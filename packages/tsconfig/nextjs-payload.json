@@ -1,0 +1,6 @@
+{
+  "extends": "./nextjs.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true
+  }
+}

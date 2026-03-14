@@ -1,0 +1,58 @@
+// .vscode/launch.json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Next.js: debug server (bun)",
+      "type": "bun",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceFolder}/node_modules/next/dist/bin/next",
+      "args": ["dev"],
+      "env": {
+        "NODE_OPTIONS": "--inspect"
+      },
+      "watchMode": false,
+      "stopOnEntry": false,
+      "noDebug": false,
+      "runtime": "bun",
+      "runtimeArgs": [],
+    },
+    {
+      "name": "Next.js: debug client (Chrome)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "Next.js: debug full stack (bun + Chrome)",
+      "type": "bun",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceFolder}/node_modules/next/dist/bin/next",
+      "args": ["dev"],
+      "env": {
+        "NODE_OPTIONS": "--inspect"
+      },
+      "watchMode": false,
+      "stopOnEntry": false,
+      "noDebug": false,
+      "runtime": "bun",
+      "runtimeArgs": [],
+      "serverReadyAction": {
+        "action": "debugWithChrome",
+        "pattern": "started server on .*, url: (https?://.+)",
+        "uriFormat": "%s"
+      }
+    },
+    {
+      "name": "Attach to Bun",
+      "type": "bun",
+      "request": "attach",
+      "url": "ws://localhost:6499/",
+      "localRoot": "${workspaceFolder}",
+      "remoteRoot": "/app"
+    }
+  ]
+}

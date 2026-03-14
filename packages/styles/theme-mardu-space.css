@@ -1,0 +1,23 @@
+@media (width >= 640px) {
+    :root {
+        --app-header-height: 84px;
+    }
+}
+
+@media (width >= 1024px) {
+    :root {
+        --app-header-height: 100px;
+    }
+}
+
+.safe-pt {
+    padding-top: calc(var(--app-header-height) + env(safe-area-inset-top));
+}
+
+.scroll-offset {
+    scroll-margin-top: calc(var(--app-header-height) + 16px);
+}
+
+.grecaptcha-badge {
+    display: none;
+}

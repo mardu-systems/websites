@@ -1,0 +1,17 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.mardu.connect",
+      "sha256_cert_fingerprints": [
+        "19:C5:30:10:36:E3:A1:E1:80:DB:41:D2:1E:8B:CF:24:AC:D5:1E:9A:2E:CA:5C:4C:C7:24:52:A6:D0:CA:40:EC",
+        "31:15:6B:BB:DC:6F:A8:79:1D:FF:1C:73:A5:99:A9:34:31:49:BD:63:A4:6F:66:61:58:70:70:B3:E2:19:88:DC",
+        "3A:F9:71:1E:14:9F:15:AD:F3:85:57:7F:4B:23:7F:22:68:52:25:D4:5D:EB:64:6A:44:0B:1F:D8:A7:19:40:79"
+      ]
+    }
+  }
+]

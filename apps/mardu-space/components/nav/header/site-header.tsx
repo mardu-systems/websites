@@ -1,0 +1,162 @@
+'use client';
+
+import * as React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { NavEntry } from '@/types/header';
+import NavLink from '@/components/nav/nav-link';
+import { Button } from '@/components/ui/button';
+import { Menu, X } from 'lucide-react';
+import { MeetergoCTAButton } from '@/components/utilities/meetergo-cta-button';
+
+export type { NavEntry } from '@/types/header';
+
+export interface HeaderProps {
+  items: NavEntry[];
+  showTopbar?: boolean;
+  showSearch?: boolean;
+  showAccount?: boolean;
+  showHelp?: boolean;
+  salesPhone?: string;
+}
+
+function useScrolledPast(px: number) {
+  const [past, setPast] = React.useState(false);
+
+  React.useEffect(() => {
+    let raf = 0;
+
+    const update = () => {
+      raf = 0;
+      setPast(window.scrollY >= px);
+    };
+
+    const onScroll = () => {
+      if (raf) return;
+      raf = window.requestAnimationFrame(update);
+    };
+
+    // initial
+    update();
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      if (raf) window.cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [px]);
+
+  return past;
+}
+
+export default function SiteHeader({ items }: HeaderProps) {
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const headerRef = React.useRef<HTMLElement | null>(null);
+  const [headerHeight, setHeaderHeight] = React.useState(72); // fallback, ca. h-18
+
+  React.useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+
+    const measure = () => setHeaderHeight(el.getBoundingClientRect().height);
+
+    measure();
+
+    const ro = new ResizeObserver(() => measure());
+    ro.observe(el);
+
+    return () => ro.disconnect();
+  }, []);
+
+  const scrolledPastHeader = useScrolledPast(headerHeight);
+
+  const navItems = items.filter(
+    (item): item is Extract<NavEntry, { type: 'link' }> => item.type === 'link',
+  );
+
+  return (
+    <header
+      ref={headerRef}
+      className="fixed inset-x-0 top-0 z-50"
+      style={
+        {
+          '--site-header-h': `${headerHeight}px`,
+        } as React.CSSProperties
+      }
+    >
+      <div
+        className={[
+          'transition-[background-color,border-color,backdrop-filter] duration-150',
+          scrolledPastHeader
+            ? 'border-b border-black/8 bg-(--paper) backdrop-blur supports-backdrop-filter:bg-(--paper)/90'
+            : 'border-b border-transparent bg-transparent',
+        ].join(' ')}
+      >
+        <nav
+          className="mardu-container flex h-18 items-center justify-between gap-4"
+          aria-label="Hauptnavigation"
+        >
+          <Link
+            href="/"
+            aria-label="Mardu Home"
+            className="block touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <div className="relative h-11 w-35">
+              <Image
+                src="/marduspace_logo_bg_white.svg"
+                alt="Mardu Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+          </Link>
+
+          <div className="hidden items-center gap-7 md:flex">
+            {navItems.map((item) => (
+              <NavLink key={item.label} href={item.href} label={item.label} />
+            ))}
+            <MeetergoCTAButton className="mt-0 w-auto sm:ml-0 sm:mt-0">
+              Demo vereinbaren
+            </MeetergoCTAButton>
+          </div>
+
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setMobileOpen((value) => !value)}
+            aria-label={mobileOpen ? 'Menü schließen' : 'Menü öffnen'}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
+          >
+            {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+          </Button>
+        </nav>
+
+        {mobileOpen ? (
+          <div id="mobile-nav" className="border-t border-black/8 bg-background/95 md:hidden">
+            <div className="mardu-container flex flex-col gap-5 py-5">
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.label}
+                  href={item.href}
+                  label={item.label}
+                  className="py-2 text-base"
+                  onNavigate={() => setMobileOpen(false)}
+                />
+              ))}
+              <MeetergoCTAButton
+                onClick={() => setMobileOpen(false)}
+                className="mt-2 w-full sm:ml-0 sm:mt-2 sm:w-full"
+              >
+                Demo vereinbaren
+              </MeetergoCTAButton>
+            </div>
+          </div>
+        ) : null}
+      </div>
+    </header>
+  );
+}

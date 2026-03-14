@@ -1,0 +1,13 @@
+{
+  "name": "@mardu/eslint-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./next": "./next.mjs"
+  },
+  "peerDependencies": {
+    "eslint": "^9.39.0",
+    "eslint-config-next": "^16.1.0"
+  }
+}

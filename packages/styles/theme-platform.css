@@ -1,0 +1,6 @@
+@layer payload-default, payload;
+
+.payload-admin-root {
+    color-scheme: light;
+    min-height: 100dvh;
+}

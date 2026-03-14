@@ -1,0 +1,162 @@
+@import "@mardu/styles/base.css";
+@import "@mardu/styles/theme-mardu-de.css";
+@import "@mardu/styles/theme-platform.css";
+
+@layer payload-default, payload;
+
+:root {
+    --radius: 0.0rem;
+
+    /* Core shadcn tokens */
+    --background: oklch(0.982 0.006 95.4);
+    --foreground: oklch(0.214 0.011 264.4);
+    --card: oklch(0.989 0.004 95.4);
+    --card-foreground: oklch(0.214 0.011 264.4);
+    --popover: oklch(0.996 0.002 95.4);
+    --popover-foreground: oklch(0.214 0.011 264.4);
+    --primary: oklch(0.214 0.011 264.4);
+    --primary-foreground: oklch(0.985 0.003 95.4);
+    --secondary: oklch(0.955 0.007 95.4);
+    --secondary-foreground: oklch(0.246 0.012 264.4);
+    --muted: oklch(0.962 0.004 95.4);
+    --muted-foreground: oklch(0.494 0.02 264.4);
+    --accent: oklch(0.723 0.213 40.3);
+    --accent-foreground: oklch(0.985 0.003 95.4);
+    --destructive: oklch(0.61 0.23 25.2);
+    --destructive-foreground: oklch(0.985 0.003 95.4);
+    --border: oklch(0.214 0.011 264.4 / 0.1);
+    --input: oklch(0.214 0.011 264.4 / 0.14);
+    --ring: oklch(0.723 0.213 40.3);
+
+    --chart-1: oklch(0.68 0.17 258);
+    --chart-2: oklch(0.62 0.19 40);
+    --chart-3: oklch(0.7 0.12 175);
+    --chart-4: oklch(0.74 0.16 300);
+    --chart-5: oklch(0.59 0.11 220);
+
+    --sidebar: oklch(0.989 0.004 95.4);
+    --sidebar-foreground: oklch(0.214 0.011 264.4);
+    --sidebar-primary: oklch(0.214 0.011 264.4);
+    --sidebar-primary-foreground: oklch(0.985 0.003 95.4);
+    --sidebar-accent: oklch(0.955 0.007 95.4);
+    --sidebar-accent-foreground: oklch(0.214 0.011 264.4);
+    --sidebar-border: oklch(0.214 0.011 264.4 / 0.12);
+    --sidebar-ring: oklch(0.723 0.213 40.3);
+
+    /* Brand extras */
+    --paper: #f9f8f4;
+    --mardu-orange: #ff5a1f;
+    --mardu-orange-hover: #f14612;
+    --line-soft: rgb(16 24 40 / 8%);
+}
+
+.dark {
+    --background: oklch(0.17 0.013 264.4);
+    --foreground: oklch(0.96 0.005 95.4);
+    --card: oklch(0.205 0.013 264.4);
+    --card-foreground: oklch(0.96 0.005 95.4);
+    --popover: oklch(0.205 0.013 264.4);
+    --popover-foreground: oklch(0.96 0.005 95.4);
+    --primary: oklch(0.96 0.005 95.4);
+    --primary-foreground: oklch(0.214 0.011 264.4);
+    --secondary: oklch(0.27 0.013 264.4);
+    --secondary-foreground: oklch(0.96 0.005 95.4);
+    --muted: oklch(0.27 0.013 264.4);
+    --muted-foreground: oklch(0.72 0.014 264.4);
+    --accent: oklch(0.723 0.213 40.3);
+    --accent-foreground: oklch(0.98 0.004 95.4);
+    --destructive: oklch(0.66 0.2 25.2);
+    --destructive-foreground: oklch(0.98 0.004 95.4);
+    --border: oklch(0.96 0.005 95.4 / 0.12);
+    --input: oklch(0.96 0.005 95.4 / 0.14);
+    --ring: oklch(0.723 0.213 40.3);
+    --sidebar: oklch(0.205 0.013 264.4);
+    --sidebar-foreground: oklch(0.96 0.005 95.4);
+    --sidebar-primary: oklch(0.96 0.005 95.4);
+    --sidebar-primary-foreground: oklch(0.214 0.011 264.4);
+    --sidebar-accent: oklch(0.27 0.013 264.4);
+    --sidebar-accent-foreground: oklch(0.96 0.005 95.4);
+    --sidebar-border: oklch(0.96 0.005 95.4 / 0.12);
+    --sidebar-ring: oklch(0.723 0.213 40.3);
+    --line-soft: rgb(248 250 252 / 12%);
+}
+
+@theme inline {
+    --font-sans: var(--font-geist-sans);
+    --font-serif: "Iowan Old Style", "Times New Roman", ui-serif, serif;
+
+    --radius-sm: calc(var(--radius));
+    --radius-md: calc(var(--radius));
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius));
+
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+
+    body {
+        @apply bg-background text-foreground antialiased;
+        position: relative;
+        isolation: isolate;
+        background-color: var(--paper);
+        text-rendering: geometricPrecision;
+    }
+
+    body.payload-admin-route {
+        background-color: var(--theme-elevation-0, var(--paper));
+        color: var(--theme-text, inherit);
+        text-rendering: auto;
+    }
+
+}
+
+@layer components {
+    .mardu-container {
+        @apply mx-auto w-full max-w-368 px-4 md:px-8;
+    }
+
+    .section-hairline {
+        border-top: 1px solid var(--line-soft);
+    }
+
+    /* Buttons are now standardized via components/ui/button variants and sizes. */
+}
+
+.grecaptcha-badge {
+    display: none;
+}

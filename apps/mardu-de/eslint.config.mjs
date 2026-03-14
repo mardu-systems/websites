@@ -1,0 +1,3 @@
+import { createNextConfig } from '@mardu/eslint-config/next';
+
+export default createNextConfig(['lib/integrations/twenty/generated/**']);

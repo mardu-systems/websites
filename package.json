@@ -1,0 +1,26 @@
+{
+  "name": "@mardu/workspace",
+  "private": true,
+  "packageManager": "bun@1.2.21",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "dev:mardu-de": "bun --cwd apps/mardu-de run dev",
+    "dev:mardu-space": "bun --cwd apps/mardu-space run dev",
+    "dev:platform": "bun --cwd apps/platform run dev",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "format": "turbo run format",
+    "format:check": "turbo run format:check",
+    "clean": "turbo run clean",
+    "build:analyze": "turbo run build:analyze"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.6",
+    "typescript": "^5.9.3"
+  }
+}
