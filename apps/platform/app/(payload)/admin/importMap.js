@@ -29,6 +29,7 @@ import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 }
 import { AdminSSOLogoutButton as AdminSSOLogoutButton_45f17344c43c73d2ad5a734675c92615 } from '../../../components/payload/admin-sso-logout-button.tsx'
 import { AdminAuthStatus as AdminAuthStatus_fab6018a6684adbe611cf33a1e03848e } from '../../../components/payload/admin-auth-status.tsx'
 import { AdminLoginLogo as AdminLoginLogo_548c365f468b65bf1c8ddcdae4e11b2c } from '../../../components/payload/admin-login-logo.tsx'
+import { VercelBlobClientUploadHandler as VercelBlobClientUploadHandler_16c82c5e25f430251a3e3ba57219ff4e } from '@payloadcms/storage-vercel-blob/client'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 export const importMap = {
@@ -63,5 +64,6 @@ export const importMap = {
   "/components/payload/admin-sso-logout-button.tsx#AdminSSOLogoutButton": AdminSSOLogoutButton_45f17344c43c73d2ad5a734675c92615,
   "/components/payload/admin-auth-status.tsx#AdminAuthStatus": AdminAuthStatus_fab6018a6684adbe611cf33a1e03848e,
   "/components/payload/admin-login-logo.tsx#AdminLoginLogo": AdminLoginLogo_548c365f468b65bf1c8ddcdae4e11b2c,
+  "@payloadcms/storage-vercel-blob/client#VercelBlobClientUploadHandler": VercelBlobClientUploadHandler_16c82c5e25f430251a3e3ba57219ff4e,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

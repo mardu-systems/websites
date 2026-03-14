@@ -1,255 +1,93 @@
-import HeroSection from '@/components/utilities/hero-section';
-import CTASection from '@/components/utilities/cta-section';
-import FeatureSection from '@/components/utilities/feature-section';
-import DualImageSection from '@/components/utilities/dual-image-section';
-import ThreeArguments from '@/components/utilities/three-arguments';
-import Foerderung from '@/components/utilities/foerderung';
-import TripleImageSection from '@/components/utilities/triple-image-section';
-import { IntegrationsPreview } from '@/components/integrations/integrations-preview';
-import { FileSearchCorner, HeartHandshake, Milestone } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { ArrowRight, Globe, LayoutDashboard, ShieldCheck } from 'lucide-react';
+import Link from 'next/link';
 
-/* ===================== Seite ===================== */
+const adminActions = [
+  {
+    title: 'Admin Login',
+    description: 'Payload Admin für Content, Media, Nutzerverwaltung und Lead-Datensätze.',
+    href: '/admin',
+    icon: LayoutDashboard,
+  },
+  {
+    title: 'mardu.de',
+    description: 'Öffentliche Hauptseite für Kunden, Inhalte und Produktkommunikation.',
+    href: 'https://www.mardu.de',
+    icon: Globe,
+  },
+  {
+    title: 'mardu.space',
+    description: 'Öffentliche Produktsite für Werkstätten, Labs und Whitepaper-Flows.',
+    href: 'https://mardu.space',
+    icon: Globe,
+  },
+  {
+    title: 'API Entry',
+    description: 'Zentraler Einstieg für Lead- und Payload-Endpunkte dieser Plattform.',
+    href: '/api/contact',
+    icon: ShieldCheck,
+  },
+] as const;
 
-export default async function HomePage() {
+export default function HomePage() {
   return (
-    <main className="relative min-h-screen flex flex-col justify-center md:justify-start">
-      {/* Hero Header Section */}
-      <section id="home">
-        <HeroSection
-          title="Smarte Zugangssysteme für Baustellen, Werkstätten und Labore"
-          description={
-            <>
-              <p className="mb-4">
-                Verwalte Zutritt und Maschinennutzung – mobil auf der Baustelle oder stationär in
-                der Werkstatt.
-                <br />
-                Mardu passt sich an deine Bedürfnisse an.
-              </p>
-            </>
-          }
-          buttonText="Lösungen für Werkstätten"
-          buttonHref="https://mardu.space"
-          secondaryButtonText="Lösungen für Baustellen"
-          secondaryButtonHref="/#produkte"
-          imageSrc="/_A7_9072_quer.webp"
-          imageAlt="Zugriffskontrollsysteme im Makerspace"
-        />
-      </section>
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(28,97,255,0.08),transparent_35%),linear-gradient(180deg,#f7f8fb_0%,#ffffff_100%)] pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))]">
+      <section className="mardu-container py-14 md:py-20">
+        <div className="max-w-4xl">
+          <p className="text-xs uppercase tracking-[0.24em] text-foreground/50">Mardu Platform</p>
+          <h1 className="mt-4 max-w-3xl text-[clamp(2.6rem,5vw,5rem)] leading-[0.92] tracking-[-0.05em] text-foreground">
+            Admin- und Betriebsoberfläche.
+          </h1>
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-foreground/72 md:text-lg">
+            Diese App ist nur für interne Nutzung vorgesehen.
+          </p>
 
-      <section id="loesung">
-        <FeatureSection
-          className="mb-10"
-          title="Die Mardu-Lösung"
-          description={
-            <>
-              <p>
-                Mardu ist eine flexible, funkbasierte Lösung für Zugriffs- und Zutrittskontrolle.
-                Alle Endgeräte sind per Funk vernetzt und dank Dual-Band-Mesh-Technologie
-                ausfallsicher. Mardu kann zentral verwaltet oder vollständig lokal betrieben werden
-                und deckt so verschiedenste Einsatzszenarien ab – von permanenter Installation bis
-                temporärem Setup.
-              </p>
-              <p className="mt-4">
-                Ideal für Innen- und Außenbereiche sowie temporäre Setups. Damit sichern Sie Türen,
-                Tore, Drehkreuze, Maschinenzugänge und weitere kritische Bereiche.
-              </p>
-              <p className="mt-4">
-                Alle Vorgänge werden nachvollziehbar und DSGVO-konform protokolliert. Das reduziert
-                Verwaltungsaufwand und schafft belastbare Nachweise.
-              </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button asChild>
+              <Link href="/admin">
+                Admin Login
+                <ArrowRight className="size-4" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="https://www.mardu.de">Zu mardu.de</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="https://mardu.space">Zu mardu.space</Link>
+            </Button>
+          </div>
+        </div>
 
-              <p className="mt-4">
-                Egal ob Standardprodukt oder Speziallösung: Wir begleiten Konzeption, Umsetzung und
-                Betrieb.
-              </p>
-            </>
-          }
-          imageSrc="/Mardu-System.webp"
-          imageAlt="Mardu System"
-          buttonText="Kontaktiere uns"
-          buttonHref="/contact"
-        />
-      </section>
+        <div className="mt-12 grid gap-4 md:grid-cols-2">
+          {adminActions.map((section) => {
+            const Icon = section.icon;
 
-      <IntegrationsPreview />
-
-      <section id="produkte">
-        <DualImageSection
-          cards={[
-            {
-              imageSrc: '/mardu-space.webp',
-              imageAlt: 'Zugriffskontrolle',
-              title: 'mardu.space',
-              description: (
-                <>
-                  <p>
-                    Werkstätten, Produktionshallen und Labore sind Orte der täglichen Arbeit und
-                    gleichzeitig sensible Sicherheitsbereiche.
-                  </p>
-                  <p className="mt-4">
-                    Mit mardu.space stellt das Mardu-System sicher, dass nur berechtigte Personen
-                    Maschinen nutzen können. Das System wird in Makerspaces, Schülerlaboren und
-                    Universitäten eingesetzt, aber auch in produzierenden Betrieben und Werkstätten
-                    mit vielen hundert Geräten.
-                  </p>
-                </>
-              ),
-              buttonText: 'Mehr erfahren',
-              buttonHref: 'https://mardu.space',
-            },
-            {
-              imageSrc: '/mardu-constructions.webp',
-              imageAlt: 'Maschinenfreigabe',
-              title: 'mardu.construction (Early Access)',
-              description: (
-                <>
-                  <p>
-                    mardu.construction steht für digitale, flexible und skalierbare
-                    Zutrittskontrollen auf Baustellen. So erhalten Sie Übersicht über Bereiche,
-                    Lieferanten, Subunternehmer und Mitarbeitende.
-                  </p>
-                  <p className="mt-4">
-                    mardu.construction befindet sich aktuell im Early-Access-Projektstadium.
-                    Funktionen werden gemeinsam mit ersten Anwendern erprobt, weiterentwickelt und
-                    gezielt an reale Baustellenanforderungen angepasst.
-                  </p>
-                </>
-              ),
-            },
-          ]}
-        />
-      </section>
-
-      <section id="argumente">
-        <ThreeArguments
-          className="mt-12"
-          title={<span>Drei Vorteile beim Einsatz von Mardu</span>}
-          items={[
-            {
-              title: 'Mehr Sicherheit & Nachvollziehbarkeit',
-              description: (
-                <>
-                  Unbefugte Zugriffe werden zuverlässig verhindert. Jeder Zutritt oder jede
-                  Benutzung einer Maschine ist personen- und zeitbezogen geregelt und lückenlos
-                  dokumentiert.
-                </>
-              ),
-              icon: <HeartHandshake className="text-[#351B59]" size="72" />,
-            },
-            {
-              title: 'Klare Regeln & weniger Aufwand',
-              description: (
-                <>
-                  Berechtigungen lassen sich flexibel von überall vergeben, ändern oder entziehen.
-                  Ganz ohne Schlüssel, Schlössertausch oder manuelle Listen.
-                </>
-              ),
-              icon: <Milestone className="text-[#351B59]" size="72" />,
-            },
-            {
-              title: 'Lokal und Zentral verwaltbar',
-              description: (
-                <>
-                  Alle Berechtigungen werden vor Ort zentral gespeichert und verwaltet. Gleichzeitig
-                  kann alles über Fernzugriff verwaltet werden. Hierdurch kann höchste
-                  Ausfallsicherheit bei gleichzeitiger Flexibilität gewährleistet werden.
-                </>
-              ),
-              icon: <FileSearchCorner className="text-[#351B59]" size="72" />,
-            },
-          ]}
-        />
-      </section>
-
-      <TripleImageSection
-        cards={[
-          {
-            imageSrc: '/people/Bild2.webp',
-            imageAlt: 'Luca Schöneberg',
-            title: 'Luca Schöneberg',
-            subtitle: '(Co-Founder)',
-            linkedinUrl: 'https://www.linkedin.com/in/luca-sch%C3%B6neberg-150348186',
-            email: 'luca.schoeneberg@mardu.de',
-            description: (
-              <>
-                <p>
-                  B.Sc. Medieninformatik (Hochschule Osnabrück) und ausgebildeter Fachinformatiker
-                  für Systemintegration. Verantwortlich für Web-, App- und Backend-Entwicklung sowie
-                  Nutzer- und Rechteverwaltung.
-                </p>
-              </>
-            ),
-          },
-          {
-            imageSrc: '/people/Erik.webp',
-            imageAlt: 'Erik Frey',
-            title: 'Erik Frey',
-            subtitle: '(Co-Founder)',
-            linkedinUrl: 'https://www.linkedin.com/in/erik-frey-660236346',
-            email: 'erik.frey@mardu.de',
-            description: (
-              <>
-                <p>
-                  B.Sc. Elektrotechnik und Informationstechnik (Karlsruher Institut für Technologie,
-                  KIT). Verantwortlich für Embedded Software und Hardware-Entwicklung.
-                </p>
-              </>
-            ),
-          },
-          {
-            imageSrc: '/people/Bild1.webp',
-            imageAlt: 'Melvin Valerius',
-            title: 'Melvin Valerius',
-            subtitle: '(kauf. Leiter)',
-            email: 'melvin.valerius@mardu.de',
-            description: (
-              <>
-                <p>
-                  Studium Volkswirtschaftslehre (Universität Münster) und Ausbildung zum
-                  Industriekaufmann. Zuständig für Finanzen, Buchhaltung und Controlling.
-                </p>
-              </>
-            ),
-          },
-        ]}
-      />
-
-      <section id="contact">
-        <CTASection
-          title="Sicherheit, Transparenz und Kontrolle – zentral gesteuert"
-          description="Sprechen Sie uns an. Gemeinsam entwickeln wir eine Lösung, die zu Ihren Prozessen, Flächen und Sicherheitsanforderungen passt."
-          primaryButtonText="Jetzt für unseren Newsletter anmelden"
-          secondaryButtonText="Beratung Vereinbaren"
-        />
-      </section>
-
-      <section id="foerderung">
-        <Foerderung
-          items={[
-            {
-              href: 'https://www.bmwk.de/',
-              src: '/logos/bmwk.svg',
-              alt: 'Bundesministerium für Wirtschaft und Klimaschutz',
-            },
-            {
-              href: 'https://www.esf.de/portal/DE/ESF-Plus-2021-2027/Liste-der-Vorhaben/inhalt.html',
-              src: '/logos/eu_esf.svg',
-              alt: 'Europäische Union – Europäischer Sozialfonds Plus (ESF Plus)',
-            },
-            {
-              href: 'https://www.exist.de/',
-              src: '/logos/exist.svg',
-              alt: 'EXIST – Existenzgründungen aus der Wissenschaft',
-            },
-          ]}
-          description={
-            <>
-              Die Europäische Union fördert zusammen mit dem Bundesministerium für Wirtschaft und
-              Klimaschutz über den Europäischen Sozialfonds Plus (ESF Plus) das Programm{' '}
-              <em>Existenzgründungen aus der Wissenschaft (EXIST)</em> in Deutschland.
-            </>
-          }
-        />
+            return (
+              <Link
+                key={section.title}
+                href={section.href}
+                className="group rounded-3xl border border-black/8 bg-white/85 p-6 shadow-[0_12px_40px_rgba(0,0,0,0.04)] transition-transform duration-150 hover:-translate-y-0.5 hover:border-black/14"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="space-y-3">
+                    <div className="inline-flex rounded-2xl bg-foreground/6 p-3 text-foreground">
+                      <Icon className="size-5" />
+                    </div>
+                    <div>
+                      <h2 className="text-2xl tracking-[-0.03em] text-foreground">
+                        {section.title}
+                      </h2>
+                      <p className="mt-2 max-w-md text-sm leading-relaxed text-foreground/70">
+                        {section.description}
+                      </p>
+                    </div>
+                  </div>
+                  <ArrowRight className="mt-1 size-4 shrink-0 text-foreground/40 transition-transform group-hover:translate-x-0.5" />
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </section>
     </main>
   );

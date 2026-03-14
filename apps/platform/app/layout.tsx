@@ -6,7 +6,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import localFont from 'next/font/local';
 
-const SITE_URL = 'https://www.mardu.de';
+const SITE_URL = 'https://platform.mardu.de';
 
 const geist = localFont({
   src: [
@@ -28,20 +28,14 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  applicationName: 'Mardu',
+  applicationName: 'Mardu Platform',
   title: {
-    default: 'Mardu – Zutrittskontrolle & Maschinenfreigabe für Werkstätten, Labore & Baustellen',
-    template: '%s | Mardu',
+    default: 'Mardu Platform',
+    template: '%s | Mardu Platform',
   },
   description:
-    'Zutrittskontrolle und Maschinenfreigabe mit Funk-Mesh, Protokollierung und Rechteverwaltung – für Makerspaces, Labore, Werkstätten und Baustellen. DSGVO-konform.',
-  keywords: [
-    'Zugriffskontrollsysteme',
-    'Makerspace',
-    'FabLab',
-    'Schülerlabor',
-    'Open Education Badges',
-  ],
+    'Zentrales Payload-, Content- und Lead-Backend fuer mardu.de und mardu.space.',
+  keywords: ['Payload CMS', 'Lead API', 'Newsletter', 'Mardu Platform', 'Content Backend'],
   alternates: {
     canonical: '/',
     languages: {
@@ -71,38 +65,25 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Mardu – Zutrittskontrolle & Maschinenfreigabe',
-    description:
-      'Smarte Zutrittskontrolle und Maschinenfreigabe für Werkstätten, Labore, Makerspaces und Baustellen – flexibel, ausfallsicher, DSGVO-konform.',
+    title: 'Mardu Platform',
+    description: 'Zentrales Payload-, Content- und Lead-Backend fuer mardu.de und mardu.space.',
     url: SITE_URL,
-    siteName: 'Mardu',
+    siteName: 'Mardu Platform',
     locale: 'de_DE',
     type: 'website',
     images: [
       {
-        url: '/_A7_9072_quer.webp',
+        url: '/logos/Logo.svg',
         width: 1200,
         height: 630,
-        alt: 'Mardu Zutrittskontrolle und Maschinenfreigabe',
-        type: 'image/webp',
-      },
-      {
-        url: '/_A7_9072_quer.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Mardu Zutrittskontrolle und Maschinenfreigabe',
+        alt: 'Mardu Platform',
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Mardu – Zutrittskontrolle & Maschinenfreigabe',
-    description:
-      'Zutrittskontrolle und Maschinenfreigabe für Werkstätten, Labore, Makerspaces und Baustellen – flexibel, ausfallsicher, DSGVO-konform.',
-    images: ['/_A7_9072_quer.webp', '/_A7_9072_quer.jpg'],
-  },
-  verification: {
-    google: 'a9afa5f97adbb711',
+    card: 'summary',
+    title: 'Mardu Platform',
+    description: 'Zentrales Payload-, Content- und Lead-Backend fuer mardu.de und mardu.space.',
   },
 };
 
@@ -111,21 +92,21 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'Organization',
-      name: 'Mardu',
+      name: 'Mardu Platform',
       url: SITE_URL,
-      logo: `${SITE_URL}/logos/Logo.svg`,
+      logo: 'https://www.mardu.de/logos/Logo.svg',
       email: 'info@mardu.de',
       sameAs: ['https://www.linkedin.com/company/marduofficial'],
     },
     {
       '@type': 'WebSite',
-      name: 'Mardu',
+      name: 'Mardu Platform',
       url: SITE_URL,
       publisher: {
         '@type': 'Organization',
-        name: 'Mardu',
-        url: SITE_URL,
-        logo: `${SITE_URL}/logos/Logo.svg`,
+        name: 'Mardu Platform',
+        url: 'https://www.mardu.de',
+        logo: 'https://www.mardu.de/logos/Logo.svg',
       },
     },
   ],

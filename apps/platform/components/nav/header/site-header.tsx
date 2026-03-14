@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 import NavLink from '@/components/nav/nav-link';
 import { Button } from '@/components/ui/button';
-import { MeetergoCTAButton } from '@/components/utilities/meetergo-cta-button';
 import type { NavEntry } from '@/types/header';
 
 type HeaderProps = {
@@ -97,9 +96,9 @@ export default function SiteHeader({ items }: HeaderProps) {
             {navItems.map((item) => (
               <NavLink key={item.label} href={item.href} label={item.label} />
             ))}
-            <MeetergoCTAButton className="mt-0 w-auto sm:ml-0 sm:mt-0">
-              Demo vereinbaren
-            </MeetergoCTAButton>
+            <Button asChild>
+              <Link href="/admin">Admin Login</Link>
+            </Button>
           </div>
 
           <Button
@@ -127,12 +126,11 @@ export default function SiteHeader({ items }: HeaderProps) {
                   onNavigate={() => setMobileOpen(false)}
                 />
               ))}
-              <MeetergoCTAButton
-                onClick={() => setMobileOpen(false)}
-                className="mt-2 w-full sm:ml-0 sm:mt-2 sm:w-full"
-              >
-                Demo vereinbaren
-              </MeetergoCTAButton>
+              <Button asChild className="mt-2 w-full">
+                <Link href="/admin" onClick={() => setMobileOpen(false)}>
+                  Admin Login
+                </Link>
+              </Button>
             </div>
           </div>
         ) : null}

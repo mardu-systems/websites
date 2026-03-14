@@ -1,13 +1,10 @@
 import { FooterLink } from "@/components/nav/footer/footer";
 
 export const defaultFooterNavLinks: FooterLink[] = [
-    { href: "/", label: "Startseite" },
-    { href: "/#loesung", label: "Lösung" },
-    { href: "/#produkte", label: "Angebote" },
-    { href: "/#argumente", label: "Vorteile" },
-    { href: "/integrations", label: "Integrationen" },
-    { href: "/blog", label: "Blog" },
-    { href: "/contact", label: "Kontakt" },
+    { href: "/", label: "Home" },
+    { href: "/admin", label: "Admin Login" },
+    { href: "https://www.mardu.de", label: "mardu.de" },
+    { href: "https://mardu.space", label: "mardu.space" },
 ];
 
 export const defaultFooterMetaLinks: FooterLink[] = [
