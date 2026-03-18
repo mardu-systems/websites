@@ -76,6 +76,9 @@ export interface Config {
     'integration-categories': IntegrationCategory;
     'integration-protocols': IntegrationProtocol;
     integrations: Integration;
+    'newsletter-subscribers': NewsletterSubscriber;
+    'contact-leads': ContactLead;
+    'preorder-requests': PreorderRequest;
     'payload-mcp-api-keys': PayloadMcpApiKey;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -92,6 +95,9 @@ export interface Config {
     'integration-categories': IntegrationCategoriesSelect<false> | IntegrationCategoriesSelect<true>;
     'integration-protocols': IntegrationProtocolsSelect<false> | IntegrationProtocolsSelect<true>;
     integrations: IntegrationsSelect<false> | IntegrationsSelect<true>;
+    'newsletter-subscribers': NewsletterSubscribersSelect<false> | NewsletterSubscribersSelect<true>;
+    'contact-leads': ContactLeadsSelect<false> | ContactLeadsSelect<true>;
+    'preorder-requests': PreorderRequestsSelect<false> | PreorderRequestsSelect<true>;
     'payload-mcp-api-keys': PayloadMcpApiKeysSelect<false> | PayloadMcpApiKeysSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -248,6 +254,10 @@ export interface BlogPost {
   featured?: boolean | null;
   categories: (number | BlogCategory)[];
   author: number | BlogAuthor;
+  /**
+   * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
+   */
+  sites: ('mardu-de' | 'mardu-space')[];
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -310,7 +320,7 @@ export interface Integration {
     };
     [k: string]: unknown;
   };
-  status: 'available' | 'beta' | 'planned';
+  availabilityStatus: 'available' | 'beta' | 'planned';
   vendor?: string | null;
   logo?: (number | null) | Media;
   heroImage?: (number | null) | Media;
@@ -334,6 +344,10 @@ export interface Integration {
       }[]
     | null;
   compatibilityNotes?: string | null;
+  /**
+   * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
+   */
+  sites: ('mardu-de' | 'mardu-space')[];
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -345,6 +359,75 @@ export interface Integration {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-subscribers".
+ */
+export interface NewsletterSubscriber {
+  id: number;
+  subscriptionKey: string;
+  site: 'mardu-de' | 'mardu-space';
+  email: string;
+  role: 'newsletter' | 'whitepaper';
+  status: 'pending' | 'confirmed' | 'unsubscribed';
+  firstName?: string | null;
+  lastName?: string | null;
+  company?: string | null;
+  consentModel?: 'double-opt-in' | null;
+  confirmedAt?: string | null;
+  unsubscribedAt?: string | null;
+  lastConfirmationSentAt?: string | null;
+  twentySyncStatus: 'pending' | 'synced' | 'failed' | 'skipped';
+  twentyLastSyncedAt?: string | null;
+  twentyLastError?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-leads".
+ */
+export interface ContactLead {
+  id: number;
+  site: 'mardu-de' | 'mardu-space';
+  source: 'contact-form' | 'configurator' | 'admin-software';
+  name: string;
+  email: string;
+  company?: string | null;
+  phone?: string | null;
+  message?: string | null;
+  consent?: boolean | null;
+  newsletterOptIn?: boolean | null;
+  config?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  newsletterSubscriber?: (number | null) | NewsletterSubscriber;
+  emailDeliveryStatus: 'pending' | 'sent' | 'failed';
+  twentySyncStatus: 'pending' | 'synced' | 'failed' | 'skipped';
+  twentyLastSyncedAt?: string | null;
+  twentyLastError?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "preorder-requests".
+ */
+export interface PreorderRequest {
+  id: number;
+  site: 'mardu-de' | 'mardu-space';
+  email: string;
+  status: 'received';
+  emailDeliveryStatus: 'pending' | 'sent' | 'failed';
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * API keys control which collections, resources, tools, and prompts MCP clients can access
@@ -464,6 +547,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'integrations';
         value: number | Integration;
+      } | null)
+    | ({
+        relationTo: 'newsletter-subscribers';
+        value: number | NewsletterSubscriber;
+      } | null)
+    | ({
+        relationTo: 'contact-leads';
+        value: number | ContactLead;
+      } | null)
+    | ({
+        relationTo: 'preorder-requests';
+        value: number | PreorderRequest;
       } | null)
     | ({
         relationTo: 'payload-mcp-api-keys';
@@ -598,6 +693,7 @@ export interface BlogPostsSelect<T extends boolean = true> {
   featured?: T;
   categories?: T;
   author?: T;
+  sites?: T;
   meta?:
     | T
     | {
@@ -642,7 +738,7 @@ export interface IntegrationsSelect<T extends boolean = true> {
   slug?: T;
   shortDescription?: T;
   description?: T;
-  status?: T;
+  availabilityStatus?: T;
   vendor?: T;
   logo?: T;
   heroImage?: T;
@@ -666,6 +762,7 @@ export interface IntegrationsSelect<T extends boolean = true> {
         id?: T;
       };
   compatibilityNotes?: T;
+  sites?: T;
   meta?:
     | T
     | {
@@ -676,6 +773,64 @@ export interface IntegrationsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-subscribers_select".
+ */
+export interface NewsletterSubscribersSelect<T extends boolean = true> {
+  subscriptionKey?: T;
+  site?: T;
+  email?: T;
+  role?: T;
+  status?: T;
+  firstName?: T;
+  lastName?: T;
+  company?: T;
+  consentModel?: T;
+  confirmedAt?: T;
+  unsubscribedAt?: T;
+  lastConfirmationSentAt?: T;
+  twentySyncStatus?: T;
+  twentyLastSyncedAt?: T;
+  twentyLastError?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-leads_select".
+ */
+export interface ContactLeadsSelect<T extends boolean = true> {
+  site?: T;
+  source?: T;
+  name?: T;
+  email?: T;
+  company?: T;
+  phone?: T;
+  message?: T;
+  consent?: T;
+  newsletterOptIn?: T;
+  config?: T;
+  newsletterSubscriber?: T;
+  emailDeliveryStatus?: T;
+  twentySyncStatus?: T;
+  twentyLastSyncedAt?: T;
+  twentyLastError?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "preorder-requests_select".
+ */
+export interface PreorderRequestsSelect<T extends boolean = true> {
+  site?: T;
+  email?: T;
+  status?: T;
+  emailDeliveryStatus?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

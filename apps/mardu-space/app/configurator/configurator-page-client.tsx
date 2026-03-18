@@ -77,14 +77,17 @@ export default function ConfiguratorPageClient() {
       const stored = window.sessionStorage.getItem(STORAGE_KEY);
       if (stored) {
         try {
-          return JSON.parse(stored) as State;
+          const parsed = JSON.parse(stored);
+          if (parsed && typeof parsed === 'object') {
+            return parsed as State;
+          }
         } catch {}
       }
     }
     return defaultState;
   });
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && state) {
       window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     }
   }, [state]);
@@ -108,6 +111,7 @@ export default function ConfiguratorPageClient() {
           steps={steps}
           state={state}
           onSubmit={async () => {
+            if (!state) return;
             const { contact, ...config } = state;
             const validation = ContactSchema.safeParse(contact);
             if (!validation.success) {

@@ -1,4 +1,5 @@
 import { postgresAdapter } from '@payloadcms/db-postgres';
+import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import * as usersModule from './collections/users.ts';
 
 const resolveCollectionExport = (module, exportName) => {
@@ -31,6 +32,7 @@ const payloadSharedConfig = {
       connectionString: databaseURL,
     },
   }),
+  editor: lexicalEditor(),
   collections: [Users],
   admin: {
     user: Users.slug,

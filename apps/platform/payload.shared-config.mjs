@@ -95,12 +95,12 @@ const payloadSharedConfig = {
     },
   },
   plugins: [
-    vercelBlobStorage({
-      token: process.env.BLOB_READ_WRITE_TOKEN,
-      collections: {
-        media: true,
-      },
-    }),
+    // vercelBlobStorage({
+    //   token: process.env.BLOB_READ_WRITE_TOKEN,
+    //   collections: {
+    //     media: true,
+    //   },
+    // }),
     mcpPlugin({
       collections: {
         'blog-posts': {
@@ -170,7 +170,10 @@ const payloadSharedConfig = {
   cors: [process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000'],
   onInit: async (payload) => {
     if (process.env.NODE_ENV === 'development' && process.env.OIDC_DEBUG === 'true') {
-      console.info('[OIDC][payload:onInit:authStrategies]', payload.authStrategies.map((s) => s.name));
+      console.info(
+        '[OIDC][payload:onInit:authStrategies]',
+        payload.authStrategies.map((s) => s.name),
+      );
     }
   },
 };

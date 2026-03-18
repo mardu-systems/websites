@@ -1,7 +1,7 @@
 @import "@mardu/styles/base.css";
-@import "@mardu/styles/theme-mardu-de.css";
 @import "@mardu/styles/theme-platform.css";
 
+@plugin "@tailwindcss/typography";
 @layer payload-default, payload;
 
 :root {

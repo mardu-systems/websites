@@ -4,16 +4,18 @@ import React from 'react';
 import SiteShell from '@/components/layout/site-shell';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { getSiteConfig } from '@mardu/site-config';
 import localFont from 'next/font/local';
 
-const SITE_URL = 'https://platform.mardu.de';
+const siteConfig = getSiteConfig('mardu-de');
+const SITE_URL = siteConfig.origin;
 
 const geist = localFont({
   src: [
-    { path: '../public/fonts/Inter-Regular.woff2', weight: '400', style: 'normal' },
-    { path: '../public/fonts/Inter-Medium.woff2', weight: '500', style: 'normal' },
-    { path: '../public/fonts/Inter-Bold.woff2', weight: '700', style: 'normal' },
-    { path: '../public/fonts/Inter-ExtraBold.woff2', weight: '800', style: 'normal' },
+    { path: '../../public/fonts/Inter-Regular.woff2', weight: '400', style: 'normal' },
+    { path: '../../public/fonts/Inter-Medium.woff2', weight: '500', style: 'normal' },
+    { path: '../../public/fonts/Inter-Bold.woff2', weight: '700', style: 'normal' },
+    { path: '../../public/fonts/Inter-ExtraBold.woff2', weight: '800', style: 'normal' },
   ],
   variable: '--font-geist-sans',
 });
@@ -28,14 +30,20 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  applicationName: 'Mardu Platform',
+  applicationName: siteConfig.appName,
   title: {
-    default: 'Mardu Platform',
-    template: '%s | Mardu Platform',
+    default: 'Mardu – Zutrittskontrolle & Maschinenfreigabe für Werkstätten, Labore & Baustellen',
+    template: '%s | Mardu',
   },
   description:
-    'Zentrales Payload-, Content- und Lead-Backend fuer mardu.de und mardu.space.',
-  keywords: ['Payload CMS', 'Lead API', 'Newsletter', 'Mardu Platform', 'Content Backend'],
+    'Zutrittskontrolle und Maschinenfreigabe mit Funk-Mesh, Protokollierung und Rechteverwaltung – für Makerspaces, Labore, Werkstätten und Baustellen. DSGVO-konform.',
+  keywords: [
+    'Zugriffskontrollsysteme',
+    'Makerspace',
+    'FabLab',
+    'Schülerlabor',
+    'Open Education Badges',
+  ],
   alternates: {
     canonical: '/',
     languages: {
@@ -65,25 +73,38 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Mardu Platform',
-    description: 'Zentrales Payload-, Content- und Lead-Backend fuer mardu.de und mardu.space.',
+    title: 'Mardu – Zutrittskontrolle & Maschinenfreigabe',
+    description:
+      'Smarte Zutrittskontrolle und Maschinenfreigabe für Werkstätten, Labore, Makerspaces und Baustellen – flexibel, ausfallsicher, DSGVO-konform.',
     url: SITE_URL,
-    siteName: 'Mardu Platform',
+    siteName: siteConfig.appName,
     locale: 'de_DE',
     type: 'website',
     images: [
       {
-        url: '/logos/Logo.svg',
+        url: '/_A7_9072_quer.webp',
         width: 1200,
         height: 630,
-        alt: 'Mardu Platform',
+        alt: 'Mardu Zutrittskontrolle und Maschinenfreigabe',
+        type: 'image/webp',
+      },
+      {
+        url: '/_A7_9072_quer.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Mardu Zutrittskontrolle und Maschinenfreigabe',
       },
     ],
   },
   twitter: {
-    card: 'summary',
-    title: 'Mardu Platform',
-    description: 'Zentrales Payload-, Content- und Lead-Backend fuer mardu.de und mardu.space.',
+    card: 'summary_large_image',
+    title: 'Mardu – Zutrittskontrolle & Maschinenfreigabe',
+    description:
+      'Zutrittskontrolle und Maschinenfreigabe für Werkstätten, Labore, Makerspaces und Baustellen – flexibel, ausfallsicher, DSGVO-konform.',
+    images: ['/_A7_9072_quer.webp', '/_A7_9072_quer.jpg'],
+  },
+  verification: {
+    google: 'a9afa5f97adbb711',
   },
 };
 
@@ -92,21 +113,21 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'Organization',
-      name: 'Mardu Platform',
+      name: siteConfig.appName,
       url: SITE_URL,
-      logo: 'https://www.mardu.de/logos/Logo.svg',
+      logo: `${SITE_URL}/logos/Logo.svg`,
       email: 'info@mardu.de',
       sameAs: ['https://www.linkedin.com/company/marduofficial'],
     },
     {
       '@type': 'WebSite',
-      name: 'Mardu Platform',
+      name: siteConfig.appName,
       url: SITE_URL,
       publisher: {
         '@type': 'Organization',
-        name: 'Mardu Platform',
-        url: 'https://www.mardu.de',
-        logo: 'https://www.mardu.de/logos/Logo.svg',
+        name: 'Mardu',
+        url: SITE_URL,
+        logo: `${SITE_URL}/logos/Logo.svg`,
       },
     },
   ],

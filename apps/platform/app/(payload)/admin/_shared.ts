@@ -2,6 +2,7 @@ import config from '@/payload.config';
 import { importMap } from '@/app/(payload)/admin/importMap';
 import { generatePageMetadata, RootPage } from '@payloadcms/next/views';
 import type { Metadata } from 'next';
+import '@/app/(frontend)/globals.css';
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
