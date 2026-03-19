@@ -22,6 +22,7 @@
         "@mardu/site-config": "workspace:*",
         "@mardu/styles": "workspace:*",
         "@mardu/ui": "workspace:*",
+        "@payloadcms/richtext-lexical": "3.79.0",
         "@stepperize/react": "^5.1.9",
         "@tailwindcss/typography": "^0.5.19",
         "@vercel/analytics": "^1.6.1",

@@ -80,6 +80,7 @@ bun run --cwd apps/platform build
 
 - Gemeinsame Packages dürfen nicht nur im Repo existieren, sie müssen über den Workspace aufgelöst werden. Deshalb immer mit dem Root-`bun.lock` deployen.
 - Workspace-Pakete, die Next.js zur Laufzeit bundeln soll, müssen in `transpilePackages` stehen. `@mardu/layout` ist bereits ergänzt.
+- `outputFileTracingRoot` und `turbopack.root` sind in den Apps auf den Monorepo-Root ausgerichtet, damit Vercel das Tracing konsistent für Workspace-Pakete berechnet.
 - Wenn eine App nach einem Refactor optisch “unvollständig” aussieht, zuerst prüfen, ob das jeweilige Package per Tailwind `@source` in der App eingebunden ist.
 
 ## Vercel CLI

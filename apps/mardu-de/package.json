@@ -27,6 +27,7 @@
     "@mardu/site-config": "workspace:*",
     "@mardu/styles": "workspace:*",
     "@mardu/ui": "workspace:*",
+    "@payloadcms/richtext-lexical": "3.79.0",
     "@base-ui/react": "^1.2.0",
     "@hookform/resolvers": "^5.2.2",
     "@stepperize/react": "^5.1.9",

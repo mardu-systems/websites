@@ -60,6 +60,7 @@ const nextConfig: NextConfig = {
   experimental: {
     viewTransition: true,
   },
+  outputFileTracingRoot: workspaceRoot,
   transpilePackages: [
     '@mardu/layout',
     '@mardu/content-core',
