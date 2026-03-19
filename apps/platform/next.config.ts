@@ -8,7 +8,7 @@ const contentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://*.vercel.app https://vitals.vercel-insights.com https://liv-showcase.s3.eu-central-1.amazonaws.com;
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  img-src 'self' data: blob: https://www.mardu.de https://mardu.de https://*.public.blob.vercel-storage.com;
+  img-src 'self' data: blob: https://www.mardu.de https://mardu.de;
   font-src 'self' https://fonts.gstatic.com;
   connect-src 'self' https://vercel.live https://vitals.vercel-insights.com;
   frame-src 'self' https://cal.meetergo.com;
@@ -61,18 +61,19 @@ const nextConfig: NextConfig = {
   experimental: {
     viewTransition: true,
   },
-  transpilePackages: ['@mardu/content-core', '@mardu/lead-core', '@mardu/site-config', '@mardu/styles'],
+  transpilePackages: [
+    '@mardu/content-core',
+    '@mardu/lead-core',
+    '@mardu/sections',
+    '@mardu/site-config',
+    '@mardu/styles',
+    '@mardu/ui',
+  ],
   turbopack: {
     root: workspaceRoot,
   },
   images: {
     formats: ['image/avif', 'image/webp'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**.public.blob.vercel-storage.com',
-      },
-    ],
   },
   async headers() {
     return [

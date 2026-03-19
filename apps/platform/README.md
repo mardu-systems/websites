@@ -45,10 +45,9 @@ TWENTY_CONTACT_CONSENT_FIELD=
 TWENTY_NEWSLETTER_STATUS_FIELD=
 TWENTY_NEWSLETTER_ROLE_FIELD=
 TWENTY_NEWSLETTER_CONSENT_MODEL_FIELD=
-BLOB_READ_WRITE_TOKEN=
 ```
 
-The newsletter signup uses a double opt-in process. `MARDU_PLATFORM_ORIGIN` should match the public platform domain, `NEWSLETTER_SECRET` signs confirmation, unsubscribe and whitepaper tokens, and `BLOB_READ_WRITE_TOKEN` enables central media uploads via Vercel Blob.
+The newsletter signup uses a double opt-in process. `MARDU_PLATFORM_ORIGIN` should match the public platform domain, and `NEWSLETTER_SECRET` signs confirmation, unsubscribe and whitepaper tokens.
 
 If `TWENTY_API_KEY` is set, confirmed newsletter/whitepaper events and contact leads are synchronized to Twenty. This integration is optional and non-blocking.
 

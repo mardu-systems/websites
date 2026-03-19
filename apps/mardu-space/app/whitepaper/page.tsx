@@ -1,4 +1,4 @@
-import WhitepaperSection from '@/components/utilities/whitepaper-section';
+import { WhitepaperSection } from '@mardu/sections';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

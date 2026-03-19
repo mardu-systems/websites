@@ -1,27 +1,45 @@
-# Payload Endpoints (`mardu.de`)
+# Plattform-Proxy und Admin-Vertrag (`mardu.de`)
 
-`mardu.de` stellt keine eigenstaendige aktive Payload-REST-Implementierung mehr bereit. Die Catch-all Route ist jetzt ein Proxy auf `apps/platform`.
+`mardu.de` betreibt keine eigene Payload-Runtime mehr. Die App ist Frontend plus Proxy zur zentralen Plattform.
 
-## `GET|POST|PATCH|PUT|DELETE|OPTIONS /api/[...slug]`
+## API-Proxy
 
-Quelle: [`apps/mardu-de/app/api/[...slug]/route.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/api/[...slug]/route.ts)
+Quelle:
+[`app/api/[...slug]/route.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/api/[...slug]/route.ts)
 
+- `GET|POST|PATCH|PUT|DELETE|OPTIONS /api/[...slug]`
 - leitet Requests an `MARDU_PLATFORM_ORIGIN/api/[...slug]` weiter
-- uebernimmt Query-Parameter, Methode, Header und Request-Body
-- ist `force-dynamic`, damit keine Payload-Antwort gecacht wird
+- uebernimmt Methode, Query-Parameter, Header und Request-Body
+- bleibt `force-dynamic`, damit keine Plattform-Antwort gecacht wird
 
-## Admin
+## Admin-Weiterleitung
 
-Quelle: [`apps/mardu-de/app/(payload)/admin/layout.tsx`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/(payload)/admin/layout.tsx)
+Quellen:
 
-- `/admin` und `/admin/[...segments]` redirecten an `apps/platform /admin`
-- die aktive Payload-Admin-Oberflaeche liegt damit zentral in `apps/platform`
+- [`app/(payload)/admin/page.tsx`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/(payload)/admin/page.tsx)
+- [`app/(payload)/admin/[...segments]/page.tsx`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/(payload)/admin/[...segments]/page.tsx)
 
-## OIDC
+Verhalten:
 
-Die SSO-Routen in `mardu.de` bleiben lokal vorhanden, solange `mardu.de` noch eigene Content-/Auth-Pfade nutzt:
+- `/admin` redirectet auf `apps/platform /admin`
+- `/admin/[...segments]` redirectet auf die entsprechende Plattform-Admin-Route
+- `mardu.de` hostet kein eigenes Payload-Admin mehr
 
-- `/api/sso/login`
-- `/api/sso/callback`
-- `/api/sso/logout`
-- `/api/sso/debug`
+## SSO-Proxy
+
+Quellen:
+
+- [`app/api/sso/login/route.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/api/sso/login/route.ts)
+- [`app/api/sso/callback/route.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/api/sso/callback/route.ts)
+- [`app/api/sso/logout/route.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/api/sso/logout/route.ts)
+- [`app/api/sso/debug/route.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/api/sso/debug/route.ts)
+
+Verhalten:
+
+- `mardu.de` exponiert kompatible SSO-Einstiegspfade
+- die eigentliche OIDC-/Payload-Logik liegt ausschliesslich in `apps/platform`
+
+## Source of Truth
+
+- Payload-Runtime und Admin: [`apps/platform`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform)
+- Lead- und Content-DTOs: [`packages/content-core/src/index.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/index.ts), [`packages/lead-core/src/index.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/lead-core/src/index.ts)

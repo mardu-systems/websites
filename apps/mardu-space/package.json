@@ -19,8 +19,10 @@
   "dependencies": {
     "@base-ui/react": "^1.2.0",
     "@mardu/lead-core": "workspace:*",
+    "@mardu/sections": "workspace:*",
     "@mardu/site-config": "workspace:*",
     "@mardu/styles": "workspace:*",
+    "@mardu/ui": "workspace:*",
     "@hookform/resolvers": "^5.2.2",
     "@stepperize/react": "^5.1.9",
     "@tailwindcss/typography": "^0.5.19",

@@ -1,16 +1,11 @@
-import { getAdminPageMetadata, renderAdminPage } from '@/app/(payload)/admin/_shared';
+import { getPlatformOrigin } from '@mardu/site-config';
 import type { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 
-type SearchParams = Promise<Record<string, string | string[] | undefined>>;
-
-export const generateMetadata = async ({
-  searchParams,
-}: {
-  searchParams: SearchParams;
-}): Promise<Metadata> => {
-  return getAdminPageMetadata([], searchParams);
+export const metadata: Metadata = {
+  title: 'Mardu Platform Admin',
 };
 
-export default async function AdminRootPage({ searchParams }: { searchParams: SearchParams }) {
-  return renderAdminPage([], searchParams);
+export default async function AdminRootPage() {
+  redirect(new URL('/admin', getPlatformOrigin()).toString());
 }

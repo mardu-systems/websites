@@ -62,7 +62,14 @@ const nextConfig: NextConfig = {
   experimental: {
     viewTransition: true,
   },
-  transpilePackages: ['@mardu/content-core', '@mardu/lead-core', '@mardu/site-config', '@mardu/styles'],
+  transpilePackages: [
+    '@mardu/content-core',
+    '@mardu/lead-core',
+    '@mardu/sections',
+    '@mardu/site-config',
+    '@mardu/styles',
+    '@mardu/ui',
+  ],
   turbopack: {
     root: workspaceRoot,
   },

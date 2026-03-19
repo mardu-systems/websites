@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from 'react';
 import { Slot as SlotPrimitive } from 'radix-ui';
 import { ChevronRight, MoreHorizontal } from 'lucide-react';

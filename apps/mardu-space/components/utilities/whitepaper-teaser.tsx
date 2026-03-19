@@ -148,7 +148,7 @@ export default function WhitepaperTeaser({ className }: WhitepaperTeaserProps) {
                 <div className="flex flex-wrap gap-4 pt-2">
                   <Dialog
                     open={open}
-                    onOpenChange={(nextOpen) => {
+                    onOpenChange={(nextOpen: boolean) => {
                       setOpen(nextOpen);
                       if (!nextOpen) {
                         setStatus('idle');
@@ -209,13 +209,15 @@ export default function WhitepaperTeaser({ className }: WhitepaperTeaserProps) {
                               className="touch-manipulation"
                               ref={emailInputRef}
                               value={email}
-                              onChange={(e) => {
+                              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                 setEmail(e.target.value);
                                 if (fieldErrors.email) {
                                   setFieldErrors((prev) => ({ ...prev, email: undefined }));
                                 }
                               }}
-                              onBlur={(e) => setEmail(e.target.value.trim())}
+                              onBlur={(e: React.FocusEvent<HTMLInputElement>) =>
+                                setEmail(e.target.value.trim())
+                              }
                               aria-invalid={Boolean(fieldErrors.email)}
                               aria-describedby={fieldErrors.email ? 'wp.email-error' : undefined}
                             />
@@ -236,7 +238,7 @@ export default function WhitepaperTeaser({ className }: WhitepaperTeaserProps) {
                                 id="wp.terms"
                                 name="consent"
                                 checked={consent}
-                                onCheckedChange={(c) => {
+                                onCheckedChange={(c: boolean | 'indeterminate') => {
                                   setConsent(c === true);
                                   if (fieldErrors.consent) {
                                     setFieldErrors((prev) => ({ ...prev, consent: undefined }));

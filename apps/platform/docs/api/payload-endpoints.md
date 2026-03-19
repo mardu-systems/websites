@@ -6,8 +6,9 @@ Diese Datei dokumentiert alle bereitgestellten Payload-Routen, deren Zugriff und
 
 - `apps/platform` ist die einzige Payload-Instanz im Monorepo.
 - `apps/mardu-de` konsumiert Blog-, Integrations- und Lead-Daten ueber diese Plattform.
+- `apps/mardu-de` leitet `/admin` und lokale SSO-Routen nur noch auf die Plattform weiter und betreibt keine eigene aktive Payload-Runtime mehr.
 - `apps/mardu-space` nutzt fuer Leads und Whitepaper nur noch Proxy-Routen gegen diese Plattform.
-- Uploads fuer `media` laufen ueber Vercel Blob (`BLOB_READ_WRITE_TOKEN`), nicht mehr ueber lokales Dateisystem.
+- Uploads fuer `media` laufen ueber die Standard-Payload-Upload-Konfiguration der Plattform.
 
 ## Bereitstellung
 

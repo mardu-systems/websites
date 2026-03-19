@@ -41,7 +41,7 @@ export default function NumberStep({
               pattern="[0-9]*"
               aria-label={ariaLabel}
               value={display}
-              onChange={(e) => {
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const raw = e.target.value;
                 if (raw === '') {
                   setDisplay('');
@@ -54,7 +54,7 @@ export default function NumberStep({
                   onChange(safe);
                 }
               }}
-              onBlur={(e) => {
+              onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
                 const normalized = e.target.value.replace(/[^\d]/g, '');
                 const parsed = normalized ? clamp(Number(normalized)) : 0;
                 setDisplay(parsed === 0 ? '' : String(parsed));

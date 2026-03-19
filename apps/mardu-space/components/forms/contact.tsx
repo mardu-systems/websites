@@ -5,8 +5,10 @@ import Link from 'next/link';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
+import { Button } from '@mardu/ui/components/button';
+import { Card, CardContent } from '@mardu/ui/components/card';
+import { Checkbox } from '@mardu/ui/components/checkbox';
+import { Textarea } from '@mardu/ui/components/textarea';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import {
   Form,
@@ -18,8 +20,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Loader2 } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
 import { useRecaptcha } from '@/lib/recaptcha';
 import { normalizePhoneNumber } from '@/lib/phone';
 import type { ContactErrorResponseDto } from '@/types/api/contact';
@@ -197,7 +197,7 @@ export function ContactForm({
                     autoComplete="name"
                     autoCapitalize="words"
                     className={inputClasses}
-                    onBlur={(event) => {
+                    onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
                       const trimmed = event.target.value.trim();
                       field.onChange(trimmed);
                       field.onBlur();
@@ -225,7 +225,7 @@ export function ContactForm({
                     autoCorrect="off"
                     spellCheck={false}
                     className={inputClasses}
-                    onBlur={(event) => {
+                    onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
                       const trimmed = event.target.value.trim();
                       field.onChange(trimmed);
                       field.onBlur();
@@ -248,7 +248,7 @@ export function ContactForm({
                     placeholder="Ihr Unternehmen"
                     autoComplete="organization"
                     className={inputClasses}
-                    onBlur={(event) => {
+                    onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
                       const trimmed = event.target.value.trim();
                       field.onChange(trimmed);
                       field.onBlur();
@@ -275,7 +275,7 @@ export function ContactForm({
                     autoCorrect="off"
                     spellCheck={false}
                     className={inputClasses}
-                    onBlur={(event) => {
+                    onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
                       const trimmed = event.target.value.trim();
                       field.onChange(trimmed);
                       field.onBlur();
@@ -301,7 +301,7 @@ export function ContactForm({
                     {...field}
                     placeholder="Ihre Nachricht..."
                     className={textareaClasses}
-                    onBlur={(event) => {
+                    onBlur={(event: React.FocusEvent<HTMLTextAreaElement>) => {
                       const trimmed = event.target.value.trim();
                       field.onChange(trimmed);
                       field.onBlur();
@@ -326,7 +326,9 @@ export function ContactForm({
                     <Checkbox
                       id={newsletterId}
                       checked={field.value}
-                      onCheckedChange={(checked) => field.onChange(checked === true)}
+                      onCheckedChange={(checked: boolean | 'indeterminate') =>
+                        field.onChange(checked === true)
+                      }
                       name={field.name}
                       className="mt-0.5 touch-manipulation"
                     />
@@ -358,7 +360,9 @@ export function ContactForm({
                     <Checkbox
                       id={consentId}
                       checked={field.value}
-                      onCheckedChange={field.onChange}
+                      onCheckedChange={(checked: boolean | 'indeterminate') =>
+                        field.onChange(checked === true)
+                      }
                       name={field.name}
                       data-contact-consent
                       className="mt-0.5 touch-manipulation"

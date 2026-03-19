@@ -1,13 +1,14 @@
 import config from '@/payload.config';
 import { importMap } from '@/app/(payload)/admin/importMap';
 import '@payloadcms/next/css';
-import { RootLayout, type ServerFunctionClient } from '@payloadcms/next/layouts';
+import { RootLayout } from '@payloadcms/next/layouts';
 import { handleServerFunctions } from '@payloadcms/next/layouts';
+import type { ServerFunctionClient } from 'payload';
 import React from 'react';
 
 export const dynamic = 'force-dynamic';
 
-const serverFunction: ServerFunctionClient = async (args) => {
+const serverFunction: ServerFunctionClient = async (args: Parameters<ServerFunctionClient>[0]) => {
   'use server';
 
   return handleServerFunctions({

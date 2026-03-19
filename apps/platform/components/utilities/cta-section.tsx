@@ -164,7 +164,7 @@ export default function CTASection({
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:items-center">
               <Dialog
                 open={open}
-                onOpenChange={(nextOpen) => {
+                onOpenChange={(nextOpen: boolean) => {
                   setOpen(nextOpen);
                   if (!nextOpen) {
                     setFormErrors({});
@@ -317,7 +317,7 @@ export default function CTASection({
                           ref={consentRef}
                           className="mt-1"
                           checked={consentChecked}
-                          onCheckedChange={(checked) => {
+                          onCheckedChange={(checked: boolean | 'indeterminate') => {
                             setConsentChecked(checked === true);
                             if (formErrors.consent)
                               setFormErrors((prev) => ({ ...prev, consent: undefined }));

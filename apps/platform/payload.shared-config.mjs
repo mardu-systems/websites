@@ -2,7 +2,6 @@ import { postgresAdapter } from '@payloadcms/db-postgres';
 import { mcpPlugin } from '@payloadcms/plugin-mcp';
 import { seoPlugin } from '@payloadcms/plugin-seo';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
-import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
 import * as blogAuthorsModule from './collections/blog-authors.ts';
 import * as blogCategoriesModule from './collections/blog-categories.ts';
 import * as blogPostsModule from './collections/blog-posts.ts';
@@ -95,12 +94,6 @@ const payloadSharedConfig = {
     },
   },
   plugins: [
-    // vercelBlobStorage({
-    //   token: process.env.BLOB_READ_WRITE_TOKEN,
-    //   collections: {
-    //     media: true,
-    //   },
-    // }),
     mcpPlugin({
       collections: {
         'blog-posts': {

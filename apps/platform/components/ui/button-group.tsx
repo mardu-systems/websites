@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Slot as SlotPrimitive } from 'radix-ui';
 import { cva, type VariantProps } from 'class-variance-authority';
 

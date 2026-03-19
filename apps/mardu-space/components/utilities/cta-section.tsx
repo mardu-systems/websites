@@ -153,7 +153,7 @@ export default function CTASection({
               ) : (
                 <Dialog
                   open={open}
-                  onOpenChange={(nextOpen) => {
+                  onOpenChange={(nextOpen: boolean) => {
                     setOpen(nextOpen);
                     if (!nextOpen) {
                       setFormErrors({});
@@ -262,7 +262,7 @@ export default function CTASection({
                             <Checkbox
                               id="cta.consent"
                               checked={consentChecked}
-                              onCheckedChange={(checked) => {
+                              onCheckedChange={(checked: boolean | 'indeterminate') => {
                                 setConsentChecked(checked === true);
                                 if (formErrors.consent) {
                                   setFormErrors((prev) => ({ ...prev, consent: undefined }));

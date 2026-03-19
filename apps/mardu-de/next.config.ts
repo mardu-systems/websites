@@ -1,5 +1,4 @@
 import type { NextConfig } from 'next';
-import { withPayload } from '@payloadcms/next/withPayload';
 import { fileURLToPath } from 'node:url';
 
 const workspaceRoot = fileURLToPath(new URL('../../', import.meta.url));
@@ -61,7 +60,14 @@ const nextConfig: NextConfig = {
   experimental: {
     viewTransition: true,
   },
-  transpilePackages: ['@mardu/content-core', '@mardu/lead-core', '@mardu/site-config', '@mardu/styles'],
+  transpilePackages: [
+    '@mardu/content-core',
+    '@mardu/lead-core',
+    '@mardu/sections',
+    '@mardu/site-config',
+    '@mardu/styles',
+    '@mardu/ui',
+  ],
   turbopack: {
     root: workspaceRoot,
   },
@@ -78,4 +84,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withPayload(nextConfig);
+export default nextConfig;

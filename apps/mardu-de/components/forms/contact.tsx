@@ -6,8 +6,10 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 // Use native input elements instead of the shadcn `Input` component
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
+import { Button } from '@mardu/ui/components/button';
+import { Card, CardContent } from '@mardu/ui/components/card';
+import { Checkbox } from '@mardu/ui/components/checkbox';
+import { Textarea } from '@mardu/ui/components/textarea';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import {
   Form,
@@ -19,8 +21,6 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Loader2 } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
 import { normalizePhoneNumber } from '@/lib/phone';
 import type { ContactErrorResponseDto } from '@/types/api/contact';
 
@@ -276,7 +276,9 @@ export function ContactForm({
                   <FormControl>
                     <Checkbox
                       checked={field.value}
-                      onCheckedChange={(checked) => field.onChange(checked === true)}
+                      onCheckedChange={(checked: boolean | 'indeterminate') =>
+                        field.onChange(checked === true)
+                      }
                       className="mt-0.5"
                     />
                   </FormControl>
@@ -307,7 +309,9 @@ export function ContactForm({
                   <FormControl>
                     <Checkbox
                       checked={field.value}
-                      onCheckedChange={(checked) => field.onChange(checked === true)}
+                      onCheckedChange={(checked: boolean | 'indeterminate') =>
+                        field.onChange(checked === true)
+                      }
                       className="mt-0.5"
                     />
                   </FormControl>

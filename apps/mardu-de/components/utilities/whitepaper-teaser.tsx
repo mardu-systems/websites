@@ -164,7 +164,7 @@ export default function WhitepaperTeaser({ className }: WhitepaperTeaserProps) {
                 <div className="flex flex-wrap gap-4 pt-2">
                   <Dialog
                     open={open}
-                    onOpenChange={(nextOpen) => {
+                    onOpenChange={(nextOpen: boolean) => {
                       setOpen(nextOpen);
                       if (!nextOpen) {
                         setStatus('idle');
@@ -225,7 +225,7 @@ export default function WhitepaperTeaser({ className }: WhitepaperTeaserProps) {
                                 autoComplete="given-name"
                                 ref={firstNameInputRef}
                                 value={firstName}
-                                onChange={(e) => {
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                   setFirstName(e.target.value);
                                   if (fieldErrors.firstName) {
                                     setFieldErrors((prev) => ({ ...prev, firstName: undefined }));
@@ -260,7 +260,7 @@ export default function WhitepaperTeaser({ className }: WhitepaperTeaserProps) {
                                 autoComplete="family-name"
                                 ref={lastNameInputRef}
                                 value={lastName}
-                                onChange={(e) => {
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                   setLastName(e.target.value);
                                   if (fieldErrors.lastName) {
                                     setFieldErrors((prev) => ({ ...prev, lastName: undefined }));
@@ -291,7 +291,9 @@ export default function WhitepaperTeaser({ className }: WhitepaperTeaserProps) {
                               name="company"
                               autoComplete="organization"
                               value={company}
-                              onChange={(e) => setCompany(e.target.value)}
+                              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                setCompany(e.target.value)
+                              }
                             />
                           </div>
 
@@ -310,13 +312,15 @@ export default function WhitepaperTeaser({ className }: WhitepaperTeaserProps) {
                               ref={emailInputRef}
                               autoFocus
                               value={email}
-                              onChange={(e) => {
+                              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                 setEmail(e.target.value);
                                 if (fieldErrors.email) {
                                   setFieldErrors((prev) => ({ ...prev, email: undefined }));
                                 }
                               }}
-                              onBlur={(e) => setEmail(e.target.value.trim())}
+                              onBlur={(e: React.FocusEvent<HTMLInputElement>) =>
+                                setEmail(e.target.value.trim())
+                              }
                               aria-invalid={Boolean(fieldErrors.email)}
                               aria-describedby={fieldErrors.email ? 'wp.email-error' : undefined}
                             />
@@ -337,7 +341,7 @@ export default function WhitepaperTeaser({ className }: WhitepaperTeaserProps) {
                                 id="wp.terms"
                                 name="consent"
                                 checked={consent}
-                                onCheckedChange={(c) => {
+                                onCheckedChange={(c: boolean | 'indeterminate') => {
                                   setConsent(c === true);
                                   if (fieldErrors.consent) {
                                     setFieldErrors((prev) => ({ ...prev, consent: undefined }));

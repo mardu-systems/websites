@@ -1,16 +1,16 @@
-# Integrations + Payload CMS Integration
+# Integrations Consumer Contract (`mardu.de`)
 
-Diese Dokumentation beschreibt den API-Vertrag fuer `/integrations` und `/integrations/[slug]`.
+Diese Dokumentation beschreibt den Integrations-Vertrag aus Sicht von `mardu.de` als Consumer der zentralen Plattform.
 
-## Zweck
+## Source of Truth
 
-- Integrationen in Payload verwalten (Kategorien, Protokolle, Status).
-- Oeffentliche Auslieferung nur fuer `published`.
-- Stabile Frontend-Vertraege ueber DTOs.
+- Runtime und Collections liegen in [`apps/platform`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform)
+- Gemeinsame DTOs und Filtertypen liegen in [`packages/content-core/src/index.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/index.ts)
+- `mardu.de` konsumiert Integrations-Daten ueber den Plattform-Proxy in [`app/api/[...slug]/route.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/api/[...slug]/route.ts)
 
 ## DTO-Vertrag
 
-Kanonische Typen: [types/api/integrations.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/types/api/integrations.ts)
+Kanonische Integrations-Typen:
 
 - `IntegrationListQueryDto`
 - `IntegrationCategoryDto`
@@ -18,54 +18,35 @@ Kanonische Typen: [types/api/integrations.ts](/Users/lucaschoeneberg/Documents/G
 - `IntegrationListItemDto`
 - `IntegrationDetailDto`
 - `PaginatedIntegrationsDto`
+- `IntegrationStatus`
+- `IntegrationSort`
 
-## Endpunktmatrix
+Quelle:
+[`packages/content-core/src/index.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/index.ts)
 
-Bereitstellung ueber: [app/api/[...slug]/route.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/api/[...slug]/route.ts)
+## Oeffentliche Endpunkte
+
+`mardu.de` nutzt die zentralen Plattform-Endpunkte ueber den lokalen Proxy:
 
 1. `GET /api/integrations`
 2. `GET /api/integrations/:id`
 3. `GET /api/integration-categories`
 4. `GET /api/integration-protocols`
 
-## Query-Parameter (Katalog-URL)
+Die eigentliche Payload-Implementierung liegt ausschliesslich in `apps/platform`.
 
-`/integrations` unterstuetzt:
+## Frontend-Consumer
 
-- `q`: Suche in Titel, Kurzbeschreibung und Protokollnamen
-- `category`: Kategorie-Slug
-- `protocol`: Protokoll-Slug
-- `status`: `available | beta | planned`
-- `sort`: `featured | alphabetical | latest`
-- `page`: Seitennummer (`>= 1`)
+Frontend-Layer in `mardu.de`:
 
-Defaults:
+- [`lib/integrations.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/lib/integrations.ts)
+- [`app/(frontend)/integrations/page.tsx`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/(frontend)/integrations/page.tsx)
+- [`app/(frontend)/integrations/[slug]/page.tsx`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/(frontend)/integrations/[slug]/page.tsx)
 
-- `limit = 12`
-- `sort = featured`
+Diese Consumer duerfen nur DTOs und Read-Vertraege nutzen, keine lokalen Collection-Definitionen oder Seed-Skripte.
 
-## Access-Regeln
+## SEO und Sichtbarkeit
 
-Collection: [collections/integrations.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/collections/integrations.ts)
-
-- Public Read: nur `_status=published`
-- Authenticated Read/Write: Admin-Kontext
-
-## SEO-Verhalten
-
-- SEO-Quelle ist Payload SEO Plugin (`meta.*`).
-- Frontend liest `meta.title`, `meta.description`, `meta.image`, `meta.url` mit Fallback auf Fachfelder.
-
-## Fehlerbeispiele
-
-- `400`: Ungueltige Query-Werte
-- `401`: Zugriff auf geschuetzte Ressourcen ohne Auth
-- `404`: Unbekannter Slug auf `/integrations/[slug]`
-
-## Seed-Daten
-
-V1 Start-Datenquelle:
-- [data/integration-seed-items.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/data/integration-seed-items.ts)
-
-Optionales Seed-Skript:
-- [scripts/seed-integrations.mjs](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/scripts/seed-integrations.mjs)
+- SEO-Daten kommen aus der zentralen Plattform bzw. dem Payload SEO Plugin
+- Site-Sichtbarkeit wird zentral ueber `packages/content-core`/Payload geregelt
+- neue Integrations-Felder oder Filter werden zuerst in `apps/platform` und `packages/content-core` dokumentiert
