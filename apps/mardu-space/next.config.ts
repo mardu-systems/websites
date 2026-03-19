@@ -63,6 +63,7 @@ const nextConfig: NextConfig = {
     viewTransition: true,
   },
   transpilePackages: [
+    '@mardu/layout',
     '@mardu/content-core',
     '@mardu/lead-core',
     '@mardu/sections',

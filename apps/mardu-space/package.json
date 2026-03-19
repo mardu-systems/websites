@@ -19,6 +19,7 @@
   "dependencies": {
     "@base-ui/react": "^1.2.0",
     "@mardu/content-core": "workspace:*",
+    "@mardu/layout": "workspace:*",
     "@mardu/lead-core": "workspace:*",
     "@mardu/sections": "workspace:*",
     "@mardu/site-config": "workspace:*",

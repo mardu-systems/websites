@@ -1,6 +1,6 @@
-import { FooterLink } from '@/components/nav/footer/footer';
+import type { LayoutLinkDto } from '@mardu/layout/types';
 
-export const defaultFooterNavLinks: FooterLink[] = [
+export const defaultFooterNavLinks: LayoutLinkDto[] = [
   { href: '/', label: 'Startseite' },
   { href: '/configurator', label: 'Konfigurator' },
   { href: '/system', label: 'System' },

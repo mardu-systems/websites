@@ -16,6 +16,7 @@
         "@base-ui/react": "^1.2.0",
         "@hookform/resolvers": "^5.2.2",
         "@mardu/content-core": "workspace:*",
+        "@mardu/layout": "workspace:*",
         "@mardu/lead-core": "workspace:*",
         "@mardu/sections": "workspace:*",
         "@mardu/site-config": "workspace:*",
@@ -85,6 +86,7 @@
         "@base-ui/react": "^1.2.0",
         "@hookform/resolvers": "^5.2.2",
         "@mardu/content-core": "workspace:*",
+        "@mardu/layout": "workspace:*",
         "@mardu/lead-core": "workspace:*",
         "@mardu/sections": "workspace:*",
         "@mardu/site-config": "workspace:*",
@@ -242,6 +244,19 @@
       "peerDependencies": {
         "eslint": "^9.39.0",
         "eslint-config-next": "^16.1.0",
+      },
+    },
+    "packages/layout": {
+      "name": "@mardu/layout",
+      "version": "0.0.0",
+      "dependencies": {
+        "@mardu/ui": "workspace:*",
+        "lucide-react": "^0.562.0",
+        "next": "^16.1.0",
+      },
+      "peerDependencies": {
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0",
       },
     },
     "packages/lead-core": {
@@ -664,6 +679,8 @@
     "@mardu/content-core": ["@mardu/content-core@workspace:packages/content-core"],
 
     "@mardu/eslint-config": ["@mardu/eslint-config@workspace:packages/eslint-config"],
+
+    "@mardu/layout": ["@mardu/layout@workspace:packages/layout"],
 
     "@mardu/lead-core": ["@mardu/lead-core@workspace:packages/lead-core"],
 

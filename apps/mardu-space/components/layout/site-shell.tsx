@@ -1,25 +1,50 @@
-import SiteHeader from '@/components/nav/header/site-header';
-import { defaultHeaderItems } from '@/data/default-header-items';
-import SiteFooter from '@/components/nav/footer/footer';
 import React from 'react';
+import SharedSiteShell from '@mardu/layout/site-shell';
+import type { FooterSocialLinkDto } from '@mardu/layout/types';
+import { defaultHeaderItems } from '@/data/default-header-items';
 import { defaultFooterNavLinks } from '@/data/default-footer-items';
 import { getSiteConfig } from '@mardu/site-config';
 
+const socialLinks: ReadonlyArray<FooterSocialLinkDto> = [
+  { href: 'https://www.instagram.com/mardu.de', label: 'Instagram', icon: 'instagram' },
+  { href: 'https://www.linkedin.com/company/marduofficial', label: 'LinkedIn', icon: 'linkedin' },
+  { href: 'https://github.com/mardu-systems', label: 'GitHub', icon: 'github' },
+];
+
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   const siteConfig = getSiteConfig('mardu-space');
+
   return (
-    <div>
-      <SiteHeader items={defaultHeaderItems} />
-      <div data-theme="light" style={{ colorScheme: 'light' }}>
-        {children}
-      </div>
-      <SiteFooter
-        description={
-          'mardu.space ermöglicht die digitale Zutritts- und Maschinenfreigabe für Werkstätten, Hochschulen und Unternehmen – sicher, skalierbar und effizient.'
-        }
-        navLinks={defaultFooterNavLinks}
-        metaLinks={siteConfig.footerMetaLinks}
-      />
-    </div>
+    <SharedSiteShell
+      header={{
+        brand: {
+          homeHref: '/',
+          logoSrc: '/marduspace_logo_bg_white.svg',
+          logoAlt: 'mardu.space Logo',
+        },
+        items: defaultHeaderItems,
+        cta: {
+          label: 'Demo vereinbaren',
+          href: 'https://cal.meetergo.com/infomardu/30-min-meeting-or-info',
+          mode: 'meetergo',
+        },
+      }}
+      footer={{
+        brand: {
+          homeHref: '/',
+          logoSrc: '/marduspace_logo_bg_black.svg',
+          logoAlt: 'mardu.space Logo',
+          copyrightName: 'Mardu',
+        },
+        description:
+          'mardu.space ermöglicht die digitale Zutritts- und Maschinenfreigabe für Werkstätten, Hochschulen und Unternehmen – sicher, skalierbar und effizient.',
+        navLinks: defaultFooterNavLinks,
+        metaLinks: siteConfig.footerMetaLinks,
+        socialLinks,
+        theme: 'dark',
+      }}
+    >
+      {children}
+    </SharedSiteShell>
   );
 }

@@ -1,6 +1,6 @@
-import { NavEntry } from '@/types/header';
+import type { HeaderNavItemDto } from '@mardu/layout/types';
 
-export const defaultHeaderItems: NavEntry[] = [
+export const defaultHeaderItems: HeaderNavItemDto[] = [
   { type: 'link', label: 'Home', href: '/' },
   { type: 'link', label: 'Konfigurator', href: '/configurator' },
   { type: 'link', label: 'Hardware', href: '/system' },

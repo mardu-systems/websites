@@ -35,3 +35,7 @@ bun run dev:mardu-de
 bun run dev:mardu-space
 bun run dev:platform
 ```
+
+## Vercel Deployment
+
+Die Vercel-Einrichtung für dieses Monorepo ist in [docs/vercel-deployment.md](./docs/vercel-deployment.md) dokumentiert.

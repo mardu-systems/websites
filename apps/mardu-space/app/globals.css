@@ -1,5 +1,6 @@
 @import "@mardu/styles/base.css";
 @import "@mardu/styles/theme-mardu-space.css";
+@source "../../../packages/layout/src";
 
 :root {
     --background: oklch(0.982 0.006 95.4);

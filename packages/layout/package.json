@@ -1,0 +1,23 @@
+{
+  "name": "@mardu/layout",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@mardu/ui": "workspace:*",
+    "lucide-react": "^0.562.0",
+    "next": "^16.1.0"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./dto": "./src/dto.ts",
+    "./types": "./src/dto.ts",
+    "./site-shell": "./src/site-shell.tsx",
+    "./site-header": "./src/site-header.tsx",
+    "./site-footer": "./src/site-footer.tsx"
+  },
+  "peerDependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  }
+}

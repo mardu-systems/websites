@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@mardu/content-core": "workspace:*",
+    "@mardu/layout": "workspace:*",
     "@mardu/lead-core": "workspace:*",
     "@mardu/sections": "workspace:*",
     "@mardu/site-config": "workspace:*",
