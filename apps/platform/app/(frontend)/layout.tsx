@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import './globals.css';
+import '../globals.css';
 import React from 'react';
 import SiteShell from '@/components/layout/site-shell';
 import { Analytics } from '@vercel/analytics/next';
@@ -33,8 +33,7 @@ export const meta: Metadata = {
     default: 'Mardu Platform',
     template: '%s | Mardu Platform',
   },
-  description:
-    'Zentrales Payload-, Content- und Lead-Backend fuer mardu.de und mardu.space.',
+  description: 'Zentrales Payload-, Content- und Lead-Backend fuer mardu.de und mardu.space.',
   keywords: ['Payload CMS', 'Lead API', 'Newsletter', 'Mardu Platform', 'Content Backend'],
   alternates: {
     canonical: '/',
