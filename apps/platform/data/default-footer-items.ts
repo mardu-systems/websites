@@ -6,8 +6,3 @@ export const defaultFooterNavLinks: FooterLink[] = [
     { href: "https://www.mardu.de", label: "mardu.de" },
     { href: "https://mardu.space", label: "mardu.space" },
 ];
-
-export const defaultFooterMetaLinks: FooterLink[] = [
-    { href: "/publisher", label: "Impressum" },
-    { href: "/privacy", label: "Datenschutz" },
-];

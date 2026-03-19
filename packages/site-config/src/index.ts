@@ -1,5 +1,10 @@
 export type SiteKey = 'mardu-de' | 'mardu-space' | 'platform';
 
+export type SiteLink = {
+  href: string;
+  label: string;
+};
+
 export type SiteConfig = {
   key: SiteKey;
   label: string;
@@ -17,6 +22,7 @@ export type SiteConfig = {
   whitepaperDownloadPath?: string;
   emailLogoUrl: string;
   emailBrandName: string;
+  footerMetaLinks: ReadonlyArray<SiteLink>;
 };
 
 export const siteConfigs: Record<SiteKey, SiteConfig> = {
@@ -35,6 +41,10 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
     newsletterUnsubscribePath: '/newsletter/abmeldung',
     emailLogoUrl: 'https://www.mardu.de/logos/Logo.svg',
     emailBrandName: 'Mardu',
+    footerMetaLinks: [
+      { href: '/publisher', label: 'Impressum' },
+      { href: '/privacy', label: 'Datenschutz' },
+    ],
   },
   'mardu-space': {
     key: 'mardu-space',
@@ -53,6 +63,11 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
     whitepaperDownloadPath: '/api/whitepaper/download',
     emailLogoUrl: 'https://mardu.space/marduspace_logo_bg_white.svg',
     emailBrandName: 'mardu.space',
+    footerMetaLinks: [
+      { href: '/roadmap', label: 'Roadmap' },
+      { href: '/privacy', label: 'Datenschutz' },
+      { href: '/publisher', label: 'Impressum' },
+    ],
   },
   platform: {
     key: 'platform',
@@ -69,6 +84,10 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
     newsletterUnsubscribePath: '/newsletter/abmeldung',
     emailLogoUrl: 'https://www.mardu.de/logos/Logo.svg',
     emailBrandName: 'Mardu Platform',
+    footerMetaLinks: [
+      { href: '/publisher', label: 'Impressum' },
+      { href: '/privacy', label: 'Datenschutz' },
+    ],
   },
 };
 

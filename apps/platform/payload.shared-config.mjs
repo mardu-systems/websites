@@ -9,6 +9,7 @@ import * as contactLeadsModule from './collections/contact-leads.ts';
 import * as integrationCategoriesModule from './collections/integration-categories.ts';
 import * as integrationProtocolsModule from './collections/integration-protocols.ts';
 import * as integrationsModule from './collections/integrations.ts';
+import * as legalPagesModule from './collections/legal-pages.ts';
 import * as mediaModule from './collections/media.ts';
 import * as newsletterSubscribersModule from './collections/newsletter-subscribers.ts';
 import * as preorderRequestsModule from './collections/preorder-requests.ts';
@@ -45,6 +46,7 @@ const IntegrationProtocols = resolveCollectionExport(
   'IntegrationProtocols',
 );
 const Integrations = resolveCollectionExport(integrationsModule, 'Integrations');
+const LegalPages = resolveCollectionExport(legalPagesModule, 'LegalPages');
 const Media = resolveCollectionExport(mediaModule, 'Media');
 const NewsletterSubscribers = resolveCollectionExport(
   newsletterSubscribersModule,
@@ -70,6 +72,7 @@ const payloadSharedConfig = {
     BlogCategories,
     BlogAuthors,
     BlogPosts,
+    LegalPages,
     IntegrationCategories,
     IntegrationProtocols,
     Integrations,
@@ -102,11 +105,22 @@ const payloadSharedConfig = {
         integrations: {
           enabled: true,
         },
+        'legal-pages': {
+          enabled: true,
+        },
       },
     }),
     seoPlugin({
       collections: ['blog-posts', 'integrations'],
       generateDescription: ({ doc }) => {
+        if (typeof doc?.seoDescription === 'string') {
+          return doc.seoDescription;
+        }
+
+        if (typeof doc?.summary === 'string') {
+          return doc.summary;
+        }
+
         if (typeof doc?.shortDescription === 'string') {
           return doc.shortDescription;
         }
@@ -133,6 +147,10 @@ const payloadSharedConfig = {
         return '';
       },
       generateTitle: ({ doc }) => {
+        if (typeof doc?.seoTitle === 'string') {
+          return doc.seoTitle;
+        }
+
         if (typeof doc?.title === 'string') {
           return doc.title;
         }
@@ -141,6 +159,18 @@ const payloadSharedConfig = {
       },
       generateURL: ({ doc }) => {
         const baseURL = process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000';
+
+        if (
+          typeof doc?.canonicalUrl === 'string' &&
+          doc.canonicalUrl.length > 0 &&
+          (doc?.slug === 'privacy' || doc?.slug === 'publisher')
+        ) {
+          return doc.canonicalUrl;
+        }
+
+        if ((doc?.slug === 'privacy' || doc?.slug === 'publisher') && typeof doc?.slug === 'string') {
+          return `${baseURL}/${doc.slug}`;
+        }
 
         if (
           typeof doc?.availabilityStatus === 'string' &&

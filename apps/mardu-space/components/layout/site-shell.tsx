@@ -2,9 +2,11 @@ import SiteHeader from '@/components/nav/header/site-header';
 import { defaultHeaderItems } from '@/data/default-header-items';
 import SiteFooter from '@/components/nav/footer/footer';
 import React from 'react';
-import { defaultFooterMetaLinks, defaultFooterNavLinks } from '@/data/default-footer-items';
+import { defaultFooterNavLinks } from '@/data/default-footer-items';
+import { getSiteConfig } from '@mardu/site-config';
 
 export default function SiteShell({ children }: { children: React.ReactNode }) {
+  const siteConfig = getSiteConfig('mardu-space');
   return (
     <div>
       <SiteHeader items={defaultHeaderItems} />
@@ -16,7 +18,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
           'mardu.space ermöglicht die digitale Zutritts- und Maschinenfreigabe für Werkstätten, Hochschulen und Unternehmen – sicher, skalierbar und effizient.'
         }
         navLinks={defaultFooterNavLinks}
-        metaLinks={defaultFooterMetaLinks}
+        metaLinks={siteConfig.footerMetaLinks}
       />
     </div>
   );

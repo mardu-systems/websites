@@ -55,6 +55,24 @@ Shared DTO- und Client-Logik:
 Erweiterte Integrations-Dokumentation:
 [docs/api/integrations-payload-integration.md](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/docs/api/integrations-payload-integration.md)
 
+## Legal-Page-Endpunkte
+
+1. `GET /api/legal-pages`
+2. `GET /api/legal-pages/:id`
+
+DTO-Vertrag fuer Legal-Page-Consumer:
+[packages/content-core/src/index.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/index.ts)
+
+Shared Fetch- und Bootstrap-Logik:
+[packages/content-core/src/legal-pages.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/legal-pages.ts)
+
+Erweiterte Legal-Page-Dokumentation:
+[docs/api/legal-pages-payload-integration.md](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/docs/api/legal-pages-payload-integration.md)
+
+Hinweis:
+- `legal-pages` nutzt einen collection-lokalen SEO-Tab mit `seoTitle`, `seoDescription` und `canonicalUrl`.
+- Die generischen SEO-Plugin-Endpunkte unten gelten weiterhin fuer die ueber das Plugin integrierten Collections, aber nicht als Admin-UI-Quelle fuer `legal-pages`.
+
 ## SSO-Endpunkte (OIDC)
 
 1. `GET /api/sso/login`

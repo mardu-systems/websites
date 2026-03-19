@@ -4,10 +4,12 @@ import SiteHeader from '@/components/nav/header/site-header';
 import { defaultHeaderItems } from '@/data/default-header-items';
 import SiteFooter from '@/components/nav/footer/footer';
 import React from 'react';
-import { defaultFooterMetaLinks, defaultFooterNavLinks } from '@/data/default-footer-items';
+import { defaultFooterNavLinks } from '@/data/default-footer-items';
+import { getSiteConfig } from '@mardu/site-config';
 import { usePathname } from 'next/navigation';
 
 export default function SiteShell({ children }: { children: React.ReactNode }) {
+  const siteConfig = getSiteConfig('platform');
   const pathname = usePathname();
   const isPayloadAdminRoute = pathname?.startsWith('/admin');
 
@@ -24,7 +26,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
       <SiteFooter
         description="Interne Plattform für Payload Admin, zentrale APIs, Media-Uploads und Betriebsaufgaben im Mardu-Monorepo."
         navLinks={defaultFooterNavLinks}
-        metaLinks={defaultFooterMetaLinks}
+        metaLinks={siteConfig.footerMetaLinks}
       />
     </div>
   );

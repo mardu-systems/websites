@@ -9,9 +9,3 @@ export const defaultFooterNavLinks: FooterLink[] = [
   { href: '/fotos', label: 'Fotos' },
   { href: '/contact', label: 'Kontakt' },
 ];
-
-export const defaultFooterMetaLinks: FooterLink[] = [
-  { href: '/roadmap', label: 'Roadmap' },
-  { href: '/privacy', label: 'Datenschutz' },
-  { href: '/publisher', label: 'Impressum' },
-];

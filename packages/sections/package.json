@@ -4,9 +4,11 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@mardu/content-core": "workspace:*",
     "@mardu/ui": "workspace:*",
     "framer-motion": "^12.34.3",
-    "lucide-react": "^0.562.0"
+    "lucide-react": "^0.562.0",
+    "react-markdown": "^10.1.0"
   },
   "exports": {
     ".": "./src/index.ts"

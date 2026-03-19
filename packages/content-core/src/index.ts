@@ -1,7 +1,21 @@
-export type VisibleSite = 'mardu-de' | 'mardu-space';
+export type VisibleSite = 'mardu-de' | 'mardu-space' | 'platform';
 
 export type SiteVisibility = {
   sites?: VisibleSite[] | null;
+};
+
+export type LegalPageSlug = 'privacy' | 'publisher';
+
+export type LegalPageDto = {
+  slug: LegalPageSlug;
+  title: string;
+  pageKind: LegalPageSlug;
+  contentMarkdown: string;
+  summary?: string;
+  updatedLabel?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  canonicalUrl?: string;
 };
 
 export type BlogListQueryDto = {
@@ -227,6 +241,7 @@ const DEFAULT_REVALIDATE_SECONDS = 60;
 export const visibleSiteOptions = [
   { label: 'mardu.de', value: 'mardu-de' },
   { label: 'mardu.space', value: 'mardu-space' },
+  { label: 'platform.mardu.de', value: 'platform' },
 ] satisfies Array<{ label: string; value: VisibleSite }>;
 
 export function isVisibleOnSite(visibility: SiteVisibility, site: VisibleSite) {
@@ -237,13 +252,13 @@ export function isVisibleOnSite(visibility: SiteVisibility, site: VisibleSite) {
   return visibility.sites.includes(site);
 }
 
-export function buildSiteVisibilityField() {
+export function buildSiteVisibilityField(defaultSites: VisibleSite[] = ['mardu-de', 'mardu-space']) {
   return {
     name: 'sites',
     type: 'select' as const,
     hasMany: true,
     required: true,
-    defaultValue: ['mardu-de', 'mardu-space'],
+    defaultValue: defaultSites,
     options: [...visibleSiteOptions],
     admin: {
       description: 'Steuert auf welchen Frontends dieser Inhalt sichtbar ist.',
