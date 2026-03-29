@@ -2,8 +2,8 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { cn } from '@mardu/ui/lib/utils';
+import { Button } from '@mardu/ui/components/button';
 
 export interface ImageCardProps {
   imageSrc: string;

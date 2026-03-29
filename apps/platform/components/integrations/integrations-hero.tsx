@@ -1,4 +1,4 @@
-import { HeroHeadline } from '@/components/ui/typography';
+import { HeroHeadline } from '@mardu/ui/components/typography';
 
 export function IntegrationsHero({
   available,

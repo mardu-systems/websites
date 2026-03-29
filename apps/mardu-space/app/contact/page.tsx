@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import ContactForm from './contact-form';
-import { Overline } from '@/components/ui/typography';
+import { Overline } from '@mardu/ui/components/typography';
 import { getContactPageContext, type ContactPageSearchParamsDto } from '@/lib/contact-page-context';
 
 export const metadata: Metadata = {

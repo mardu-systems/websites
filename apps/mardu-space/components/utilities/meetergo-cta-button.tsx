@@ -2,9 +2,9 @@
 
 import * as React from 'react';
 import { Loader2 } from 'lucide-react';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { Button, buttonVariants } from '@mardu/ui/components/button';
 import { type VariantProps } from 'class-variance-authority';
-import { cn } from '@/lib/utils';
+import { cn } from '@mardu/ui/lib/utils';
 
 // Types extracted from meetergo-integration definitions
 export interface MeetergoPrefill {

@@ -12,8 +12,8 @@
   },
   "aliases": {
     "components": "@/components",
-    "utils": "@/lib/utils",
-    "ui": "@/components/ui",
+    "utils": "@mardu/ui/lib/utils",
+    "ui": "@mardu/ui/components",
     "lib": "@/lib",
     "hooks": "@/hooks"
   },

@@ -2,9 +2,9 @@
 
 import * as React from 'react';
 import Image from 'next/image';
-import { cn } from '@/lib/utils';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Overline } from '@/components/ui/typography';
+import { cn } from '@mardu/ui/lib/utils';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@mardu/ui/components/tabs';
+import { Overline } from '@mardu/ui/components/typography';
 
 export type Feature = {
   id: string;

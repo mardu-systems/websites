@@ -3,12 +3,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronDown } from 'lucide-react';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@mardu/ui/components/hover-card';
 import React from 'react';
 import clsx from 'clsx';
 import MegaContent from './mega-content';
 import { NavEntry } from '@/types/header';
-import { useScrollToSection } from '@/hooks/use-scroll-to-section';
+import { useScrollToSection } from '@mardu/layout/use-scroll-to-section';
 
 interface DesktopNavProps {
   items: NavEntry[];

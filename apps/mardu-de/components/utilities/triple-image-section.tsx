@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { cn } from '@/lib/utils';
+import { cn } from '@mardu/ui/lib/utils';
 import { Linkedin, Mail } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@mardu/ui/components/button';
 
 export interface TripleImageCardProps {
   imageSrc: string;

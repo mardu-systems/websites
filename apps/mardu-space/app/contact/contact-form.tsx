@@ -1,7 +1,7 @@
 'use client';
 
 import ContactForm from '@/components/forms/contact';
-import type { ContactSource } from '@/types/api/contact';
+import type { ContactSource } from '@mardu/lead-core';
 
 type ContactFormPageVariantProps = {
   source?: ContactSource;

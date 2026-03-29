@@ -5,7 +5,7 @@ import { sendContactEmail } from '@/lib/email';
 import { syncContactLeadToTwenty } from '@/lib/integrations/twenty';
 import { sendNewsletterConfirmationEmail, splitFullName } from '@/lib/newsletter-confirmation';
 import { normalizePhoneNumber } from '@/lib/phone';
-import type { ContactRequestDto, ContactResponseDto } from '@/types/api/contact';
+import type { ContactRequestDto, ContactResponseDto } from '@mardu/lead-core';
 
 export async function POST(req: Request) {
   const json = await req.json();

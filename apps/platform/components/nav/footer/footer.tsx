@@ -4,7 +4,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowUp } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@mardu/ui/components/button';
 
 export type FooterLink = {
   href: string;

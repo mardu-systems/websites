@@ -10,6 +10,11 @@ The package mirrors the `components/ui` baseline from `../mardu.de` and is the c
 - Shared helpers use `@mardu/ui/lib/*` and `@mardu/ui/hooks/*`
 - [`src/index.ts`](./src/index.ts) exists only as a compatibility barrel and should not be the default import path for app code
 - Full shared `components/ui/*` set is copied from `../mardu.de`
+- Additional shared building blocks exposed by this package:
+  - `@mardu/ui/lib/utils` for the canonical `cn(...)` Tailwind merge helper
+  - `@mardu/ui/hooks/use-mobile` for shared mobile-breakpoint state
+  - `@mardu/ui/components/circle-number`
+  - `@mardu/ui/components/dashed-connector`
 
 ## Contract
 

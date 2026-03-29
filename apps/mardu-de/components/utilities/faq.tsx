@@ -5,8 +5,8 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
-import { cn } from '@/lib/utils';
+} from '@mardu/ui/components/accordion';
+import { cn } from '@mardu/ui/lib/utils';
 import React from 'react';
 
 export type FaqItem = {

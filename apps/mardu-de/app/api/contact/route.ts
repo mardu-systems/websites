@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { contactRequestSchema } from '@mardu/lead-core';
 import { normalizePhoneNumber } from '@/lib/phone';
 import { forwardPlatformJson } from '@/lib/platform-api';
-import type { ContactRequestDto, ContactResponseDto } from '@/types/api/contact';
+import type { ContactRequestDto, ContactResponseDto } from '@mardu/lead-core';
 
 const PhoneSchema = z
   .string()

@@ -1,8 +1,8 @@
 // roadmap-timeline.tsx
 import { ReactNode } from 'react';
-import { cn } from '@/lib/utils';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { cn } from '@mardu/ui/lib/utils';
+import { Card, CardContent } from '@mardu/ui/components/card';
+import { Badge } from '@mardu/ui/components/badge';
 import { LucideIcon } from 'lucide-react';
 
 export type RoadmapCard = {

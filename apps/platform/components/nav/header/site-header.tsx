@@ -4,8 +4,8 @@ import * as React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
-import NavLink from '@/components/nav/nav-link';
-import { Button } from '@/components/ui/button';
+import NavLink from '@mardu/layout/nav-link';
+import { Button } from '@mardu/ui/components/button';
 import type { NavEntry } from '@/types/header';
 
 type HeaderProps = {

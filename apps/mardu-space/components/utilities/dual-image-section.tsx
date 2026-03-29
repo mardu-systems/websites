@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ScrollReveal } from '@/components/ui/motion/scroll-reveal';
-import { cn } from '@/lib/utils';
+import { ScrollReveal } from '@mardu/ui/components/motion/scroll-reveal';
+import { cn } from '@mardu/ui/lib/utils';
 
 export interface ImageCardProps {
   imageSrc: string;

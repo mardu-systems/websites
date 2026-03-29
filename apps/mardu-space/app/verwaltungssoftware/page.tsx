@@ -17,9 +17,9 @@ import {
 import CTASection from '@/components/utilities/cta-section';
 import MediaPlaceholder from '@/components/utilities/media-placeholder';
 import SplitContent from '@/components/utilities/split-content';
-import { Button } from '@/components/ui/button';
-import { NoiseAuroraBackground } from '@/components/ui/noise-aurora';
-import { Overline } from '@/components/ui/typography';
+import { Button } from '@mardu/ui/components/button';
+import { NoiseAuroraBackground } from '@mardu/ui/components/noise-aurora';
+import { Overline } from '@mardu/ui/components/typography';
 import {
   administrationCta,
   administrationGrowthPillars,

@@ -3,7 +3,7 @@ import { BlogGrid } from '@/components/blog/blog-grid';
 import { BlogHero } from '@/components/blog/blog-hero';
 import { BlogPagination } from '@/components/blog/blog-pagination';
 import { BlogSearch } from '@/components/blog/blog-search';
-import { Overline } from '@/components/ui/typography';
+import { Overline } from '@mardu/ui/components/typography';
 import { getBlogCategories, getBlogPosts, getFeaturedPost } from '@/lib/blog';
 import type { Metadata } from 'next';
 

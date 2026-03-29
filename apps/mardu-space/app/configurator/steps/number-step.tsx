@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Input } from '@/components/ui/input';
+import { Input } from '@mardu/ui/components/input';
 
 export default function NumberStep({
   value,

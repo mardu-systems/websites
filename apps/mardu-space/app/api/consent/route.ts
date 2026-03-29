@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { getConsent, setConsent } from '@/lib/consent';
-import type { ConsentPreferences } from '@/types/consent';
+import { getConsent, setConsent } from '@mardu/lead-core/consent-server';
+import type { ConsentPreferences } from '@mardu/lead-core';
 
 export async function GET() {
   return NextResponse.json(await getConsent());

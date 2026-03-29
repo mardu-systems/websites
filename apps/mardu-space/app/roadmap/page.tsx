@@ -1,6 +1,6 @@
 import RoadmapTimeline, { RoadmapMilestone } from '@/components/utilities/roadmap-timeline';
 import type { Metadata } from 'next';
-import { Overline } from '@/components/ui/typography';
+import { Overline } from '@mardu/ui/components/typography';
 
 export const metadata: Metadata = {
   title: 'Roadmap & Ausblick',

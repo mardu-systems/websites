@@ -1,8 +1,8 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@mardu/ui/components/button';
 import * as React from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@mardu/ui/lib/utils';
 import Image from 'next/image';
 
 export type ProductAdvertisementProps = {

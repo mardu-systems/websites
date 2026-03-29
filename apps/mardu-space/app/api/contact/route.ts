@@ -7,7 +7,7 @@ import type {
   ContactErrorResponseDto,
   ContactRequestDto,
   ContactResponseDto,
-} from '@/types/api/contact';
+} from '@mardu/lead-core';
 
 const PhoneSchema = z
   .string()

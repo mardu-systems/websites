@@ -3,9 +3,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { MouseEvent } from 'react';
-import { cn } from '@/lib/utils';
-import { HeroHeadline, Overline } from '@/components/ui/typography';
-import { Button } from '@/components/ui/button';
+import { cn } from '@mardu/ui/lib/utils';
+import { HeroHeadline, Overline } from '@mardu/ui/components/typography';
+import { Button } from '@mardu/ui/components/button';
 import { ArrowRight } from 'lucide-react';
 
 export interface HeroSectionProps {

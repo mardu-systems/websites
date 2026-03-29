@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import path from 'path';
 import sharp from 'sharp';
-import { Overline } from '@/components/ui/typography';
+import { Overline } from '@mardu/ui/components/typography';
 import PhotoSwipeGallery, {
   type PhotoSwipeGalleryItem,
 } from '@/components/utilities/photoswipe-gallery';

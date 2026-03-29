@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import ContactForm from './contact-form';
-import { Overline } from '@/components/ui/typography';
+import { Overline } from '@mardu/ui/components/typography';
 
 export const metadata: Metadata = {
   title: 'Kontakt',

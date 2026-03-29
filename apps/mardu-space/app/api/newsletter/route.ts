@@ -5,7 +5,7 @@ import type {
   NewsletterErrorResponseDto,
   NewsletterRequestDto,
   NewsletterResponseDto,
-} from '@/types/api/newsletter';
+} from '@mardu/lead-core';
 
 export async function POST(req: Request) {
   const json = await req.json();

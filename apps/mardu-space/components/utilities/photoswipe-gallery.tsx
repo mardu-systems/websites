@@ -4,7 +4,7 @@ import { useEffect, useId, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
-import { cn } from '@/lib/utils';
+import { cn } from '@mardu/ui/lib/utils';
 
 /**
  * Render-ready DTO for the PhotoSwipe gallery.

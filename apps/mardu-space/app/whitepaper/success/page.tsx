@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Download, FileText, CheckCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@mardu/ui/components/button';
 
 export const metadata = {
   title: 'Whitepaper Download',

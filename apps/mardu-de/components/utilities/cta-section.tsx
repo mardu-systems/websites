@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import Image from 'next/image';
-import { Button } from '@/components/ui/button';
+import { Button } from '@mardu/ui/components/button';
 import {
   Dialog,
   DialogContent,
@@ -11,14 +11,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Checkbox } from '@/components/ui/checkbox';
-import { cn } from '@/lib/utils';
+} from '@mardu/ui/components/dialog';
+import { Input } from '@mardu/ui/components/input';
+import { Label } from '@mardu/ui/components/label';
+import { Checkbox } from '@mardu/ui/components/checkbox';
+import { cn } from '@mardu/ui/lib/utils';
 import { MeetergoCTAButton } from './meetergo-cta-button';
 import { useRecaptcha } from '@/lib/recaptcha';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Alert, AlertDescription } from '@mardu/ui/components/alert';
 
 export interface CTASectionProps {
   title: string;

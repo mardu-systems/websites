@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Switch } from '@/components/ui/switch';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import type { ConsentPreferences } from '@/types/consent';
+import { Button } from '@mardu/ui/components/button';
+import { Switch } from '@mardu/ui/components/switch';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@mardu/ui/components/tooltip';
+import type { ConsentPreferences } from '@mardu/lead-core';
 import Link from 'next/link';
 import { toast } from 'sonner';
 

@@ -10,7 +10,7 @@ import { Button } from '@mardu/ui/components/button';
 import { Card, CardContent } from '@mardu/ui/components/card';
 import { Checkbox } from '@mardu/ui/components/checkbox';
 import { Textarea } from '@mardu/ui/components/textarea';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Alert, AlertDescription } from '@mardu/ui/components/alert';
 import {
   Form,
   FormControl,
@@ -19,10 +19,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
+} from '@mardu/ui/components/form';
 import { Loader2 } from 'lucide-react';
 import { normalizePhoneNumber } from '@/lib/phone';
-import type { ContactErrorResponseDto } from '@/types/api/contact';
+import type { ContactErrorResponseDto } from '@mardu/lead-core';
 
 export const contactSchema = z.object({
   name: z.string().min(1, 'Bitte Name angeben'),

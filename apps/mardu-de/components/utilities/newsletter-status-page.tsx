@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import type { ComponentType } from 'react';
 import { ArrowLeft, CheckCircle2, MailWarning, XCircle } from 'lucide-react';
-import { Overline } from '@/components/ui/typography';
-import { Button } from '@/components/ui/button';
+import { Overline } from '@mardu/ui/components/typography';
+import { Button } from '@mardu/ui/components/button';
 
 type NewsletterStatusVariant = 'confirm' | 'unsubscribe';
 type NewsletterStatusState = 'success' | 'missing-token' | 'invalid-token' | 'error';

@@ -2,10 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import type { ConsentPreferences } from '@/types/consent';
-import { Button } from '@/components/ui/button';
-import { useConsent } from '@/hooks/use-consent';
-import { Skeleton } from '@/components/ui/skeleton';
+import type { ConsentPreferences } from '@mardu/lead-core';
+import { Button } from '@mardu/ui/components/button';
+import { useConsent } from '@mardu/lead-core/use-consent';
+import { Skeleton } from '@mardu/ui/components/skeleton';
 import dynamic from 'next/dynamic';
 import clsx from 'clsx';
 

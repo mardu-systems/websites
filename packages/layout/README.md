@@ -7,6 +7,8 @@ Shared site-layout components for Mardu frontends.
 - `SiteShell`
 - `SiteHeader`
 - `SiteFooter`
+- `NavLink`
+- `useScrollToSection`
 - documented DTOs from `@mardu/layout/types`
 
 ## Contract
@@ -33,3 +35,13 @@ Shared site-layout components for Mardu frontends.
 
 - composes `SiteHeader`, themed content, and `SiteFooter`
 - supports `disabled` for routes or wrappers that must bypass the shared shell
+
+### `NavLink`
+
+- renders a hard-linked navigation entry with optional in-page anchor scrolling
+- accepts only render-ready link props; route ownership remains in the app
+
+### `useScrollToSection`
+
+- shared hook for anchor scrolling in marketing navigation
+- supports optional hash updates so app-specific desktop/mobile menus can share the same behavior

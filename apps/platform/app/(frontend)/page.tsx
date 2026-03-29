@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '@mardu/ui/components/button';
 import { ArrowRight, Globe, LayoutDashboard, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 

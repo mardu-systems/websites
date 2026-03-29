@@ -4,9 +4,19 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./consent": "./src/consent.ts",
+    "./consent-server": "./src/consent-server.ts",
+    "./use-consent": "./src/use-consent.ts"
   },
   "dependencies": {
+    "next": "^16.1.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3"
   }
 }

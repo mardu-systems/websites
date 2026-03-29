@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import { cn } from '@/lib/utils';
-import { Overline } from '@/components/ui/typography';
+import { cn } from '@mardu/ui/lib/utils';
+import { Overline } from '@mardu/ui/components/typography';
 
 export type StepItem = {
   title: string;

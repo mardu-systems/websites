@@ -1,5 +1,12 @@
 import { createHmac } from 'node:crypto';
 import { z } from 'zod';
+export {
+  CONSENT_COOKIE,
+  DEFAULT_CONSENT_PREFERENCES,
+  type ConsentPreferences,
+} from './consent';
+export { getConsent, setConsent } from './consent-server';
+export { useConsent } from './use-consent';
 
 export const siteSchema = z.enum(['mardu-de', 'mardu-space']);
 export type SiteKey = z.infer<typeof siteSchema>;
@@ -133,6 +140,21 @@ export interface NewsletterTokenPayload {
 export type NewsletterResponseDto = { ok: true };
 export type ContactResponseDto = { ok: true };
 export type PreorderResponseDto = { ok: true };
+
+/**
+ * API error DTO returned by public contact endpoints.
+ */
+export interface ContactErrorResponseDto {
+  error: string;
+  details?: Record<string, string[] | undefined>;
+}
+
+/**
+ * API error DTO returned by public newsletter endpoints.
+ */
+export interface NewsletterErrorResponseDto {
+  error: string;
+}
 
 function getSecret() {
   const secret = process.env.NEWSLETTER_SECRET;

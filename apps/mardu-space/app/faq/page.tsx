@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Faq from '@/components/utilities/faq';
 import { faqItems } from '@/data/faq-items';
-import { Overline } from '@/components/ui/typography';
+import { Overline } from '@mardu/ui/components/typography';
 
 export const metadata: Metadata = {
   title: 'FAQ',

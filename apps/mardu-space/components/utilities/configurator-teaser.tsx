@@ -3,10 +3,10 @@
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Settings, Sparkles } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { ScrollReveal } from '@/components/ui/motion/scroll-reveal';
-import { Overline } from '@/components/ui/typography';
+import { Button } from '@mardu/ui/components/button';
+import { cn } from '@mardu/ui/lib/utils';
+import { ScrollReveal } from '@mardu/ui/components/motion/scroll-reveal';
+import { Overline } from '@mardu/ui/components/typography';
 import MediaPlaceholder from '@/components/utilities/media-placeholder';
 
 interface ConfiguratorTeaserProps {

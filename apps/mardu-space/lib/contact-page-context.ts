@@ -1,4 +1,4 @@
-import type { ContactSource } from '@/types/api/contact';
+import type { ContactSource } from '@mardu/lead-core';
 
 /**
  * URL contract for `/contact`.

@@ -1,8 +1,8 @@
 import { LucideIcon } from 'lucide-react';
 import { ReactNode } from 'react';
-import { cn } from '@/lib/utils';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Overline } from '@/components/ui/typography';
+import { cn } from '@mardu/ui/lib/utils';
+import { Card, CardContent, CardHeader, CardTitle } from '@mardu/ui/components/card';
+import { Overline } from '@mardu/ui/components/typography';
 
 export type CardItem = {
   title: string;

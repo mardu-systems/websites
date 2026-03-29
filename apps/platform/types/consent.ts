@@ -1,6 +1,1 @@
-export type ConsentPreferences = {
-    necessary: boolean;
-    analytics: boolean;
-    marketing: boolean;
-    given: boolean;
-};
+export type { ConsentPreferences } from '@mardu/lead-core';

@@ -5,16 +5,16 @@ import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { defineStepper } from '@stepperize/react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { Button } from '@mardu/ui/components/button';
+import { cn } from '@mardu/ui/lib/utils';
 import { createSteps } from './steps';
 import { ContactSchema } from './steps/contact';
 import { useRecaptcha } from '@/lib/recaptcha';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Alert, AlertDescription } from '@mardu/ui/components/alert';
 import { Loader2 } from 'lucide-react';
 import StepIndicator from '@/components/stepper/step-indicator';
 /* ===================== Typen & Defaults ===================== */
-import { Overline } from '@/components/ui/typography';
+import { Overline } from '@mardu/ui/components/typography';
 
 /* ===================== Typen & Defaults ===================== */
 

@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 import React from 'react';
-import { cn } from '@/lib/utils';
-import BentoCard from '@/components/ui/bento-card';
+import { cn } from '@mardu/ui/lib/utils';
+import BentoCard from '@mardu/ui/components/bento-card';
 
 export type ArgumentItem = {
   title: string;

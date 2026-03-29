@@ -1,5 +1,5 @@
 import { IntegrationCard } from '@/components/integrations/integration-card';
-import { Overline } from '@/components/ui/typography';
+import { Overline } from '@mardu/ui/components/typography';
 import { getFeaturedIntegrations } from '@/lib/integrations';
 import Link from 'next/link';
 

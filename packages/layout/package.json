@@ -12,9 +12,11 @@
     ".": "./src/index.ts",
     "./dto": "./src/dto.ts",
     "./types": "./src/dto.ts",
+    "./nav-link": "./src/nav-link.tsx",
     "./site-shell": "./src/site-shell.tsx",
     "./site-header": "./src/site-header.tsx",
-    "./site-footer": "./src/site-footer.tsx"
+    "./site-footer": "./src/site-footer.tsx",
+    "./use-scroll-to-section": "./src/use-scroll-to-section.ts"
   },
   "peerDependencies": {
     "react": "^19.2.0",

@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import * as React from 'react';
 import { ReactNode } from 'react';
-import { cn } from '@/lib/utils';
-import { ScrollReveal } from '@/components/ui/motion/scroll-reveal';
+import { cn } from '@mardu/ui/lib/utils';
+import { ScrollReveal } from '@mardu/ui/components/motion/scroll-reveal';
 import { motion, useReducedMotion } from 'framer-motion';
 import { MeetergoCTAButton } from './meetergo-cta-button';
 

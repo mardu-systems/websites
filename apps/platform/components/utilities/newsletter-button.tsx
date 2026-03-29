@@ -1,7 +1,7 @@
 'use client';
 
 import { startTransition, useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@mardu/ui/components/button';
 import {
   Dialog,
   DialogContent,
@@ -9,10 +9,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Checkbox } from '@/components/ui/checkbox';
+} from '@mardu/ui/components/dialog';
+import { Input } from '@mardu/ui/components/input';
+import { Label } from '@mardu/ui/components/label';
+import { Checkbox } from '@mardu/ui/components/checkbox';
 
 export default function NewsletterButton({ primaryButtonText }: { primaryButtonText: string }) {
   const [open, setOpen] = useState(false);

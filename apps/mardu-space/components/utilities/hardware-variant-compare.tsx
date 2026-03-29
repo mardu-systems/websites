@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils';
-import { Overline } from '@/components/ui/typography';
+import { cn } from '@mardu/ui/lib/utils';
+import { Overline } from '@mardu/ui/components/typography';
 import type { HardwareVariantDto } from '@/data/hardware-page';
 
 export interface HardwareVariantCompareProps {

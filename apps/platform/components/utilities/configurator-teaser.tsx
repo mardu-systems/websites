@@ -3,9 +3,9 @@
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, Settings, CheckSquare } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { ScrollReveal } from '@/components/ui/motion/scroll-reveal';
+import { Button } from '@mardu/ui/components/button';
+import { cn } from '@mardu/ui/lib/utils';
+import { ScrollReveal } from '@mardu/ui/components/motion/scroll-reveal';
 
 interface ConfiguratorTeaserProps {
   className?: string;

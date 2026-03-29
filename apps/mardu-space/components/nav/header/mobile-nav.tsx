@@ -1,21 +1,21 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@mardu/ui/components/sheet';
+import { Button } from '@mardu/ui/components/button';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
+} from '@mardu/ui/components/accordion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { NavEntry } from '@/types/header';
 import BurgerIcon from './burger-icon';
-import { useScrollToSection } from '@/hooks/use-scroll-to-section';
+import { useScrollToSection } from '@mardu/layout/use-scroll-to-section';
 import { MeetergoCTAButton } from '@/components/utilities/meetergo-cta-button';
 
 export default function MobileNav({

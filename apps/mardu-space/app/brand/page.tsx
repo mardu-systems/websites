@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { Overline } from '@/components/ui/typography';
+import { Overline } from '@mardu/ui/components/typography';
 import Faq, { type FaqItem } from '@/components/utilities/faq';
 
 export const metadata: Metadata = {

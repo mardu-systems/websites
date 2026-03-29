@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ScrollReveal } from '@/components/ui/motion/scroll-reveal';
-import { cn } from '@/lib/utils';
+import { ScrollReveal } from '@mardu/ui/components/motion/scroll-reveal';
+import { cn } from '@mardu/ui/lib/utils';
 
 export type ArgumentItem = {
   title: string;

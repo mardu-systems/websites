@@ -3,9 +3,9 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
+} from '@mardu/ui/components/accordion';
 import { ReactNode } from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@mardu/ui/lib/utils';
 
 export type AccordionData = {
   id: string;

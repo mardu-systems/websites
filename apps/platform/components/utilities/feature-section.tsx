@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { cn } from '@mardu/ui/lib/utils';
+import { Button } from '@mardu/ui/components/button';
 
 export type FeatureSectionProps = {
   title: string | ReactNode;

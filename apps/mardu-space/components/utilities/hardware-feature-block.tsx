@@ -2,10 +2,10 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
+import { cn } from '@mardu/ui/lib/utils';
 import MediaPlaceholder from '@/components/utilities/media-placeholder';
 import type { HardwareFeatureBlockDto } from '@/data/hardware-page';
-import { Button } from '@/components/ui/button';
+import { Button } from '@mardu/ui/components/button';
 
 export interface HardwareFeatureBlockProps {
   block: HardwareFeatureBlockDto;

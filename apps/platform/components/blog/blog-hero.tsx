@@ -1,4 +1,4 @@
-import { HeroHeadline } from '@/components/ui/typography';
+import { HeroHeadline } from '@mardu/ui/components/typography';
 import type { BlogPostListItemDto } from '@/types/api/blog';
 import Image from 'next/image';
 import Link from 'next/link';

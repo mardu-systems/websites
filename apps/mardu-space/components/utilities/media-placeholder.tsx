@@ -1,5 +1,5 @@
 import { Boxes, LucideIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn } from '@mardu/ui/lib/utils';
 
 /**
  * Placeholder DTO for media that is planned but not yet available as a final asset.

@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@mardu/ui/components/button';
 
 export function CookieSettingsButton() {
   const handleClick = () => {
