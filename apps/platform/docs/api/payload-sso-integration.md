@@ -118,12 +118,16 @@ PAYLOAD_PUBLIC_SERVER_URL=http://localhost:3000
 PAYLOAD_SECRET=
 
 OIDC_ISSUER=
+OIDC_DISCOVERY_URL=
 OIDC_CLIENT_ID=
 OIDC_CLIENT_SECRET=
 OIDC_REDIRECT_URI=http://localhost:3000/api/sso/callback
+OIDC_JWKS_URI=
 OIDC_ALLOWED_EMAILS=
 OIDC_ALLOWED_EMAIL_DOMAINS=
 OIDC_AUTO_CREATE_USERS=false
 OIDC_SESSION_SECRET=
 OIDC_DEBUG=false
 ```
+
+`OIDC_DISCOVERY_URL` und `OIDC_JWKS_URI` sind optionale Overrides fuer Provider, deren Discovery- oder JWKS-Endpunkte von der Standardableitung aus `OIDC_ISSUER` abweichen.

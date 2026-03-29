@@ -1,5 +1,5 @@
 import { randomBytes, createHash, createHmac, timingSafeEqual } from 'node:crypto';
-import { createRemoteJWKSet, jwtVerify, SignJWT } from 'jose';
+import { createLocalJWKSet, jwtVerify, SignJWT } from 'jose';
 
 export const OIDC_STATE_COOKIE = 'mardu_oidc_state';
 export const OIDC_SESSION_COOKIE = 'mardu_oidc_session';
@@ -12,6 +12,10 @@ type OidcDiscovery = {
   issuer: string;
   jwks_uri: string;
   token_endpoint: string;
+};
+
+type OidcJwksResponse = {
+  keys: unknown[];
 };
 
 type OidcSessionClaims = {
@@ -87,6 +91,12 @@ const getRequiredEnv = (key: string): string => {
   }
 
   return value;
+};
+
+const getOptionalEnv = (key: string): null | string => {
+  const value = process.env[key];
+
+  return value ? value : null;
 };
 
 export const buildRedirectURL = (request: Request, path: string): URL => {
@@ -202,7 +212,7 @@ const sanitizeReturnTo = (returnTo?: string): string => {
 
 const getDiscoveryDocument = async (): Promise<OidcDiscovery> => {
   const issuer = getRequiredEnv('OIDC_ISSUER').replace(/\/$/, '');
-  const discoveryURL = `${issuer}/.well-known/openid-configuration`;
+  const discoveryURL = getOptionalEnv('OIDC_DISCOVERY_URL') || `${issuer}/.well-known/openid-configuration`;
 
   const response = await fetch(discoveryURL, {
     cache: 'no-store',
@@ -221,9 +231,40 @@ const getDiscoveryDocument = async (): Promise<OidcDiscovery> => {
   return {
     authorization_endpoint: json.authorization_endpoint,
     issuer: json.issuer,
-    jwks_uri: json.jwks_uri,
+    jwks_uri: getOptionalEnv('OIDC_JWKS_URI') || json.jwks_uri,
     token_endpoint: json.token_endpoint,
   };
+};
+
+const getJWKS = async (jwksURI: string): Promise<OidcJwksResponse> => {
+  const response = await fetch(jwksURI, {
+    cache: 'no-store',
+  });
+
+  if (!response.ok) {
+    throw new Error(`Unable to load OIDC JWKS: ${response.status}`);
+  }
+
+  const contentType = response.headers.get('content-type') || '';
+
+  let json: unknown;
+
+  try {
+    json = await response.json();
+  } catch {
+    const body = await response.text().catch(() => '');
+    throw new Error(
+      `OIDC JWKS response is not valid JSON. content-type=${contentType || 'unknown'} body-preview=${body.slice(0, 160)}`,
+    );
+  }
+
+  if (!json || typeof json !== 'object' || !('keys' in json) || !Array.isArray(json.keys)) {
+    throw new Error(
+      `OIDC JWKS payload is malformed. content-type=${contentType || 'unknown'} body-preview=${JSON.stringify(json).slice(0, 160)}`,
+    );
+  }
+
+  return json as OidcJwksResponse;
 };
 
 export const buildOidcAuthorization = async (inputReturnTo?: string) => {
@@ -381,8 +422,8 @@ const verifyIDToken = async (args: {
 }): Promise<VerifiedOidcUser> => {
   const discovery = await getDiscoveryDocument();
   const clientID = getRequiredEnv('OIDC_CLIENT_ID');
-
-  const jwks = createRemoteJWKSet(new URL(discovery.jwks_uri));
+  const jwksPayload = await getJWKS(discovery.jwks_uri);
+  const jwks = createLocalJWKSet(jwksPayload);
 
   const { payload } = await jwtVerify(args.idToken, jwks, {
     audience: clientID,
