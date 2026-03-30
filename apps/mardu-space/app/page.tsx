@@ -28,8 +28,6 @@ import {
   SplitContent,
 } from '@mardu/sections';
 
-const SECTION_SPACING = '';
-
 const heroDescription = (
   <>
     <p className="mb-4 text-lg font-medium">
@@ -388,9 +386,7 @@ export default function HomePage() {
       </a>
       <section id="home">
         <HeroSection
-          className={SECTION_SPACING}
           title="Wer darf was wann nutzen?"
-          emphasis="Zutritt und Maschinenfreigabe sicher steuern."
           overline="Digitale Zutritts- und Maschinenfreigabe"
           description={heroDescription}
           buttonText="Konfigurator starten"
@@ -417,7 +413,6 @@ export default function HomePage() {
 
       <section id="loesung" className="section-hairline">
         <SplitContent
-          className={SECTION_SPACING}
           title="Zutritt, Maschinenfreigabe und Qualifikation in einem System"
           eyebrow="Die Mardu-Lösung"
           description={summaryDescription}
@@ -430,7 +425,6 @@ export default function HomePage() {
 
       <section id="argumente" className="section-hairline">
         <CardGrid
-          className={SECTION_SPACING}
           eyebrow="Einsatzfelder"
           title="Wo mardu.space besonders hilft"
           itemMetaLabel="Fokus"
@@ -440,12 +434,11 @@ export default function HomePage() {
       </section>
 
       <section className="section-hairline">
-        <ConfiguratorTeaser className={SECTION_SPACING} />
+        <ConfiguratorTeaser/>
       </section>
 
       <section id="produkte" className="section-hairline">
         <ScenarioShowcase
-          className={SECTION_SPACING}
           eyebrow="Angebote"
           heading="Einsatzszenarien"
           subheading="Sichern Sie Türen, Tore und Maschinen, von Schuko-Geräten bis zu Drehstrom-Maschinen, regelbasiert und nachvollziehbar."
@@ -455,12 +448,11 @@ export default function HomePage() {
       </section>
 
       <section id="whitepaper" className="section-hairline">
-        <WhitepaperTeaser className={SECTION_SPACING} />
+        <WhitepaperTeaser />
       </section>
 
       <section className="section-hairline">
         <InfoGrid
-          className={SECTION_SPACING}
           eyebrow="System"
           title="Spezifikation & Funktionsumfang"
           intro="Die Plattform verbindet Identität, Freigabe, Protokollierung und technische Durchsetzung in einem zusammenhängenden System statt in isolierten Einzelbausteinen."
@@ -471,7 +463,6 @@ export default function HomePage() {
 
       <section className="section-hairline">
         <ProcessSteps
-          className={SECTION_SPACING}
           eyebrow="Projektablauf"
           title="Von der Anforderung bis zum Rollout"
           steps={processSteps}
@@ -481,7 +472,6 @@ export default function HomePage() {
 
       <section className="section-hairline">
         <SecurityAccordion
-          className={SECTION_SPACING}
           eyebrow="Sicherheit"
           title="Sicherheit, Datenschutz & Normen"
           items={securityItems}
@@ -489,7 +479,6 @@ export default function HomePage() {
       </section>
 
       <CTASection
-        className={SECTION_SPACING}
         title="Nächster Schritt: Bedarf strukturieren, dann sauber entscheiden."
         description="Starten Sie mit dem Konfigurator für eine erste Einordnung. Wenn Sie intern vertiefen oder weitergeben müssen, nutzen Sie ergänzend das Whitepaper."
         primaryButtonText="Konfigurator starten"
@@ -499,7 +488,6 @@ export default function HomePage() {
       />
 
       <Foerderung
-        className={SECTION_SPACING}
         items={foerderungItems}
         description={foerderungDescription}
         spacing="compact"

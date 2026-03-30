@@ -34,7 +34,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
           homeHref: '/',
           logoSrc: '/logos/LogoWeiss.svg',
           logoAlt: 'Mardu Logo',
-          copyrightName: 'Mardu',
+          copyrightName: 'Mardu GmbH',
         },
         description:
           'Verwalte Zutritt und Maschinennutzung – mobil auf der Baustelle oder stationär in der Werkstatt. Mardu passt sich deinen Bedürfnissen an.',

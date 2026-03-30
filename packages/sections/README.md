@@ -23,6 +23,7 @@ Shared content sections for multiple Mardu frontends.
 - `NewsletterStatusPage`
 - `ProcessSteps`
 - `ScenarioShowcase`
+- `ContactPageSection`
 
 ## `WhitepaperSection` contract
 
@@ -80,6 +81,7 @@ Shared content sections for multiple Mardu frontends.
 - `SplitContent` supports `variant: 'immersive' | 'plain'` so `mardu-space` can keep a light editorial layout without a local fork.
 - `FeatureSection`, `ThreeArguments`, `TripleImageSection`, `Foerderung`, `InfoGrid`, `ProcessSteps` and `RoadmapTimeline` expose eyebrow/intro metadata so the same layouts can tell different stories without forking the component.
 - `NewsletterStatusPage` keeps the newsletter semantics, but primary and secondary action links are now configurable.
+- `ContactPageSection` standardizes the `/contact` page shell while the consuming app still owns the actual form renderer and submit route.
 
 ## Shared section DTOs
 
@@ -102,5 +104,6 @@ Shared content sections for multiple Mardu frontends.
 - `NewsletterStatusPageProps`
 - `StepItem` / `ProcessStepsProps`
 - `Feature` / `Scenario` / `ScenarioShowcaseProps`
+- `ContactPageDetailsDto` / `ContactPageSectionProps`
 
 These DTOs are intentionally render-ready. Routing, fetching, and CMS mapping stay in the consuming app or in upstream core packages.

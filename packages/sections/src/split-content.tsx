@@ -51,7 +51,11 @@ export default function SplitContent({
           <div className="absolute inset-0 opacity-30 bg-[linear-gradient(to_right,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:24px_24px]" />
         </div>
       ) : null}
-      <div className={cn(variant === 'immersive' ? 'max-w-7xl mx-auto px-6 md:px-8' : 'mardu-container')}>
+      <div
+        className={cn(
+          variant === 'immersive' ? 'max-w-7xl mx-auto px-6 md:px-8' : 'mardu-content-container',
+        )}
+      >
         <div className="flex flex-col gap-3 mb-8 md:mb-12">
           {eyebrow ? (
             <div>

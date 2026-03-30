@@ -34,7 +34,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
           homeHref: '/',
           logoSrc: '/marduspace_logo_bg_black.svg',
           logoAlt: 'mardu.space Logo',
-          copyrightName: 'Mardu',
+          copyrightName: 'Mardu GmbH',
         },
         description:
           'mardu.space ermöglicht die digitale Zutritts- und Maschinenfreigabe für Werkstätten, Hochschulen und Unternehmen – sicher, skalierbar und effizient.',

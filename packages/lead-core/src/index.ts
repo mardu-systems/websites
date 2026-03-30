@@ -7,6 +7,14 @@ export {
 } from './consent';
 export { getConsent, setConsent } from './consent-server';
 export { useConsent } from './use-consent';
+export {
+  ContactForm,
+  createContactSchema,
+  type ContactFormProps,
+  type ContactValues,
+  type ExecuteRecaptcha,
+  type NormalizePhoneNumber,
+} from './contact-form';
 
 export const siteSchema = z.enum(['mardu-de', 'mardu-space']);
 export type SiteKey = z.infer<typeof siteSchema>;

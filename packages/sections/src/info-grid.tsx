@@ -41,29 +41,32 @@ export default function InfoGrid({
     }[columns] || 'md:grid-cols-2 lg:grid-cols-4';
 
   return (
-    <section className={cn('py-16 px-6 md:px-8 max-w-7xl mx-auto w-full', className)}>
-      {eyebrow ? <Overline className="mb-3">{eyebrow}</Overline> : null}
-      {title ? (
-        intro ? (
-          <div className="mb-7 grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.7fr)] lg:items-start">
-            <h2 className="headline-balance max-w-4xl text-[clamp(1.9rem,4vw,3.5rem)] leading-[1.02] tracking-[-0.03em] text-foreground">
+    <section className={cn('w-full py-20 md:py-24', className)}>
+      <div className="mardu-content-container">
+        {eyebrow ? <Overline className="mb-3">{eyebrow}</Overline> : null}
+        {title ? (
+          intro ? (
+            <div className="mb-7 grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.7fr)] lg:items-start">
+              <h2 className="headline-balance max-w-4xl text-[clamp(1.9rem,4vw,3.5rem)] leading-[1.02] tracking-[-0.03em] text-foreground">
+                {title}
+              </h2>
+              <div className="max-w-xl pt-1 text-sm leading-relaxed text-foreground/68 md:text-base">
+                {typeof intro === 'string' ? <p>{intro}</p> : intro}
+              </div>
+            </div>
+          ) : (
+            <h2 className="headline-balance mb-12 max-w-4xl text-[clamp(1.9rem,4vw,3.5rem)] leading-[1.02] tracking-[-0.03em] text-foreground">
               {title}
             </h2>
-            <div className="max-w-xl pt-1 text-sm leading-relaxed text-foreground/68 md:text-base">
-              {typeof intro === 'string' ? <p>{intro}</p> : intro}
-            </div>
-          </div>
-        ) : (
-          <h2 className="mb-12 text-center text-3xl font-bold text-primary md:text-4xl">{title}</h2>
-        )
-      ) : null}
-      <div className={cn('grid', variant === 'cards' ? 'gap-4 lg:gap-5' : 'gap-8 lg:gap-12', gridCols)}>
-        {items.map((item, idx) => (
-          variant === 'cards' ? (
-            <section
-              key={idx}
-              className="border border-black/10 bg-card/90 px-5 py-5 shadow-none md:px-6 md:py-6"
-            >
+          )
+        ) : null}
+        <div className={cn('grid', variant === 'cards' ? 'gap-4 lg:gap-5' : 'gap-8 lg:gap-12', gridCols)}>
+          {items.map((item, idx) =>
+            variant === 'cards' ? (
+              <section
+                key={idx}
+                className="border border-black/10 bg-card/90 px-5 py-5 shadow-none md:px-6 md:py-6"
+              >
               <div className="flex items-center gap-3">
                 {item.icon ? (
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center border border-black/10 bg-background">
@@ -91,36 +94,37 @@ export default function InfoGrid({
                   </li>
                 ))}
               </ul>
-            </section>
-          ) : (
-            <Card key={idx} className="bg-transparent border-none shadow-none">
-              <CardHeader className="mb-2 border-b border-primary/10 px-0 pt-0">
-                <div className="flex items-center gap-3">
-                  {item.icon && <item.icon className="text-accent w-7 h-7" />}
-                  <CardTitle className="font-bold text-xl text-primary">{item.title}</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent className="px-0">
-                <ul className="space-y-6">
-                  {item.features.map((feature, fIdx) => (
-                    <li key={fIdx} className="space-y-1">
-                      <strong className="block text-primary font-bold text-sm uppercase tracking-wider">
-                        {feature.label}
-                      </strong>
-                      <div className="text-muted-foreground text-[15px] leading-relaxed">
-                        {typeof feature.description === 'string' ? (
-                          <span>{feature.description}</span>
-                        ) : (
-                          feature.description
-                        )}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          )
-        ))}
+              </section>
+            ) : (
+              <Card key={idx} className="border-none bg-transparent shadow-none">
+                <CardHeader className="mb-2 border-b border-primary/10 px-0 pt-0">
+                  <div className="flex items-center gap-3">
+                    {item.icon ? <item.icon className="h-7 w-7 text-accent" /> : null}
+                    <CardTitle className="text-xl font-bold text-primary">{item.title}</CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent className="px-0">
+                  <ul className="space-y-6">
+                    {item.features.map((feature, fIdx) => (
+                      <li key={fIdx} className="space-y-1">
+                        <strong className="block text-sm font-bold uppercase tracking-wider text-primary">
+                          {feature.label}
+                        </strong>
+                        <div className="text-[15px] leading-relaxed text-muted-foreground">
+                          {typeof feature.description === 'string' ? (
+                            <span>{feature.description}</span>
+                          ) : (
+                            feature.description
+                          )}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            ),
+          )}
+        </div>
       </div>
     </section>
   );

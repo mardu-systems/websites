@@ -62,7 +62,6 @@ export default function TripleImageSection({
                   fill
                   priority={index === 0}
                   unoptimized={card.unoptimized}
-                  quality={90}
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 34vw, 420px"
                   className="object-cover transition-transform duration-500 group-hover:scale-[1.01]"
                   style={card.objectPosition ? { objectPosition: card.objectPosition } : undefined}

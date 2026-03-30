@@ -40,84 +40,80 @@ export default function CardGrid({
   }[columns];
 
   return (
-    <section className={cn('py-16 px-6 md:px-8 max-w-7xl mx-auto w-full', className)}>
-      {eyebrow ? <Overline className="mb-3">{eyebrow}</Overline> : null}
-      {title && (
-        <h2
-          className={cn(
-            'mb-10 text-3xl font-bold text-primary md:text-4xl',
-            eyebrow ? 'text-left' : 'text-center',
-          )}
-        >
-          {title}
-        </h2>
-      )}
-      <div className={cn('grid gap-8 items-stretch', gridCols)}>
-        {items.map((item, idx) => (
-          <Card
-            key={`${item.title}-${idx}`}
-            className={cn(
-              'rounded-3xl overflow-hidden transition-shadow duration-300 hover:shadow-md h-full border-none',
-              // Default variant relies on Card's default styles (bg-card, border, shadow-sm)
-
-              // Outline variant: semi-transparent background, standard border
-              variant === 'outline' && 'bg-card/50 shadow-none',
-
-              // Muted variant: No border, muted background, no shadow
-              variant === 'muted' && 'bg-muted border-none shadow-none',
-
-              item.className,
-            )}
-          >
-            <CardHeader className="relative p-6">
-              {item.badge && (
-                <div className="absolute top-4 right-4">
-                  <Badge
-                    variant="secondary"
-                    className="bg-primary/10 text-primary hover:bg-primary/20 border-0 rounded-full px-3 py-1"
-                  >
-                    {item.badge}
-                  </Badge>
-                </div>
+    <section className={cn('w-full py-20 md:py-24', className)}>
+      <div className="mardu-content-container">
+        {eyebrow ? <Overline className="mb-3">{eyebrow}</Overline> : null}
+        {title ? (
+          <h2 className="headline-balance mb-10 max-w-4xl text-[clamp(1.9rem,4vw,3.5rem)] leading-[1.02] tracking-[-0.03em] text-foreground">
+            {title}
+          </h2>
+        ) : null}
+        <div className={cn('grid items-stretch gap-8', gridCols)}>
+          {items.map((item, idx) => (
+            <Card
+              key={`${item.title}-${idx}`}
+              className={cn(
+                'h-full overflow-hidden border border-black/10 shadow-none',
+                variant === 'default' && 'bg-card',
+                variant === 'outline' && 'bg-card/80',
+                variant === 'muted' &&
+                  (idx === 0 ? 'bg-linear-to-br from-muted/55 via-card to-card' : 'bg-card'),
+                item.className,
               )}
-              <div className="flex items-center gap-4">
-                {item.icon && (
-                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
-                    <item.icon className="text-primary w-5 h-5" aria-hidden="true" />
+            >
+              <CardHeader className="relative border-b border-black/8 p-6">
+                {item.badge ? (
+                  <div className="absolute right-4 top-4">
+                    <Badge
+                      variant="secondary"
+                      className="rounded-full border-0 bg-black/6 px-3 py-1 text-foreground hover:bg-black/10"
+                    >
+                      {item.badge}
+                    </Badge>
                   </div>
-                )}
-                <div className="space-y-1">
-                  {itemMetaLabel ? (
-                    <span className="block text-[11px] uppercase tracking-[0.16em] text-foreground/45">
-                      {typeof itemMetaLabel === 'function'
-                        ? itemMetaLabel(idx, item)
-                        : `${itemMetaLabel} ${idx + 1}`}
-                    </span>
+                ) : null}
+                <div className="flex items-center gap-4">
+                  {item.icon ? (
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-black/10 bg-background">
+                      <item.icon className="h-5 w-5 text-foreground/75" aria-hidden="true" />
+                    </div>
                   ) : null}
-                  <CardTitle className="text-lg md:text-xl font-semibold leading-tight text-primary">
-                    {item.title}
-                  </CardTitle>
+                  <div className="space-y-1">
+                    {itemMetaLabel ? (
+                      <span className="block text-[11px] uppercase tracking-[0.16em] text-foreground/45">
+                        {typeof itemMetaLabel === 'function'
+                          ? itemMetaLabel(idx, item)
+                          : `${itemMetaLabel} ${idx + 1}`}
+                      </span>
+                    ) : null}
+                    <CardTitle className="text-lg font-semibold leading-tight tracking-[-0.01em] text-foreground md:text-xl">
+                      {item.title}
+                    </CardTitle>
+                  </div>
                 </div>
-              </div>
-            </CardHeader>
-            <CardContent className="p-6 pt-0">
-              <div className="text-sm md:text-base text-foreground leading-relaxed">
-                {typeof item.description === 'string' ? (
-                  <p>{item.description}</p>
+              </CardHeader>
+              <CardContent className="p-6 pt-0">
+                {item.badge ? (
+                  <p className="mb-4 pt-6 text-[11px] uppercase tracking-[0.18em] text-foreground/50">
+                    {item.badge}
+                  </p>
                 ) : (
-                  item.description
+                  <div className="pt-6" />
                 )}
-              </div>
-              {item.list && (
-                <ul className="mt-5 space-y-2 text-sm md:text-base text-foreground list-disc list-inside">
-                  {item.list.map((li, lIdx) => (
-                    <li key={lIdx}>{li}</li>
-                  ))}
-                </ul>
-              )}
-            </CardContent>
-          </Card>
-        ))}
+                <div className="text-sm leading-relaxed text-foreground/75 md:text-base">
+                  {typeof item.description === 'string' ? <p>{item.description}</p> : item.description}
+                </div>
+                {item.list ? (
+                  <ul className="mt-5 list-inside list-disc space-y-2 text-sm text-foreground/75 md:text-base">
+                    {item.list.map((li, lIdx) => (
+                      <li key={lIdx}>{li}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
     </section>
   );

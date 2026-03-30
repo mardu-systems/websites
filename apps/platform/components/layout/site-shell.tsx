@@ -43,7 +43,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
             homeHref: '/',
             logoSrc: '/logos/LogoWeiss.svg',
             logoAlt: 'Mardu Logo',
-            copyrightName: 'Mardu',
+            copyrightName: 'Mardu GmbH',
           },
           description:
             'Interne Plattform für Payload Admin, zentrale APIs, Media-Uploads und Betriebsaufgaben im Mardu-Monorepo.',

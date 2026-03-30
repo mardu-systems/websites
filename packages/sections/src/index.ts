@@ -70,3 +70,8 @@ export {
   type Scenario,
   type ScenarioShowcaseProps,
 } from './scenario-showcase';
+export {
+  default as ContactPageSection,
+  type ContactPageDetailsDto,
+  type ContactPageSectionProps,
+} from './contact-page-section';
