@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { NewsletterStatusPage } from '@/components/utilities/newsletter-status-page';
+import { NewsletterStatusPage } from '@mardu/sections';
 
 export const metadata: Metadata = {
   title: 'Newsletter Anmeldung',

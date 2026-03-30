@@ -8,7 +8,7 @@ Zentrale Lead- und Newsletter-API fuer `mardu.de` und `mardu.space`.
   - Newsletter-Subscriber
   - Contact-Leads
   - Preorder-Requests
-- Persistenz erfolgt ueber Payload + PostgreSQL.
+- Persistenz erfolgt über Payload + PostgreSQL.
 - `mardu.space` und `mardu.de` nutzen dafuer oeffentliche API-Routen oder Proxy-Routen.
 
 ## Gemeinsame DTOs

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import Faq from '@/components/utilities/faq';
 import { faqItems } from '@/data/faq-items';
 import { Overline } from '@mardu/ui/components/typography';
+import { Faq } from '@mardu/sections';
 
 export const metadata: Metadata = {
   title: 'FAQ',
@@ -36,7 +36,7 @@ export default function FaqPage() {
           </p>
         </div>
 
-        <Faq items={faqItems} className="pt-8 md:pt-10" />
+        <Faq items={faqItems} variant="lined" className="pt-8 md:pt-10" />
       </section>
     </main>
   );

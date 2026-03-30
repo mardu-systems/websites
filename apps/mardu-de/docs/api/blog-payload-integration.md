@@ -6,7 +6,7 @@ Diese Dokumentation beschreibt den Blog-Vertrag aus Sicht von `mardu.de` als Con
 
 - Runtime und Collections liegen in [`apps/platform`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform)
 - Gemeinsame DTOs und Mapping-Helfer liegen in [`packages/content-core/src/index.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/index.ts)
-- `mardu.de` konsumiert Blog-Daten ueber den Plattform-Proxy in [`app/api/[...slug]/route.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/api/[...slug]/route.ts)
+- `mardu.de` konsumiert Blog-Daten über den Plattform-Proxy in [`app/api/[...slug]/route.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/api/[...slug]/route.ts)
 
 ## DTO-Vertrag
 
@@ -24,7 +24,7 @@ Quelle:
 
 ## Oeffentliche Endpunkte
 
-`mardu.de` nutzt die zentralen Plattform-Endpunkte ueber den lokalen Proxy:
+`mardu.de` nutzt die zentralen Plattform-Endpunkte über den lokalen Proxy:
 
 1. `GET /api/blog-posts`
 2. `GET /api/blog-posts/:id`

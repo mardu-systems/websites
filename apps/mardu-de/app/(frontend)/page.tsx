@@ -1,11 +1,13 @@
-import HeroSection from '@/components/utilities/hero-section';
 import CTASection from '@/components/utilities/cta-section';
-import FeatureSection from '@/components/utilities/feature-section';
-import DualImageSection from '@/components/utilities/dual-image-section';
-import ThreeArguments from '@/components/utilities/three-arguments';
-import Foerderung from '@/components/utilities/foerderung';
-import TripleImageSection from '@/components/utilities/triple-image-section';
 import { IntegrationsPreview } from '@/components/integrations/integrations-preview';
+import {
+  DualImageSection,
+  FeatureSection,
+  Foerderung,
+  HeroSection,
+  ThreeArguments,
+  TripleImageSection,
+} from '@mardu/sections';
 import { FileSearchCorner, HeartHandshake, Milestone } from 'lucide-react';
 
 /* ===================== Seite ===================== */
@@ -17,6 +19,7 @@ export default async function HomePage() {
       <section id="home">
         <HeroSection
           title="Smarte Zugangssysteme für Baustellen, Werkstätten und Labore"
+          overline="Engineering Access Platform"
           description={
             <>
               <p className="mb-4">
@@ -33,6 +36,27 @@ export default async function HomePage() {
           secondaryButtonHref="/#produkte"
           imageSrc="/_A7_9072_quer.webp"
           imageAlt="Zugriffskontrollsysteme im Makerspace"
+          variant="landing"
+          mediaCards={[
+            {
+              href: 'https://mardu.space',
+              imageSrc: '/_A7_9094_quer.jpg',
+              imageAlt: 'Maschinenfreischaltung an einer Drehbank mit mardu.space',
+              ariaLabel: 'Zu mardu.space wechseln',
+              badge: 'mardu.space',
+              description: 'Maschinenzugang per NFC in Werkstatt und Labor.',
+              priority: true,
+            },
+            {
+              href: '/#produkte',
+              scrollTargetId: 'produkte',
+              imageSrc: '/mardu-constructions.webp',
+              imageAlt: 'Freischaltung einer Bautür mit mardu.construction',
+              ariaLabel: 'Zu den Produktlösungen mardu.construction scrollen',
+              badge: 'mardu.construction',
+              description: 'Digitale Zutrittskontrolle für Baustellentüren und Tore.',
+            },
+          ]}
         />
       </section>
 

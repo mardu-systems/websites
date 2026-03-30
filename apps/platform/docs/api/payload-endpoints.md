@@ -5,14 +5,14 @@ Diese Datei dokumentiert alle bereitgestellten Payload-Routen, deren Zugriff und
 ## Zentraler Plattform-Vertrag
 
 - `apps/platform` ist die einzige Payload-Instanz im Monorepo.
-- `apps/mardu-de` konsumiert Blog-, Integrations- und Lead-Daten ueber diese Plattform.
+- `apps/mardu-de` konsumiert Blog-, Integrations- und Lead-Daten über diese Plattform.
 - `apps/mardu-de` leitet `/admin` und lokale SSO-Routen nur noch auf die Plattform weiter und betreibt keine eigene aktive Payload-Runtime mehr.
 - `apps/mardu-space` nutzt fuer Leads und Whitepaper nur noch Proxy-Routen gegen diese Plattform.
-- Uploads fuer `media` laufen ueber die Standard-Payload-Upload-Konfiguration der Plattform.
+- Uploads fuer `media` laufen über die Standard-Payload-Upload-Konfiguration der Plattform.
 
 ## Bereitstellung
 
-Payload REST wird ueber die Catch-all Route bereitgestellt:
+Payload REST wird über die Catch-all Route bereitgestellt:
 [app/api/[...slug]/route.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/api/[...slug]/route.ts)
 
 Supported Methods:
@@ -71,7 +71,7 @@ Erweiterte Legal-Page-Dokumentation:
 
 Hinweis:
 - `legal-pages` nutzt einen collection-lokalen SEO-Tab mit `seoTitle`, `seoDescription` und `canonicalUrl`.
-- Die generischen SEO-Plugin-Endpunkte unten gelten weiterhin fuer die ueber das Plugin integrierten Collections, aber nicht als Admin-UI-Quelle fuer `legal-pages`.
+- Die generischen SEO-Plugin-Endpunkte unten gelten weiterhin fuer die über das Plugin integrierten Collections, aber nicht als Admin-UI-Quelle fuer `legal-pages`.
 
 ## SSO-Endpunkte (OIDC)
 

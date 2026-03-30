@@ -6,7 +6,7 @@ Diese Dokumentation beschreibt den API-Vertrag fuer `/integrations` und `/integr
 
 - Integrationen in Payload verwalten (Kategorien, Protokolle, Status).
 - Oeffentliche Auslieferung nur fuer `published`.
-- Stabile Frontend-Vertraege ueber DTOs.
+- Stabile Frontend-Vertraege über DTOs.
 
 ## DTO-Vertrag
 
@@ -24,7 +24,7 @@ Shared Mapping- und Remote-Client-Layer:
 
 ## Endpunktmatrix
 
-Bereitstellung ueber: [app/api/[...slug]/route.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/api/[...slug]/route.ts)
+Bereitstellung über: [app/api/[...slug]/route.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/api/[...slug]/route.ts)
 
 1. `GET /api/integrations`
 2. `GET /api/integrations/:id`
@@ -53,7 +53,7 @@ Collection: [collections/integrations.ts](/Users/lucaschoeneberg/Documents/GitHu
 
 - Public Read: nur `_status=published`
 - Authenticated Read/Write: Admin-Kontext
-- Site-Ausspielung erfolgt zusaetzlich ueber das Feld `sites` im Shared Content Layer.
+- Site-Ausspielung erfolgt zusaetzlich über das Feld `sites` im Shared Content Layer.
 
 ## SEO-Verhalten
 

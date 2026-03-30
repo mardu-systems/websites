@@ -24,7 +24,7 @@ Typische Public-Filter:
 - `LegalPageSlug`
 - `LegalPageDto`
 
-Der Content wird als `contentMarkdown` ausgeliefert und ueber einen gemeinsamen Renderer dargestellt.
+Der Content wird als `contentMarkdown` ausgeliefert und über einen gemeinsamen Renderer dargestellt.
 
 SEO-Felder fuer `legal-pages` sind bewusst collection-lokal und stabil gehalten:
 

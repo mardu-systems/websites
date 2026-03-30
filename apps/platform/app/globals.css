@@ -1,6 +1,9 @@
 @import "@mardu/styles/base.css";
 @import "@mardu/styles/theme-platform.css";
 
+@source "../../../packages/layout/src";
+@source "../../../packages/sections/src";
+
 @plugin "@tailwindcss/typography";
 @layer payload-default, payload;
 

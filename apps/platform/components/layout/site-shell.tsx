@@ -1,13 +1,18 @@
 'use client';
 
-import SiteHeader from '@/components/nav/header/site-header';
 import { defaultHeaderItems } from '@/data/default-header-items';
-import SiteFooter from '@/components/nav/footer/footer';
 import React from 'react';
 import { defaultFooterNavLinks } from '@/data/default-footer-items';
 import { getSiteConfig } from '@mardu/site-config';
 import { usePathname } from 'next/navigation';
+import SharedSiteShell from '@mardu/layout/site-shell';
+import type { FooterSocialLinkDto } from '@mardu/layout';
 
+const socialLinks: ReadonlyArray<FooterSocialLinkDto> = [
+  { href: 'https://www.instagram.com/mardu.de', label: 'Instagram', icon: 'instagram' },
+  { href: 'https://www.linkedin.com/company/marduofficial', label: 'LinkedIn', icon: 'linkedin' },
+  { href: 'https://github.com/mardu-systems', label: 'GitHub', icon: 'github' },
+];
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   const siteConfig = getSiteConfig('platform');
   const pathname = usePathname();
@@ -19,15 +24,37 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div>
-      <SiteHeader items={defaultHeaderItems} />
-      <div data-theme="light" style={{ colorScheme: 'light' }}>
+      <SharedSiteShell
+        header={{
+          brand: {
+            homeHref: '/',
+            logoSrc: '/logos/Logo.svg',
+            logoAlt: 'Mardu Logo',
+          },
+          items: defaultHeaderItems,
+          cta: {
+            label: 'Admin Login',
+            href: '/admin',
+            mode: 'link',
+          },
+        }}
+        footer={{
+          brand: {
+            homeHref: '/',
+            logoSrc: '/logos/LogoWeiss.svg',
+            logoAlt: 'Mardu Logo',
+            copyrightName: 'Mardu',
+          },
+          description:
+            'Interne Plattform für Payload Admin, zentrale APIs, Media-Uploads und Betriebsaufgaben im Mardu-Monorepo.',
+          navLinks: defaultFooterNavLinks,
+          metaLinks: siteConfig.footerMetaLinks,
+          socialLinks,
+          theme: 'dark',
+        }}
+      >
         {children}
-      </div>
-      <SiteFooter
-        description="Interne Plattform für Payload Admin, zentrale APIs, Media-Uploads und Betriebsaufgaben im Mardu-Monorepo."
-        navLinks={defaultFooterNavLinks}
-        metaLinks={siteConfig.footerMetaLinks}
-      />
+      </SharedSiteShell>
     </div>
   );
 }

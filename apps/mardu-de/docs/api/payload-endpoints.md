@@ -9,7 +9,7 @@ Quelle:
 
 - `GET|POST|PATCH|PUT|DELETE|OPTIONS /api/[...slug]`
 - leitet Requests an `MARDU_PLATFORM_ORIGIN/api/[...slug]` weiter
-- uebernimmt Methode, Query-Parameter, Header und Request-Body
+- übernimmt Methode, Query-Parameter, Header und Request-Body
 - bleibt `force-dynamic`, damit keine Plattform-Antwort gecacht wird
 
 ## Admin-Weiterleitung

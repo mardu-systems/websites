@@ -5,8 +5,8 @@ Diese Dokumentation beschreibt den einmaligen Import der Altbestaende in `apps/p
 ## Ziel
 
 - `newsletter.json` und `preorders.json` aus `apps/mardu-de`, `apps/mardu-space` und `apps/platform` in die neuen Payload-Collections importieren.
-- Optional einen Export der alten `mardu.space`-Subscriber-Tabelle in `newsletter-subscribers` uebernehmen.
-- Deduplizierung ueber `subscriptionKey = site + email + role`.
+- Optional einen Export der alten `mardu.space`-Subscriber-Tabelle in `newsletter-subscribers` übernehmen.
+- Deduplizierung über `subscriptionKey = site + email + role`.
 
 ## Script
 
@@ -30,7 +30,7 @@ Implementierung:
 
 ## Optionaler Import der alten `mardu.space`-Subscriber-Tabelle
 
-Falls ein JSON-Export der alten TypeORM-Tabelle vorliegt, kann er ueber die Umgebungsvariable eingebunden werden:
+Falls ein JSON-Export der alten TypeORM-Tabelle vorliegt, kann er über die Umgebungsvariable eingebunden werden:
 
 ```bash
 SPACE_SUBSCRIBERS_EXPORT=/absolute/path/to/subscribers-export.json bun run migrate:legacy-data

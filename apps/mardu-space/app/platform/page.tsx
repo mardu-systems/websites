@@ -1,7 +1,6 @@
 import CTASection from '@/components/utilities/cta-section';
-import HeroSection from '@/components/utilities/hero-section';
 import MediaPlaceholder from '@/components/utilities/media-placeholder';
-import SplitContent from '@/components/utilities/split-content';
+import { HeroSection, SplitContent } from '@mardu/sections';
 import { platformFeatures, platformViews } from '@/data/platform-page';
 
 const heroDescription = (
@@ -68,6 +67,7 @@ export default function Page() {
           description={introDescription}
           sideTitle="Was Betreiber hier steuern"
           items={introItems}
+          variant="plain"
         />
       </section>
 

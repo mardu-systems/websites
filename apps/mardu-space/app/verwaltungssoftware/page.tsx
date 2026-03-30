@@ -16,10 +16,10 @@ import {
 
 import CTASection from '@/components/utilities/cta-section';
 import MediaPlaceholder from '@/components/utilities/media-placeholder';
-import SplitContent from '@/components/utilities/split-content';
 import { Button } from '@mardu/ui/components/button';
 import { NoiseAuroraBackground } from '@mardu/ui/components/noise-aurora';
 import { Overline } from '@mardu/ui/components/typography';
+import { SplitContent } from '@mardu/sections';
 import {
   administrationCta,
   administrationGrowthPillars,
@@ -556,6 +556,7 @@ export default function VerwaltungsoftwarePage() {
             }
             sideTitle="Worauf die Basis vorbereitet ist"
             items={growthItems}
+            variant="plain"
           />
         </div>
       </section>

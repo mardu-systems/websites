@@ -1,4 +1,4 @@
-import type { FaqItem } from '@/components/utilities/faq';
+import type { FaqItem } from '@mardu/sections';
 import type { LucideIcon } from 'lucide-react';
 import { Activity, Boxes, Cpu, Network, ShieldCheck, Smartphone, Wifi } from 'lucide-react';
 

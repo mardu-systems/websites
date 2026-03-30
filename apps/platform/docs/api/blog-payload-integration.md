@@ -6,7 +6,7 @@ Diese Dokumentation beschreibt den Blog-spezifischen API-Vertrag fuer `/blog` un
 
 - Blog-Inhalte in Payload verwalten.
 - Oeffentliche Auslieferung nur fuer `published`.
-- Stabilen Frontend-Vertrag ueber DTOs garantieren.
+- Stabilen Frontend-Vertrag über DTOs garantieren.
 
 ## DTO-Vertrag
 
@@ -35,7 +35,7 @@ Hinweis:
 
 ## Endpunktmatrix (Blog)
 
-Bereitstellung ueber: [app/api/[...slug]/route.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/api/[...slug]/route.ts)
+Bereitstellung über: [app/api/[...slug]/route.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/api/[...slug]/route.ts)
 
 1. `GET /api/blog-posts`
 2. `GET /api/blog-posts/:id`
@@ -73,7 +73,7 @@ Quelle: [lib/blog.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/plat
 Mapper garantieren DTO-Stabilitaet und verwerfen unvollstaendige Payload-Dokumente defensiv.
 
 Zusatzregel:
-- Blog-Posts sind site-faehig ueber das Feld `sites` und werden fuer Consumer nur ausgeliefert, wenn die jeweilige Site sichtbar ist.
+- Blog-Posts sind site-faehig über das Feld `sites` und werden fuer Consumer nur ausgeliefert, wenn die jeweilige Site sichtbar ist.
 
 ## Access-Regeln
 

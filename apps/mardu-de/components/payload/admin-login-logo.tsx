@@ -10,7 +10,7 @@ export function AdminLoginLogo() {
     <div className="mardu-admin-auth-card" role="status" aria-live="polite">
       <h1 className="mardu-admin-auth-title">Mardu Admin</h1>
       <p className="mardu-admin-auth-subtitle">
-        {oidcEnabled ? 'Anmeldung ueber OIDC moeglich' : 'Anmeldung mit E-Mail und Passwort'}
+        {oidcEnabled ? 'Anmeldung über OIDC moeglich' : 'Anmeldung mit E-Mail und Passwort'}
       </p>
       {oidcEnabled ? (
         <>

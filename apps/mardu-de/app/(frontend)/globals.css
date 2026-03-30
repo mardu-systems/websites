@@ -1,6 +1,7 @@
 @import "@mardu/styles/base.css";
 @import "@mardu/styles/theme-mardu-de.css";
 @source "../../../../packages/layout/src";
+@source "../../../../packages/sections/src";
 
 @layer payload-default, payload;
 

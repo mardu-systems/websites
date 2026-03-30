@@ -4,7 +4,7 @@ Diese Datei dokumentiert den OIDC-SSO-Vertrag fuer den Payload Admin Login.
 
 ## Ziel
 
-- Login in `/admin` ueber externen Identity Provider (OIDC).
+- Login in `/admin` über externen Identity Provider (OIDC).
 - Kompatibel mit Keycloak, Auth0, Okta, Azure Entra ID.
 - Bun-basiertes Setup ohne zusaetzlichen Auth-Proxy.
 

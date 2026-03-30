@@ -14,18 +14,19 @@ import {
   Wrench,
 } from 'lucide-react';
 
-import HeroSection from '@/components/utilities/hero-section';
 import CTASection from '@/components/utilities/cta-section';
-import Foerderung from '@/components/utilities/foerderung';
-import SplitContent from '@/components/utilities/split-content';
-import CardGrid from '@/components/utilities/card-grid';
-import InfoGrid from '@/components/utilities/info-grid';
-import ProcessSteps from '@/components/utilities/process-steps';
 import SecurityAccordion from '@/components/utilities/security-accordion';
-import ConfiguratorTeaser from '@/components/utilities/configurator-teaser';
-
 import WhitepaperTeaser from '@/components/utilities/whitepaper-teaser';
-import ScenarioShowcase from '@/components/utilities/scenario-showcase';
+import {
+  CardGrid,
+  ConfiguratorTeaser,
+  Foerderung,
+  HeroSection,
+  InfoGrid,
+  ProcessSteps,
+  ScenarioShowcase,
+  SplitContent,
+} from '@mardu/sections';
 
 const SECTION_SPACING = '';
 
@@ -399,6 +400,18 @@ export default function HomePage() {
           imageSrc="/_A7_9094_quer.jpg"
           imageAlt="mardu.space-System in einer Werkstatt"
           variant="landing"
+          mediaCards={[
+            {
+              href: '/#produkte',
+              scrollTargetId: 'produkte',
+              imageSrc: '/_A7_9094_quer.jpg',
+              imageAlt: 'mardu.space-System in einer Werkstatt',
+              ariaLabel: 'Zu den Produktlösungen mardu.space scrollen',
+              description:
+                'Digitale Zutritts- und Maschinenfreigabe für Werkstätten, Labore und Makerspaces.',
+              priority: true,
+            },
+          ]}
         />
       </section>
 
@@ -411,6 +424,7 @@ export default function HomePage() {
           sideTitle="Vorteile für Betreiber"
           sideIcon={CheckCircle}
           items={summaryItems}
+          variant="plain"
         />
       </section>
 
@@ -419,6 +433,7 @@ export default function HomePage() {
           className={SECTION_SPACING}
           eyebrow="Einsatzfelder"
           title="Wo mardu.space besonders hilft"
+          itemMetaLabel="Fokus"
           variant="muted"
           items={cardGridItems}
         />
@@ -448,6 +463,8 @@ export default function HomePage() {
           className={SECTION_SPACING}
           eyebrow="System"
           title="Spezifikation & Funktionsumfang"
+          intro="Die Plattform verbindet Identität, Freigabe, Protokollierung und technische Durchsetzung in einem zusammenhängenden System statt in isolierten Einzelbausteinen."
+          variant="cards"
           items={infoGridItems}
         />
       </section>
@@ -458,6 +475,7 @@ export default function HomePage() {
           eyebrow="Projektablauf"
           title="Von der Anforderung bis zum Rollout"
           steps={processSteps}
+          variant="plain"
         />
       </section>
 
@@ -484,6 +502,7 @@ export default function HomePage() {
         className={SECTION_SPACING}
         items={foerderungItems}
         description={foerderungDescription}
+        spacing="compact"
       />
     </main>
   );

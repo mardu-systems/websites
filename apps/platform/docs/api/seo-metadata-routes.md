@@ -1,6 +1,6 @@
 # SEO Metadata Routes
 
-Diese Datei dokumentiert die SEO-Endpunkte, die ueber Next.js File-based Metadata bereitgestellt werden.
+Diese Datei dokumentiert die SEO-Endpunkte, die über Next.js File-based Metadata bereitgestellt werden.
 
 ## Zweck
 

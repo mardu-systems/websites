@@ -23,7 +23,7 @@ const adminActions = [
   },
   {
     title: 'API Entry',
-    description: 'Zentraler Einstieg für Lead- und Payload-Endpunkte dieser Plattform.',
+    description: 'Zentraler API für Payload-Endpunkte dieser Plattform.',
     href: '/api/contact',
     icon: ShieldCheck,
   },

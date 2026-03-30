@@ -1,6 +1,6 @@
-import RoadmapTimeline, { RoadmapMilestone } from '@/components/utilities/roadmap-timeline';
 import type { Metadata } from 'next';
 import { Overline } from '@mardu/ui/components/typography';
+import { RoadmapTimeline, type RoadmapMilestone } from '@mardu/sections';
 
 export const metadata: Metadata = {
   title: 'Roadmap & Ausblick',
@@ -114,6 +114,7 @@ export default function RoadmapPage() {
 
         <RoadmapTimeline
           className="pt-8 md:pt-10"
+          variant="plain"
           items={items}
         />
       </section>

@@ -4,13 +4,10 @@ import Image from 'next/image';
 import { CheckCircle, Cpu, Network, ShieldCheck } from 'lucide-react';
 
 import CTASection from '@/components/utilities/cta-section';
-import Faq from '@/components/utilities/faq';
 import HardwareFeatureBlock from '@/components/utilities/hardware-feature-block';
 import HardwareVariantCompare from '@/components/utilities/hardware-variant-compare';
-import HeroSection from '@/components/utilities/hero-section';
-import InfoGrid from '@/components/utilities/info-grid';
-import SplitContent from '@/components/utilities/split-content';
 import MediaPlaceholder from '@/components/utilities/media-placeholder';
+import { Faq, HeroSection, InfoGrid, SplitContent } from '@mardu/sections';
 import {
   hardwareFaqItems,
   hardwareFeatureBlocks,
@@ -92,6 +89,7 @@ export default function Page() {
           sideTitle="Drei Rollen, ein Ablauf"
           sideIcon={CheckCircle}
           items={systemOverviewItems}
+          variant="plain"
         />
       </section>
 
@@ -188,7 +186,9 @@ export default function Page() {
         <InfoGrid
           eyebrow="Vertrauenselemente"
           title="Worauf Betreiber bei der Hardware vertrauen können"
+          intro="Die Hardware schafft belastbare Freigaben vor Ort und bindet sie sauber in Betrieb, Sicherheit und Administration ein."
           items={trustGridItems}
+          variant="cards"
         />
       </section>
 
@@ -203,7 +203,7 @@ export default function Page() {
               Produktstufe.
             </p>
           </div>
-          <Faq items={hardwareFaqItems} />
+          <Faq items={hardwareFaqItems} variant="lined" />
         </div>
       </section>
 

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Overline } from '@mardu/ui/components/typography';
-import Faq, { type FaqItem } from '@/components/utilities/faq';
+import { Faq, type FaqItem } from '@mardu/sections';
 
 export const metadata: Metadata = {
   title: 'Brand Assets',
@@ -121,7 +121,7 @@ export default function BrandPage() {
             </p>
           </div>
 
-          <Faq items={brandFaqItems} className="pt-8 md:pt-10" />
+          <Faq items={brandFaqItems} variant="lined" className="pt-8 md:pt-10" />
         </div>
       </section>
     </main>
