@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import ContactForm from './contact-form';
 import { ContactPageSection } from '@mardu/sections';
+import ContactForm from '@/components/forms/contact';
 
 export const metadata: Metadata = {
   title: 'Kontakt',
@@ -76,7 +76,7 @@ export default function ContactPage() {
         contactContent:
           'Gib uns einfach deine Kontaktdaten und eine kurze Beschreibung deines Vorhabens.',
       }}
-      form={<ContactForm />}
+      form={<ContactForm submit action="/api/contact" extra={{ source: 'contact-form' }} layout="card" />}
     />
   );
 }

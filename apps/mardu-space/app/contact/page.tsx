@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import ContactForm from './contact-form';
 import { ContactPageSection } from '@mardu/sections';
 import { getContactPageContext, type ContactPageSearchParamsDto } from '@/lib/contact-page-context';
+import ContactForm from '@/components/forms/contact';
 
 export const metadata: Metadata = {
   title: 'Kontakt',
@@ -81,7 +81,10 @@ export default async function ContactPage({
       }}
       form={
         <ContactForm
-          source={context.source}
+          submit
+          action="/api/contact"
+          extra={{ source: context.source }}
+          layout="card"
           initialMessage={context.initialMessage}
           submitLabel={context.submitLabel}
           successMessage={context.successMessage}

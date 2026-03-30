@@ -56,6 +56,7 @@ export type ContactValues = z.infer<ReturnType<typeof createContactSchema>>;
 
 export interface ContactFormProps {
   initialValues?: Partial<ContactValues>;
+  initialMessage?: string;
   onChange?: (values: Partial<ContactValues>) => void;
   submit?: boolean;
   action?: string;
@@ -69,6 +70,7 @@ export interface ContactFormProps {
 
 export function ContactForm({
   initialValues,
+  initialMessage,
   onChange,
   submit = false,
   action = '/api/contact',
@@ -88,7 +90,7 @@ export function ContactForm({
       email: initialValues?.email ?? '',
       company: initialValues?.company ?? '',
       phone: initialValues?.phone ?? '',
-      message: initialValues?.message ?? '',
+      message: initialValues?.message ?? initialMessage ?? '',
       consent: initialValues?.consent ?? false,
       newsletterOptIn: initialValues?.newsletterOptIn ?? false,
     },
@@ -102,11 +104,11 @@ export function ContactForm({
       email: initialValues.email ?? form.getValues('email'),
       company: initialValues.company ?? form.getValues('company'),
       phone: initialValues.phone ?? form.getValues('phone'),
-      message: initialValues.message ?? form.getValues('message'),
+      message: initialValues.message ?? initialMessage ?? form.getValues('message'),
       consent: initialValues.consent ?? form.getValues('consent'),
       newsletterOptIn: initialValues.newsletterOptIn ?? form.getValues('newsletterOptIn'),
     });
-  }, [initialValues, form]);
+  }, [initialMessage, initialValues, form]);
 
   React.useEffect(() => {
     if (submit || !onChange) return;
