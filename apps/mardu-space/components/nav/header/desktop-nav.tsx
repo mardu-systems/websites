@@ -7,7 +7,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '@mardu/ui/compone
 import React from 'react';
 import clsx from 'clsx';
 import MegaContent from './mega-content';
-import { NavEntry } from '@/types/header';
+import type { HeaderNavItemDto as NavEntry } from '@mardu/layout/types';
 import { useScrollToSection } from '@mardu/layout/use-scroll-to-section';
 
 interface DesktopNavProps {

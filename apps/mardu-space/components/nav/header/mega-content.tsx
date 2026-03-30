@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, ChevronRight } from 'lucide-react';
-import { MegaGroup } from '@/types/header';
+import type { HeaderNavMegaGroupDto as MegaGroup } from '@mardu/layout/types';
 
 export default function MegaContent({ group }: { group: MegaGroup }) {
   return (

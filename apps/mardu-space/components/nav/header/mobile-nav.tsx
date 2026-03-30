@@ -13,7 +13,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import clsx from 'clsx';
-import { NavEntry } from '@/types/header';
+import type { HeaderNavItemDto as NavEntry } from '@mardu/layout/types';
 import BurgerIcon from './burger-icon';
 import { useScrollToSection } from '@mardu/layout/use-scroll-to-section';
 import { MeetergoCTAButton } from '@/components/utilities/meetergo-cta-button';

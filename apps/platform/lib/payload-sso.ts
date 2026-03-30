@@ -1,5 +1,5 @@
 import { randomBytes, createHash, createHmac, timingSafeEqual } from 'node:crypto';
-import { createLocalJWKSet, jwtVerify, SignJWT } from 'jose';
+import { createLocalJWKSet, jwtVerify, SignJWT, type JSONWebKeySet } from 'jose';
 
 export const OIDC_STATE_COOKIE = 'mardu_oidc_state';
 export const OIDC_SESSION_COOKIE = 'mardu_oidc_session';
@@ -14,9 +14,7 @@ type OidcDiscovery = {
   token_endpoint: string;
 };
 
-type OidcJwksResponse = {
-  keys: unknown[];
-};
+type OidcJwksResponse = JSONWebKeySet;
 
 type OidcSessionClaims = {
   email: string;
@@ -261,6 +259,12 @@ const getJWKS = async (jwksURI: string): Promise<OidcJwksResponse> => {
   if (!json || typeof json !== 'object' || !('keys' in json) || !Array.isArray(json.keys)) {
     throw new Error(
       `OIDC JWKS payload is malformed. content-type=${contentType || 'unknown'} body-preview=${JSON.stringify(json).slice(0, 160)}`,
+    );
+  }
+
+  if (!json.keys.every((key) => key && typeof key === 'object')) {
+    throw new Error(
+      `OIDC JWKS payload contains invalid keys. content-type=${contentType || 'unknown'} body-preview=${JSON.stringify(json).slice(0, 160)}`,
     );
   }
 
