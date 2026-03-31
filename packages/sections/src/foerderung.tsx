@@ -35,7 +35,7 @@ export default function Foerderung({
 }: Props) {
   return (
     <section id={sectionId} className={cn('section-hairline py-18 md:py-24', className)}>
-      <div className="mardu-content-container">
+      <div className="mardu-container">
         {eyebrow ? <Overline className="mb-3">{eyebrow}</Overline> : null}
         <h2 className="headline-balance mb-12 max-w-4xl text-[clamp(1.9rem,4vw,3.5rem)] leading-[1.02] tracking-[-0.03em] text-foreground">
           {title}

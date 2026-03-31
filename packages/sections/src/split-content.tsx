@@ -53,7 +53,7 @@ export default function SplitContent({
       ) : null}
       <div
         className={cn(
-          variant === 'immersive' ? 'max-w-7xl mx-auto px-6 md:px-8' : 'mardu-content-container',
+          variant === 'immersive' ? 'max-w-7xl mx-auto px-6 md:px-8' : 'mardu-container',
         )}
       >
         <div className="flex flex-col gap-3 mb-8 md:mb-12">

@@ -153,10 +153,6 @@
         @apply mx-auto w-full max-w-368 px-4 md:px-8;
     }
 
-    .mardu-content-container {
-        @apply mx-auto w-full max-w-368 px-6 md:px-10 xl:px-14;
-    }
-
     .section-hairline {
         border-top: 1px solid var(--line-soft);
     }

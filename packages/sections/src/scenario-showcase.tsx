@@ -86,7 +86,7 @@ export default function ScenarioShowcase({
 
   return (
     <section className={cn('w-full py-20 md:py-24', className)}>
-      <div className="mardu-content-container">
+      <div className="mardu-container">
         <Tabs value={selectedId} onValueChange={setSelected} className="w-full">
           <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
             <div className="lg:col-start-1 lg:row-start-1">

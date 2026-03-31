@@ -42,7 +42,7 @@ export default function InfoGrid({
 
   return (
     <section className={cn('w-full py-20 md:py-24', className)}>
-      <div className="mardu-content-container">
+      <div className="mardu-container">
         {eyebrow ? <Overline className="mb-3">{eyebrow}</Overline> : null}
         {title ? (
           intro ? (

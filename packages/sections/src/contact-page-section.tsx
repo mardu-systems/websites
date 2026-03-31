@@ -44,7 +44,7 @@ export default function ContactPageSection({
         className,
       )}
     >
-      <section className="mardu-content-container w-full py-12 md:py-16">
+      <section className="mardu-container w-full py-12 md:py-16">
         <header className="max-w-3xl space-y-4 pb-8">
           <Overline>{overline}</Overline>
           <h1 className="headline-balance text-[clamp(2rem,4.5vw,3.75rem)] leading-[0.95] tracking-[-0.03em] text-foreground">
