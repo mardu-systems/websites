@@ -1,4 +1,4 @@
-import type { IntegrationProtocolDto } from '@/types/api/integrations';
+import type { IntegrationProtocolDto } from '@mardu/content-core';
 
 const STYLE_CLASSES: Record<IntegrationProtocolDto['badgeStyle'], string> = {
   neutral: 'border-black/20 text-foreground/70',

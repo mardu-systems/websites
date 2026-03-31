@@ -10,7 +10,7 @@ Diese Dokumentation beschreibt den API-Vertrag fuer `/integrations` und `/integr
 
 ## DTO-Vertrag
 
-Kanonische Typen: [types/api/integrations.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/types/api/integrations.ts)
+Kanonische Typen: [packages/content-core/src/index.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/index.ts)
 
 Shared Mapping- und Remote-Client-Layer:
 [packages/content-core/src/index.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/index.ts)

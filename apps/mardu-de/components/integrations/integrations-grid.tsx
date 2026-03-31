@@ -1,5 +1,5 @@
 import { IntegrationCard } from '@/components/integrations/integration-card';
-import type { IntegrationListItemDto } from '@/types/api/integrations';
+import type { IntegrationListItemDto } from '@mardu/content-core';
 
 export function IntegrationsGrid({ items }: { items: IntegrationListItemDto[] }) {
   if (items.length === 0) {

@@ -1,4 +1,4 @@
-import type { BlogPostListItemDto } from '@/types/api/blog';
+import type { BlogPostListItemDto } from '@mardu/content-core';
 import Image from 'next/image';
 import Link from 'next/link';
 

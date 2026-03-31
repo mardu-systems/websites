@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { SiteKey } from '@mardu/lead-core';
-import { createNewsletterToken, verifyNewsletterToken } from '@/lib/newsletter';
+import { createNewsletterToken, verifyNewsletterToken } from '@mardu/lead-core';
 import { confirmNewsletterSubscriber, setNewsletterSubscriberTwentyStatus } from '@/lib/lead-store';
 import { sendNewsletterEventToTwenty } from '@/lib/integrations/twenty';
 import { renderEmailLayout, sendEmail } from '@/lib/email';

@@ -1,4 +1,4 @@
-import type { BlogPostListItemDto } from '@/types/api/blog';
+import type { BlogPostListItemDto } from '@mardu/content-core';
 import { BlogPostCard } from '@/components/blog/blog-post-card';
 
 export function BlogGrid({ posts }: { posts: BlogPostListItemDto[] }) {

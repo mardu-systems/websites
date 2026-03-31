@@ -4,7 +4,7 @@ import { IntegrationsHero } from '@/components/integrations/integrations-hero';
 import { IntegrationsPagination } from '@/components/integrations/integrations-pagination';
 import { Overline } from '@mardu/ui/components/typography';
 import { getIntegrationCategories, getIntegrations, getIntegrationProtocols } from '@/lib/integrations';
-import type { IntegrationSort, IntegrationStatus } from '@/types/api/integrations';
+import type { IntegrationSort, IntegrationStatus } from '@mardu/content-core';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

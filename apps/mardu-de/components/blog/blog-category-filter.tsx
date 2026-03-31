@@ -1,4 +1,4 @@
-import type { BlogCategoryDto } from '@/types/api/blog';
+import type { BlogCategoryDto } from '@mardu/content-core';
 import Link from 'next/link';
 
 type BlogCategoryFilterProps = {

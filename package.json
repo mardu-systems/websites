@@ -20,7 +20,10 @@
     "build:analyze": "turbo run build:analyze"
   },
   "devDependencies": {
-    "turbo": "^2.8.17",
-    "typescript": "^5.9.3"
+    "turbo": "^2.8.21",
+    "typescript": "^6.0.2"
+  },
+  "dependencies": {
+    "i": "^0.3.7"
   }
 }

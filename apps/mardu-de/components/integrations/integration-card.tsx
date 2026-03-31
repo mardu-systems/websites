@@ -1,6 +1,6 @@
 import { IntegrationProtocolBadges } from '@/components/integrations/integration-protocol-badges';
 import { IntegrationStatusBadge } from '@/components/integrations/integration-status-badge';
-import type { IntegrationListItemDto } from '@/types/api/integrations';
+import type { IntegrationListItemDto } from '@mardu/content-core';
 import Image from 'next/image';
 import Link from 'next/link';
 

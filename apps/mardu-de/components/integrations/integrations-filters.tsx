@@ -1,4 +1,8 @@
-import type { IntegrationCategoryDto, IntegrationProtocolDto, IntegrationStatus } from '@/types/api/integrations';
+import type {
+  IntegrationCategoryDto,
+  IntegrationProtocolDto,
+  IntegrationStatus,
+} from '@mardu/content-core';
 import Link from 'next/link';
 
 const STATUS_ITEMS: Array<{ label: string; value: '' | IntegrationStatus }> = [

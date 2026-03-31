@@ -8,7 +8,7 @@ import type {
   IntegrationSort,
   IntegrationStatus,
   PaginatedIntegrationsDto,
-} from '@/types/api/integrations';
+} from '@mardu/content-core';
 import { getPayload } from 'payload';
 
 const DEFAULT_LIMIT = 12;

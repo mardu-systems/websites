@@ -62,7 +62,7 @@ const Modal: React.FC = ({}) => {
       </button>
       {data && (
         <motion.div
-          className="relative w-full max-w-[720px] px-6 sm:px-12 md:px-20 text-left text-white"
+          className="relative w-full max-w-180 px-6 sm:px-12 md:px-20 text-left text-white"
           initial={{ x: 20 }}
           ref={containerRef}
         >

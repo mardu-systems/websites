@@ -1,5 +1,5 @@
 import { IntegrationStatusBadge } from '@/components/integrations/integration-status-badge';
-import type { IntegrationDetailDto } from '@/types/api/integrations';
+import type { IntegrationDetailDto } from '@mardu/content-core';
 
 export function IntegrationDetailSidebar({ integration }: { integration: IntegrationDetailDto }) {
   return (

@@ -46,6 +46,6 @@ Quelle: [`apps/mardu-space/app/api/whitepaper/download/route.ts`](/Users/lucasch
 
 ## DTOs
 
-Quelle: [`apps/mardu-space/types/api/newsletter.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-space/types/api/newsletter.ts)
+Quelle: [`packages/lead-core/src/index.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/lead-core/src/index.ts)
 
 Die oeffentlichen DTOs re-exportieren die zentralen Vertraege aus [`packages/lead-core/src/index.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/lead-core/src/index.ts).

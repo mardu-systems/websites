@@ -1,4 +1,4 @@
-import type { IntegrationStatus } from '@/types/api/integrations';
+import type { IntegrationStatus } from '@mardu/content-core';
 
 const STATUS_LABELS: Record<IntegrationStatus, string> = {
   available: 'Available',

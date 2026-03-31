@@ -14,7 +14,7 @@ Quelle: [`apps/mardu-space/app/api/contact/route.ts`](/Users/lucaschoeneberg/Doc
 
 ## DTO
 
-Quelle: [`apps/mardu-space/types/api/contact.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-space/types/api/contact.ts)
+Quelle: [`packages/lead-core/src/index.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/lead-core/src/index.ts)
 
 ```ts
 interface ContactRequestDto {

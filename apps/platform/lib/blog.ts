@@ -5,7 +5,7 @@ import type {
   BlogPostDetailDto,
   BlogPostListItemDto,
   PaginatedBlogPostsDto,
-} from '@/types/api/blog';
+} from '@mardu/content-core';
 import { getPayload } from 'payload';
 
 const DEFAULT_LIMIT = 9;

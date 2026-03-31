@@ -10,7 +10,7 @@ Diese Dokumentation beschreibt den Blog-spezifischen API-Vertrag fuer `/blog` un
 
 ## DTO-Vertrag
 
-Kanonische Typen: [types/api/blog.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/types/api/blog.ts)
+Kanonische Typen: [packages/content-core/src/index.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/index.ts)
 
 Shared Mapping- und Remote-Client-Layer:
 [packages/content-core/src/index.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/index.ts)

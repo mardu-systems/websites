@@ -31,7 +31,7 @@ Supported Methods:
 3. `GET /api/blog-categories`
 
 DTO-Vertrag fuer Blog-Consumer:
-[types/api/blog.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/types/api/blog.ts)
+[packages/content-core/src/index.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/index.ts)
 
 Shared DTO- und Client-Logik:
 [packages/content-core/src/index.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/index.ts)
@@ -47,7 +47,7 @@ Erweiterte Blog-Details:
 4. `GET /api/integration-protocols`
 
 DTO-Vertrag fuer Integrations-Consumer:
-[types/api/integrations.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/types/api/integrations.ts)
+[packages/content-core/src/index.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/index.ts)
 
 Shared DTO- und Client-Logik:
 [packages/content-core/src/index.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/index.ts)
