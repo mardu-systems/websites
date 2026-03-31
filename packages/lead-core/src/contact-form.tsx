@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import Link from 'next/link';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '@mardu/ui/components/button';
-import { Card, CardContent } from '@mardu/ui/components/card';
-import { Checkbox } from '@mardu/ui/components/checkbox';
-import { Textarea } from '@mardu/ui/components/textarea';
-import { Alert, AlertDescription } from '@mardu/ui/components/alert';
+import * as React from "react";
+import Link from "next/link";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@mardu/ui/components/button";
+import { Card, CardContent } from "@mardu/ui/components/card";
+import { Checkbox } from "@mardu/ui/components/checkbox";
+import { Textarea } from "@mardu/ui/components/textarea";
+import { Alert, AlertDescription } from "@mardu/ui/components/alert";
 import {
   Form,
   FormControl,
@@ -18,22 +18,26 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@mardu/ui/components/form';
-import { Loader2 } from 'lucide-react';
-import type { ContactErrorResponseDto } from './index';
+} from "@mardu/ui/components/form";
+import { Loader2 } from "lucide-react";
+import type { ContactErrorResponseDto } from "./index";
 
 export type NormalizePhoneNumber = (value?: string) => string | undefined;
-export type ExecuteRecaptcha = (action: string) => Promise<string | null | undefined>;
+export type ExecuteRecaptcha = (
+  action: string,
+) => Promise<string | null | undefined>;
 
 /**
  * Public schema factory for the shared contact form.
  * Apps can inject their own phone normalization strategy while keeping the form
  * contract stable.
  */
-export function createContactSchema(normalizePhoneNumber?: NormalizePhoneNumber) {
+export function createContactSchema(
+  normalizePhoneNumber?: NormalizePhoneNumber,
+) {
   return z.object({
-    name: z.string().trim().min(1, 'Bitte Name angeben'),
-    email: z.string().trim().email('Bitte eine gültige E-Mail angeben'),
+    name: z.string().trim().min(1, "Bitte Name angeben"),
+    email: z.string().trim().email("Bitte eine gültige E-Mail angeben"),
     company: z.string().trim().optional(),
     phone: z
       .string()
@@ -44,9 +48,13 @@ export function createContactSchema(normalizePhoneNumber?: NormalizePhoneNumber)
           value == null ||
           value.length === 0 ||
           (normalizePhoneNumber ? Boolean(normalizePhoneNumber(value)) : true),
-        'Bitte eine gültige Telefonnummer im internationalen Format angeben',
+        "Bitte eine gültige Telefonnummer im internationalen Format angeben",
       ),
-    message: z.string().trim().max(500, 'Bitte maximal 500 Zeichen eingeben').optional(),
+    message: z
+      .string()
+      .trim()
+      .max(500, "Bitte maximal 500 Zeichen eingeben")
+      .optional(),
     consent: z.boolean().optional(),
     newsletterOptIn: z.boolean().optional(),
   });
@@ -63,7 +71,7 @@ export interface ContactFormProps {
   extra?: Record<string, unknown>;
   submitLabel?: string;
   successMessage?: string;
-  layout?: 'plain' | 'card';
+  layout?: "plain" | "card";
   normalizePhoneNumber?: NormalizePhoneNumber;
   executeRecaptcha?: ExecuteRecaptcha;
 }
@@ -73,40 +81,45 @@ export function ContactForm({
   initialMessage,
   onChange,
   submit = false,
-  action = '/api/contact',
+  action = "/api/contact",
   extra,
-  submitLabel = 'Senden',
-  successMessage = 'Danke! Nachricht gesendet',
-  layout = 'plain',
+  submitLabel = "Senden",
+  successMessage = "Danke! Nachricht gesendet",
+  layout = "plain",
   normalizePhoneNumber,
   executeRecaptcha,
 }: ContactFormProps) {
-  const schema = React.useMemo(() => createContactSchema(normalizePhoneNumber), [normalizePhoneNumber]);
+  const schema = React.useMemo(
+    () => createContactSchema(normalizePhoneNumber),
+    [normalizePhoneNumber],
+  );
 
   const form = useForm<ContactValues>({
     resolver: zodResolver(schema),
     defaultValues: {
-      name: initialValues?.name ?? '',
-      email: initialValues?.email ?? '',
-      company: initialValues?.company ?? '',
-      phone: initialValues?.phone ?? '',
-      message: initialValues?.message ?? initialMessage ?? '',
+      name: initialValues?.name ?? "",
+      email: initialValues?.email ?? "",
+      company: initialValues?.company ?? "",
+      phone: initialValues?.phone ?? "",
+      message: initialValues?.message ?? initialMessage ?? "",
       consent: initialValues?.consent ?? false,
       newsletterOptIn: initialValues?.newsletterOptIn ?? false,
     },
-    mode: submit ? 'onSubmit' : 'onChange',
+    mode: submit ? "onSubmit" : "onChange",
   });
 
   React.useEffect(() => {
     if (!initialValues) return;
     form.reset({
-      name: initialValues.name ?? form.getValues('name'),
-      email: initialValues.email ?? form.getValues('email'),
-      company: initialValues.company ?? form.getValues('company'),
-      phone: initialValues.phone ?? form.getValues('phone'),
-      message: initialValues.message ?? initialMessage ?? form.getValues('message'),
-      consent: initialValues.consent ?? form.getValues('consent'),
-      newsletterOptIn: initialValues.newsletterOptIn ?? form.getValues('newsletterOptIn'),
+      name: initialValues.name ?? form.getValues("name"),
+      email: initialValues.email ?? form.getValues("email"),
+      company: initialValues.company ?? form.getValues("company"),
+      phone: initialValues.phone ?? form.getValues("phone"),
+      message:
+        initialValues.message ?? initialMessage ?? form.getValues("message"),
+      consent: initialValues.consent ?? form.getValues("consent"),
+      newsletterOptIn:
+        initialValues.newsletterOptIn ?? form.getValues("newsletterOptIn"),
     });
   }, [initialMessage, initialValues, form]);
 
@@ -116,7 +129,9 @@ export function ContactForm({
     return () => sub.unsubscribe();
   }, [form, onChange, submit]);
 
-  const [status, setStatus] = React.useState<'idle' | 'success' | 'error'>('idle');
+  const [status, setStatus] = React.useState<"idle" | "success" | "error">(
+    "idle",
+  );
   const [submitting, setSubmitting] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
   const consentId = React.useId();
@@ -126,22 +141,29 @@ export function ContactForm({
     if (!submit) return;
 
     if (values.consent !== true) {
-      form.setError('consent', { type: 'required', message: 'Bitte Zustimmung erteilen' });
-      setStatus('idle');
+      form.setError("consent", {
+        type: "required",
+        message: "Bitte Zustimmung erteilen",
+      });
+      setStatus("idle");
       setErrorMessage(null);
       return;
     }
 
     try {
       setSubmitting(true);
-      setStatus('idle');
+      setStatus("idle");
       setErrorMessage(null);
 
-      const token = executeRecaptcha ? await executeRecaptcha('contact') : undefined;
-      const normalizedPhone = normalizePhoneNumber ? normalizePhoneNumber(values.phone) : values.phone;
+      const token = executeRecaptcha
+        ? await executeRecaptcha("contact")
+        : undefined;
+      const normalizedPhone = normalizePhoneNumber
+        ? normalizePhoneNumber(values.phone)
+        : values.phone;
       const res = await fetch(action, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...values,
           phone: normalizedPhone,
@@ -151,32 +173,37 @@ export function ContactForm({
       });
 
       if (!res.ok) {
-        const payload = (await res.json().catch(() => null)) as ContactErrorResponseDto | null;
+        const payload = (await res
+          .json()
+          .catch(() => null)) as ContactErrorResponseDto | null;
         if (payload?.details) {
           for (const [field, messages] of Object.entries(payload.details)) {
             const message = messages?.[0];
             if (!message) continue;
             if (field in form.getValues()) {
-              form.setError(field as keyof ContactValues, { type: 'server', message });
+              form.setError(field as keyof ContactValues, {
+                type: "server",
+                message,
+              });
             }
           }
         }
-        throw new Error(payload?.error || 'Request failed');
+        throw new Error(payload?.error || "Request failed");
       }
 
-      setStatus('success');
+      setStatus("success");
       form.reset({
-        name: '',
-        email: '',
-        company: '',
-        phone: '',
-        message: '',
+        name: "",
+        email: "",
+        company: "",
+        phone: "",
+        message: "",
         consent: false,
         newsletterOptIn: false,
       });
     } catch (e: unknown) {
       console.error(e);
-      setStatus('error');
+      setStatus("error");
       setErrorMessage(e instanceof Error ? e.message : null);
     } finally {
       setSubmitting(false);
@@ -184,14 +211,16 @@ export function ContactForm({
   }
 
   const inputClasses =
-    'w-full min-h-11 text-base rounded-none border-0 border-b border-neutral-800/70 bg-transparent px-0 py-2 text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:border-primary/80 touch-manipulation';
+    "w-full rounded-none border-0 border-b border-neutral-800/70 bg-transparent px-0 py-2 text-base text-foreground placeholder:text-muted-foreground focus-visible:border-neutral-900 focus-visible:outline-none focus-visible:ring-0";
   const textareaClasses =
-    'w-full min-h-28 text-base rounded-none border-0 border-b border-neutral-800/70 bg-transparent px-0 py-2 text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/30 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:border-primary/80 touch-manipulation';
+    "w-full min-h-28 rounded-none border-0 border-b border-neutral-800/70 bg-transparent px-0 py-2 text-base text-foreground placeholder:text-muted-foreground focus-visible:border-neutral-900 focus-visible:outline-none focus-visible:ring-0";
   const submitHandler = submit ? form.handleSubmit(handleSubmit) : undefined;
 
-  const handleTextareaKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleTextareaKeyDown = (
+    event: React.KeyboardEvent<HTMLTextAreaElement>,
+  ) => {
     if (!submit) return;
-    if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') {
+    if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
       event.preventDefault();
       submitHandler?.();
     }
@@ -200,64 +229,72 @@ export function ContactForm({
   const content = (
     <div className="w-full">
       <Form {...form}>
-        <form noValidate onSubmit={submitHandler} className="grid gap-4 sm:grid-cols-2">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name*</FormLabel>
-                <FormControl>
-                  <input
-                    {...field}
-                    placeholder="Max Mustermann"
-                    autoComplete="name"
-                    autoCapitalize="words"
-                    className={inputClasses}
-                    onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
-                      const trimmed = event.target.value.trim();
-                      field.onChange(trimmed);
-                      field.onBlur();
-                    }}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>E-Mail*</FormLabel>
-                <FormControl>
-                  <input
-                    type="email"
-                    {...field}
-                    placeholder="name@beispiel.de"
-                    autoComplete="email"
-                    inputMode="email"
-                    autoCapitalize="none"
-                    autoCorrect="off"
-                    spellCheck={false}
-                    className={inputClasses}
-                    onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
-                      const trimmed = event.target.value.trim();
-                      field.onChange(trimmed);
-                      field.onBlur();
-                    }}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        <form
+          noValidate
+          onSubmit={submitHandler}
+          className="space-y-6"
+        >
+          <div className="grid gap-6 sm:grid-cols-2 sm:gap-8">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name*</FormLabel>
+                  <FormControl>
+                    <input
+                      {...field}
+                      placeholder="Max Mustermann"
+                      autoComplete="name"
+                      autoCapitalize="words"
+                      className={inputClasses}
+                      onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
+                        const trimmed = event.target.value.trim();
+                        field.onChange(trimmed);
+                        field.onBlur();
+                      }}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>E-Mail*</FormLabel>
+                  <FormControl>
+                    <input
+                      type="email"
+                      {...field}
+                      placeholder="name@beispiel.de"
+                      autoComplete="email"
+                      inputMode="email"
+                      autoCapitalize="none"
+                      autoCorrect="off"
+                      spellCheck={false}
+                      className={inputClasses}
+                      onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
+                        const trimmed = event.target.value.trim();
+                        field.onChange(trimmed);
+                        field.onBlur();
+                      }}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
           <FormField
             control={form.control}
             name="company"
             render={({ field }) => (
-              <FormItem className="sm:col-span-2">
+              <FormItem>
                 <FormLabel>Firma (optional)</FormLabel>
                 <FormControl>
                   <input
@@ -276,11 +313,12 @@ export function ContactForm({
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="phone"
             render={({ field }) => (
-              <FormItem className="sm:col-span-2">
+              <FormItem>
                 <FormLabel>Telefon</FormLabel>
                 <FormControl>
                   <input
@@ -300,17 +338,19 @@ export function ContactForm({
                   />
                 </FormControl>
                 <FormDescription>
-                  Optional. Bitte im internationalen Format, z. B. <code>+4915202189213</code>.
+                  Optional. Bitte im internationalen Format, z. B.{" "}
+                  <code>+4915202189213</code>.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="message"
             render={({ field }) => (
-              <FormItem className="sm:col-span-2">
+              <FormItem>
                 <FormLabel>Nachricht</FormLabel>
                 <FormControl>
                   <Textarea
@@ -318,7 +358,9 @@ export function ContactForm({
                     {...field}
                     placeholder="Ihre Nachricht..."
                     className={textareaClasses}
-                    onBlur={(event: React.FocusEvent<HTMLTextAreaElement>) => {
+                    onBlur={(
+                      event: React.FocusEvent<HTMLTextAreaElement>,
+                    ) => {
                       const trimmed = event.target.value.trim();
                       field.onChange(trimmed);
                       field.onBlur();
@@ -333,17 +375,18 @@ export function ContactForm({
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="newsletterOptIn"
             render={({ field }) => (
-              <FormItem className="sm:col-span-2">
+              <FormItem>
                 <div className="flex items-start gap-3">
                   <FormControl>
                     <Checkbox
                       id={newsletterId}
                       checked={field.value}
-                      onCheckedChange={(checked: boolean | 'indeterminate') =>
+                      onCheckedChange={(checked: boolean | "indeterminate") =>
                         field.onChange(checked === true)
                       }
                       name={field.name}
@@ -351,41 +394,59 @@ export function ContactForm({
                     />
                   </FormControl>
                   <div className="flex-1">
-                    <FormLabel htmlFor={newsletterId} className="text-sm leading-relaxed">
-                      Ich möchte zusätzlich Produkt- und Update-Informationen per E-Mail erhalten.
+                    <FormLabel
+                      htmlFor={newsletterId}
+                      className="cursor-pointer text-sm leading-5"
+                    >
+                      Ich möchte zusätzlich Produkt- und Update-Informationen
+                      per E-Mail erhalten.
                     </FormLabel>
+                    <FormDescription className="mt-1 text-xs text-muted-foreground">
+                      Ihre Daten werden für den Newsletter genutzt. Anmeldung
+                      per Double-Opt-in mit Bestätigungs-E-Mail. Details in der{" "}
+                      <Link
+                        href="/privacy"
+                        className="underline underline-offset-2"
+                      >
+                        Datenschutzerklärung
+                      </Link>
+                      .
+                    </FormDescription>
                     <FormMessage />
                   </div>
                 </div>
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="consent"
             render={({ field }) => (
-              <FormItem className="sm:col-span-2">
+              <FormItem>
                 <div className="flex items-start gap-3">
                   <FormControl>
                     <Checkbox
                       id={consentId}
                       checked={field.value}
-                      onCheckedChange={(checked: boolean | 'indeterminate') =>
+                      onCheckedChange={(checked) =>
                         field.onChange(checked === true)
                       }
-                      name={field.name}
-                      className="mt-0.5 touch-manipulation"
+                      className="mt-0.5"
                     />
                   </FormControl>
                   <div className="flex-1">
-                    <FormLabel htmlFor={consentId} className="text-sm leading-relaxed">
-                      Ich stimme zu, dass meine Angaben zur Bearbeitung meiner Anfrage verwendet werden.
-                      Weitere Informationen stehen in der{' '}
-                      <Link href="/privacy" className="underline underline-offset-3">
-                        Datenschutzerklärung
-                      </Link>
-                      .
+                    <FormLabel
+                      htmlFor={consentId}
+                      className="cursor-pointer text-sm leading-5 after:ml-0.5 after:text-destructive after:content-['*']"
+                    >
+                      Ich stimme zu, dass meine Angaben zur Beantwortung meiner
+                      Anfrage verarbeitet werden.
                     </FormLabel>
+                    <FormDescription className="mt-1 text-xs text-muted-foreground">
+                      Ihre Daten werden gemäß DSGVO verarbeitet und nicht an
+                      Dritte weitergegeben.
+                    </FormDescription>
                     <FormMessage />
                   </div>
                 </div>
@@ -393,22 +454,8 @@ export function ContactForm({
             )}
           />
 
-          {status === 'success' ? (
-            <Alert className="sm:col-span-2 border-green-600/30 bg-green-50 text-green-900">
-              <AlertDescription>{successMessage}</AlertDescription>
-            </Alert>
-          ) : null}
-
-          {status === 'error' ? (
-            <Alert variant="destructive" className="sm:col-span-2">
-              <AlertDescription>
-                {errorMessage || 'Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.'}
-              </AlertDescription>
-            </Alert>
-          ) : null}
-
           {submit ? (
-            <div className="sm:col-span-2 pt-2">
+            <div>
               <Button type="submit" disabled={submitting} className="min-w-40">
                 {submitting ? (
                   <>
@@ -421,15 +468,30 @@ export function ContactForm({
               </Button>
             </div>
           ) : null}
+
+          {status === "success" ? (
+            <Alert className="border-green-600/30 bg-green-50 text-green-900">
+              <AlertDescription>{successMessage}</AlertDescription>
+            </Alert>
+          ) : null}
+
+          {status === "error" ? (
+            <Alert variant="destructive">
+              <AlertDescription>
+                {errorMessage ||
+                  "Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."}
+              </AlertDescription>
+            </Alert>
+          ) : null}
         </form>
       </Form>
     </div>
   );
 
-  if (layout === 'card') {
+  if (layout === "card") {
     return (
-      <Card className="border border-black/10 bg-card/95 shadow-none">
-        <CardContent className="p-6 md:p-8">{content}</CardContent>
+      <Card className="rounded-none border border-black/10 bg-transparent shadow-none">
+        <CardContent className="p-8 md:p-8">{content}</CardContent>
       </Card>
     );
   }

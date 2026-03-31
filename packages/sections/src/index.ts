@@ -75,3 +75,8 @@ export {
   type ContactPageDetailsDto,
   type ContactPageSectionProps,
 } from './contact-page-section';
+export {
+  default as CTASection,
+  type CTASectionNewsletterDialogProps,
+  type CTASectionProps,
+} from './cta-section';

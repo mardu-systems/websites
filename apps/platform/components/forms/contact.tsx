@@ -1,5 +1,6 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import {
   ContactForm,
   createContactSchema,
@@ -15,10 +16,18 @@ export type { ContactFormProps, ContactValues };
 
 export { ContactForm };
 
+const ClientContactForm = dynamic<ContactFormProps>(
+  async () => {
+    const mod = await import('@mardu/lead-core/contact-form');
+    return mod.ContactForm;
+  },
+  { ssr: false },
+);
+
 export default function SiteContactForm(props: ContactFormProps) {
   const executeRecaptcha = useRecaptcha();
   return (
-    <ContactForm
+    <ClientContactForm
       {...props}
       normalizePhoneNumber={normalizePhoneNumber}
       executeRecaptcha={executeRecaptcha}

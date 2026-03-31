@@ -14,11 +14,12 @@ import {
   Wrench,
 } from 'lucide-react';
 
-import CTASection from '@/components/utilities/cta-section';
 import SecurityAccordion from '@/components/utilities/security-accordion';
 import WhitepaperTeaser from '@/components/utilities/whitepaper-teaser';
+import { useRecaptcha } from '@/lib/recaptcha';
 import {
   CardGrid,
+  CTASection,
   ConfiguratorTeaser,
   Foerderung,
   HeroSection,
@@ -376,6 +377,8 @@ const foerderungDescription = (
 );
 
 export default function HomePage() {
+  const executeRecaptcha = useRecaptcha();
+
   return (
     <main id="main-content" tabIndex={-1} className="min-h-screen bg-background flex flex-col">
       <a
@@ -485,6 +488,7 @@ export default function HomePage() {
         primaryButtonHref="/configurator"
         secondaryButtonText="Whitepaper ansehen"
         secondaryButtonHref="/#whitepaper"
+        newsletterDialog={{ getRequestToken: executeRecaptcha }}
       />
 
       <Foerderung

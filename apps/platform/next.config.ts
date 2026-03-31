@@ -76,6 +76,45 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '4000',
+        pathname: '/api/media/**',
+      },
+      {
+        protocol: 'http',
+        hostname: '127.0.0.1',
+        port: '4000',
+        pathname: '/api/media/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'platform.mardu.de',
+        pathname: '/api/media/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.mardu.de',
+        pathname: '/api/media/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'mardu.de',
+        pathname: '/api/media/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'mardu.space',
+        pathname: '/api/media/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.mardu.space',
+        pathname: '/api/media/**',
+      },
+    ],
   },
   async headers() {
     return [

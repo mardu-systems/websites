@@ -24,6 +24,7 @@ Shared content sections for multiple Mardu frontends.
 - `ProcessSteps`
 - `ScenarioShowcase`
 - `ContactPageSection`
+- `CTASection`
 
 ## `WhitepaperSection` contract
 
@@ -82,6 +83,39 @@ Shared content sections for multiple Mardu frontends.
 - `FeatureSection`, `ThreeArguments`, `TripleImageSection`, `Foerderung`, `InfoGrid`, `ProcessSteps` and `RoadmapTimeline` expose eyebrow/intro metadata so the same layouts can tell different stories without forking the component.
 - `NewsletterStatusPage` keeps the newsletter semantics, but primary and secondary action links are now configurable.
 - `ContactPageSection` standardizes the `/contact` page shell while the consuming app still owns the actual form renderer and submit route.
+- `CTASection` standardizes the large conversion block near the end of a page. The package owns the shared layout and optional newsletter dialog, while the app still owns hard links and any custom secondary action UI.
+- `CTASection` keeps the `mardu.de` visual baseline as the default and only exposes small hooks for routing, custom secondary actions and optional request tokens.
+
+## `CTASection` contract
+
+- Props:
+  - `title: string`
+  - `description: ReactNode`
+  - `primaryButtonText: string`
+  - `secondaryButtonText?: string`
+  - `primaryButtonHref?: string`
+  - `secondaryButtonHref?: string`
+  - `eyebrow?: string`
+  - `backgroundImageSrc?: string`
+  - `secondaryActionSlot?: ReactNode`
+  - `newsletterDialog?: CTASectionNewsletterDialogProps`
+  - `className?: string`
+- `CTASectionNewsletterDialogProps`:
+  - `requestUrl?: string`
+  - `requestRole?: 'newsletter' | 'whitepaper'`
+  - `dialogTitle?: string`
+  - `dialogDescription?: string`
+  - `submitLabel?: string`
+  - `submitPendingLabel?: string`
+  - `successMessage?: string`
+  - `errorMessage?: string`
+  - `consentLabel?: ReactNode`
+  - `getRequestToken?: (action: string) => Promise<string | null>`
+- Behavior:
+  - if `primaryButtonHref` is set, the primary action is a hard link
+  - otherwise the section opens the shared newsletter dialog and posts to `requestUrl`
+  - `secondaryActionSlot` is the escape hatch for app-owned actions like Meetergo
+  - the default styling and dialog flow follow the previous `mardu.de` CTA section
 
 ## Shared section DTOs
 
@@ -105,5 +139,6 @@ Shared content sections for multiple Mardu frontends.
 - `StepItem` / `ProcessStepsProps`
 - `Feature` / `Scenario` / `ScenarioShowcaseProps`
 - `ContactPageDetailsDto` / `ContactPageSectionProps`
+- `CTASectionNewsletterDialogProps` / `CTASectionProps`
 
 These DTOs are intentionally render-ready. Routing, fetching, and CMS mapping stay in the consuming app or in upstream core packages.

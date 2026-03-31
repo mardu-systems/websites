@@ -1,6 +1,7 @@
-import CTASection from '@/components/utilities/cta-section';
 import { IntegrationsPreview } from '@/components/integrations/integrations-preview';
+import { MeetergoCTAButton } from '@/components/utilities/meetergo-cta-button';
 import {
+  CTASection,
   DualImageSection,
   FeatureSection,
   Foerderung,
@@ -243,7 +244,11 @@ export default async function HomePage() {
           title="Sicherheit, Transparenz und Kontrolle – zentral gesteuert"
           description="Sprechen Sie uns an. Gemeinsam entwickeln wir eine Lösung, die zu Ihren Prozessen, Flächen und Sicherheitsanforderungen passt."
           primaryButtonText="Jetzt für unseren Newsletter anmelden"
-          secondaryButtonText="Beratung Vereinbaren"
+          secondaryActionSlot={
+            <MeetergoCTAButton className="mt-0 ml-0 h-11 rounded-none border border-white/35 bg-white/12 px-5 text-sm uppercase tracking-[0.08em] text-white hover:bg-white/18 sm:mt-0 sm:ml-0">
+              Beratung Vereinbaren
+            </MeetergoCTAButton>
+          }
         />
       </section>
 

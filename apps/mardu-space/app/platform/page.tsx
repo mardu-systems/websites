@@ -1,6 +1,6 @@
-import CTASection from '@/components/utilities/cta-section';
 import MediaPlaceholder from '@/components/utilities/media-placeholder';
-import { HeroSection, SplitContent } from '@mardu/sections';
+import { useRecaptcha } from '@/lib/recaptcha';
+import { CTASection, HeroSection, SplitContent } from '@mardu/sections';
 import { platformFeatures, platformViews } from '@/data/platform-page';
 
 const heroDescription = (
@@ -46,6 +46,8 @@ const introItems = [
 ];
 
 export default function Page() {
+  const executeRecaptcha = useRecaptcha();
+
   return (
     <main className="min-h-screen bg-background">
       <HeroSection
@@ -144,6 +146,7 @@ export default function Page() {
         primaryButtonHref="/configurator"
         secondaryButtonText="Kontakt aufnehmen"
         secondaryButtonHref="/contact"
+        newsletterDialog={{ getRequestToken: executeRecaptcha }}
       />
     </main>
   );
