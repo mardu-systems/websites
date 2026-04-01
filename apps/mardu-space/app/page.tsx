@@ -16,7 +16,7 @@ import {
 
 import SecurityAccordion from '@/components/utilities/security-accordion';
 import WhitepaperTeaser from '@/components/utilities/whitepaper-teaser';
-import { useRecaptcha } from '@/lib/recaptcha';
+import { useRecaptcha } from '@mardu/lead-core/recaptcha';
 import {
   CardGrid,
   CTASection,

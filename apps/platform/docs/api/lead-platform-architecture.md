@@ -9,6 +9,7 @@ Zentrale Lead- und Newsletter-API fuer `mardu.de` und `mardu.space`.
   - Contact-Leads
   - Preorder-Requests
 - Persistenz erfolgt über Payload + PostgreSQL.
+- Abuse-Protection fuer oeffentliche Lead-POSTs erfolgt zentral in `apps/platform`.
 - `mardu.space` und `mardu.de` nutzen dafuer oeffentliche API-Routen oder Proxy-Routen.
 
 ## Gemeinsame DTOs
@@ -53,10 +54,13 @@ interface PreorderRequestDto {
 Quelle: [`apps/platform/app/api/newsletter/route.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/api/newsletter/route.ts)
 
 - validiert `NewsletterRequestDto`
+- prueft Abuse-Guard vor Persistenz:
+  - Rate-Limit pro IP + Endpoint
+  - verpflichtendes reCAPTCHA ausserhalb von `development`
 - persistiert/aktualisiert einen Subscriber mit Status `pending`
 - versendet die DOI-Mail
-- prueft reCAPTCHA nur, wenn Token + Secret vorhanden sind
 - Response: `{ ok: true }`
+- Whitepaper-Requests aus `mardu.space` laufen ueber denselben Endpunkt mit `role = whitepaper`
 
 ### `GET /api/newsletter/confirm`
 
@@ -84,6 +88,9 @@ Quelle: [`apps/platform/app/api/newsletter/unsubscribe/route.ts`](/Users/lucasch
 Quelle: [`apps/platform/app/api/contact/route.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/api/contact/route.ts)
 
 - validiert `ContactRequestDto`
+- prueft Abuse-Guard vor Persistenz:
+  - Rate-Limit pro IP + Endpoint
+  - verpflichtendes reCAPTCHA ausserhalb von `development`
 - persistiert den Lead in `contact-leads`
 - versendet die interne Lead-Mail
 - startet optional einen DOI-Flow
@@ -106,6 +113,12 @@ Collections:
 - [`newsletter-subscribers`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/collections/newsletter-subscribers.ts)
 - [`contact-leads`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/collections/contact-leads.ts)
 - [`preorder-requests`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/collections/preorder-requests.ts)
+
+Interne Tabellen:
+
+- `abuse_rate_limits`
+  - speichert endpoint-spezifische Request-Counter je gehashter Client-IP
+  - wird fuer serverseitiges Rate-Limiting auf `POST /api/contact` und `POST /api/newsletter` genutzt
 
 Wichtige Felder:
 

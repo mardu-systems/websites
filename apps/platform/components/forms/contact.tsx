@@ -1,13 +1,13 @@
 'use client';
 
 import dynamic from 'next/dynamic';
+import { useRecaptcha } from '@mardu/lead-core/recaptcha';
 import {
   ContactForm,
   createContactSchema,
   type ContactFormProps,
   type ContactValues,
 } from '@mardu/lead-core/contact-form';
-import { useRecaptcha } from '@/lib/recaptcha';
 import { normalizePhoneNumber } from '@/lib/phone';
 
 export const contactSchema = createContactSchema(normalizePhoneNumber);

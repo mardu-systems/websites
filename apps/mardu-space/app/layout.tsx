@@ -2,10 +2,10 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import 'photoswipe/style.css';
 import React from 'react';
+import { RecaptchaProvider } from '@mardu/lead-core/recaptcha';
 import SiteShell from '@/components/layout/site-shell';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import RecaptchaProvider from '@/components/providers/recaptcha-provider';
 import { getSiteConfig } from '@mardu/site-config';
 
 const siteConfig = getSiteConfig('mardu-space');

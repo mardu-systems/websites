@@ -17,7 +17,7 @@ import {
 import { Input } from '@mardu/ui/components/input';
 import { Label } from '@mardu/ui/components/label';
 import { Checkbox } from '@mardu/ui/components/checkbox';
-import { useRecaptcha } from '@/lib/recaptcha';
+import { useRecaptcha } from '@mardu/lead-core/recaptcha';
 import { Alert, AlertDescription } from '@mardu/ui/components/alert';
 import { Overline } from '@mardu/ui/components/typography';
 

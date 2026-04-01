@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import React from 'react';
+import { RecaptchaProvider } from '@mardu/lead-core/recaptcha';
 import SiteShell from '@/components/layout/site-shell';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -143,9 +144,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={`${geist.variable} bg-background text-foreground overflow-x-hidden`}>
-        <SiteShell>{children}</SiteShell>
-        <Analytics />
-        <SpeedInsights />
+        <RecaptchaProvider>
+          <SiteShell>{children}</SiteShell>
+          <Analytics />
+          <SpeedInsights />
+        </RecaptchaProvider>
       </body>
     </html>
   );

@@ -1,7 +1,7 @@
 import { IntegrationsPreview } from '@/components/integrations/integrations-preview';
+import CTASectionWithRecaptcha from '@/components/utilities/cta-section-with-recaptcha';
 import { MeetergoCTAButton } from '@/components/utilities/meetergo-cta-button';
 import {
-  CTASection,
   DualImageSection,
   FeatureSection,
   Foerderung,
@@ -26,7 +26,7 @@ export default async function HomePage() {
               <p className="mb-4">
                 Verwalte Zutritt und Maschinennutzung – mobil auf der Baustelle oder stationär in
                 der Werkstatt.
-                <br />y
+                <br />
                 Mardu passt sich an deine Bedürfnisse an.
               </p>
             </>
@@ -240,7 +240,7 @@ export default async function HomePage() {
       />
 
       <section id="contact">
-        <CTASection
+        <CTASectionWithRecaptcha
           title="Sicherheit, Transparenz und Kontrolle – zentral gesteuert"
           description="Sprechen Sie uns an. Gemeinsam entwickeln wir eine Lösung, die zu Ihren Prozessen, Flächen und Sicherheitsanforderungen passt."
           primaryButtonText="Jetzt für unseren Newsletter anmelden"

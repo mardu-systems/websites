@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { newsletterRequestSchema, type NewsletterRequestDto, type NewsletterSignupRole } from '@mardu/lead-core';
 import { upsertPendingNewsletterSubscriber } from '@/lib/lead-store';
 import { sendNewsletterConfirmationEmail } from '@/lib/newsletter-confirmation';
+import { enforcePublicLeadProtection } from '@/lib/abuse-protection';
 
 export async function POST(req: Request) {
   const json = await req.json();
@@ -16,22 +17,15 @@ export async function POST(req: Request) {
     ...rawPayload,
     role,
   };
-  const isDev = process.env.NODE_ENV === 'development';
-  const secret = process.env.RECAPTCHA_SECRET_KEY;
-  const shouldVerifyCaptcha = !isDev && Boolean(token && secret);
+  const protection = await enforcePublicLeadProtection({
+    req,
+    endpoint: 'newsletter',
+    site: payload.site,
+    token,
+  });
 
-  if (shouldVerifyCaptcha) {
-    const captchaRes = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `secret=${secret}&response=${token}`,
-    });
-    const captchaJson = await captchaRes.json();
-    if (!captchaJson.success) {
-      return NextResponse.json({ error: 'Invalid captcha' }, { status: 400 });
-    }
-  } else if (!isDev && (token || secret)) {
-    console.warn('Newsletter captcha check skipped due to partial captcha configuration');
+  if (!protection.ok) {
+    return NextResponse.json({ error: protection.error }, { status: protection.status });
   }
 
   try {

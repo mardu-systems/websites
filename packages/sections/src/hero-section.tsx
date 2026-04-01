@@ -14,6 +14,7 @@ export type HeroMediaDescriptionPosition = 'bottom-left' | 'bottom-right';
 
 export type HeroImageMedia = {
   type: 'image';
+  src: string;
   alt: string;
 };
 

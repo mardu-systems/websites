@@ -5,10 +5,12 @@ import { sendContactEmail } from '@/lib/email';
 import { syncContactLeadToTwenty } from '@/lib/integrations/twenty';
 import { sendNewsletterConfirmationEmail, splitFullName } from '@/lib/newsletter-confirmation';
 import { normalizePhoneNumber } from '@/lib/phone';
+import { enforcePublicLeadProtection } from '@/lib/abuse-protection';
 import type { ContactRequestDto, ContactResponseDto } from '@mardu/lead-core';
 
 export async function POST(req: Request) {
   const json = await req.json();
+  let lead: Awaited<ReturnType<typeof createContactLead>> | null = null;
   const rawPhone = typeof json?.phone === 'string' ? json.phone : undefined;
   const normalizedPhone = rawPhone ? normalizePhoneNumber(rawPhone) : undefined;
 
@@ -28,31 +30,24 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Invalid payload', details }, { status: 400 });
   }
 
-  const lead = await createContactLead(parsed.data);
-
   try {
     const payload: ContactRequestDto = parsed.data;
-    const isDev = process.env.NODE_ENV === 'development';
-    const secret = process.env.RECAPTCHA_SECRET_KEY;
-    const token = payload.token;
-    const shouldVerifyCaptcha = !isDev && Boolean(token && secret);
+    const protection = await enforcePublicLeadProtection({
+      req,
+      endpoint: 'contact',
+      site: payload.site,
+      token: payload.token,
+    });
 
-    if (shouldVerifyCaptcha) {
-      const captchaRes = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `secret=${secret}&response=${token}`,
-      });
-      const captchaJson = await captchaRes.json();
-      if (!captchaJson.success) {
-        return NextResponse.json({ error: 'Invalid captcha' }, { status: 400 });
-      }
-    } else if (!isDev && (token || secret)) {
-      console.warn('Contact form captcha check skipped due to partial captcha configuration');
+    if (!protection.ok) {
+      return NextResponse.json({ error: protection.error }, { status: protection.status });
     }
 
+    lead = await createContactLead(payload);
+    const leadId = lead.id;
+
     await sendContactEmail(payload);
-    await setContactLeadStatuses({ id: lead.id, emailDeliveryStatus: 'sent' });
+    await setContactLeadStatuses({ id: leadId, emailDeliveryStatus: 'sent' });
 
     if (payload.newsletterOptIn) {
       const { firstName, lastName } = splitFullName(payload.name);
@@ -64,7 +59,7 @@ export async function POST(req: Request) {
         lastName,
         ...(payload.company ? { company: payload.company } : {}),
       });
-      await attachContactLeadToSubscriber(lead.id, subscriber.id);
+      await attachContactLeadToSubscriber(leadId, subscriber.id);
       void sendNewsletterConfirmationEmail({
         email: payload.email,
         role: payload.source === 'configurator' ? 'whitepaper' : 'newsletter',
@@ -91,7 +86,7 @@ export async function POST(req: Request) {
     })
       .then((result) =>
         setContactLeadStatuses({
-          id: lead.id,
+          id: leadId,
           twentySyncStatus: result.skipped ? 'skipped' : 'synced',
           twentyLastError: result.skipped ? result.reason : null,
         }),
@@ -99,7 +94,7 @@ export async function POST(req: Request) {
       .catch((crmError) => {
         console.error('Failed to sync contact lead to Twenty', crmError);
         return setContactLeadStatuses({
-          id: lead.id,
+          id: leadId,
           twentySyncStatus: 'failed',
           twentyLastError: String(crmError),
         });
@@ -109,10 +104,12 @@ export async function POST(req: Request) {
     return NextResponse.json(response);
   } catch (err) {
     console.error('Failed to send contact email', err);
-    await setContactLeadStatuses({
-      id: lead.id,
-      emailDeliveryStatus: 'failed',
-    });
+    if (lead) {
+      await setContactLeadStatuses({
+        id: lead.id,
+        emailDeliveryStatus: 'failed',
+      });
+    }
     return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
   }
 }

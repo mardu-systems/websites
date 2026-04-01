@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
-import type { EditorialPanelItem } from '@mardu/sections';
+import type { EditorialLinkPanelItem, EditorialPanelItem } from '@mardu/sections';
 import { Activity, KeyRound, LockKeyhole, MapPinned, Server, UsersRound } from 'lucide-react';
 
 /**
@@ -22,6 +22,15 @@ export type PlatformEditorialPanelsDto = [
   EditorialPanelItem,
   EditorialPanelItem,
   EditorialPanelItem,
+];
+
+/**
+ * DTO tuple for the 2-panel editorial link stage on the `/platform` page.
+ * The page owns thematic copy and routes, while `@mardu/sections` owns composition and motion.
+ */
+export type PlatformEditorialLinkPanelsDto = [
+  EditorialLinkPanelItem,
+  EditorialLinkPanelItem,
 ];
 
 export const platformFeatures: PlatformFeatureDto[] = [
@@ -107,5 +116,43 @@ export const platformEditorialPanels: PlatformEditorialPanelsDto = [
     imageAlt: 'WebQ Oberfläche mit Zutrittspunkten und verwalteten Geräten',
     theme: 'light',
     accentTone: 'sky',
+  },
+];
+
+export const platformEditorialLinkPanels: PlatformEditorialLinkPanelsDto = [
+  {
+    id: 'operations-view',
+    badge: 'Betrieb',
+    title: 'Verwaltung bleibt im Alltag lesbar.',
+    description:
+      'WebQ ist nicht nur eine Oberfläche für einzelne Listen. Die Plattform ordnet Nutzer, Geräte, Regeln und Zustände so, dass operative Entscheidungen schneller und belastbarer werden.',
+    href: '/verwaltungssoftware',
+    ctaLabel: 'Mehr erfahren',
+    ariaLabel: 'Mehr über die Verwaltungsoberfläche WebQ erfahren',
+    pattern: {
+      glyph: 'chevron',
+      density: 'default',
+      anchor: 'top-left',
+      fade: 'diagonal',
+      tone: 'mixed',
+    },
+  },
+  {
+    id: 'system-view',
+    badge: 'System',
+    title: 'Hardware, Regeln und Oberfläche greifen ineinander.',
+    description:
+      'Die Plattform entfaltet ihren Wert erst im Zusammenspiel mit Zugriffspunkten, Gateways und lokalem Betrieb. Genau dort entsteht die technische Stärke des Systems.',
+    href: '/system',
+    ctaLabel: 'Mehr erfahren',
+    ariaLabel: 'Mehr über den Systemaufbau erfahren',
+    align: 'right',
+    pattern: {
+      glyph: 'v',
+      density: 'compact',
+      anchor: 'bottom-right',
+      fade: 'vertical',
+      tone: 'mixed',
+    },
   },
 ];

@@ -1,6 +1,15 @@
 import CTASectionWithRecaptcha from '@/components/utilities/cta-section-with-recaptcha';
-import { EditorialPanelsSection, HeroSection, SplitContent } from '@mardu/sections';
-import { platformEditorialPanels, platformFeatures } from '@/data/platform-page';
+import {
+  EditorialLinkPanelsSection,
+  EditorialPanelsSection,
+  HeroSection,
+  SplitContent,
+} from '@mardu/sections';
+import {
+  platformEditorialLinkPanels,
+  platformEditorialPanels,
+  platformFeatures,
+} from '@/data/platform-page';
 
 const heroDescription = (
   <>
@@ -114,6 +123,13 @@ export default function Page() {
         title="Produkt-Tour durch die wichtigsten Views"
         intro="Drei produktnahe Panels zeigen, wie WebQ Betrieb, Regelwerk und Infrastruktur in einer Oberfläche zusammenzieht."
         items={platformEditorialPanels}
+      />
+
+      <EditorialLinkPanelsSection
+        eyebrow="Weiterführende Kapitel"
+        title="WebQ endet nicht bei der Oberfläche"
+        intro="Diese beiden Kapitel vertiefen die Plattform aus zwei Richtungen: als Werkzeug für den operativen Alltag und als Teil eines größeren technischen Systems."
+        items={platformEditorialLinkPanels}
       />
 
       <CTASectionWithRecaptcha

@@ -112,3 +112,14 @@ export {
   type EditorialPanelsSectionProps,
   type EditorialPanelTheme,
 } from "./editorial-panels-section";
+export {
+  default as EditorialLinkPanelsSection,
+  type EditorialLinkPanelItem,
+  type EditorialLinkPanelsSectionProps,
+  type EditorialPatternAnchor,
+  type EditorialPatternConfig,
+  type EditorialPatternDensity,
+  type EditorialPatternFade,
+  type EditorialPatternGlyph,
+  type EditorialPatternTone,
+} from "./editorial-link-panels-section";

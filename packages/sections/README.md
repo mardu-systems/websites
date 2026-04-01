@@ -26,6 +26,7 @@ Shared content sections for multiple Mardu frontends.
 - `ContactPageSection`
 - `CTASection`
 - `EditorialPanelsSection`
+- `EditorialLinkPanelsSection`
 
 ## `WhitepaperSection` contract
 
@@ -114,6 +115,37 @@ Shared content sections for multiple Mardu frontends.
 - `CTASection` standardizes the large conversion block near the end of a page. The package owns the shared layout and optional newsletter dialog, while the app still owns hard links and any custom secondary action UI.
 - `CTASection` keeps the `mardu.de` visual baseline as the default and only exposes small hooks for routing, custom secondary actions and optional request tokens.
 - `EditorialPanelsSection` provides an editorial 3-panel product-story layout with render-ready media DTOs, so apps can supply their own copy and screenshots without forking the composition.
+- `EditorialLinkPanelsSection` provides a 2-panel editorial link stage with brand-led pattern fields, so apps can deepen a story without falling back to generic cards.
+
+## `EditorialLinkPanelsSection` contract
+
+- Props:
+  - `eyebrow?: string`
+  - `title?: string`
+  - `intro?: ReactNode`
+  - `items: [EditorialLinkPanelItem, EditorialLinkPanelItem]`
+  - `className?: string`
+- `EditorialLinkPanelItem`:
+  - `id: string`
+  - `title: string`
+  - `description: ReactNode`
+  - `href: string`
+  - `ctaLabel: string`
+  - `ariaLabel?: string`
+  - `pattern?: EditorialPatternConfig`
+  - `align?: 'left' | 'right'`
+  - `badge?: string`
+- `EditorialPatternConfig`:
+  - `glyph?: 'chevron' | 'v' | 'bar'`
+  - `density?: 'compact' | 'default' | 'airy'`
+  - `anchor?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'`
+  - `fade?: 'diagonal' | 'vertical' | 'horizontal'`
+  - `tone?: 'emerald' | 'sky' | 'violet' | 'mixed'`
+- Behavior:
+  - renders exactly 2 large editorial panels to keep the composition calm and intentional
+  - uses generated pattern fields instead of screenshots or decorative assets
+  - keeps one CTA per panel and low text density so the section reads like an editorial bridge, not a card grid
+  - is visually related to `EditorialPanelsSection`, but optimized for thematic or corporate narrative links
 
 ## `EditorialPanelsSection` contract
 
@@ -194,5 +226,6 @@ Shared content sections for multiple Mardu frontends.
 - `ContactPageDetailsDto` / `ContactPageSectionProps`
 - `CTASectionNewsletterDialogProps` / `CTASectionProps`
 - `EditorialPanelItem` / `EditorialPanelsSectionProps`
+- `EditorialLinkPanelItem` / `EditorialLinkPanelsSectionProps` / `EditorialPatternConfig`
 
 These DTOs are intentionally render-ready. Routing, fetching, and CMS mapping stay in the consuming app or in upstream core packages.

@@ -7,6 +7,7 @@ export {
 } from './consent';
 export { getConsent, setConsent } from './consent-server';
 export { useConsent } from './use-consent';
+export { RecaptchaProvider, useRecaptcha, type RecaptchaProviderProps } from './recaptcha';
 export {
   ContactForm,
   createContactSchema,

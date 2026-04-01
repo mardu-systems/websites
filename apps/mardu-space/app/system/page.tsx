@@ -6,7 +6,7 @@ import { CheckCircle, Cpu, Network, ShieldCheck } from 'lucide-react';
 import HardwareFeatureBlock from '@/components/utilities/hardware-feature-block';
 import HardwareVariantCompare from '@/components/utilities/hardware-variant-compare';
 import MediaPlaceholder from '@/components/utilities/media-placeholder';
-import { useRecaptcha } from '@/lib/recaptcha';
+import { useRecaptcha } from '@mardu/lead-core/recaptcha';
 import { CTASection, Faq, HeroSection, InfoGrid, SplitContent } from '@mardu/sections';
 import {
   hardwareFaqItems,
