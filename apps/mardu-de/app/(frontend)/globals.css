@@ -3,8 +3,6 @@
 @source "../../../../packages/layout/src";
 @source "../../../../packages/sections/src";
 
-@layer payload-default, payload;
-
 :root {
     --radius: 0.0rem;
 
@@ -136,12 +134,6 @@
         isolation: isolate;
         background-color: var(--paper);
         text-rendering: geometricPrecision;
-    }
-
-    body.payload-admin-route {
-        background-color: var(--theme-elevation-0, var(--paper));
-        color: var(--theme-text, inherit);
-        text-rendering: auto;
     }
 
 }

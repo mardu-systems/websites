@@ -170,7 +170,7 @@ export default function HeroSection({
 
                     <div className="overflow-hidden border border-black/10 bg-card">
                         {mediaType === 'video' && videoUrl ? (
-                            <div className="relative aspect-[16/10] w-full">
+                            <div className="relative aspect-16/10 w-full">
                                 <iframe
                                     src={videoUrl}
                                     className="absolute inset-0 h-full w-full"
@@ -180,7 +180,7 @@ export default function HeroSection({
                                 />
                             </div>
                         ) : (
-                            <div className="relative aspect-[16/10] w-full">
+                            <div className="relative aspect-16/10 w-full">
                                 <Image
                                     src={imageSrc}
                                     alt={imageAlt}
