@@ -54,9 +54,15 @@ export {
 } from "./info-grid";
 export {
   default as HeroSection,
+  type HeroCardMedia,
+  type HeroEmbedMedia,
+  type HeroImageMedia,
+  type HeroMediaBadgePosition,
   type HeroMediaCard,
+  type HeroMediaDescriptionPosition,
   type HeroSectionProps,
   type HeroSectionVariant,
+  type HeroVideoMedia,
 } from "./hero-section";
 export {
   default as DualImageSection,

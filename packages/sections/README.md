@@ -67,8 +67,35 @@ Shared content sections for multiple Mardu frontends.
   - `backgroundImageSrc?: string`
 - Behavior:
   - `default` renders a classic text + media hero
-  - `landing` renders one or more configurable media cards instead of hardcoded product teasers
+  - `landing` renders one or two configurable media cards instead of hardcoded product teasers
+  - one media card renders as a single large hero medium
+  - two media cards render as an overlapping editorial stack on larger screens and a simple vertical stack on small screens
   - in-page scroll behavior is opt-in via `HeroMediaCard.scrollTargetId`
+- `HeroMediaCard`:
+  - `href: string`
+  - `ariaLabel: string`
+  - `media?: HeroCardMedia`
+  - `imageSrc?: string`
+  - `imageAlt?: string`
+  - `badge?: ReactNode`
+  - `description?: ReactNode`
+  - `scrollTargetId?: string`
+  - `priority?: boolean`
+  - `sizes?: string`
+  - `className?: string`
+  - `mediaClassName?: string`
+  - `imageClassName?: string`
+  - `overlayClassName?: string`
+  - `badgePosition?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'`
+  - `descriptionPosition?: 'bottom-left' | 'bottom-right'`
+- `HeroCardMedia`:
+  - `{ type: 'image'; src: string; alt: string }`
+  - `{ type: 'video'; src: string; poster?: string; muted?: boolean; autoPlay?: boolean; loop?: boolean; playsInline?: boolean; controls?: boolean }`
+  - `{ type: 'embed'; src: string; title: string }`
+- Notes:
+  - `media` is the preferred API for landing cards
+  - `imageSrc` and `imageAlt` remain supported as a compatibility fallback for existing image cards
+  - badge and description positioning stay card-owned so apps can place labels differently for primary vs. secondary cards
 
 ## Shared section API notes
 

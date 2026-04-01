@@ -19,14 +19,14 @@ export default async function HomePage() {
       {/* Hero Header Section */}
       <section id="home">
         <HeroSection
-          title="Smarte Zugangssysteme für Baustellen, Werkstätten und Labore"
+          title="Zutrittskontrolle & Maschinenfreigabe für Werkstätten, Labore & Baustellen."
           overline="Engineering Access Platform"
           description={
             <>
               <p className="mb-4">
                 Verwalte Zutritt und Maschinennutzung – mobil auf der Baustelle oder stationär in
                 der Werkstatt.
-                <br />
+                <br />y
                 Mardu passt sich an deine Bedürfnisse an.
               </p>
             </>
@@ -189,7 +189,7 @@ export default async function HomePage() {
       <TripleImageSection
         cards={[
           {
-            imageSrc: '/people/Bild2.webp',
+            imageSrc: '/people/luca_schoeneberg.jpg',
             imageAlt: 'Luca Schöneberg',
             title: 'Luca Schöneberg',
             subtitle: '(Co-Founder)',
@@ -206,7 +206,7 @@ export default async function HomePage() {
             ),
           },
           {
-            imageSrc: '/people/Erik.webp',
+            imageSrc: '/people/erik_frey.jpg',
             imageAlt: 'Erik Frey',
             title: 'Erik Frey',
             subtitle: '(Co-Founder)',
@@ -222,7 +222,7 @@ export default async function HomePage() {
             ),
           },
           {
-            imageSrc: '/people/Bild1.webp',
+            imageSrc: '/people/melvin_valerius.jpg',
             imageAlt: 'Melvin Valerius',
             title: 'Melvin Valerius',
             subtitle: '(kauf. Leiter)',
