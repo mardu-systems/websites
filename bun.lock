@@ -18,7 +18,9 @@
       "dependencies": {
         "@base-ui/react": "^1.2.0",
         "@hookform/resolvers": "^5.2.2",
+        "@mardu/blog-ui": "workspace:*",
         "@mardu/content-core": "workspace:*",
+        "@mardu/integrations-ui": "workspace:*",
         "@mardu/layout": "workspace:*",
         "@mardu/lead-core": "workspace:*",
         "@mardu/sections": "workspace:*",
@@ -241,6 +243,24 @@
         "typescript": "^6.0.2",
       },
     },
+    "packages/blog-ui": {
+      "name": "@mardu/blog-ui",
+      "version": "0.0.0",
+      "dependencies": {
+        "@mardu/content-core": "workspace:*",
+        "@mardu/ui": "workspace:*",
+        "@payloadcms/richtext-lexical": "3.80.0",
+        "next": "16.2.1",
+      },
+      "devDependencies": {
+        "@types/react": "^19.2.14",
+        "@types/react-dom": "^19.2.3",
+      },
+      "peerDependencies": {
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0",
+      },
+    },
     "packages/content-core": {
       "name": "@mardu/content-core",
       "version": "0.0.0",
@@ -251,6 +271,22 @@
       "peerDependencies": {
         "eslint": "^9.39.0",
         "eslint-config-next": "^16.1.0",
+      },
+    },
+    "packages/integrations-ui": {
+      "name": "@mardu/integrations-ui",
+      "version": "0.0.0",
+      "dependencies": {
+        "@mardu/content-core": "workspace:*",
+        "next": "16.2.1",
+      },
+      "devDependencies": {
+        "@types/react": "^19.2.14",
+        "@types/react-dom": "^19.2.3",
+      },
+      "peerDependencies": {
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0",
       },
     },
     "packages/layout": {
@@ -706,9 +742,13 @@
 
     "@mardu/app-platform": ["@mardu/app-platform@workspace:apps/platform"],
 
+    "@mardu/blog-ui": ["@mardu/blog-ui@workspace:packages/blog-ui"],
+
     "@mardu/content-core": ["@mardu/content-core@workspace:packages/content-core"],
 
     "@mardu/eslint-config": ["@mardu/eslint-config@workspace:packages/eslint-config"],
+
+    "@mardu/integrations-ui": ["@mardu/integrations-ui@workspace:packages/integrations-ui"],
 
     "@mardu/layout": ["@mardu/layout@workspace:packages/layout"],
 

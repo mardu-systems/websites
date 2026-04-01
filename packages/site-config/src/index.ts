@@ -5,6 +5,13 @@ export type SiteLink = {
   label: string;
 };
 
+export type SiteFeatureKey = 'blog' | 'integrations';
+
+export type SiteFeatureFlags = {
+  blog: boolean;
+  integrations: boolean;
+};
+
 export type SiteConfig = {
   key: SiteKey;
   label: string;
@@ -22,8 +29,42 @@ export type SiteConfig = {
   whitepaperDownloadPath?: string;
   emailLogoUrl: string;
   emailBrandName: string;
+  features: SiteFeatureFlags;
   footerMetaLinks: ReadonlyArray<SiteLink>;
 };
+
+const featureEnvVarNames: Record<SiteKey, Record<SiteFeatureKey, string>> = {
+  'mardu-de': {
+    blog: 'MARDU_DE_ENABLE_BLOG',
+    integrations: 'MARDU_DE_ENABLE_INTEGRATIONS',
+  },
+  'mardu-space': {
+    blog: 'MARDU_SPACE_ENABLE_BLOG',
+    integrations: 'MARDU_SPACE_ENABLE_INTEGRATIONS',
+  },
+  platform: {
+    blog: 'MARDU_PLATFORM_ENABLE_BLOG',
+    integrations: 'MARDU_PLATFORM_ENABLE_INTEGRATIONS',
+  },
+};
+
+function parseBooleanEnvOverride(rawValue: string | undefined): boolean | undefined {
+  if (!rawValue) {
+    return undefined;
+  }
+
+  const normalized = rawValue.trim().toLowerCase();
+
+  if (normalized === 'true') {
+    return true;
+  }
+
+  if (normalized === 'false') {
+    return false;
+  }
+
+  return undefined;
+}
 
 export const siteConfigs: Record<SiteKey, SiteConfig> = {
   'mardu-de': {
@@ -41,6 +82,10 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
     newsletterUnsubscribePath: '/newsletter/abmeldung',
     emailLogoUrl: 'https://www.mardu.de/logos/Logo.svg',
     emailBrandName: 'Mardu',
+    features: {
+      blog: false,
+      integrations: false,
+    },
     footerMetaLinks: [
       { href: '/publisher', label: 'Impressum' },
       { href: '/privacy', label: 'Datenschutz' },
@@ -63,6 +108,10 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
     whitepaperDownloadPath: '/api/whitepaper/download',
     emailLogoUrl: 'https://mardu.space/marduspace_logo_bg_white.svg',
     emailBrandName: 'mardu.space',
+    features: {
+      blog: false,
+      integrations: false,
+    },
     footerMetaLinks: [
       { href: '/roadmap', label: 'Roadmap' },
       { href: '/privacy', label: 'Datenschutz' },
@@ -84,6 +133,10 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
     newsletterUnsubscribePath: '/newsletter/abmeldung',
     emailLogoUrl: 'https://www.mardu.de/logos/Logo.svg',
     emailBrandName: 'Mardu Platform',
+    features: {
+      blog: false,
+      integrations: false,
+    },
     footerMetaLinks: [
       { href: '/publisher', label: 'Impressum' },
       { href: '/privacy', label: 'Datenschutz' },
@@ -93,6 +146,26 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
 
 export function getSiteConfig(site: SiteKey): SiteConfig {
   return siteConfigs[site];
+}
+
+export function getSiteFeatureFlags(site: SiteKey): SiteFeatureFlags {
+  const config = getSiteConfig(site);
+  const envVarNames = featureEnvVarNames[site];
+
+  return {
+    blog: parseBooleanEnvOverride(process.env[envVarNames.blog]) ?? config.features.blog,
+    integrations:
+      parseBooleanEnvOverride(process.env[envVarNames.integrations]) ??
+      config.features.integrations,
+  };
+}
+
+export function isBlogEnabled(site: SiteKey): boolean {
+  return getSiteFeatureFlags(site).blog;
+}
+
+export function isIntegrationsEnabled(site: SiteKey): boolean {
+  return getSiteFeatureFlags(site).integrations;
 }
 
 export function getPlatformOrigin(): string {

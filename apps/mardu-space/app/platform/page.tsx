@@ -1,7 +1,6 @@
-import MediaPlaceholder from '@/components/utilities/media-placeholder';
-import { useRecaptcha } from '@/lib/recaptcha';
-import { CTASection, HeroSection, SplitContent } from '@mardu/sections';
-import { platformFeatures, platformViews } from '@/data/platform-page';
+import CTASectionWithRecaptcha from '@/components/utilities/cta-section-with-recaptcha';
+import { EditorialPanelsSection, HeroSection, SplitContent } from '@mardu/sections';
+import { platformEditorialPanels, platformFeatures } from '@/data/platform-page';
 
 const heroDescription = (
   <>
@@ -46,8 +45,6 @@ const introItems = [
 ];
 
 export default function Page() {
-  const executeRecaptcha = useRecaptcha();
-
   return (
     <main className="min-h-screen bg-background">
       <HeroSection
@@ -112,41 +109,20 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="section-hairline">
-        <div className="mardu-container py-20 md:py-24">
-          <div className="mb-8 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.72fr)] lg:items-start">
-            <h2 className="headline-balance text-[clamp(1.9rem,4vw,3.4rem)] leading-[1.02] tracking-[-0.03em] text-foreground">
-              Produkt-Tour durch die wichtigsten Views
-            </h2>
-            <p className="max-w-xl text-sm leading-relaxed text-foreground/68 md:text-base">
-              Für finale Screens fehlen aktuell noch die Marketing-Assets. Die Platzhalter halten
-              Layout und Story stabil, bis echte UI-Views vorliegen.
-            </p>
-          </div>
+      <EditorialPanelsSection
+        eyebrow="Produkt-Tour"
+        title="Produkt-Tour durch die wichtigsten Views"
+        intro="Drei produktnahe Panels zeigen, wie WebQ Betrieb, Regelwerk und Infrastruktur in einer Oberfläche zusammenzieht."
+        items={platformEditorialPanels}
+      />
 
-          <div className="grid gap-5 lg:grid-cols-3">
-            {platformViews.map((view) => (
-              <MediaPlaceholder
-                key={view.id}
-                badge={view.badge}
-                title={view.title}
-                description={view.description}
-                aspectRatioClassName="aspect-[5/4]"
-                className="min-h-[20rem]"
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <CTASection
+      <CTASectionWithRecaptcha
         title="Live sehen, wie WebQ Geräte, Nutzer und Zutritte zusammenführt."
         description="Nutzen Sie den Konfigurator für eine erste Einordnung oder sprechen Sie direkt mit uns über Hardware, Verwaltungslogik und passende Produktstufen."
         primaryButtonText="Konfigurator starten"
         primaryButtonHref="/configurator"
         secondaryButtonText="Kontakt aufnehmen"
         secondaryButtonHref="/contact"
-        newsletterDialog={{ getRequestToken: executeRecaptcha }}
       />
     </main>
   );

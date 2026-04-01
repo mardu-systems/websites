@@ -15,11 +15,11 @@ import {
 } from 'lucide-react';
 
 import MediaPlaceholder from '@/components/utilities/media-placeholder';
-import { useRecaptcha } from '@/lib/recaptcha';
+import CTASectionWithRecaptcha from '@/components/utilities/cta-section-with-recaptcha';
 import { Button } from '@mardu/ui/components/button';
 import { NoiseAuroraBackground } from '@mardu/ui/components/noise-aurora';
 import { Overline } from '@mardu/ui/components/typography';
-import { CTASection, SplitContent } from '@mardu/sections';
+import { SplitContent } from '@mardu/sections';
 import {
   administrationCta,
   administrationGrowthPillars,
@@ -478,7 +478,6 @@ function CoreBenefitsSection() {
 }
 
 export default function VerwaltungsoftwarePage() {
-  const executeRecaptcha = useRecaptcha();
   const storyOrder = ['users', 'tags', 'groups', 'rules', 'directories'];
   const orderedSections = storyOrder
     .map((id) => administrationStorySections.find((section) => section.id === id))
@@ -562,14 +561,13 @@ export default function VerwaltungsoftwarePage() {
         </div>
       </section>
 
-      <CTASection
+      <CTASectionWithRecaptcha
         title={administrationCta.title}
         description={administrationCta.description}
         primaryButtonText={administrationCta.primaryButtonText}
         primaryButtonHref={administrationCta.primaryButtonHref}
         secondaryButtonText={administrationCta.secondaryButtonText}
         secondaryButtonHref={administrationCta.secondaryButtonHref}
-        newsletterDialog={{ getRequestToken: executeRecaptcha }}
       />
     </main>
   );

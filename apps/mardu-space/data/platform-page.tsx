@@ -1,4 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
+import type { EditorialPanelItem } from '@mardu/sections';
 import { Activity, KeyRound, LockKeyhole, MapPinned, Server, UsersRound } from 'lucide-react';
 
 /**
@@ -14,15 +15,14 @@ export interface PlatformFeatureDto {
 }
 
 /**
- * DTO for a visible product view or placeholder on the `/platform` page.
+ * DTO tuple for the editorial product-story section on the `/platform` page.
+ * The page owns copy and media selection, while `@mardu/sections` owns layout and styling.
  */
-export interface PlatformViewDto {
-  id: string;
-  eyebrow: string;
-  title: string;
-  description: string;
-  badge: string;
-}
+export type PlatformEditorialPanelsDto = [
+  EditorialPanelItem,
+  EditorialPanelItem,
+  EditorialPanelItem,
+];
 
 export const platformFeatures: PlatformFeatureDto[] = [
   {
@@ -74,29 +74,38 @@ export const platformFeatures: PlatformFeatureDto[] = [
   },
 ];
 
-export const platformViews: PlatformViewDto[] = [
+export const platformEditorialPanels: PlatformEditorialPanelsDto = [
   {
-    id: 'devices-overview',
-    eyebrow: 'View 01',
-    title: 'Geräteübersicht',
+    id: 'webq-overview',
+    badge: 'Software',
+    title: 'WebQ bündelt Betrieb und Freigaben.',
     description:
-      'Platzhalter für einen echten Screen mit Gerätestatus, letzter Aktivität, Firmware und Provisionierung.',
-    badge: 'UI',
+      'Nutzer, Geräte, Rollen und Ereignisse laufen in einer Oberfläche zusammen statt in separaten Tools zu verschwinden.',
+    imageSrc: '/verwaltungssoftware/benutzerverwaltung.png',
+    imageAlt: 'WebQ Oberfläche mit Benutzerverwaltung und zentralem Überblick',
+    theme: 'dark',
+    accentTone: 'emerald',
   },
   {
     id: 'access-rules',
-    eyebrow: 'View 02',
-    title: 'Zugriffsregeln',
+    badge: 'Freigaben',
+    title: 'Regeln bleiben präzise statt pauschal.',
     description:
-      'Platzhalter für eine Ansicht mit Freigaben, Bedingungen, Zeitfenstern und beteiligten Akteuren.',
-    badge: 'Rules',
+      'Zeitfenster, Bedingungen und Verantwortlichkeiten lassen sich so modellieren, wie reale Zutrittslogik tatsächlich funktioniert.',
+    imageSrc: '/verwaltungssoftware/zugriffsprotokolle.png',
+    imageAlt: 'WebQ Oberfläche mit Zugriffsprotokollen und nachvollziehbaren Ereignissen',
+    theme: 'light',
+    accentTone: 'amber',
   },
   {
-    id: 'users-security',
-    eyebrow: 'View 03',
-    title: 'Benutzer & Sicherheit',
+    id: 'device-visibility',
+    badge: 'Infrastruktur',
+    title: 'Geräte und Zutrittspunkte bleiben sichtbar.',
     description:
-      'Platzhalter für Rollenverwaltung, Passkeys, 2FA und zentrale Sicherheitsoptionen.',
-    badge: 'Security',
+      'Status, Zuordnung und technische Sichtbarkeit landen dort, wo Security, Betrieb und Administration Entscheidungen treffen.',
+    imageSrc: '/verwaltungssoftware/zutrittspunkte-und-geraete.png',
+    imageAlt: 'WebQ Oberfläche mit Zutrittspunkten und verwalteten Geräten',
+    theme: 'light',
+    accentTone: 'sky',
   },
 ];

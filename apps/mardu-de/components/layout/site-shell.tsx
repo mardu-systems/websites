@@ -1,9 +1,10 @@
 import React from 'react';
 import SharedSiteShell from '@mardu/layout/site-shell';
+import type { HeaderNavItemDto } from '@mardu/layout/types';
 import type { FooterSocialLinkDto } from '@mardu/layout/types';
 import { defaultHeaderItems } from '@/data/default-header-items';
 import { defaultFooterNavLinks } from '@/data/default-footer-items';
-import { getSiteConfig } from '@mardu/site-config';
+import { getSiteConfig, isBlogEnabled, isIntegrationsEnabled } from '@mardu/site-config';
 
 const socialLinks: ReadonlyArray<FooterSocialLinkDto> = [
   { href: 'https://www.instagram.com/mardu.de', label: 'Instagram', icon: 'instagram' },
@@ -13,6 +14,21 @@ const socialLinks: ReadonlyArray<FooterSocialLinkDto> = [
 
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   const siteConfig = getSiteConfig('mardu-de');
+  const headerItems: HeaderNavItemDto[] = defaultHeaderItems.filter((item) => {
+    if (item.type !== 'link') {
+      return true;
+    }
+
+    if (item.href === '/blog') {
+      return isBlogEnabled('mardu-de');
+    }
+
+    if (item.href === '/integrations') {
+      return isIntegrationsEnabled('mardu-de');
+    }
+
+    return true;
+  });
 
   return (
     <SharedSiteShell
@@ -22,7 +38,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
           logoSrc: '/logos/Logo.svg',
           logoAlt: 'Mardu Logo',
         },
-        items: defaultHeaderItems,
+        items: headerItems,
         cta: {
           label: 'Demo vereinbaren',
           href: 'https://cal.meetergo.com/infomardu/30-min-meeting-or-info',

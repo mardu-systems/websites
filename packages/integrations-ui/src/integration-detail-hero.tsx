@@ -1,9 +1,15 @@
-import { IntegrationProtocolBadges } from '@/components/integrations/integration-protocol-badges';
-import { IntegrationStatusBadge } from '@/components/integrations/integration-status-badge';
-import type { IntegrationDetailDto } from '@mardu/content-core';
-import Image from 'next/image';
+import type { IntegrationDetailDto } from "@mardu/content-core";
+import Image from "next/image";
+import { IntegrationProtocolBadges } from "./integration-protocol-badges";
+import { IntegrationStatusBadge } from "./integration-status-badge";
 
-export function IntegrationDetailHero({ integration }: { integration: IntegrationDetailDto }) {
+export interface IntegrationDetailHeroProps {
+  integration: IntegrationDetailDto;
+}
+
+export function IntegrationDetailHero({
+  integration,
+}: IntegrationDetailHeroProps) {
   return (
     <header className="relative overflow-hidden border border-black/8 bg-gradient-to-r from-white via-white to-[color:var(--paper)] p-6 md:p-8">
       <div className="grid gap-6 lg:grid-cols-[1fr_260px] lg:items-center">
@@ -16,7 +22,11 @@ export function IntegrationDetailHero({ integration }: { integration: Integratio
           </p>
           <div className="mt-4 flex flex-wrap items-center gap-2">
             <IntegrationStatusBadge status={integration.status} />
-            {integration.vendor ? <span className="text-sm text-foreground/60">{integration.vendor}</span> : null}
+            {integration.vendor ? (
+              <span className="text-sm text-foreground/60">
+                {integration.vendor}
+              </span>
+            ) : null}
           </div>
           <div className="mt-4">
             <IntegrationProtocolBadges protocols={integration.protocols} />

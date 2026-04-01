@@ -1,7 +1,10 @@
-import { BlogRichText } from '@/components/blog/blog-richtext';
-import { IntegrationCard } from '@/components/integrations/integration-card';
-import { IntegrationDetailHero } from '@/components/integrations/integration-detail-hero';
-import { IntegrationDetailSidebar } from '@/components/integrations/integration-detail-sidebar';
+import { BlogRichText } from '@mardu/blog-ui';
+import {
+  IntegrationCard,
+  IntegrationDetailHero,
+  IntegrationDetailSidebar,
+} from '@mardu/integrations-ui';
+import { isIntegrationsEnabled } from '@mardu/site-config';
 import { getIntegrationBySlug, getRelatedIntegrations } from '@/lib/integrations';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -12,6 +15,16 @@ type Params = Promise<{ slug: string }>;
 export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  if (!isIntegrationsEnabled('mardu-de')) {
+    return {
+      title: 'Integration nicht gefunden',
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
+  }
+
   const { slug } = await params;
   const integration = await getIntegrationBySlug(slug);
 
@@ -61,6 +74,10 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 }
 
 export default async function IntegrationDetailPage({ params }: { params: Params }) {
+  if (!isIntegrationsEnabled('mardu-de')) {
+    notFound();
+  }
+
   const { slug } = await params;
   const integration = await getIntegrationBySlug(slug);
 
@@ -134,7 +151,9 @@ export default async function IntegrationDetailPage({ params }: { params: Params
                       rel="noopener noreferrer"
                       className="border border-black/20 px-4 py-2 text-sm"
                     >
-                      {integration.status === 'planned' ? 'Interesse melden' : 'Integration anfragen'}
+                      {integration.status === 'planned'
+                        ? 'Interesse melden'
+                        : 'Integration anfragen'}
                     </a>
                   ) : (
                     <Link href="/contact" className="border border-black/20 px-4 py-2 text-sm">
@@ -146,7 +165,9 @@ export default async function IntegrationDetailPage({ params }: { params: Params
 
               {related.length > 0 ? (
                 <section className="mt-10 border-t border-black/10 pt-6">
-                  <h2 className="text-2xl leading-tight tracking-[-0.02em]">Ähnliche Integrationen</h2>
+                  <h2 className="text-2xl leading-tight tracking-[-0.02em]">
+                    Ähnliche Integrationen
+                  </h2>
                   <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
                     {related.map((item) => (
                       <IntegrationCard key={item.id} item={item} />

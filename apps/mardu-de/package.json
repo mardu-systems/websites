@@ -20,7 +20,9 @@
     "api:twenty:generate": "npm run api:twenty:pull-openapi && orval --config orval.config.cjs && node scripts/mark-generated-twenty-no-check.mjs"
   },
   "dependencies": {
+    "@mardu/blog-ui": "workspace:*",
     "@mardu/content-core": "workspace:*",
+    "@mardu/integrations-ui": "workspace:*",
     "@mardu/layout": "workspace:*",
     "@mardu/lead-core": "workspace:*",
     "@mardu/sections": "workspace:*",

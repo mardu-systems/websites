@@ -1,11 +1,20 @@
-import { IntegrationsFilters } from '@/components/integrations/integrations-filters';
-import { IntegrationsGrid } from '@/components/integrations/integrations-grid';
-import { IntegrationsHero } from '@/components/integrations/integrations-hero';
-import { IntegrationsPagination } from '@/components/integrations/integrations-pagination';
+import {
+  IntegrationsFilters,
+  IntegrationsGrid,
+  IntegrationsHero,
+  IntegrationsPagination,
+} from '@mardu/integrations-ui';
+import { isIntegrationsEnabled } from '@mardu/site-config';
 import { Overline } from '@mardu/ui/components/typography';
-import { getIntegrationCategories, getIntegrations, getIntegrationProtocols } from '@/lib/integrations';
+import { HeroHeadline } from '@mardu/ui/components/typography';
+import {
+  getIntegrationCategories,
+  getIntegrations,
+  getIntegrationProtocols,
+} from '@/lib/integrations';
 import type { IntegrationSort, IntegrationStatus } from '@mardu/content-core';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Integrationen',
@@ -66,6 +75,10 @@ const asSort = (value: string): IntegrationSort => {
 };
 
 export default async function IntegrationsPage({ searchParams }: { searchParams: SearchParams }) {
+  if (!isIntegrationsEnabled('mardu-de')) {
+    notFound();
+  }
+
   const resolvedSearchParams = (await searchParams) ?? {};
   const q = asString(resolvedSearchParams.q).trim();
   const category = asString(resolvedSearchParams.category).trim();
@@ -86,6 +99,15 @@ export default async function IntegrationsPage({ searchParams }: { searchParams:
         available={result.statusCounts.available}
         beta={result.statusCounts.beta}
         planned={result.statusCounts.planned}
+        title={
+          <HeroHeadline
+            prefix="Mardu"
+            emphasis="Integrationen"
+            suffix="für offene Systeme"
+            className="text-[clamp(2rem,4vw,4.1rem)]"
+          />
+        }
+        intro="Verbinde Zutritt, Maschinen, Identitäten und Prozesse mit Standards wie LDAP, OIDC, MQTT, ModBus, MCP sowie Plattformen wie n8n, Node-RED, Stripe und EasyVerein."
       />
 
       <section className="section-hairline mt-10 py-10 md:mt-14 md:py-14">

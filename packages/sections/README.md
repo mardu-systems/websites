@@ -25,6 +25,7 @@ Shared content sections for multiple Mardu frontends.
 - `ScenarioShowcase`
 - `ContactPageSection`
 - `CTASection`
+- `EditorialPanelsSection`
 
 ## `WhitepaperSection` contract
 
@@ -85,6 +86,31 @@ Shared content sections for multiple Mardu frontends.
 - `ContactPageSection` standardizes the `/contact` page shell while the consuming app still owns the actual form renderer and submit route.
 - `CTASection` standardizes the large conversion block near the end of a page. The package owns the shared layout and optional newsletter dialog, while the app still owns hard links and any custom secondary action UI.
 - `CTASection` keeps the `mardu.de` visual baseline as the default and only exposes small hooks for routing, custom secondary actions and optional request tokens.
+- `EditorialPanelsSection` provides an editorial 3-panel product-story layout with render-ready media DTOs, so apps can supply their own copy and screenshots without forking the composition.
+
+## `EditorialPanelsSection` contract
+
+- Props:
+  - `eyebrow?: string`
+  - `title: string`
+  - `intro?: string`
+  - `items: [EditorialPanelItem, EditorialPanelItem, EditorialPanelItem]`
+  - `className?: string`
+- `EditorialPanelItem`:
+  - `id: string`
+  - `badge: string`
+  - `title: string`
+  - `description: string`
+  - `imageSrc: string`
+  - `imageAlt: string`
+  - `theme?: 'dark' | 'light'`
+  - `imageObjectPosition?: string`
+  - `accentTone?: 'emerald' | 'amber' | 'sky' | 'stone'`
+- Behavior:
+  - renders exactly 3 tall product-story panels to preserve the intended editorial rhythm
+  - each panel keeps copy short and image-led, with media anchored to the lower area
+  - `theme` controls dark vs. light panel treatment without app-owned layout overrides
+  - `accentTone` only adjusts subtle atmosphere, not the core composition or hierarchy
 
 ## `CTASection` contract
 
@@ -140,5 +166,6 @@ Shared content sections for multiple Mardu frontends.
 - `Feature` / `Scenario` / `ScenarioShowcaseProps`
 - `ContactPageDetailsDto` / `ContactPageSectionProps`
 - `CTASectionNewsletterDialogProps` / `CTASectionProps`
+- `EditorialPanelItem` / `EditorialPanelsSectionProps`
 
 These DTOs are intentionally render-ready. Routing, fetching, and CMS mapping stay in the consuming app or in upstream core packages.

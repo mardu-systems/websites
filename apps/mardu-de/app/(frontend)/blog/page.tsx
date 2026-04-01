@@ -1,11 +1,9 @@
-import { BlogCategoryFilter } from '@/components/blog/blog-category-filter';
-import { BlogGrid } from '@/components/blog/blog-grid';
-import { BlogHero } from '@/components/blog/blog-hero';
-import { BlogPagination } from '@/components/blog/blog-pagination';
-import { BlogSearch } from '@/components/blog/blog-search';
+import { BlogCategoryFilter, BlogGrid, BlogHero, BlogPagination, BlogSearch } from '@mardu/blog-ui';
+import { isBlogEnabled } from '@mardu/site-config';
 import { Overline } from '@mardu/ui/components/typography';
 import { getBlogCategories, getBlogPosts, getFeaturedPost } from '@/lib/blog';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -47,6 +45,10 @@ const asPositiveNumber = (value: string | string[] | undefined): number | undefi
 };
 
 export default async function BlogPage({ searchParams }: { searchParams: SearchParams }) {
+  if (!isBlogEnabled('mardu-de')) {
+    notFound();
+  }
+
   const resolvedSearchParams = (await searchParams) ?? {};
 
   const q = asString(resolvedSearchParams.q).trim();

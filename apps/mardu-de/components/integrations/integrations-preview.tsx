@@ -1,9 +1,14 @@
-import { IntegrationCard } from '@/components/integrations/integration-card';
+import { IntegrationCard } from '@mardu/integrations-ui';
+import { isIntegrationsEnabled } from '@mardu/site-config';
 import { Overline } from '@mardu/ui/components/typography';
 import { getFeaturedIntegrations } from '@/lib/integrations';
 import Link from 'next/link';
 
 export async function IntegrationsPreview() {
+  if (!isIntegrationsEnabled('mardu-de')) {
+    return null;
+  }
+
   const items = await getFeaturedIntegrations(6);
 
   if (items.length === 0) {

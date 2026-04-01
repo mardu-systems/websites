@@ -1,5 +1,5 @@
-import { BlogHeadingAnchors } from '@/components/blog/blog-heading-anchors';
-import { BlogRichText } from '@/components/blog/blog-richtext';
+import { BlogHeadingAnchors, BlogRichText } from '@mardu/blog-ui';
+import { isBlogEnabled } from '@mardu/site-config';
 import { getBlogPostBySlug } from '@/lib/blog';
 import type { Metadata } from 'next';
 import Image from 'next/image';
@@ -139,6 +139,16 @@ const renderTocItems = (items: TocNode[], depth = 0): React.ReactNode => {
 };
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  if (!isBlogEnabled('mardu-de')) {
+    return {
+      title: 'Beitrag nicht gefunden',
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
+  }
+
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
 
@@ -186,6 +196,10 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 }
 
 export default async function BlogDetailPage({ params }: { params: Params }) {
+  if (!isBlogEnabled('mardu-de')) {
+    notFound();
+  }
+
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
 
@@ -242,7 +256,9 @@ export default async function BlogDetailPage({ params }: { params: Params }) {
                 <h1 className="headline-balance max-w-5xl font-serif text-[clamp(2.2rem,5vw,5.4rem)] leading-[0.94] tracking-[-0.03em] text-foreground">
                   {post.title}
                 </h1>
-                <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground/72">{post.excerpt}</p>
+                <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground/72">
+                  {post.excerpt}
+                </p>
               </header>
 
               <div className="mt-6 overflow-hidden border border-black/10 bg-white/40">

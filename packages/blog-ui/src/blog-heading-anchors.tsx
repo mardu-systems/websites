@@ -1,18 +1,21 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-type HeadingLink = {
+export type BlogHeadingLink = {
   id: string;
   level: 1 | 2 | 3;
 };
 
-type BlogHeadingAnchorsProps = {
+export interface BlogHeadingAnchorsProps {
   containerId: string;
-  headings: HeadingLink[];
-};
+  headings: BlogHeadingLink[];
+}
 
-export function BlogHeadingAnchors({ containerId, headings }: BlogHeadingAnchorsProps) {
+export function BlogHeadingAnchors({
+  containerId,
+  headings,
+}: BlogHeadingAnchorsProps) {
   useEffect(() => {
     const container = document.getElementById(containerId);
 
@@ -20,7 +23,7 @@ export function BlogHeadingAnchors({ containerId, headings }: BlogHeadingAnchors
       return;
     }
 
-    const elements = Array.from(container.querySelectorAll('h1, h2, h3'));
+    const elements = Array.from(container.querySelectorAll("h1, h2, h3"));
     let index = 0;
 
     for (const element of elements) {
