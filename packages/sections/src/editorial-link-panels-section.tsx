@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@mardu/ui/lib/utils';
+import { SectionIntro } from './section-intro';
 
 export type EditorialPatternGlyph = 'chevron' | 'v' | 'bar';
 export type EditorialPatternDensity = 'compact' | 'default' | 'airy';
@@ -273,25 +274,12 @@ export default function EditorialLinkPanelsSection({
   return (
     <section className={cn('section-hairline py-20 md:py-24', className)}>
       <div className="mardu-container">
-        {title || intro ? (
-          <div className="mb-8 grid gap-4 lg:mb-10 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.7fr)] lg:items-start">
-            <div>
-              <p className="mb-3 text-xs uppercase tracking-[0.18em] text-foreground/46">
-                {eyebrow}
-              </p>
-              {title ? (
-                <h2 className="headline-balance max-w-[12ch] text-[clamp(1.95rem,4vw,3.35rem)] leading-[1.02] tracking-[-0.035em] text-foreground">
-                  {title}
-                </h2>
-              ) : null}
-            </div>
-            {intro ? (
-              <div className="max-w-[38ch] text-sm leading-relaxed text-foreground/68 md:text-base">
-                {typeof intro === 'string' ? <p>{intro}</p> : intro}
-              </div>
-            ) : null}
-          </div>
-        ) : null}
+        <SectionIntro
+          eyebrow={eyebrow}
+          title={title}
+          intro={intro}
+          titleClassName="text-[clamp(1.95rem,4vw,3.35rem)]"
+        />
 
         <div className="grid gap-5 xl:grid-cols-2">
           {items.map((item, index) => (

@@ -225,58 +225,61 @@ export default async function HomePage() {
         />
       </section>
 
-      <TripleImageSection
-        cards={[
-          {
-            imageSrc: '/people/luca_schoeneberg.jpg',
-            imageAlt: 'Luca Schöneberg',
-            title: 'Luca Schöneberg',
-            subtitle: '(Co-Founder)',
-            linkedinUrl: 'https://www.linkedin.com/in/luca-sch%C3%B6neberg-150348186',
-            email: 'luca.schoeneberg@mardu.de',
-            description: (
-              <>
-                <p>
-                  B.Sc. Medieninformatik (Hochschule Osnabrück) und ausgebildeter Fachinformatiker
-                  für Systemintegration. Verantwortlich für Web-, App- und Backend-Entwicklung sowie
-                  Nutzer- und Rechteverwaltung.
-                </p>
-              </>
-            ),
-          },
-          {
-            imageSrc: '/people/erik_frey.jpg',
-            imageAlt: 'Erik Frey',
-            title: 'Erik Frey',
-            subtitle: '(Co-Founder)',
-            linkedinUrl: 'https://www.linkedin.com/in/erik-frey-660236346',
-            email: 'erik.frey@mardu.de',
-            description: (
-              <>
-                <p>
-                  B.Sc. Elektrotechnik und Informationstechnik (Karlsruher Institut für Technologie,
-                  KIT). Verantwortlich für Embedded Software und Hardware-Entwicklung.
-                </p>
-              </>
-            ),
-          },
-          {
-            imageSrc: '/people/melvin_valerius.jpg',
-            imageAlt: 'Melvin Valerius',
-            title: 'Melvin Valerius',
-            subtitle: '(kauf. Leiter)',
-            email: 'melvin.valerius@mardu.de',
-            description: (
-              <>
-                <p>
-                  Studium Volkswirtschaftslehre (Universität Münster) und Ausbildung zum
-                  Industriekaufmann. Zuständig für Finanzen, Buchhaltung und Controlling.
-                </p>
-              </>
-            ),
-          },
-        ]}
-      />
+      <section id="team">
+        <TripleImageSection
+          cards={[
+            {
+              imageSrc: '/people/luca_schoeneberg.jpg',
+              imageAlt: 'Luca Schöneberg',
+              title: 'Luca Schöneberg',
+              subtitle: '(Co-Founder)',
+              linkedinUrl: 'https://www.linkedin.com/in/luca-sch%C3%B6neberg-150348186',
+              email: 'luca.schoeneberg@mardu.de',
+              description: (
+                <>
+                  <p>
+                    B.Sc. Medieninformatik (Hochschule Osnabrück) und ausgebildeter Fachinformatiker
+                    für Systemintegration. Verantwortlich für Web-, App- und Backend-Entwicklung
+                    sowie Nutzer- und Rechteverwaltung.
+                  </p>
+                </>
+              ),
+            },
+            {
+              imageSrc: '/people/erik_frey.jpg',
+              imageAlt: 'Erik Frey',
+              title: 'Erik Frey',
+              subtitle: '(Co-Founder)',
+              linkedinUrl: 'https://www.linkedin.com/in/erik-frey-660236346',
+              email: 'erik.frey@mardu.de',
+              description: (
+                <>
+                  <p>
+                    B.Sc. Elektrotechnik und Informationstechnik (Karlsruher Institut für
+                    Technologie, KIT). Verantwortlich für Embedded Software und
+                    Hardware-Entwicklung.
+                  </p>
+                </>
+              ),
+            },
+            {
+              imageSrc: '/people/melvin_valerius.jpg',
+              imageAlt: 'Melvin Valerius',
+              title: 'Melvin Valerius',
+              subtitle: '(kauf. Leiter)',
+              email: 'melvin.valerius@mardu.de',
+              description: (
+                <>
+                  <p>
+                    Studium Volkswirtschaftslehre (Universität Münster) und Ausbildung zum
+                    Industriekaufmann. Zuständig für Finanzen, Buchhaltung und Controlling.
+                  </p>
+                </>
+              ),
+            },
+          ]}
+        />
+      </section>
 
       <section id="contact">
         <CTASectionWithRecaptcha

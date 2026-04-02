@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@mardu/ui/lib/utils";
+import { SectionIntro } from "./section-intro";
 
 export type EditorialPanelTheme = "dark" | "light";
 export type EditorialPanelAccentTone = "emerald" | "amber" | "sky" | "stone";
@@ -93,21 +94,14 @@ export default function EditorialPanelsSection({
   return (
     <section className={cn("section-hairline py-20 md:py-24", className)}>
       <div className="mardu-container">
-        <div className="mb-6 grid gap-3 md:mb-8 md:gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,0.72fr)] lg:items-start">
-          <div>
-            <p className="mb-3 text-xs uppercase tracking-[0.18em] text-foreground/46">
-              {eyebrow}
-            </p>
-            <h2 className="max-w-[12ch] text-[clamp(2.1rem,10vw,3.4rem)] leading-[0.95] tracking-[-0.05em] text-foreground md:headline-balance md:max-w-none md:leading-[1.02] md:tracking-[-0.03em]">
-              {title}
-            </h2>
-          </div>
-          {intro ? (
-            <p className="max-w-[34ch] text-sm leading-relaxed text-foreground/68 md:max-w-xl md:text-base">
-              {intro}
-            </p>
-          ) : null}
-        </div>
+        <SectionIntro
+          eyebrow={eyebrow}
+          title={title}
+          intro={intro}
+          className="mb-6 md:mb-8"
+          introClassName="md:max-w-xl"
+          titleClassName="text-[clamp(2.1rem,10vw,3.4rem)]"
+        />
 
         <div className="mb-4 flex items-center justify-between gap-3 xl:hidden">
           <div />

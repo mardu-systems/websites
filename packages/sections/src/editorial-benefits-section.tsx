@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@mardu/ui/lib/utils';
+import { SectionIntro } from './section-intro';
 import type {
   EditorialPatternDensity,
   EditorialPatternGlyph,
@@ -398,25 +399,7 @@ export default function EditorialBenefitsSection({
   return (
     <section className={cn('section-hairline py-18 md:py-24', className)}>
       <div className="mardu-container">
-        {(eyebrow || title || intro) ? (
-          <div className="mb-8 grid gap-5 md:mb-10 md:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] md:items-end">
-            <div className="space-y-4">
-              {eyebrow ? (
-                <p className="text-xs uppercase tracking-[0.18em] text-foreground/45">{eyebrow}</p>
-              ) : null}
-              {title ? (
-                <h2 className="max-w-[12ch] text-[clamp(2rem,5vw,4.25rem)] leading-[0.94] tracking-[-0.05em] text-balance">
-                  {title}
-                </h2>
-              ) : null}
-            </div>
-            {intro ? (
-              <div className="max-w-[38ch] text-sm leading-relaxed text-foreground/68 md:justify-self-end md:text-base">
-                {intro}
-              </div>
-            ) : null}
-          </div>
-        ) : null}
+        <SectionIntro eyebrow={eyebrow} title={title} intro={intro} />
 
         <div className="-mx-4 flex gap-4 overflow-x-auto px-4 pb-2 snap-x snap-mandatory md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 xl:grid-cols-3">
           {items.map((item, index) => (

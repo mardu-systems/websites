@@ -4,7 +4,7 @@ import { cn } from '@mardu/ui/lib/utils';
 import { Card, CardContent } from '@mardu/ui/components/card';
 import { Badge } from '@mardu/ui/components/badge';
 import { LucideIcon } from 'lucide-react';
-import { Overline } from '@mardu/ui/components/typography';
+import { SectionIntro } from './section-intro';
 
 export type RoadmapCard = {
   description: string | ReactNode;
@@ -41,20 +41,18 @@ export default function RoadmapTimeline({
 }: RoadmapTimelineProps) {
   return (
     <section className={cn('py-16 px-6 md:px-8 max-w-7xl mx-auto w-full', className)}>
-      {eyebrow ? <Overline className="mb-3">{eyebrow}</Overline> : null}
-      {title ? (
-        intro ? (
-          <div className="mb-10 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.7fr)] lg:items-start">
-            <h2 className="headline-balance text-[clamp(1.9rem,4vw,3.5rem)] leading-[1.02] tracking-[-0.03em] text-foreground">
-              {title}
-            </h2>
-            <div className="text-sm leading-relaxed text-foreground/68 md:text-base">
-              {typeof intro === 'string' ? <p>{intro}</p> : intro}
-            </div>
-          </div>
-        ) : (
-          <h2 className="mb-10 text-center text-3xl font-bold text-primary md:text-4xl">{title}</h2>
-        )
+      {title || intro || eyebrow ? (
+        <SectionIntro
+          eyebrow={eyebrow}
+          title={title}
+          intro={intro}
+          className="mb-10"
+          titleClassName={cn(
+            intro ? 'text-[clamp(1.9rem,4vw,3.5rem)]' : 'mx-auto max-w-4xl text-center text-3xl font-bold text-primary md:text-4xl',
+          )}
+          layout={intro ? 'split' : 'stacked'}
+          balanceTitle
+        />
       ) : null}
 
       <div className={cn('relative', compact ? 'space-y-5' : 'space-y-7')}>

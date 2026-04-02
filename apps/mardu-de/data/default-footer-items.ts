@@ -5,6 +5,7 @@ export const defaultFooterNavLinks: LayoutLinkDto[] = [
   { href: '/#loesung', label: 'Lösung' },
   { href: '/#produkte', label: 'Angebote' },
   { href: '/#argumente', label: 'Vorteile' },
+  { href: '/#team', label: 'Team' },
   { href: '/integrations', label: 'Integrationen' },
   { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Kontakt' },

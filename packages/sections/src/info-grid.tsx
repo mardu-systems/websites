@@ -2,7 +2,7 @@ import { LucideIcon } from 'lucide-react';
 import { ReactNode } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@mardu/ui/components/card';
 import { cn } from '@mardu/ui/lib/utils';
-import { Overline } from '@mardu/ui/components/typography';
+import { SectionIntro } from './section-intro';
 
 export type InfoGridItem = {
   title: string;
@@ -43,22 +43,16 @@ export default function InfoGrid({
   return (
     <section className={cn('w-full py-20 md:py-24', className)}>
       <div className="mardu-container">
-        {eyebrow ? <Overline className="mb-3">{eyebrow}</Overline> : null}
-        {title ? (
-          intro ? (
-            <div className="mb-7 grid gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(18rem,0.7fr)] lg:items-start">
-              <h2 className="headline-balance max-w-4xl text-[clamp(1.9rem,4vw,3.5rem)] leading-[1.02] tracking-[-0.03em] text-foreground">
-                {title}
-              </h2>
-              <div className="max-w-xl pt-1 text-sm leading-relaxed text-foreground/68 md:text-base">
-                {typeof intro === 'string' ? <p>{intro}</p> : intro}
-              </div>
-            </div>
-          ) : (
-            <h2 className="headline-balance mb-12 max-w-4xl text-[clamp(1.9rem,4vw,3.5rem)] leading-[1.02] tracking-[-0.03em] text-foreground">
-              {title}
-            </h2>
-          )
+        {title || intro || eyebrow ? (
+          <SectionIntro
+            eyebrow={eyebrow}
+            title={title}
+            intro={intro}
+            className="mb-7"
+            titleClassName="max-w-4xl text-[clamp(1.9rem,4vw,3.5rem)]"
+            introClassName="max-w-xl pt-1"
+            layout={intro ? 'split' : 'stacked'}
+          />
         ) : null}
         <div className={cn('grid', variant === 'cards' ? 'gap-4 lg:gap-5' : 'gap-8 lg:gap-12', gridCols)}>
           {items.map((item, idx) =>
