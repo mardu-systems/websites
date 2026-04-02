@@ -1,6 +1,7 @@
 'use client';
 
 import { useId, useState } from 'react';
+import { useRecaptcha } from '@mardu/lead-core/recaptcha';
 import { Alert, AlertDescription } from '@mardu/ui/components/alert';
 import { Button } from '@mardu/ui/components/button';
 import { Checkbox } from '@mardu/ui/components/checkbox';
@@ -22,6 +23,7 @@ export default function NewsletterSignupForm({ onSuccess }: NewsletterSignupForm
   const [success, setSuccess] = useState<string | null>(null);
   const [consentChecked, setConsentChecked] = useState(false);
   const idPrefix = useId();
+  const executeRecaptcha = useRecaptcha();
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -54,13 +56,17 @@ export default function NewsletterSignupForm({ onSuccess }: NewsletterSignupForm
       setPending(true);
       setError(null);
       setSuccess(null);
+      const token = await executeRecaptcha('newsletter_signup');
 
       const response = await fetch('/api/newsletter', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          ...payload,
+          ...(token ? { token } : {}),
+        }),
       });
 
       const body = (await response.json().catch(() => null)) as { error?: string } | null;
