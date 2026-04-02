@@ -36,7 +36,28 @@ type PayloadDb = {
   execute: (query: unknown) => Promise<{ rows?: DbExecuteResultRow[] } | DbExecuteResultRow[]>;
 };
 
+type PayloadDbContainer = {
+  db?: PayloadDb & {
+    drizzle?: PayloadDb;
+  };
+};
+
 const getPayloadClient = () => getPayload({ config });
+
+function getDbExecutor(payload: unknown): PayloadDb {
+  const container = payload as PayloadDbContainer;
+  const directDb = container.db;
+
+  if (directDb && typeof directDb.execute === 'function') {
+    return directDb;
+  }
+
+  if (directDb?.drizzle && typeof directDb.drizzle.execute === 'function') {
+    return directDb.drizzle;
+  }
+
+  throw new Error('Payload database adapter does not expose an execute() method.');
+}
 
 function getClientIp(req: Request): string {
   const forwardedFor = req.headers.get('x-forwarded-for');
@@ -70,7 +91,7 @@ async function incrementRateLimit(input: {
   ipHash: string;
 }): Promise<number> {
   const payload = await getPayloadClient();
-  const db = (payload as unknown as { db: PayloadDb }).db;
+  const db = getDbExecutor(payload);
   const config = RATE_LIMITS[input.endpoint];
   const windowSeconds = Math.floor(config.windowMs / 1000);
 
