@@ -8,7 +8,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Mardu',
     short_name: 'Mardu',
-    description: 'Zutrittskontrolle & Maschinenfreigabe für Werkstätten, Labore, Makerspaces und Baustellen.',
+    description: 'Plattform für physische Zugriffssteuerung mit Produktlinien für Werkstatt, Labor und Baustelle.',
     start_url: '/',
     scope: '/',
     display: 'standalone',

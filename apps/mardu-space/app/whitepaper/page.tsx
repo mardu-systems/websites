@@ -3,7 +3,8 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Whitepaper Download | Mardu',
-  description: 'Laden Sie unser exklusives Whitepaper herunter und erhalten Sie wertvolle Einblicke in die Zukunft des Marktes.',
+  description:
+    'Whitepaper für Werkstatt-, Labor- und Hochschulverantwortliche: Zutritt, Maschinenfreigabe und Qualifikationen nachvollziehbar organisieren.',
 };
 
 export default function WhitepaperPage() {

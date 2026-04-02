@@ -72,7 +72,7 @@ export function SectionIntro({
         {title ? (
           <h2
             className={cn(
-              'max-w-[12ch] text-[clamp(2rem,5vw,4.25rem)] leading-[0.94] tracking-[-0.05em] text-foreground',
+              'max-w-[10ch] text-[clamp(1.75rem,7vw,4.25rem)] leading-[0.96] tracking-[-0.05em] text-foreground sm:max-w-[12ch] sm:text-[clamp(2rem,5vw,4.25rem)] sm:leading-[0.94]',
               balanceTitle && 'text-balance md:headline-balance md:max-w-none md:leading-[1.02] md:tracking-[-0.03em]',
               titleClassName,
             )}
@@ -84,7 +84,7 @@ export function SectionIntro({
       {intro ? (
         <div
           className={cn(
-            'max-w-[38ch] text-sm leading-relaxed text-foreground/68 md:justify-self-end md:text-base',
+            'max-w-[34ch] text-[15px] leading-relaxed text-foreground/68 sm:max-w-[38ch] sm:text-sm md:justify-self-end md:text-base',
             introClassName,
           )}
         >

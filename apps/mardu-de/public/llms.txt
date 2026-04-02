@@ -1,6 +1,6 @@
 # Mardu (mardu.de)
 
-> Mardu entwickelt funkbasierte Zutritts- und Zugriffskontrollsysteme (Hard- und Software) für Werkstätten, Labore, Makerspaces und Baustellen. Kernfunktionen: Rechteverwaltung, Maschinenfreigabe/Zutritt, ausfallsichere Vernetzung (Mesh), nachvollziehbare Protokollierung (DSGVO-orientiert) sowie Betrieb lokal vor Ort oder zentral verwaltet.
+> Mardu ist die Plattformmarke für physische Zugriffssteuerung. Die Marke verbindet Identität, Berechtigung, Hardware und Protokollierung für digitale Zutrittssteuerung und Maschinenfreigabe. Produktlinien: `mardu.space` für Werkstätten, Labore, Hochschulen und Makerspaces sowie `mardu.construction` für Baustellen im Early-Access-Stadium.
 
 Wichtige Hinweise für LLM-Crawler und Agents:
 - Primäre, kanonische Website: https://mardu.de/
@@ -11,21 +11,21 @@ Wichtige Hinweise für LLM-Crawler und Agents:
 
 ## Start & Überblick
 
-- [Startseite](https://mardu.de/): Gesamtüberblick (Zielgruppen, Nutzenversprechen, Einstieg)
-- [Die Mardu-Lösung](https://mardu.de/#loesung): Beschreibung der Lösung, Betriebsmodelle (lokal/zentral), Einsatzszenarien
-- [Vorteile/Argumente](https://mardu.de/#argumente): Sicherheits-, Prozess- und Betriebsargumente
+- [Startseite](https://mardu.de/): Dachmarke, Produktlinien und gemeinsamer Plattformansatz
+- [Plattform](https://mardu.de/#loesung): Beschreibung der gemeinsamen Technologie- und Betriebslogik
+- [Proof](https://mardu.de/#argumente): Sicherheits-, Prozess- und Betriebsargumente
 
 ## Produkte
 
-- [mardu.space](https://mardu.de/#produkte): Produktlinie für Werkstätten, Produktionsumgebungen und Labore (Zutritt + Maschinenfreigabe)
-- [mardu.space (Produktseite)](https://mardu.space): Externe Produktseite/Vertiefung (falls verfügbar und aktuell)
-- [mardu.construction](https://mardu.de/#produkte): Produktlinie für Baustellen-Zutrittskontrolle (Early Access/Projektstadium)
+- [mardu.space](https://mardu.de/#produkte): Produktlinie für Werkstätten, Labore, Hochschulen und Makerspaces
+- [mardu.space (Produktseite)](https://mardu.space): vertiefende Produktseite für Zutritt, Maschinenfreigabe und Qualifikation
+- [mardu.construction](https://mardu.de/#produkte): Produktlinie für Baustellen-Zutrittskontrolle (Early Access)
 
 ## Technik & Funktionsumfang
 
-- [Funk-/Mesh-Betrieb & Ausfallsicherheit](https://mardu.de/#loesung): Dual-Band-Mesh, vernetzte Endgeräte, temporäre und permanente Setups
-- [Protokollierung & Nachvollziehbarkeit](https://mardu.de/#argumente): Ereignislogging (wer/was/wann), Auditierbarkeit, Rechtekonzepte
-- [Einsatzbereiche](https://mardu.de/#loesung): Innen-/Außenbereiche, Türen/Tore/Drehkreuze/Maschinenzugänge
+- [Identität, Regeln und Hardware](https://mardu.de/#loesung): Plattformlogik über Produktlinien hinweg
+- [Protokollierung & Nachvollziehbarkeit](https://mardu.de/#argumente): Ereignislogging, Auditierbarkeit, Rechtekonzepte
+- [Projektvorgehen](https://mardu.de/#vorgehen): Einordnung, Pilot und Rollout
 
 ## Kontakt & Vertrieb
 

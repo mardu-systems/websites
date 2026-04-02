@@ -165,6 +165,7 @@ export interface SiteFooterBrandingDto {
 export interface SiteFooterProps {
   brand: SiteFooterBrandingDto;
   description?: string;
+  primaryActionSlot?: React.ReactNode;
   navLinks?: ReadonlyArray<LayoutLinkDto>;
   metaLinks?: ReadonlyArray<LayoutLinkDto>;
   socialLinks?: ReadonlyArray<FooterSocialLinkDto>;

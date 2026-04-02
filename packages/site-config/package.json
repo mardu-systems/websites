@@ -5,5 +5,9 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@flags-sdk/vercel": "^1.2.1",
+    "flags": "^4.0.5"
   }
 }

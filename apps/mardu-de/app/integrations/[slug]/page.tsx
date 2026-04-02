@@ -15,7 +15,7 @@ type Params = Promise<{ slug: string }>;
 export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  if (!isIntegrationsEnabled('mardu-de')) {
+  if (!(await isIntegrationsEnabled('mardu-de'))) {
     return {
       title: 'Integration nicht gefunden',
       robots: {
@@ -74,7 +74,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 }
 
 export default async function IntegrationDetailPage({ params }: { params: Params }) {
-  if (!isIntegrationsEnabled('mardu-de')) {
+  if (!(await isIntegrationsEnabled('mardu-de'))) {
     notFound();
   }
 

@@ -5,6 +5,7 @@ import type { FooterSocialLinkDto } from '@mardu/layout/types';
 import { defaultHeaderItems } from '@/data/default-header-items';
 import { defaultFooterNavLinks } from '@/data/default-footer-items';
 import { getSiteConfig, isBlogEnabled, isIntegrationsEnabled } from '@mardu/site-config';
+import NewsletterButton from '@/components/utilities/newsletter-button';
 
 const socialLinks: ReadonlyArray<FooterSocialLinkDto> = [
   { href: 'https://www.instagram.com/mardu.de', label: 'Instagram', icon: 'instagram' },
@@ -12,19 +13,36 @@ const socialLinks: ReadonlyArray<FooterSocialLinkDto> = [
   { href: 'https://github.com/mardu-systems', label: 'GitHub', icon: 'github' },
 ];
 
-export default function SiteShell({ children }: { children: React.ReactNode }) {
+export default async function SiteShell({ children }: { children: React.ReactNode }) {
   const siteConfig = getSiteConfig('mardu-de');
+  const [blogEnabled, integrationsEnabled] = await Promise.all([
+    isBlogEnabled('mardu-de'),
+    isIntegrationsEnabled('mardu-de'),
+  ]);
+
+  const footerNavLinks = defaultFooterNavLinks.filter((item) => {
+    if (item.href === '/blog') {
+      return blogEnabled;
+    }
+
+    if (item.href === '/integrations') {
+      return integrationsEnabled;
+    }
+
+    return true;
+  });
+
   const headerItems: HeaderNavItemDto[] = defaultHeaderItems.filter((item) => {
     if (item.type !== 'link') {
       return true;
     }
 
     if (item.href === '/blog') {
-      return isBlogEnabled('mardu-de');
+      return blogEnabled;
     }
 
     if (item.href === '/integrations') {
-      return isIntegrationsEnabled('mardu-de');
+      return integrationsEnabled;
     }
 
     return true;
@@ -53,8 +71,15 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
           copyrightName: 'Mardu GmbH',
         },
         description:
-          'Verwalte Zutritt und Maschinennutzung – mobil auf der Baustelle oder stationär in der Werkstatt. Mardu passt sich deinen Bedürfnissen an.',
-        navLinks: defaultFooterNavLinks,
+          'Mardu digitalisiert Zutritt und Maschinenfreigabe für Werkstatt, Industrie und Baustelle und reduziert dabei Verwaltungsaufwand, Abstimmung und manuelle Prozesse.',
+        primaryActionSlot: (
+          <NewsletterButton
+            primaryButtonText="Newsletter abonnieren"
+            variant="outline"
+            className="border-white/28 bg-transparent text-white hover:bg-white hover:text-neutral-950"
+          />
+        ),
+        navLinks: footerNavLinks,
         metaLinks: siteConfig.footerMetaLinks,
         socialLinks,
         theme: 'dark',

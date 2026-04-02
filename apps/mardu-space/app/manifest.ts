@@ -8,7 +8,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'mardu.space',
     short_name: 'mardu',
-    description: 'Digitale Zutritts- und Maschinenfreigabe für Werkstätten, Hochschulen und Unternehmen.',
+    description: 'Digitale Zutritts- und Maschinenfreigabe für Werkstätten, Labore, Hochschulen und Makerspaces.',
     start_url: '/',
     scope: '/',
     display: 'standalone',

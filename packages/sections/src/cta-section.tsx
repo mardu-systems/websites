@@ -40,6 +40,7 @@ export interface CTASectionProps {
   title: string;
   description: ReactNode;
   primaryButtonText: string;
+  primaryActionSlot?: ReactNode;
   secondaryButtonText?: string;
   primaryButtonHref?: string;
   secondaryButtonHref?: string;
@@ -68,6 +69,7 @@ export default function CTASection({
   title,
   description,
   primaryButtonText,
+  primaryActionSlot,
   secondaryButtonText,
   primaryButtonHref,
   secondaryButtonHref,
@@ -205,7 +207,9 @@ export default function CTASection({
             </div>
 
             <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:items-center">
-              {opensNewsletterDialog ? (
+              {primaryActionSlot ? (
+                primaryActionSlot
+              ) : opensNewsletterDialog ? (
                 <Dialog
                   open={open}
                   onOpenChange={(nextOpen: boolean) => {

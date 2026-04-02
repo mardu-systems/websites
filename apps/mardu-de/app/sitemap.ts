@@ -6,8 +6,10 @@ const SITE_URL = 'https://www.mardu.de';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
-  const blogEnabled = isBlogEnabled('mardu-de');
-  const integrationsEnabled = isIntegrationsEnabled('mardu-de');
+  const [blogEnabled, integrationsEnabled] = await Promise.all([
+    isBlogEnabled('mardu-de'),
+    isIntegrationsEnabled('mardu-de'),
+  ]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {

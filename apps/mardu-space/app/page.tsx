@@ -35,9 +35,9 @@ const heroDescription = (
       Für Unternehmenswerkstätten, Hochschulen, Makerspaces und Labore.
     </p>
     <p>
-      mardu.space organisiert Zutritt, Maschinenfreigaben und Qualifikationen in einem zentralen
-      System. Betreiber steuern damit nachvollziehbar, wer wann welche Bereiche betreten und welche
-      Maschinen nutzen darf.
+      mardu.space verbindet Zutritt, Maschinenfreigabe und Qualifikation in einem System. Betreiber
+      steuern damit nicht nur, wer wo hinein darf, sondern auch, wer welche Maschine unter welchen
+      Voraussetzungen nutzen darf.
     </p>
   </>
 );
@@ -45,8 +45,8 @@ const heroDescription = (
 const summaryDescription = (
   <>
     <p className="text-balance">
-      mardu.space steuert, wer welche Bereiche betreten und welche Maschinen nutzen darf und
-      dokumentiert Freigaben nachvollziehbar in einem zentralen System.
+      mardu.space ersetzt Schlüssel, Listen und lose Einweisungen durch ein Berechtigungsmodell,
+      das Zutritt, Maschinenfreigabe und Qualifikation operativ zusammenhält.
     </p>
     <ul className="mt-10 space-y-6 list-disc list-inside">
       <li>Rechte rollenbasiert und zeitgesteuert vergeben</li>
@@ -65,13 +65,13 @@ const summaryItems = [
   },
   {
     title: 'Weniger Verwaltungsaufwand',
-    description: 'Rechte digital vergeben, anpassen und entziehen statt manuell organisieren.',
+    description: 'Rechte digital vergeben, anpassen und entziehen statt Schlüssel und Listen manuell zu pflegen.',
     icon: Settings,
   },
   {
-    title: 'Flexibel integrierbar',
+    title: 'Technisch durchgesetzt',
     description:
-      'Lokal oder zentral betreibbar, passend zu Infrastruktur, Compliance und Verfügbarkeit.',
+      'Qualifikation, Regelwerk und Freigabe greifen systemisch ineinander statt organisatorisch auseinanderzulaufen.',
     icon: Server,
   },
 ];
@@ -103,9 +103,9 @@ const cardGridItems = [
   },
   {
     title: 'Private Werkstätten',
-    badge: 'Einfacher Betrieb',
+    badge: 'Nachgelagerter Use Case',
     description:
-      'Passend, wenn Sicherheit, Komfort und überschaubare Verwaltung wichtiger sind als komplexe Organisationsstrukturen.',
+      'Als nachgelagerter Einsatzfall sinnvoll, wenn Sicherheit und einfache Verwaltung wichtiger sind als komplexe Organisationsstrukturen.',
     list: [
       'Schutz vor unbefugtem Zugriff auf Räume und Geräte',
       'einfaches Rechtemanagement ohne Listen und Schlüsselchaos',
@@ -326,8 +326,8 @@ const securityItems = [
           Gefährdungsbeurteilung Pflicht (TRBS 1111).
         </p>
         <p>
-          mardu.space unterstützt die operative Umsetzung: Qualifikationen werden zur technischen
-          Voraussetzung für Zutritt und Freigabe. Ereignisse werden nachvollziehbar protokolliert.
+      mardu.space unterstützt die operative Umsetzung: Qualifikationen werden zur technischen
+      Voraussetzung für Zutritt und Freigabe. Ereignisse werden nachvollziehbar protokolliert.
         </p>
       </div>
     ),
@@ -389,13 +389,13 @@ export default function HomePage() {
       </a>
       <section id="home">
         <HeroSection
-          title="Wer darf was wann nutzen?"
+          title="Digitale Zutritts- und Maschinenfreigabe für Werkstätten und Labore"
           overline="Digitale Zutritts- und Maschinenfreigabe"
           description={heroDescription}
           buttonText="Konfigurator starten"
           buttonHref="/configurator"
-          secondaryButtonText="Whitepaper"
-          secondaryButtonHref="/#whitepaper"
+          secondaryButtonText="Demo vereinbaren"
+          secondaryButtonHref="/contact"
           imageSrc="/_A7_9094_quer.jpg"
           imageAlt="mardu.space-System in einer Werkstatt"
           variant="landing"
@@ -419,7 +419,7 @@ export default function HomePage() {
           title="Zutritt, Maschinenfreigabe und Qualifikation in einem System"
           eyebrow="Die Mardu-Lösung"
           description={summaryDescription}
-          sideTitle="Vorteile für Betreiber"
+          sideTitle="Warum Betreiber umstellen"
           sideIcon={CheckCircle}
           items={summaryItems}
           variant="plain"
@@ -429,10 +429,53 @@ export default function HomePage() {
       <section id="argumente" className="section-hairline">
         <CardGrid
           eyebrow="Einsatzfelder"
-          title="Wo mardu.space besonders hilft"
+          title="Wo mardu.space heute besonders klaren Mehrwert schafft"
           itemMetaLabel="Fokus"
           variant="muted"
           items={cardGridItems}
+        />
+      </section>
+
+      <section className="section-hairline">
+        <SplitContent
+          title="Warum mardu.space über klassische Zutrittskontrolle hinausgeht"
+          eyebrow="Proof"
+          description={
+            <>
+              <p>
+                Der Wert entsteht nicht nur am Leser oder an der Tür. mardu.space verknüpft
+                Qualifikation, Freigaberegeln und technische Durchsetzung so, dass Betreiber
+                Vorfälle, Audits und den laufenden Betrieb sauber einordnen können.
+              </p>
+              <p>
+                Gerade in Werkstatt- und Laborumgebungen ist das der Unterschied zwischen
+                dokumentierten Regeln und real wirksamer Freigabe.
+              </p>
+            </>
+          }
+          sideTitle="Drei Belege für den Produktfit"
+          sideIcon={ShieldCheck}
+          variant="plain"
+          items={[
+            {
+              title: 'Typische Umgebungen',
+              description:
+                'Werkstätten, Labore, Hochschulen und Makerspaces mit Türen, Toren, Schuko- und Drehstrom-Maschinen.',
+              icon: Briefcase,
+            },
+            {
+              title: 'Integrationen und Betrieb',
+              description:
+                'Offene APIs, Berichte und lokale oder zentrale Betriebsmodelle verbinden Technik mit Security und Administration.',
+              icon: Server,
+            },
+            {
+              title: 'Compliance-Bezug',
+              description:
+                'DGUV-, TRBS- und Governance-Anforderungen werden nicht nur beschrieben, sondern in Freigabelogik und Nachweise übersetzt.',
+              icon: CheckCircle,
+            },
+          ]}
         />
       </section>
 
@@ -483,11 +526,11 @@ export default function HomePage() {
 
       <CTASection
         title="Nächster Schritt: Bedarf strukturieren, dann sauber entscheiden."
-        description="Starten Sie mit dem Konfigurator für eine erste Einordnung. Wenn Sie intern vertiefen oder weitergeben müssen, nutzen Sie ergänzend das Whitepaper."
+        description="Starten Sie mit dem Konfigurator für eine erste Einordnung. Wenn Sie intern abstimmen oder weitergeben müssen, nutzen Sie zusätzlich das Whitepaper. Für konkrete Einführungsfragen geht es direkt in die Demo."
         primaryButtonText="Konfigurator starten"
         primaryButtonHref="/configurator"
         secondaryButtonText="Whitepaper ansehen"
-        secondaryButtonHref="/#whitepaper"
+        secondaryButtonHref="/whitepaper"
         newsletterDialog={{ getRequestToken: executeRecaptcha }}
       />
 

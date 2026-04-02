@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.label}`,
   },
   description:
-    'Sichere Maschinenfreigabe & Zutrittskontrolle für Unternehmenswerkstätten, Hochschulen & Makerspaces. Ersetzen Sie Schlüssel durch digitale, qualifikationsbasierte Berechtigungen (RBAC) & lückenlose Protokollierung.',
+    'mardu.space verbindet Zutritt, Maschinenfreigabe und Qualifikation für Werkstätten, Labore, Hochschulen und Makerspaces. Weniger Schlüssel, mehr technische Durchsetzung und nachvollziehbare Nachweise.',
   keywords: [
     'Maschinenfreigabe',
     'Zutrittskontrolle',
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Digitale Zutritts- und Maschinenfreigabe für Werkstätten',
     description:
-      'Sichere Maschinenfreigabe & Zutrittskontrolle für Unternehmenswerkstätten, Hochschulen & Makerspaces. Rollenbasiert, compliant & vernetzt.',
+      'mardu.space verknüpft Zutritt, Qualifikation und Maschinenfreigabe für Werkstätten, Labore, Hochschulen und Makerspaces.',
     url: siteConfig.origin,
     siteName: siteConfig.appName,
     locale: 'de_DE',
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Digitale Zutritts- und Maschinenfreigabe für Werkstätten',
     description:
-      'Sichere Maschinenfreigabe & Zutrittskontrolle für Unternehmenswerkstätten, Hochschulen & Makerspaces.',
+      'mardu.space verknüpft Zutritt, Qualifikation und Maschinenfreigabe für Werkstätten, Labore, Hochschulen und Makerspaces.',
     images: ['/_A7_9094_quer.jpg'],
   },
 };

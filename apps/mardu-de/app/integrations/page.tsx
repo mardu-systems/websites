@@ -75,7 +75,7 @@ const asSort = (value: string): IntegrationSort => {
 };
 
 export default async function IntegrationsPage({ searchParams }: { searchParams: SearchParams }) {
-  if (!isIntegrationsEnabled('mardu-de')) {
+  if (!(await isIntegrationsEnabled('mardu-de'))) {
     notFound();
   }
 

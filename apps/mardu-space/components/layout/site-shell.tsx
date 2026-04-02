@@ -37,7 +37,7 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
           copyrightName: 'Mardu GmbH',
         },
         description:
-          'mardu.space ermöglicht die digitale Zutritts- und Maschinenfreigabe für Werkstätten, Hochschulen und Unternehmen – sicher, skalierbar und effizient.',
+          'mardu.space koppelt Zutritt, Maschinenfreigabe und Qualifikation für Werkstätten, Labore, Hochschulen und Makerspaces in einem nachvollziehbaren Betriebssystem.',
         navLinks: defaultFooterNavLinks,
         metaLinks: siteConfig.footerMetaLinks,
         socialLinks,

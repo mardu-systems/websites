@@ -33,11 +33,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   applicationName: siteConfig.appName,
   title: {
-    default: 'Mardu – Zutrittskontrolle & Maschinenfreigabe für Werkstätten, Labore & Baustellen',
+    default: 'Mardu – Plattform für physische Zugriffssteuerung',
     template: '%s | Mardu',
   },
   description:
-    'Zutrittskontrolle und Maschinenfreigabe mit Funk-Mesh, Protokollierung und Rechteverwaltung – für Makerspaces, Labore, Werkstätten und Baustellen. DSGVO-konform.',
+    'Mardu ist die Plattformmarke für digitale Zutrittssteuerung und Maschinenfreigabe. Entdecken Sie mardu.space für Werkstatt und Labor sowie mardu.construction für Baustellen.',
   keywords: [
     'Zugriffskontrollsysteme',
     'Makerspace',
@@ -74,9 +74,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Mardu – Zutrittskontrolle & Maschinenfreigabe',
+    title: 'Mardu – Plattform für physische Zugriffssteuerung',
     description:
-      'Smarte Zutrittskontrolle und Maschinenfreigabe für Werkstätten, Labore, Makerspaces und Baustellen – flexibel, ausfallsicher, DSGVO-konform.',
+      'Mardu verbindet Identität, Regeln, Hardware und Protokollierung in klaren Produktlinien für Werkstatt, Labor und Baustelle.',
     url: SITE_URL,
     siteName: siteConfig.appName,
     locale: 'de_DE',
@@ -99,9 +99,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mardu – Zutrittskontrolle & Maschinenfreigabe',
+    title: 'Mardu – Plattform für physische Zugriffssteuerung',
     description:
-      'Zutrittskontrolle und Maschinenfreigabe für Werkstätten, Labore, Makerspaces und Baustellen – flexibel, ausfallsicher, DSGVO-konform.',
+      'Mardu führt in die passende Produktlinie für digitale Zutrittssteuerung und Maschinenfreigabe.',
     images: ['/_A7_9072_quer.webp', '/_A7_9072_quer.jpg'],
   },
   verification: {

@@ -5,7 +5,7 @@ import { getFeaturedIntegrations } from '@/lib/integrations';
 import Link from 'next/link';
 
 export async function IntegrationsPreview() {
-  if (!isIntegrationsEnabled('mardu-de')) {
+  if (!(await isIntegrationsEnabled('mardu-de'))) {
     return null;
   }
 

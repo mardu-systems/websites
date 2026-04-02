@@ -143,7 +143,14 @@ const clipPathPlugin = plugin(({ addUtilities, matchUtilities, theme }) => {
 });
 
 const config: Config = {
-  content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./features/**/*.{ts,tsx}"],
+  // Shared workspace packages provide Tailwind utility classes that must be
+  // scanned in the consuming app build, otherwise dialog/layout styles vanish.
+  content: [
+    "./app/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./features/**/*.{ts,tsx}",
+    "../../packages/**/*.{ts,tsx}",
+  ],
   theme: {
     extend: {
       animation: {

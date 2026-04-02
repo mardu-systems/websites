@@ -139,7 +139,7 @@ const renderTocItems = (items: TocNode[], depth = 0): React.ReactNode => {
 };
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  if (!isBlogEnabled('mardu-de')) {
+  if (!(await isBlogEnabled('mardu-de'))) {
     return {
       title: 'Beitrag nicht gefunden',
       robots: {
@@ -196,7 +196,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 }
 
 export default async function BlogDetailPage({ params }: { params: Params }) {
-  if (!isBlogEnabled('mardu-de')) {
+  if (!(await isBlogEnabled('mardu-de'))) {
     notFound();
   }
 

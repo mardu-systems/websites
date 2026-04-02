@@ -1,15 +1,16 @@
 import { IntegrationsPreview } from '@/components/integrations/integrations-preview';
 import CTASectionWithRecaptcha from '@/components/utilities/cta-section-with-recaptcha';
 import { MeetergoCTAButton } from '@/components/utilities/meetergo-cta-button';
+import NewsletterButton from '@/components/utilities/newsletter-button';
 import {
   DualImageSection,
   EditorialBenefitsSection,
   FeatureSection,
   Foerderung,
   HeroSection,
+  ProcessSteps,
   TripleImageSection,
 } from '@mardu/sections';
-
 /* ===================== Seite ===================== */
 
 export default async function HomePage() {
@@ -18,21 +19,24 @@ export default async function HomePage() {
       {/* Hero Header Section */}
       <section id="home">
         <HeroSection
-          title="Zutrittskontrolle & Maschinenfreigabe für Werkstätten, Labore & Baustellen."
-          overline="Engineering Access Platform"
+          title="Digitale Zutrittssteuerung und Maschinenfreigabe für sicherheitsrelevante Umgebungen."
+          overline="Für Werkstatt, Industrie und Baustelle"
           description={
             <>
               <p className="mb-4">
-                Verwalte Zutritt und Maschinennutzung – mobil auf der Baustelle oder stationär in
-                der Werkstatt.
-                <br />
-                Mardu passt sich an deine Bedürfnisse an.
+                Mardu reduziert Verwaltungsaufwand bei Zutritt und Maschinennutzung, schafft mehr
+                Übersicht im Betrieb und lässt sich in bestehende Systeme integrieren.
+              </p>
+              <p>
+                Mit IP500-Funksystem, digitaler Verwaltung und klaren Zugangsregeln organisieren Sie
+                Türen, Tore und Maschinen deutlich einfacher als mit Schlüsseln, Listen und
+                isolierten Einzellösungen.
               </p>
             </>
           }
-          buttonText="Lösungen für Werkstätten"
+          buttonText="Mehr über mardu.space"
           buttonHref="https://mardu.space"
-          secondaryButtonText="Lösungen für Baustellen"
+          secondaryButtonText="Mehr über mardu.construction"
           secondaryButtonHref="/#produkte"
           imageSrc="/_A7_9072_quer.webp"
           imageAlt="Zugriffskontrollsysteme im Makerspace"
@@ -44,7 +48,8 @@ export default async function HomePage() {
               imageAlt: 'Maschinenfreischaltung an einer Drehbank mit mardu.space',
               ariaLabel: 'Zu mardu.space wechseln',
               badge: 'mardu.space',
-              description: 'Maschinenzugang per NFC in Werkstatt und Labor.',
+              description:
+                'Für Industrie, Werkstätten, Labore, Makerspaces, FabLabs und Hochschulen.',
               priority: true,
             },
             {
@@ -54,67 +59,30 @@ export default async function HomePage() {
               imageAlt: 'Freischaltung einer Bautür mit mardu.construction',
               ariaLabel: 'Zu den Produktlösungen mardu.construction scrollen',
               badge: 'mardu.construction',
-              description: 'Digitale Zutrittskontrolle für Baustellentüren und Tore.',
+              badgePosition: 'bottom-right',
+              description: 'Für Baustellenzugang, Tore und temporäre Sicherheitsbereiche.',
             },
           ]}
         />
       </section>
-
-      <section id="loesung">
-        <FeatureSection
-          className="mb-10"
-          title="Die Mardu-Lösung"
-          description={
-            <>
-              <p>
-                Mardu ist eine flexible, funkbasierte Lösung für Zugriffs- und Zutrittskontrolle.
-                Alle Endgeräte sind per Funk vernetzt und dank Dual-Band-Mesh-Technologie
-                ausfallsicher. Mardu kann zentral verwaltet oder vollständig lokal betrieben werden
-                und deckt so verschiedenste Einsatzszenarien ab – von permanenter Installation bis
-                temporärem Setup.
-              </p>
-              <p className="mt-4">
-                Ideal für Innen- und Außenbereiche sowie temporäre Setups. Damit sichern Sie Türen,
-                Tore, Drehkreuze, Maschinenzugänge und weitere kritische Bereiche.
-              </p>
-              <p className="mt-4">
-                Alle Vorgänge werden nachvollziehbar und DSGVO-konform protokolliert. Das reduziert
-                Verwaltungsaufwand und schafft belastbare Nachweise.
-              </p>
-
-              <p className="mt-4">
-                Egal ob Standardprodukt oder Speziallösung: Wir begleiten Konzeption, Umsetzung und
-                Betrieb.
-              </p>
-            </>
-          }
-          imageSrc="/Mardu-System.webp"
-          imageAlt="Mardu System"
-          buttonText="Kontaktiere uns"
-          buttonHref="/contact"
-        />
-      </section>
-
-      <IntegrationsPreview />
 
       <section id="produkte">
         <DualImageSection
           cards={[
             {
               imageSrc: '/mardu-space.webp',
-              imageAlt: 'Zugriffskontrolle',
+              imageAlt: 'mardu.space in Werkstatt und Labor',
               title: 'mardu.space',
               description: (
                 <>
                   <p>
-                    Werkstätten, Produktionshallen und Labore sind Orte der täglichen Arbeit und
-                    gleichzeitig sensible Sicherheitsbereiche.
+                    Für Industrie, Werkstätten, Labore, Makerspaces, FabLabs und Hochschulen, in
+                    denen Zutritt, Qualifikation und Maschinennutzung zuverlässig zusammenlaufen
+                    müssen.
                   </p>
                   <p className="mt-4">
-                    Mit mardu.space stellt das Mardu-System sicher, dass nur berechtigte Personen
-                    Maschinen nutzen können. Das System wird in Makerspaces, Schülerlaboren und
-                    Universitäten eingesetzt, aber auch in produzierenden Betrieben und Werkstätten
-                    mit vielen hundert Geräten.
+                    mardu.space organisiert Maschinenfreigabe, Zutritt und Verwaltung in einer
+                    benutzerfreundlichen Lösung für den laufenden Betrieb.
                   </p>
                 </>
               ),
@@ -123,54 +91,81 @@ export default async function HomePage() {
             },
             {
               imageSrc: '/mardu-constructions.webp',
-              imageAlt: 'Maschinenfreigabe',
+              imageAlt: 'mardu.construction für Baustellentüren und Tore',
               title: 'mardu.construction (Early Access)',
               description: (
                 <>
                   <p>
-                    mardu.construction steht für digitale, flexible und skalierbare
-                    Zutrittskontrollen auf Baustellen. So erhalten Sie Übersicht über Bereiche,
-                    Lieferanten, Subunternehmer und Mitarbeitende.
+                    Für Baustellenkoordination und Betreiber temporärer Flächen, die Zugriffe auf
+                    Tore, Türen und sensible Bereiche sauber organisieren wollen.
                   </p>
                   <p className="mt-4">
-                    mardu.construction befindet sich aktuell im Early-Access-Projektstadium.
-                    Funktionen werden gemeinsam mit ersten Anwendern erprobt, weiterentwickelt und
-                    gezielt an reale Baustellenanforderungen angepasst.
+                    mardu.construction befindet sich im Early Access und wird gemeinsam mit ersten
+                    Anwendern an reale Baustellenprozesse angepasst.
                   </p>
                 </>
               ),
+              buttonText: 'Early Access anfragen',
+              buttonHref: '/contact',
             },
           ]}
         />
       </section>
 
+      <section id="loesung">
+        <FeatureSection
+          className="mb-10"
+          title="Zutritt und Nutzung einfacher organisieren"
+          description={
+            <>
+              <p>
+                Mardu ersetzt manuelle Freigaben, Schlüsselorganisation und unübersichtliche
+                Einzelprozesse durch ein digitales System für Türen, Tore und Maschinen.
+              </p>
+              <p className="mt-4">
+                Der Vorteil liegt nicht in abstrakter Technologie, sondern im Alltag: weniger
+                Abstimmung, weniger Listenpflege, mehr Übersicht und eine Verwaltung, die sich
+                sauber in bestehende Infrastruktur einfügt.
+              </p>
+              <p className="mt-4">
+                So behalten Betreiber den Überblick über Zugänge, Berechtigungen und Nutzung, ohne
+                zusätzliche Komplexität in den Betrieb zu holen.
+              </p>
+              <p className="mt-4">
+                Die technische Basis mit IP500-Funk und der Anbindung an bestehende Systeme sorgt
+                dafür, dass digitale Organisation nicht an der Praxis vorbeigeht.
+              </p>
+            </>
+          }
+          imageSrc="/Mardu-System.webp"
+          imageAlt="Mardu System"
+          buttonText="Mehr erfahren"
+          buttonHref="/contact"
+        />
+      </section>
+
+      <IntegrationsPreview />
+
       <section id="argumente">
         <EditorialBenefitsSection
           className="mt-12"
           eyebrow="Vorteile"
-          title={<span>Drei Vorteile beim Einsatz von Mardu</span>}
+          title={<span>Drei Vorteile, die im Alltag wirklich zählen</span>}
           intro={
             <>
-              Mardu verbindet Zugriff, Regeln und Betrieb in einer technischen Plattform, die im
-              Alltag belastbar bleibt und trotzdem flexibel auf neue Situationen reagiert.
+              Mardu unterstützt Betreiber dabei, Zutritt und Nutzung einfacher zu organisieren,
+              Abläufe übersichtlicher zu steuern und bestehende Systeme sinnvoll einzubinden.
             </>
           }
           items={[
             {
               id: 'sicherheit',
-              badge: 'Sicherheit',
-              title: (
-                <>
-                  <span className="whitespace-nowrap">Mehr Sicherheit &</span>
-                  <br />
-                  Nachvollziehbarkeit
-                </>
-              ),
+              badge: 'Verwaltung',
+              title: 'Weniger Schlüssel, Listen und Abstimmung',
               description: (
                 <>
-                  Unbefugte Zugriffe werden zuverlässig verhindert. Jeder Zutritt oder jede
-                  Benutzung einer Maschine ist personen- und zeitbezogen geregelt und lückenlos
-                  dokumentiert.
+                  Rechte, Zugänge und Nutzung lassen sich zentral organisieren, statt im Alltag über
+                  Schlüssel, Excel-Listen und einzelne Rückfragen zusammengehalten zu werden.
                 </>
               ),
               shape: {
@@ -184,12 +179,12 @@ export default async function HomePage() {
             },
             {
               id: 'regeln',
-              badge: 'Betrieb',
-              title: 'Klare Regeln & weniger Aufwand',
+              badge: 'Übersicht',
+              title: 'Mehr Kontrolle ohne komplizierte Prozesse',
               description: (
                 <>
-                  Berechtigungen lassen sich flexibel von überall vergeben, ändern oder entziehen.
-                  Ganz ohne Schlüssel, Schlössertausch oder manuelle Listen.
+                  Betreiber sehen klarer, wer worauf Zugriff hat, welche Bereiche abgesichert sind
+                  und wie Zugänge und Nutzung im Alltag organisiert werden.
                 </>
               ),
               shape: {
@@ -203,13 +198,13 @@ export default async function HomePage() {
             },
             {
               id: 'verwaltung',
-              badge: 'System',
-              title: 'Lokal und Zentral verwaltbar',
+              badge: 'Integration',
+              title: 'Passt in bestehende Systeme und reale Abläufe',
               description: (
                 <>
-                  Alle Berechtigungen werden vor Ort zentral gespeichert und verwaltet. Gleichzeitig
-                  kann alles über Fernzugriff verwaltet werden. Hierdurch kann höchste
-                  Ausfallsicherheit bei gleichzeitiger Flexibilität gewährleistet werden.
+                  Mit IP500-Funksystem und Anbindung an vorhandene Infrastruktur wird digitale
+                  Zutrittsorganisation zu einer praktikablen Lösung statt zu einem zusätzlichen
+                  Sonderprozess.
                 </>
               ),
               shape: {
@@ -220,6 +215,31 @@ export default async function HomePage() {
                 anchor: 'top-right',
                 fade: 'none',
               },
+            },
+          ]}
+        />
+      </section>
+
+      <section id="vorgehen" className="section-hairline">
+        <ProcessSteps
+          eyebrow="So läuft es ab"
+          title="Von der Anfrage zur passenden Lösung"
+          variant="plain"
+          steps={[
+            {
+              title: 'Anwendungsfall verstehen',
+              description:
+                'Zu Beginn klären wir, welche Bereiche, Türen, Tore oder Maschinen organisiert werden sollen und welche Abläufe im Betrieb heute Zeit kosten.',
+            },
+            {
+              title: 'System und Schnittstellen prüfen',
+              description:
+                'Danach prüfen wir die relevanten Zugangspunkte, die vorhandene Infrastruktur und wie sich Mardu sinnvoll in bestehende Systeme integrieren lässt.',
+            },
+            {
+              title: 'Lösung und Einstieg festlegen',
+              description:
+                'Anschließend definieren wir den passenden Einstieg, von der Demo bis zum Pilot oder Early-Access-Setup.',
             },
           ]}
         />
@@ -283,12 +303,13 @@ export default async function HomePage() {
 
       <section id="contact">
         <CTASectionWithRecaptcha
-          title="Sicherheit, Transparenz und Kontrolle – zentral gesteuert"
-          description="Sprechen Sie uns an. Gemeinsam entwickeln wir eine Lösung, die zu Ihren Prozessen, Flächen und Sicherheitsanforderungen passt."
-          primaryButtonText="Jetzt für unseren Newsletter anmelden"
+          title="Mehr über Mardu erfahren"
+          description="Erfahren Sie, wie Mardu Zutritt, Maschinenfreigabe und Verwaltung in Werkstatt, Industrie oder Baustelle einfacher organisiert. Für Updates und Einblicke können Sie den Newsletter abonnieren oder direkt eine Demo vereinbaren."
+          primaryButtonText="Newsletter abonnieren"
+          primaryActionSlot={<NewsletterButton primaryButtonText="Newsletter abonnieren" />}
           secondaryActionSlot={
             <MeetergoCTAButton className="mt-0 ml-0 h-11 rounded-none border border-white/35 bg-white/12 px-5 text-sm uppercase tracking-[0.08em] text-white hover:bg-white/18 sm:mt-0 sm:ml-0">
-              Beratung Vereinbaren
+              Demo vereinbaren
             </MeetergoCTAButton>
           }
         />

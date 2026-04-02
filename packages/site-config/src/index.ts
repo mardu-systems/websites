@@ -1,3 +1,6 @@
+import { vercelAdapter } from '@flags-sdk/vercel';
+import { flag, type Flag } from 'flags/next';
+
 export type SiteKey = 'mardu-de' | 'mardu-space' | 'platform';
 
 export type SiteLink = {
@@ -11,6 +14,8 @@ export type SiteFeatureFlags = {
   blog: boolean;
   integrations: boolean;
 };
+
+export type SiteFeatureFlagDeclarations = Record<SiteFeatureKey, Flag<boolean>>;
 
 export type SiteConfig = {
   key: SiteKey;
@@ -144,28 +149,98 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
   },
 };
 
+const BOOLEAN_FLAG_OPTIONS: { label: string; value: boolean }[] = [
+  { label: 'Off', value: false },
+  { label: 'On', value: true },
+];
+
+const siteFeatureFlagDeclarations: Record<SiteKey, SiteFeatureFlagDeclarations> = {
+  'mardu-de': {
+    blog: flag<boolean>({
+      key: 'blog',
+      adapter: vercelAdapter(),
+      defaultValue: siteConfigs['mardu-de'].features.blog,
+      description: 'Steuert Blog-Navigation, Blog-Routen und Sitemap-Einträge auf mardu.de.',
+      origin: `${siteConfigs['mardu-de'].origin}/blog`,
+      options: BOOLEAN_FLAG_OPTIONS,
+    }),
+    integrations: flag<boolean>({
+      key: 'integrations',
+      adapter: vercelAdapter(),
+      defaultValue: siteConfigs['mardu-de'].features.integrations,
+      description:
+        'Steuert Integrations-Navigation, Integrations-Routen und Sitemap-Einträge auf mardu.de.',
+      origin: `${siteConfigs['mardu-de'].origin}/integrations`,
+      options: BOOLEAN_FLAG_OPTIONS,
+    }),
+  },
+  'mardu-space': {
+    blog: flag<boolean>({
+      key: 'blog',
+      adapter: vercelAdapter(),
+      defaultValue: siteConfigs['mardu-space'].features.blog,
+      description: 'Steuert Blog-Features auf mardu.space.',
+      origin: `${siteConfigs['mardu-space'].origin}/blog`,
+      options: BOOLEAN_FLAG_OPTIONS,
+    }),
+    integrations: flag<boolean>({
+      key: 'integrations',
+      adapter: vercelAdapter(),
+      defaultValue: siteConfigs['mardu-space'].features.integrations,
+      description: 'Steuert Integrations-Features auf mardu.space.',
+      origin: `${siteConfigs['mardu-space'].origin}/integrations`,
+      options: BOOLEAN_FLAG_OPTIONS,
+    }),
+  },
+  platform: {
+    blog: flag<boolean>({
+      key: 'blog',
+      adapter: vercelAdapter(),
+      defaultValue: siteConfigs.platform.features.blog,
+      description: 'Steuert Blog-Features auf platform.mardu.de.',
+      origin: `${siteConfigs.platform.origin}/blog`,
+      options: BOOLEAN_FLAG_OPTIONS,
+    }),
+    integrations: flag<boolean>({
+      key: 'integrations',
+      adapter: vercelAdapter(),
+      defaultValue: siteConfigs.platform.features.integrations,
+      description: 'Steuert Integrations-Features auf platform.mardu.de.',
+      origin: `${siteConfigs.platform.origin}/integrations`,
+      options: BOOLEAN_FLAG_OPTIONS,
+    }),
+  },
+};
+
 export function getSiteConfig(site: SiteKey): SiteConfig {
   return siteConfigs[site];
 }
 
-export function getSiteFeatureFlags(site: SiteKey): SiteFeatureFlags {
+export function getSiteFlagDefinitions(site: SiteKey): SiteFeatureFlagDeclarations {
+  return siteFeatureFlagDeclarations[site];
+}
+
+export async function getSiteFeatureFlags(site: SiteKey): Promise<SiteFeatureFlags> {
   const config = getSiteConfig(site);
   const envVarNames = featureEnvVarNames[site];
+  const flags = getSiteFlagDefinitions(site);
 
   return {
-    blog: parseBooleanEnvOverride(process.env[envVarNames.blog]) ?? config.features.blog,
+    blog:
+      parseBooleanEnvOverride(process.env[envVarNames.blog]) ??
+      (await flags.blog().catch(() => config.features.blog)),
     integrations:
       parseBooleanEnvOverride(process.env[envVarNames.integrations]) ??
-      config.features.integrations,
+      (await flags.integrations().catch(() => config.features.integrations)),
   };
 }
 
-export function isBlogEnabled(site: SiteKey): boolean {
-  return getSiteFeatureFlags(site).blog;
+export async function isBlogEnabled(site: SiteKey): Promise<boolean> {
+  return (await getSiteFeatureFlags(site)).blog;
 }
 
-export function isIntegrationsEnabled(site: SiteKey): boolean {
-  return getSiteFeatureFlags(site).integrations;
+export async function isIntegrationsEnabled(site: SiteKey): Promise<boolean> {
+  return (await getSiteFeatureFlags(site)).integrations;
 }
 
 export function getPlatformOrigin(): string {

@@ -92,6 +92,7 @@ function FooterSocialLink({
 export default function SiteFooter({
   brand,
   description,
+  primaryActionSlot,
   navLinks = EMPTY_LINKS,
   metaLinks = EMPTY_LINKS,
   socialLinks = EMPTY_SOCIAL_LINKS,
@@ -148,18 +149,21 @@ export default function SiteFooter({
               {description ??
                 'Verwalte Zutritt und Maschinennutzung mobil auf der Baustelle oder stationär in der Werkstatt.'}
             </p>
-            <Button
-              variant="outline"
-              onClick={scrollToTop}
-              className={
-                isDark
-                  ? 'border-white/28 bg-transparent text-white hover:bg-white hover:text-neutral-950'
-                  : undefined
-              }
-            >
-              <ArrowUp className="size-4" />
-              Nach oben
-            </Button>
+            <div className="flex flex-wrap items-center gap-3">
+              <Button
+                variant="outline"
+                onClick={scrollToTop}
+                className={
+                  isDark
+                    ? 'border-white/28 bg-transparent text-white hover:bg-white hover:text-neutral-950'
+                    : undefined
+                }
+              >
+                <ArrowUp className="size-4" />
+                Nach oben
+              </Button>
+              {primaryActionSlot}
+            </div>
           </div>
 
           <div className="space-y-4">
@@ -189,21 +193,6 @@ export default function SiteFooter({
               Kontakt & Recht
             </p>
             <ul className="space-y-2.5 text-sm">
-              {actions.map((action) => (
-                <li key={action.id}>
-                  <button
-                    type="button"
-                    onClick={() => onAction?.(action.id)}
-                    className={
-                      isDark
-                        ? 'text-white/86 transition-colors hover:text-white'
-                        : 'text-foreground/75 transition-colors hover:text-foreground'
-                    }
-                  >
-                    {action.label}
-                  </button>
-                </li>
-              ))}
               {metaLinks.map((link) => (
                 <li key={`${link.label}:${link.href}`}>
                   <FooterLink

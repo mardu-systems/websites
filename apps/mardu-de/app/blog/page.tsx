@@ -45,7 +45,7 @@ const asPositiveNumber = (value: string | string[] | undefined): number | undefi
 };
 
 export default async function BlogPage({ searchParams }: { searchParams: SearchParams }) {
-  if (!isBlogEnabled('mardu-de')) {
+  if (!(await isBlogEnabled('mardu-de'))) {
     notFound();
   }
 

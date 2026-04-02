@@ -35,6 +35,13 @@ DTO describing the resolved site feature state.
 - `blog: boolean`
 - `integrations: boolean`
 
+#### `SiteFeatureFlagDeclarations`
+
+Map of concrete Vercel Flags declarations for a site.
+
+- `blog: Flag<boolean>`
+- `integrations: Flag<boolean>`
+
 #### `SiteConfig`
 
 Shared configuration DTO for a site.
@@ -64,12 +71,18 @@ Shared configuration DTO for a site.
 
 Returns the static config DTO for the given site.
 
+#### `getSiteFlagDefinitions(site)`
+
+Returns the concrete Vercel Flags declarations for the given site. These declarations are used by
+app-local `flags.ts` modules and the `/.well-known/vercel/flags` discovery endpoint.
+
 #### `getSiteFeatureFlags(site)`
 
-Returns the resolved site feature flags. Resolution order:
+Returns the resolved site feature flags asynchronously. Resolution order:
 
-1. default values from `siteConfigs`
-2. optional env override per site and feature
+1. optional env override per site and feature
+2. Vercel Flags evaluation
+3. default values from `siteConfigs`
 
 Recognized env variables:
 
@@ -88,11 +101,11 @@ Supported values:
 
 #### `isBlogEnabled(site)`
 
-Convenience helper for `getSiteFeatureFlags(site).blog`.
+Async convenience helper for `(await getSiteFeatureFlags(site)).blog`.
 
 #### `isIntegrationsEnabled(site)`
 
-Convenience helper for `getSiteFeatureFlags(site).integrations`.
+Async convenience helper for `(await getSiteFeatureFlags(site)).integrations`.
 
 #### `getPlatformOrigin()`
 
@@ -101,5 +114,6 @@ Returns the platform origin, optionally overridden through `MARDU_PLATFORM_ORIGI
 ## Boundaries
 
 - This package resolves site-level availability only.
+- Feature evaluation uses Vercel Flags via `flags/next` and `@flags-sdk/vercel`.
 - Payload content visibility per entry stays in `@mardu/content-core` via the existing `sites` fields.
 - Frontends are responsible for using these helpers to gate navigation, routes, sitemap entries, and preview modules.
