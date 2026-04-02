@@ -7,3 +7,5 @@ export const migrations = [
     name: '20260402_200045'
   },
 ];
+
+export default migrations;
