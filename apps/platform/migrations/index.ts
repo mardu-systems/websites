@@ -1,4 +1,4 @@
-import * as migration_20260402_200045 from './20260402_200045';
+import * as migration_20260402_200045 from './20260402_200045.ts';
 
 export const migrations = [
   {

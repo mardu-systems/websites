@@ -86,6 +86,18 @@ DTO-Vertrag fuer SSO:
 Erweiterte SSO-Dokumentation:
 [docs/api/payload-sso-integration.md](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/docs/api/payload-sso-integration.md)
 
+## MCP-Endpunkt
+
+1. `POST /api/mcp`
+
+MCP-Berechtigungs- und Funktionsvertrag:
+[docs/api/payload-mcp-surface.md](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/docs/api/payload-mcp-surface.md)
+
+Hinweis:
+
+- Die freigegebene MCP-Oberflaeche ist bewusst auf CMS- und Ops-Collections begrenzt.
+- Experimentelle Admin-/Developer-Tools bleiben deaktiviert.
+
 ## SEO-Plugin-Endpunkte (Payload Plugin SEO)
 
 Wenn das SEO-Plugin aktiv ist, stellt Payload zusaetzlich folgende Endpunkte bereit:

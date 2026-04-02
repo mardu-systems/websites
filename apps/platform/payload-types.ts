@@ -492,6 +492,42 @@ export interface PayloadMcpApiKey {
      */
     delete?: boolean | null;
   };
+  blogCategories?: {
+    /**
+     * Allow clients to find blog-categories.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create blog-categories.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update blog-categories.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete blog-categories.
+     */
+    delete?: boolean | null;
+  };
+  blogAuthors?: {
+    /**
+     * Allow clients to find blog-authors.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create blog-authors.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update blog-authors.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete blog-authors.
+     */
+    delete?: boolean | null;
+  };
   integrations?: {
     /**
      * Allow clients to find integrations.
@@ -507,6 +543,42 @@ export interface PayloadMcpApiKey {
     update?: boolean | null;
     /**
      * Allow clients to delete integrations.
+     */
+    delete?: boolean | null;
+  };
+  integrationCategories?: {
+    /**
+     * Allow clients to find integration-categories.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create integration-categories.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update integration-categories.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete integration-categories.
+     */
+    delete?: boolean | null;
+  };
+  integrationProtocols?: {
+    /**
+     * Allow clients to find integration-protocols.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create integration-protocols.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update integration-protocols.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete integration-protocols.
      */
     delete?: boolean | null;
   };
@@ -527,6 +599,54 @@ export interface PayloadMcpApiKey {
      * Allow clients to delete legal-pages.
      */
     delete?: boolean | null;
+  };
+  media?: {
+    /**
+     * Allow clients to find media.
+     */
+    find?: boolean | null;
+  };
+  newsletterSubscribers?: {
+    /**
+     * Allow clients to find newsletter-subscribers.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create newsletter-subscribers.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update newsletter-subscribers.
+     */
+    update?: boolean | null;
+  };
+  contactLeads?: {
+    /**
+     * Allow clients to find contact-leads.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create contact-leads.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update contact-leads.
+     */
+    update?: boolean | null;
+  };
+  preorderRequests?: {
+    /**
+     * Allow clients to find preorder-requests.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create preorder-requests.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update preorder-requests.
+     */
+    update?: boolean | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -914,7 +1034,39 @@ export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
         update?: T;
         delete?: T;
       };
+  blogCategories?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  blogAuthors?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
   integrations?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  integrationCategories?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  integrationProtocols?:
     | T
     | {
         find?: T;
@@ -929,6 +1081,32 @@ export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
         create?: T;
         update?: T;
         delete?: T;
+      };
+  media?:
+    | T
+    | {
+        find?: T;
+      };
+  newsletterSubscribers?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+      };
+  contactLeads?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+      };
+  preorderRequests?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
       };
   updatedAt?: T;
   createdAt?: T;

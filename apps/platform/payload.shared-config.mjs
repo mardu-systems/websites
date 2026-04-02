@@ -104,13 +104,108 @@ const payloadSharedConfig = {
     mcpPlugin({
       collections: {
         'blog-posts': {
-          enabled: true,
+          description:
+            'Redaktionelle Pflege von Blog-Inhalten fuer CMS-Workflows inklusive Lesen, Anlegen, Aktualisieren und Loeschen.',
+          enabled: {
+            create: true,
+            delete: true,
+            find: true,
+            update: true,
+          },
+        },
+        'blog-categories': {
+          description:
+            'Taxonomie fuer Blog-Posts. Ermoeglicht redaktionelle Verwaltung von Kategorien ueber MCP.',
+          enabled: {
+            create: true,
+            delete: true,
+            find: true,
+            update: true,
+          },
+        },
+        'blog-authors': {
+          description:
+            'Pflege von Blog-Autorenprofilen fuer redaktionelle Zuordnung und Darstellung im CMS.',
+          enabled: {
+            create: true,
+            delete: true,
+            find: true,
+            update: true,
+          },
         },
         integrations: {
-          enabled: true,
+          description:
+            'CMS-Pflege fuer Integrationen inklusive Lesen, Erstellen, Aktualisieren und Entfernen von Eintraegen.',
+          enabled: {
+            create: true,
+            delete: true,
+            find: true,
+            update: true,
+          },
+        },
+        'integration-categories': {
+          description:
+            'Taxonomie fuer Integrationen. Wird fuer redaktionelle Pflege und Filterlogik bereitgestellt.',
+          enabled: {
+            create: true,
+            delete: true,
+            find: true,
+            update: true,
+          },
+        },
+        'integration-protocols': {
+          description:
+            'Pflege von Protokoll-Taxonomien fuer Integrationen im operativen CMS-Kontext.',
+          enabled: {
+            create: true,
+            delete: true,
+            find: true,
+            update: true,
+          },
         },
         'legal-pages': {
-          enabled: true,
+          description:
+            'Pflege rechtlicher Seiten wie Impressum und Datenschutz mit vollem redaktionellen CRUD-Zugriff.',
+          enabled: {
+            create: true,
+            delete: true,
+            find: true,
+            update: true,
+          },
+        },
+        media: {
+          description:
+            'Lesender Zugriff auf Media-Dokumente fuer Referenzen in CMS-Workflows. Uploads und Loeschungen bleiben ausserhalb von MCP.',
+          enabled: {
+            find: true,
+          },
+        },
+        'newsletter-subscribers': {
+          description:
+            'Operative Bearbeitung von Newsletter-Abonnenten fuer CRM-nahe Workflows ohne Loeschrechte.',
+          enabled: {
+            create: true,
+            find: true,
+            update: true,
+          },
+        },
+        'contact-leads': {
+          description:
+            'Operative Bearbeitung von Kontaktanfragen fuer Lead- und Vertriebs-Workflows ohne Loeschrechte.',
+          enabled: {
+            create: true,
+            find: true,
+            update: true,
+          },
+        },
+        'preorder-requests': {
+          description:
+            'Operative Bearbeitung von Vorbestellungen fuer Pipeline- und Qualification-Workflows ohne Loeschrechte.',
+          enabled: {
+            create: true,
+            find: true,
+            update: true,
+          },
         },
       },
     }),

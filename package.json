@@ -12,6 +12,7 @@
     "dev:mardu-de": "bun --cwd apps/mardu-de run dev",
     "dev:mardu-space": "bun --cwd apps/mardu-space run dev",
     "dev:platform": "bun --cwd apps/platform run dev",
+    "payload": "cd apps/platform && bun run payload",
     "lint": "turbo run lint",
     "type-check": "turbo run type-check",
     "format": "turbo run format",
