@@ -27,6 +27,7 @@ Shared content sections for multiple Mardu frontends.
 - `CTASection`
 - `EditorialPanelsSection`
 - `EditorialLinkPanelsSection`
+- `EditorialBenefitsSection`
 
 ## `WhitepaperSection` contract
 
@@ -116,6 +117,40 @@ Shared content sections for multiple Mardu frontends.
 - `CTASection` keeps the `mardu.de` visual baseline as the default and only exposes small hooks for routing, custom secondary actions and optional request tokens.
 - `EditorialPanelsSection` provides an editorial 3-panel product-story layout with render-ready media DTOs, so apps can supply their own copy and screenshots without forking the composition.
 - `EditorialLinkPanelsSection` provides a 2-panel editorial link stage with brand-led pattern fields, so apps can deepen a story without falling back to generic cards.
+- `EditorialBenefitsSection` provides a 3-panel editorial advantages stage with generated pattern silhouettes, so apps can express benefits in the same brand language without falling back to icon cards.
+
+## `EditorialBenefitsSection` contract
+
+- Props:
+  - `eyebrow?: ReactNode`
+  - `title?: ReactNode`
+  - `intro?: ReactNode`
+  - `items: [EditorialBenefitItem, EditorialBenefitItem, EditorialBenefitItem]`
+  - `className?: string`
+- `EditorialBenefitItem`:
+  - `id: string`
+  - `title: string`
+  - `description: ReactNode`
+  - `badge?: string`
+  - `shape: EditorialShapeConfig`
+  - `align?: 'left' | 'center'`
+  - `cta?: EditorialBenefitCta`
+- `EditorialBenefitCta`:
+  - `href: string`
+  - `label: string`
+  - `ariaLabel?: string`
+- `EditorialShapeConfig`:
+  - `glyph?: 'chevron' | 'v' | 'bar'`
+  - `tone?: 'emerald' | 'sky' | 'violet' | 'mixed'`
+  - `density?: 'compact' | 'default' | 'airy'`
+  - `silhouette: 'shield' | 'flow' | 'stack' | 'check' | 'grid-cutout' | 'sliders' | 'bridge'`
+  - `anchor?: 'top-left' | 'top-center' | 'top-right'`
+  - `fade?: 'diagonal' | 'vertical' | 'horizontal' | 'none'`
+- Behavior:
+  - renders exactly 3 editorial benefit panels to preserve a calm advantages rhythm
+  - uses generated glyph fields to form symbolic silhouettes instead of separate icon assets
+  - keeps CTA support optional so the same component can work for informational or navigational benefit stages
+  - falls back to a horizontal strip on small screens instead of compressing the pattern-heavy panels
 
 ## `EditorialLinkPanelsSection` contract
 
@@ -227,5 +262,6 @@ Shared content sections for multiple Mardu frontends.
 - `CTASectionNewsletterDialogProps` / `CTASectionProps`
 - `EditorialPanelItem` / `EditorialPanelsSectionProps`
 - `EditorialLinkPanelItem` / `EditorialLinkPanelsSectionProps` / `EditorialPatternConfig`
+- `EditorialBenefitItem` / `EditorialBenefitCta` / `EditorialBenefitsSectionProps` / `EditorialShapeConfig`
 
 These DTOs are intentionally render-ready. Routing, fetching, and CMS mapping stay in the consuming app or in upstream core packages.

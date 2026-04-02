@@ -3,13 +3,12 @@ import CTASectionWithRecaptcha from '@/components/utilities/cta-section-with-rec
 import { MeetergoCTAButton } from '@/components/utilities/meetergo-cta-button';
 import {
   DualImageSection,
+  EditorialBenefitsSection,
   FeatureSection,
   Foerderung,
   HeroSection,
-  ThreeArguments,
   TripleImageSection,
 } from '@mardu/sections';
-import { FileSearchCorner, HeartHandshake, Milestone } from 'lucide-react';
 
 /* ===================== Seite ===================== */
 
@@ -146,12 +145,27 @@ export default async function HomePage() {
       </section>
 
       <section id="argumente">
-        <ThreeArguments
+        <EditorialBenefitsSection
           className="mt-12"
+          eyebrow="Vorteile"
           title={<span>Drei Vorteile beim Einsatz von Mardu</span>}
+          intro={
+            <>
+              Mardu verbindet Zugriff, Regeln und Betrieb in einer technischen Plattform, die im
+              Alltag belastbar bleibt und trotzdem flexibel auf neue Situationen reagiert.
+            </>
+          }
           items={[
             {
-              title: 'Mehr Sicherheit & Nachvollziehbarkeit',
+              id: 'sicherheit',
+              badge: 'Sicherheit',
+              title: (
+                <>
+                  <span className="whitespace-nowrap">Mehr Sicherheit &</span>
+                  <br />
+                  Nachvollziehbarkeit
+                </>
+              ),
               description: (
                 <>
                   Unbefugte Zugriffe werden zuverlässig verhindert. Jeder Zutritt oder jede
@@ -159,9 +173,18 @@ export default async function HomePage() {
                   dokumentiert.
                 </>
               ),
-              icon: <HeartHandshake className="text-[#351B59]" size="72" />,
+              shape: {
+                silhouette: 'shield',
+                glyph: 'chevron',
+                tone: 'mixed',
+                density: 'default',
+                anchor: 'top-left',
+                fade: 'diagonal',
+              },
             },
             {
+              id: 'regeln',
+              badge: 'Betrieb',
               title: 'Klare Regeln & weniger Aufwand',
               description: (
                 <>
@@ -169,9 +192,18 @@ export default async function HomePage() {
                   Ganz ohne Schlüssel, Schlössertausch oder manuelle Listen.
                 </>
               ),
-              icon: <Milestone className="text-[#351B59]" size="72" />,
+              shape: {
+                silhouette: 'sliders',
+                glyph: 'bar',
+                tone: 'sky',
+                density: 'default',
+                anchor: 'top-center',
+                fade: 'none',
+              },
             },
             {
+              id: 'verwaltung',
+              badge: 'System',
               title: 'Lokal und Zentral verwaltbar',
               description: (
                 <>
@@ -180,7 +212,14 @@ export default async function HomePage() {
                   Ausfallsicherheit bei gleichzeitiger Flexibilität gewährleistet werden.
                 </>
               ),
-              icon: <FileSearchCorner className="text-[#351B59]" size="72" />,
+              shape: {
+                silhouette: 'bridge',
+                glyph: 'bar',
+                tone: 'emerald',
+                density: 'default',
+                anchor: 'top-right',
+                fade: 'none',
+              },
             },
           ]}
         />

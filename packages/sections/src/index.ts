@@ -123,3 +123,13 @@ export {
   type EditorialPatternGlyph,
   type EditorialPatternTone,
 } from "./editorial-link-panels-section";
+export {
+  default as EditorialBenefitsSection,
+  type EditorialBenefitCta,
+  type EditorialBenefitItem,
+  type EditorialBenefitsSectionProps,
+  type EditorialShapeAnchor,
+  type EditorialShapeConfig,
+  type EditorialShapeFade,
+  type EditorialShapeSilhouette,
+} from "./editorial-benefits-section";
