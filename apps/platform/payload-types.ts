@@ -73,6 +73,7 @@ export interface Config {
     'blog-categories': BlogCategory;
     'blog-authors': BlogAuthor;
     'blog-posts': BlogPost;
+    'legal-pages': LegalPage;
     'integration-categories': IntegrationCategory;
     'integration-protocols': IntegrationProtocol;
     integrations: Integration;
@@ -92,6 +93,7 @@ export interface Config {
     'blog-categories': BlogCategoriesSelect<false> | BlogCategoriesSelect<true>;
     'blog-authors': BlogAuthorsSelect<false> | BlogAuthorsSelect<true>;
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
+    'legal-pages': LegalPagesSelect<false> | LegalPagesSelect<true>;
     'integration-categories': IntegrationCategoriesSelect<false> | IntegrationCategoriesSelect<true>;
     'integration-protocols': IntegrationProtocolsSelect<false> | IntegrationProtocolsSelect<true>;
     integrations: IntegrationsSelect<false> | IntegrationsSelect<true>;
@@ -257,7 +259,7 @@ export interface BlogPost {
   /**
    * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
    */
-  sites: ('mardu-de' | 'mardu-space')[];
+  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -266,6 +268,29 @@ export interface BlogPost {
      */
     image?: (number | null) | Media;
   };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-pages".
+ */
+export interface LegalPage {
+  id: number;
+  title: string;
+  slug: 'privacy' | 'publisher';
+  pageKind: 'privacy' | 'publisher';
+  summary?: string | null;
+  updatedLabel?: string | null;
+  contentMarkdown: string;
+  /**
+   * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
+   */
+  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
+  seoTitle?: string | null;
+  seoDescription?: string | null;
+  canonicalUrl?: string | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -347,7 +372,7 @@ export interface Integration {
   /**
    * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
    */
-  sites: ('mardu-de' | 'mardu-space')[];
+  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -485,6 +510,24 @@ export interface PayloadMcpApiKey {
      */
     delete?: boolean | null;
   };
+  legalPages?: {
+    /**
+     * Allow clients to find legal-pages.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create legal-pages.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update legal-pages.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete legal-pages.
+     */
+    delete?: boolean | null;
+  };
   updatedAt: string;
   createdAt: string;
   enableAPIKey?: boolean | null;
@@ -535,6 +578,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'blog-posts';
         value: number | BlogPost;
+      } | null)
+    | ({
+        relationTo: 'legal-pages';
+        value: number | LegalPage;
       } | null)
     | ({
         relationTo: 'integration-categories';
@@ -707,6 +754,25 @@ export interface BlogPostsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-pages_select".
+ */
+export interface LegalPagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  pageKind?: T;
+  summary?: T;
+  updatedLabel?: T;
+  contentMarkdown?: T;
+  sites?: T;
+  seoTitle?: T;
+  seoDescription?: T;
+  canonicalUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "integration-categories_select".
  */
 export interface IntegrationCategoriesSelect<T extends boolean = true> {
@@ -849,6 +915,14 @@ export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
         delete?: T;
       };
   integrations?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  legalPages?:
     | T
     | {
         find?: T;

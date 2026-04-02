@@ -2,7 +2,7 @@ import { postgresAdapter } from '@payloadcms/db-postgres';
 import { mcpPlugin } from '@payloadcms/plugin-mcp';
 import { seoPlugin } from '@payloadcms/plugin-seo';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
-import { migrations } from './migrations/index.ts';
+import migrations from './migrations/index.ts';
 import * as blogAuthorsModule from './collections/blog-authors.ts';
 import * as blogCategoriesModule from './collections/blog-categories.ts';
 import * as blogPostsModule from './collections/blog-posts.ts';
@@ -65,6 +65,8 @@ const payloadSharedConfig = {
     pool: {
       connectionString: databaseURL,
     },
+    push: false,
+    migrationDir: './migrations',
     prodMigrations: migrations,
   }),
   editor: lexicalEditor(),
