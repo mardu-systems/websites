@@ -1,6 +1,3 @@
-import { vercelAdapter } from '@flags-sdk/vercel';
-import { flag, type Flag } from 'flags/next';
-
 export type SiteKey = 'mardu-de' | 'mardu-space' | 'platform';
 
 export type SiteLink = {
@@ -15,7 +12,20 @@ export type SiteFeatureFlags = {
   integrations: boolean;
 };
 
-export type SiteFeatureFlagDeclarations = Record<SiteFeatureKey, Flag<boolean>>;
+export type SiteFeatureFlagOptionDto = {
+  label: string;
+  value: boolean;
+};
+
+export type SiteFeatureFlagDefinitionDto = {
+  key: SiteFeatureKey;
+  defaultValue: boolean;
+  description: string;
+  origin: string;
+  options: ReadonlyArray<SiteFeatureFlagOptionDto>;
+};
+
+export type SiteFeatureFlagDefinitionsDto = Record<SiteFeatureKey, SiteFeatureFlagDefinitionDto>;
 
 export type SiteConfig = {
   key: SiteKey;
@@ -37,39 +47,6 @@ export type SiteConfig = {
   features: SiteFeatureFlags;
   footerMetaLinks: ReadonlyArray<SiteLink>;
 };
-
-const featureEnvVarNames: Record<SiteKey, Record<SiteFeatureKey, string>> = {
-  'mardu-de': {
-    blog: 'MARDU_DE_ENABLE_BLOG',
-    integrations: 'MARDU_DE_ENABLE_INTEGRATIONS',
-  },
-  'mardu-space': {
-    blog: 'MARDU_SPACE_ENABLE_BLOG',
-    integrations: 'MARDU_SPACE_ENABLE_INTEGRATIONS',
-  },
-  platform: {
-    blog: 'MARDU_PLATFORM_ENABLE_BLOG',
-    integrations: 'MARDU_PLATFORM_ENABLE_INTEGRATIONS',
-  },
-};
-
-function parseBooleanEnvOverride(rawValue: string | undefined): boolean | undefined {
-  if (!rawValue) {
-    return undefined;
-  }
-
-  const normalized = rawValue.trim().toLowerCase();
-
-  if (normalized === 'true') {
-    return true;
-  }
-
-  if (normalized === 'false') {
-    return false;
-  }
-
-  return undefined;
-}
 
 export const siteConfigs: Record<SiteKey, SiteConfig> = {
   'mardu-de': {
@@ -149,66 +126,60 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
   },
 };
 
-const BOOLEAN_FLAG_OPTIONS: { label: string; value: boolean }[] = [
+export const booleanSiteFlagOptions: ReadonlyArray<SiteFeatureFlagOptionDto> = [
   { label: 'Off', value: false },
   { label: 'On', value: true },
 ];
 
-const siteFeatureFlagDeclarations: Record<SiteKey, SiteFeatureFlagDeclarations> = {
+export const siteFeatureFlagDefinitions: Record<SiteKey, SiteFeatureFlagDefinitionsDto> = {
   'mardu-de': {
-    blog: flag<boolean>({
+    blog: {
       key: 'blog',
-      adapter: vercelAdapter(),
       defaultValue: siteConfigs['mardu-de'].features.blog,
       description: 'Steuert Blog-Navigation, Blog-Routen und Sitemap-Einträge auf mardu.de.',
       origin: `${siteConfigs['mardu-de'].origin}/blog`,
-      options: BOOLEAN_FLAG_OPTIONS,
-    }),
-    integrations: flag<boolean>({
+      options: booleanSiteFlagOptions,
+    },
+    integrations: {
       key: 'integrations',
-      adapter: vercelAdapter(),
       defaultValue: siteConfigs['mardu-de'].features.integrations,
       description:
         'Steuert Integrations-Navigation, Integrations-Routen und Sitemap-Einträge auf mardu.de.',
       origin: `${siteConfigs['mardu-de'].origin}/integrations`,
-      options: BOOLEAN_FLAG_OPTIONS,
-    }),
+      options: booleanSiteFlagOptions,
+    },
   },
   'mardu-space': {
-    blog: flag<boolean>({
+    blog: {
       key: 'blog',
-      adapter: vercelAdapter(),
       defaultValue: siteConfigs['mardu-space'].features.blog,
       description: 'Steuert Blog-Features auf mardu.space.',
       origin: `${siteConfigs['mardu-space'].origin}/blog`,
-      options: BOOLEAN_FLAG_OPTIONS,
-    }),
-    integrations: flag<boolean>({
+      options: booleanSiteFlagOptions,
+    },
+    integrations: {
       key: 'integrations',
-      adapter: vercelAdapter(),
       defaultValue: siteConfigs['mardu-space'].features.integrations,
       description: 'Steuert Integrations-Features auf mardu.space.',
       origin: `${siteConfigs['mardu-space'].origin}/integrations`,
-      options: BOOLEAN_FLAG_OPTIONS,
-    }),
+      options: booleanSiteFlagOptions,
+    },
   },
   platform: {
-    blog: flag<boolean>({
+    blog: {
       key: 'blog',
-      adapter: vercelAdapter(),
       defaultValue: siteConfigs.platform.features.blog,
       description: 'Steuert Blog-Features auf platform.mardu.de.',
       origin: `${siteConfigs.platform.origin}/blog`,
-      options: BOOLEAN_FLAG_OPTIONS,
-    }),
-    integrations: flag<boolean>({
+      options: booleanSiteFlagOptions,
+    },
+    integrations: {
       key: 'integrations',
-      adapter: vercelAdapter(),
       defaultValue: siteConfigs.platform.features.integrations,
       description: 'Steuert Integrations-Features auf platform.mardu.de.',
       origin: `${siteConfigs.platform.origin}/integrations`,
-      options: BOOLEAN_FLAG_OPTIONS,
-    }),
+      options: booleanSiteFlagOptions,
+    },
   },
 };
 
@@ -216,33 +187,43 @@ export function getSiteConfig(site: SiteKey): SiteConfig {
   return siteConfigs[site];
 }
 
-export function getSiteFlagDefinitions(site: SiteKey): SiteFeatureFlagDeclarations {
-  return siteFeatureFlagDeclarations[site];
-}
-
-export async function getSiteFeatureFlags(site: SiteKey): Promise<SiteFeatureFlags> {
-  const config = getSiteConfig(site);
-  const envVarNames = featureEnvVarNames[site];
-  const flags = getSiteFlagDefinitions(site);
-
-  return {
-    blog:
-      parseBooleanEnvOverride(process.env[envVarNames.blog]) ??
-      (await flags.blog().catch(() => config.features.blog)),
-    integrations:
-      parseBooleanEnvOverride(process.env[envVarNames.integrations]) ??
-      (await flags.integrations().catch(() => config.features.integrations)),
-  };
-}
-
-export async function isBlogEnabled(site: SiteKey): Promise<boolean> {
-  return (await getSiteFeatureFlags(site)).blog;
-}
-
-export async function isIntegrationsEnabled(site: SiteKey): Promise<boolean> {
-  return (await getSiteFeatureFlags(site)).integrations;
+export function getSiteFlagDefinitions(site: SiteKey): SiteFeatureFlagDefinitionsDto {
+  return siteFeatureFlagDefinitions[site];
 }
 
 export function getPlatformOrigin(): string {
   return process.env.MARDU_PLATFORM_ORIGIN?.trim() || siteConfigs.platform.origin;
 }
+
+export function parseBooleanEnvOverride(rawValue: string | undefined): boolean | undefined {
+  if (!rawValue) {
+    return undefined;
+  }
+
+  const normalized = rawValue.trim().toLowerCase();
+
+  if (normalized === 'true') {
+    return true;
+  }
+
+  if (normalized === 'false') {
+    return false;
+  }
+
+  return undefined;
+}
+
+export const featureEnvVarNames: Record<SiteKey, Record<SiteFeatureKey, string>> = {
+  'mardu-de': {
+    blog: 'MARDU_DE_ENABLE_BLOG',
+    integrations: 'MARDU_DE_ENABLE_INTEGRATIONS',
+  },
+  'mardu-space': {
+    blog: 'MARDU_SPACE_ENABLE_BLOG',
+    integrations: 'MARDU_SPACE_ENABLE_INTEGRATIONS',
+  },
+  platform: {
+    blog: 'MARDU_PLATFORM_ENABLE_BLOG',
+    integrations: 'MARDU_PLATFORM_ENABLE_INTEGRATIONS',
+  },
+};

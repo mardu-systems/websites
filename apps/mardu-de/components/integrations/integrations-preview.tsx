@@ -1,5 +1,5 @@
 import { IntegrationCard } from '@mardu/integrations-ui';
-import { isIntegrationsEnabled } from '@mardu/site-config';
+import { isIntegrationsEnabled } from '@mardu/site-config/feature-flags.server';
 import { Overline } from '@mardu/ui/components/typography';
 import { getFeaturedIntegrations } from '@/lib/integrations';
 import Link from 'next/link';

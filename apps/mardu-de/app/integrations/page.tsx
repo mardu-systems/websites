@@ -4,7 +4,7 @@ import {
   IntegrationsHero,
   IntegrationsPagination,
 } from '@mardu/integrations-ui';
-import { isIntegrationsEnabled } from '@mardu/site-config';
+import { isIntegrationsEnabled } from '@mardu/site-config/feature-flags.server';
 import { Overline } from '@mardu/ui/components/typography';
 import { HeroHeadline } from '@mardu/ui/components/typography';
 import {

@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./feature-flags.server": "./src/feature-flags.server.ts"
   },
   "dependencies": {
     "@flags-sdk/vercel": "^1.2.1",

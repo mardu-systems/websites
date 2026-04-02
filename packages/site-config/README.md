@@ -35,12 +35,29 @@ DTO describing the resolved site feature state.
 - `blog: boolean`
 - `integrations: boolean`
 
-#### `SiteFeatureFlagDeclarations`
+#### `SiteFeatureFlagOptionDto`
 
-Map of concrete Vercel Flags declarations for a site.
+DTO for one documented override option in Vercel Flags Explorer.
 
-- `blog: Flag<boolean>`
-- `integrations: Flag<boolean>`
+- `label: string`
+- `value: boolean`
+
+#### `SiteFeatureFlagDefinitionDto`
+
+Documented flag definition DTO exposed to app-local `flags.ts` modules.
+
+- `key: SiteFeatureKey`
+- `defaultValue: boolean`
+- `description: string`
+- `origin: string`
+- `options: ReadonlyArray<SiteFeatureFlagOptionDto>`
+
+#### `SiteFeatureFlagDefinitionsDto`
+
+Map of documented flag definitions for one site.
+
+- `blog: SiteFeatureFlagDefinitionDto`
+- `integrations: SiteFeatureFlagDefinitionDto`
 
 #### `SiteConfig`
 
@@ -73,7 +90,7 @@ Returns the static config DTO for the given site.
 
 #### `getSiteFlagDefinitions(site)`
 
-Returns the concrete Vercel Flags declarations for the given site. These declarations are used by
+Returns the documented flag definition DTOs for the given site. These definitions are used by
 app-local `flags.ts` modules and the `/.well-known/vercel/flags` discovery endpoint.
 
 #### `getSiteFeatureFlags(site)`
@@ -83,6 +100,9 @@ Returns the resolved site feature flags asynchronously. Resolution order:
 1. optional env override per site and feature
 2. Vercel Flags evaluation
 3. default values from `siteConfigs`
+
+If no `FLAGS` SDK key is present, evaluation falls back to env overrides and site defaults without
+loading the Vercel adapter. This keeps local builds and non-Vercel environments stable.
 
 Recognized env variables:
 
@@ -114,6 +134,8 @@ Returns the platform origin, optionally overridden through `MARDU_PLATFORM_ORIGI
 ## Boundaries
 
 - This package resolves site-level availability only.
-- Feature evaluation uses Vercel Flags via `flags/next` and `@flags-sdk/vercel`.
+- Discovery metadata stays synchronous and framework-safe in `@mardu/site-config`.
+- Runtime evaluation lives in `@mardu/site-config/feature-flags.server`.
+- Feature evaluation uses Vercel Flags via `flags/next` and lazily loaded `@flags-sdk/vercel`.
 - Payload content visibility per entry stays in `@mardu/content-core` via the existing `sites` fields.
 - Frontends are responsible for using these helpers to gate navigation, routes, sitemap entries, and preview modules.

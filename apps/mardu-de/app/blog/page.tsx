@@ -1,5 +1,5 @@
 import { BlogCategoryFilter, BlogGrid, BlogHero, BlogPagination, BlogSearch } from '@mardu/blog-ui';
-import { isBlogEnabled } from '@mardu/site-config';
+import { isBlogEnabled } from '@mardu/site-config/feature-flags.server';
 import { Overline } from '@mardu/ui/components/typography';
 import { getBlogCategories, getBlogPosts, getFeaturedPost } from '@/lib/blog';
 import type { Metadata } from 'next';

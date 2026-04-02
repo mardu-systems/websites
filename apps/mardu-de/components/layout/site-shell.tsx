@@ -4,7 +4,8 @@ import type { HeaderNavItemDto } from '@mardu/layout/types';
 import type { FooterSocialLinkDto } from '@mardu/layout/types';
 import { defaultHeaderItems } from '@/data/default-header-items';
 import { defaultFooterNavLinks } from '@/data/default-footer-items';
-import { getSiteConfig, isBlogEnabled, isIntegrationsEnabled } from '@mardu/site-config';
+import { getSiteConfig } from '@mardu/site-config';
+import { isBlogEnabled, isIntegrationsEnabled } from '@mardu/site-config/feature-flags.server';
 import NewsletterButton from '@/components/utilities/newsletter-button';
 
 const socialLinks: ReadonlyArray<FooterSocialLinkDto> = [

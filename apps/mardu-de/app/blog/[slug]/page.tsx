@@ -1,5 +1,5 @@
 import { BlogHeadingAnchors, BlogRichText } from '@mardu/blog-ui';
-import { isBlogEnabled } from '@mardu/site-config';
+import { isBlogEnabled } from '@mardu/site-config/feature-flags.server';
 import { getBlogPostBySlug } from '@/lib/blog';
 import type { Metadata } from 'next';
 import Image from 'next/image';

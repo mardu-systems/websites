@@ -4,7 +4,7 @@ import {
   IntegrationDetailHero,
   IntegrationDetailSidebar,
 } from '@mardu/integrations-ui';
-import { isIntegrationsEnabled } from '@mardu/site-config';
+import { isIntegrationsEnabled } from '@mardu/site-config/feature-flags.server';
 import { getIntegrationBySlug, getRelatedIntegrations } from '@/lib/integrations';
 import type { Metadata } from 'next';
 import Link from 'next/link';

@@ -1,5 +1,6 @@
 import { getPlatformContentSitemapEntries } from '@mardu/content-core';
-import { getPlatformOrigin, isBlogEnabled, isIntegrationsEnabled } from '@mardu/site-config';
+import { getPlatformOrigin } from '@mardu/site-config';
+import { isBlogEnabled, isIntegrationsEnabled } from '@mardu/site-config/feature-flags.server';
 import type { MetadataRoute } from 'next';
 
 const SITE_URL = 'https://www.mardu.de';
