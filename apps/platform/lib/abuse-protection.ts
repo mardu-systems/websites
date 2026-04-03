@@ -1,32 +1,15 @@
-import { createHash } from 'node:crypto';
 import { getPayload } from 'payload';
 import { sql } from '@payloadcms/db-postgres';
 import config from '@/payload.config';
-
-type PublicLeadEndpoint = 'contact' | 'newsletter';
-
-type GuardResult =
-  | { ok: true }
-  | { ok: false; status: 400 | 429 | 503; error: string };
-
-type RateLimitConfig = {
-  endpoint: string;
-  limit: number;
-  windowMs: number;
-};
-
-const RATE_LIMITS: Record<PublicLeadEndpoint, RateLimitConfig> = {
-  contact: {
-    endpoint: '/api/contact',
-    limit: 5,
-    windowMs: 10 * 60 * 1000,
-  },
-  newsletter: {
-    endpoint: '/api/newsletter',
-    limit: 10,
-    windowMs: 10 * 60 * 1000,
-  },
-};
+import {
+  RATE_LIMITS,
+  enforcePublicLeadProtectionCore,
+  isRateLimitStoreUnavailableError,
+  normalizeErrorMessage,
+  type AbuseLogEventInput,
+  type PublicLeadEndpoint,
+  type RateLimitStoreBypassResult,
+} from './abuse-protection-core';
 
 type DbExecuteResultRow = {
   request_count?: number | string | null;
@@ -59,30 +42,7 @@ function getDbExecutor(payload: unknown): PayloadDb {
   throw new Error('Payload database adapter does not expose an execute() method.');
 }
 
-function getClientIp(req: Request): string {
-  const forwardedFor = req.headers.get('x-forwarded-for');
-  if (forwardedFor) {
-    return forwardedFor.split(',')[0]?.trim() || 'unknown';
-  }
-
-  const realIp = req.headers.get('x-real-ip');
-  if (realIp) {
-    return realIp.trim();
-  }
-
-  return 'unknown';
-}
-
-function hashIp(ip: string): string {
-  return createHash('sha256').update(ip).digest('hex');
-}
-
-function logAbuseEvent(input: {
-  endpoint: string;
-  site: string;
-  ipHash: string;
-  reason: 'rate_limited' | 'missing_captcha' | 'invalid_captcha' | 'captcha_misconfigured';
-}) {
+function logAbuseEvent(input: AbuseLogEventInput) {
   console.warn('[lead-abuse]', input);
 }
 
@@ -127,6 +87,33 @@ async function incrementRateLimit(input: {
   return 1;
 }
 
+async function incrementRateLimitOrBypass(input: {
+  endpoint: PublicLeadEndpoint;
+  site: string;
+  ipHash: string;
+}): Promise<RateLimitStoreBypassResult> {
+  try {
+    const count = await incrementRateLimit({
+      endpoint: input.endpoint,
+      ipHash: input.ipHash,
+    });
+    return { count, bypassed: false };
+  } catch (error) {
+    if (!isRateLimitStoreUnavailableError(error)) {
+      throw error;
+    }
+
+    logAbuseEvent({
+      endpoint: RATE_LIMITS[input.endpoint].endpoint,
+      site: input.site,
+      ipHash: input.ipHash,
+      reason: 'rate_limit_store_unavailable',
+      note: normalizeErrorMessage(error),
+    });
+    return { count: 1, bypassed: true };
+  }
+}
+
 async function verifyCaptchaToken(token: string): Promise<boolean> {
   const secret = process.env.RECAPTCHA_SECRET_KEY;
   if (!secret) {
@@ -147,61 +134,19 @@ async function verifyCaptchaToken(token: string): Promise<boolean> {
   return captchaJson?.success === true;
 }
 
+export { isRateLimitStoreUnavailableError } from './abuse-protection-core';
+
 export async function enforcePublicLeadProtection(input: {
   req: Request;
   endpoint: PublicLeadEndpoint;
   site: string;
   token?: string;
-}): Promise<GuardResult> {
-  const isDev = process.env.NODE_ENV === 'development';
-  if (isDev) {
-    return { ok: true };
-  }
-
-  const ipHash = hashIp(getClientIp(input.req));
-  const config = RATE_LIMITS[input.endpoint];
-  const currentCount = await incrementRateLimit({ endpoint: input.endpoint, ipHash });
-
-  if (currentCount > config.limit) {
-    logAbuseEvent({
-      endpoint: config.endpoint,
-      site: input.site,
-      ipHash,
-      reason: 'rate_limited',
-    });
-    return { ok: false, status: 429, error: 'Too many requests' };
-  }
-
-  if (!input.token) {
-    logAbuseEvent({
-      endpoint: config.endpoint,
-      site: input.site,
-      ipHash,
-      reason: 'missing_captcha',
-    });
-    return { ok: false, status: 400, error: 'Invalid captcha' };
-  }
-
-  if (!process.env.RECAPTCHA_SECRET_KEY) {
-    logAbuseEvent({
-      endpoint: config.endpoint,
-      site: input.site,
-      ipHash,
-      reason: 'captcha_misconfigured',
-    });
-    return { ok: false, status: 503, error: 'Service temporarily unavailable' };
-  }
-
-  const captchaValid = await verifyCaptchaToken(input.token);
-  if (!captchaValid) {
-    logAbuseEvent({
-      endpoint: config.endpoint,
-      site: input.site,
-      ipHash,
-      reason: 'invalid_captcha',
-    });
-    return { ok: false, status: 400, error: 'Invalid captcha' };
-  }
-
-  return { ok: true };
+}) {
+  return enforcePublicLeadProtectionCore(input, {
+    incrementRateLimitOrBypassImpl: incrementRateLimitOrBypass,
+    verifyCaptchaTokenImpl: verifyCaptchaToken,
+    logAbuseEventImpl: logAbuseEvent,
+    nodeEnv: process.env.NODE_ENV,
+    recaptchaSecret: process.env.RECAPTCHA_SECRET_KEY,
+  });
 }

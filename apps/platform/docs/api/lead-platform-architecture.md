@@ -57,6 +57,7 @@ Quelle: [`apps/platform/app/api/newsletter/route.ts`](/Users/lucaschoeneberg/Doc
 - prueft Abuse-Guard vor Persistenz:
   - Rate-Limit pro IP + Endpoint
   - verpflichtendes reCAPTCHA ausserhalb von `development`
+  - bei fehlendem Rate-Limit-Store degradiert der Guard kontrolliert weiter und erzeugt keinen `500`
 - persistiert/aktualisiert einen Subscriber mit Status `pending`
 - versendet die DOI-Mail
 - Response: `{ ok: true }`
@@ -91,6 +92,7 @@ Quelle: [`apps/platform/app/api/contact/route.ts`](/Users/lucaschoeneberg/Docume
 - prueft Abuse-Guard vor Persistenz:
   - Rate-Limit pro IP + Endpoint
   - verpflichtendes reCAPTCHA ausserhalb von `development`
+  - bei fehlendem Rate-Limit-Store degradiert der Guard kontrolliert weiter und erzeugt keinen `500`
 - persistiert den Lead in `contact-leads`
 - versendet die interne Lead-Mail
 - startet optional einen DOI-Flow
@@ -119,6 +121,7 @@ Interne Tabellen:
 - `abuse_rate_limits`
   - speichert endpoint-spezifische Request-Counter je gehashter Client-IP
   - wird fuer serverseitiges Rate-Limiting auf `POST /api/contact` und `POST /api/newsletter` genutzt
+  - falls die Tabelle in einer Laufzeitumgebung fehlt, laeuft der Guard voruebergehend fail-open weiter; die Tabelle soll per Migration wieder verbindlich bereitgestellt werden
 
 Wichtige Felder:
 
