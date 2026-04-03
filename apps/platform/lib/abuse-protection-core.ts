@@ -107,7 +107,10 @@ export function isRateLimitStoreUnavailableError(error: unknown): boolean {
     message.includes('abuse_rate_limits') ||
     message.includes('relation "abuse_rate_limits" does not exist') ||
     message.includes("relation 'abuse_rate_limits' does not exist") ||
-    message.includes('payload database adapter does not expose an execute() method')
+    message.includes('payload database adapter does not expose an execute() method') ||
+    message.includes("cannot read properties of undefined (reading 'execute')") ||
+    message.includes("undefined is not an object (evaluating 's.execute')") ||
+    message.includes("undefined is not an object (evaluating 'executefrom.execute')")
   );
 }
 

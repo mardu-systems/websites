@@ -43,6 +43,15 @@ describe('isRateLimitStoreUnavailableError', () => {
     );
   });
 
+  test('matches adapter execute initialization errors', () => {
+    assert.equal(
+      isRateLimitStoreUnavailableError(
+        new TypeError("Cannot read properties of undefined (reading 'execute')"),
+      ),
+      true,
+    );
+  });
+
   test('ignores unrelated database errors', () => {
     assert.equal(
       isRateLimitStoreUnavailableError({
