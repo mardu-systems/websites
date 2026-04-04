@@ -10,6 +10,7 @@
   },
   "include": [
     "next-env.d.ts",
+    "../../packages/tsconfig/markdown-modules.d.ts",
     "**/*.ts",
     "**/*.tsx"
   ],

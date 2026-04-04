@@ -21,6 +21,7 @@
     "build:analyze": "turbo run build:analyze"
   },
   "devDependencies": {
+    "raw-loader": "^4.0.2",
     "turbo": "^2.9.3",
     "typescript": "^6.0.2"
   },
