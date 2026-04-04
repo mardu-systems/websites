@@ -71,26 +71,43 @@ async function getRuntimeSiteFlagDeclarations(site: SiteKey): Promise<SiteFeatur
   return declarationsPromise;
 }
 
-export async function getSiteFeatureFlags(site: SiteKey): Promise<SiteFeatureFlags> {
+function getStaticSiteFeatureFlags(site: SiteKey): SiteFeatureFlags {
   const config = getSiteConfig(site);
   const envVarNames = featureEnvVarNames[site];
   const blogOverride = parseBooleanEnvOverride(process.env[envVarNames.blog]);
   const integrationsOverride = parseBooleanEnvOverride(process.env[envVarNames.integrations]);
 
+  return {
+    blog: blogOverride ?? config.features.blog,
+    integrations: integrationsOverride ?? config.features.integrations,
+  };
+}
+
+export async function getSiteFeatureFlags(site: SiteKey): Promise<SiteFeatureFlags> {
+  const config = getSiteConfig(site);
+  const staticFlags = getStaticSiteFeatureFlags(site);
+
   if (!process.env.FLAGS?.trim()) {
-    return {
-      blog: blogOverride ?? config.features.blog,
-      integrations: integrationsOverride ?? config.features.integrations,
-    };
+    return staticFlags;
   }
 
-  const flags = await getRuntimeSiteFlagDeclarations(site);
+  try {
+    const flags = await getRuntimeSiteFlagDeclarations(site);
 
-  return {
-    blog: blogOverride ?? (await flags.blog().catch(() => config.features.blog)),
-    integrations:
-      integrationsOverride ?? (await flags.integrations().catch(() => config.features.integrations)),
-  };
+    return {
+      blog: await flags.blog().catch(() => staticFlags.blog),
+      integrations: await flags.integrations().catch(() => staticFlags.integrations),
+    };
+  } catch (error) {
+    console.error('[site-flags] Falling back to static feature flags', {
+      site,
+      error: error instanceof Error ? error.message : String(error),
+    });
+    return {
+      blog: staticFlags.blog ?? config.features.blog,
+      integrations: staticFlags.integrations ?? config.features.integrations,
+    };
+  }
 }
 
 export async function isBlogEnabled(site: SiteKey): Promise<boolean> {

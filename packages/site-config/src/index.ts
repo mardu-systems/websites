@@ -63,7 +63,7 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
     newsletterSuccessPath: '/newsletter/anmeldung',
     newsletterUnsubscribePath: '/newsletter/abmeldung',
     emailLogoUrl: 'https://www.mardu.de/logos/Logo.svg',
-    emailBrandName: 'Mardu',
+    emailBrandName: 'Mardu GmbH',
     features: {
       blog: false,
       integrations: false,
@@ -89,7 +89,7 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
     whitepaperSuccessPath: '/whitepaper/success',
     whitepaperDownloadPath: '/api/whitepaper/download',
     emailLogoUrl: 'https://mardu.space/marduspace_logo_bg_white.svg',
-    emailBrandName: 'mardu.space',
+    emailBrandName: 'Mardu GmbH',
     features: {
       blog: false,
       integrations: false,
@@ -114,7 +114,7 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
     newsletterSuccessPath: '/newsletter/anmeldung',
     newsletterUnsubscribePath: '/newsletter/abmeldung',
     emailLogoUrl: 'https://www.mardu.de/logos/Logo.svg',
-    emailBrandName: 'Mardu Platform',
+    emailBrandName: 'Mardu GmbH',
     features: {
       blog: false,
       integrations: false,
