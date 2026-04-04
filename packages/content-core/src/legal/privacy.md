@@ -65,7 +65,6 @@ Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:
 Alter Schlachthof 39
 76131 Karlsruhe
 
-Telefon: [Telefonnummer der verantwortlichen Stelle]
 E-Mail: info@mardu.de
 
 Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z. B. Namen, E-Mail-Adressen o. Ä.) entscheidet.

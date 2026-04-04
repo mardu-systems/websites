@@ -36,6 +36,7 @@ type PayloadRestCollectionResult<T> = {
 const DEFAULT_REVALIDATE_SECONDS = 60;
 const DEFAULT_SHARED_SITES: VisibleSite[] = ['mardu-de', 'mardu-space', 'platform'];
 const CURRENT_DIR = dirname(fileURLToPath(import.meta.url));
+const REPO_LEGAL_DIR = join(process.cwd(), 'packages', 'content-core', 'src', 'legal');
 const DEFAULT_FETCH_TIMEOUT_MS = 3_000;
 
 const DEFAULT_PAGE_COPY: Record<
@@ -99,6 +100,13 @@ function toMeta(value: unknown): PayloadMeta | null {
 }
 
 async function readBundledLegalMarkdown(slug: LegalPageSlug): Promise<string | null> {
+  try {
+    return await readFile(join(REPO_LEGAL_DIR, `${slug}.md`), 'utf8');
+  } catch {
+    // Fall through to package-local lookup for environments that retain source
+    // files next to the transpiled module.
+  }
+
   try {
     return await readFile(join(CURRENT_DIR, 'legal', `${slug}.md`), 'utf8');
   } catch {
