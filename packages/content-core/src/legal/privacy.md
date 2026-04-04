@@ -359,7 +359,3 @@ Bei Bestellungen von **Dienstleistungen oder digitalen Inhalten** verarbeiten un
 Eine weitergehende Übermittlung erfolgt nicht, es sei denn, sie ist zur Vertragserfüllung erforderlich oder gesetzlich vorgeschrieben.
 
 **Rechtsgrundlagen:** Art. 6 Abs. 1 lit. b, lit. c DSGVO; ggf. Art. 6 Abs. 1 lit. f DSGVO.
-
----
-
-**Quelle:** [https://www.datenschutzerklaerung.de](https://www.datenschutzerklaerung.de)
