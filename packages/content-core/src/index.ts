@@ -73,6 +73,161 @@ export type PaginatedBlogPostsDto = {
 
 export type IntegrationStatus = 'available' | 'beta' | 'planned';
 
+export type CatalogAvailabilityStatus = 'available' | 'lead-time' | 'project';
+
+/**
+ * Render-ready category DTO for modular product catalog landing pages.
+ * The owning app decides how products are loaded and routed.
+ */
+export type CatalogCategoryDto = {
+  id: string;
+  slug: string;
+  name: string;
+  eyebrow?: string;
+  description: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  visualLabel?: string;
+  featured?: boolean;
+  productIds: string[];
+};
+
+/**
+ * Shared technology DTO for badges, grids, and compatibility sections.
+ */
+export type CatalogTechnologyDto = {
+  id: string;
+  slug: string;
+  name: string;
+  description: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  visualLabel?: string;
+};
+
+/**
+ * Shared credential / carrier DTO used on catalog overviews and product details.
+ */
+export type CatalogCarrierDto = {
+  id: string;
+  slug: string;
+  name: string;
+  description: string;
+  technologyLabel?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  visualLabel?: string;
+};
+
+/**
+ * Compact product DTO for grids, related products, and category highlights.
+ */
+export type CatalogProductListItemDto = {
+  id: string;
+  slug: string;
+  name: string;
+  categoryId: string;
+  categoryName: string;
+  tagline: string;
+  summary: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  priceFromLabel?: string;
+  availability: CatalogAvailabilityStatus;
+  availabilityLabel: string;
+  technologies: CatalogTechnologyDto[];
+  featured?: boolean;
+};
+
+/**
+ * Variant DTO for compare blocks and detail hero selectors.
+ */
+export type CatalogVariantDto = {
+  id: string;
+  label: string;
+  summary: string;
+  priceFromLabel?: string;
+  availabilityLabel?: string;
+  recommendation?: string;
+  attributes: Array<{
+    label: string;
+    value: string;
+  }>;
+};
+
+/**
+ * Feature grouping for benefit and capability sections on product detail pages.
+ */
+export type CatalogFeatureGroupDto = {
+  title: string;
+  items: string[];
+};
+
+/**
+ * Structured specification groups for technical detail sections.
+ */
+export type CatalogSpecGroupDto = {
+  title: string;
+  specs: Array<{
+    label: string;
+    value: string;
+  }>;
+};
+
+/**
+ * Related-product DTO. Reuses the list item shape and adds an optional relation label.
+ */
+export type CatalogRelatedProductDto = CatalogProductListItemDto & {
+  relationLabel?: string;
+};
+
+/**
+ * Structured context for product-related inquiry flows.
+ * Apps may pass this through query params or other app-owned routing mechanisms.
+ */
+export type CatalogInquiryContextDto = {
+  productId: string;
+  productSlug: string;
+  productName: string;
+  category: string;
+  variantId?: string;
+  priceFrom?: string;
+  sourcePage: string;
+  technologyIds?: string[];
+};
+
+/**
+ * Full product DTO for catalog detail pages.
+ */
+export type CatalogProductDetailDto = CatalogProductListItemDto & {
+  seoTitle?: string;
+  seoDescription?: string;
+  heroDescription: string;
+  overview: string;
+  breadcrumbLabel?: string;
+  technologiesHeading?: string;
+  technologiesIntro?: string;
+  carriersHeading?: string;
+  carriersIntro?: string;
+  variants: CatalogVariantDto[];
+  technologies: CatalogTechnologyDto[];
+  carriers: CatalogCarrierDto[];
+  featureGroups: CatalogFeatureGroupDto[];
+  specGroups: CatalogSpecGroupDto[];
+  relatedProducts: CatalogRelatedProductDto[];
+  primaryCtaLabel?: string;
+  secondaryCtaLabel?: string;
+  inquiryContext: CatalogInquiryContextDto;
+};
+
+export type PaginatedCatalogProductsDto = {
+  items: CatalogProductListItemDto[];
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+};
+
 export type IntegrationSort = 'featured' | 'alphabetical' | 'latest';
 
 export type IntegrationListQueryDto = {
