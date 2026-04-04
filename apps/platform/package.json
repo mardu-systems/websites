@@ -18,6 +18,7 @@
     "build:analyze": "ANALYZE=true next build",
     "seed:integrations": "node scripts/seed-integrations.mjs",
     "seed:legal-pages": "node scripts/seed-legal-pages.mjs",
+    "seed:roadmap-items": "node scripts/seed-roadmap-items.mjs",
     "migrate:legacy-data": "bun scripts/migrate-legacy-data.mjs",
     "images:compress:overwrite": "node scripts/compress-images.mjs --overwrite",
     "api:twenty:pull-openapi": "node scripts/fetch-twenty-openapi.mjs",

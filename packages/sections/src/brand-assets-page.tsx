@@ -151,7 +151,7 @@ export function BrandAssetsPage({ content, className }: BrandAssetsPageProps) {
 
 const sharedBrandAssetCopy = {
   eyebrow: 'Brand',
-  title: 'Brand Assets',
+  title: 'Markenressourcen',
   downloadsEyebrow: 'Downloads',
   downloadsTitle: 'Logo-Dateien',
   usageEyebrow: 'Nutzungsregeln',
@@ -184,7 +184,7 @@ const sharedBrandAssetCopy = {
   contactTitle: 'Fragen zur Nutzung oder zu Sonderformaten',
   contactDescription:
     'Wenn du die Marke in einem besonderen Kontext einsetzen möchtest oder zusätzliche Formate brauchst, gib uns einfach kurz Bescheid.',
-  contactCtaLabel: 'Brand-Team kontaktieren',
+  contactCtaLabel: 'Kontaktiere uns',
 };
 
 export const marduSpaceBrandAssetsPageContent: BrandAssetsPageContentDto = {

@@ -14,6 +14,7 @@ import * as legalPagesModule from './collections/legal-pages.ts';
 import * as mediaModule from './collections/media.ts';
 import * as newsletterSubscribersModule from './collections/newsletter-subscribers.ts';
 import * as preorderRequestsModule from './collections/preorder-requests.ts';
+import * as roadmapItemsModule from './collections/roadmap-items.ts';
 import * as usersModule from './collections/users.ts';
 
 const resolveCollectionExport = (module, exportName) => {
@@ -54,6 +55,7 @@ const NewsletterSubscribers = resolveCollectionExport(
   'NewsletterSubscribers',
 );
 const PreorderRequests = resolveCollectionExport(preorderRequestsModule, 'PreorderRequests');
+const RoadmapItems = resolveCollectionExport(roadmapItemsModule, 'RoadmapItems');
 const Users = resolveCollectionExport(usersModule, 'Users');
 
 const databaseURL =
@@ -77,6 +79,7 @@ const payloadSharedConfig = {
     BlogAuthors,
     BlogPosts,
     LegalPages,
+    RoadmapItems,
     IntegrationCategories,
     IntegrationProtocols,
     Integrations,
@@ -166,6 +169,16 @@ const payloadSharedConfig = {
         'legal-pages': {
           description:
             'Pflege rechtlicher Seiten wie Impressum und Datenschutz mit vollem redaktionellen CRUD-Zugriff.',
+          enabled: {
+            create: true,
+            delete: true,
+            find: true,
+            update: true,
+          },
+        },
+        'roadmap-items': {
+          description:
+            'Pflege öffentlicher Roadmap-Einträge für mardu.space inklusive Drafts, Status und Zeiträumen.',
           enabled: {
             create: true,
             delete: true,

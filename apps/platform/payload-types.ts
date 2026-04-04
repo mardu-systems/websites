@@ -74,6 +74,7 @@ export interface Config {
     'blog-authors': BlogAuthor;
     'blog-posts': BlogPost;
     'legal-pages': LegalPage;
+    'roadmap-items': RoadmapItem;
     'integration-categories': IntegrationCategory;
     'integration-protocols': IntegrationProtocol;
     integrations: Integration;
@@ -94,6 +95,7 @@ export interface Config {
     'blog-authors': BlogAuthorsSelect<false> | BlogAuthorsSelect<true>;
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
     'legal-pages': LegalPagesSelect<false> | LegalPagesSelect<true>;
+    'roadmap-items': RoadmapItemsSelect<false> | RoadmapItemsSelect<true>;
     'integration-categories': IntegrationCategoriesSelect<false> | IntegrationCategoriesSelect<true>;
     'integration-protocols': IntegrationProtocolsSelect<false> | IntegrationProtocolsSelect<true>;
     integrations: IntegrationsSelect<false> | IntegrationsSelect<true>;
@@ -291,6 +293,33 @@ export interface LegalPage {
   seoTitle?: string | null;
   seoDescription?: string | null;
   canonicalUrl?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "roadmap-items".
+ */
+export interface RoadmapItem {
+  id: number;
+  title: string;
+  slug: string;
+  summary?: string | null;
+  phaseLabel: string;
+  timeLabel: string;
+  sortOrder?: number | null;
+  status: 'planned' | 'in-progress' | 'beta' | 'done';
+  category: 'software' | 'hardware' | 'platform' | 'integrations';
+  /**
+   * Markdown-Inhalt für die öffentliche Roadmap. Listen und kurze Absätze werden direkt auf mardu.space dargestellt.
+   */
+  bodyMarkdown: string;
+  featured?: boolean | null;
+  /**
+   * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
+   */
+  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -600,6 +629,24 @@ export interface PayloadMcpApiKey {
      */
     delete?: boolean | null;
   };
+  roadmapItems?: {
+    /**
+     * Allow clients to find roadmap-items.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create roadmap-items.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update roadmap-items.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete roadmap-items.
+     */
+    delete?: boolean | null;
+  };
   media?: {
     /**
      * Allow clients to find media.
@@ -702,6 +749,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'legal-pages';
         value: number | LegalPage;
+      } | null)
+    | ({
+        relationTo: 'roadmap-items';
+        value: number | RoadmapItem;
       } | null)
     | ({
         relationTo: 'integration-categories';
@@ -893,6 +944,26 @@ export interface LegalPagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "roadmap-items_select".
+ */
+export interface RoadmapItemsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  summary?: T;
+  phaseLabel?: T;
+  timeLabel?: T;
+  sortOrder?: T;
+  status?: T;
+  category?: T;
+  bodyMarkdown?: T;
+  featured?: T;
+  sites?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "integration-categories_select".
  */
 export interface IntegrationCategoriesSelect<T extends boolean = true> {
@@ -1075,6 +1146,14 @@ export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
         delete?: T;
       };
   legalPages?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  roadmapItems?:
     | T
     | {
         find?: T;
