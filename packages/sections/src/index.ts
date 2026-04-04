@@ -85,6 +85,15 @@ export {
   type NewsletterStatusPageProps,
 } from "./newsletter-status-page";
 export {
+  BrandAssetsPage,
+  marduBrandAssetsPageContent,
+  marduSpaceBrandAssetsPageContent,
+  type BrandAssetDownloadDto,
+  type BrandAssetsPageContentDto,
+  type BrandAssetsPageProps,
+  type BrandAssetUsageRuleDto,
+} from "./brand-assets-page";
+export {
   default as ProcessSteps,
   type ProcessStepsProps,
   type StepItem,

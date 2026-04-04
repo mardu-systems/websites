@@ -21,6 +21,7 @@ Shared content sections for multiple Mardu frontends.
 - `TripleImageSection`
 - `Foerderung`
 - `NewsletterStatusPage`
+- `BrandAssetsPage`
 - `ProcessSteps`
 - `ScenarioShowcase`
 - `ContactPageSection`
@@ -98,6 +99,48 @@ Shared content sections for multiple Mardu frontends.
   - `media` is the preferred API for landing cards
   - `imageSrc` and `imageAlt` remain supported as a compatibility fallback for existing image cards
   - badge and description positioning stay card-owned so apps can place labels differently for primary vs. secondary cards
+
+## `BrandAssetsPage` contract
+
+- Props:
+  - `content: BrandAssetsPageContentDto`
+  - `className?: string`
+- `BrandAssetsPageContentDto`:
+  - `eyebrow: string`
+  - `title: string`
+  - `description: string`
+  - `downloadsEyebrow: string`
+  - `downloadsTitle: string`
+  - `downloadsDescription: string`
+  - `downloads: BrandAssetDownloadDto[]`
+  - `usageEyebrow: string`
+  - `usageTitle: string`
+  - `usageDescription: string`
+  - `usageRules: BrandAssetUsageRuleDto[]`
+  - `contactEyebrow: string`
+  - `contactTitle: string`
+  - `contactDescription: string`
+  - `contactCtaLabel: string`
+  - `contactHref: string`
+- `BrandAssetDownloadDto`:
+  - `id: string`
+  - `fileName: string`
+  - `href: string`
+  - `previewSrc: string`
+  - `previewAlt: string`
+  - `previewSurface: 'light' | 'dark'`
+  - `downloadLabel: string`
+  - `description: string`
+- `BrandAssetUsageRuleDto`:
+  - `question: string`
+  - `answer: string`
+- Shared content:
+  - `marduSpaceBrandAssetsPageContent` exports the canonical copy and section order for the public `mardu.space` brand-assets page.
+  - `marduBrandAssetsPageContent` exports the same section structure and shared usage copy for the public `Mardu` brand-assets page.
+- Behavior:
+  - renders a shared brand-assets page with hero, download grid, usage rules and contact section
+  - keeps section structure and usage copy centralized so multiple apps can publish the same public content without duplication
+  - expects app-owned metadata, routing and shell integration; the package owns the section layout and visible copy contract
 
 ## Shared section API notes
 
