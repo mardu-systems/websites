@@ -4,7 +4,6 @@ import { Activity, Boxes, Cpu, Network, ShieldCheck, Smartphone, Wifi } from 'lu
 
 /**
  * DTO for a sellable hardware capability block on the `/system` page.
- * Each block pairs one clear outcome with proof points and either a real image or placeholder.
  */
 export interface HardwareFeatureBlockDto {
   id: string;
@@ -26,7 +25,6 @@ export interface HardwareFeatureBlockDto {
 
 /**
  * DTO for comparing the available hardware product tiers.
- * The focus is buyer orientation first, not protocol detail.
  */
 export interface HardwareVariantDto {
   id: string;
@@ -52,58 +50,64 @@ export const hardwareFeatureBlocks: HardwareFeatureBlockDto[] = [
   {
     id: 'access-point',
     eyebrow: 'Zugriffspunkt',
-    title: 'Zugriffe lokal und zuverlässig schalten',
+    title: 'Die lokale Entscheidung passiert direkt am Zugriffspunkt',
     description:
-      'Der Zugriffspunkt liest Identität vor Ort und schaltet Türen oder Maschinen direkt frei. Damit wird aus einer Regel im System eine belastbare Aktion im Betrieb.',
+      'Der Zugriffspunkt liest Identität vor Ort und setzt die Entscheidung aus dem Regelwerk direkt an Tür, Tor oder Maschine um. Dadurch bleibt die Freigabe nicht organisatorisch, sondern wird technisch wirksam.',
     points: [
-      'identifiziert Nutzer per Karte, NFC oder App-Anbindung',
-      'schaltet Maschinen und Zutrittspunkte lokal statt nur organisatorisch',
-      'bleibt Teil einer nachvollziehbaren Freigabelogik mit klaren Regeln',
+      'identifiziert Nutzer per NFC-Tags, Smartcards oder Smartphone (App Key)',
+      'schaltet Maschinen und Zutrittspunkte lokal über verbaute Relais/Schütze',
+      'meldet Ereignisse und Zustände zurück in die WebQ-Verwaltungsplattform',
     ],
+    ctaLabel: 'Zum Access Point Pro',
+    ctaHref: '/products/access-point-pro',
     imageSrc: '/device/tor-2.jpg',
     imageAlt: 'Zugriffspunkt für Türen und Maschinen',
   },
   {
     id: 'gateway',
     eyebrow: 'Gateway',
-    title: 'Hardware zentral koordinieren',
+    title: 'Das Gateway hält Regeln, Netz und lokalen Betrieb zusammen',
     description:
-      'Das Gateway verbindet Zugriffspunkte, Regeln und lokalen Betrieb. Es hält Freigaben verfügbar, koordiniert das Netz und schafft eine belastbare Basis für anspruchsvollere Umgebungen.',
+      'Das Gateway spannt das IP500- und BLE-Netzwerk auf und verbindet Zugriffspunkte mit der Plattform. Es hält Freigaben verfügbar, koordiniert Kommunikation und hostet die lokale Datenbank für maximale Stabilität.',
     points: [
-      'verwaltet Netz und Kommunikation pro Standort oder Gebäude',
-      'hält Berechtigungen lokal verfügbar für stabilen Betrieb',
-      'schafft die Grundlage für zentrale Steuerung, Monitoring und Auswertung',
+      'verwaltet das gesamte Mesh-Netzwerk pro Gebäude oder Standort',
+      'hält Berechtigungen lokal verfügbar (Offline-Fähigkeit)',
+      'bildet das Herzstück des Systems für hochverfügbare Cluster (HA-Ready)',
     ],
+    ctaLabel: 'Zum Gateway Pro',
+    ctaHref: '/products/gateway-pro',
     imageSrc: '/gateway/mounted.jpg',
     imageAlt: 'Montiertes Gateway in einer Werkstatt',
   },
   {
     id: 'offline',
     eyebrow: 'Betrieb',
-    title: 'Auch bei Ausfällen weiter arbeitsfähig',
+    title: 'Auch bei Störungen muss die Freigabelogik tragen',
     description:
-      'Hardware muss nicht nur im Normalfall funktionieren. Sie muss auch unter Last, bei Störungen oder ohne Internet verlässlich weiterlaufen.',
+      'Mardu Hardware funktioniert auch im Worst-Case: Bei einem Server- oder Internetausfall arbeiten die Geräte dank lokaler Zwischenspeicherung im Mesh-Netzwerk einfach weiter.',
     points: [
-      'Offline-Caching hält Freigaben lokal vor',
-      'robuste Freigabelogik reduziert manuelle Ausnahmen im Alltag',
-      'geeignet für Türen, Tore, Maschinen und Zonen mit unterschiedlichen Anforderungen',
+      'Dezentrale Speicherung der Freigaben auf Gateways und Access Points',
+      'Selbstheilendes Mesh-Netzwerk gleicht den Ausfall einzelner Knoten aus',
+      'Volle Kontrolle über sicherheitskritische Maschinen – jederzeit',
     ],
+    ctaLabel: 'Zur Plattformübersicht',
+    ctaHref: '/platform',
     imageSrc: '/_A7_9094_quer.jpg',
     imageAlt: 'mardu Hardware im Werkstattkontext',
   },
   {
     id: 'software-view',
     eyebrow: 'Verwaltung',
-    title: 'Mit Software und Betrieb verbunden',
+    title: 'Hardware bleibt mit Software und Integrationen verbunden',
     description:
-      'Die Hardware arbeitet nicht isoliert. Status, Regeln und Entscheidungen werden in WebQ sichtbar und für Betrieb, Security und Administration nachvollziehbar.',
+      'Infrastruktur wird in der Software sichtbar. Über die WebQ-Plattform verwalten Sie alle Hardwarekomponenten, verteilen Rollen und können Hochschulsysteme (SSO, UniNow) anbinden.',
     points: [
-      'Gerätezustände und Infrastruktur zentral im Blick behalten',
-      'Regeln und Freigaben ohne Medienbruch anpassen',
-      'Ereignisse und Zustände dort prüfen, wo Entscheidungen fallen',
+      'Gerätezustände in Echtzeit im Browser einsehen',
+      'Regeln und Freigaben per Klick zentral verteilen',
+      'Protokolle auswerten und Audits rechtssicher dokumentieren',
     ],
     ctaLabel: 'Zur Software-Seite',
-    ctaHref: '/platform',
+    ctaHref: '/verwaltungssoftware',
     placeholder: {
       badge: 'UI',
       title: 'WebQ Hardware-Status',
@@ -116,43 +120,43 @@ export const hardwareFeatureBlocks: HardwareFeatureBlockDto[] = [
 
 export const hardwareVariants: HardwareVariantDto[] = [
   {
-    id: 'light',
-    name: 'Light',
+    id: 'software-only',
+    name: 'Mardu QR (Software-Integration)',
     tier: 'Einfachster Einstieg',
-    summary: 'Für einfache, klar abgegrenzte Schaltpunkte.',
+    summary: 'Für Maschinenfreigabe über Smartphone ohne unsere Steuerungs-Hardware.',
     suitableFor: [
-      'einzelne Türen, Tore oder Relais',
-      'einfache Schaltpunkte',
-      'kleine Umgebungen mit wenig Komplexität',
+      'bereits vorhandene Schaltschränke und Hardware',
+      'Smartphone-App/QR-Code-Identifikation',
+      'SaaS-Nutzung unserer WebQ-Plattform',
     ],
-    strengths: ['günstiger Einstieg', 'schnell umsetzbar', 'bewusst einfach gehalten'],
+    strengths: ['kein Hardware-Umbau nötig', 'schnell ausrollbar', 'günstiger Einstiegspreis'],
   },
   {
-    id: 'basic',
-    name: 'Basic',
-    tier: 'Wirtschaftlicher Standard',
-    summary: 'Für vernetzte, aber überschaubare Umgebungen.',
-    suitableFor: ['kleinere Werkstätten', 'Makerspaces', 'überschaubare Gebäude und Flächen'],
+    id: 'ble-standard',
+    name: 'BLE Standard',
+    tier: 'Wirtschaftliche Vernetzung',
+    summary: 'Bluetooth LE Mesh für typische Distanzen und Werkstätten.',
+    suitableFor: ['Makerspaces', 'kleinere Ausbildungswerkstätten', 'Standard-Bürogebäude'],
     strengths: [
-      'gutes Verhältnis aus Preis und Funktion',
-      'vernetzte Freigaben möglich',
-      'für viele Standardfälle passend',
+      'stabile BLE-Vernetzung bis 10m',
+      'hervorragendes Preis-Leistungs-Verhältnis',
+      'kompatibel mit Smart Akteur, Zylinder & Tags',
     ],
   },
   {
-    id: 'pro',
-    name: 'Pro',
+    id: 'ip500-pro',
+    name: 'IP500 Pro',
     badge: 'Empfohlen',
-    tier: 'Für professionelle Umgebungen',
-    summary: 'Für professionelle und belastbare Installationen.',
+    tier: 'Für professionelle Industrie-Umgebungen',
+    summary: 'Selbstheilendes Dualband-Mesh mit maximaler Reichweite und VdS-Sicherheit.',
     suitableFor: [
-      'Unternehmen und professionelle Werkstätten',
-      'größere Gebäude, Hallen oder Außenbereiche',
-      'Installationen mit höherem Anspruch an Stabilität',
+      'große Produktionshallen und Hochschul-Campusse',
+      'Altbauten mit dicken Wänden',
+      'hochverfügbare Enterprise-Szenarien',
     ],
-    strengths: ['höchste Robustheit', 'besser planbar', 'empfohlen für professionelle Umgebungen'],
+    strengths: ['höchste Durchdringung', 'Dualband (Sub-GHz & 2.4GHz)', 'maximale Ausfallsicherheit'],
     recommendation:
-      'Für die meisten professionellen Umgebungen die richtige Wahl, wenn Zuverlässigkeit wichtiger ist als der niedrigste Preis.',
+      'Für alle Umgebungen, in denen ein Störungsfall keine Option ist. Durch das IP500-Protokoll spart man sich aufwändige Kabelverlegung und sichert maximale Stabilität ab.',
   },
 ];
 
@@ -160,100 +164,79 @@ export const hardwareTrustItems: HardwareTrustItemDto[] = [
   {
     title: 'Offline weiter nutzbar',
     icon: ShieldCheck,
-    description: 'Lokale Berechtigungen helfen, auch bei Internetstörungen weiterzuarbeiten.',
+    description: 'Lokale Berechtigungen auf dem Gateway helfen, auch bei Netzwerkstörungen sicher weiterzuarbeiten.',
+  },
+  {
+    title: 'Kabelloses Mesh (IP500/BLE)',
+    icon: Wifi,
+    description: 'Zwei starke Funkstandards sparen die teure Verkabelung von Türen und Maschinen im Bestand.',
   },
   {
     title: 'Nachvollziehbare Freigaben',
     icon: Activity,
     description:
-      'Hardware, Regeln und Ereignisse greifen zusammen statt in getrennten Einzelsystemen zu laufen.',
+      'Rechte und Hardware-Ereignisse greifen lückenlos in der Plattform ineinander (Audit-Ready).',
   },
   {
-    title: 'Geeignet für reale Infrastrukturen',
-    icon: Network,
-    description:
-      'Türen, Tore, Zonen und Maschinen lassen sich in einem konsistenten Hardwarekonzept zusammenführen.',
-  },
-  {
-    title: 'Für anspruchsvolle Geräteklassen',
+    title: 'Für Industrie & Makerspaces',
     icon: Cpu,
-    description: 'Vom Zutrittspunkt bis zur Maschinenfreigabe für leistungsstärkere Verbraucher.',
+    description: 'Vom einfachen 40A Schütz an der Drehbank bis zum ausgedehnten Hochschul-Campus.',
   },
   {
     title: 'Netz passend zur Umgebung',
-    icon: Wifi,
+    icon: Network,
     description:
-      'Light für einfache Schaltpunkte, Basic für wirtschaftliche Vernetzung, Pro für mehr Stabilität und Belastbarkeit.',
+      'Mardu QR für reines SaaS, BLE-Standard für Kompaktheit, IP500 Pro für höchste Belastbarkeit.',
   },
   {
     title: 'Eigenentwickelte Hardware',
     icon: Boxes,
     description:
-      'Innenleben, Aufbau und Integration sind auf realen Betrieb statt auf reine Demooptik ausgelegt.',
+      'Zugriffspunkte und Gateways "Made in Germany" – ausgelegt auf robusten und sicheren Dauerbetrieb.',
   },
 ];
 
 export const hardwareFaqItems: FaqItem[] = [
   {
-    question: 'Wann reicht Light?',
+    question: 'Wann reicht Mardu QR (Software-Integration)?',
     answer:
-      'Light passt, wenn ein einzelner Schaltpunkt einfach per QR-Code freigegeben werden soll und keine volle Rollen-, Karten- oder Netzlogik nötig ist.',
+      'Mardu QR ist perfekt, wenn Sie bereits smarte Steuerungen oder Hardware besitzen und nur unsere Plattform (WebQ) zur Maschinenfreigabe via Smartphone-Scan nutzen möchten.',
   },
   {
-    question: 'Wann ist Basic sinnvoll?',
+    question: 'Wann ist BLE Standard sinnvoll?',
     answer:
-      'Basic ist sinnvoll, wenn mehrere Zugänge oder Maschinen digital verwaltet werden sollen, die Umgebung aber überschaubar bleibt und das Preis-Leistungs-Verhältnis im Vordergrund steht.',
+      'Basic BLE ist sinnvoll für Makerspaces oder kleine Vereinswerkstätten, in denen die Distanz zwischen den Geräten maximal 10 Meter beträgt und ein solides Preis-Leistungs-Verhältnis wichtig ist.',
   },
   {
-    question: 'Wann sollte man Pro wählen?',
+    question: 'Wann sollte man IP500 Pro wählen?',
     answer:
-      'Pro ist die richtige Wahl, wenn Gebäude, Hallen oder Außenbereiche anspruchsvoller sind, mehr Geräte vernetzt werden und der Betrieb langfristig robust und planbar bleiben soll.',
+      'Das IP500-Mesh-Netzwerk durchdringt problemlos dicke Wände in Altbauten und überbrückt sehr weite Distanzen in großen Werkhallen. Zudem ist das Funksystem VdS-abgenommen, was es besonders für Versicherungsfragen interessant macht.',
   },
   {
-    question: 'Warum ist Pro empfohlen?',
+    question: 'Funktioniert die Hardware auch ohne Internetverbindung?',
     answer:
-      'Weil bei professionellen Zutritts- und Freigabeumgebungen meist nicht die billigste Technik entscheidet, sondern wie belastbar sich die Installation im Gebäude und im Alltag verhält. Genau dort ist Pro klar im Vorteil.',
+      'Ja. Berechtigungen und Logs werden lokal auf den Gateways und Access Points zwischengespeichert. Bei einem Ausfall bleibt die Sicherheit stets erhalten und berechtigte Nutzer können weiterarbeiten.',
   },
   {
     question: 'Wie viele Zugriffspunkte und Gateways braucht man typischerweise?',
     answer: (
       <>
-        Das hängt von Türen, Toren, Maschinen und Zonen ab. Mit dem{' '}
+        Das hängt von den Räumlichkeiten ab. Oft reicht ein Gateway pro Etage oder Werkstatt aus. Wir empfehlen unseren{' '}
         <a href="/configurator" className="text-primary hover:underline">
           Konfigurator
         </a>{' '}
-        lässt sich der Bedarf früh strukturieren und für ein erstes Gespräch greifbar machen.
+        oder ein kurzes Gespräch, um den genauen Bedarf passend zur Funktechnologie zu ermitteln. Bei höchster Redundanz verbauen wir z.B. 2 Gateways pro Gebäude.
       </>
     ),
   },
   {
-    question: 'Funktioniert die Hardware auch ohne Internetverbindung?',
+    question: 'Lässt sich das System an meine Hochschule / Universität anbinden?',
     answer:
-      'Ja. Berechtigungen können lokal vorgehalten werden, damit der Betrieb auch bei Internetausfall kontrolliert weiterlaufen kann.',
+      'Absolut. Wir haben Mardu von Beginn an für Schnittstellen konzipiert. Anbindungen an Single Sign-On (SSO) Systeme, LDAP oder Hochschul-Apps wie UniNow stehen auf unserer Roadmap, um doppelte Pflege von Studierendendaten zu verhindern.',
   },
   {
-    question: 'Welche Komponenten gehören zu welcher Umgebung?',
+    question: 'Kann ich die Mardu Access Points selbst installieren?',
     answer:
-      'Typischerweise besteht ein Setup aus mindestens einem Gateway und mehreren Zugriffspunkten. Welche Kombination sinnvoll ist, hängt von Fläche, Infrastruktur und Anzahl der zu schaltenden Türen oder Maschinen ab.',
-  },
-  {
-    question: 'Wann passt die Light-Version mit QR-Code?',
-    answer:
-      'Sie passt für einfachere Schaltpunkte, an denen ein elektronisches Schütz oder Relais freigegeben werden soll, ohne die volle Rollen-, Karten- oder Ausweislogik der größeren Produktstufen aufzubauen.',
-  },
-  {
-    question: 'Wo finde ich technische Unterschiede im Detail?',
-    answer:
-      'Auf dieser Seite steht die Einordnung im Vordergrund. Technische Unterschiede und Funkdetails sollten nur in einer separaten Detailseite, einem Datenblatt oder einem Download-Vergleich vertieft werden.',
-  },
-  {
-    question: 'Wie läuft Inbetriebnahme und Integration grob ab?',
-    answer:
-      'Zunächst werden Umgebung, Schaltpunkte und Anforderungen aufgenommen. Danach folgen Auswahl der passenden Produktstufe, Montage, Konfiguration und Einbindung in die Verwaltungs- und Regelstruktur.',
-  },
-  {
-    question: 'Kann ich die Hardware zusammen mit WebQ betreiben?',
-    answer:
-      'Ja. Die Hardware ist dafür gedacht, Zustände, Freigaben und Entscheidungen mit der Verwaltungsoberfläche zusammenzuführen, statt als isolierte Einzellösung zu arbeiten.',
+      'Sie erhalten von uns einen klaren Schaltplan, vorkonfigurierte SD-Karten (bei SPS-Lösungen) und die Geräte. Den Einbau der 40A-Schütze oder der reinen APs in den Schaltschrank sollte jedoch immer Ihr zertifizierter Haus-Elektriker übernehmen.',
   },
 ];

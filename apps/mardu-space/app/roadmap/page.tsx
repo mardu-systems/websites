@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
+import { getPlatformOrigin } from '@mardu/site-config';
+import { getPlatformRoadmapPhases } from '@mardu/content-core';
 import { Overline } from '@mardu/ui/components/typography';
 import { RoadmapTimeline, type RoadmapMilestone } from '@mardu/sections';
+import Markdown from 'react-markdown';
 
 export const metadata: Metadata = {
   title: 'Roadmap & Ausblick',
@@ -21,83 +24,23 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RoadmapPage() {
-  const items: RoadmapMilestone[] = [
-    {
-      title: 'Phase 1: Erweiterte Maschinensteuerung & Logik',
-      time: 'Q2 2026',
-      cards: [
-        {
-          description: (
-            <ul className="space-y-3">
-              <li>
-                <strong>Erweiterte Regel-Engine:</strong> Implementierung komplexer
-                Freigabe-Szenarien, wie z.B. das &quot;Vier-Augen-Prinzip&quot; (Freigabe nur durch zwei
-                autorisierte Personen).
-              </li>
-              <li>
-                <strong>First Run Wizard:</strong> Ein web-basierter Einrichtungsassistent führt durch die Erstinstallation
-                (Datenbank, Admin-User), um die Inbetriebnahme ohne Konfigurationsdateien zu
-                ermöglichen. Einrichtung ohne Hilfe von mardu.
-              </li>
-              <li>
-                <strong>Qualifikations-Management:</strong> Tiefere Integration von Zertifikaten und
-                Unterweisungen mit automatischem Ablaufdatum und Benachrichtigungen.
-              </li>
-            </ul>
-          ),
-        },
-      ],
-    },
-    {
-      title: 'Phase 2: User Experience & Self-Service',
-      time: 'Q2-3 2026',
-      cards: [
-        {
-          description: (
-            <ul className="space-y-3">
-              <li>
-                <strong>Dynamische Konfigurations-UI:</strong> Administratoren können
-                Systemeinstellungen direkt über die Weboberfläche anpassen, ohne Neustarts oder Serverzugriff.
-              </li>
-              <li>
-                <strong>Interlock-Zwang:</strong> Technische Kopplung von Maschinenbedingungen, z.B. &quot;Maschine
-                startet nur, wenn die Absaugung aktiv ist&quot; oder &quot;Kühlmittel läuft&quot;.
-              </li>
-              <li>
-                <strong>Self-Onboarding:</strong> Neue Nutzer können sich selbst registrieren und Freigaben
-                beantragen, die durch Administratoren genehmigt werden (Approval-Flow).
-              </li>
-              <li>
-                <strong>Energie-Monitoring:</strong> Erfassung und Auswertung von Verbrauchsdaten
-                direkt an den Maschinen zur Optimierung der Energiekosten.
-              </li>
-            </ul>
-          ),
-        },
-      ],
-    },
-    {
-      title: 'Phase 3: Ökosystem & Integration',
-      time: 'Q3 2026 - Q2 2027',
-      cards: [
-        {
-          description: (
-            <ul className="space-y-3">
-              <li>
-                <strong>Plugin-Marktplatz:</strong> Module von Drittanbietern für Raumbuchung,
-                Bezahlsysteme oder LMS (Moodle, ILIAS, Uni-Now).
-              </li>
-              <li>
-                <strong>Hardware-backed Keystore:</strong> Unterstützung spezieller Sicherheits-Chips
-                für maximalen Schutzbedarf.
-              </li>
-            </ul>
-          ),
-        },
-      ],
-    },
-  ];
+export default async function RoadmapPage() {
+  const phases = await getPlatformRoadmapPhases(getPlatformOrigin(), 'mardu-space');
+  const items: RoadmapMilestone[] = phases.map((phase) => ({
+    title: phase.title,
+    time: phase.time,
+    cards: phase.items.map((item) => ({
+      title: item.title,
+      description: (
+        <div className="space-y-3">
+          <p className="text-sm leading-relaxed text-foreground/72 md:text-base">{item.summary}</p>
+          <div className="prose prose-sm max-w-none prose-p:my-0 prose-p:text-foreground/85 prose-li:text-foreground/85 prose-strong:text-foreground prose-ul:my-0 prose-ul:pl-5 prose-a:text-foreground prose-a:underline prose-a:underline-offset-3 md:prose-base">
+            <Markdown>{item.bodyMarkdown}</Markdown>
+          </div>
+        </div>
+      ),
+    })),
+  }));
 
   return (
     <main className="pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))]">
@@ -112,11 +55,16 @@ export default function RoadmapPage() {
           </p>
         </div>
 
-        <RoadmapTimeline
-          className="pt-8 md:pt-10"
-          variant="plain"
-          items={items}
-        />
+        {items.length > 0 ? (
+          <RoadmapTimeline className="pt-8 md:pt-10" variant="plain" items={items} />
+        ) : (
+          <div className="pt-8 md:pt-10">
+            <div className="border border-black/10 bg-card px-6 py-8 text-sm leading-relaxed text-foreground/72 md:px-8 md:py-10 md:text-base">
+              Die öffentliche Roadmap wird gerade redaktionell in den neuen Payload-Workflow
+              überführt. Inhalte folgen in Kürze.
+            </div>
+          </div>
+        )}
       </section>
     </main>
   );

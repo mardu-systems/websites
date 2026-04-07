@@ -1,4 +1,5 @@
 import type { ContactSource } from '@mardu/lead-core';
+import type { CatalogInquiryContextDto } from '@mardu/content-core';
 
 /**
  * URL contract for `/contact`.
@@ -7,6 +8,11 @@ import type { ContactSource } from '@mardu/lead-core';
 export interface ContactPageSearchParamsDto {
   source?: string;
   topic?: string;
+  product?: string;
+  productName?: string;
+  category?: string;
+  variant?: string;
+  priceFrom?: string;
 }
 
 /**
@@ -21,6 +27,7 @@ export interface ContactPageContextDto {
   initialMessage?: string;
   submitLabel?: string;
   successMessage?: string;
+  config?: CatalogInquiryContextDto;
 }
 
 const DEFAULT_CONTACT_CONTEXT: ContactPageContextDto = {
@@ -45,6 +52,39 @@ const ADMIN_SOFTWARE_CONTACT_CONTEXT: ContactPageContextDto = {
   successMessage: 'Danke! Wir melden uns zur Verwaltungssoftware bei Ihnen.',
 };
 
+function getCatalogContactContext(
+  searchParams: ContactPageSearchParamsDto,
+): ContactPageContextDto | undefined {
+  if (!searchParams.product || !searchParams.productName || !searchParams.category) {
+    return undefined;
+  }
+
+  const variantText = searchParams.variant ? ` in der Variante ${searchParams.variant}` : '';
+  const priceText = searchParams.priceFrom ? ` Richtpreis ab ${searchParams.priceFrom}.` : '';
+
+  return {
+    overline: 'Produktanfrage',
+    title: `Angebot für ${searchParams.productName} anfragen.`,
+    description:
+      'Dieser Kontaktweg ist auf produktbezogene Angebotsanfragen ausgerichtet. So startet die Rückmeldung direkt mit dem passenden Produktkontext.',
+    intro:
+      'Teilen Sie uns kurz Einsatzumgebung, Stückzahl oder gewünschte Kombination mit. Wir melden uns mit einem passenden nächsten Schritt.',
+    source: 'contact-form',
+    initialMessage: `Ich möchte ein Angebot für ${searchParams.productName}${variantText} anfragen. Einsatzbereich: ${searchParams.category}.${priceText}`,
+    submitLabel: 'Angebot anfragen',
+    successMessage: `Danke! Wir melden uns zu ${searchParams.productName}.`,
+    config: {
+      productId: searchParams.product,
+      productSlug: searchParams.product,
+      productName: searchParams.productName,
+      category: searchParams.category,
+      variantId: searchParams.variant,
+      priceFrom: searchParams.priceFrom,
+      sourcePage: `/products/${searchParams.product}`,
+    },
+  };
+}
+
 /**
  * Resolve contextual contact copy from the `/contact` URL parameters.
  * Unknown sources deliberately fall back to the default contact experience.
@@ -52,6 +92,11 @@ const ADMIN_SOFTWARE_CONTACT_CONTEXT: ContactPageContextDto = {
 export function getContactPageContext(
   searchParams?: ContactPageSearchParamsDto,
 ): ContactPageContextDto {
+  const catalogContext = searchParams ? getCatalogContactContext(searchParams) : undefined;
+  if (catalogContext) {
+    return catalogContext;
+  }
+
   if (
     searchParams?.source === 'admin-software' &&
     searchParams?.topic === 'verwaltungssoftware-demo'

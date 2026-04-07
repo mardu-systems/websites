@@ -1,10 +1,9 @@
 import type { LucideIcon } from 'lucide-react';
 import type { EditorialLinkPanelItem, EditorialPanelItem } from '@mardu/sections';
-import { Activity, KeyRound, LockKeyhole, MapPinned, Server, UsersRound } from 'lucide-react';
+import { Activity, KeyRound, LockKeyhole, MapPinned, Server, UsersRound, Wifi, Smartphone, Radio } from 'lucide-react';
 
 /**
  * DTO for a sellable WebQ capability block on the `/platform` page.
- * Each block translates a real product area into one clear business outcome.
  */
 export interface PlatformFeatureDto {
   id: string;
@@ -16,7 +15,6 @@ export interface PlatformFeatureDto {
 
 /**
  * DTO tuple for the editorial product-story section on the `/platform` page.
- * The page owns copy and media selection, while `@mardu/sections` owns layout and styling.
  */
 export type PlatformEditorialPanelsDto = [
   EditorialPanelItem,
@@ -26,70 +24,108 @@ export type PlatformEditorialPanelsDto = [
 
 /**
  * DTO tuple for the 2-panel editorial link stage on the `/platform` page.
- * The page owns thematic copy and routes, while `@mardu/sections` owns composition and motion.
  */
 export type PlatformEditorialLinkPanelsDto = [
   EditorialLinkPanelItem,
   EditorialLinkPanelItem,
 ];
 
+/**
+ * DTO for Network topologies (IP500 vs BLE).
+ */
+export interface PlatformNetworkDto {
+  id: string;
+  title: string;
+  description: string;
+  benefits: string[];
+  icon: LucideIcon;
+}
+
 export const platformFeatures: PlatformFeatureDto[] = [
   {
-    id: 'devices',
-    title: 'Geräte zentral verwalten',
+    id: 'identity',
+    title: 'Sicherheit durch echte Qualifikation',
     description:
-      'Status, Firmware, Provisionierung und Erreichbarkeit lassen sich in einer Oberfläche überwachen und steuern.',
-    proof: 'Geeignet für operative Kontrolle statt verteilter Einzeltools.',
-    icon: Server,
-  },
-  {
-    id: 'access',
-    title: 'Zugriffe präzise steuern',
-    description:
-      'Freigaben lassen sich nach Person, Gruppe, Zeitfenster und Zugangspunkt modellieren statt pauschal vergeben.',
-    proof: 'Besonders wertvoll für Maschinen, Türen, Tore und qualifikationsabhängige Freigaben.',
-    icon: KeyRound,
-  },
-  {
-    id: 'users',
-    title: 'Benutzer und Rollen sauber organisieren',
-    description:
-      'Konten, Zuständigkeiten und Berechtigungen bleiben für Betrieb, Security und Administration nachvollziehbar.',
-    proof: 'Hilft dort, wo viele Beteiligte in einem gemeinsamen System koordiniert werden.',
+      'Berechtigungen sind personenbezogen, nicht geteilt. Einweisungen werden bei jedem Maschinenstart oder Zutrittsversuch aktiv überprüft.',
+    proof: 'Erhöht die Sicherheit und verhindert Stilllegungen durch Fehlbedienungen.',
     icon: UsersRound,
   },
   {
-    id: 'security',
-    title: 'Sicherheit integriert statt nachgerüstet',
-    description: '2FA, Passkeys, Sitzungen und Freigaberegeln greifen in einem System ineinander.',
-    proof: 'Reduziert Reibung für Nutzer und hält Sicherheitslogik zentral pflegbar.',
+    id: 'rules',
+    title: 'Zutritt ohne permanente Aufsicht',
+    description:
+      'Geregeltes Arbeiten auch am Wochenende oder am Abend. Nur Nutzer mit einer gültigen Freigabe können Maschinen starten oder Räume betreten.',
+    proof: 'Ideal für Makerspaces, Universitäten und offene Werkstätten.',
+    icon: KeyRound,
+  },
+  {
+    id: 'hardware',
+    title: 'Kabellose Vernetzung (IP500 & BLE)',
+    description:
+      'Unsere Hardware lässt sich in Bestandsgebäude leicht nachrüsten. Das Mesh-Netzwerk garantiert einen stabilen Betrieb auch durch Wände hindurch.',
+    proof: 'Spart teure Verkabelung in Altbauten und großen Werkhallen.',
+    icon: Wifi,
+  },
+  {
+    id: 'integrations',
+    title: 'Einfache Integration (SSO & UniNow)',
+    description:
+      'Wir integrieren uns in Ihre bestehende Infrastruktur: Single Sign-On (SSO) oder Campus-Apps wie UniNow für Hochschulen stehen auf der Roadmap.',
+    proof: 'Reduziert den administrativen Aufwand auf ein Minimum.',
     icon: LockKeyhole,
   },
   {
     id: 'audit',
-    title: 'Betrieb nachvollziehbar machen',
+    title: 'Volle Übersicht für die Leitungsebene',
     description:
-      'Ereignisse, Zustände und Änderungen werden dort sichtbar, wo Entscheidungen getroffen werden.',
-    proof: 'Unterstützt Audit, Nachweis und störungsarmen Betrieb.',
+      'Protokolle, Maschinenzustände und Zugriffsrechte sind auf einen Blick einsehbar. Sie müssen nicht permanent vor Ort sein, um die Kontrolle zu behalten.',
+    proof: 'Vereinfacht Audits und den Nachweis der Aufsichtspflicht.',
     icon: Activity,
   },
   {
-    id: 'zones',
-    title: 'Komplexe Standorte einfach abbilden',
+    id: 'products',
+    title: 'Digitale Identifikation via App oder NFC',
     description:
-      'Zonen, Access Points und standortspezifische Regeln lassen sich ohne unübersichtliche Sonderlogik verwalten.',
-    proof: 'Sinnvoll für Gebäude, Werkstätten, Campusse und verteilte Schaltpunkte.',
-    icon: MapPinned,
+      'Nutzer authentifizieren sich wahlweise per Smartphone (QR-Code / App Key), per NFC-Tag oder Smartcard direkt am Gerät.',
+    proof: 'Flexible Handhabung für feste Teams oder wechselnde Semesterrollen.',
+    icon: Smartphone,
   },
+];
+
+export const platformNetworks: PlatformNetworkDto[] = [
+  {
+    id: 'ip500',
+    title: 'IP500: Das Industrie-Mesh für extreme Reichweiten',
+    description: 'Das IP500 Funk-Protokoll bildet ein selbstheilendes Dualband-Mesh (Sub-GHz und 2,4 GHz). Es ist VdS-abgenommen und wurde für hochsichere Gebäudeautomation entwickelt.',
+    benefits: [
+      'Extrem hohe Reichweite und Wändedurchdringung (Ideal für Altbau/Industrie)',
+      'Dualband-Mesh für Ausfallsicherheit und Selbstheilung',
+      'VdS-Zertifiziert – relevant für den Versicherungsschutz',
+      'Einsatz in Pro-Geräten: Gateway Pro, Access Point Pro, Smart Akteur Pro'
+    ],
+    icon: Radio,
+  },
+  {
+    id: 'ble',
+    title: 'Bluetooth LE: Der effiziente Standard',
+    description: 'Die Bluetooth Low Energy (BLE) Lösung baut ebenfalls ein zuverlässiges Mesh-Netzwerk auf und eignet sich perfekt für normale Distanzen und kompakte Installationen.',
+    benefits: [
+      'Reichweiten von bis zu 10m von Gerät zu Gerät',
+      'Direkte Smartphone-Integration (App Key)',
+      'Kosteneffizient für Standard-Werkstätten und Vereinsräume',
+      'Einsatz in Standard-Geräten: Gateway, Access Point, Smart Akteur, Schließzylinder'
+    ],
+    icon: Wifi,
+  }
 ];
 
 export const platformEditorialPanels: PlatformEditorialPanelsDto = [
   {
     id: 'webq-overview',
-    badge: 'Software',
-    title: 'WebQ bündelt Betrieb und Freigaben.',
+    badge: 'Software (WebQ)',
+    title: 'Nutzer, Rollen und Qualifikationen zentral steuern.',
     description:
-      'Nutzer, Geräte, Rollen und Ereignisse laufen in einer Oberfläche zusammen statt in separaten Tools zu verschwinden.',
+      'Hier pflegen Sie Berechtigungen und Einweisungen digital. Das System prüft diese in Echtzeit und übersetzt sie in echte Freigaben an den Maschinen.',
     imageSrc: '/verwaltungssoftware/benutzerverwaltung.png',
     imageAlt: 'WebQ Oberfläche mit Benutzerverwaltung und zentralem Überblick',
     theme: 'dark',
@@ -97,10 +133,10 @@ export const platformEditorialPanels: PlatformEditorialPanelsDto = [
   },
   {
     id: 'access-rules',
-    badge: 'Freigaben',
-    title: 'Regeln bleiben präzise statt pauschal.',
+    badge: 'Regelwerk',
+    title: 'Verantwortung und Nachweise sicher dokumentieren.',
     description:
-      'Zeitfenster, Bedingungen und Verantwortlichkeiten lassen sich so modellieren, wie reale Zutrittslogik tatsächlich funktioniert.',
+      'Zeitfenster, Bedingungen und Protokolle werden transparent erfasst. Das System sorgt dafür, dass Ihre Aufsichtspflicht stets erfüllt und nachweisbar bleibt.',
     imageSrc: '/verwaltungssoftware/zugriffsprotokolle.png',
     imageAlt: 'WebQ Oberfläche mit Zugriffsprotokollen und nachvollziehbaren Ereignissen',
     theme: 'light',
@@ -109,9 +145,9 @@ export const platformEditorialPanels: PlatformEditorialPanelsDto = [
   {
     id: 'device-visibility',
     badge: 'Infrastruktur',
-    title: 'Geräte und Zutrittspunkte bleiben sichtbar.',
+    title: 'Geräte und Zutrittspunkte im Blick behalten.',
     description:
-      'Status, Zuordnung und technische Sichtbarkeit landen dort, wo Security, Betrieb und Administration Entscheidungen treffen.',
+      'Gateways und Access Points setzen die Rechte lokal um. Selbst bei Serverausfall oder Störungen bleiben die Zutrittspunkte verlässlich steuerbar.',
     imageSrc: '/verwaltungssoftware/zutrittspunkte-und-geraete.png',
     imageAlt: 'WebQ Oberfläche mit Zutrittspunkten und verwalteten Geräten',
     theme: 'light',
@@ -122,12 +158,12 @@ export const platformEditorialPanels: PlatformEditorialPanelsDto = [
 export const platformEditorialLinkPanels: PlatformEditorialLinkPanelsDto = [
   {
     id: 'operations-view',
-    badge: 'Betrieb',
-    title: 'Verwaltung bleibt im Alltag lesbar.',
+    badge: 'Software',
+    title: 'So steuern Sie Regeln und Personen.',
     description:
-      'WebQ ist nicht nur eine Oberfläche für einzelne Listen. Die Plattform ordnet Nutzer, Geräte, Regeln und Zustände so, dass operative Entscheidungen schneller und belastbarer werden.',
+      'Erfahren Sie, wie Sie Einweisungen verwalten, Integrationen (SSO, UniNow) einrichten und den Überblick über Ihren Makerspace behalten.',
     href: '/verwaltungssoftware',
-    ctaLabel: 'Mehr erfahren',
+    ctaLabel: 'Zur Software',
     ariaLabel: 'Mehr über die Verwaltungsoberfläche WebQ erfahren',
     pattern: {
       glyph: 'chevron',
@@ -139,12 +175,12 @@ export const platformEditorialLinkPanels: PlatformEditorialLinkPanelsDto = [
   },
   {
     id: 'system-view',
-    badge: 'System',
-    title: 'Hardware, Regeln und Oberfläche greifen ineinander.',
+    badge: 'Hardware',
+    title: 'So werden Freigaben vor Ort umgesetzt.',
     description:
-      'Die Plattform entfaltet ihren Wert erst im Zusammenspiel mit Zugriffspunkten, Gateways und lokalem Betrieb. Genau dort entsteht die technische Stärke des Systems.',
+      'Entdecken Sie, wie Access Points, Schütze und IP500-Gateways Ihre Maschinen sicher schalten – auch ohne Aufsichtsperson.',
     href: '/system',
-    ctaLabel: 'Mehr erfahren',
+    ctaLabel: 'Zur Hardware',
     ariaLabel: 'Mehr über den Systemaufbau erfahren',
     align: 'right',
     pattern: {

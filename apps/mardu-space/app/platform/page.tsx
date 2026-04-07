@@ -9,17 +9,18 @@ import {
   platformEditorialLinkPanels,
   platformEditorialPanels,
   platformFeatures,
+  platformNetworks,
 } from '@/data/platform-page';
 
 const heroDescription = (
   <>
     <p className="mb-4 text-lg font-medium">
-      WebQ verbindet Sicherheitskontrolle und operative Verwaltung in einer Oberfläche.
+      Die Plattform ist die Klammer zwischen Software, Hardware, Integrationen und Produkten.
     </p>
     <p>
-      Die Software führt Geräte, Nutzer, Freigaben und Nachweise zusammen. So bleibt nicht nur
-      sichtbar, wer was darf, sondern auch, wie Hardware, Regeln und Betrieb tatsächlich
-      zusammenspielen.
+      Hier wird sichtbar, wie aus Identität, Regel und lokaler Entscheidung ein belastbarer
+      Betriebsablauf wird. Nicht als abstraktes Architekturdiagramm, sondern so, wie Werkstätten,
+      Makerspaces, Labore und Hochschulumgebungen tatsächlich organisiert werden müssen.
     </p>
   </>
 );
@@ -27,29 +28,29 @@ const heroDescription = (
 const introDescription = (
   <>
     <p className="text-balance">
-      WebQ ist die zentrale Oberfläche hinter der Hardware. Hier laufen Gerätezustände,
-      Zugriffsregeln, Qualifikationen und Protokolle zusammen.
+      Sicherheit darf kein Widerspruch zur freien und kreativen Entfaltung sein. Die Plattform erklärt nicht nur einzelne Funktionen. Sie zeigt den Weg von der Person über
+      die Regel bis zur tatsächlichen Freigabe an Tür, Tor oder Maschine.
     </p>
     <ul className="mt-10 list-inside list-disc space-y-6">
-      <li>Geräte, Nutzer und Rollen in einer Oberfläche verwalten</li>
-      <li>Freigaben nach Person, Gruppe, Zeit und Zugangspunkt modellieren</li>
-      <li>Ereignisse, Zustände und Änderungen nachvollziehbar prüfen</li>
+      <li>Software steuert Personen, Qualifikationen und Regeln (z. B. über UniNow oder SSO-Integrationen)</li>
+      <li>Hardware setzt diese Entscheidungen lokal, kabellos und verlässlich um</li>
+      <li>Integrationen und Produkte machen daraus ein belastbares Projektbild – ideal für Makerspaces und Hochschulen</li>
     </ul>
   </>
 );
 
 const introItems = [
   {
-    title: 'Geräteverwaltung',
-    description: 'Status, Firmware und Provisionierung zentral im Blick behalten.',
+    title: 'Software',
+    description: 'WebQ verwaltet Nutzer, Rollen, Qualifikationen, Regeln und Nachweise. Integrationen via API möglich.',
   },
   {
-    title: 'Zugriffssteuerung',
-    description: 'Regeln und Berechtigungen präzise statt pauschal vergeben.',
+    title: 'Hardware',
+    description: 'Zugriffspunkte, Gateways und Maschinenanbindung setzen Freigaben vor Ort um. (VdS-Zertifiziert, IP500 oder BLE)',
   },
   {
-    title: 'Sicherheit & Audit',
-    description: 'Passkeys, 2FA, Sessions und Logs in einer Oberfläche bündeln.',
+    title: 'Integrationen & Produkte',
+    description: 'Bestehende Systeme und passende Komponenten werden in ein gemeinsames Setup übersetzt.',
   },
 ];
 
@@ -57,23 +58,23 @@ export default function Page() {
   return (
     <main className="min-h-screen bg-background">
       <HeroSection
-        title="Software für Geräte, Freigaben und nachvollziehbaren Betrieb"
+        title="Wie Software, Hardware und Integrationen in mardu.space zusammenspielen"
         description={heroDescription}
-        overline="Software"
-        buttonText="Konfigurator starten"
-        buttonHref="/configurator"
-        secondaryButtonText="Kontakt"
-        secondaryButtonHref="/contact"
+        overline="Plattform"
+        buttonText="Whitepaper ansehen"
+        buttonHref="/whitepaper"
+        secondaryButtonText="Produkte ansehen"
+        secondaryButtonHref="/products"
         imageSrc="/gateway/mounted.jpg"
         imageAlt="mardu Hardware im Werkstattkontext"
       />
 
       <section className="section-hairline">
         <SplitContent
-          eyebrow="WebQ"
-          title="Die Verwaltungsoberfläche hinter der Hardware"
+          eyebrow="Gesamtlogik"
+          title="Vom Nutzer bis zur lokalen Freigabe läuft alles durch dieselbe Plattformlogik"
           description={introDescription}
-          sideTitle="Was Betreiber hier steuern"
+          sideTitle="Drei Ebenen, ein System"
           items={introItems}
           variant="plain"
         />
@@ -86,8 +87,8 @@ export default function Page() {
               Kernfunktionen, die sich im Alltag auszahlen
             </h2>
             <p className="max-w-xl text-sm leading-relaxed text-foreground/68 md:text-base">
-              Statt einzelne Screens aufzuzählen, fasst WebQ die wichtigsten Verwaltungsaufgaben in
-              wenige klar lesbare Produktblöcke zusammen.
+              Mardu sorgt für Sicherheit ohne permanente Aufsicht. Diese Blöcke zeigen, welche Rolle die Plattform
+              im Zusammenspiel mit Hardware, Integrationen und realen Betriebsabläufen (z.B. Makerspaces) übernimmt.
             </p>
           </div>
 
@@ -118,23 +119,64 @@ export default function Page() {
         </div>
       </section>
 
+      <section className="section-hairline bg-black/5">
+        <div className="mardu-container py-20 md:py-24">
+          <div className="mb-12">
+            <h2 className="headline-balance text-[clamp(1.9rem,4vw,3.4rem)] leading-[1.02] tracking-[-0.03em] text-foreground">
+              Kabellose Mesh-Netzwerke für jede Reichweite
+            </h2>
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-foreground/72">
+              Je nach Anforderung setzen wir auf zwei ausfallsichere, kabellose Mesh-Technologien, um selbst in Altbauten oder großen Werkhallen eine störungsfreie Übertragung zu garantieren.
+            </p>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2">
+            {platformNetworks.map((network) => {
+              const Icon = network.icon;
+
+              return (
+                <article key={network.id} className="flex flex-col border border-black/10 bg-background p-8">
+                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-black/5">
+                    <Icon className="h-7 w-7 text-foreground/80" aria-hidden="true" />
+                  </div>
+                  <h3 className="text-2xl font-semibold tracking-[-0.02em] text-foreground mb-4">
+                    {network.title}
+                  </h3>
+                  <p className="text-base leading-relaxed text-foreground/80 mb-6">
+                    {network.description}
+                  </p>
+                  <div className="mt-auto">
+                    <h4 className="font-medium text-foreground mb-3">Vorteile & Anwendungsbereiche</h4>
+                    <ul className="list-inside list-disc space-y-2 text-sm text-foreground/70">
+                      {network.benefits.map((benefit, i) => (
+                        <li key={i}>{benefit}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       <EditorialPanelsSection
-        eyebrow="Produkt-Tour"
-        title="Produkt-Tour durch die wichtigsten Views"
-        intro="Drei produktnahe Panels zeigen, wie WebQ Betrieb, Regelwerk und Infrastruktur in einer Oberfläche zusammenzieht."
+        eyebrow="Systemblick"
+        title="Drei Blickwinkel auf dasselbe System"
+        intro="Die Plattform wird erst dann verständlich, wenn Software, Regeln und technische Infrastruktur gemeinsam betrachtet werden."
         items={platformEditorialPanels}
       />
 
       <EditorialLinkPanelsSection
-        eyebrow="Weiterführende Kapitel"
-        title="WebQ endet nicht bei der Oberfläche"
-        intro="Diese beiden Kapitel vertiefen die Plattform aus zwei Richtungen: als Werkzeug für den operativen Alltag und als Teil eines größeren technischen Systems."
+        eyebrow="Weiter vertiefen"
+        title="Von hier aus geht es in die Systemebenen"
+        intro="Diese Kapitel zeigen das Zusammenspiel noch genauer: einmal aus Sicht des operativen Regelwerks und einmal aus Sicht der Hardware vor Ort."
         items={platformEditorialLinkPanels}
       />
 
       <CTASectionWithRecaptcha
-        title="Live sehen, wie WebQ Geräte, Nutzer und Zutritte zusammenführt."
-        description="Nutzen Sie den Konfigurator für eine erste Einordnung oder sprechen Sie direkt mit uns über Hardware, Verwaltungslogik und passende Produktstufen."
+        title="Die Plattform macht erst im Projektkontext wirklich Sinn."
+        description="Wenn Sie klären möchten, welche Software-, Hardware- und Produktkombination zu Ihrem Betrieb oder Makerspace passt, gehen wir das gemeinsam durch."
         primaryButtonText="Konfigurator starten"
         primaryButtonHref="/configurator"
         secondaryButtonText="Kontakt aufnehmen"

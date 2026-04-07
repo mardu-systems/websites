@@ -32,17 +32,15 @@ import {
 const heroDescription = (
   <>
     <p className="mb-4 text-lg font-medium">
-      Für Unternehmenswerkstätten, Hochschulen, Makerspaces und Labore.
+      Für Werkstätten, Labore, Hochschulen und Makerspaces.
     </p>
     <p>
-      mardu.space reduziert Abstimmung, Listenpflege und Schlüsselorganisation im laufenden
-      Betrieb. Betreiber behalten den Überblick über Zugänge, Verantwortlichkeiten und Freigaben,
-      ohne neue Sonderprozesse in den Alltag zu holen.
+      Offene oder komplexe Werkstattumgebungen scheitern selten an fehlenden Regeln. Sie scheitern
+      daran, dass Schlüssel, Listen und Einweisungen im Alltag auseinanderlaufen.
     </p>
     <p className="mt-4">
-      Zutritt, Maschinenfreigabe und Qualifikation laufen in einem System zusammen. So wird nicht
-      nur geregelt, wer wohin darf, sondern auch, wer welche Maschine unter welchen
-      Voraussetzungen nutzen darf.
+      mardu.space verbindet Zutritt, Maschinenfreigabe und Qualifikation so, dass Verantwortung
+      nicht nur dokumentiert bleibt, sondern an Tür, Tor und Maschine tatsächlich wirksam wird.
     </p>
   </>
 );
@@ -50,13 +48,14 @@ const heroDescription = (
 const summaryDescription = (
   <>
     <p className="text-balance">
-      mardu.space ersetzt Schlüssel, Listen und lose Einweisungen durch eine Betriebslogik, die
-      Zutritt, Maschinenfreigabe und Qualifikation sauber zusammenhält.
+      Wer einen Makerspace, eine Hochschulwerkstatt oder ein Labor betreibt, braucht keine weitere
+      Nebenliste. Benötigt wird ein System, das Menschen, Regeln und Freigaben im Alltag
+      zusammenhält.
     </p>
     <ul className="mt-10 space-y-6 list-disc list-inside">
-      <li>Rechte klar und ohne Nebenlisten organisieren</li>
-      <li>Maschinen nur mit gültiger Qualifikation freigeben</li>
-      <li>Nutzung und Entscheidungen nachvollziehbar dokumentieren</li>
+      <li>Zugänge und Zuständigkeiten ohne Schlüsselchaos steuern</li>
+      <li>Maschinen nur dann freigeben, wenn die Voraussetzungen wirklich erfüllt sind</li>
+      <li>Entscheidungen und Ereignisse später nachvollziehen können</li>
     </ul>
   </>
 );
@@ -65,19 +64,19 @@ const summaryItems = [
   {
     title: 'Weniger Abstimmung im Alltag',
     description:
-      'Zugänge, Rollen und Freigaben werden zentral gepflegt, statt über Rückfragen, Schlüssel und Einzelabsprachen zusammengehalten zu werden.',
+      'Zugänge, Rollen und Freigaben werden an einer Stelle gepflegt, statt über Schlüssel, Zurufe und Einzelabsprachen zusammenzuhalten.',
     icon: ShieldCheck,
   },
   {
     title: 'Klare Regeln, technisch umgesetzt',
     description:
-      'Qualifikation, Regelwerk und Freigabe greifen ineinander, damit Vorgaben nicht nur dokumentiert, sondern im Betrieb auch wirksam umgesetzt werden.',
+      'Qualifikation, Regelwerk und lokale Freigabe greifen ineinander, damit Vorgaben nicht nur auf dem Papier existieren.',
     icon: Settings,
   },
   {
     title: 'Nachvollziehbar im Betrieb',
     description:
-      'Ereignisse, Entscheidungen und Ausnahmen bleiben nachvollziehbar, wenn Verantwortliche intern abstimmen, Vorfälle klären oder Audits vorbereiten müssen.',
+      'Ereignisse, Entscheidungen und Ausnahmen bleiben sichtbar, wenn Vorfälle geklärt oder interne Nachweise gebraucht werden.',
     icon: Server,
   },
 ];
@@ -87,7 +86,7 @@ const cardGridItems = [
     title: 'Komplexe Betriebsstrukturen',
     badge: 'Viele Beteiligte',
     description:
-      'Besonders passend, wenn viele Räume, Maschinen und Nutzergruppen zusammenkommen und Verantwortlichkeiten im Alltag sauber organisiert werden müssen.',
+      'Besonders passend, wenn viele Räume, Maschinen und Nutzergruppen zusammenkommen und Verantwortung nicht an Einzelpersonen hängen soll.',
     list: [
       'klare Zuständigkeiten trotz vieler Bereiche und Rollen',
       'saubere Nachweise für Betrieb, Aufsicht und interne Abstimmung',
@@ -99,7 +98,7 @@ const cardGridItems = [
     title: 'Hohe Fluktuation, wenig Administration',
     badge: 'Wechselnde Nutzer',
     description:
-      'Sinnvoll, wenn Einweisungen, wechselnde Nutzer und anspruchsvolle Maschinen im Alltag zusammenkommen, aber die Administration schlank bleiben muss.',
+      'Sinnvoll, wenn Einweisungen, wechselnde Nutzer und anspruchsvolle Maschinen zusammenkommen, aber der Betrieb trotzdem ruhig bleiben muss.',
     list: [
       'Qualifikation direkt mit Freigaben koppeln',
       'weniger manuelle Organisation trotz Fluktuation und Ehrenamt',
@@ -111,7 +110,7 @@ const cardGridItems = [
     title: 'Kleinere Umgebungen mit Sicherheitsfokus',
     badge: 'Nachgeordnet',
     description:
-      'Auch in kleineren Werkstattumgebungen sinnvoll, wenn Sicherheit, klare Freigaben und einfache Verwaltung wichtiger sind als komplexe Organisationsstrukturen.',
+      'Auch in kleineren Umgebungen sinnvoll, wenn klare Freigaben und einfache Verwaltung wichtiger sind als improvisierte Schlüsselprozesse.',
     list: [
       'Schutz vor unbefugtem Zugriff auf Räume und Geräte',
       'einfaches Rechtemanagement ohne Schlüsselchaos und Nebenlisten',
@@ -395,12 +394,12 @@ export default function HomePage() {
       </a>
       <section id="home">
         <HeroSection
-          title="Mehr Ordnung und Nachvollziehbarkeit für Zutritt und Maschinenfreigabe"
-          overline="Für Betreiber von Werkstätten und Laboren"
+          title="Wenn Werkstätten offen bleiben sollen, müssen Freigaben verlässlich funktionieren"
+          overline="Digitale Zutritts- und Maschinenfreigabe"
           description={heroDescription}
-          buttonText="Konfigurator starten"
-          buttonHref="/configurator"
-          secondaryButtonText="Demo vereinbaren"
+          buttonText="Whitepaper ansehen"
+          buttonHref="/whitepaper"
+          secondaryButtonText="Gespräch anfragen"
           secondaryButtonHref="/contact"
           imageSrc="/_A7_9094_quer.jpg"
           imageAlt="mardu.space-System in einer Werkstatt"
@@ -413,7 +412,7 @@ export default function HomePage() {
               imageAlt: 'mardu.space-System in einer Werkstatt',
               ariaLabel: 'Zu den Produktlösungen mardu.space scrollen',
               description:
-                'Digitale Zutritts- und Maschinenfreigabe für Werkstätten, Labore und Makerspaces.',
+                'Wie mardu.space Regeln, Hardware und Freigaben im Betrieb zusammenführt.',
               priority: true,
             },
           ]}
@@ -422,10 +421,10 @@ export default function HomePage() {
 
       <section id="loesung" className="section-hairline">
         <SplitContent
-          title="Warum Betreiber von Schlüsseln, Listen und Einzelabsprachen weg wollen"
-          eyebrow="Betrieblich sauber organisiert"
+          title="Warum freie Werkstatt- und Labororte organisatorisch so schnell unruhig werden"
+          eyebrow="Der eigentliche Engpass"
           description={summaryDescription}
-          sideTitle="Drei Gründe für die Umstellung"
+          sideTitle="Drei Gründe, warum das nicht bei Schlüsseln endet"
           sideIcon={CheckCircle}
           items={summaryItems}
           variant="plain"
@@ -435,7 +434,7 @@ export default function HomePage() {
       <section id="argumente" className="section-hairline">
         <CardGrid
           eyebrow="Einsatzfelder"
-          title="Wo mardu.space heute besonders gut in reale Betriebsabläufe passt"
+          title="Wo diese Logik besonders viel Druck aus dem Alltag nimmt"
           itemMetaLabel="Fokus"
           variant="muted"
           items={cardGridItems}
@@ -444,42 +443,42 @@ export default function HomePage() {
 
       <section className="section-hairline">
         <SplitContent
-          title="Warum mardu.space über klassische Zutrittskontrolle hinausgeht"
-          eyebrow="Produktlogik"
+          title="Wie aus Regeln im Kopf ein belastbarer Ablauf im Betrieb wird"
+          eyebrow="Das Zusammenspiel"
           description={
             <>
               <p>
-                Der Mehrwert entsteht nicht nur an der Tür oder am Leser. mardu.space verknüpft
-                Qualifikation, Freigaberegeln und technische Durchsetzung so, dass Betrieb,
-                Verantwortung und Nachweise zusammenpassen.
+                Der Mehrwert entsteht nicht nur an der Tür oder am Leser. mardu.space verbindet
+                Software, Hardware und Integrationen so, dass Qualifikation, Freigaberegeln und
+                technische Durchsetzung zusammenpassen.
               </p>
               <p>
-                Gerade in Werkstatt- und Laborumgebungen ist das der Unterschied zwischen
-                dokumentierten Vorgaben und einer Freigabe, die im Alltag wirklich trägt.
+                Genau darin liegt der Unterschied zwischen dokumentierten Vorgaben und einer
+                Freigabe, die im Alltag wirklich trägt.
               </p>
             </>
           }
-          sideTitle="Drei Gründe, warum das im Alltag relevant ist"
+          sideTitle="Drei Ebenen des Systems"
           sideIcon={ShieldCheck}
           variant="plain"
           items={[
             {
-              title: 'Passend für typische Betriebsumgebungen',
+              title: 'Software steuert Regeln und Nachweise',
               description:
-                'Werkstätten, Labore, Hochschulen und Makerspaces mit Türen, Toren sowie Schuko- und Drehstrom-Maschinen.',
-              icon: Briefcase,
+                'In WebQ werden Personen, Rollen, Qualifikationen und Freigaberegeln gepflegt und später nachvollziehbar ausgewertet.',
+              icon: Cpu,
             },
             {
-              title: 'An vorhandene Infrastruktur anschließbar',
+              title: 'Hardware setzt Entscheidungen lokal um',
               description:
-                'Offene APIs, Berichte und lokale oder zentrale Betriebsmodelle verbinden das System mit vorhandenen Abläufen in Betrieb, Security und Administration.',
+                'Zugriffspunkte, Gateways und Maschinenanbindung sorgen dafür, dass Freigaben an Ort und Stelle wirksam werden.',
+              icon: ShieldCheck,
+            },
+            {
+              title: 'Integrationen halten den Betrieb anschlussfähig',
+              description:
+                'Bestehende Systeme, Berichte und Prozesse lassen sich anbinden, statt parallel weitergepflegt zu werden.',
               icon: Server,
-            },
-            {
-              title: 'Nachweise bleiben operativ nutzbar',
-              description:
-                'DGUV-, TRBS- und Governance-Anforderungen bleiben nicht abstrakt, sondern werden in Freigabelogik und nachvollziehbare Ereignisse übersetzt.',
-              icon: CheckCircle,
             },
           ]}
         />
@@ -491,9 +490,9 @@ export default function HomePage() {
 
       <section id="produkte" className="section-hairline">
         <ScenarioShowcase
-          eyebrow="Angebote"
-          heading="Einsatzszenarien"
-          subheading="Türen, Tore und Maschinen lassen sich regelbasiert, nachvollziehbar und passend zur vorhandenen Infrastruktur organisieren."
+          eyebrow="Vor Ort"
+          heading="Woran das System im Alltag tatsächlich arbeitet"
+          subheading="Türen, Tore und Maschinen werden nicht isoliert betrachtet. Jede Freigabe ist Teil derselben Logik aus Identität, Regel, lokaler Entscheidung und Nachweis."
           features={scenarioFeatures}
           scenarios={scenarioScenarios}
         />
@@ -505,9 +504,9 @@ export default function HomePage() {
 
       <section className="section-hairline">
         <InfoGrid
-          eyebrow="System"
-          title="Spezifikation & Funktionsumfang"
-          intro="Die Plattform verbindet Identität, Freigabe, Protokollierung und technische Durchsetzung in einem zusammenhängenden System, das sich sauber betreiben und in bestehende Strukturen einordnen lässt."
+          eyebrow="Plattform"
+          title="Was mardu.space als System zusammenhält"
+          intro="Die Plattform verbindet Identität, Freigabe, Protokollierung und technische Durchsetzung in einem zusammenhängenden Betriebssystem für reale Werkstatt- und Laborumgebungen."
           variant="cards"
           items={infoGridItems}
         />
@@ -531,12 +530,12 @@ export default function HomePage() {
       </section>
 
       <CTASection
-        title="Nächster Schritt: Bedarf strukturieren, dann sauber entscheiden."
-        description="Starten Sie mit dem Konfigurator für eine erste Einordnung. Wenn Sie intern abstimmen oder die Anforderungen weitergeben müssen, nutzen Sie zusätzlich das Whitepaper. Für konkrete Einführungsfragen geht es direkt in die Demo."
-        primaryButtonText="Konfigurator starten"
-        primaryButtonHref="/configurator"
-        secondaryButtonText="Whitepaper ansehen"
-        secondaryButtonHref="/whitepaper"
+        title="Der nächste Schritt ist kein Warenkorb, sondern ein klares Betriebsbild."
+        description="Nutzen Sie das Whitepaper für interne Abstimmung, die Plattform-Seite für das Zusammenspiel von Software und Hardware und den Konfigurator für ein erstes Projektbild."
+        primaryButtonText="Whitepaper ansehen"
+        primaryButtonHref="/whitepaper"
+        secondaryButtonText="Plattform ansehen"
+        secondaryButtonHref="/platform"
         newsletterDialog={{ getRequestToken: executeRecaptcha }}
       />
 

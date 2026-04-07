@@ -1,0 +1,10 @@
+<svg width="320" height="240" viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="240" rx="24" fill="#F5F3EE"/>
+  <rect x="96" y="52" width="128" height="136" rx="18" stroke="#111111" stroke-width="8"/>
+  <path d="M120 86H172C188 86 200 98 200 113C200 126 190 136 178 139L200 162" stroke="#111111" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M120 86V162" stroke="#111111" stroke-width="8" stroke-linecap="round"/>
+  <path d="M120 124H170" stroke="#111111" stroke-width="8" stroke-linecap="round"/>
+  <path d="M220 92C231 101 238 114 238 128C238 142 231 155 220 164" stroke="#111111" stroke-width="8" stroke-linecap="round"/>
+  <path d="M238 76C253 89 262 107 262 128C262 149 253 167 238 180" stroke="#111111" stroke-width="8" stroke-linecap="round" opacity="0.85"/>
+  <text x="160" y="222" text-anchor="middle" fill="#111111" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700">RFID</text>
+</svg>

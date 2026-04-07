@@ -18,12 +18,11 @@ import {
 const heroDescription = (
   <>
     <p className="mb-4 text-lg font-medium">
-      Für Werkstätten, Labore, Hochschulen und sicherheitsrelevante Zugänge.
+      Für Türen, Tore, Maschinen und Zonen, an denen Regeln wirklich gelten müssen.
     </p>
     <p>
-      mardu Hardware verbindet lokale Schaltpunkte mit zentraler Steuerung. So werden Zutritte und
-      Maschinen vor Ort zuverlässig freigegeben und gleichzeitig für Betrieb, Security und
-      Administration nachvollziehbar eingebunden.
+      Hardware ist in mardu.space nicht nur Gehäuse und Elektronik. Sie ist die Ebene, auf der aus
+      einer Regel in der Software eine reale Freigabe vor Ort wird.
     </p>
   </>
 );
@@ -31,13 +30,13 @@ const heroDescription = (
 const systemOverviewDescription = (
   <>
     <p className="text-balance">
-      Hardware, Netz und Plattform greifen ineinander. Das schafft nicht nur technische Freigaben,
-      sondern einen belastbaren operativen Ablauf vom Zutritt bis zum Maschinenstart.
+      Zugriffspunkte, Gateways und Maschinenanbindung arbeiten nicht isoliert. Sie greifen in das
+      Regelwerk der Software ein und melden Zustände zurück in dieselbe Plattform.
     </p>
     <ul className="mt-10 list-inside list-disc space-y-6">
       <li>Zugriffspunkte identifizieren Personen und schalten lokal</li>
-      <li>Gateways koordinieren Regeln, Netz und Offline-Verfügbarkeit</li>
-      <li>Die Plattform verbindet Berechtigungen, Logs und Betrieb in einer Oberfläche</li>
+      <li>Gateways koordinieren Regeln, Netz und lokale Verfügbarkeit</li>
+      <li>WebQ und Integrationen halten Entscheidungen, Logs und Zustände zusammen</li>
     </ul>
   </>
 );
@@ -72,20 +71,20 @@ export default function Page() {
   return (
     <main className="min-h-screen bg-background">
       <HeroSection
-        title="Hardware für Zutritt, Maschinenfreigabe und belastbaren Betrieb"
+        title="Wie mardu.space Freigaben vor Ort technisch durchsetzt"
         description={heroDescription}
         overline="Hardware"
-        buttonText="Konfigurator starten"
-        buttonHref="/configurator"
-        secondaryButtonText="Kontakt"
-        secondaryButtonHref="/contact"
+        buttonText="Plattform ansehen"
+        buttonHref="/platform"
+        secondaryButtonText="Produkte ansehen"
+        secondaryButtonHref="/products"
         imageSrc="/gateway/mounted.jpg"
         imageAlt="Montiertes Gateway in einer Werkstatt"
       />
 
       <section className="section-hairline">
         <SplitContent
-          title="Wie die Hardware zusammenspielt"
+          title="Wie Zugriffspunkt, Gateway und Software zusammenarbeiten"
           eyebrow="Systemaufbau"
           description={systemOverviewDescription}
           sideTitle="Drei Rollen, ein Ablauf"
@@ -102,8 +101,8 @@ export default function Page() {
               Hardware, die im Betrieb Wert schafft
             </h2>
             <p className="max-w-xl text-sm leading-relaxed text-foreground/68 md:text-base">
-              Statt Technik nur aufzuzählen, zeigt dieser Bereich, wie Zugriffspunkt, Gateway und
-              Software zusammenarbeiten, damit aus Freigaben verlässliche Abläufe im Alltag werden.
+              Diese Abschnitte erklären nicht nur einzelne Geräte. Sie zeigen, wie Hardware,
+              Software, Integrationen und passende Produkte im Betrieb zusammenwirken.
             </p>
           </div>
 
@@ -118,8 +117,8 @@ export default function Page() {
       <section className="section-hairline">
         <HardwareVariantCompare
           eyebrow="Produktstufen"
-          title="Drei Ausbaustufen für unterschiedliche Anforderungen"
-          description="Nicht jede Umgebung braucht die gleiche Technik. Deshalb gibt es mardu.space in drei Ausbaustufen. So finden Sie schneller die passende Lösung für Ihren Einsatzbereich und Ihr Budget."
+          title="Drei Ausbaustufen für unterschiedliche technische Ausgangslagen"
+          description="Nicht jede Umgebung braucht dieselbe Tiefe im Systemaufbau. Die Produktstufen helfen dabei, aus Schaltpunkten, Vernetzung und Betriebsanspruch die passende Basis zu wählen."
           variants={hardwareVariants}
         />
       </section>
@@ -135,9 +134,9 @@ export default function Page() {
                 Eigenentwickelte Hardware für den realen Betrieb
               </h2>
               <p className="max-w-[58ch] text-sm leading-relaxed text-foreground/72 md:text-base">
-                Innenansichten und Baugruppen sind auf dieser Seite kein Selbstzweck. Sie belegen,
-                dass die Hardware servicefreundlich aufgebaut ist und für Integration, Belastbarkeit
-                und saubere Einbindung in reale Umgebungen gedacht wurde.
+                Innenansichten und Baugruppen sind hier kein Selbstzweck. Sie zeigen, dass die
+                Hardware für Integration, Wartbarkeit und belastbare Einbindung in reale Umgebungen
+                gebaut wurde.
               </p>
               <ul className="space-y-3 border-t border-black/8 pt-5">
                 <li className="flex items-start gap-3 text-sm leading-relaxed text-foreground/74 md:text-base">
@@ -188,7 +187,7 @@ export default function Page() {
         <InfoGrid
           eyebrow="Vertrauenselemente"
           title="Worauf Betreiber bei der Hardware vertrauen können"
-          intro="Die Hardware schafft belastbare Freigaben vor Ort und bindet sie sauber in Betrieb, Sicherheit und Administration ein."
+          intro="Die Hardware schafft belastbare Freigaben vor Ort und bindet sie sauber in Software, Betrieb und Administration ein."
           items={trustGridItems}
           variant="cards"
         />
@@ -210,12 +209,12 @@ export default function Page() {
       </section>
 
       <CTASection
-        title="Hardware sauber einordnen, dann fundiert entscheiden."
-        description="Nutzen Sie den Konfigurator für eine erste Bedarfserfassung oder sprechen Sie direkt mit uns über Umgebung, Netzvariante und Integrationsanforderungen."
+        title="Wenn die Hardware-Frage geklärt ist, wird das Projekt deutlich konkreter."
+        description="Gehen Sie als Nächstes in die Plattform- oder Software-Seite, wenn Sie das Regelwerk besser verstehen möchten, oder direkt in den Konfigurator für ein erstes Setup."
         primaryButtonText="Konfigurator starten"
         primaryButtonHref="/configurator"
-        secondaryButtonText="Kontakt aufnehmen"
-        secondaryButtonHref="/contact"
+        secondaryButtonText="Zur Software"
+        secondaryButtonHref="/verwaltungssoftware"
         newsletterDialog={{ getRequestToken: executeRecaptcha }}
       />
     </main>

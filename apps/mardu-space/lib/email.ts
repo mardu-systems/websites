@@ -92,7 +92,7 @@ export function renderEmailLayout(title: string, content: string): string {
         <h1 style="text-align:center;font-size:24px;font-weight:bold;margin-bottom:24px;color:#333;">${title}</h1>
         <div style="font-size:16px;line-height:1.5;color:#333;">${content}</div>
         <footer style="margin-top:32px;font-size:12px;color:#666;text-align:center;line-height:1.4;">
-            <p>Mardu GmbH · Alter Schlachthof 39 · 76131 Karlsruhe</p>
+            <p>Mardu GmbH · Alter Schlachthof 39 A1 · 76131 Karlsruhe</p>
             <p>E-Mail: <a href="mailto:info@mardu.de" style="color:#666;text-decoration:underline;">info@mardu.de</a></p>
             <p>Du erhältst diese E-Mail, weil du uns kontaktiert hast. Wenn du sie nicht erwartet hast, kannst du sie ignorieren oder <a href="mailto:info@mardu.de" style="color:#666;text-decoration:underline;">uns Bescheid geben</a>.</p>
         </footer>

@@ -45,9 +45,7 @@ export default async function ContactPage({
             <p>
               <strong>Mardu GmbH</strong>
               <br />
-              A1
-              <br />
-              Alter Schlachthof 39
+              Alter Schlachthof 39 A1
               <br />
               76131 Karlsruhe
               <br />
@@ -83,7 +81,10 @@ export default async function ContactPage({
         <ContactForm
           submit
           action="/api/contact"
-          extra={{ source: context.source }}
+          extra={{
+            source: context.source,
+            ...(context.config ? { config: context.config } : {}),
+          }}
           layout="card"
           initialMessage={context.initialMessage}
           submitLabel={context.submitLabel}

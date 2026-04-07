@@ -64,11 +64,13 @@ const nextConfig: NextConfig = {
   },
   outputFileTracingRoot: workspaceRoot,
   transpilePackages: [
+    '@mardu/catalog-ui',
     '@mardu/layout',
     '@mardu/content-core',
     '@mardu/lead-core',
     '@mardu/sections',
     '@mardu/site-config',
+    '@mardu/solutions-ui',
     '@mardu/styles',
     '@mardu/ui',
   ],

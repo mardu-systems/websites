@@ -91,13 +91,13 @@ export interface AdministrationCtaDto {
 
 export const administrationHero: AdministrationHeroDto = {
   overline: 'Verwaltungssoftware',
-  title: 'Zentrale Verwaltungsapp für Nutzer, Zutrittspunkte und Freigaben.',
+  title: 'Die Software steuert, wer unter welchen Bedingungen wirklich freigegeben wird.',
   description: [
-    'Verwalten Sie Nutzer, Gruppen, Regeln und Zugangstags an einem Ort. Das vereinfacht Onboarding, senkt manuellen Aufwand und schafft Ordnung über Standorte hinweg.',
+    'WebQ hält Nutzer, Gruppen, Qualifikationen, Zutrittspunkte und Regeln an einem Ort zusammen. So wird aus Verwaltungsarbeit ein belastbarer Ablauf zwischen Software, Hardware und Nachweis.',
   ],
   primaryCtaLabel: 'Demo anfragen',
   primaryCtaHref: '/contact?source=admin-software&topic=verwaltungssoftware-demo',
-  secondaryCtaLabel: 'Software-Überblick',
+  secondaryCtaLabel: 'Zur Plattform',
   secondaryCtaHref: '/platform',
   keyFigures: [
     {
@@ -108,12 +108,12 @@ export const administrationHero: AdministrationHeroDto = {
     {
       label: 'Onboarding',
       value: 'Weniger Reibung',
-      description: 'Neue Personen schneller anlegen und freischalten.',
+      description: 'Neue Personen schneller anlegen und in Hardware und Regelwerk wirksam machen.',
     },
     {
       label: 'Skalierung',
       value: 'Mehr Struktur',
-      description: 'Auch mehrere Standorte und Gruppen sauber organisieren.',
+      description: 'Auch mehrere Standorte, Gruppen und Integrationen sauber organisieren.',
     },
   ],
 };
@@ -122,19 +122,19 @@ export const administrationStorySections: AdministrationStorySectionDto[] = [
   {
     id: 'users',
     eyebrow: 'Benutzer einfach verwalten',
-    title: 'Nutzer anlegen und pflegen ohne Verwaltungschaos',
+    title: 'Nutzer anlegen, bevor daraus vor Ort ein Freigabeproblem wird',
     description: [
-      'Neue Mitarbeitende, externe Personen und Zuständigkeiten lassen sich in einem klaren Ablauf anlegen, zuordnen und aktuell halten. Das reduziert Abstimmungsaufwand und beschleunigt das Onboarding.',
+      'Neue Mitarbeitende, externe Personen und Zuständigkeiten lassen sich in einem klaren Ablauf anlegen, zuordnen und aktuell halten. Dadurch weiß später auch die Hardware vor Ort, wer an welche Tür oder Maschine darf.',
     ],
     benefitTitle: 'Was das im Alltag verbessert',
     benefits: [
       {
         title: 'Schnelleres Onboarding',
-        description: 'Neue Nutzer sind schneller im richtigen Kontext angelegt.',
+        description: 'Neue Nutzer sind schneller angelegt und an der richtigen Stelle wirksam.',
       },
       {
         title: 'Weniger manuelle Pflege',
-        description: 'Stammdaten und Berechtigungen bleiben an einem Ort zusammen.',
+        description: 'Stammdaten, Berechtigungen und lokale Wirkung bleiben an einem Ort zusammen.',
       },
     ],
     media: {
@@ -147,9 +147,9 @@ export const administrationStorySections: AdministrationStorySectionDto[] = [
   {
     id: 'directories',
     eyebrow: 'Externe Benutzerdatenbanken anbinden',
-    title: 'Bestehende Nutzerquellen anbinden statt doppelt pflegen',
+    title: 'Bestehende Nutzerquellen anbinden statt neue Nebenprozesse aufzubauen',
     description: [
-      'Bestehende Verzeichnisdienste oder HR-Systeme lassen sich anbinden, damit Daten nicht doppelt gepflegt werden müssen. Das spart Zeit, senkt Fehler und passt besser in bestehende Abläufe.',
+      'Bestehende Verzeichnisdienste oder HR-Systeme lassen sich anbinden, damit Daten nicht doppelt gepflegt werden müssen. Das spart Zeit, senkt Fehler und hält die Plattform anschlussfähig an den Bestand.',
     ],
     benefitTitle: 'Warum das wirtschaftlich relevant ist',
     benefits: [
@@ -172,9 +172,9 @@ export const administrationStorySections: AdministrationStorySectionDto[] = [
   {
     id: 'rules',
     eyebrow: 'Zutrittsregeln flexibel steuern',
-    title: 'Zugänge präzise und nachvollziehbar regeln',
+    title: 'Regeln so pflegen, dass sie an Tür und Maschine wirklich gelten',
     description: [
-      'Freigaben lassen sich nach Personen, Zeiten und Bereichen sauber steuern. So bekommen die richtigen Personen zur richtigen Zeit Zugriff, ohne dass Regeln unübersichtlich werden.',
+      'Freigaben lassen sich nach Personen, Zeiten, Bereichen und Qualifikation sauber steuern. So bekommen die richtigen Personen zur richtigen Zeit Zugriff, ohne dass Regeln zwischen Liste, Aufsicht und Technik auseinanderlaufen.',
     ],
     benefitTitle: 'Was Kunden davon haben',
     benefits: [
@@ -184,7 +184,7 @@ export const administrationStorySections: AdministrationStorySectionDto[] = [
       },
       {
         title: 'Weniger Sonderlogik',
-        description: 'Auch komplexere Regeln bleiben strukturiert pflegbar.',
+        description: 'Auch komplexere Regeln bleiben strukturiert pflegbar und an Hardware knüpfbar.',
       },
     ],
     media: {
@@ -197,9 +197,9 @@ export const administrationStorySections: AdministrationStorySectionDto[] = [
   {
     id: 'groups',
     eyebrow: 'Mit Gruppen schneller arbeiten',
-    title: 'Gruppen zentral steuern statt einzeln pflegen',
+    title: 'Gruppen zentral steuern, damit Änderungen nicht an jedem Gerät einzeln landen',
     description: [
-      'Sobald mehrere Nutzer oder Zutrittspunkte beteiligt sind, spart Gruppenlogik spürbar Zeit. Regeln lassen sich zentral anwenden und Änderungen schneller umsetzen.',
+      'Sobald mehrere Nutzer oder Zutrittspunkte beteiligt sind, spart Gruppenlogik spürbar Zeit. Regeln lassen sich zentral anwenden und Änderungen schneller in die Fläche bringen.',
     ],
     benefitTitle: 'Der operative Nutzen',
     benefits: [
@@ -222,9 +222,9 @@ export const administrationStorySections: AdministrationStorySectionDto[] = [
   {
     id: 'tags',
     eyebrow: 'Tags schnell und intuitiv ausgeben',
-    title: 'Neue Zugangstags ohne Reibung erstellen und zuweisen',
+    title: 'Neue Zugangstags ohne Reibung ausgeben und sofort wirksam machen',
     description: [
-      'Die Tag-Ausgabe folgt einem klaren Prozess. Neue Zugangstags lassen sich schnell anlegen, zuweisen und dokumentieren, ohne lange Einarbeitung.',
+      'Die Tag-Ausgabe folgt einem klaren Prozess. Neue Zugangstags lassen sich schnell anlegen, zuweisen und dokumentieren, ohne lange Einarbeitung und ohne Medienbruch zwischen Ausgabe und Freigabe.',
     ],
     benefitTitle: 'Warum das für Teams wichtig ist',
     benefits: [
@@ -249,15 +249,15 @@ export const administrationStorySections: AdministrationStorySectionDto[] = [
 export const administrationGrowthPillars: AdministrationGrowthPillarDto[] = [
   {
     id: 'integrations',
-    title: 'Heute Ordnung, später anschlussfähig',
+    title: 'Heute Ordnung, morgen weiter integrierbar',
     description:
-      'Die Software ist heute operativ nutzbar und bleibt offen für weitere Systeme und Prozesse.',
+      'Die Software ist heute operativ nutzbar und bleibt offen für weitere Systeme, Hardwareebenen und Prozesse.',
     proof: 'So entsteht erst Struktur und später saubere Erweiterbarkeit.',
     icon: PlugZap,
   },
   {
     id: 'automation',
-    title: 'Wiederkehrende Abläufe später automatisieren',
+    title: 'Wiederkehrende Abläufe später systematisch entlasten',
     description:
       'Wiederkehrende Verwaltungsaufgaben lassen sich später schrittweise stärker standardisieren.',
     proof: 'Das reduziert Zusatzaufwand, wenn Nutzerzahlen und Standorte wachsen.',
@@ -265,7 +265,7 @@ export const administrationGrowthPillars: AdministrationGrowthPillarDto[] = [
   },
   {
     id: 'structures',
-    title: 'Standorte und Rollen sauber erweitern',
+    title: 'Standorte, Rollen und Schaltpunkte sauber erweitern',
     description:
       'Mehr Gruppen, Standorte und Rollen bleiben beherrschbar, wenn die Struktur sauber mitwächst.',
     proof: 'Entscheidend ist eine Basis, die Ordnung schafft, bevor Komplexität teuer wird.',
@@ -295,11 +295,11 @@ export const administrationGrowthSignals = [
 ];
 
 export const administrationCta: AdministrationCtaDto = {
-  title: 'Weniger Verwaltungsaufwand. Klarere Prozesse. Mehr Kontrolle.',
+  title: 'Wenn Regeln, Hardware und Nachweise zusammenlaufen, wird Verwaltung plötzlich operativ relevant.',
   description:
-    'Wenn Sie Nutzer, Zutrittspunkte, Regeln und Tags zentral verwalten wollen, sprechen Sie mit uns über Ihre Anforderungen und eine passende Demo.',
+    'Wenn Sie Nutzer, Zutrittspunkte, Regeln und Tags zentral verwalten und sauber mit der Hardware vor Ort verbinden wollen, sprechen Sie mit uns über Ihre Anforderungen und eine passende Demo.',
   primaryButtonText: 'Demo anfragen',
   primaryButtonHref: '/contact?source=admin-software&topic=verwaltungssoftware-demo',
-  secondaryButtonText: 'Kontakt aufnehmen',
-  secondaryButtonHref: '/contact',
+  secondaryButtonText: 'Zur Hardware',
+  secondaryButtonHref: '/system',
 };

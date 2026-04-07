@@ -11,7 +11,7 @@ export const catalogCategories: CatalogCategoryDto[] = [
     imageUrl: '/device/tor-2.jpg',
     imageAlt: 'Zugriffspunkt für Tür oder Maschine',
     featured: true,
-    productIds: ['access-point-nfc', 'schuetz-modul-32a'],
+    productIds: ['access-point-pro', 'access-point', 'smart-akteur-pro', 'smart-akteur', 'schlieszylinder', 'tuer-griff'],
   },
   {
     id: 'gateways',
@@ -19,11 +19,11 @@ export const catalogCategories: CatalogCategoryDto[] = [
     name: 'Gateways & Steuerung Module',
     eyebrow: 'Netz und Koordination',
     description:
-      'Verbindet Regeln, Geräte, Integrationen und lokalen Betrieb zu einer stabilen Infrastruktur pro Standort oder Gebäude.',
+      'Verbinden Regeln, Geräte, Integrationen und lokalen Betrieb zu einer stabilen Infrastruktur pro Standort oder Gebäude.',
     imageUrl: '/gateway/mounted.jpg',
     imageAlt: 'Montiertes Mardu IP500 Gateway',
     featured: true,
-    productIds: ['gateway-pro'],
+    productIds: ['gateway-pro', 'gateway'],
   },
   {
     id: 'credentials',
@@ -31,11 +31,11 @@ export const catalogCategories: CatalogCategoryDto[] = [
     name: 'NFC-Tags & Schlüsselkarte',
     eyebrow: 'Identifikation',
     description:
-      'Als Schlüsselanhänger oder als Karte für dein Potmonete Mardu NFC-Tags für dein Betrieb.',
+      'Als Schlüsselanhänger, kompakte Tags oder bedruckbare ISO-Karte für deinen Betrieb.',
     imageUrl: '/device/render.png',
     imageAlt: 'Produktvisual für Identifikations- und Credential-Bereich',
     featured: true,
-    productIds: ['nfc-tag-mifare', 'nfc-card-mifare'],
+    productIds: ['nfc-tag-mifare'],
   },
   {
     id: 'accessories',
@@ -43,10 +43,10 @@ export const catalogCategories: CatalogCategoryDto[] = [
     name: 'Zubehör & Erweiterungen',
     eyebrow: 'Erweitern statt komplett neu kaufen',
     description:
-      'Schütze, Relais und Ergänzungen, um Maschinen und Türen in die Infrastruktur sauber einzubinden.',
+      'Software-Integrationen über QR-Code, Schütze, Relais und Ergänzungen, um Maschinen und Türen in die Infrastruktur sauber einzubinden.',
     imageUrl: '/configurator/32a.jpg',
     imageAlt: 'Leistungsstarke Maschinenanbindung und Zubehör',
-    productIds: ['schuetz-modul-32a'],
+    productIds: ['mardu-qr', 'schuetz-und-sps'],
   },
   {
     id: 'bundles',
@@ -54,10 +54,10 @@ export const catalogCategories: CatalogCategoryDto[] = [
     name: 'Starter-Sets',
     eyebrow: 'Schneller Einstieg',
     description:
-      'Vorkuratierte Kombinationen für die ersten Türen, Maschinen und Sclüsselkarten, damit Projekte schneller greifbar werden.',
+      'Vorkuratierte Kombinationen für die ersten Türen, Maschinen und Schlüsselkarten, damit Projekte schneller greifbar werden.',
     imageUrl: '/_A7_9094_quer.jpg',
     imageAlt: 'Mardu Hardware im Werkstattbetrieb',
-    productIds: ['starter-kit-workshop'],
+    productIds: ['starter-kits'],
   },
 ];
 

@@ -29,22 +29,22 @@ import {
 } from '@/data/administration-page';
 
 export const metadata: Metadata = {
-  title: 'Verwaltungssoftware für Nutzer, Gruppen und Zutrittsregeln',
+  title: 'Software für Regeln, Nutzer und nachvollziehbare Freigaben',
   description:
-    'Externe Marketing-Seite für die Verwaltungssoftware von mardu.space: weniger Verwaltungsaufwand, mehr Kontrolle und klarere Prozesse für Nutzer, Standorte und Zutritte.',
+    'Die Verwaltungssoftware von mardu.space verbindet Nutzer, Qualifikationen, Zutrittspunkte und Regeln mit der Hardware vor Ort und den nötigen Nachweisen im Betrieb.',
   alternates: {
     canonical: '/verwaltungssoftware',
   },
   openGraph: {
-    title: 'Verwaltungssoftware für Nutzer, Gruppen und Zutrittsregeln | mardu.space',
+    title: 'Software für Regeln, Nutzer und nachvollziehbare Freigaben | mardu.space',
     description:
-      'Die zentrale Verwaltungsapp für Nutzer, Zutrittspunkte, Gruppen und Tags. Für Entscheider, die Prozesse vereinfachen und skalierbar aufstellen wollen.',
+      'Die zentrale Verwaltungsapp für Nutzer, Zutrittspunkte, Gruppen und Tags. Sie verbindet Regeln, lokale Freigabe und Nachweise in einem operativen Ablauf.',
     url: '/verwaltungssoftware',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Verwaltungssoftware für Nutzer, Gruppen und Zutrittsregeln | mardu.space',
+    title: 'Software für Regeln, Nutzer und nachvollziehbare Freigaben | mardu.space',
     description: 'Die zentrale Verwaltungsapp für Nutzer, Zutrittspunkte, Gruppen und Tags.',
   },
 };
@@ -453,7 +453,7 @@ function CoreBenefitsSection() {
         <div className="mb-8 flex flex-col gap-3 lg:max-w-2xl">
           <Overline>Kernvorteile</Overline>
           <h2 className="headline-balance text-[clamp(1.6rem,3.2vw,2.6rem)] leading-[1.05] tracking-[-0.03em] text-foreground">
-            Was die Software heute konkret vereinfacht
+            Was die Software im Zusammenspiel mit Hardware konkret steuert
           </h2>
         </div>
 
@@ -518,8 +518,8 @@ export default function VerwaltungsoftwarePage() {
                 </Link>
               </Button>
               <Button asChild variant="outline">
-                <Link href="#nutzerverwaltung">
-                  Produkt ansehen
+                <Link href="/platform">
+                  Zur Plattform
                   <ChevronRight className="size-4" />
                 </Link>
               </Button>
@@ -541,12 +541,13 @@ export default function VerwaltungsoftwarePage() {
       <section className="section-hairline">
         <div className="mardu-container py-20 md:py-24">
           <SplitContent
-            eyebrow="Zukunftsfähigkeit"
-            title="Heute nutzbar, später sauber erweiterbar"
+            eyebrow="Zusammenspiel"
+            title="Die Software wirkt nicht allein, sondern durch Hardware, Integrationen und klare Produktlogik"
             description={
               <>
                 <p className="text-balance">
-                  Die Verwaltungsapp soll heute Ordnung schaffen und später anschlussfähig bleiben.
+                  Die Verwaltungsapp schafft heute Ordnung und bleibt gleichzeitig die Ebene, in der
+                  Hardware, Integrationen und spätere Erweiterungen zusammengeführt werden.
                 </p>
                 <p className="mt-4">
                   Wenn weitere Nutzerquellen, Standorte oder automatisierte Abläufe dazukommen, muss

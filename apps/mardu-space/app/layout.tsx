@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.label}`,
   },
   description:
-    'mardu.space verbindet Zutritt, Maschinenfreigabe und Qualifikation für Werkstätten, Labore, Hochschulen und Makerspaces. Weniger Schlüssel, mehr technische Durchsetzung und nachvollziehbare Nachweise.',
+    'mardu.space verbindet Zutritt, Maschinenfreigabe und Qualifikation für Werkstätten, Labore, Hochschulen und Makerspaces. So werden Regeln nicht nur dokumentiert, sondern an Tür und Maschine tatsächlich wirksam.',
   keywords: [
     'Maschinenfreigabe',
     'Zutrittskontrolle',
@@ -88,7 +88,7 @@ const jsonLd = {
   name: siteConfig.appName,
   url: siteConfig.origin,
   description:
-    'Digitale Zutritts- und Maschinenfreigabe für Unternehmenswerkstätten, Hochschulen und Makerspaces.',
+    'Digitale Zutritts- und Maschinenfreigabe für Werkstätten, Labore, Hochschulen und Makerspaces.',
   publisher: {
     '@type': 'Organization',
     name: siteConfig.appName,

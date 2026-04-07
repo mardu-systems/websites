@@ -5,7 +5,7 @@ const [nfc, mifare, bluetoothLe, ip500, appKey] = catalogTechnologies;
 const [nfcTagCarrier, cardCarrier, keyFobCarrier, digitalKeyCarrier] = catalogCarriers;
 
 // Die Produktpalette wurde aktualisiert und professionell aufbereitet.
- 
+
 export const catalogProducts: CatalogProductDetailDto[] = [
   {
     id: 'gateway-pro',

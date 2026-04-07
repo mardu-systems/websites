@@ -5,7 +5,7 @@
 export type SitePhotoUsage = {
   label: string;
   href: string;
-};
+}
 
 /**
  * Curated DTO for photographic assets that are already used in the UI.
