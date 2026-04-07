@@ -1,4 +1,4 @@
-# Brand Assets auf `mardu.de`
+# Markenressourcen auf `mardu.de`
 
 ## Öffentliche Oberfläche
 
@@ -21,7 +21,7 @@ Die Dateien werden auf `mardu.de` aus dem lokalen `public`-Verzeichnis ausgelief
 
 ## Metadaten
 
-- `title`: `Brand Assets | Mardu`
+- `title`: `Markenressourcen | Mardu`
 - `description`: verweist auf die Brand-Assets der Marke `Mardu`
 - `canonical`: `/brand`
 

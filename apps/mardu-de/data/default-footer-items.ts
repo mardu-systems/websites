@@ -9,6 +9,6 @@ export const defaultFooterNavLinks: LayoutLinkDto[] = [
   { href: '/#team', label: 'Team' },
   { href: '/integrations', label: 'Integrationen' },
   { href: '/blog', label: 'Blog' },
-  { href: '/brand', label: 'Brand Assets' },
+  { href: '/brand', label: 'Markenressourcen' },
   { href: '/contact', label: 'Kontakt' },
 ];

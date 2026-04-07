@@ -1,8 +1,5 @@
 @import "@mardu/styles/base.css";
 @import "@mardu/styles/theme-mardu-de.css";
-@source "../../../packages/ui/src";
-@source "../../../packages/layout/src";
-@source "../../../packages/sections/src";
 
 :root {
     --radius: 0.0rem;

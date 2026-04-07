@@ -44,7 +44,7 @@ export default function ContactPage() {
             <p>
               <strong>Mardu GmbH</strong>
               <br />
-              Alter Schlachthof 39
+              Alter Schlachthof 39 A1
               <br />
               76131 Karlsruhe
               <br />
