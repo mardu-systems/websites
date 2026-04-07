@@ -72,6 +72,9 @@ export type PaginatedBlogPostsDto = {
 };
 
 export type IntegrationStatus = 'available' | 'beta' | 'planned';
+export type RoadmapStatus = 'planned' | 'in-progress' | 'beta' | 'done';
+export type RoadmapCategory = 'software' | 'hardware' | 'platform' | 'integrations';
+export type SolutionThemeTone = 'forest' | 'sand' | 'mist' | 'clay' | 'ink';
 
 export type CatalogAvailabilityStatus = 'available' | 'lead-time' | 'project';
 
@@ -204,6 +207,11 @@ export type CatalogProductDetailDto = CatalogProductListItemDto & {
   seoDescription?: string;
   heroDescription: string;
   overview: string;
+  /**
+   * Optional long-form markdown body rendered below the detail hero.
+   * If omitted, apps may derive a fallback editorial body from the structured fields.
+   */
+  detailMarkdown?: string;
   breadcrumbLabel?: string;
   technologiesHeading?: string;
   technologiesIntro?: string;
@@ -226,6 +234,90 @@ export type PaginatedCatalogProductsDto = {
   limit: number;
   total: number;
   totalPages: number;
+};
+
+/**
+ * Compact solution DTO for overview grids and navigation teasers.
+ * The consuming app owns routing and content sourcing.
+ */
+export type SolutionListItemDto = {
+  id: string;
+  slug: string;
+  title: string;
+  tagline: string;
+  summary: string;
+  imageUrl: string;
+  imageAlt: string;
+  badge?: string;
+  themeTone?: SolutionThemeTone;
+};
+
+/**
+ * Rich editorial block for solution detail pages.
+ */
+export type SolutionContentBlockDto = {
+  id: string;
+  eyebrow?: string;
+  title: string;
+  body: string;
+  imageUrl: string;
+  imageAlt: string;
+  imageSide: 'left' | 'right';
+};
+
+/**
+ * Optional feature list item for solution detail pages.
+ */
+export type SolutionFeatureDto = {
+  title: string;
+  description: string;
+};
+
+/**
+ * Full solution DTO for branch-specific landing pages.
+ */
+export type SolutionDetailDto = SolutionListItemDto & {
+  heroTitle: string;
+  heroIntro: string;
+  problemTitle: string;
+  problemBody: string;
+  /**
+   * Optional long-form markdown body rendered below the detail hero.
+   * If omitted, apps may derive a fallback editorial body from the structured fields.
+   */
+  detailMarkdown?: string;
+  heroImageUrl: string;
+  heroImageAlt: string;
+  contentBlocks: SolutionContentBlockDto[];
+  features?: SolutionFeatureDto[];
+  ctaLabel?: string;
+  ctaHref?: string;
+};
+
+/**
+ * Public DTO for one roadmap entry maintained in Payload.
+ */
+export type RoadmapItemDto = {
+  id: string;
+  slug: string;
+  title: string;
+  summary: string;
+  phaseLabel: string;
+  timeLabel: string;
+  sortOrder: number;
+  status: RoadmapStatus;
+  category: RoadmapCategory;
+  bodyMarkdown: string;
+  featured: boolean;
+};
+
+/**
+ * Render-ready grouped roadmap phase for timeline sections.
+ */
+export type RoadmapPhaseDto = {
+  title: string;
+  time: string;
+  items: RoadmapItemDto[];
 };
 
 export type IntegrationSort = 'featured' | 'alphabetical' | 'latest';
@@ -387,8 +479,23 @@ type PayloadIntegrationDoc = SiteVisibility & {
   updatedAt?: Date | string;
 };
 
+type PayloadRoadmapDoc = SiteVisibility & {
+  id?: string | number;
+  slug?: string;
+  title?: string;
+  summary?: string;
+  phaseLabel?: string;
+  timeLabel?: string;
+  sortOrder?: number;
+  status?: RoadmapStatus;
+  category?: RoadmapCategory;
+  bodyMarkdown?: string;
+  featured?: boolean;
+};
+
 const DEFAULT_BLOG_LIMIT = 9;
 const DEFAULT_INTEGRATION_LIMIT = 12;
+const MAX_ROADMAP_FETCH = 300;
 const MAX_BLOG_FETCH = 200;
 const MAX_INTEGRATION_FETCH = 400;
 const DEFAULT_REVALIDATE_SECONDS = 60;
@@ -833,6 +940,99 @@ function normalizeIntegrationQuery(query: IntegrationListQueryDto) {
   const sort = query.sort ?? 'featured';
 
   return { q, category, protocol, status: query.status, limit, page, sort };
+}
+
+function mapRoadmapItem(doc: PayloadRoadmapDoc): RoadmapItemDto | null {
+  if (
+    !doc.id ||
+    !doc.slug ||
+    !doc.title ||
+    !doc.summary ||
+    !doc.phaseLabel ||
+    !doc.timeLabel ||
+    !doc.status ||
+    !doc.category ||
+    !doc.bodyMarkdown
+  ) {
+    return null;
+  }
+
+  return {
+    id: toId(doc.id),
+    slug: doc.slug,
+    title: doc.title,
+    summary: doc.summary,
+    phaseLabel: doc.phaseLabel,
+    timeLabel: doc.timeLabel,
+    sortOrder: Number.isFinite(doc.sortOrder) ? Number(doc.sortOrder) : 0,
+    status: doc.status,
+    category: doc.category,
+    bodyMarkdown: doc.bodyMarkdown,
+    featured: Boolean(doc.featured),
+  };
+}
+
+function sortRoadmapItems(items: RoadmapItemDto[]) {
+  return [...items].sort((a, b) => {
+    if (a.sortOrder !== b.sortOrder) {
+      return a.sortOrder - b.sortOrder;
+    }
+
+    return a.title.localeCompare(b.title, 'de');
+  });
+}
+
+async function fetchPublishedRoadmapDocs(origin: string, site: VisibleSite): Promise<PayloadRoadmapDoc[]> {
+  const url = buildRestUrl(origin, '/api/roadmap-items', {
+    depth: '0',
+    limit: String(MAX_ROADMAP_FETCH),
+    pagination: 'false',
+    sort: 'sortOrder',
+    'where[_status][equals]': 'published',
+  });
+  const result = await fetchJson<PayloadRestCollectionResult<PayloadRoadmapDoc>>(url);
+
+  return (result?.docs ?? []).filter((doc) => isVisibleOnSite(doc, site));
+}
+
+export async function getPlatformRoadmapItems(
+  origin: string,
+  site: VisibleSite,
+): Promise<RoadmapItemDto[]> {
+  return sortRoadmapItems(
+    (await fetchPublishedRoadmapDocs(origin, site))
+      .map((doc) => mapRoadmapItem(doc))
+      .filter((item): item is RoadmapItemDto => Boolean(item)),
+  );
+}
+
+export async function getPlatformRoadmapPhases(
+  origin: string,
+  site: VisibleSite,
+): Promise<RoadmapPhaseDto[]> {
+  const items = await getPlatformRoadmapItems(origin, site);
+  const phases = new Map<string, RoadmapPhaseDto>();
+
+  for (const item of items) {
+    const key = `${item.phaseLabel}__${item.timeLabel}`;
+    const phase = phases.get(key);
+
+    if (phase) {
+      phase.items.push(item);
+      continue;
+    }
+
+    phases.set(key, {
+      title: item.phaseLabel,
+      time: item.timeLabel,
+      items: [item],
+    });
+  }
+
+  return Array.from(phases.values()).map((phase) => ({
+    ...phase,
+    items: sortRoadmapItems(phase.items),
+  }));
 }
 
 function applyIntegrationSort(items: IntegrationListItemDto[], sort: IntegrationSort) {

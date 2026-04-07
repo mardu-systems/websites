@@ -142,3 +142,4 @@ export {
   type EditorialShapeFade,
   type EditorialShapeSilhouette,
 } from "./editorial-benefits-section";
+export { SectionIntro, type SectionIntroProps } from "./section-intro";

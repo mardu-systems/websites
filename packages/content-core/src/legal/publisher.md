@@ -2,7 +2,7 @@
 
 **Mardu GmbH**
 
-Alter Schlachthof 39  
+Alter Schlachthof 39 A1
 76131 Karlsruhe  
 Deutschland
 
@@ -21,7 +21,7 @@ Luca Schöneberg, Erik Frey
 
 **Mardu GmbH**
 
-Alter Schlachthof 39  
+Alter Schlachthof 39 A1
 76131 Karlsruhe
 
 Hinweis: Im Gebäudekomplex finden Sie uns unter **A1**.

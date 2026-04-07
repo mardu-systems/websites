@@ -62,7 +62,7 @@ Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglic
 Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:
 
 **Mardu GmbH**
-Alter Schlachthof 39
+Alter Schlachthof 39 A1
 76131 Karlsruhe
 
 E-Mail: info@mardu.de
