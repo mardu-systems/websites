@@ -81,6 +81,12 @@ export interface Config {
     'newsletter-subscribers': NewsletterSubscriber;
     'contact-leads': ContactLead;
     'preorder-requests': PreorderRequest;
+    solutions: Solution;
+    'product-categories': ProductCategory;
+    'product-technologies': ProductTechnology;
+    'product-carriers': ProductCarrier;
+    products: Product;
+    'product-variants': ProductVariant;
     'payload-mcp-api-keys': PayloadMcpApiKey;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -102,6 +108,12 @@ export interface Config {
     'newsletter-subscribers': NewsletterSubscribersSelect<false> | NewsletterSubscribersSelect<true>;
     'contact-leads': ContactLeadsSelect<false> | ContactLeadsSelect<true>;
     'preorder-requests': PreorderRequestsSelect<false> | PreorderRequestsSelect<true>;
+    solutions: SolutionsSelect<false> | SolutionsSelect<true>;
+    'product-categories': ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
+    'product-technologies': ProductTechnologiesSelect<false> | ProductTechnologiesSelect<true>;
+    'product-carriers': ProductCarriersSelect<false> | ProductCarriersSelect<true>;
+    products: ProductsSelect<false> | ProductsSelect<true>;
+    'product-variants': ProductVariantsSelect<false> | ProductVariantsSelect<true>;
     'payload-mcp-api-keys': PayloadMcpApiKeysSelect<false> | PayloadMcpApiKeysSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -484,6 +496,150 @@ export interface PreorderRequest {
   createdAt: string;
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "solutions".
+ */
+export interface Solution {
+  id: number;
+  title: string;
+  slug: string;
+  tagline?: string | null;
+  summary?: string | null;
+  themeTone?: ('light' | 'dark') | null;
+  heroTitle?: string | null;
+  heroIntro?: string | null;
+  problemTitle?: string | null;
+  problemBody?: string | null;
+  ctaLabel?: string | null;
+  ctaHref?: string | null;
+  image?: (number | null) | Media;
+  heroImage?: (number | null) | Media;
+  contentBlocks?:
+    | {
+        eyebrow?: string | null;
+        title?: string | null;
+        body?: string | null;
+        image?: (number | null) | Media;
+        imageSide?: ('left' | 'right') | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
+   */
+  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
+  publishedAt?: string | null;
+  featured?: boolean | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-categories".
+ */
+export interface ProductCategory {
+  id: number;
+  name: string;
+  slug: string;
+  eyebrow?: string | null;
+  description?: string | null;
+  image?: (number | null) | Media;
+  featured?: boolean | null;
+  products?: (number | Product)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: number;
+  name: string;
+  slug: string;
+  badge?: string | null;
+  eyebrow?: string | null;
+  description?: string | null;
+  image?: (number | null) | Media;
+  priceFrom?: number | null;
+  variants?: (number | ProductVariant)[] | null;
+  categories?: (number | ProductCategory)[] | null;
+  technologies?: (number | ProductTechnology)[] | null;
+  carriers?: (number | ProductCarrier)[] | null;
+  featureGroups?:
+    | {
+        groupName?: string | null;
+        features?:
+          | {
+              feature?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-variants".
+ */
+export interface ProductVariant {
+  id: number;
+  name: string;
+  sku: string;
+  price?: number | null;
+  image?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-technologies".
+ */
+export interface ProductTechnology {
+  id: number;
+  name: string;
+  slug: string;
+  description?: string | null;
+  visualLabel?: string | null;
+  image?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-carriers".
+ */
+export interface ProductCarrier {
+  id: number;
+  name: string;
+  slug: string;
+  description?: string | null;
+  visualLabel?: string | null;
+  technologyLabel?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * API keys control which collections, resources, tools, and prompts MCP clients can access
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -695,6 +851,114 @@ export interface PayloadMcpApiKey {
      */
     update?: boolean | null;
   };
+  solutions?: {
+    /**
+     * Allow clients to find solutions.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create solutions.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update solutions.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete solutions.
+     */
+    delete?: boolean | null;
+  };
+  productCategories?: {
+    /**
+     * Allow clients to find product-categories.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create product-categories.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update product-categories.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete product-categories.
+     */
+    delete?: boolean | null;
+  };
+  productTechnologies?: {
+    /**
+     * Allow clients to find product-technologies.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create product-technologies.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update product-technologies.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete product-technologies.
+     */
+    delete?: boolean | null;
+  };
+  productCarriers?: {
+    /**
+     * Allow clients to find product-carriers.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create product-carriers.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update product-carriers.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete product-carriers.
+     */
+    delete?: boolean | null;
+  };
+  products?: {
+    /**
+     * Allow clients to find products.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create products.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update products.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete products.
+     */
+    delete?: boolean | null;
+  };
+  productVariants?: {
+    /**
+     * Allow clients to find product-variants.
+     */
+    find?: boolean | null;
+    /**
+     * Allow clients to create product-variants.
+     */
+    create?: boolean | null;
+    /**
+     * Allow clients to update product-variants.
+     */
+    update?: boolean | null;
+    /**
+     * Allow clients to delete product-variants.
+     */
+    delete?: boolean | null;
+  };
   updatedAt: string;
   createdAt: string;
   enableAPIKey?: boolean | null;
@@ -777,6 +1041,30 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'preorder-requests';
         value: number | PreorderRequest;
+      } | null)
+    | ({
+        relationTo: 'solutions';
+        value: number | Solution;
+      } | null)
+    | ({
+        relationTo: 'product-categories';
+        value: number | ProductCategory;
+      } | null)
+    | ({
+        relationTo: 'product-technologies';
+        value: number | ProductTechnology;
+      } | null)
+    | ({
+        relationTo: 'product-carriers';
+        value: number | ProductCarrier;
+      } | null)
+    | ({
+        relationTo: 'products';
+        value: number | Product;
+      } | null)
+    | ({
+        relationTo: 'product-variants';
+        value: number | ProductVariant;
       } | null)
     | ({
         relationTo: 'payload-mcp-api-keys';
@@ -1091,6 +1379,139 @@ export interface PreorderRequestsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "solutions_select".
+ */
+export interface SolutionsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  tagline?: T;
+  summary?: T;
+  themeTone?: T;
+  heroTitle?: T;
+  heroIntro?: T;
+  problemTitle?: T;
+  problemBody?: T;
+  ctaLabel?: T;
+  ctaHref?: T;
+  image?: T;
+  heroImage?: T;
+  contentBlocks?:
+    | T
+    | {
+        eyebrow?: T;
+        title?: T;
+        body?: T;
+        image?: T;
+        imageSide?: T;
+        id?: T;
+      };
+  sites?: T;
+  publishedAt?: T;
+  featured?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-categories_select".
+ */
+export interface ProductCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  eyebrow?: T;
+  description?: T;
+  image?: T;
+  featured?: T;
+  products?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-technologies_select".
+ */
+export interface ProductTechnologiesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  description?: T;
+  visualLabel?: T;
+  image?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-carriers_select".
+ */
+export interface ProductCarriersSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  description?: T;
+  visualLabel?: T;
+  technologyLabel?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products_select".
+ */
+export interface ProductsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  badge?: T;
+  eyebrow?: T;
+  description?: T;
+  image?: T;
+  priceFrom?: T;
+  variants?: T;
+  categories?: T;
+  technologies?: T;
+  carriers?: T;
+  featureGroups?:
+    | T
+    | {
+        groupName?: T;
+        features?:
+          | T
+          | {
+              feature?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-variants_select".
+ */
+export interface ProductVariantsSelect<T extends boolean = true> {
+  name?: T;
+  sku?: T;
+  price?: T;
+  image?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-mcp-api-keys_select".
  */
 export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
@@ -1186,6 +1607,54 @@ export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
         find?: T;
         create?: T;
         update?: T;
+      };
+  solutions?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  productCategories?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  productTechnologies?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  productCarriers?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  products?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+        delete?: T;
+      };
+  productVariants?:
+    | T
+    | {
+        find?: T;
+        create?: T;
+        update?: T;
+        delete?: T;
       };
   updatedAt?: T;
   createdAt?: T;

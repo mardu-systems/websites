@@ -1,5 +1,5 @@
-import * as migration_20260402_200045 from './20260402_200045';
-import * as migration_20260404_161830_add_roadmap_items from './20260404_161830_add_roadmap_items';
+import * as migration_20260402_200045 from './20260402_200045.ts';
+import * as migration_20260404_161830_add_roadmap_items from './20260404_161830_add_roadmap_items.ts';
 
 export const migrations = [
   {

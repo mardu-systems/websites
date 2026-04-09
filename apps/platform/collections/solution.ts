@@ -1,7 +1,6 @@
 import type { CollectionConfig } from 'payload';
 import { buildSiteVisibilityField } from '@mardu/content-core';
 
-// ToDo: Fix and support full Solutions
 const formatSlug = (value: string): string =>
   value
     .toLowerCase()
@@ -10,8 +9,8 @@ const formatSlug = (value: string): string =>
     .replace(/\s+/g, '-')
     .replace(/-+/g, '-');
 
-export const SolutionPosts: CollectionConfig = {
-  slug: 'solution-posts',
+export const Solutions: CollectionConfig = {
+  slug: 'solutions',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'featured', 'publishedAt', 'updatedAt'],
@@ -24,7 +23,6 @@ export const SolutionPosts: CollectionConfig = {
       if (req.user) {
         return true;
       }
-
       return {
         _status: {
           equals: 'published',
@@ -82,33 +80,110 @@ export const SolutionPosts: CollectionConfig = {
             if (typeof value === 'string' && value.length > 0) {
               return formatSlug(value);
             }
-
             if (typeof data?.title === 'string') {
               return formatSlug(data.title);
             }
-
             return value;
           },
         ],
       },
     },
     {
-      name: 'excerpt',
-      type: 'textarea',
-      required: true,
-      maxLength: 320,
+      name: 'tagline',
+      type: 'text',
     },
     {
-      name: 'coverImage',
+      name: 'summary',
+      type: 'textarea',
+    },
+    {
+      name: 'themeTone',
+      type: 'select',
+      options: [
+        { label: 'Light', value: 'light' },
+        { label: 'Dark', value: 'dark' },
+      ],
+    },
+    {
+      name: 'heroTitle',
+      type: 'text',
+    },
+    {
+      name: 'heroIntro',
+      type: 'textarea',
+    },
+    {
+      name: 'problemTitle',
+      type: 'text',
+    },
+    {
+      name: 'problemBody',
+      type: 'textarea',
+    },
+    {
+      name: 'ctaLabel',
+      type: 'text',
+    },
+    {
+      name: 'ctaHref',
+      type: 'text',
+    },
+    {
+      name: 'image',
       type: 'upload',
       relationTo: 'media',
-      required: true,
     },
     {
-      name: 'content',
-      type: 'richText',
-      required: true,
+      name: 'heroImage',
+      type: 'upload',
+      relationTo: 'media',
+    },
+    {
+      name: 'contentBlocks',
+      type: 'array',
+      fields: [
+        {
+          name: 'eyebrow',
+          type: 'text',
+        },
+        {
+          name: 'title',
+          type: 'text',
+        },
+        {
+          name: 'body',
+          type: 'textarea',
+        },
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+        },
+        {
+          name: 'imageSide',
+          type: 'select',
+          options: [
+            { label: 'Left', value: 'left' },
+            { label: 'Right', value: 'right' },
+          ],
+        },
+      ],
     },
     buildSiteVisibilityField(),
+    {
+      name: 'publishedAt',
+      type: 'date',
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'featured',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+      },
+    },
   ],
 };

@@ -76,7 +76,7 @@ export const catalogTechnologies: CatalogTechnologyDto[] = [
     slug: 'mifare',
     name: 'NXP Mifare Ev2-3',
     description: 'Bewährte Identifikation und Kopierschutz für Schlüsselkarten',
-    imageUrl: '/logos/MIFARE.svg',
+    imageUrl: '/logos/Mifare_logo_rgb.svg',
     imageAlt: 'Mifare Technologie-Logo',
     visualLabel: 'MIFARE',
   },

@@ -16,6 +16,12 @@ import * as newsletterSubscribersModule from './collections/newsletter-subscribe
 import * as preorderRequestsModule from './collections/preorder-requests.ts';
 import * as roadmapItemsModule from './collections/roadmap-items.ts';
 import * as usersModule from './collections/users.ts';
+import * as solutionModule from './collections/solution.ts';
+import * as productCategoriesModule from './collections/product-categories.ts';
+import * as productTechnologiesModule from './collections/product-technologies.ts';
+import * as productCarriersModule from './collections/product-carriers.ts';
+import * as productsModule from './collections/products.ts';
+import * as productVariantsModule from './collections/product-variants.ts';
 
 const resolveCollectionExport = (module, exportName) => {
   if (module && typeof module === 'object') {
@@ -57,6 +63,12 @@ const NewsletterSubscribers = resolveCollectionExport(
 const PreorderRequests = resolveCollectionExport(preorderRequestsModule, 'PreorderRequests');
 const RoadmapItems = resolveCollectionExport(roadmapItemsModule, 'RoadmapItems');
 const Users = resolveCollectionExport(usersModule, 'Users');
+const Solutions = resolveCollectionExport(solutionModule, 'Solutions');
+const ProductCategories = resolveCollectionExport(productCategoriesModule, 'ProductCategories');
+const ProductTechnologies = resolveCollectionExport(productTechnologiesModule, 'ProductTechnologies');
+const ProductCarriers = resolveCollectionExport(productCarriersModule, 'ProductCarriers');
+const Products = resolveCollectionExport(productsModule, 'Products');
+const ProductVariants = resolveCollectionExport(productVariantsModule, 'ProductVariants');
 
 const databaseURL =
   process.env.DATABASE_URI || 'postgres://postgres:postgres@127.0.0.1:5432/mardu_payload';
@@ -86,6 +98,12 @@ const payloadSharedConfig = {
     NewsletterSubscribers,
     ContactLeads,
     PreorderRequests,
+    Solutions,
+    ProductCategories,
+    ProductTechnologies,
+    ProductCarriers,
+    Products,
+    ProductVariants,
   ],
   admin: {
     user: Users.slug,
@@ -220,10 +238,64 @@ const payloadSharedConfig = {
             update: true,
           },
         },
+        solutions: {
+          description: 'Redaktionelle Pflege von Solutions',
+          enabled: {
+            create: true,
+            delete: true,
+            find: true,
+            update: true,
+          },
+        },
+        'product-categories': {
+          description: 'Taxonomie fuer Produktkategorien',
+          enabled: {
+            create: true,
+            delete: true,
+            find: true,
+            update: true,
+          },
+        },
+        'product-technologies': {
+          description: 'Taxonomie fuer Produkttechnologien',
+          enabled: {
+            create: true,
+            delete: true,
+            find: true,
+            update: true,
+          },
+        },
+        'product-carriers': {
+          description: 'Taxonomie fuer Produkt-Carrier',
+          enabled: {
+            create: true,
+            delete: true,
+            find: true,
+            update: true,
+          },
+        },
+        products: {
+          description: 'Redaktionelle Pflege von Produkten',
+          enabled: {
+            create: true,
+            delete: true,
+            find: true,
+            update: true,
+          },
+        },
+        'product-variants': {
+          description: 'Redaktionelle Pflege von Produktvarianten',
+          enabled: {
+            create: true,
+            delete: true,
+            find: true,
+            update: true,
+          },
+        },
       },
     }),
     seoPlugin({
-      collections: ['blog-posts', 'integrations'],
+      collections: ['blog-posts', 'integrations', 'solutions', 'products'],
       generateDescription: ({ doc }) => {
         if (typeof doc?.seoDescription === 'string') {
           return doc.seoDescription;
