@@ -13,7 +13,7 @@ import {
   getCatalogProducts,
   getCatalogTechnologies,
   getFeaturedCatalogProducts,
-} from '@/data/catalog/helpers';
+} from '@/lib/catalog';
 
 export const metadata: Metadata = {
   title: 'Produkte',
@@ -31,13 +31,15 @@ export const metadata: Metadata = {
   },
 };
 
-const categories = getCatalogCategories();
-const technologies = getCatalogTechnologies();
-const carriers = getCatalogCarriers();
-const featuredProducts = getFeaturedCatalogProducts(3);
-const allProducts = getCatalogProducts();
+export default async function ProductsPage() {
+  const [categories, technologies, carriers, featuredProducts, allProducts] = await Promise.all([
+    getCatalogCategories(),
+    getCatalogTechnologies(),
+    getCatalogCarriers(),
+    getFeaturedCatalogProducts(3),
+    getCatalogProducts(),
+  ]);
 
-export default function ProductsPage() {
   return (
     <main className="min-h-screen bg-background">
       <CatalogHero

@@ -493,11 +493,164 @@ type PayloadRoadmapDoc = SiteVisibility & {
   featured?: boolean;
 };
 
+type PayloadCatalogCategoryDoc = SiteVisibility & {
+  id?: string | number;
+  slug?: string;
+  name?: string;
+  eyebrow?: string;
+  description?: string;
+  image?: unknown;
+  imageUrl?: string;
+  imageAlt?: string;
+  visualLabel?: string;
+  featured?: boolean;
+  sortOrder?: number;
+  products?: unknown;
+  updatedAt?: Date | string;
+};
+
+type PayloadCatalogTechnologyDoc = SiteVisibility & {
+  id?: string | number;
+  slug?: string;
+  name?: string;
+  description?: string;
+  image?: unknown;
+  imageUrl?: string;
+  imageAlt?: string;
+  visualLabel?: string;
+  sortOrder?: number;
+};
+
+type PayloadCatalogCarrierDoc = SiteVisibility & {
+  id?: string | number;
+  slug?: string;
+  name?: string;
+  description?: string;
+  image?: unknown;
+  imageUrl?: string;
+  imageAlt?: string;
+  visualLabel?: string;
+  technologyLabel?: string;
+  sortOrder?: number;
+};
+
+type PayloadCatalogVariantDoc = SiteVisibility & {
+  id?: string | number;
+  slug?: string;
+  label?: string;
+  summary?: string;
+  priceFromLabel?: string;
+  availabilityLabel?: string;
+  recommendation?: string;
+  image?: unknown;
+  imageUrl?: string;
+  imageAlt?: string;
+  sortOrder?: number;
+  attributes?: Array<{
+    label?: string;
+    value?: string;
+  }>;
+};
+
+type PayloadCatalogProductDoc = SiteVisibility & {
+  id?: string | number;
+  slug?: string;
+  name?: string;
+  badge?: string;
+  eyebrow?: string;
+  tagline?: string;
+  summary?: string;
+  description?: string;
+  heroDescription?: string;
+  overview?: string;
+  detailMarkdown?: string;
+  breadcrumbLabel?: string;
+  priceFrom?: number;
+  priceFromLabel?: string;
+  availability?: CatalogAvailabilityStatus;
+  availabilityLabel?: string;
+  image?: unknown;
+  imageUrl?: string;
+  imageAlt?: string;
+  categories?: unknown;
+  technologies?: unknown;
+  carriers?: unknown;
+  variants?: unknown;
+  featureGroups?: Array<{
+    title?: string;
+    items?: Array<{
+      item?: string;
+    }>;
+  }>;
+  specGroups?: Array<{
+    title?: string;
+    specs?: Array<{
+      label?: string;
+      value?: string;
+    }>;
+  }>;
+  relatedProducts?: unknown;
+  technologiesHeading?: string;
+  technologiesIntro?: string;
+  carriersHeading?: string;
+  carriersIntro?: string;
+  primaryCtaLabel?: string;
+  secondaryCtaLabel?: string;
+  featured?: boolean;
+  sortOrder?: number;
+  meta?: unknown;
+  updatedAt?: Date | string;
+};
+
+type PayloadSolutionDoc = SiteVisibility & {
+  id?: string | number;
+  slug?: string;
+  title?: string;
+  tagline?: string;
+  summary?: string;
+  badge?: string;
+  themeTone?: SolutionThemeTone;
+  heroTitle?: string;
+  heroIntro?: string;
+  problemTitle?: string;
+  problemBody?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  image?: unknown;
+  imageUrl?: string;
+  imageAlt?: string;
+  heroImage?: unknown;
+  heroImageUrl?: string;
+  heroImageAlt?: string;
+  detailMarkdown?: string;
+  features?: Array<{
+    title?: string;
+    description?: string;
+  }>;
+  contentBlocks?: Array<{
+    id?: string | number;
+    eyebrow?: string;
+    title?: string;
+    body?: string;
+    image?: unknown;
+    imageUrl?: string;
+    imageAlt?: string;
+    imageSide?: 'left' | 'right';
+  }>;
+  featured?: boolean;
+  publishedAt?: string;
+  updatedAt?: Date | string;
+  meta?: unknown;
+};
+
 const DEFAULT_BLOG_LIMIT = 9;
 const DEFAULT_INTEGRATION_LIMIT = 12;
 const MAX_ROADMAP_FETCH = 300;
 const MAX_BLOG_FETCH = 200;
 const MAX_INTEGRATION_FETCH = 400;
+const MAX_CATALOG_FETCH = 400;
+const MAX_TAXONOMY_FETCH = 400;
+const MAX_SOLUTION_FETCH = 200;
 const DEFAULT_REVALIDATE_SECONDS = 60;
 
 export const visibleSiteOptions = [
@@ -597,6 +750,70 @@ function normalizeMediaUrl(url: string | undefined, origin: string): string {
   return new URL(url, origin).toString();
 }
 
+function toStringArray(value: unknown): string[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value
+    .map((item) => (typeof item === 'string' ? item.trim() : ''))
+    .filter(Boolean);
+}
+
+function toRelationshipDocs<T>(value: unknown): T[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value.filter((item): item is T => Boolean(item) && typeof item === 'object');
+}
+
+function toRelationshipIds(value: unknown): string[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return value
+    .map((item) => {
+      if (typeof item === 'string' || typeof item === 'number') {
+        return toId(item);
+      }
+
+      if (item && typeof item === 'object' && 'id' in item) {
+        const relation = item as { id?: string | number };
+        return toId(relation.id);
+      }
+
+      return '';
+    })
+    .filter(Boolean);
+}
+
+function resolveMediaFields(
+  mediaValue: unknown,
+  origin: string,
+  fallbackUrl?: string,
+  fallbackAlt?: string,
+): { url?: string; alt?: string } {
+  const media = toMedia(mediaValue);
+
+  if (media?.url) {
+    return {
+      url: normalizeMediaUrl(media.url, origin),
+      alt: media.alt || fallbackAlt,
+    };
+  }
+
+  if (fallbackUrl) {
+    return {
+      url: normalizeMediaUrl(fallbackUrl, origin),
+      alt: fallbackAlt,
+    };
+  }
+
+  return {};
+}
+
 function mapBlogCategory(value: unknown): BlogCategoryDto | null {
   if (!value || typeof value !== 'object') {
     return null;
@@ -655,7 +872,7 @@ function mapBlogPost(doc: PayloadBlogDoc, origin: string): BlogPostListItemDto |
   }
 
   return {
-    id: toId(doc.id),
+    id: doc.slug,
     slug: doc.slug,
     title: doc.title,
     excerpt: doc.excerpt,
@@ -852,7 +1069,7 @@ function mapIntegrationListItem(
   const logo = toMedia(doc.logo);
 
   return {
-    id: toId(doc.id),
+    id: doc.slug,
     slug: doc.slug,
     title: doc.title,
     shortDescription: doc.shortDescription,
@@ -958,7 +1175,7 @@ function mapRoadmapItem(doc: PayloadRoadmapDoc): RoadmapItemDto | null {
   }
 
   return {
-    id: toId(doc.id),
+    id: doc.slug,
     slug: doc.slug,
     title: doc.title,
     summary: doc.summary,
@@ -1218,16 +1435,630 @@ export async function getPlatformRelatedIntegrations(
   ).slice(0, Math.max(1, limit));
 }
 
+function mapCatalogCategory(
+  doc: PayloadCatalogCategoryDoc,
+  origin: string,
+  productIds: string[] = [],
+): CatalogCategoryDto | null {
+  if (!doc.id || !doc.slug || !doc.name || !doc.description) {
+    return null;
+  }
+
+  const image = resolveMediaFields(doc.image, origin, doc.imageUrl, doc.imageAlt ?? doc.name);
+
+  return {
+    id: toId(doc.id),
+    slug: doc.slug,
+    name: doc.name,
+    ...(doc.eyebrow ? { eyebrow: doc.eyebrow } : {}),
+    description: doc.description,
+    ...(image.url ? { imageUrl: image.url } : {}),
+    ...(image.alt ? { imageAlt: image.alt } : {}),
+    ...(doc.visualLabel ? { visualLabel: doc.visualLabel } : {}),
+    ...(doc.featured !== undefined ? { featured: Boolean(doc.featured) } : {}),
+    productIds,
+  };
+}
+
+function mapCatalogTechnology(
+  doc: PayloadCatalogTechnologyDoc,
+  origin: string,
+): CatalogTechnologyDto | null {
+  if (!doc.id || !doc.slug || !doc.name || !doc.description) {
+    return null;
+  }
+
+  const image = resolveMediaFields(doc.image, origin, doc.imageUrl, doc.imageAlt ?? doc.name);
+
+  return {
+    id: toId(doc.id),
+    slug: doc.slug,
+    name: doc.name,
+    description: doc.description,
+    ...(image.url ? { imageUrl: image.url } : {}),
+    ...(image.alt ? { imageAlt: image.alt } : {}),
+    ...(doc.visualLabel ? { visualLabel: doc.visualLabel } : {}),
+  };
+}
+
+function mapCatalogCarrier(
+  doc: PayloadCatalogCarrierDoc,
+  origin: string,
+): CatalogCarrierDto | null {
+  if (!doc.id || !doc.slug || !doc.name || !doc.description) {
+    return null;
+  }
+
+  const image = resolveMediaFields(doc.image, origin, doc.imageUrl, doc.imageAlt ?? doc.name);
+
+  return {
+    id: toId(doc.id),
+    slug: doc.slug,
+    name: doc.name,
+    description: doc.description,
+    ...(doc.technologyLabel ? { technologyLabel: doc.technologyLabel } : {}),
+    ...(image.url ? { imageUrl: image.url } : {}),
+    ...(image.alt ? { imageAlt: image.alt } : {}),
+    ...(doc.visualLabel ? { visualLabel: doc.visualLabel } : {}),
+  };
+}
+
+function mapCatalogVariant(
+  doc: PayloadCatalogVariantDoc,
+  _origin: string,
+): CatalogVariantDto | null {
+  if (!doc.id || !doc.label || !doc.summary) {
+    return null;
+  }
+
+  return {
+    id: doc.slug || toId(doc.id),
+    label: doc.label,
+    summary: doc.summary,
+    ...(doc.priceFromLabel ? { priceFromLabel: doc.priceFromLabel } : {}),
+    ...(doc.availabilityLabel ? { availabilityLabel: doc.availabilityLabel } : {}),
+    ...(doc.recommendation ? { recommendation: doc.recommendation } : {}),
+    attributes: Array.isArray(doc.attributes)
+      ? doc.attributes
+          .flatMap((attribute) => {
+            if (!attribute?.label || !attribute.value) {
+              return [];
+            }
+
+            return [
+              {
+                label: attribute.label,
+                value: attribute.value,
+              },
+            ];
+          })
+      : [],
+  };
+}
+
+function mapCatalogProductListItem(
+  doc: PayloadCatalogProductDoc,
+  origin: string,
+): CatalogProductListItemDto | null {
+  if (
+    !doc.id ||
+    !doc.slug ||
+    !doc.name ||
+    !doc.tagline ||
+    !doc.summary ||
+    !doc.availability ||
+    !doc.availabilityLabel
+  ) {
+    return null;
+  }
+
+  const categories = toRelationshipDocs<PayloadCatalogCategoryDoc>(doc.categories)
+    .map((item) => mapCatalogCategory(item, origin, []))
+    .filter((item): item is CatalogCategoryDto => Boolean(item));
+  const technologies = toRelationshipDocs<PayloadCatalogTechnologyDoc>(doc.technologies)
+    .map((item) => mapCatalogTechnology(item, origin))
+    .filter((item): item is CatalogTechnologyDto => Boolean(item));
+
+  if (categories.length === 0 || technologies.length === 0) {
+    return null;
+  }
+
+  const image = resolveMediaFields(doc.image, origin, doc.imageUrl, doc.imageAlt ?? doc.name);
+  const primaryCategory = categories[0];
+
+  return {
+    id: doc.slug,
+    slug: doc.slug,
+    name: doc.name,
+    categoryId: primaryCategory.slug,
+    categoryName: primaryCategory.name,
+    tagline: doc.tagline,
+    summary: doc.summary,
+    ...(image.url ? { imageUrl: image.url } : {}),
+    ...(image.alt ? { imageAlt: image.alt } : {}),
+    ...(doc.priceFromLabel ? { priceFromLabel: doc.priceFromLabel } : {}),
+    availability: doc.availability,
+    availabilityLabel: doc.availabilityLabel,
+    technologies,
+    ...(doc.featured !== undefined ? { featured: Boolean(doc.featured) } : {}),
+  };
+}
+
+function mapCatalogProductDetail(
+  doc: PayloadCatalogProductDoc,
+  origin: string,
+): CatalogProductDetailDto | null {
+  const listItem = mapCatalogProductListItem(doc, origin);
+
+  if (!listItem || !doc.heroDescription || !doc.overview) {
+    return null;
+  }
+
+  const variants = toRelationshipDocs<PayloadCatalogVariantDoc>(doc.variants)
+    .map((item) => mapCatalogVariant(item, origin))
+    .filter((item): item is CatalogVariantDto => Boolean(item));
+  const carriers = toRelationshipDocs<PayloadCatalogCarrierDoc>(doc.carriers)
+    .map((item) => mapCatalogCarrier(item, origin))
+    .filter((item): item is CatalogCarrierDto => Boolean(item));
+  const meta = toMeta(doc.meta);
+
+  return {
+    ...listItem,
+    ...(meta?.title ? { seoTitle: meta.title } : {}),
+    ...(meta?.description ? { seoDescription: meta.description } : {}),
+    heroDescription: doc.heroDescription,
+    overview: doc.overview,
+    ...(doc.detailMarkdown ? { detailMarkdown: doc.detailMarkdown } : {}),
+    ...(doc.breadcrumbLabel ? { breadcrumbLabel: doc.breadcrumbLabel } : {}),
+    ...(doc.technologiesHeading ? { technologiesHeading: doc.technologiesHeading } : {}),
+    ...(doc.technologiesIntro ? { technologiesIntro: doc.technologiesIntro } : {}),
+    ...(doc.carriersHeading ? { carriersHeading: doc.carriersHeading } : {}),
+    ...(doc.carriersIntro ? { carriersIntro: doc.carriersIntro } : {}),
+    variants,
+    technologies: listItem.technologies,
+    carriers,
+    featureGroups: Array.isArray(doc.featureGroups)
+      ? doc.featureGroups.flatMap((group) => {
+          if (!group?.title) {
+            return [];
+          }
+
+          const items = Array.isArray(group.items)
+            ? group.items
+                .map((item) => item?.item?.trim() ?? '')
+                .filter(Boolean)
+            : [];
+
+          return [
+            {
+              title: group.title,
+              items,
+            },
+          ];
+        })
+      : [],
+    specGroups: Array.isArray(doc.specGroups)
+      ? doc.specGroups.flatMap((group) => {
+          if (!group?.title) {
+            return [];
+          }
+
+          const specs = Array.isArray(group.specs)
+            ? group.specs.flatMap((spec) => {
+                if (!spec?.label || !spec.value) {
+                  return [];
+                }
+
+                return [
+                  {
+                    label: spec.label,
+                    value: spec.value,
+                  },
+                ];
+              })
+            : [];
+
+          return [
+            {
+              title: group.title,
+              specs,
+            },
+          ];
+        })
+      : [],
+    relatedProducts: [],
+    ...(doc.primaryCtaLabel ? { primaryCtaLabel: doc.primaryCtaLabel } : {}),
+    ...(doc.secondaryCtaLabel ? { secondaryCtaLabel: doc.secondaryCtaLabel } : {}),
+    inquiryContext: {
+      productId: listItem.id,
+      productSlug: listItem.slug,
+      productName: listItem.name,
+      category: listItem.categoryName,
+      ...(doc.priceFromLabel ? { priceFrom: doc.priceFromLabel } : {}),
+      sourcePage: `/products/${listItem.slug}`,
+      technologyIds: listItem.technologies.map((item) => item.id),
+    },
+  };
+}
+
+function sortCatalogCategories(items: CatalogCategoryDto[]) {
+  return [...items].sort((a, b) => {
+    if (Number(a.featured) !== Number(b.featured)) {
+      return Number(b.featured) - Number(a.featured);
+    }
+
+    return a.name.localeCompare(b.name, 'de');
+  });
+}
+
+function sortCatalogProducts(items: CatalogProductListItemDto[]) {
+  return [...items].sort((a, b) => {
+    if (Number(a.featured) !== Number(b.featured)) {
+      return Number(b.featured) - Number(a.featured);
+    }
+
+    return a.name.localeCompare(b.name, 'de');
+  });
+}
+
+function sortCatalogTaxonomy<T extends { name: string }>(items: T[]) {
+  return [...items].sort((a, b) => a.name.localeCompare(b.name, 'de'));
+}
+
+async function fetchPublishedCatalogCategoryDocs(
+  origin: string,
+  site: VisibleSite,
+): Promise<PayloadCatalogCategoryDoc[]> {
+  const url = buildRestUrl(origin, '/api/product-categories', {
+    depth: '1',
+    limit: String(MAX_TAXONOMY_FETCH),
+    pagination: 'false',
+    sort: 'sortOrder',
+    'where[_status][equals]': 'published',
+  });
+  const result = await fetchJson<PayloadRestCollectionResult<PayloadCatalogCategoryDoc>>(url);
+
+  return (result?.docs ?? []).filter((doc) => isVisibleOnSite(doc, site));
+}
+
+async function fetchPublishedCatalogTechnologyDocs(
+  origin: string,
+  site: VisibleSite,
+): Promise<PayloadCatalogTechnologyDoc[]> {
+  const url = buildRestUrl(origin, '/api/product-technologies', {
+    depth: '1',
+    limit: String(MAX_TAXONOMY_FETCH),
+    pagination: 'false',
+    sort: 'sortOrder',
+    'where[_status][equals]': 'published',
+  });
+  const result = await fetchJson<PayloadRestCollectionResult<PayloadCatalogTechnologyDoc>>(url);
+
+  return (result?.docs ?? []).filter((doc) => isVisibleOnSite(doc, site));
+}
+
+async function fetchPublishedCatalogCarrierDocs(
+  origin: string,
+  site: VisibleSite,
+): Promise<PayloadCatalogCarrierDoc[]> {
+  const url = buildRestUrl(origin, '/api/product-carriers', {
+    depth: '1',
+    limit: String(MAX_TAXONOMY_FETCH),
+    pagination: 'false',
+    sort: 'sortOrder',
+    'where[_status][equals]': 'published',
+  });
+  const result = await fetchJson<PayloadRestCollectionResult<PayloadCatalogCarrierDoc>>(url);
+
+  return (result?.docs ?? []).filter((doc) => isVisibleOnSite(doc, site));
+}
+
+async function fetchPublishedCatalogProductDocs(
+  origin: string,
+  site: VisibleSite,
+): Promise<PayloadCatalogProductDoc[]> {
+  const url = buildRestUrl(origin, '/api/products', {
+    depth: '2',
+    limit: String(MAX_CATALOG_FETCH),
+    pagination: 'false',
+    sort: 'sortOrder',
+    'where[_status][equals]': 'published',
+  });
+  const result = await fetchJson<PayloadRestCollectionResult<PayloadCatalogProductDoc>>(url);
+
+  return (result?.docs ?? []).filter((doc) => isVisibleOnSite(doc, site));
+}
+
+async function fetchPublishedSolutionDocs(
+  origin: string,
+  site: VisibleSite,
+): Promise<PayloadSolutionDoc[]> {
+  const url = buildRestUrl(origin, '/api/solutions', {
+    depth: '1',
+    limit: String(MAX_SOLUTION_FETCH),
+    pagination: 'false',
+    sort: '-featured',
+    'where[_status][equals]': 'published',
+  });
+  const result = await fetchJson<PayloadRestCollectionResult<PayloadSolutionDoc>>(url);
+
+  return (result?.docs ?? []).filter((doc) => isVisibleOnSite(doc, site));
+}
+
+export async function getPlatformCatalogCategories(
+  origin: string,
+  site: VisibleSite,
+): Promise<CatalogCategoryDto[]> {
+  const [categoryDocs, productDocs] = await Promise.all([
+    fetchPublishedCatalogCategoryDocs(origin, site),
+    fetchPublishedCatalogProductDocs(origin, site),
+  ]);
+
+  const productIdsByCategory = new Map<string, string[]>();
+
+  for (const product of productDocs) {
+      const productId = toId(product.id);
+      const stableProductId = product.slug ?? productId;
+
+      for (const categoryId of toRelationshipIds(product.categories)) {
+        const current = productIdsByCategory.get(categoryId) ?? [];
+        current.push(stableProductId);
+        productIdsByCategory.set(categoryId, current);
+      }
+  }
+
+  return sortCatalogCategories(
+    categoryDocs
+      .map((doc) =>
+        mapCatalogCategory(doc, origin, productIdsByCategory.get(toId(doc.id)) ?? []),
+      )
+      .filter((item): item is CatalogCategoryDto => Boolean(item)),
+  );
+}
+
+export async function getPlatformCatalogTechnologies(
+  origin: string,
+  site: VisibleSite,
+): Promise<CatalogTechnologyDto[]> {
+  return sortCatalogTaxonomy(
+    (await fetchPublishedCatalogTechnologyDocs(origin, site))
+      .map((doc) => mapCatalogTechnology(doc, origin))
+      .filter((item): item is CatalogTechnologyDto => Boolean(item)),
+  );
+}
+
+export async function getPlatformCatalogCarriers(
+  origin: string,
+  site: VisibleSite,
+): Promise<CatalogCarrierDto[]> {
+  return sortCatalogTaxonomy(
+    (await fetchPublishedCatalogCarrierDocs(origin, site))
+      .map((doc) => mapCatalogCarrier(doc, origin))
+      .filter((item): item is CatalogCarrierDto => Boolean(item)),
+  );
+}
+
+export async function getPlatformCatalogProducts(
+  origin: string,
+  site: VisibleSite,
+): Promise<CatalogProductListItemDto[]> {
+  return sortCatalogProducts(
+    (await fetchPublishedCatalogProductDocs(origin, site))
+      .map((doc) => mapCatalogProductListItem(doc, origin))
+      .filter((item): item is CatalogProductListItemDto => Boolean(item)),
+  );
+}
+
+export async function getPlatformFeaturedCatalogProducts(
+  origin: string,
+  site: VisibleSite,
+  limit = 3,
+): Promise<CatalogProductListItemDto[]> {
+  return (await getPlatformCatalogProducts(origin, site))
+    .filter((item) => item.featured)
+    .slice(0, Math.max(1, limit));
+}
+
+export async function getPlatformCatalogProductBySlug(
+  origin: string,
+  site: VisibleSite,
+  slug: string,
+): Promise<CatalogProductDetailDto | null> {
+  const docs = await fetchPublishedCatalogProductDocs(origin, site);
+  const doc = docs.find((item) => item.slug === slug);
+
+  if (!doc) {
+    return null;
+  }
+
+  const detail = mapCatalogProductDetail(doc, origin);
+
+  if (!detail) {
+    return null;
+  }
+
+  const allProducts = docs
+    .map((item) => mapCatalogProductListItem(item, origin))
+    .filter((item): item is CatalogProductListItemDto => Boolean(item));
+  const explicitRelated = toRelationshipDocs<PayloadCatalogProductDoc>(doc.relatedProducts)
+    .map((item) => mapCatalogProductListItem(item, origin))
+    .filter((item): item is CatalogRelatedProductDto => Boolean(item));
+
+  const relatedProducts =
+    explicitRelated.length > 0
+      ? explicitRelated
+      : allProducts
+          .filter((item) => item.id !== detail.id)
+          .filter(
+            (item) =>
+              item.categoryId === detail.categoryId ||
+              item.technologies.some((technology) =>
+                detail.technologies.some((current) => current.id === technology.id),
+              ),
+          )
+          .slice(0, 3);
+
+  return {
+    ...detail,
+    relatedProducts,
+  };
+}
+
+export async function getPlatformCatalogProductSlugs(
+  origin: string,
+  site: VisibleSite,
+): Promise<string[]> {
+  return (await fetchPublishedCatalogProductDocs(origin, site))
+    .map((doc) => doc.slug ?? '')
+    .filter(Boolean);
+}
+
+function mapSolutionListItem(doc: PayloadSolutionDoc, origin: string): SolutionListItemDto | null {
+  if (!doc.id || !doc.slug || !doc.title || !doc.tagline || !doc.summary) {
+    return null;
+  }
+
+  const image = resolveMediaFields(doc.image, origin, doc.imageUrl, doc.imageAlt ?? doc.title);
+
+  if (!image.url || !image.alt) {
+    return null;
+  }
+
+  return {
+    id: doc.slug,
+    slug: doc.slug,
+    title: doc.title,
+    tagline: doc.tagline,
+    summary: doc.summary,
+    imageUrl: image.url,
+    imageAlt: image.alt,
+    ...(doc.badge ? { badge: doc.badge } : {}),
+    ...(doc.themeTone ? { themeTone: doc.themeTone } : {}),
+  };
+}
+
+function mapSolutionDetail(doc: PayloadSolutionDoc, origin: string): SolutionDetailDto | null {
+  const listItem = mapSolutionListItem(doc, origin);
+
+  if (!listItem || !doc.heroTitle || !doc.heroIntro || !doc.problemTitle || !doc.problemBody) {
+    return null;
+  }
+
+  const heroImage = resolveMediaFields(
+    doc.heroImage,
+    origin,
+    doc.heroImageUrl,
+    doc.heroImageAlt ?? doc.heroTitle,
+  );
+
+  if (!heroImage.url || !heroImage.alt) {
+    return null;
+  }
+
+  return {
+    ...listItem,
+    heroTitle: doc.heroTitle,
+    heroIntro: doc.heroIntro,
+    problemTitle: doc.problemTitle,
+    problemBody: doc.problemBody,
+    heroImageUrl: heroImage.url,
+    heroImageAlt: heroImage.alt,
+    contentBlocks: Array.isArray(doc.contentBlocks)
+      ? doc.contentBlocks.flatMap((block, index) => {
+          if (!block?.title || !block.body || (block.imageSide !== 'left' && block.imageSide !== 'right')) {
+            return [];
+          }
+
+          const image = resolveMediaFields(
+            block.image,
+            origin,
+            block.imageUrl,
+            block.imageAlt ?? block.title,
+          );
+
+          if (!image.url || !image.alt) {
+            return [];
+          }
+
+          return [
+            {
+              id: block.id ? toId(block.id) : `${doc.slug}-block-${index + 1}`,
+              ...(block.eyebrow ? { eyebrow: block.eyebrow } : {}),
+              title: block.title,
+              body: block.body,
+              imageUrl: image.url,
+              imageAlt: image.alt,
+              imageSide: block.imageSide,
+            },
+          ];
+        })
+      : [],
+    features: Array.isArray(doc.features)
+      ? doc.features.flatMap((feature) => {
+          if (!feature?.title || !feature.description) {
+            return [];
+          }
+
+          return [
+            {
+              title: feature.title,
+              description: feature.description,
+            },
+          ];
+        })
+      : undefined,
+    ...(doc.detailMarkdown ? { detailMarkdown: doc.detailMarkdown } : {}),
+    ...(doc.ctaLabel ? { ctaLabel: doc.ctaLabel } : {}),
+    ...(doc.ctaHref ? { ctaHref: doc.ctaHref } : {}),
+  };
+}
+
+export async function getPlatformSolutions(
+  origin: string,
+  site: VisibleSite,
+): Promise<SolutionListItemDto[]> {
+  return (await fetchPublishedSolutionDocs(origin, site))
+    .map((doc) => mapSolutionListItem(doc, origin))
+    .filter((item): item is SolutionListItemDto => Boolean(item));
+}
+
+export async function getPlatformSolutionBySlug(
+  origin: string,
+  site: VisibleSite,
+  slug: string,
+): Promise<SolutionDetailDto | null> {
+  const doc = (await fetchPublishedSolutionDocs(origin, site)).find((item) => item.slug === slug);
+
+  if (!doc) {
+    return null;
+  }
+
+  return mapSolutionDetail(doc, origin);
+}
+
+export async function getPlatformSolutionSlugs(
+  origin: string,
+  site: VisibleSite,
+): Promise<string[]> {
+  return (await fetchPublishedSolutionDocs(origin, site))
+    .map((doc) => doc.slug ?? '')
+    .filter(Boolean);
+}
+
 export async function getPlatformContentSitemapEntries(
   origin: string,
   site: VisibleSite,
 ): Promise<{
   blog: ContentSitemapEntry[];
   integrations: ContentSitemapEntry[];
+  products: ContentSitemapEntry[];
+  solutions: ContentSitemapEntry[];
 }> {
-  const [blogDocs, integrationDocs] = await Promise.all([
+  const [blogDocs, integrationDocs, productDocs, solutionDocs] = await Promise.all([
     fetchPublishedBlogDocs(origin, site),
     fetchPublishedIntegrationDocs(origin, site),
+    fetchPublishedCatalogProductDocs(origin, site),
+    fetchPublishedSolutionDocs(origin, site),
   ]);
 
   return {
@@ -1252,6 +2083,35 @@ export async function getPlatformContentSitemapEntries(
         {
           slug: doc.slug,
           updatedAt: typeof doc.updatedAt === 'string' ? doc.updatedAt : undefined,
+        },
+      ];
+    }),
+    products: productDocs.flatMap((doc) => {
+      if (typeof doc.slug !== 'string') {
+        return [];
+      }
+
+      return [
+        {
+          slug: doc.slug,
+          updatedAt: typeof doc.updatedAt === 'string' ? doc.updatedAt : undefined,
+        },
+      ];
+    }),
+    solutions: solutionDocs.flatMap((doc) => {
+      if (typeof doc.slug !== 'string') {
+        return [];
+      }
+
+      return [
+        {
+          slug: doc.slug,
+          updatedAt:
+            typeof doc.updatedAt === 'string'
+              ? doc.updatedAt
+              : typeof doc.publishedAt === 'string'
+                ? doc.publishedAt
+                : undefined,
         },
       ];
     }),

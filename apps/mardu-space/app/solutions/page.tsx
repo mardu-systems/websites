@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { CTASection } from '@mardu/sections';
 import { SolutionsGrid, SolutionsHero } from '@mardu/solutions-ui';
-import { getSolutionListItems } from '@/data/solutions';
+import { getSolutions } from '@/lib/solutions';
 
 export const metadata: Metadata = {
   title: 'Lösungen',
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
   },
 };
 
-const solutions = getSolutionListItems();
+export default async function SolutionsPage() {
+  const solutions = await getSolutions();
 
-export default function SolutionsPage() {
   return (
     <main className="min-h-screen bg-background">
       <SolutionsHero

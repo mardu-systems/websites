@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import type { CatalogProductDetailDto } from '@mardu/content-core';
 import { notFound } from 'next/navigation';
 import {
   CatalogBreadcrumbs,
@@ -6,9 +7,9 @@ import {
   CatalogStickyInquiryBar,
 } from '@mardu/catalog-ui';
 import { DetailMarkdown } from '@/components/content/detail-markdown';
-import { buildCatalogInquiryHref, getCatalogProductBySlug, getCatalogProductSlugs } from '@/data/catalog/helpers';
+import { buildCatalogInquiryHref, getCatalogProductBySlug, getCatalogProductSlugs } from '@/lib/catalog';
 
-function buildProductDetailMarkdown(product: NonNullable<ReturnType<typeof getCatalogProductBySlug>>) {
+function buildProductDetailMarkdown(product: CatalogProductDetailDto) {
   if (product.detailMarkdown) {
     return product.detailMarkdown;
   }
@@ -46,7 +47,7 @@ function buildProductDetailMarkdown(product: NonNullable<ReturnType<typeof getCa
 }
 
 export async function generateStaticParams() {
-  return getCatalogProductSlugs().map((slug) => ({ slug }));
+  return (await getCatalogProductSlugs()).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -55,7 +56,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const product = getCatalogProductBySlug(slug);
+  const product = await getCatalogProductBySlug(slug);
 
   if (!product) {
     return {};
@@ -82,7 +83,7 @@ export default async function ProductDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = getCatalogProductBySlug(slug);
+  const product = await getCatalogProductBySlug(slug);
 
   if (!product) {
     notFound();

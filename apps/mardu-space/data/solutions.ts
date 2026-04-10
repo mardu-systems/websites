@@ -17,9 +17,9 @@ export const solutions: SolutionDetailDto[] = [
       'Für Unternehmenswerkstätten, in denen mehrere Personen, Maschinen und Sicherheitsanforderungen gleichzeitig koordiniert werden müssen.',
     problemTitle: 'Zwischen Schlüsselausgabe und echter Betriebslogik liegt meist eine gefährliche Lücke.',
     problemBody:
-      'In Unternehmenswerkstätten reicht es nicht, Räume nur aufzuschließen. Entscheidend ist, wer welche Maschine unter welchen Bedingungen nutzen darf, wie Verantwortung dokumentiert wird und wie sich Regeln im Alltag tatsächlich durchsetzen lassen.
+      `In Unternehmenswerkstätten reicht es nicht, Räume nur aufzuschließen. Entscheidend ist, wer welche Maschine unter welchen Bedingungen nutzen darf, wie Verantwortung dokumentiert wird und wie sich Regeln im Alltag tatsächlich durchsetzen lassen.
 
-Mardu verbindet diese operative Ebene mit einer technischen Freigabelogik. So werden Unterweisungen, Rollen und Maschinenzustände nicht getrennt verwaltet, sondern als zusammenhängender Betriebsablauf sichtbar.',
+Mardu verbindet diese operative Ebene mit einer technischen Freigabelogik. So werden Unterweisungen, Rollen und Maschinenzustände nicht getrennt verwaltet, sondern als zusammenhängender Betriebsablauf sichtbar.`,
     heroImageUrl: '/_A7_9094_quer.jpg',
     heroImageAlt: 'Unternehmenswerkstatt mit Maschinen und geregeltem Zugang',
     contentBlocks: [
@@ -28,9 +28,9 @@ Mardu verbindet diese operative Ebene mit einer technischen Freigabelogik. So we
         eyebrow: 'Zutritt & Zonen',
         title: 'Zutritt endet nicht an der Tür.',
         body:
-          'Werkstattbereiche, Materiallager und Maschinenzonen haben unterschiedliche Risiken. Deshalb müssen Freigaben nicht nur nach Person, sondern auch nach Ort und Zweck steuerbar sein.
+          `Werkstattbereiche, Materiallager und Maschinenzonen haben unterschiedliche Risiken. Deshalb müssen Freigaben nicht nur nach Person, sondern auch nach Ort und Zweck steuerbar sein.
 
-Mardu macht daraus eine klare Zutrittslogik, die auf reale Verantwortlichkeiten statt auf lose Schlüsselausgabe reagiert.',
+Mardu macht daraus eine klare Zutrittslogik, die auf reale Verantwortlichkeiten statt auf lose Schlüsselausgabe reagiert.`,
         imageUrl: '/configurator/tuer.jpg',
         imageAlt: 'Türsituation als Beispiel für zonierten Werkstattzutritt',
         imageSide: 'right',
@@ -40,9 +40,9 @@ Mardu macht daraus eine klare Zutrittslogik, die auf reale Verantwortlichkeiten 
         eyebrow: 'Maschinen',
         title: 'Maschinenfreigaben werden nachvollziehbar statt improvisiert.',
         body:
-          'Gerade in Unternehmenswerkstätten laufen Maschinen unterschiedlich kritischer Klassen nebeneinander. Manche brauchen nur eine einfache Freigabe, andere klare Voraussetzungen und belastbare Nachweise.
+          `Gerade in Unternehmenswerkstätten laufen Maschinen unterschiedlich kritischer Klassen nebeneinander. Manche brauchen nur eine einfache Freigabe, andere klare Voraussetzungen und belastbare Nachweise.
 
-Mit Mardu lässt sich diese Logik direkt an der Maschine abbilden, statt sie nur organisatorisch zu erwarten.',
+Mit Mardu lässt sich diese Logik direkt an der Maschine abbilden, statt sie nur organisatorisch zu erwarten.`,
         imageUrl: '/configurator/32a.jpg',
         imageAlt: 'Leistungsstarke Maschine als Beispiel für kontrollierte Freigabe',
         imageSide: 'left',
@@ -67,9 +67,9 @@ Mit Mardu lässt sich diese Logik direkt an der Maschine abbilden, statt sie nur
       'Für Labore, in denen sensible Geräte, wechselnde Nutzergruppen und nachvollziehbare Freigaben gemeinsam gedacht werden müssen.',
     problemTitle: 'Im Labor ist nicht nur wichtig, wer hinein darf, sondern wer welches Gerät verantwortbar bedienen darf.',
     problemBody:
-      'Zwischen Hochschullabor, Unternehmenslabor und Prüfbereich unterscheiden sich Prozesse stark. Gleich bleibt aber die Anforderung, Zutritt, Gerätezugang und Verantwortlichkeit nicht voneinander zu trennen.
+      `Zwischen Hochschullabor, Unternehmenslabor und Prüfbereich unterscheiden sich Prozesse stark. Gleich bleibt aber die Anforderung, Zutritt, Gerätezugang und Verantwortlichkeit nicht voneinander zu trennen.
 
-Mardu schafft dafür eine operative Struktur, in der Regeln vor Ort wirksam werden und Nachweise nicht erst nachträglich zusammengesucht werden müssen.',
+Mardu schafft dafür eine operative Struktur, in der Regeln vor Ort wirksam werden und Nachweise nicht erst nachträglich zusammengesucht werden müssen.`,
     heroImageUrl: '/configurator/fridge.jpg',
     heroImageAlt: 'Laborgerät als Beispiel für kontrollierten Zugang und Freigabe',
     contentBlocks: [
@@ -78,9 +78,9 @@ Mardu schafft dafür eine operative Struktur, in der Regeln vor Ort wirksam werd
         eyebrow: 'Rollen',
         title: 'Verschiedene Nutzergruppen lassen sich präzise abbilden.',
         body:
-          'Studierende, Laborleitungen, technische Dienste und externe Partner brauchen oft nicht dieselben Rechte. Eine funktionierende Laborlösung muss diese Unterschiede im Betrieb tragen können.
+          `Studierende, Laborleitungen, technische Dienste und externe Partner brauchen oft nicht dieselben Rechte. Eine funktionierende Laborlösung muss diese Unterschiede im Betrieb tragen können.
 
-Mardu hilft dabei, Zugänge, Qualifikation und Nutzungsszenarien sauber zu staffeln.',
+Mardu hilft dabei, Zugänge, Qualifikation und Nutzungsszenarien sauber zu staffeln.`,
         imageUrl: '/device/near.jpg',
         imageAlt: 'Nahaufnahme eines Zugriffspunktes für labornahe Identifikation',
         imageSide: 'right',
@@ -90,9 +90,9 @@ Mardu hilft dabei, Zugänge, Qualifikation und Nutzungsszenarien sauber zu staff
         eyebrow: 'Nachweise',
         title: 'Dokumentation entsteht aus dem Prozess statt aus Nacharbeit.',
         body:
-          'Wenn Vorfälle, Audits oder Rückfragen auftreten, reicht es nicht zu wissen, dass ein Raum offen war. Relevant ist, welche Person zu welchem Zeitpunkt welche Freigabe tatsächlich genutzt hat.
+          `Wenn Vorfälle, Audits oder Rückfragen auftreten, reicht es nicht zu wissen, dass ein Raum offen war. Relevant ist, welche Person zu welchem Zeitpunkt welche Freigabe tatsächlich genutzt hat.
 
-Genau diese operative Sichtbarkeit ist für Labore entscheidend.',
+Genau diese operative Sichtbarkeit ist für Labore entscheidend.`,
         imageUrl: '/gateway/inside.jpg',
         imageAlt: 'Technikraum als Symbol für nachvollziehbare Laborinfrastruktur',
         imageSide: 'left',
@@ -117,9 +117,9 @@ Genau diese operative Sichtbarkeit ist für Labore entscheidend.',
       'Für Hochschulen und Universitäten, die unterschiedliche Gebäude, Rollen und Spezialflächen nicht mehr getrennt verwalten wollen – mit Anbindung an bestehende Hochschulsysteme.',
     problemTitle: 'Ein Campus funktioniert nicht wie ein einzelner Standort.',
     problemBody:
-      'Zwischen Bibliothek, Fachbereich, Labor, Werkstatt und Veranstaltungsfläche entstehen sehr unterschiedliche Nutzungsmodelle. Semesterwechsel, externe Partner und wechselnde Nutzergruppen machen eine zentrale Verwaltung zwingend erforderlich.
+      `Zwischen Bibliothek, Fachbereich, Labor, Werkstatt und Veranstaltungsfläche entstehen sehr unterschiedliche Nutzungsmodelle. Semesterwechsel, externe Partner und wechselnde Nutzergruppen machen eine zentrale Verwaltung zwingend erforderlich.
 
-Mardu hilft, diese Komplexität zu bewältigen. Dank moderner APIs können wir Integrationen wie Single Sign-On (SSO), Hochschul-Apps (wie UniNow) oder andere universitäre Verzeichnisdienste nahtlos anbinden.',
+Mardu hilft, diese Komplexität zu bewältigen. Dank moderner APIs können wir Integrationen wie Single Sign-On (SSO), Hochschul-Apps (wie UniNow) oder andere universitäre Verzeichnisdienste nahtlos anbinden.`,
     heroImageUrl: '/_A7_9072_quer.jpg',
     heroImageAlt: 'Campusartige Außenansicht als Symbol für Hochschulbetrieb',
     contentBlocks: [
@@ -163,9 +163,9 @@ Mardu hilft, diese Komplexität zu bewältigen. Dank moderner APIs können wir I
       'Für Schulen und Ausbildungszentren, die Räume, Werkstätten und Verantwortlichkeiten jenseits klassischer Schlüsselprozesse organisieren wollen.',
     problemTitle: 'Gerade in Bildungseinrichtungen treffen Offenheit und Aufsichtspflicht direkt aufeinander.',
     problemBody:
-      'Räume sollen nutzbar bleiben, aber nicht beliebig offen sein. Werkstätten und Fachräume müssen zugänglich sein, ohne dass Verantwortung und Nachvollziehbarkeit verschwimmen.
+      `Räume sollen nutzbar bleiben, aber nicht beliebig offen sein. Werkstätten und Fachräume müssen zugänglich sein, ohne dass Verantwortung und Nachvollziehbarkeit verschwimmen.
 
-Mardu hilft, diese Spannung nicht mit Improvisation, sondern mit klaren Regeln und technischer Durchsetzung zu lösen.',
+Mardu hilft, diese Spannung nicht mit Improvisation, sondern mit klaren Regeln und technischer Durchsetzung zu lösen.`,
     heroImageUrl: '/device/tor-2.jpg',
     heroImageAlt: 'Lokaler Zutrittspunkt als Symbol für geregelte Fachraumzugänge',
     contentBlocks: [
@@ -174,9 +174,9 @@ Mardu hilft, diese Spannung nicht mit Improvisation, sondern mit klaren Regeln u
         eyebrow: 'Fachräume',
         title: 'Zugang folgt dem Nutzungskontext statt dem Schlüsselbund.',
         body:
-          'Nicht jede Lerngruppe braucht zu jeder Zeit Zugriff auf denselben Bereich. Gleichzeitig sollen Lehrkräfte und Verwaltung nicht in Sonderabsprachen ersticken.
+          `Nicht jede Lerngruppe braucht zu jeder Zeit Zugriff auf denselben Bereich. Gleichzeitig sollen Lehrkräfte und Verwaltung nicht in Sonderabsprachen ersticken.
 
-Mardu bildet diese Unterschiede in einer ruhigen, belastbaren Zugriffslogik ab.',
+Mardu bildet diese Unterschiede in einer ruhigen, belastbaren Zugriffslogik ab.`,
         imageUrl: '/configurator/tuer.jpg',
         imageAlt: 'Fachraumzugang als Beispiel für zeitlich und organisatorisch geregelten Zutritt',
         imageSide: 'left',
@@ -186,9 +186,9 @@ Mardu bildet diese Unterschiede in einer ruhigen, belastbaren Zugriffslogik ab.'
         eyebrow: 'Werkstattbetrieb',
         title: 'Geräte und Maschinen lassen sich pädagogisch und technisch absichern.',
         body:
-          'Gerade in Ausbildungswerkstätten genügt es nicht, nur Türen zu öffnen. Relevant ist, ob Personen eingewiesen sind, wer Verantwortung trägt und wie Freigaben vor Ort umgesetzt werden.
+          `Gerade in Ausbildungswerkstätten genügt es nicht, nur Türen zu öffnen. Relevant ist, ob Personen eingewiesen sind, wer Verantwortung trägt und wie Freigaben vor Ort umgesetzt werden.
 
-Damit wird Betrieb planbar, ohne unpraktisch zu werden.',
+Damit wird Betrieb planbar, ohne unpraktisch zu werden.`,
         imageUrl: '/configurator/device.jpg',
         imageAlt: 'Maschinennahe Situation als Symbol für Ausbildungswerkstätten',
         imageSide: 'right',
@@ -213,9 +213,9 @@ Damit wird Betrieb planbar, ohne unpraktisch zu werden.',
       'Für Makerspaces, die ihre Maschinen pädagogisch wertvoll, aber technisch absolut sicher freigeben wollen – auch am Abend oder Wochenende.',
     problemTitle: 'Sicherheit ohne Aufsicht: Der Schlüssel zur Eigenverantwortung.',
     problemBody:
-      'Werkzeugmaschinen wie Fräsen oder Lasercutter sind gefährlich. Die Verantwortung liegt am Ende oft bei der Aufsichtsperson – auch um 19 Uhr oder am Wochenende. Ein schwerer Ernstfall kann zur endgültigen Schließung des Ortes führen.
+      `Werkzeugmaschinen wie Fräsen oder Lasercutter sind gefährlich. Die Verantwortung liegt am Ende oft bei der Aufsichtsperson – auch um 19 Uhr oder am Wochenende. Ein schwerer Ernstfall kann zur endgültigen Schließung des Ortes führen.
 
-Anstatt auf manuelle Kontrolle durch ständig anwesendes Personal zu setzen, fokussiert sich Mardu auf technische Durchsetzung: Berechtigungen sind strikt personenbezogen. Einweisungen werden bei jedem Maschinenstart aktiv überprüft. Solange keine gültige Qualifikation vorliegt, startet die Maschine schlichtweg nicht.',
+Anstatt auf manuelle Kontrolle durch ständig anwesendes Personal zu setzen, fokussiert sich Mardu auf technische Durchsetzung: Berechtigungen sind strikt personenbezogen. Einweisungen werden bei jedem Maschinenstart aktiv überprüft. Solange keine gültige Qualifikation vorliegt, startet die Maschine schlichtweg nicht.`,
     heroImageUrl: '/_A7_9094_quer.jpg',
     heroImageAlt: 'Werkstattumgebung als Symbol für offene Werkstattstrukturen',
     contentBlocks: [
@@ -259,9 +259,9 @@ Anstatt auf manuelle Kontrolle durch ständig anwesendes Personal zu setzen, fok
       'Für Vereine und Community-Spaces, die Räume, Geräte und Schlüsselprozesse aus dem Ehrenamtsmodus herausholen wollen.',
     problemTitle: 'Viele Community-Orte scheitern nicht an Technik, sondern an zu viel implizitem Wissen.',
     problemBody:
-      'Wer darf wann hinein, wer gibt Träger aus, wer kann Räume freigeben und was passiert bei Schlüsselverlust? In vielen Vereinen liegen diese Antworten verteilt bei einzelnen Personen.
+      `Wer darf wann hinein, wer gibt Träger aus, wer kann Räume freigeben und was passiert bei Schlüsselverlust? In vielen Vereinen liegen diese Antworten verteilt bei einzelnen Personen.
 
-Mardu hilft, daraus eine klare, gemeinsame Betriebsgrundlage zu machen.',
+Mardu hilft, daraus eine klare, gemeinsame Betriebsgrundlage zu machen.`,
     heroImageUrl: '/configurator/tor.jpg',
     heroImageAlt: 'Tor- und Zugangsbereich als Symbol für geregelte Vereinsbetrieb',
     contentBlocks: [
@@ -270,9 +270,9 @@ Mardu hilft, daraus eine klare, gemeinsame Betriebsgrundlage zu machen.',
         eyebrow: 'Organisation',
         title: 'Zuständigkeiten werden sichtbarer und damit entlastender.',
         body:
-          'Wenn Freigaben, Rollen und Raumzugänge nicht nur im Kopf einzelner Personen liegen, wird der Betrieb resilienter. Gerade in ehrenamtlichen Strukturen ist das entscheidend.
+          `Wenn Freigaben, Rollen und Raumzugänge nicht nur im Kopf einzelner Personen liegen, wird der Betrieb resilienter. Gerade in ehrenamtlichen Strukturen ist das entscheidend.
 
-Mardu macht daraus keinen Bürokratielayer, sondern einen ruhigeren Alltag.',
+Mardu macht daraus keinen Bürokratielayer, sondern einen ruhigeren Alltag.`,
         imageUrl: '/gateway/inside.jpg',
         imageAlt: 'Technische Infrastruktur als Symbol für verlässliche Vereinsorganisation',
         imageSide: 'left',
@@ -282,9 +282,9 @@ Mardu macht daraus keinen Bürokratielayer, sondern einen ruhigeren Alltag.',
         eyebrow: 'Zugang',
         title: 'Räume bleiben nutzbar, ohne unkontrolliert offen zu sein.',
         body:
-          'Community-Orte brauchen keine maximal komplizierte Security-Sprache. Sie brauchen eine verständliche, alltagstaugliche Lösung, die Regeln zuverlässig umsetzt.
+          `Community-Orte brauchen keine maximal komplizierte Security-Sprache. Sie brauchen eine verständliche, alltagstaugliche Lösung, die Regeln zuverlässig umsetzt.
 
-Genau dort setzt Mardu an.',
+Genau dort setzt Mardu an.`,
         imageUrl: '/configurator/tuer.jpg',
         imageAlt: 'Raumzugang als Symbol für geregelte Nutzung in Community-Spaces',
         imageSide: 'right',
@@ -309,9 +309,9 @@ Genau dort setzt Mardu an.',
       'Für Industrieumgebungen und technische Betriebsräume, in denen Infrastruktur, Zuständigkeit und Nachvollziehbarkeit nicht getrennt betrachtet werden können.',
     problemTitle: 'Je kritischer die Fläche, desto weniger trägt pauschaler Zutritt.',
     problemBody:
-      'In Technikräumen, Energieflächen oder anfrastrukturkritischen Bereichen reicht es nicht, nur zu dokumentieren, wer einen Schlüssel hat. Relevant ist, wer tatsächlich hinein durfte, unter welchen Bedingungen und mit welcher Verantwortung.
+      `In Technikräumen, Energieflächen oder anfrastrukturkritischen Bereichen reicht es nicht, nur zu dokumentieren, wer einen Schlüssel hat. Relevant ist, wer tatsächlich hinein durfte, unter welchen Bedingungen und mit welcher Verantwortung.
 
-Mardu hilft, daraus eine nachvollziehbare und technisch umsetzbare Logik zu machen.',
+Mardu hilft, daraus eine nachvollziehbare und technisch umsetzbare Logik zu machen.`,
     heroImageUrl: '/gateway/mounted.jpg',
     heroImageAlt: 'Technischer Betriebsraum mit installierter Infrastruktur',
     contentBlocks: [
@@ -320,9 +320,9 @@ Mardu hilft, daraus eine nachvollziehbare und technisch umsetzbare Logik zu mach
         eyebrow: 'Infrastruktur',
         title: 'Geräte, Räume und Infrastruktur bleiben in einem Bild sichtbar.',
         body:
-          'Technische Umgebungen zerfallen häufig in getrennte Zuständigkeiten. Das führt dazu, dass Security, Betrieb und Administration mit unterschiedlichen Informationen arbeiten.
+          `Technische Umgebungen zerfallen häufig in getrennte Zuständigkeiten. Das führt dazu, dass Security, Betrieb und Administration mit unterschiedlichen Informationen arbeiten.
 
-Mardu zieht diese Sicht wieder zusammen.',
+Mardu zieht diese Sicht wieder zusammen.`,
         imageUrl: '/gateway/inside.jpg',
         imageAlt: 'Innenansicht technischer Infrastruktur als Symbol für integrierte Steuerung',
         imageSide: 'right',
@@ -357,9 +357,9 @@ Mardu zieht diese Sicht wieder zusammen.',
       'Für kommunale Einrichtungen, bei denen mehrere Gebäude, Nutzergruppen und Zuständigkeiten unter einem organisatorischen Rahmen zusammenlaufen.',
     problemTitle: 'Kommunale Realität besteht selten aus einem einzigen Nutzungsszenario.',
     problemBody:
-      'Zwischen Verwaltung, Technik, Bildung, Vereinsnutzung und öffentlichen Flächen entstehen viele Übergänge. Genau dort geraten Schlüssel- und Sonderprozessmodelle schnell an ihre Grenzen.
+      `Zwischen Verwaltung, Technik, Bildung, Vereinsnutzung und öffentlichen Flächen entstehen viele Übergänge. Genau dort geraten Schlüssel- und Sonderprozessmodelle schnell an ihre Grenzen.
 
-Mardu hilft, diese Vielfalt als klare Zugriffsstruktur zu organisieren, ohne den Betrieb unnötig zu verkomplizieren.',
+Mardu hilft, diese Vielfalt als klare Zugriffsstruktur zu organisieren, ohne den Betrieb unnötig zu verkomplizieren.`,
     heroImageUrl: '/configurator/tuer.jpg',
     heroImageAlt: 'Öffentlicher Gebäudezugang als Symbol für kommunale Zugriffslogik',
     contentBlocks: [
@@ -368,9 +368,9 @@ Mardu hilft, diese Vielfalt als klare Zugriffsstruktur zu organisieren, ohne den
         eyebrow: 'Standorte',
         title: 'Mehrere Gebäude bleiben organisatorisch zusammenhängend.',
         body:
-          'Kommunale Einrichtungen verlieren schnell Übersicht, wenn jede Fläche anders administriert wird. Eine Lösung muss Unterschiede zulassen und trotzdem auf einem gemeinsamen Rahmen beruhen.
+          `Kommunale Einrichtungen verlieren schnell Übersicht, wenn jede Fläche anders administriert wird. Eine Lösung muss Unterschiede zulassen und trotzdem auf einem gemeinsamen Rahmen beruhen.
 
-Genau dafür ist Mardu gedacht.',
+Genau dafür ist Mardu gedacht.`,
         imageUrl: '/configurator/tor.jpg',
         imageAlt: 'Tor- und Geländeübergang als Symbol für standortübergreifende Verwaltung',
         imageSide: 'left',
@@ -380,9 +380,9 @@ Genau dafür ist Mardu gedacht.',
         eyebrow: 'Betrieb',
         title: 'Wechselnde Verantwortlichkeiten bleiben nachvollziehbar.',
         body:
-          'Hausdienst, Verwaltung, externe Dienstleister und lokale Teams arbeiten oft nacheinander oder parallel. Deshalb braucht es eine Lösung, die Verantwortung sichtbar macht und lokale Entscheidungen technisch stützt.
+          `Hausdienst, Verwaltung, externe Dienstleister und lokale Teams arbeiten oft nacheinander oder parallel. Deshalb braucht es eine Lösung, die Verantwortung sichtbar macht und lokale Entscheidungen technisch stützt.
 
-So wird der Alltag ruhiger und belastbarer.',
+So wird der Alltag ruhiger und belastbarer.`,
         imageUrl: '/device/tor-2.jpg',
         imageAlt: 'Zutrittspunkt als Symbol für geregelte Betrieb in kommunalen Einrichtungen',
         imageSide: 'right',

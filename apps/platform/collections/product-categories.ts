@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload';
+import { buildSiteVisibilityField } from '@mardu/content-core';
 
 const formatSlug = (value: string): string =>
   value
@@ -12,6 +13,23 @@ export const ProductCategories: CollectionConfig = {
   slug: 'product-categories',
   admin: {
     useAsTitle: 'name',
+    defaultColumns: ['name', 'featured', 'sortOrder', 'updatedAt'],
+  },
+  versions: {
+    drafts: true,
+  },
+  access: {
+    read: ({ req }) => {
+      if (req.user) {
+        return true;
+      }
+
+      return {
+        _status: {
+          equals: 'published',
+        },
+      };
+    },
   },
   fields: [
     {
@@ -48,6 +66,14 @@ export const ProductCategories: CollectionConfig = {
       type: 'textarea',
     },
     {
+      name: 'imageUrl',
+      type: 'text',
+    },
+    {
+      name: 'imageAlt',
+      type: 'text',
+    },
+    {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
@@ -57,10 +83,16 @@ export const ProductCategories: CollectionConfig = {
       type: 'checkbox',
     },
     {
+      name: 'sortOrder',
+      type: 'number',
+      defaultValue: 0,
+    },
+    {
       name: 'products',
       type: 'relationship',
       relationTo: 'products',
       hasMany: true,
     },
+    buildSiteVisibilityField(['mardu-space']),
   ],
 };

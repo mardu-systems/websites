@@ -320,6 +320,10 @@ const payloadSharedConfig = {
           return doc.heroImage.id;
         }
 
+        if (typeof doc?.image === 'object' && doc.image && 'id' in doc.image) {
+          return doc.image.id;
+        }
+
         if (typeof doc?.logo === 'object' && doc.logo && 'id' in doc.logo) {
           return doc.logo.id;
         }
@@ -337,6 +341,10 @@ const payloadSharedConfig = {
 
         if (typeof doc?.title === 'string') {
           return doc.title;
+        }
+
+        if (typeof doc?.name === 'string') {
+          return doc.name;
         }
 
         return '';
@@ -362,6 +370,22 @@ const payloadSharedConfig = {
           doc.slug.length > 0
         ) {
           return `${baseURL}/integrations/${doc.slug}`;
+        }
+
+        if (
+          typeof doc?.heroTitle === 'string' &&
+          typeof doc?.slug === 'string' &&
+          doc.slug.length > 0
+        ) {
+          return `${baseURL}/solutions/${doc.slug}`;
+        }
+
+        if (
+          typeof doc?.availability === 'string' &&
+          typeof doc?.slug === 'string' &&
+          doc.slug.length > 0
+        ) {
+          return `${baseURL}/products/${doc.slug}`;
         }
 
         if (typeof doc?.slug === 'string' && doc.slug.length > 0) {

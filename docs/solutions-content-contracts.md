@@ -5,12 +5,13 @@ Diese Notiz dokumentiert den öffentlichen Daten- und UI-Vertrag für Branchen- 
 ## Rollenverteilung
 
 - `@mardu/content-core` definiert die renderfähigen DTOs.
+- `@mardu/content-core` kapselt ebenfalls die Payload-Read-Layer und Mapper fuer Runtime-Consumer.
 - `@mardu/solutions-ui` rendert ausschließlich UI.
 - `apps/mardu-space` bleibt Owner von:
   - Routen
   - Metadaten
-  - app-nahen Seed-Daten
   - Linkzielen und CTA-Zielen
+- app-nahe Seed-Daten dürfen als Importquelle bestehen bleiben, sind aber nicht mehr die primäre Runtime-Quelle
 
 ## Öffentliche DTOs
 
@@ -88,7 +89,7 @@ Wichtige Regel:
 
 ## V1-Umfang
 
-- Seed-Daten liegen app-nah in `apps/mardu-space/data/solutions.ts`.
-- Keine Payload-Anbindung in V1.
-- Keine Filter, keine Taxonomie-UI und keine Detail-Unterrouten.
-- Fokus liegt auf branchenspezifischer Einordnung mit Text und Bild.
+- Seed-Daten liegen weiterhin app-nah in `apps/mardu-space/data/solutions.ts`, dienen aber primär als Importquelle.
+- Runtime-Ausspielung erfolgt über Payload in `apps/platform` und den Read-Layer in `@mardu/content-core`.
+- Keine Filter und keine zusätzliche Taxonomie-UI.
+- Fokus liegt weiterhin auf branchenspezifischer Einordnung mit Text und Bild.

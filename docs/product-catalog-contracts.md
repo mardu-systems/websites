@@ -30,9 +30,10 @@ Dieses Dokument beschreibt den öffentlichen Vertrag für den wiederverwendbaren
 - bleibt Eigentümer von:
   - Routing
   - Metadata
-  - Seed-Daten
   - Anfragefluss
   - Seitenkomposition
+- konsumiert renderfähige Payload-Daten über `@mardu/content-core`
+- kann app-nahe Seed-Daten weiterhin als Importquelle halten, aber nicht mehr als primäre Runtime-Quelle
 
 ## Öffentliche DTOs
 

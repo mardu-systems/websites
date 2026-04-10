@@ -89,6 +89,10 @@ export const Solutions: CollectionConfig = {
       },
     },
     {
+      name: 'badge',
+      type: 'text',
+    },
+    {
       name: 'tagline',
       type: 'text',
     },
@@ -100,8 +104,11 @@ export const Solutions: CollectionConfig = {
       name: 'themeTone',
       type: 'select',
       options: [
-        { label: 'Light', value: 'light' },
-        { label: 'Dark', value: 'dark' },
+        { label: 'Forest', value: 'forest' },
+        { label: 'Sand', value: 'sand' },
+        { label: 'Mist', value: 'mist' },
+        { label: 'Clay', value: 'clay' },
+        { label: 'Ink', value: 'ink' },
       ],
     },
     {
@@ -129,14 +136,50 @@ export const Solutions: CollectionConfig = {
       type: 'text',
     },
     {
+      name: 'imageUrl',
+      type: 'text',
+    },
+    {
+      name: 'imageAlt',
+      type: 'text',
+    },
+    {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
     },
     {
+      name: 'heroImageUrl',
+      type: 'text',
+    },
+    {
+      name: 'heroImageAlt',
+      type: 'text',
+    },
+    {
       name: 'heroImage',
       type: 'upload',
       relationTo: 'media',
+    },
+    {
+      name: 'detailMarkdown',
+      type: 'textarea',
+    },
+    {
+      name: 'features',
+      type: 'array',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+          required: true,
+        },
+      ],
     },
     {
       name: 'contentBlocks',
@@ -155,6 +198,14 @@ export const Solutions: CollectionConfig = {
           type: 'textarea',
         },
         {
+          name: 'imageUrl',
+          type: 'text',
+        },
+        {
+          name: 'imageAlt',
+          type: 'text',
+        },
+        {
           name: 'image',
           type: 'upload',
           relationTo: 'media',
@@ -169,7 +220,7 @@ export const Solutions: CollectionConfig = {
         },
       ],
     },
-    buildSiteVisibilityField(),
+    buildSiteVisibilityField(['mardu-space']),
     {
       name: 'publishedAt',
       type: 'date',

@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
+import type { SolutionDetailDto } from '@mardu/content-core';
 import { notFound } from 'next/navigation';
 import { SolutionDetailHero } from '@mardu/solutions-ui';
 import { DetailMarkdown } from '@/components/content/detail-markdown';
-import { getSolutionBySlug, getSolutionSlugs } from '@/data/solutions';
+import { getSolutionBySlug, getSolutionSlugs } from '@/lib/solutions';
 
-function buildSolutionDetailMarkdown(solution: NonNullable<ReturnType<typeof getSolutionBySlug>>) {
+function buildSolutionDetailMarkdown(solution: SolutionDetailDto) {
   if (solution.detailMarkdown) {
     return solution.detailMarkdown;
   }
@@ -19,7 +20,7 @@ function buildSolutionDetailMarkdown(solution: NonNullable<ReturnType<typeof get
 }
 
 export async function generateStaticParams() {
-  return getSolutionSlugs().map((slug) => ({ slug }));
+  return (await getSolutionSlugs()).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -28,7 +29,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const solution = getSolutionBySlug(slug);
+  const solution = await getSolutionBySlug(slug);
 
   if (!solution) {
     return {};
@@ -55,7 +56,7 @@ export default async function SolutionDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const solution = getSolutionBySlug(slug);
+  const solution = await getSolutionBySlug(slug);
 
   if (!solution) {
     notFound();

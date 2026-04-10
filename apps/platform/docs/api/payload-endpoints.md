@@ -55,6 +55,32 @@ Shared DTO- und Client-Logik:
 Erweiterte Integrations-Dokumentation:
 [docs/api/integrations-payload-integration.md](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/docs/api/integrations-payload-integration.md)
 
+## Solutions-Endpunkte
+
+1. `GET /api/solutions`
+2. `GET /api/solutions/:id`
+
+DTO-Vertrag fuer Solutions-Consumer:
+[packages/content-core/src/index.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/index.ts)
+
+Erweiterte Solutions-Dokumentation:
+[docs/api/solutions-payload-integration.md](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/docs/api/solutions-payload-integration.md)
+
+## Catalog-Endpunkte
+
+1. `GET /api/product-categories`
+2. `GET /api/product-technologies`
+3. `GET /api/product-carriers`
+4. `GET /api/product-variants`
+5. `GET /api/products`
+6. `GET /api/products/:id`
+
+DTO-Vertrag fuer Catalog-Consumer:
+[packages/content-core/src/index.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/index.ts)
+
+Erweiterte Catalog-Dokumentation:
+[docs/api/catalog-payload-integration.md](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/docs/api/catalog-payload-integration.md)
+
 ## Legal-Page-Endpunkte
 
 1. `GET /api/legal-pages`

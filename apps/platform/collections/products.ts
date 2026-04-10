@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload';
+import { buildSiteVisibilityField } from '@mardu/content-core';
 
 const formatSlug = (value: string): string =>
   value
@@ -12,6 +13,23 @@ export const Products: CollectionConfig = {
   slug: 'products',
   admin: {
     useAsTitle: 'name',
+    defaultColumns: ['name', 'availability', 'featured', 'sortOrder', 'updatedAt'],
+  },
+  versions: {
+    drafts: true,
+  },
+  access: {
+    read: ({ req }) => {
+      if (req.user) {
+        return true;
+      }
+
+      return {
+        _status: {
+          equals: 'published',
+        },
+      };
+    },
   },
   fields: [
     {
@@ -40,6 +58,16 @@ export const Products: CollectionConfig = {
       },
     },
     {
+      name: 'summary',
+      type: 'textarea',
+      required: true,
+    },
+    {
+      name: 'tagline',
+      type: 'text',
+      required: true,
+    },
+    {
       name: 'badge',
       type: 'text',
     },
@@ -50,6 +78,61 @@ export const Products: CollectionConfig = {
     {
       name: 'description',
       type: 'textarea',
+    },
+    {
+      name: 'heroDescription',
+      type: 'textarea',
+      required: true,
+    },
+    {
+      name: 'overview',
+      type: 'textarea',
+      required: true,
+    },
+    {
+      name: 'detailMarkdown',
+      type: 'textarea',
+    },
+    {
+      name: 'breadcrumbLabel',
+      type: 'text',
+    },
+    {
+      name: 'priceFromLabel',
+      type: 'text',
+    },
+    {
+      name: 'availability',
+      type: 'select',
+      required: true,
+      defaultValue: 'available',
+      options: [
+        {
+          label: 'Available',
+          value: 'available',
+        },
+        {
+          label: 'Lead Time',
+          value: 'lead-time',
+        },
+        {
+          label: 'Project',
+          value: 'project',
+        },
+      ],
+    },
+    {
+      name: 'availabilityLabel',
+      type: 'text',
+      required: true,
+    },
+    {
+      name: 'imageUrl',
+      type: 'text',
+    },
+    {
+      name: 'imageAlt',
+      type: 'text',
     },
     {
       name: 'image',
@@ -71,12 +154,16 @@ export const Products: CollectionConfig = {
       type: 'relationship',
       relationTo: 'product-categories',
       hasMany: true,
+      required: true,
+      minRows: 1,
     },
     {
       name: 'technologies',
       type: 'relationship',
       relationTo: 'product-technologies',
       hasMany: true,
+      required: true,
+      minRows: 1,
     },
     {
       name: 'carriers',
@@ -85,24 +172,94 @@ export const Products: CollectionConfig = {
       hasMany: true,
     },
     {
+      name: 'technologiesHeading',
+      type: 'text',
+    },
+    {
+      name: 'technologiesIntro',
+      type: 'textarea',
+    },
+    {
+      name: 'carriersHeading',
+      type: 'text',
+    },
+    {
+      name: 'carriersIntro',
+      type: 'textarea',
+    },
+    {
       name: 'featureGroups',
       type: 'array',
       fields: [
         {
-          name: 'groupName',
+          name: 'title',
           type: 'text',
+          required: true,
         },
         {
-          name: 'features',
+          name: 'items',
           type: 'array',
           fields: [
             {
-              name: 'feature',
+              name: 'item',
               type: 'text',
+              required: true,
             },
           ],
         },
       ],
     },
+    {
+      name: 'specGroups',
+      type: 'array',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'specs',
+          type: 'array',
+          fields: [
+            {
+              name: 'label',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'value',
+              type: 'text',
+              required: true,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'relatedProducts',
+      type: 'relationship',
+      relationTo: 'products',
+      hasMany: true,
+    },
+    {
+      name: 'primaryCtaLabel',
+      type: 'text',
+    },
+    {
+      name: 'secondaryCtaLabel',
+      type: 'text',
+    },
+    {
+      name: 'featured',
+      type: 'checkbox',
+      defaultValue: false,
+    },
+    {
+      name: 'sortOrder',
+      type: 'number',
+      defaultValue: 0,
+    },
+    buildSiteVisibilityField(['mardu-space']),
   ],
 };
