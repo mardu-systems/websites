@@ -2357,7 +2357,7 @@
         },
         "status": {
           "name": "status",
-          "type": "enum_roadmap_items_status",
+          "type": "enum_roadmap_items_roadmap_status",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": false,
@@ -2629,7 +2629,7 @@
         },
         "version_status": {
           "name": "version_status",
-          "type": "enum__roadmap_items_v_version_status",
+          "type": "enum__roadmap_items_v_version_roadmap_status",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": false,
@@ -6696,6 +6696,16 @@
         "platform"
       ]
     },
+    "public.enum_roadmap_items_roadmap_status": {
+      "name": "enum_roadmap_items_roadmap_status",
+      "schema": "public",
+      "values": [
+        "planned",
+        "in-progress",
+        "beta",
+        "done"
+      ]
+    },
     "public.enum_roadmap_items_status": {
       "name": "enum_roadmap_items_status",
       "schema": "public",
@@ -6721,6 +6731,16 @@
         "mardu-de",
         "mardu-space",
         "platform"
+      ]
+    },
+    "public.enum__roadmap_items_v_version_roadmap_status": {
+      "name": "enum__roadmap_items_v_version_roadmap_status",
+      "schema": "public",
+      "values": [
+        "planned",
+        "in-progress",
+        "beta",
+        "done"
       ]
     },
     "public.enum__roadmap_items_v_version_status": {

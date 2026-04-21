@@ -4,9 +4,11 @@ import type { MigrateDownArgs, MigrateUpArgs } from '@payloadcms/db-postgres'
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
    CREATE TYPE "public"."enum_roadmap_items_sites" AS ENUM('mardu-de', 'mardu-space', 'platform');
+  CREATE TYPE "public"."enum_roadmap_items_roadmap_status" AS ENUM('planned', 'in-progress', 'beta', 'done');
   CREATE TYPE "public"."enum_roadmap_items_status" AS ENUM('draft', 'published');
   CREATE TYPE "public"."enum_roadmap_items_category" AS ENUM('software', 'hardware', 'platform', 'integrations');
   CREATE TYPE "public"."enum__roadmap_items_v_version_sites" AS ENUM('mardu-de', 'mardu-space', 'platform');
+  CREATE TYPE "public"."enum__roadmap_items_v_version_roadmap_status" AS ENUM('planned', 'in-progress', 'beta', 'done');
   CREATE TYPE "public"."enum__roadmap_items_v_version_status" AS ENUM('draft', 'published');
   CREATE TYPE "public"."enum__roadmap_items_v_version_category" AS ENUM('software', 'hardware', 'platform', 'integrations');
   CREATE TABLE "roadmap_items_sites" (
@@ -24,7 +26,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"phase_label" varchar,
   	"time_label" varchar,
   	"sort_order" numeric DEFAULT 0,
-  	"status" "enum_roadmap_items_status" DEFAULT 'planned',
+  	"status" "enum_roadmap_items_roadmap_status" DEFAULT 'planned',
   	"category" "enum_roadmap_items_category" DEFAULT 'software',
   	"body_markdown" varchar,
   	"featured" boolean DEFAULT false,
@@ -49,7 +51,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"version_phase_label" varchar,
   	"version_time_label" varchar,
   	"version_sort_order" numeric DEFAULT 0,
-  	"version_status" "enum__roadmap_items_v_version_status" DEFAULT 'planned',
+  	"version_status" "enum__roadmap_items_v_version_roadmap_status" DEFAULT 'planned',
   	"version_category" "enum__roadmap_items_v_version_category" DEFAULT 'software',
   	"version_body_markdown" varchar,
   	"version_featured" boolean DEFAULT false,
@@ -162,9 +164,11 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   ALTER TABLE "payload_mcp_api_keys" DROP COLUMN "preorder_requests_update";
   ALTER TABLE "payload_locked_documents_rels" DROP COLUMN "roadmap_items_id";
   DROP TYPE "public"."enum_roadmap_items_sites";
+  DROP TYPE "public"."enum_roadmap_items_roadmap_status";
   DROP TYPE "public"."enum_roadmap_items_status";
   DROP TYPE "public"."enum_roadmap_items_category";
   DROP TYPE "public"."enum__roadmap_items_v_version_sites";
+  DROP TYPE "public"."enum__roadmap_items_v_version_roadmap_status";
   DROP TYPE "public"."enum__roadmap_items_v_version_status";
   DROP TYPE "public"."enum__roadmap_items_v_version_category";`)
 }
