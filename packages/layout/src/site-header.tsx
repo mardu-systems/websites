@@ -363,17 +363,24 @@ export default function SiteHeader({
             </div>
           </Link>
 
-          <div className="hidden items-center gap-7 md:flex">
+          <div className="hidden items-center gap-4 xl:flex 2xl:gap-7">
             {navItems.map((item) => (
-              <HeaderNavLink key={`${item.label}:${item.href}`} item={item} />
+              <HeaderNavLink
+                key={`${item.label}:${item.href}`}
+                item={item}
+                className="text-xs 2xl:text-sm"
+              />
             ))}
-            <HeaderCtaButton cta={cta} className="mt-0 w-auto sm:ml-0 sm:mt-0" />
+            <HeaderCtaButton
+              cta={cta}
+              className="mt-0 w-auto px-4 text-xs sm:ml-0 sm:mt-0 2xl:px-6 2xl:text-sm"
+            />
           </div>
 
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden"
+            className="xl:hidden"
             onClick={() => setMobileOpen((value) => !value)}
             aria-label={mobileOpen ? menuCloseLabel : menuOpenLabel}
             aria-expanded={mobileOpen}
@@ -384,7 +391,7 @@ export default function SiteHeader({
         </nav>
 
         {mobileOpen ? (
-          <div id="mobile-nav" className="border-t border-black/8 bg-background/95 md:hidden">
+          <div id="mobile-nav" className="border-t border-black/8 bg-background/95 xl:hidden">
             <div className="mardu-container flex flex-col gap-5 py-5">
               {navItems.map((item) => (
                 <HeaderNavLink

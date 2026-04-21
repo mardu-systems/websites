@@ -503,22 +503,37 @@ export interface Solution {
   id: number;
   title: string;
   slug: string;
+  badge?: string | null;
   tagline?: string | null;
   summary?: string | null;
-  themeTone?: ('light' | 'dark') | null;
+  themeTone?: ('forest' | 'sand' | 'mist' | 'clay' | 'ink') | null;
   heroTitle?: string | null;
   heroIntro?: string | null;
   problemTitle?: string | null;
   problemBody?: string | null;
   ctaLabel?: string | null;
   ctaHref?: string | null;
+  imageUrl?: string | null;
+  imageAlt?: string | null;
   image?: (number | null) | Media;
+  heroImageUrl?: string | null;
+  heroImageAlt?: string | null;
   heroImage?: (number | null) | Media;
+  detailMarkdown?: string | null;
+  features?:
+    | {
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
   contentBlocks?:
     | {
         eyebrow?: string | null;
         title?: string | null;
         body?: string | null;
+        imageUrl?: string | null;
+        imageAlt?: string | null;
         image?: (number | null) | Media;
         imageSide?: ('left' | 'right') | null;
         id?: string | null;
@@ -552,11 +567,19 @@ export interface ProductCategory {
   slug: string;
   eyebrow?: string | null;
   description?: string | null;
+  imageUrl?: string | null;
+  imageAlt?: string | null;
   image?: (number | null) | Media;
   featured?: boolean | null;
+  sortOrder?: number | null;
   products?: (number | Product)[] | null;
+  /**
+   * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
+   */
+  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -566,27 +589,64 @@ export interface Product {
   id: number;
   name: string;
   slug: string;
+  summary: string;
+  tagline: string;
   badge?: string | null;
   eyebrow?: string | null;
   description?: string | null;
+  heroDescription: string;
+  overview: string;
+  detailMarkdown?: string | null;
+  breadcrumbLabel?: string | null;
+  priceFromLabel?: string | null;
+  availability: 'available' | 'lead-time' | 'project';
+  availabilityLabel: string;
+  imageUrl?: string | null;
+  imageAlt?: string | null;
   image?: (number | null) | Media;
   priceFrom?: number | null;
   variants?: (number | ProductVariant)[] | null;
-  categories?: (number | ProductCategory)[] | null;
-  technologies?: (number | ProductTechnology)[] | null;
+  categories: (number | ProductCategory)[];
+  technologies: (number | ProductTechnology)[];
   carriers?: (number | ProductCarrier)[] | null;
+  technologiesHeading?: string | null;
+  technologiesIntro?: string | null;
+  carriersHeading?: string | null;
+  carriersIntro?: string | null;
   featureGroups?:
     | {
-        groupName?: string | null;
-        features?:
+        title: string;
+        items?:
           | {
-              feature?: string | null;
+              item: string;
               id?: string | null;
             }[]
           | null;
         id?: string | null;
       }[]
     | null;
+  specGroups?:
+    | {
+        title: string;
+        specs?:
+          | {
+              label: string;
+              value: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  relatedProducts?: (number | Product)[] | null;
+  primaryCtaLabel?: string | null;
+  secondaryCtaLabel?: string | null;
+  featured?: boolean | null;
+  sortOrder?: number | null;
+  /**
+   * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
+   */
+  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -597,6 +657,7 @@ export interface Product {
   };
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -604,12 +665,30 @@ export interface Product {
  */
 export interface ProductVariant {
   id: number;
-  name: string;
-  sku: string;
-  price?: number | null;
+  label: string;
+  slug: string;
+  summary: string;
+  priceFromLabel?: string | null;
+  availabilityLabel?: string | null;
+  recommendation?: string | null;
+  attributes?:
+    | {
+        label: string;
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
   image?: (number | null) | Media;
+  imageUrl?: string | null;
+  imageAlt?: string | null;
+  sortOrder?: number | null;
+  /**
+   * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
+   */
+  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -621,9 +700,17 @@ export interface ProductTechnology {
   slug: string;
   description?: string | null;
   visualLabel?: string | null;
+  imageUrl?: string | null;
+  imageAlt?: string | null;
   image?: (number | null) | Media;
+  sortOrder?: number | null;
+  /**
+   * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
+   */
+  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -636,8 +723,17 @@ export interface ProductCarrier {
   description?: string | null;
   visualLabel?: string | null;
   technologyLabel?: string | null;
+  imageUrl?: string | null;
+  imageAlt?: string | null;
+  image?: (number | null) | Media;
+  sortOrder?: number | null;
+  /**
+   * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
+   */
+  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * API keys control which collections, resources, tools, and prompts MCP clients can access
@@ -990,10 +1086,6 @@ export interface PayloadKv {
 export interface PayloadLockedDocument {
   id: number;
   document?:
-    | ({
-        relationTo: 'users';
-        value: number | User;
-      } | null)
     | ({
         relationTo: 'media';
         value: number | Media;
@@ -1384,6 +1476,7 @@ export interface PreorderRequestsSelect<T extends boolean = true> {
 export interface SolutionsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  badge?: T;
   tagline?: T;
   summary?: T;
   themeTone?: T;
@@ -1393,14 +1486,28 @@ export interface SolutionsSelect<T extends boolean = true> {
   problemBody?: T;
   ctaLabel?: T;
   ctaHref?: T;
+  imageUrl?: T;
+  imageAlt?: T;
   image?: T;
+  heroImageUrl?: T;
+  heroImageAlt?: T;
   heroImage?: T;
+  detailMarkdown?: T;
+  features?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
   contentBlocks?:
     | T
     | {
         eyebrow?: T;
         title?: T;
         body?: T;
+        imageUrl?: T;
+        imageAlt?: T;
         image?: T;
         imageSide?: T;
         id?: T;
@@ -1428,11 +1535,16 @@ export interface ProductCategoriesSelect<T extends boolean = true> {
   slug?: T;
   eyebrow?: T;
   description?: T;
+  imageUrl?: T;
+  imageAlt?: T;
   image?: T;
   featured?: T;
+  sortOrder?: T;
   products?: T;
+  sites?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1443,9 +1555,14 @@ export interface ProductTechnologiesSelect<T extends boolean = true> {
   slug?: T;
   description?: T;
   visualLabel?: T;
+  imageUrl?: T;
+  imageAlt?: T;
   image?: T;
+  sortOrder?: T;
+  sites?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1457,8 +1574,14 @@ export interface ProductCarriersSelect<T extends boolean = true> {
   description?: T;
   visualLabel?: T;
   technologyLabel?: T;
+  imageUrl?: T;
+  imageAlt?: T;
+  image?: T;
+  sortOrder?: T;
+  sites?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1467,27 +1590,61 @@ export interface ProductCarriersSelect<T extends boolean = true> {
 export interface ProductsSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
+  summary?: T;
+  tagline?: T;
   badge?: T;
   eyebrow?: T;
   description?: T;
+  heroDescription?: T;
+  overview?: T;
+  detailMarkdown?: T;
+  breadcrumbLabel?: T;
+  priceFromLabel?: T;
+  availability?: T;
+  availabilityLabel?: T;
+  imageUrl?: T;
+  imageAlt?: T;
   image?: T;
   priceFrom?: T;
   variants?: T;
   categories?: T;
   technologies?: T;
   carriers?: T;
+  technologiesHeading?: T;
+  technologiesIntro?: T;
+  carriersHeading?: T;
+  carriersIntro?: T;
   featureGroups?:
     | T
     | {
-        groupName?: T;
-        features?:
+        title?: T;
+        items?:
           | T
           | {
-              feature?: T;
+              item?: T;
               id?: T;
             };
         id?: T;
       };
+  specGroups?:
+    | T
+    | {
+        title?: T;
+        specs?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  relatedProducts?: T;
+  primaryCtaLabel?: T;
+  secondaryCtaLabel?: T;
+  featured?: T;
+  sortOrder?: T;
+  sites?: T;
   meta?:
     | T
     | {
@@ -1497,18 +1654,34 @@ export interface ProductsSelect<T extends boolean = true> {
       };
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "product-variants_select".
  */
 export interface ProductVariantsSelect<T extends boolean = true> {
-  name?: T;
-  sku?: T;
-  price?: T;
+  label?: T;
+  slug?: T;
+  summary?: T;
+  priceFromLabel?: T;
+  availabilityLabel?: T;
+  recommendation?: T;
+  attributes?:
+    | T
+    | {
+        label?: T;
+        value?: T;
+        id?: T;
+      };
   image?: T;
+  imageUrl?: T;
+  imageAlt?: T;
+  sortOrder?: T;
+  sites?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

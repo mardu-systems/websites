@@ -82,6 +82,7 @@ export const RoadmapItems: CollectionConfig = {
     {
       name: 'status',
       type: 'select',
+      enumName: 'enum_roadmap_items_roadmap_status',
       required: true,
       defaultValue: 'planned',
       options: [

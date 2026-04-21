@@ -160,6 +160,50 @@ Import-Map Single Source of Truth:
 
 - [app/(payload)/admin/importMap.js](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/(payload)/admin/importMap.js)
 
+## Admin-Passwort-Reset
+
+Wenn ein Payload-Admin-Passwort vergessen wurde, darf das Passwort nicht direkt per SQL ersetzt werden. Payload verwaltet Passwort-Hashing und Salt intern.
+
+Kontrollierter Reset:
+
+```bash
+export DATABASE_URI="postgres://..."
+export PAYLOAD_SECRET="..."
+export ADMIN_EMAIL="admin@example.com"
+export ADMIN_PASSWORD="neues-langes-passwort"
+export ADMIN_PASSWORD_RESET_CONFIRM="true"
+bun --cwd apps/platform run admin:reset-password
+```
+
+Wenn Vercel-Production-Env lokal gezogen wurde, zuerst die Ziel-Env laden und dann resetten:
+
+```bash
+cd apps/platform
+vercel env pull .env.production.local --environment=production --yes
+set -a
+source .env.production.local
+set +a
+export ADMIN_EMAIL="admin@example.com"
+export ADMIN_PASSWORD="neues-langes-passwort"
+export ADMIN_PASSWORD_RESET_CONFIRM="true"
+bun run admin:reset-password
+```
+
+Optional kann ein fehlender Admin nur explizit erstellt werden:
+
+```bash
+export ADMIN_CREATE_IF_MISSING="true"
+```
+
+Sicherheitsregeln:
+
+- `ADMIN_PASSWORD_RESET_CONFIRM=true` ist Pflicht.
+- Das Script loggt das Passwort nie.
+- `ADMIN_PASSWORD` nur temporär in einer sicheren Shell setzen.
+- Kein automatischer Reset in `onInit` oder während `next build`.
+- Nach erfolgreichem Reset temporäre Env-Werte wieder entfernen.
+- Auth-User verwenden `lockDocuments: false`, damit Wartungs-Resets keine Admin-Document-Locks berühren.
+
 ## Access-Regeln
 
 Beispiel `blog-posts`:
@@ -182,9 +226,9 @@ Empfohlener Ablauf:
    - `PAYLOAD_SECRET=...`
    - `PAYLOAD_PUBLIC_SERVER_URL=http://localhost:3000`
 3. Migrationen anwenden:
-   - `bun run payload migrate`
+   - `bun run payload:migrate`
 4. Status pruefen:
-   - `bun run payload migrate:status`
+   - `bun run payload:migrate:status`
 
 Wichtig:
 
