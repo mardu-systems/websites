@@ -60,7 +60,7 @@ export default async function RoadmapPage() {
         ) : (
           <div className="pt-8 md:pt-10">
             <div className="border border-black/10 bg-card px-6 py-8 text-sm leading-relaxed text-foreground/72 md:px-8 md:py-10 md:text-base">
-              Die öffentliche Roadmap wird gerade redaktionell in den neuen Payload-Workflow
+              Die öffentliche Roadmap wird gerade redaktionell in den neuen Workflow
               überführt. Inhalte folgen in Kürze.
             </div>
           </div>
