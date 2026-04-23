@@ -46,8 +46,8 @@ export interface EditorialLinkPanelsSectionProps {
 }
 
 const densityConfig: Record<EditorialPatternDensity, { rows: number; cols: number; gap: string }> = {
-  compact: { rows: 9, cols: 10, gap: 'gap-2.5' },
-  default: { rows: 11, cols: 13, gap: 'gap-2' },
+  compact: { rows: 10, cols: 11, gap: 'gap-2.5 md:gap-3 xl:gap-2.5' },
+  default: { rows: 12, cols: 15, gap: 'gap-2.5 md:gap-3 xl:gap-2' },
   airy: { rows: 8, cols: 8, gap: 'gap-3.5' },
 };
 
@@ -71,15 +71,17 @@ const toneClasses: Record<EditorialPatternTone, string[]> = {
 
 const anchorClasses: Record<EditorialPatternAnchor, string> = {
   'top-left': 'left-5 top-5 items-start justify-start md:left-7 md:top-7',
-  'top-right': 'right-5 top-5 items-end justify-start md:right-7 md:top-7',
-  'bottom-left': 'bottom-5 left-5 items-start justify-end md:bottom-7 md:left-7',
+  'top-right':
+    'right-5 top-5 items-end justify-start md:right-12 md:top-1/2 md:-translate-y-1/2 xl:right-7 xl:top-7 xl:translate-y-0',
+  'bottom-left':
+    'bottom-5 left-5 items-start justify-end md:bottom-1/2 md:left-12 md:translate-y-1/2 xl:bottom-7 xl:left-7 xl:translate-y-0',
   'bottom-right': 'bottom-8 right-6 items-end justify-end md:bottom-10 md:right-9',
 };
 
 const frameClasses: Record<EditorialPatternAnchor, string> = {
   'top-left': 'h-[42%] w-[52%]',
-  'top-right': 'h-[42%] w-[52%]',
-  'bottom-left': 'h-[34%] w-[38%]',
+  'top-right': 'h-[44%] w-[56%] md:h-[62%] md:w-[52%] xl:h-[42%] xl:w-[52%]',
+  'bottom-left': 'h-[38%] w-[46%] md:h-[58%] md:w-[48%] xl:h-[34%] xl:w-[38%]',
   'bottom-right': 'h-[34%] w-[34%] md:h-[36%] md:w-[32%]',
 };
 
@@ -228,6 +230,10 @@ function EditorialLinkPanel({
 }) {
   const shouldReduceMotion = useReducedMotion();
   const align = item.align ?? 'left';
+  const arrangedPattern: EditorialPatternConfig = {
+    ...item.pattern,
+    anchor: align === 'right' ? 'bottom-left' : 'top-right',
+  };
 
   return (
     <motion.article
@@ -241,11 +247,11 @@ function EditorialLinkPanel({
         'after:absolute after:inset-0 after:bg-[linear-gradient(180deg,rgba(255,255,255,0.02),transparent_32%,rgba(0,0,0,0.08))] after:content-[""]',
       )}
     >
-      <EditorialPatternField pattern={item.pattern} />
+      <EditorialPatternField pattern={arrangedPattern} />
 
       <div
         className={cn(
-          'relative z-10 mt-auto flex max-w-[28rem] flex-col gap-4',
+          'relative z-10 mt-auto flex max-w-[28rem] flex-col gap-4 md:my-auto md:max-w-[24rem] xl:mt-auto xl:mb-0 xl:max-w-[28rem]',
           contentAlignmentClasses[align],
         )}
       >
@@ -255,7 +261,7 @@ function EditorialLinkPanel({
         <h3 className="max-w-[11ch] text-[clamp(2rem,4vw,3.2rem)] leading-[0.96] tracking-[-0.045em] text-white">
           {item.title}
         </h3>
-        <div className="max-w-[34ch] text-[15px] leading-relaxed text-white/74 md:text-base">
+        <div className="max-w-[34ch] text-[15px] leading-relaxed text-white/74 md:max-w-[30ch] md:text-base xl:max-w-[34ch]">
           {typeof item.description === 'string' ? <p>{item.description}</p> : item.description}
         </div>
         <EditorialPanelAction href={item.href} label={item.ctaLabel} ariaLabel={item.ariaLabel} />

@@ -170,7 +170,7 @@ export default function EditorialPanelsSection({
                       className={cn(
                         "relative w-full",
                         index === 0 && "max-w-[18rem] lg:max-w-[28rem]",
-                        index === 1 && "max-w-[9.5rem] lg:max-w-[14rem]",
+                        index === 1 && "max-w-[18rem] lg:max-w-[28rem]",
                         index === 2 && "max-w-[13rem] lg:max-w-[19rem]",
                       )}
                     >
