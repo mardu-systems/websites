@@ -44,13 +44,13 @@ const DEFAULT_PAGE_COPY: Record<
     title: 'Datenschutzerklärung',
     pageKind: 'privacy',
     summary: 'Informationen zum Datenschutz.',
-    updatedLabel: '14.11.2025',
+    updatedLabel: '30.04.2026',
   },
   publisher: {
     title: 'Impressum',
     pageKind: 'publisher',
     summary: 'Angaben gemäß § 5 TMG.',
-    updatedLabel: '14.11.2025',
+    updatedLabel: '30.04.2026',
   },
 };
 
