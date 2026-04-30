@@ -26,15 +26,15 @@ import {
   Halftone3DIllustration,
   type Halftone3DSettings,
   type Halftone3DShapeKey,
-} from '@mardu/ui/components/halftone-3d-illustration';
+} from "@mardu/ui/components/halftone-3d-illustration";
 
 export function Example() {
   return (
     <Halftone3DIllustration
       shapeKey="sphere"
       settings={{
-        halftone: { scale: 18, dashColor: '#0f766e' },
-        material: { color: '#e8e2d8' },
+        halftone: { scale: 18, dashColor: "#0f766e" },
+        material: { color: "#e8e2d8" },
       }}
     />
   );
@@ -64,6 +64,14 @@ Props:
 - `initialPose?: Partial<Halftone3DPose>` wird beim Mount als Startpose verwendet.
 - `previewDistance?: number` steuert die Kamera-Distanz und wird live übernommen.
 - `className`, `style` und `onError` steuern Container und Fehlerbehandlung.
+
+Interne Struktur:
+
+- `components/halftone-3d-illustration.tsx` ist nur der öffentliche React-Wrapper.
+- `components/halftone-3d/types.ts` enthält die dokumentierten DTOs.
+- `components/halftone-3d/presets.ts` enthält Defaults und Resolver.
+- `components/halftone-3d/builtin-geometries.ts` enthält die Builtin-Shape-Presets und Geometrie-Factories.
+- `components/halftone-3d/renderer.ts` kapselt Three.js, Shader, Ressourcenverwaltung und Live-Updates.
 
 ## Contract
 
