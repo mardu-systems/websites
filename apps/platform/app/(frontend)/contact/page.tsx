@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import { ContactPageSection } from '@mardu/sections';
 import ContactForm from '@/components/forms/contact';
+import { getSiteConfig } from '@mardu/site-config';
+
+const siteConfig = getSiteConfig('platform');
 
 export const metadata: Metadata = {
   title: 'Kontakt',
@@ -52,8 +55,13 @@ export default function ContactPage() {
             </p>
             <p>
               E-Mail:{' '}
-              <a href="mailto:info@mardu.de" className="underline underline-offset-3">
-                info@mardu.de
+              <a href={`mailto:${siteConfig.supportEmail}`} className="underline underline-offset-3">
+                {siteConfig.supportEmail}
+              </a>
+              <br />
+              Telefon:{' '}
+              <a href={siteConfig.contactPhoneHref} className="underline underline-offset-3">
+                {siteConfig.contactPhone}
               </a>
             </p>
           </>

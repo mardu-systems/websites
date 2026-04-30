@@ -71,6 +71,7 @@ export function renderEmailLayout(site: SiteKey, title: string, content: string)
     <footer style="margin-top:32px;font-size:12px;color:#666;text-align:center;line-height:1.4;">
       <p>${siteConfig.emailBrandName}</p>
       <p>E-Mail: <a href="mailto:${siteConfig.supportEmail}" style="color:#666;text-decoration:underline;">${siteConfig.supportEmail}</a></p>
+      <p>Telefon: <a href="${siteConfig.contactPhoneHref}" style="color:#666;text-decoration:underline;">${siteConfig.contactPhone}</a></p>
       <p>Du erhältst diese E-Mail, weil du uns kontaktiert oder dich angemeldet hast. Wenn du sie nicht erwartet hast, kannst du sie ignorieren oder uns kurz schreiben.</p>
     </footer>
   </main>

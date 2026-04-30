@@ -129,7 +129,7 @@ export interface SiteHeaderProps {
 /**
  * Supported icon keys for shared footer social links.
  */
-export type FooterSocialIcon = 'instagram' | 'linkedin' | 'github';
+export type FooterSocialIcon = 'instagram' | 'linkedin' | 'github' | 'mail' | 'phone';
 
 /**
  * Footer social link DTO. The icon key keeps the DTO serializable and easy to

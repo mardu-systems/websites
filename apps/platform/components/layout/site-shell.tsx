@@ -8,13 +8,18 @@ import { usePathname } from 'next/navigation';
 import SharedSiteShell from '@mardu/layout/site-shell';
 import type { FooterSocialLinkDto } from '@mardu/layout';
 
-const socialLinks: ReadonlyArray<FooterSocialLinkDto> = [
+const baseSocialLinks: ReadonlyArray<FooterSocialLinkDto> = [
   { href: 'https://www.instagram.com/mardu.de', label: 'Instagram', icon: 'instagram' },
   { href: 'https://www.linkedin.com/company/marduofficial', label: 'LinkedIn', icon: 'linkedin' },
   { href: 'https://github.com/mardu-systems', label: 'GitHub', icon: 'github' },
 ];
 export default function SiteShell({ children }: { children: React.ReactNode }) {
   const siteConfig = getSiteConfig('platform');
+  const socialLinks: ReadonlyArray<FooterSocialLinkDto> = [
+    ...baseSocialLinks,
+    { href: `mailto:${siteConfig.supportEmail}`, label: `E-Mail: ${siteConfig.supportEmail}`, icon: 'mail' },
+    { href: siteConfig.contactPhoneHref, label: `Telefon: ${siteConfig.contactPhone}`, icon: 'phone' },
+  ];
   const pathname = usePathname();
   const isPayloadAdminRoute = pathname?.startsWith('/admin');
 

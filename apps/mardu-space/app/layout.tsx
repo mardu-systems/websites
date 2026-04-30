@@ -94,6 +94,9 @@ const jsonLd = {
     name: siteConfig.appName,
     url: siteConfig.origin,
     logo: `${siteConfig.origin}/marduspace_logo_bg_white.svg`,
+    email: siteConfig.supportEmail,
+    telephone: siteConfig.contactPhone,
+    vatID: siteConfig.vatId,
   },
 };
 

@@ -6,8 +6,10 @@ import SiteShell from '@/components/layout/site-shell';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import localFont from 'next/font/local';
+import { getSiteConfig } from '@mardu/site-config';
 
-const SITE_URL = 'https://platform.mardu.de';
+const siteConfig = getSiteConfig('platform');
+const SITE_URL = siteConfig.origin;
 
 const geist = localFont({
   src: [
@@ -95,7 +97,9 @@ const jsonLd = {
       name: 'Mardu Platform',
       url: SITE_URL,
       logo: 'https://www.mardu.de/logos/Logo.svg',
-      email: 'info@mardu.de',
+      email: siteConfig.supportEmail,
+      telephone: siteConfig.contactPhone,
+      vatID: siteConfig.vatId,
       sameAs: ['https://www.linkedin.com/company/marduofficial'],
     },
     {
@@ -107,6 +111,8 @@ const jsonLd = {
         name: 'Mardu Platform',
         url: 'https://www.mardu.de',
         logo: 'https://www.mardu.de/logos/Logo.svg',
+        telephone: siteConfig.contactPhone,
+        vatID: siteConfig.vatId,
       },
     },
   ],

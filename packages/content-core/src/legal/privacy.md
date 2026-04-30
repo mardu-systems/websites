@@ -66,6 +66,7 @@ Alter Schlachthof 39 A1
 76131 Karlsruhe
 
 E-Mail: info@mardu.de
+Telefon: +49 721 25510624
 
 Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z. B. Namen, E-Mail-Adressen o. Ä.) entscheidet.
 

@@ -1,14 +1,13 @@
 import React from 'react';
 import SharedSiteShell from '@mardu/layout/site-shell';
-import type { HeaderNavItemDto } from '@mardu/layout/types';
-import type { FooterSocialLinkDto } from '@mardu/layout/types';
+import type { FooterSocialLinkDto, HeaderNavItemDto } from '@mardu/layout/types';
 import { defaultHeaderItems } from '@/data/default-header-items';
 import { defaultFooterNavLinks } from '@/data/default-footer-items';
 import { getSiteConfig } from '@mardu/site-config';
 import { isBlogEnabled, isIntegrationsEnabled } from '@mardu/site-config/feature-flags.server';
 import NewsletterButton from '@/components/utilities/newsletter-button';
 
-const socialLinks: ReadonlyArray<FooterSocialLinkDto> = [
+const baseSocialLinks: ReadonlyArray<FooterSocialLinkDto> = [
   { href: 'https://www.instagram.com/mardu.de', label: 'Instagram', icon: 'instagram' },
   { href: 'https://www.linkedin.com/company/marduofficial', label: 'LinkedIn', icon: 'linkedin' },
   { href: 'https://github.com/mardu-systems', label: 'GitHub', icon: 'github' },
@@ -16,6 +15,11 @@ const socialLinks: ReadonlyArray<FooterSocialLinkDto> = [
 
 export default async function SiteShell({ children }: { children: React.ReactNode }) {
   const siteConfig = getSiteConfig('mardu-de');
+  const socialLinks: ReadonlyArray<FooterSocialLinkDto> = [
+    ...baseSocialLinks,
+    { href: `mailto:${siteConfig.supportEmail}`, label: `E-Mail: ${siteConfig.supportEmail}`, icon: 'mail' },
+    { href: siteConfig.contactPhoneHref, label: `Telefon: ${siteConfig.contactPhone}`, icon: 'phone' },
+  ];
   const [blogEnabled, integrationsEnabled] = await Promise.all([
     isBlogEnabled('mardu-de'),
     isIntegrationsEnabled('mardu-de'),

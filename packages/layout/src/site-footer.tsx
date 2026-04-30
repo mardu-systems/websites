@@ -3,7 +3,7 @@
 import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUp, Github, Instagram, Linkedin } from 'lucide-react';
+import { ArrowUp, Github, Instagram, Linkedin, Mail, Phone } from 'lucide-react';
 import { Button } from '@mardu/ui/components/button';
 import { cn } from '@mardu/ui/lib/utils';
 import type {
@@ -21,10 +21,16 @@ const SOCIAL_ICONS: Record<FooterSocialIcon, React.ComponentType<{ className?: s
   instagram: Instagram,
   linkedin: Linkedin,
   github: Github,
+  mail: Mail,
+  phone: Phone,
 };
 
 function isExternalHref(href: string, external?: boolean) {
-  return external ?? /^https?:\/\//i.test(href);
+  return external ?? /^[a-z][a-z\d+.-]*:/i.test(href);
+}
+
+function opensInNewTab(href: string) {
+  return /^https?:\/\//i.test(href);
 }
 
 function FooterLink({
@@ -35,11 +41,13 @@ function FooterLink({
   className?: string;
 }) {
   if (isExternalHref(link.href, link.external)) {
+    const newTab = opensInNewTab(link.href);
+
     return (
       <a
         href={link.href}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={newTab ? '_blank' : undefined}
+        rel={newTab ? 'noopener noreferrer' : undefined}
         className={className}
       >
         {link.label}
@@ -62,6 +70,7 @@ function FooterSocialLink({
   theme: 'dark' | 'light';
 }) {
   const Icon = SOCIAL_ICONS[link.icon];
+  const newTab = opensInNewTab(link.href);
   const className =
     theme === 'dark'
       ? 'inline-flex size-10 items-center justify-center rounded-full border border-white/20 bg-white/6 text-white/90 transition-colors hover:bg-white hover:text-neutral-950'
@@ -71,8 +80,8 @@ function FooterSocialLink({
     return (
       <a
         href={link.href}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={newTab ? '_blank' : undefined}
+        rel={newTab ? 'noopener noreferrer' : undefined}
         className={className}
         aria-label={link.label}
         title={link.label}

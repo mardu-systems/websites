@@ -1,4 +1,8 @@
+import Link from 'next/link';
 import type { FaqItem } from '@mardu/sections';
+import { getSiteConfig } from '@mardu/site-config';
+
+const siteConfig = getSiteConfig('mardu-space');
 
 export const faqItems: FaqItem[] = [
     {
@@ -6,12 +10,12 @@ export const faqItems: FaqItem[] = [
         answer: (
             <>
                 Das hängt von eurer Einrichtung ab. Mit unserem{" "}
-                <a
+                <Link
                     href="/configurator"
                     className="text-primary hover:underline"
                 >
                     Konfigurator
-                </a>{" "}
+                </Link>{" "}
                 könnt ihr schnell und einfach berechnen, wie viele Geräte für euch sinnvoll sind.
             </>
         ),
@@ -26,10 +30,17 @@ export const faqItems: FaqItem[] = [
                 vergünstigten Zugriff auf das <strong>mardu.space</strong>-System erhaltet.
                 Meldet euch bei Interesse einfach unter{" "}
                 <a
-                    href="mailto:info@mardu.de"
+                    href={`mailto:${siteConfig.supportEmail}`}
                     className="text-primary hover:underline"
                 >
-                    info@mardu.de
+                    {siteConfig.supportEmail}
+                </a>
+                {" "}oder telefonisch unter{" "}
+                <a
+                    href={siteConfig.contactPhoneHref}
+                    className="text-primary hover:underline"
+                >
+                    {siteConfig.contactPhone}
                 </a>
                 .
             </>
@@ -54,10 +65,17 @@ export const faqItems: FaqItem[] = [
                 erst, sobald die Geräte offiziell in den Verkauf gehen.
                 Falls ihr vorab Interesse habt oder Fragen klären möchtet, schreibt uns gerne an{" "}
                 <a
-                    href="mailto:info@mardu.de"
+                    href={`mailto:${siteConfig.supportEmail}`}
                     className="text-primary hover:underline"
                 >
-                    info@mardu.de
+                    {siteConfig.supportEmail}
+                </a>
+                {" "}oder ruft uns unter{" "}
+                <a
+                    href={siteConfig.contactPhoneHref}
+                    className="text-primary hover:underline"
+                >
+                    {siteConfig.contactPhone}
                 </a>
                 .
             </>

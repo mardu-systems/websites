@@ -1,19 +1,23 @@
-## Angaben gemäß § 5 TMG
+### Angaben gemäß § 5 DDG
 
-**Mardu GmbH**
-
-Alter Schlachthof 39 A1
+**Mardu GmbH**  
+Alter Schlachthof 39 A1  
 76131 Karlsruhe  
 Deutschland
 
 Hinweis: Im Gebäudekomplex finden Sie uns unter **A1**.
 
-E-Mail: [info@mardu.de](mailto:info@mardu.de)
+E-Mail: [info@mardu.de](mailto:info@mardu.de)  
+Telefon: [+49 721 25510624](tel:+4972125510624)
 
-Registergericht: Amtsgericht Mannheim (Baden-Württemberg), HRB 757158
-
-Geschäftsführung:  
+Vertreten durch die Geschäftsführer:  
 Luca Schöneberg, Erik Frey
+
+Registergericht: Amtsgericht Mannheim  
+Registernummer: HRB 757158
+
+Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG:  
+DE461239481
 
 ---
 

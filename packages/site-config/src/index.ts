@@ -35,7 +35,22 @@ export type SiteConfig = {
   origin: string;
   apiOrigin: string;
   theme: string;
+  /**
+   * Public support inbox shown on contact surfaces and transactional email footers.
+   */
   supportEmail: string;
+  /**
+   * Public company phone number formatted for humans.
+   */
+  contactPhone: string;
+  /**
+   * Clickable tel URI for the public company phone number.
+   */
+  contactPhoneHref: string;
+  /**
+   * Public German Umsatzsteuer-Identifikationsnummer for structured data and legal pages.
+   */
+  vatId: string;
   newsletterSourceLabel: string;
   contactPath: string;
   newsletterSuccessPath: string;
@@ -58,6 +73,9 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
     apiOrigin: 'https://platform.mardu.de',
     theme: '@mardu/styles/theme-mardu-de.css',
     supportEmail: 'info@mardu.de',
+    contactPhone: '+49 721 25510624',
+    contactPhoneHref: 'tel:+4972125510624',
+    vatId: 'DE461239481',
     newsletterSourceLabel: 'mardu.de newsletter',
     contactPath: '/contact',
     newsletterSuccessPath: '/newsletter/anmeldung',
@@ -82,6 +100,9 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
     apiOrigin: 'https://platform.mardu.de',
     theme: '@mardu/styles/theme-mardu-space.css',
     supportEmail: 'info@mardu.space',
+    contactPhone: '+49 721 25510624',
+    contactPhoneHref: 'tel:+4972125510624',
+    vatId: 'DE461239481',
     newsletterSourceLabel: 'mardu.space newsletter',
     contactPath: '/contact',
     newsletterSuccessPath: '/newsletter/success',
@@ -95,7 +116,6 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
       integrations: false,
     },
     footerMetaLinks: [
-      { href: '/roadmap', label: 'Roadmap' },
       { href: '/privacy', label: 'Datenschutz' },
       { href: '/publisher', label: 'Impressum' },
     ],
@@ -109,6 +129,9 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
     apiOrigin: 'https://platform.mardu.de',
     theme: '@mardu/styles/theme-platform.css',
     supportEmail: 'info@mardu.de',
+    contactPhone: '+49 721 25510624',
+    contactPhoneHref: 'tel:+4972125510624',
+    vatId: 'DE461239481',
     newsletterSourceLabel: 'platform leads',
     contactPath: '/contact',
     newsletterSuccessPath: '/newsletter/anmeldung',

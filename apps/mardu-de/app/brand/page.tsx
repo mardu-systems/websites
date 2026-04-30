@@ -1,5 +1,13 @@
 import type { Metadata } from 'next';
 import { BrandAssetsPage, marduBrandAssetsPageContent } from '@mardu/sections';
+import { getSiteConfig } from '@mardu/site-config';
+
+const siteConfig = getSiteConfig('mardu-de');
+const brandAssetsPageContent = {
+  ...marduBrandAssetsPageContent,
+  contactDescription: `${marduBrandAssetsPageContent.contactDescription} Du erreichst uns per E-Mail unter ${siteConfig.supportEmail} oder telefonisch unter ${siteConfig.contactPhone}.`,
+  contactHref: `mailto:${siteConfig.supportEmail}?subject=Anfrage%20zu%20Brand%20Assets`,
+};
 
 export const metadata: Metadata = {
   title: 'Markenressourcen | Mardu',
@@ -21,5 +29,5 @@ export const metadata: Metadata = {
 };
 
 export default function BrandPage() {
-  return <BrandAssetsPage content={marduBrandAssetsPageContent} />;
+  return <BrandAssetsPage content={brandAssetsPageContent} />;
 }

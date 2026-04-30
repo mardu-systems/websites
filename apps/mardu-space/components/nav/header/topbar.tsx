@@ -17,7 +17,7 @@ export default function Topbar({
   showSearch = true,
   showAccount = true,
   showHelp = true,
-  salesPhone = '+49 176 200 00 00',
+  salesPhone = '+49 721 25510624',
 }: TopbarProps) {
   return (
     <div

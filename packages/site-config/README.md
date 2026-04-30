@@ -71,6 +71,9 @@ Shared configuration DTO for a site.
 - `apiOrigin: string`
 - `theme: string`
 - `supportEmail: string`
+- `contactPhone: string`
+- `contactPhoneHref: string`
+- `vatId: string`
 - `newsletterSourceLabel: string`
 - `contactPath: string`
 - `newsletterSuccessPath: string`

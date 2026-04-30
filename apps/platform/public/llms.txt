@@ -29,6 +29,8 @@ Wichtige Hinweise für LLM-Crawler und Agents:
 
 ## Kontakt & Vertrieb
 
+- E-Mail: info@mardu.de
+- Telefon: +49 721 25510624
 - [Kontakt](https://mardu.de/contact): Kontaktaufnahme / Beratung
 - [Call-to-Action Abschnitt](https://mardu.de/#contact): Newsletter/Terminvereinbarung/Erstgespräch
 
