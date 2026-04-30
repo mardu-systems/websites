@@ -15,6 +15,55 @@ The package mirrors the `components/ui` baseline from `../mardu.de` and is the c
   - `@mardu/ui/hooks/use-mobile` for shared mobile-breakpoint state
   - `@mardu/ui/components/circle-number`
   - `@mardu/ui/components/dashed-connector`
+  - `@mardu/ui/components/halftone-3d-illustration`
+
+## `halftone-3d-illustration`
+
+Client-Komponente für wiederverwendbare Three.js-Illustrationen mit Halftone-Postprocessing. Der öffentliche Vertrag ist über DTO-Typen dokumentiert und wird über Props gesteuert, ohne dass Consumer Three.js-Internals anfassen müssen.
+
+```tsx
+import {
+  Halftone3DIllustration,
+  type Halftone3DSettings,
+  type Halftone3DShapeKey,
+} from '@mardu/ui/components/halftone-3d-illustration';
+
+export function Example() {
+  return (
+    <Halftone3DIllustration
+      shapeKey="sphere"
+      settings={{
+        halftone: { scale: 18, dashColor: '#0f766e' },
+        material: { color: '#e8e2d8' },
+      }}
+    />
+  );
+}
+```
+
+Exportierte API:
+
+- `Halftone3DIllustration`
+- `DollarCoin`
+- `defaultHalftone3DSettings`
+- `defaultDollarCoinPose`
+- `Halftone3DIllustrationProps`
+- `Halftone3DSettings`
+- `Halftone3DShapeKey`
+- `Halftone3DLightingSettings`
+- `Halftone3DMaterialSettings`
+- `Halftone3DHalftoneSettings`
+- `Halftone3DAnimationSettings`
+- `Halftone3DPose`
+- `DeepPartial`
+
+Props:
+
+- `shapeKey?: Halftone3DShapeKey` wählt eine Builtin-Geometrie.
+- `settings?: DeepPartial<Halftone3DSettings>` überschreibt Lighting, Material, Halftone, Background und Animation partiell.
+- `initialPose?: Partial<Halftone3DPose>` wird beim Mount als Startpose verwendet.
+- `previewDistance?: number` steuert die Kamera-Distanz und wird live übernommen.
+- `className`, `style` und `onError` steuern Container und Fehlerbehandlung.
 
 ## Contract
 
