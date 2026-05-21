@@ -13,7 +13,7 @@ Die Website soll auf den ersten Blick erklären, was Mardu macht: digitale Zutri
 Besucher sollen schnell verstehen:
 
 - welche konkreten Produkte es gibt
-- das Mardu für Türen, Maschinen oder beide Anwendungsfälle passt
+- dass Mardu für Türen, Maschinen oder beide Anwendungsfälle passt
 - dass die Software einfach zu bedienen ist
 - welche Szenarien Mardu abdeckt
 - wie sie ein Projekt anfragen oder konfigurieren können
@@ -47,6 +47,7 @@ Mögliche Hero-Sprüche:
 Direkt unter dem Hero soll eine schmale Vertrauensleiste stehen. Sie kann Firmen, Hochschulen, Makerspaces oder Förderungen zeigen, die Mardu bereits nutzen oder unterstützen.
 
 - im Einsatz für Werkstätten, Hochschulen und Makerspaces
+- gefördert durch EXIST
 - entwickelt für professionelle Zugriffs- und Freigabeprozesse
 
 ### Produkt Section
@@ -70,7 +71,7 @@ Diese Sektion zeigt typische Einsatzszenarien. Vorgesehen sind mehrere kleine Ka
 - Makerspaces
 - Ausbildungszentren
 - Unternehmenswerkstätten
-- Behindertenwerkstätten
+- Werkstätten für Menschen mit Behinderung
 - Community-Spaces
 
 Jede Kachel soll kurz zeigen, warum Mardu in diesem Szenario hilft. Idealerweise werden Action-Bilder verwendet, auf denen klar zu sehen ist, wie Mardu im Alltag eingesetzt wird.
@@ -87,9 +88,19 @@ Die Aussage:
 
 Die Software darf nicht wie ein kompliziertes Admin-Tool wirken. Sie soll zeigen: Das System ist einfach zu bedienen, auch wenn die zugrunde liegende Logik stark ist.
 
-### Comming soon
-Nutzer App für IOS und Android freigben direkt mit dem handy nutuzungs analysen direkt am handy und so weiter für den Nutzer eine APP
-Logik system um autoamtisierungen oder Freigabe prozesse an bedingungne zu küpfen wie laser cutter soll nur angehen wenn die strommessung für die lüftung besagt das diese läuft
+### Geplante Erweiterungen
+
+Die Hauptseite oder Roadmap kann zusätzlich zeigen, welche Erweiterungen geplant sind. Diese Inhalte sollen Lust auf die Weiterentwicklung machen, aber klar als Ausblick erkennbar bleiben.
+
+Geplante Themen:
+
+- Nutzer-App für iOS und Android
+- Freigaben direkt per Smartphone
+- Nutzungsanalysen direkt in der App
+- mobile Informationen für Nutzer, zum Beispiel eigene Berechtigungen oder Nutzungshistorie
+- Logiksystem für Automatisierungen und bedingte Freigaben
+
+Ein Beispiel für das Logiksystem: Ein Lasercutter soll nur starten, wenn die Strommessung der Lüftung zeigt, dass diese tatsächlich läuft. Damit werden Freigaben nicht nur an Personen, sondern auch an technische Bedingungen geknüpft.
 
 ### Team Section
 
@@ -103,11 +114,12 @@ Die EXIST-Förderung soll weiterhin sichtbar sein. Sie unterstützt Glaubwürdig
 
 Die Pricing-Seite soll zwei Ebenen verbinden:
 
-- Produkte als einmal Kauf
-  - Wenn man dann will mit Service dazu als Service Vertrag ist alles verhandelbar ersatzgerät nur in Garantie sonst ähnliche leistungen wie bei HaaS
+- Produkte als Einmalkauf
 - Hardware as a Service als laufendes Service-Angebot
 
 Produkte sollen mit „ab“-Preisen dargestellt werden, zum Beispiel ab 495 €. Die Preise dienen zur Orientierung, nicht als klassischer Warenkorb.
+
+Beim Einmalkauf kann optional ein Servicevertrag ergänzt werden. Dieser Servicevertrag ist verhandelbar und kann ähnliche Leistungen wie Hardware as a Service enthalten. Ein Ersatzgerät ist beim Einmalkauf grundsätzlich nur im Garantiefall enthalten, sofern nichts anderes vereinbart wurde.
 
 Hardware as a Service soll als hybrides Angebot gezeigt werden.
 
@@ -146,8 +158,8 @@ Die Produktseite soll wie ein moderner B2B-Katalog wirken, nicht wie ein klassis
 
 Geplante Produktübersicht:
 
-- D1: Maschinen Freigabe mit BLE
-- D1-Pro: Maschinen Freigabe mit IP500 und Strommessung
+- D1: Maschinenfreigabe mit BLE
+- D1-Pro: Maschinenfreigabe mit IP500 und Strommessung
 - DO1: elektronischer Halbzylinder
 - DO1-1: elektronischer Knaufzylinder
 - DO1-2: elektronischer Doppelknaufzylinder
@@ -216,8 +228,7 @@ Der Konfigurator ist besonders wichtig, weil Mardu kein Standardprodukt für den
 - ob Integrationen benötigt werden
 - ob sie Beratung oder ein Angebot wünschen
 
-
-Soll so ein wenig wie ein Fragebogen sein also auch mal fragen am ende drin damit wir das besser einordnen können.
+Der Konfigurator soll sich eher wie ein geführter Fragebogen anfühlen als wie ein technisches Formular. Am Ende sollen gezielte Rückfragen möglich sein, damit Mardu das Projekt besser einordnen und sinnvoll weiterbearbeiten kann.
 
 ## FAQ
 
