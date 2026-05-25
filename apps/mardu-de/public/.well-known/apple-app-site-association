@@ -3,8 +3,8 @@
     "apps": [],
     "details": [
       {
-        "appID": "6P6P4S8NPB.com.mardu.connect",
-        "paths": ["*"]
+        "appID": "6P6P4S8NPB.de.mardu.connect",
+        "paths": ["/enroll", "/enroll/*"]
       }
     ]
   }
