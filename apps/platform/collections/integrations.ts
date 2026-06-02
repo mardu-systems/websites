@@ -16,6 +16,7 @@ export const Integrations: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'availabilityStatus', 'featured', 'sortOrder', 'updatedAt'],
+    group: 'Integrationen',
   },
   versions: {
     drafts: true,
@@ -84,48 +85,174 @@ export const Integrations: CollectionConfig = {
   },
   fields: [
     {
-      name: 'title',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'slug',
-      type: 'text',
-      required: true,
-      unique: true,
-      index: true,
-      hooks: {
-        beforeValidate: [
-          ({ value, data }) => {
-            if (typeof value === 'string' && value.length > 0) {
-              return formatSlug(value);
-            }
+      type: 'tabs',
+      tabs: [
+        {
+          label: 'Basisdaten',
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'title',
+                  type: 'text',
+                  required: true,
+                  admin: { width: '50%' },
+                },
+                {
+                  name: 'slug',
+                  type: 'text',
+                  required: true,
+                  unique: true,
+                  index: true,
+                  admin: {
+                    width: '50%',
+                    description: 'Wird automatisch aus dem Titel generiert.',
+                  },
+                  hooks: {
+                    beforeValidate: [
+                      ({ value, data }) => {
+                        if (typeof value === 'string' && value.length > 0) {
+                          return formatSlug(value);
+                        }
 
-            if (typeof data?.title === 'string') {
-              return formatSlug(data.title);
-            }
+                        if (typeof data?.title === 'string') {
+                          return formatSlug(data.title);
+                        }
 
-            return value;
-          },
-        ],
-      },
+                        return value;
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+            {
+              name: 'shortDescription',
+              type: 'textarea',
+              required: true,
+              maxLength: 220,
+              admin: {
+                description: 'Kurzbeschreibung für Listenansichten (max. 220 Zeichen).',
+              },
+            },
+            {
+              name: 'description',
+              type: 'richText',
+              required: true,
+            },
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'logo',
+                  type: 'upload',
+                  relationTo: 'media',
+                  admin: { width: '50%' },
+                },
+                {
+                  name: 'heroImage',
+                  type: 'upload',
+                  relationTo: 'media',
+                  admin: { width: '50%' },
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: 'Technische Details',
+          fields: [
+            {
+              name: 'protocols',
+              type: 'relationship',
+              relationTo: 'integration-protocols',
+              hasMany: true,
+              required: true,
+              minRows: 1,
+            },
+            {
+              name: 'useCases',
+              type: 'array',
+              labels: {
+                singular: 'Use Case',
+                plural: 'Use Cases',
+              },
+              admin: {
+                initCollapsed: true,
+              },
+              fields: [
+                {
+                  name: 'title',
+                  type: 'text',
+                  required: true,
+                },
+              ],
+            },
+            {
+              name: 'supportedActions',
+              type: 'array',
+              labels: {
+                singular: 'Aktion',
+                plural: 'Aktionen',
+              },
+              admin: {
+                initCollapsed: true,
+              },
+              fields: [
+                {
+                  name: 'title',
+                  type: 'text',
+                  required: true,
+                },
+              ],
+            },
+            {
+              name: 'compatibilityNotes',
+              type: 'textarea',
+              admin: {
+                description: 'Besondere Hinweise zur Kompatibilität dieser Integration.',
+              },
+            },
+          ],
+        },
+        {
+          label: 'Verbindungen & Links',
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'vendor',
+                  type: 'text',
+                  admin: { width: '50%', placeholder: 'z. B. mardu GmbH' },
+                },
+                {
+                  name: 'docsUrl',
+                  type: 'text',
+                  admin: { width: '50%', placeholder: 'https://docs.mardu.de/...' },
+                },
+              ],
+            },
+            {
+              name: 'requestUrl',
+              type: 'text',
+              admin: {
+                placeholder: 'https://...',
+                description: 'URL, um die Integration anzufordern, falls nicht direkt verfügbar.',
+              },
+            },
+          ],
+        },
+      ],
     },
-    {
-      name: 'shortDescription',
-      type: 'textarea',
-      required: true,
-      maxLength: 220,
-    },
-    {
-      name: 'description',
-      type: 'richText',
-      required: true,
-    },
+    // Sidebar fields
     {
       name: 'availabilityStatus',
       type: 'select',
       required: true,
       defaultValue: 'planned',
+      admin: { position: 'sidebar' },
       options: [
         {
           label: 'Available',
@@ -142,18 +269,9 @@ export const Integrations: CollectionConfig = {
       ],
     },
     {
-      name: 'vendor',
-      type: 'text',
-    },
-    {
-      name: 'logo',
-      type: 'upload',
-      relationTo: 'media',
-    },
-    {
-      name: 'heroImage',
-      type: 'upload',
-      relationTo: 'media',
+      name: 'comingAt',
+      type: 'date',
+      admin: { position: 'sidebar' },
     },
     {
       name: 'categories',
@@ -162,64 +280,24 @@ export const Integrations: CollectionConfig = {
       hasMany: true,
       required: true,
       minRows: 1,
+      admin: { position: 'sidebar' },
     },
     {
-      name: 'protocols',
-      type: 'relationship',
-      relationTo: 'integration-protocols',
-      hasMany: true,
-      required: true,
-      minRows: 1,
+      name: 'sortOrder',
+      type: 'number',
+      defaultValue: 0,
+      admin: { position: 'sidebar' },
     },
     {
       name: 'featured',
       type: 'checkbox',
       defaultValue: false,
       index: true,
+      admin: { position: 'sidebar' },
     },
     {
-      name: 'sortOrder',
-      type: 'number',
-      defaultValue: 0,
+      ...buildSiteVisibilityField(),
+      admin: { position: 'sidebar' },
     },
-    {
-      name: 'comingAt',
-      type: 'date',
-    },
-    {
-      name: 'docsUrl',
-      type: 'text',
-    },
-    {
-      name: 'requestUrl',
-      type: 'text',
-    },
-    {
-      name: 'useCases',
-      type: 'array',
-      fields: [
-        {
-          name: 'title',
-          type: 'text',
-          required: true,
-        },
-      ],
-    },
-    {
-      name: 'supportedActions',
-      type: 'array',
-      fields: [
-        {
-          name: 'title',
-          type: 'text',
-          required: true,
-        },
-      ],
-    },
-    {
-      name: 'compatibilityNotes',
-      type: 'textarea',
-    },
-    buildSiteVisibilityField(),
   ],
 };

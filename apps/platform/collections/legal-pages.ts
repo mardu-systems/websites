@@ -6,6 +6,7 @@ export const LegalPages: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'pageKind', 'updatedAt'],
+    group: 'System',
   },
   versions: {
     drafts: true,
@@ -36,35 +37,42 @@ export const LegalPages: CollectionConfig = {
               required: true,
             },
             {
-              name: 'slug',
-              type: 'select',
-              required: true,
-              unique: true,
-              index: true,
-              options: [
+              type: 'row',
+              fields: [
                 {
-                  label: 'Datenschutz',
-                  value: 'privacy',
+                  name: 'slug',
+                  type: 'select',
+                  required: true,
+                  unique: true,
+                  index: true,
+                  admin: { width: '50%' },
+                  options: [
+                    {
+                      label: 'Datenschutz',
+                      value: 'privacy',
+                    },
+                    {
+                      label: 'Impressum',
+                      value: 'publisher',
+                    },
+                  ],
                 },
                 {
-                  label: 'Impressum',
-                  value: 'publisher',
-                },
-              ],
-            },
-            {
-              name: 'pageKind',
-              type: 'select',
-              required: true,
-              defaultValue: 'privacy',
-              options: [
-                {
-                  label: 'Datenschutz',
-                  value: 'privacy',
-                },
-                {
-                  label: 'Impressum',
-                  value: 'publisher',
+                  name: 'pageKind',
+                  type: 'select',
+                  required: true,
+                  defaultValue: 'privacy',
+                  admin: { width: '50%' },
+                  options: [
+                    {
+                      label: 'Datenschutz',
+                      value: 'privacy',
+                    },
+                    {
+                      label: 'Impressum',
+                      value: 'publisher',
+                    },
+                  ],
                 },
               ],
             },
@@ -72,15 +80,25 @@ export const LegalPages: CollectionConfig = {
               name: 'summary',
               type: 'textarea',
               maxLength: 240,
+              admin: {
+                description: 'Eine kurze Beschreibung der Seite für Listenansichten und interne Zwecke (max. 240 Zeichen).',
+              },
             },
             {
               name: 'updatedLabel',
               type: 'text',
+              admin: {
+                description: 'Aktualisierungslabel, das auf der Seite angezeigt wird.',
+                placeholder: 'z. B. „Stand: Januar 2026“',
+              },
             },
             {
               name: 'contentMarkdown',
               type: 'textarea',
               required: true,
+              admin: {
+                description: 'Der rechtliche Hauptinhalt der Seite im Markdown-Format (GFM).',
+              },
             },
             buildSiteVisibilityField(['mardu-de', 'mardu-space', 'platform']),
           ],

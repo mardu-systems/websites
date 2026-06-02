@@ -1,6 +1,7 @@
-import * as migration_20260402_200045 from './20260402_200045.ts';
-import * as migration_20260404_161830_add_roadmap_items from './20260404_161830_add_roadmap_items.ts';
-import * as migration_20260421_085300_add_catalog_solutions from './20260421_085300_add_catalog_solutions.ts';
+import * as migration_20260402_200045 from './20260402_200045';
+import * as migration_20260404_161830_add_roadmap_items from './20260404_161830_add_roadmap_items';
+import * as migration_20260421_085300_add_catalog_solutions from './20260421_085300_add_catalog_solutions';
+import * as migration_20260602_080745 from './20260602_080745';
 
 export const migrations = [
   {
@@ -17,6 +18,11 @@ export const migrations = [
     up: migration_20260421_085300_add_catalog_solutions.up,
     down: migration_20260421_085300_add_catalog_solutions.down,
     name: '20260421_085300_add_catalog_solutions',
+  },
+  {
+    up: migration_20260602_080745.up,
+    down: migration_20260602_080745.down,
+    name: '20260602_080745'
   },
 ];
 

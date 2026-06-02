@@ -1,4 +1,4 @@
-import config from '@/payload.config';
+import config from '@payload-config';
 import { importMap } from '@/app/(payload)/admin/importMap';
 import '@payloadcms/next/css';
 import { RootLayout } from '@payloadcms/next/layouts';

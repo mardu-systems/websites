@@ -14,6 +14,7 @@ export const Solutions: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'featured', 'publishedAt', 'updatedAt'],
+    group: 'Katalog',
   },
   versions: {
     drafts: true,
@@ -64,163 +65,270 @@ export const Solutions: CollectionConfig = {
   },
   fields: [
     {
-      name: 'title',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'slug',
-      type: 'text',
-      required: true,
-      unique: true,
-      index: true,
-      hooks: {
-        beforeValidate: [
-          ({ value, data }) => {
-            if (typeof value === 'string' && value.length > 0) {
-              return formatSlug(value);
-            }
-            if (typeof data?.title === 'string') {
-              return formatSlug(data.title);
-            }
-            return value;
-          },
-        ],
-      },
-    },
-    {
-      name: 'badge',
-      type: 'text',
-    },
-    {
-      name: 'tagline',
-      type: 'text',
-    },
-    {
-      name: 'summary',
-      type: 'textarea',
-    },
-    {
-      name: 'themeTone',
-      type: 'select',
-      options: [
-        { label: 'Forest', value: 'forest' },
-        { label: 'Sand', value: 'sand' },
-        { label: 'Mist', value: 'mist' },
-        { label: 'Clay', value: 'clay' },
-        { label: 'Ink', value: 'ink' },
-      ],
-    },
-    {
-      name: 'heroTitle',
-      type: 'text',
-    },
-    {
-      name: 'heroIntro',
-      type: 'textarea',
-    },
-    {
-      name: 'problemTitle',
-      type: 'text',
-    },
-    {
-      name: 'problemBody',
-      type: 'textarea',
-    },
-    {
-      name: 'ctaLabel',
-      type: 'text',
-    },
-    {
-      name: 'ctaHref',
-      type: 'text',
-    },
-    {
-      name: 'imageUrl',
-      type: 'text',
-    },
-    {
-      name: 'imageAlt',
-      type: 'text',
-    },
-    {
-      name: 'image',
-      type: 'upload',
-      relationTo: 'media',
-    },
-    {
-      name: 'heroImageUrl',
-      type: 'text',
-    },
-    {
-      name: 'heroImageAlt',
-      type: 'text',
-    },
-    {
-      name: 'heroImage',
-      type: 'upload',
-      relationTo: 'media',
-    },
-    {
-      name: 'detailMarkdown',
-      type: 'textarea',
-    },
-    {
-      name: 'features',
-      type: 'array',
-      fields: [
+      type: 'tabs',
+      tabs: [
         {
-          name: 'title',
-          type: 'text',
-          required: true,
+          label: 'Basisdaten',
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'title',
+                  type: 'text',
+                  required: true,
+                  admin: { width: '50%' },
+                },
+                {
+                  name: 'slug',
+                  type: 'text',
+                  required: true,
+                  unique: true,
+                  index: true,
+                  admin: {
+                    width: '50%',
+                    description: 'Wird automatisch aus dem Titel generiert.',
+                  },
+                  hooks: {
+                    beforeValidate: [
+                      ({ value, data }) => {
+                        if (typeof value === 'string' && value.length > 0) {
+                          return formatSlug(value);
+                        }
+                        if (typeof data?.title === 'string') {
+                          return formatSlug(data.title);
+                        }
+                        return value;
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'badge',
+                  type: 'text',
+                  admin: { width: '50%', placeholder: 'z. B. „Enterprise“' },
+                },
+                {
+                  name: 'themeTone',
+                  type: 'select',
+                  admin: { width: '50%', description: 'Visueller Farbton für die Seite.' },
+                  options: [
+                    { label: 'Forest', value: 'forest' },
+                    { label: 'Sand', value: 'sand' },
+                    { label: 'Mist', value: 'mist' },
+                    { label: 'Clay', value: 'clay' },
+                    { label: 'Ink', value: 'ink' },
+                  ],
+                },
+              ],
+            },
+            {
+              name: 'tagline',
+              type: 'text',
+              admin: { placeholder: 'z. B. „Maßgeschneiderte Ladelösungen“' },
+            },
+            {
+              name: 'summary',
+              type: 'textarea',
+              admin: { description: 'Kurze Beschreibung für Lösungs-Übersichten.' },
+            },
+            {
+              name: 'detailMarkdown',
+              type: 'textarea',
+              admin: { description: 'Ausführliche Beschreibung im Markdown-Format.' },
+            },
+          ],
         },
         {
-          name: 'description',
-          type: 'textarea',
-          required: true,
+          label: 'Hero & Problem',
+          fields: [
+            {
+              name: 'heroTitle',
+              type: 'text',
+              admin: { placeholder: 'Überschrift im Hero-Bereich (Standard: Titel)' },
+            },
+            {
+              name: 'heroIntro',
+              type: 'textarea',
+            },
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'heroImage',
+                  type: 'upload',
+                  relationTo: 'media',
+                  admin: { width: '50%', description: 'Hero-Bild (Upload).' },
+                },
+                {
+                  name: 'heroImageUrl',
+                  type: 'text',
+                  admin: { width: '50%', description: 'Alternative externe Hero-Bild-URL.' },
+                },
+              ],
+            },
+            {
+              name: 'heroImageAlt',
+              type: 'text',
+            },
+            {
+              name: 'problemTitle',
+              type: 'text',
+              admin: { placeholder: 'z. B. „Die Herausforderung“' },
+            },
+            {
+              name: 'problemBody',
+              type: 'textarea',
+            },
+          ],
         },
-      ],
-    },
-    {
-      name: 'contentBlocks',
-      type: 'array',
-      fields: [
         {
-          name: 'eyebrow',
-          type: 'text',
+          label: 'Features & Blöcke',
+          fields: [
+            {
+              name: 'features',
+              type: 'array',
+              labels: {
+                singular: 'Feature',
+                plural: 'Features',
+              },
+              admin: {
+                initCollapsed: true,
+              },
+              fields: [
+                {
+                  name: 'title',
+                  type: 'text',
+                  required: true,
+                },
+                {
+                  name: 'description',
+                  type: 'textarea',
+                  required: true,
+                },
+              ],
+            },
+            {
+              name: 'contentBlocks',
+              type: 'array',
+              labels: {
+                singular: 'Inhaltsblock',
+                plural: 'Inhaltsblöcke',
+              },
+              admin: {
+                initCollapsed: true,
+              },
+              fields: [
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'eyebrow',
+                      type: 'text',
+                      admin: { width: '50%' },
+                    },
+                    {
+                      name: 'title',
+                      type: 'text',
+                      admin: { width: '50%' },
+                    },
+                  ],
+                },
+                {
+                  name: 'body',
+                  type: 'textarea',
+                },
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'image',
+                      type: 'upload',
+                      relationTo: 'media',
+                      admin: { width: '50%' },
+                    },
+                    {
+                      name: 'imageUrl',
+                      type: 'text',
+                      admin: { width: '50%' },
+                    },
+                  ],
+                },
+                {
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'imageAlt',
+                      type: 'text',
+                      admin: { width: '50%' },
+                    },
+                    {
+                      name: 'imageSide',
+                      type: 'select',
+                      admin: { width: '50%', description: 'Ausrichtung des Bildes.' },
+                      options: [
+                        { label: 'Left', value: 'left' },
+                        { label: 'Right', value: 'right' },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
         },
         {
-          name: 'title',
-          type: 'text',
-        },
-        {
-          name: 'body',
-          type: 'textarea',
-        },
-        {
-          name: 'imageUrl',
-          type: 'text',
-        },
-        {
-          name: 'imageAlt',
-          type: 'text',
-        },
-        {
-          name: 'image',
-          type: 'upload',
-          relationTo: 'media',
-        },
-        {
-          name: 'imageSide',
-          type: 'select',
-          options: [
-            { label: 'Left', value: 'left' },
-            { label: 'Right', value: 'right' },
+          label: 'Medien & CTAs',
+          fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'media',
+                  admin: { width: '50%' },
+                },
+                {
+                  name: 'imageUrl',
+                  type: 'text',
+                  admin: { width: '50%' },
+                },
+              ],
+            },
+            {
+              name: 'imageAlt',
+              type: 'text',
+            },
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'ctaLabel',
+                  type: 'text',
+                  admin: { width: '50%', placeholder: 'z. B. „Jetzt beraten lassen“' },
+                },
+                {
+                  name: 'ctaHref',
+                  type: 'text',
+                  admin: { width: '50%', placeholder: 'z. B. „/kontakt“' },
+                },
+              ],
+            },
           ],
         },
       ],
     },
-    buildSiteVisibilityField(['mardu-space']),
+    // Sidebar fields
+    {
+      ...buildSiteVisibilityField(['mardu-de']),
+      admin: { position: 'sidebar' },
+    },
     {
       name: 'publishedAt',
       type: 'date',

@@ -203,6 +203,9 @@ export interface User {
  */
 export interface Media {
   id: number;
+  /**
+   * Eine sachliche Beschreibung des Bildes für Barrierefreiheit (Screenreader) und Suchmaschinen (SEO).
+   */
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -223,7 +226,13 @@ export interface Media {
 export interface BlogCategory {
   id: number;
   title: string;
+  /**
+   * Wird automatisch aus dem Titel generiert.
+   */
   slug: string;
+  /**
+   * Eine kurze Beschreibung der Kategorie für Übersichtsseiten und Metadaten.
+   */
   description?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -235,8 +244,17 @@ export interface BlogCategory {
 export interface BlogAuthor {
   id: number;
   name: string;
+  /**
+   * Wird automatisch aus dem Namen generiert.
+   */
   slug: string;
+  /**
+   * Optimales Format: Quadratisch (z. B. 400x400 Pixel).
+   */
   avatar?: (number | null) | Media;
+  /**
+   * Die berufliche Bezeichnung oder Rolle des Autors.
+   */
   role?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -248,8 +266,17 @@ export interface BlogAuthor {
 export interface BlogPost {
   id: number;
   title: string;
+  /**
+   * Wird automatisch aus dem Titel generiert.
+   */
   slug: string;
+  /**
+   * Kurzer, prägnanter Anreißer für Suchergebnisse und Listen (max. 320 Zeichen).
+   */
   excerpt: string;
+  /**
+   * Das Hauptbild des Blog-Beitrag. Empfohlen: 16:9 Querformat, mind. 1200px Breite.
+   */
   coverImage: number | Media;
   content: {
     root: {
@@ -266,14 +293,20 @@ export interface BlogPost {
     };
     [k: string]: unknown;
   };
+  /**
+   * Datum und Uhrzeit der Veröffentlichung.
+   */
   publishedAt: string;
-  featured?: boolean | null;
-  categories: (number | BlogCategory)[];
   author: number | BlogAuthor;
+  categories: (number | BlogCategory)[];
   /**
    * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
    */
   sites: ('mardu-de' | 'mardu-space' | 'platform')[];
+  /**
+   * Hebt diesen Beitrag als Hauptbeitrag auf der Startseite hervor.
+   */
+  featured?: boolean | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -295,8 +328,17 @@ export interface LegalPage {
   title: string;
   slug: 'privacy' | 'publisher';
   pageKind: 'privacy' | 'publisher';
+  /**
+   * Eine kurze Beschreibung der Seite für Listenansichten und interne Zwecke (max. 240 Zeichen).
+   */
   summary?: string | null;
+  /**
+   * Aktualisierungslabel, das auf der Seite angezeigt wird.
+   */
   updatedLabel?: string | null;
+  /**
+   * Der rechtliche Hauptinhalt der Seite im Markdown-Format (GFM).
+   */
   contentMarkdown: string;
   /**
    * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
@@ -316,21 +358,27 @@ export interface LegalPage {
 export interface RoadmapItem {
   id: number;
   title: string;
+  /**
+   * Wird automatisch aus dem Titel generiert.
+   */
   slug: string;
+  /**
+   * Kurze Zusammenfassung für die Roadmap-Übersicht (max. 240 Zeichen).
+   */
   summary?: string | null;
   phaseLabel: string;
   timeLabel: string;
-  sortOrder?: number | null;
-  status: 'planned' | 'in-progress' | 'beta' | 'done';
-  category: 'software' | 'hardware' | 'platform' | 'integrations';
   /**
    * Markdown-Inhalt für die öffentliche Roadmap. Listen und kurze Absätze werden direkt auf mardu.space dargestellt.
    */
   bodyMarkdown: string;
-  featured?: boolean | null;
+  status: 'planned' | 'in-progress' | 'beta' | 'done';
+  category: 'software' | 'hardware' | 'platform' | 'integrations';
   /**
-   * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
+   * Niedrigere Zahlen werden zuerst angezeigt.
    */
+  sortOrder?: number | null;
+  featured?: boolean | null;
   sites: ('mardu-de' | 'mardu-space' | 'platform')[];
   updatedAt: string;
   createdAt: string;
@@ -343,8 +391,17 @@ export interface RoadmapItem {
 export interface IntegrationCategory {
   id: number;
   title: string;
+  /**
+   * Wird automatisch aus dem Titel generiert.
+   */
   slug: string;
+  /**
+   * Eine kurze Beschreibung der Kategorie für Übersichten und Metadaten.
+   */
   description?: string | null;
+  /**
+   * Niedrigere Zahlen werden zuerst angezeigt.
+   */
   sortOrder?: number | null;
   updatedAt: string;
   createdAt: string;
@@ -356,8 +413,17 @@ export interface IntegrationCategory {
 export interface IntegrationProtocol {
   id: number;
   title: string;
+  /**
+   * Wird automatisch aus dem Titel generiert.
+   */
   slug: string;
+  /**
+   * Farblicher Darstellungsstil des Protokoll-Badges in den Frontends.
+   */
   badgeStyle: 'neutral' | 'success' | 'warn' | 'info';
+  /**
+   * Niedrigere Zahlen werden zuerst angezeigt.
+   */
   sortOrder?: number | null;
   updatedAt: string;
   createdAt: string;
@@ -369,7 +435,13 @@ export interface IntegrationProtocol {
 export interface Integration {
   id: number;
   title: string;
+  /**
+   * Wird automatisch aus dem Titel generiert.
+   */
   slug: string;
+  /**
+   * Kurzbeschreibung für Listenansichten (max. 220 Zeichen).
+   */
   shortDescription: string;
   description: {
     root: {
@@ -386,17 +458,9 @@ export interface Integration {
     };
     [k: string]: unknown;
   };
-  availabilityStatus: 'available' | 'beta' | 'planned';
-  vendor?: string | null;
   logo?: (number | null) | Media;
   heroImage?: (number | null) | Media;
-  categories: (number | IntegrationCategory)[];
   protocols: (number | IntegrationProtocol)[];
-  featured?: boolean | null;
-  sortOrder?: number | null;
-  comingAt?: string | null;
-  docsUrl?: string | null;
-  requestUrl?: string | null;
   useCases?:
     | {
         title: string;
@@ -409,11 +473,16 @@ export interface Integration {
         id?: string | null;
       }[]
     | null;
-  compatibilityNotes?: string | null;
   /**
-   * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
+   * Besondere Hinweise zur Kompatibilität dieser Integration.
    */
-  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
+  compatibilityNotes?: string | null;
+  vendor?: string | null;
+  docsUrl?: string | null;
+  /**
+   * URL, um die Integration anzufordern, falls nicht direkt verfügbar.
+   */
+  requestUrl?: string | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -422,6 +491,12 @@ export interface Integration {
      */
     image?: (number | null) | Media;
   };
+  availabilityStatus: 'available' | 'beta' | 'planned';
+  comingAt?: string | null;
+  categories: (number | IntegrationCategory)[];
+  sortOrder?: number | null;
+  featured?: boolean | null;
+  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -432,21 +507,33 @@ export interface Integration {
  */
 export interface NewsletterSubscriber {
   id: number;
-  subscriptionKey: string;
-  site: 'mardu-de' | 'mardu-space';
-  email: string;
-  role: 'newsletter' | 'whitepaper';
-  status: 'pending' | 'confirmed' | 'unsubscribed';
   firstName?: string | null;
   lastName?: string | null;
+  email: string;
   company?: string | null;
-  consentModel?: 'double-opt-in' | null;
-  confirmedAt?: string | null;
-  unsubscribedAt?: string | null;
-  lastConfirmationSentAt?: string | null;
+  /**
+   * Eindeutiger Hash/Schlüssel zur Identifikation des Abonnements.
+   */
+  subscriptionKey: string;
   twentySyncStatus: 'pending' | 'synced' | 'failed' | 'skipped';
   twentyLastSyncedAt?: string | null;
   twentyLastError?: string | null;
+  site: 'mardu-de' | 'mardu-space';
+  role: 'newsletter' | 'whitepaper';
+  status: 'pending' | 'confirmed' | 'unsubscribed';
+  consentModel?: 'double-opt-in' | null;
+  /**
+   * Zeitpunkt der Double-Opt-in Bestätigung.
+   */
+  confirmedAt?: string | null;
+  /**
+   * Zeitpunkt der Abmeldung.
+   */
+  unsubscribedAt?: string | null;
+  /**
+   * Letzter Versand der DOI-E-Mail.
+   */
+  lastConfirmationSentAt?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -456,15 +543,14 @@ export interface NewsletterSubscriber {
  */
 export interface ContactLead {
   id: number;
-  site: 'mardu-de' | 'mardu-space';
-  source: 'contact-form' | 'configurator' | 'admin-software';
   name: string;
   email: string;
   company?: string | null;
   phone?: string | null;
   message?: string | null;
-  consent?: boolean | null;
-  newsletterOptIn?: boolean | null;
+  /**
+   * Vollständige JSON-Konfiguration (z. B. aus dem Produktkonfigurator).
+   */
   config?:
     | {
         [k: string]: unknown;
@@ -474,11 +560,24 @@ export interface ContactLead {
     | number
     | boolean
     | null;
+  /**
+   * Verknüpftes Newsletter-Abonnement.
+   */
   newsletterSubscriber?: (number | null) | NewsletterSubscriber;
-  emailDeliveryStatus: 'pending' | 'sent' | 'failed';
   twentySyncStatus: 'pending' | 'synced' | 'failed' | 'skipped';
   twentyLastSyncedAt?: string | null;
   twentyLastError?: string | null;
+  site: 'mardu-de' | 'mardu-space';
+  source: 'contact-form' | 'configurator' | 'admin-software';
+  /**
+   * Einwilligung in Datenschutzerklärung erteilt.
+   */
+  consent?: boolean | null;
+  /**
+   * Wunsch für Newsletter-Anmeldung geäußert.
+   */
+  newsletterOptIn?: boolean | null;
+  emailDeliveryStatus: 'pending' | 'sent' | 'failed';
   updatedAt: string;
   createdAt: string;
 }
@@ -488,8 +587,8 @@ export interface ContactLead {
  */
 export interface PreorderRequest {
   id: number;
-  site: 'mardu-de' | 'mardu-space';
   email: string;
+  site: 'mardu-de' | 'mardu-space';
   status: 'received';
   emailDeliveryStatus: 'pending' | 'sent' | 'failed';
   updatedAt: string;
@@ -502,24 +601,37 @@ export interface PreorderRequest {
 export interface Solution {
   id: number;
   title: string;
+  /**
+   * Wird automatisch aus dem Titel generiert.
+   */
   slug: string;
   badge?: string | null;
-  tagline?: string | null;
-  summary?: string | null;
+  /**
+   * Visueller Farbton für die Seite.
+   */
   themeTone?: ('forest' | 'sand' | 'mist' | 'clay' | 'ink') | null;
+  tagline?: string | null;
+  /**
+   * Kurze Beschreibung für Lösungs-Übersichten.
+   */
+  summary?: string | null;
+  /**
+   * Ausführliche Beschreibung im Markdown-Format.
+   */
+  detailMarkdown?: string | null;
   heroTitle?: string | null;
   heroIntro?: string | null;
-  problemTitle?: string | null;
-  problemBody?: string | null;
-  ctaLabel?: string | null;
-  ctaHref?: string | null;
-  imageUrl?: string | null;
-  imageAlt?: string | null;
-  image?: (number | null) | Media;
+  /**
+   * Hero-Bild (Upload).
+   */
+  heroImage?: (number | null) | Media;
+  /**
+   * Alternative externe Hero-Bild-URL.
+   */
   heroImageUrl?: string | null;
   heroImageAlt?: string | null;
-  heroImage?: (number | null) | Media;
-  detailMarkdown?: string | null;
+  problemTitle?: string | null;
+  problemBody?: string | null;
   features?:
     | {
         title: string;
@@ -532,19 +644,21 @@ export interface Solution {
         eyebrow?: string | null;
         title?: string | null;
         body?: string | null;
+        image?: (number | null) | Media;
         imageUrl?: string | null;
         imageAlt?: string | null;
-        image?: (number | null) | Media;
+        /**
+         * Ausrichtung des Bildes.
+         */
         imageSide?: ('left' | 'right') | null;
         id?: string | null;
       }[]
     | null;
-  /**
-   * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
-   */
-  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
-  publishedAt?: string | null;
-  featured?: boolean | null;
+  image?: (number | null) | Media;
+  imageUrl?: string | null;
+  imageAlt?: string | null;
+  ctaLabel?: string | null;
+  ctaHref?: string | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -553,6 +667,9 @@ export interface Solution {
      */
     image?: (number | null) | Media;
   };
+  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
+  publishedAt?: string | null;
+  featured?: boolean | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -564,18 +681,39 @@ export interface Solution {
 export interface ProductCategory {
   id: number;
   name: string;
+  /**
+   * Wird automatisch aus dem Namen generiert.
+   */
   slug: string;
   eyebrow?: string | null;
+  /**
+   * Eine kurze Beschreibung der Kategorie für Übersichtsseiten und Metadaten.
+   */
   description?: string | null;
-  imageUrl?: string | null;
-  imageAlt?: string | null;
+  /**
+   * Das Kategorie-Bild (Upload).
+   */
   image?: (number | null) | Media;
-  featured?: boolean | null;
-  sortOrder?: number | null;
+  /**
+   * Alternative externe Bild-URL.
+   */
+  imageUrl?: string | null;
+  /**
+   * Alternativtext für das Kategorie-Bild.
+   */
+  imageAlt?: string | null;
+  /**
+   * Verknüpfte Produkte dieser Kategorie.
+   */
   products?: (number | Product)[] | null;
   /**
-   * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
+   * Hebt diese Kategorie auf der Übersichtsseite hervor.
    */
+  featured?: boolean | null;
+  /**
+   * Niedrigere Zahlen werden zuerst angezeigt.
+   */
+  sortOrder?: number | null;
   sites: ('mardu-de' | 'mardu-space' | 'platform')[];
   updatedAt: string;
   createdAt: string;
@@ -588,31 +726,31 @@ export interface ProductCategory {
 export interface Product {
   id: number;
   name: string;
+  /**
+   * Wird automatisch aus dem Namen generiert.
+   */
   slug: string;
-  summary: string;
-  tagline: string;
-  badge?: string | null;
   eyebrow?: string | null;
-  description?: string | null;
-  heroDescription: string;
+  badge?: string | null;
+  tagline: string;
+  /**
+   * Kurze Produktzusammenfassung für Übersichtslisten.
+   */
+  summary: string;
+  /**
+   * Detaillierterer Produktüberblick für den Hero-Bereich.
+   */
   overview: string;
+  description?: string | null;
+  /**
+   * Umfangreiche Produktdetails in Markdown-Format.
+   */
   detailMarkdown?: string | null;
-  breadcrumbLabel?: string | null;
-  priceFromLabel?: string | null;
-  availability: 'available' | 'lead-time' | 'project';
-  availabilityLabel: string;
-  imageUrl?: string | null;
-  imageAlt?: string | null;
-  image?: (number | null) | Media;
+  /**
+   * Netto-Einstiegspreis in Euro.
+   */
   priceFrom?: number | null;
-  variants?: (number | ProductVariant)[] | null;
-  categories: (number | ProductCategory)[];
-  technologies: (number | ProductTechnology)[];
-  carriers?: (number | ProductCarrier)[] | null;
-  technologiesHeading?: string | null;
-  technologiesIntro?: string | null;
-  carriersHeading?: string | null;
-  carriersIntro?: string | null;
+  priceFromLabel?: string | null;
   featureGroups?:
     | {
         title: string;
@@ -638,15 +776,45 @@ export interface Product {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Das Haupt-Produktbild (Upload).
+   */
+  image?: (number | null) | Media;
+  /**
+   * Alternative externe Bild-URL.
+   */
+  imageUrl?: string | null;
+  /**
+   * Alternativtext für das Haupt-Produktbild.
+   */
+  imageAlt?: string | null;
+  breadcrumbLabel?: string | null;
+  /**
+   * Verknüpfte Varianten dieses Produkts.
+   */
+  variants?: (number | ProductVariant)[] | null;
+  /**
+   * Kategorien, denen das Produkt zugeordnet ist.
+   */
+  categories: (number | ProductCategory)[];
+  /**
+   * Unterstützte Technologien.
+   */
+  technologies?: (number | ProductTechnology)[] | null;
+  /**
+   * Unterstützte Mobilfunk-Provider.
+   */
+  carriers?: (number | ProductCarrier)[] | null;
+  /**
+   * Ähnliche Produkte als Empfehlung.
+   */
   relatedProducts?: (number | Product)[] | null;
   primaryCtaLabel?: string | null;
   secondaryCtaLabel?: string | null;
-  featured?: boolean | null;
-  sortOrder?: number | null;
-  /**
-   * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
-   */
-  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
+  technologiesHeading?: string | null;
+  technologiesIntro?: string | null;
+  carriersHeading?: string | null;
+  carriersIntro?: string | null;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -655,6 +823,14 @@ export interface Product {
      */
     image?: (number | null) | Media;
   };
+  availability: 'available' | 'lead-time' | 'project';
+  availabilityLabel: string;
+  /**
+   * Niedrigere Zahlen werden zuerst angezeigt.
+   */
+  sortOrder?: number | null;
+  featured?: boolean | null;
+  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -666,10 +842,19 @@ export interface Product {
 export interface ProductVariant {
   id: number;
   label: string;
+  /**
+   * Eindeutiger URL-Slug dieser Variante.
+   */
   slug: string;
+  /**
+   * Kurze Zusammenfassung der Variante für Vergleichstabellen.
+   */
   summary: string;
   priceFromLabel?: string | null;
   availabilityLabel?: string | null;
+  /**
+   * Zusatzhinweis oder Empfehlungs-Label.
+   */
   recommendation?: string | null;
   attributes?:
     | {
@@ -678,13 +863,22 @@ export interface ProductVariant {
         id?: string | null;
       }[]
     | null;
-  image?: (number | null) | Media;
-  imageUrl?: string | null;
-  imageAlt?: string | null;
-  sortOrder?: number | null;
   /**
-   * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
+   * Das Varianten-Bild (Upload).
    */
+  image?: (number | null) | Media;
+  /**
+   * Alternative externe Bild-URL.
+   */
+  imageUrl?: string | null;
+  /**
+   * Alternativtext für das Bild.
+   */
+  imageAlt?: string | null;
+  /**
+   * Niedrigere Zahlen werden zuerst angezeigt.
+   */
+  sortOrder?: number | null;
   sites: ('mardu-de' | 'mardu-space' | 'platform')[];
   updatedAt: string;
   createdAt: string;
@@ -697,16 +891,34 @@ export interface ProductVariant {
 export interface ProductTechnology {
   id: number;
   name: string;
-  slug: string;
-  description?: string | null;
-  visualLabel?: string | null;
-  imageUrl?: string | null;
-  imageAlt?: string | null;
-  image?: (number | null) | Media;
-  sortOrder?: number | null;
   /**
-   * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
+   * Wird automatisch aus dem Namen generiert.
    */
+  slug: string;
+  /**
+   * Eine kurze Beschreibung der Technologie für Übersichtsseiten.
+   */
+  description?: string | null;
+  /**
+   * Optisches Label, das im Frontend über dem Bild dargestellt wird.
+   */
+  visualLabel?: string | null;
+  /**
+   * Das Technologie-Bild (Upload).
+   */
+  image?: (number | null) | Media;
+  /**
+   * Alternative externe Bild-URL.
+   */
+  imageUrl?: string | null;
+  /**
+   * Alternativtext für das Bild.
+   */
+  imageAlt?: string | null;
+  /**
+   * Niedrigere Zahlen werden zuerst angezeigt.
+   */
+  sortOrder?: number | null;
   sites: ('mardu-de' | 'mardu-space' | 'platform')[];
   updatedAt: string;
   createdAt: string;
@@ -719,17 +931,38 @@ export interface ProductTechnology {
 export interface ProductCarrier {
   id: number;
   name: string;
-  slug: string;
-  description?: string | null;
-  visualLabel?: string | null;
-  technologyLabel?: string | null;
-  imageUrl?: string | null;
-  imageAlt?: string | null;
-  image?: (number | null) | Media;
-  sortOrder?: number | null;
   /**
-   * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
+   * Wird automatisch aus dem Namen generiert.
    */
+  slug: string;
+  /**
+   * Eine kurze Beschreibung des Mobilfunknetz-Betreibers/Carriers.
+   */
+  description?: string | null;
+  /**
+   * Optisches Label im Frontend.
+   */
+  visualLabel?: string | null;
+  /**
+   * Netzwerktechnologie-Etikett.
+   */
+  technologyLabel?: string | null;
+  /**
+   * Das Betreiber-Logo (Upload).
+   */
+  image?: (number | null) | Media;
+  /**
+   * Alternative externe Bild-URL.
+   */
+  imageUrl?: string | null;
+  /**
+   * Alternativtext für das Betreiber-Logo.
+   */
+  imageAlt?: string | null;
+  /**
+   * Niedrigere Zahlen werden zuerst angezeigt.
+   */
+  sortOrder?: number | null;
   sites: ('mardu-de' | 'mardu-space' | 'platform')[];
   updatedAt: string;
   createdAt: string;
@@ -1288,10 +1521,10 @@ export interface BlogPostsSelect<T extends boolean = true> {
   coverImage?: T;
   content?: T;
   publishedAt?: T;
-  featured?: T;
-  categories?: T;
   author?: T;
+  categories?: T;
   sites?: T;
+  featured?: T;
   meta?:
     | T
     | {
@@ -1332,10 +1565,10 @@ export interface RoadmapItemsSelect<T extends boolean = true> {
   summary?: T;
   phaseLabel?: T;
   timeLabel?: T;
-  sortOrder?: T;
+  bodyMarkdown?: T;
   status?: T;
   category?: T;
-  bodyMarkdown?: T;
+  sortOrder?: T;
   featured?: T;
   sites?: T;
   updatedAt?: T;
@@ -1375,17 +1608,9 @@ export interface IntegrationsSelect<T extends boolean = true> {
   slug?: T;
   shortDescription?: T;
   description?: T;
-  availabilityStatus?: T;
-  vendor?: T;
   logo?: T;
   heroImage?: T;
-  categories?: T;
   protocols?: T;
-  featured?: T;
-  sortOrder?: T;
-  comingAt?: T;
-  docsUrl?: T;
-  requestUrl?: T;
   useCases?:
     | T
     | {
@@ -1399,7 +1624,9 @@ export interface IntegrationsSelect<T extends boolean = true> {
         id?: T;
       };
   compatibilityNotes?: T;
-  sites?: T;
+  vendor?: T;
+  docsUrl?: T;
+  requestUrl?: T;
   meta?:
     | T
     | {
@@ -1407,6 +1634,12 @@ export interface IntegrationsSelect<T extends boolean = true> {
         description?: T;
         image?: T;
       };
+  availabilityStatus?: T;
+  comingAt?: T;
+  categories?: T;
+  sortOrder?: T;
+  featured?: T;
+  sites?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -1416,21 +1649,21 @@ export interface IntegrationsSelect<T extends boolean = true> {
  * via the `definition` "newsletter-subscribers_select".
  */
 export interface NewsletterSubscribersSelect<T extends boolean = true> {
-  subscriptionKey?: T;
-  site?: T;
-  email?: T;
-  role?: T;
-  status?: T;
   firstName?: T;
   lastName?: T;
+  email?: T;
   company?: T;
+  subscriptionKey?: T;
+  twentySyncStatus?: T;
+  twentyLastSyncedAt?: T;
+  twentyLastError?: T;
+  site?: T;
+  role?: T;
+  status?: T;
   consentModel?: T;
   confirmedAt?: T;
   unsubscribedAt?: T;
   lastConfirmationSentAt?: T;
-  twentySyncStatus?: T;
-  twentyLastSyncedAt?: T;
-  twentyLastError?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1439,21 +1672,21 @@ export interface NewsletterSubscribersSelect<T extends boolean = true> {
  * via the `definition` "contact-leads_select".
  */
 export interface ContactLeadsSelect<T extends boolean = true> {
-  site?: T;
-  source?: T;
   name?: T;
   email?: T;
   company?: T;
   phone?: T;
   message?: T;
-  consent?: T;
-  newsletterOptIn?: T;
   config?: T;
   newsletterSubscriber?: T;
-  emailDeliveryStatus?: T;
   twentySyncStatus?: T;
   twentyLastSyncedAt?: T;
   twentyLastError?: T;
+  site?: T;
+  source?: T;
+  consent?: T;
+  newsletterOptIn?: T;
+  emailDeliveryStatus?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1462,8 +1695,8 @@ export interface ContactLeadsSelect<T extends boolean = true> {
  * via the `definition` "preorder-requests_select".
  */
 export interface PreorderRequestsSelect<T extends boolean = true> {
-  site?: T;
   email?: T;
+  site?: T;
   status?: T;
   emailDeliveryStatus?: T;
   updatedAt?: T;
@@ -1477,22 +1710,17 @@ export interface SolutionsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   badge?: T;
+  themeTone?: T;
   tagline?: T;
   summary?: T;
-  themeTone?: T;
+  detailMarkdown?: T;
   heroTitle?: T;
   heroIntro?: T;
-  problemTitle?: T;
-  problemBody?: T;
-  ctaLabel?: T;
-  ctaHref?: T;
-  imageUrl?: T;
-  imageAlt?: T;
-  image?: T;
+  heroImage?: T;
   heroImageUrl?: T;
   heroImageAlt?: T;
-  heroImage?: T;
-  detailMarkdown?: T;
+  problemTitle?: T;
+  problemBody?: T;
   features?:
     | T
     | {
@@ -1506,15 +1734,17 @@ export interface SolutionsSelect<T extends boolean = true> {
         eyebrow?: T;
         title?: T;
         body?: T;
+        image?: T;
         imageUrl?: T;
         imageAlt?: T;
-        image?: T;
         imageSide?: T;
         id?: T;
       };
-  sites?: T;
-  publishedAt?: T;
-  featured?: T;
+  image?: T;
+  imageUrl?: T;
+  imageAlt?: T;
+  ctaLabel?: T;
+  ctaHref?: T;
   meta?:
     | T
     | {
@@ -1522,6 +1752,9 @@ export interface SolutionsSelect<T extends boolean = true> {
         description?: T;
         image?: T;
       };
+  sites?: T;
+  publishedAt?: T;
+  featured?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -1535,12 +1768,12 @@ export interface ProductCategoriesSelect<T extends boolean = true> {
   slug?: T;
   eyebrow?: T;
   description?: T;
+  image?: T;
   imageUrl?: T;
   imageAlt?: T;
-  image?: T;
+  products?: T;
   featured?: T;
   sortOrder?: T;
-  products?: T;
   sites?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1555,9 +1788,9 @@ export interface ProductTechnologiesSelect<T extends boolean = true> {
   slug?: T;
   description?: T;
   visualLabel?: T;
+  image?: T;
   imageUrl?: T;
   imageAlt?: T;
-  image?: T;
   sortOrder?: T;
   sites?: T;
   updatedAt?: T;
@@ -1574,9 +1807,9 @@ export interface ProductCarriersSelect<T extends boolean = true> {
   description?: T;
   visualLabel?: T;
   technologyLabel?: T;
+  image?: T;
   imageUrl?: T;
   imageAlt?: T;
-  image?: T;
   sortOrder?: T;
   sites?: T;
   updatedAt?: T;
@@ -1590,30 +1823,15 @@ export interface ProductCarriersSelect<T extends boolean = true> {
 export interface ProductsSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
-  summary?: T;
-  tagline?: T;
-  badge?: T;
   eyebrow?: T;
-  description?: T;
-  heroDescription?: T;
+  badge?: T;
+  tagline?: T;
+  summary?: T;
   overview?: T;
+  description?: T;
   detailMarkdown?: T;
-  breadcrumbLabel?: T;
-  priceFromLabel?: T;
-  availability?: T;
-  availabilityLabel?: T;
-  imageUrl?: T;
-  imageAlt?: T;
-  image?: T;
   priceFrom?: T;
-  variants?: T;
-  categories?: T;
-  technologies?: T;
-  carriers?: T;
-  technologiesHeading?: T;
-  technologiesIntro?: T;
-  carriersHeading?: T;
-  carriersIntro?: T;
+  priceFromLabel?: T;
   featureGroups?:
     | T
     | {
@@ -1639,12 +1857,21 @@ export interface ProductsSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  image?: T;
+  imageUrl?: T;
+  imageAlt?: T;
+  breadcrumbLabel?: T;
+  variants?: T;
+  categories?: T;
+  technologies?: T;
+  carriers?: T;
   relatedProducts?: T;
   primaryCtaLabel?: T;
   secondaryCtaLabel?: T;
-  featured?: T;
-  sortOrder?: T;
-  sites?: T;
+  technologiesHeading?: T;
+  technologiesIntro?: T;
+  carriersHeading?: T;
+  carriersIntro?: T;
   meta?:
     | T
     | {
@@ -1652,6 +1879,11 @@ export interface ProductsSelect<T extends boolean = true> {
         description?: T;
         image?: T;
       };
+  availability?: T;
+  availabilityLabel?: T;
+  sortOrder?: T;
+  featured?: T;
+  sites?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

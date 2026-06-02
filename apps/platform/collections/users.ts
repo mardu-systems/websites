@@ -6,6 +6,7 @@ export const Users: CollectionConfig = {
   lockDocuments: false,
   admin: {
     useAsTitle: 'email',
+    group: 'System',
   },
   auth: {
     strategies: [OidcSessionStrategy],

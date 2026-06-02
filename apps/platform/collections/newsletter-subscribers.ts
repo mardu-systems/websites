@@ -4,7 +4,8 @@ export const NewsletterSubscribers: CollectionConfig = {
   slug: 'newsletter-subscribers',
   admin: {
     useAsTitle: 'subscriptionKey',
-    defaultColumns: ['email', 'site', 'role', 'status', 'updatedAt'],
+    defaultColumns: ['email', 'site', 'role', 'status', 'twentySyncStatus', 'updatedAt'],
+    group: 'CRM / Leads',
   },
   access: {
     read: ({ req }) => Boolean(req.user),
@@ -14,33 +15,101 @@ export const NewsletterSubscribers: CollectionConfig = {
   },
   fields: [
     {
+      type: 'row',
+      fields: [
+        {
+          name: 'firstName',
+          type: 'text',
+          admin: { width: '50%' },
+        },
+        {
+          name: 'lastName',
+          type: 'text',
+          admin: { width: '50%' },
+        },
+      ],
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'email',
+          type: 'email',
+          required: true,
+          admin: { width: '50%' },
+        },
+        {
+          name: 'company',
+          type: 'text',
+          admin: { width: '50%' },
+        },
+      ],
+    },
+    {
       name: 'subscriptionKey',
       type: 'text',
       unique: true,
       required: true,
       index: true,
+      admin: {
+        description: 'Eindeutiger Hash/Schlüssel zur Identifikation des Abonnements.',
+      },
     },
+    {
+      type: 'collapsible',
+      label: 'Twenty CRM Sync-Daten (Schreibgeschützt)',
+      admin: {
+        initCollapsed: true,
+      },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'twentySyncStatus',
+              type: 'select',
+              required: true,
+              defaultValue: 'pending',
+              admin: { readOnly: true, width: '50%' },
+              options: [
+                { label: 'Pending', value: 'pending' },
+                { label: 'Synced', value: 'synced' },
+                { label: 'Failed', value: 'failed' },
+                { label: 'Skipped', value: 'skipped' },
+              ],
+            },
+            {
+              name: 'twentyLastSyncedAt',
+              type: 'date',
+              admin: { readOnly: true, width: '50%' },
+            },
+          ],
+        },
+        {
+          name: 'twentyLastError',
+          type: 'textarea',
+          admin: { readOnly: true },
+        },
+      ],
+    },
+    // Sidebar fields
     {
       name: 'site',
       type: 'select',
       required: true,
       defaultValue: 'mardu-de',
+      admin: { position: 'sidebar' },
       options: [
         { label: 'mardu.de', value: 'mardu-de' },
         { label: 'mardu.space', value: 'mardu-space' },
       ],
     },
     {
-      name: 'email',
-      type: 'email',
-      required: true,
-      index: true,
-    },
-    {
       name: 'role',
       type: 'select',
       required: true,
       defaultValue: 'newsletter',
+      admin: { position: 'sidebar' },
       options: [
         { label: 'Newsletter', value: 'newsletter' },
         { label: 'Whitepaper', value: 'whitepaper' },
@@ -51,6 +120,7 @@ export const NewsletterSubscribers: CollectionConfig = {
       type: 'select',
       required: true,
       defaultValue: 'pending',
+      admin: { position: 'sidebar' },
       options: [
         { label: 'Pending', value: 'pending' },
         { label: 'Confirmed', value: 'confirmed' },
@@ -58,54 +128,26 @@ export const NewsletterSubscribers: CollectionConfig = {
       ],
     },
     {
-      name: 'firstName',
-      type: 'text',
-    },
-    {
-      name: 'lastName',
-      type: 'text',
-    },
-    {
-      name: 'company',
-      type: 'text',
-    },
-    {
       name: 'consentModel',
       type: 'select',
       defaultValue: 'double-opt-in',
+      admin: { position: 'sidebar', readOnly: true },
       options: [{ label: 'Double Opt-in', value: 'double-opt-in' }],
     },
     {
       name: 'confirmedAt',
       type: 'date',
+      admin: { position: 'sidebar', readOnly: true, description: 'Zeitpunkt der Double-Opt-in Bestätigung.' },
     },
     {
       name: 'unsubscribedAt',
       type: 'date',
+      admin: { position: 'sidebar', readOnly: true, description: 'Zeitpunkt der Abmeldung.' },
     },
     {
       name: 'lastConfirmationSentAt',
       type: 'date',
-    },
-    {
-      name: 'twentySyncStatus',
-      type: 'select',
-      required: true,
-      defaultValue: 'pending',
-      options: [
-        { label: 'Pending', value: 'pending' },
-        { label: 'Synced', value: 'synced' },
-        { label: 'Failed', value: 'failed' },
-        { label: 'Skipped', value: 'skipped' },
-      ],
-    },
-    {
-      name: 'twentyLastSyncedAt',
-      type: 'date',
-    },
-    {
-      name: 'twentyLastError',
-      type: 'textarea',
+      admin: { position: 'sidebar', readOnly: true, description: 'Letzter Versand der DOI-E-Mail.' },
     },
   ],
 };

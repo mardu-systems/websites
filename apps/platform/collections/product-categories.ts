@@ -14,6 +14,7 @@ export const ProductCategories: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'featured', 'sortOrder', 'updatedAt'],
+    group: 'Katalog',
   },
   versions: {
     drafts: true,
@@ -33,66 +34,103 @@ export const ProductCategories: CollectionConfig = {
   },
   fields: [
     {
-      name: 'name',
-      type: 'text',
-      required: true,
-    },
-    {
-      name: 'slug',
-      type: 'text',
-      required: true,
-      unique: true,
-      index: true,
-      hooks: {
-        beforeValidate: [
-          ({ value, data }) => {
-            if (typeof value === 'string' && value.length > 0) {
-              return formatSlug(value);
-            }
-            if (typeof data?.name === 'string') {
-              return formatSlug(data.name);
-            }
-            return value;
+      type: 'row',
+      fields: [
+        {
+          name: 'name',
+          type: 'text',
+          required: true,
+          admin: { width: '50%' },
+        },
+        {
+          name: 'slug',
+          type: 'text',
+          required: true,
+          unique: true,
+          index: true,
+          admin: {
+            width: '50%',
+            description: 'Wird automatisch aus dem Namen generiert.',
           },
-        ],
-      },
+          hooks: {
+            beforeValidate: [
+              ({ value, data }) => {
+                if (typeof value === 'string' && value.length > 0) {
+                  return formatSlug(value);
+                }
+                if (typeof data?.name === 'string') {
+                  return formatSlug(data.name);
+                }
+                return value;
+              },
+            ],
+          },
+        },
+      ],
     },
     {
       name: 'eyebrow',
       type: 'text',
+      admin: {
+        placeholder: 'z. B. „Unsere mardu Produktfamilie“',
+      },
     },
     {
       name: 'description',
       type: 'textarea',
+      admin: {
+        description: 'Eine kurze Beschreibung der Kategorie für Übersichtsseiten und Metadaten.',
+      },
     },
     {
-      name: 'imageUrl',
-      type: 'text',
+      type: 'row',
+      fields: [
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          admin: { width: '50%', description: 'Das Kategorie-Bild (Upload).' },
+        },
+        {
+          name: 'imageUrl',
+          type: 'text',
+          admin: { width: '50%', description: 'Alternative externe Bild-URL.', placeholder: '/category.webp' },
+        },
+      ],
     },
     {
       name: 'imageAlt',
       type: 'text',
-    },
-    {
-      name: 'image',
-      type: 'upload',
-      relationTo: 'media',
-    },
-    {
-      name: 'featured',
-      type: 'checkbox',
-    },
-    {
-      name: 'sortOrder',
-      type: 'number',
-      defaultValue: 0,
+      admin: {
+        description: 'Alternativtext für das Kategorie-Bild.',
+      },
     },
     {
       name: 'products',
       type: 'relationship',
       relationTo: 'products',
       hasMany: true,
+      admin: {
+        description: 'Verknüpfte Produkte dieser Kategorie.',
+      },
     },
-    buildSiteVisibilityField(['mardu-space']),
+    {
+      name: 'featured',
+      type: 'checkbox',
+      admin: { position: 'sidebar', description: 'Hebt diese Kategorie auf der Übersichtsseite hervor.' },
+    },
+    {
+      name: 'sortOrder',
+      type: 'number',
+      defaultValue: 0,
+      admin: {
+        position: 'sidebar',
+        description: 'Niedrigere Zahlen werden zuerst angezeigt.',
+      },
+    },
+    {
+      ...buildSiteVisibilityField(['mardu-de']),
+      admin: { position: 'sidebar' },
+    },
   ],
 };

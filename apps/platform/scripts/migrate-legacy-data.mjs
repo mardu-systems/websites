@@ -5,9 +5,10 @@ import { getPayload } from 'payload';
 import config from '../payload.config.ts';
 import { buildSubscriptionKey, normalizeNewsletterRole } from '@mardu/lead-core';
 
+import { findMonorepoRoot } from './utils.mjs';
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const appRoot = path.resolve(__dirname, '..');
-const workspaceRoot = path.resolve(appRoot, '..', '..');
+const workspaceRoot = findMonorepoRoot(__dirname);
 
 const defaultSources = {
   newsletters: [
@@ -299,7 +300,9 @@ async function main() {
   console.info('[migrate:legacy-data] Done', summary);
 }
 
-main().catch((error) => {
-  console.error('[migrate:legacy-data] Failed', error);
-  process.exitCode = 1;
-});
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error('[migrate:legacy-data] Failed', error);
+    process.exit(1);
+  });

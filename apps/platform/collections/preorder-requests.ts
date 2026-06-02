@@ -5,6 +5,7 @@ export const PreorderRequests: CollectionConfig = {
   admin: {
     useAsTitle: 'email',
     defaultColumns: ['email', 'site', 'status', 'createdAt'],
+    group: 'CRM / Leads',
   },
   access: {
     read: ({ req }) => Boolean(req.user),
@@ -14,26 +15,33 @@ export const PreorderRequests: CollectionConfig = {
   },
   fields: [
     {
-      name: 'site',
-      type: 'select',
-      required: true,
-      defaultValue: 'mardu-de',
-      options: [
-        { label: 'mardu.de', value: 'mardu-de' },
-        { label: 'mardu.space', value: 'mardu-space' },
+      type: 'row',
+      fields: [
+        {
+          name: 'email',
+          type: 'email',
+          required: true,
+          admin: { width: '50%' },
+        },
+        {
+          name: 'site',
+          type: 'select',
+          required: true,
+          defaultValue: 'mardu-de',
+          admin: { width: '50%' },
+          options: [
+            { label: 'mardu.de', value: 'mardu-de' },
+            { label: 'mardu.space', value: 'mardu-space' },
+          ],
+        },
       ],
-    },
-    {
-      name: 'email',
-      type: 'email',
-      required: true,
-      index: true,
     },
     {
       name: 'status',
       type: 'select',
       required: true,
       defaultValue: 'received',
+      admin: { position: 'sidebar' },
       options: [{ label: 'Received', value: 'received' }],
     },
     {
@@ -41,6 +49,7 @@ export const PreorderRequests: CollectionConfig = {
       type: 'select',
       required: true,
       defaultValue: 'pending',
+      admin: { position: 'sidebar', readOnly: true },
       options: [
         { label: 'Pending', value: 'pending' },
         { label: 'Sent', value: 'sent' },
