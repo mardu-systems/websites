@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { cn } from '@mardu/ui/lib/utils';
-import { Button } from '@mardu/ui/components/button';
+import Link from "next/link";
+import Image from "next/image";
+import { cn } from "@mardu/ui/lib/utils";
+import { Button } from "@mardu/ui/components/button";
 
 export interface ImageCardProps {
   imageSrc: string;
@@ -19,13 +19,19 @@ export interface DualImageSectionProps {
   className?: string;
 }
 
-export default function DualImageSection({ cards, className = '' }: DualImageSectionProps) {
+export default function DualImageSection({
+  cards,
+  className = "",
+}: DualImageSectionProps) {
   return (
-    <section className={cn('section-hairline py-18 md:py-24', className)}>
+    <section className={cn("section-hairline py-18 md:py-24", className)}>
       <div className="mardu-container">
         <div className="grid grid-cols-1 gap-7 md:grid-cols-2">
           {cards.map((card, index) => (
-            <article key={card.title ?? index} className="border border-black/10 bg-white/50 p-4 md:p-5">
+            <article
+              key={card.title ?? index}
+              className="border border-border bg-card p-4 md:p-5"
+            >
               <div className="relative mb-5 aspect-16/10 overflow-hidden border border-black/10">
                 <Image
                   src={card.imageSrc}
@@ -42,7 +48,11 @@ export default function DualImageSection({ cards, className = '' }: DualImageSec
                   {card.title}
                 </h3>
                 <div className="space-y-3 text-[15px] leading-relaxed text-foreground/75 md:text-base">
-                  {typeof card.description === 'string' ? <p>{card.description}</p> : card.description}
+                  {typeof card.description === "string" ? (
+                    <p>{card.description}</p>
+                  ) : (
+                    card.description
+                  )}
                 </div>
                 {card.buttonText && card.buttonHref ? (
                   <Button asChild variant="outline">

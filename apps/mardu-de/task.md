@@ -1,0 +1,25 @@
+# Task List: Mardu.de Restructuring & Redesign
+
+- [ ] **Navigation & Layout**
+  - [ ] Implement custom local [site-header.tsx](file:///Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/components/layout/site-header.tsx) to support nested multi-line layout
+  - [ ] Implement custom local [site-footer.tsx](file:///Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/components/layout/site-footer.tsx)
+  - [ ] Refactor [site-shell.tsx](file:///Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/components/layout/site-shell.tsx) to use local header and footer
+- [ ] **Design Theme & Style Adoption**
+  - [ ] Extend `@theme inline` in [globals.css](file:///Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/globals.css) with new custom colors and animation keyframes
+- [ ] **Restructure Single-Page Routes & Dynamic Tab toggles**
+  - [ ] Redesign `/solutions` to use interactive CMS tab-switching, delete `/solutions/[slug]` route
+  - [ ] Redesign `/products` and `/pricing` with sub-tabs, delete `/products/[slug]` route
+  - [ ] Redesign `/integrations` list, delete `/integrations/[slug]` route
+- [ ] **Circular Orbit Configurator**
+  - [ ] Build orbital interactive layout for `/configurator` steps
+  - [ ] Add `+` tooltip info boxes and step 7 math calculations
+- [ ] **Re-style Other Pages**
+  - [ ] Restructure `/roadmap` with categories and search
+  - [ ] Update `/about` (Über Uns) member details and timeline
+  - [ ] Align `/blog` list and post reading layouts
+  - [ ] Restructure `/fotos` and `/brand`
+  - [ ] Redesign `/faq` to match technical screenshot list
+- [ ] **Verification & Validation**
+  - [ ] Run `npm run lint`
+  - [ ] Run `npm run type-check`
+  - [ ] Run `npm run build`

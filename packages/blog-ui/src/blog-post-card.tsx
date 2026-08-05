@@ -12,7 +12,7 @@ export function BlogPostCard({ post, href, buildHref }: BlogPostCardProps) {
   const postHref = href ?? buildHref?.(post) ?? `/blog/${post.slug}`;
 
   return (
-    <article className="border border-black/12 bg-white/40 p-3">
+    <article className="border border-border bg-card p-3">
       <Link
         href={postHref}
         className="block overflow-hidden border border-black/8"

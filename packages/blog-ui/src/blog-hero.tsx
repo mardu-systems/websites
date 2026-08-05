@@ -58,7 +58,7 @@ export function BlogHero({
           {featuredPost && featuredHref ? (
             <Link
               href={featuredHref}
-              className="group relative block min-h-72 overflow-hidden border border-black/10 bg-white/30"
+              className="group relative block min-h-72 overflow-hidden border border-border bg-card"
             >
               <Image
                 src={featuredPost.coverImageUrl}

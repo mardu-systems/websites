@@ -83,8 +83,8 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
     emailLogoUrl: 'https://www.mardu.de/logos/Logo.svg',
     emailBrandName: 'Mardu GmbH',
     features: {
-      blog: false,
-      integrations: false,
+      blog: true,
+      integrations: true,
     },
     footerMetaLinks: [
       { href: '/publisher', label: 'Impressum' },

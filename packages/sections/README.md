@@ -155,7 +155,7 @@ Shared content sections for multiple Mardu frontends.
 - `SplitContent` supports `variant: 'immersive' | 'plain'` so `mardu-space` can keep a light editorial layout without a local fork.
 - `FeatureSection`, `ThreeArguments`, `TripleImageSection`, `Foerderung`, `InfoGrid`, `ProcessSteps` and `RoadmapTimeline` expose eyebrow/intro metadata so the same layouts can tell different stories without forking the component.
 - `NewsletterStatusPage` keeps the newsletter semantics, but primary and secondary action links are now configurable.
-- `ContactPageSection` standardizes the `/contact` page shell while the consuming app still owns the actual form renderer and submit route.
+- `ContactPageSection` standardizes the `/contact` page shell while the consuming app still owns the actual form renderer and submit route. Optional `addressTitle` and `formTitle` fields expose the numbered editorial section headings without moving app-owned copy into the package.
 - `CTASection` standardizes the large conversion block near the end of a page. The package owns the shared layout and optional newsletter dialog, while the app still owns hard links and any custom secondary action UI.
 - `CTASection` keeps the `mardu.de` visual baseline as the default and only exposes small hooks for routing, custom secondary actions and optional request tokens.
 - `EditorialPanelsSection` provides an editorial 3-panel product-story layout with render-ready media DTOs, so apps can supply their own copy and screenshots without forking the composition.

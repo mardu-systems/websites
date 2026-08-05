@@ -1,10 +1,10 @@
 # Shared Layout Package API
 
-Dieses Dokument beschreibt den oeffentlichen Vertrag von `@mardu/layout`.
+Dieses Dokument beschreibt den öffentlichen Vertrag von `@mardu/layout`.
 
 ## Ziel
 
-- gemeinsame Header-, Footer- und Shell-Komponenten fuer mehrere Mardu-Frontends
+- gemeinsame Header-, Footer- und Shell-Komponenten für mehrere Mardu-Frontends
 - render-nahe DTOs statt App-spezifischer Implementierungsdetails
 - Payload-ready, aber bewusst nicht Payload-modelliert
 
@@ -21,14 +21,16 @@ Dieses Dokument beschreibt den oeffentlichen Vertrag von `@mardu/layout`.
 - `label: string`
 - `href: string`
 - `external?: boolean`
+- `index?: string` für nummerierte Editorial-Navigation
+- `description?: string` für eine optionale Kurzbeschreibung
 - `slug?: string`
 - `documentId?: string`
 - `cmsKey?: string`
 
 ### `HeaderNavItemDto`
 
-- unterstuetzt heute vor allem `type: "link"` fuer die bestehende flache Navigation
-- enthaelt bereits eine vorbereitende `mega`-Variante fuer spaetere CMS- oder Mega-Menu-Modelle
+- unterstützt heute vor allem `type: "link"` für die bestehende flache Navigation
+- enthält bereits eine vorbereitende `mega`-Variante für spätere CMS- oder Mega-Menu-Modelle
 
 ### `HeaderCtaDto`
 
@@ -43,25 +45,36 @@ Dieses Dokument beschreibt den oeffentlichen Vertrag von `@mardu/layout`.
 - `brand`
 - `items`
 - `cta?`
-- zusaetzliche UI-Labels fuer Accessibility und Mobile-Menu-Texte
+- `variant?: "default" | "editorial-index"`
+- zusätzliche UI-Labels für Accessibility und Mobile-Menü-Texte
+
+`editorial-index` rendert Indexnummer, Hauptlabel und optionale Kurzbeschreibung
+als durchgehendes Kapitelraster. Auf kleineren Viewports wechselt die Variante
+in ihr responsives Menü. Ankerauflösung und CTA-Verträge bleiben unverändert.
 
 ### `FooterSocialLinkDto`
 
 - `label`
 - `href`
-- `icon: "instagram" | "linkedin" | "github"`
+- `icon: "instagram" | "linkedin" | "github" | "mail" | "phone"`
 - optionale Payload-Referenzfelder
 
 ### `SiteFooterProps`
 
 - `brand`
 - `description?`
+- `primaryActionSlot?`
 - `navLinks?`
 - `metaLinks?`
 - `socialLinks?`
 - `actions?`
 - `onAction?`
 - `theme?: "dark" | "light"`
+- `variant?: "default" | "editorial-index"`
+
+`editorial-index` rendert einen dunklen, gerasterten Footer. Ein optionaler
+`primaryActionSlot` erscheint in der Markenspalte unter dem Abschlussslogan.
+Ohne Angabe der Variante bleibt das bisherige Standardlayout aktiv.
 
 ### `SiteShellProps`
 

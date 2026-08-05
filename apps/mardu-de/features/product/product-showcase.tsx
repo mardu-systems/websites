@@ -130,9 +130,7 @@ function MobileShowcase({
           <h2 className="text-3xl leading-tight text-neutral-900 uppercase tracking-wide">
             {title}
           </h2>
-          <p className="mt-3 text-lg leading-snug text-neutral-800">
-            {description}
-          </p>
+          <p className="mt-3 text-lg leading-snug text-neutral-800">{description}</p>
         </div>
 
         {/* Hintergrund Hero-Image */}
@@ -159,6 +157,7 @@ function MobileShowcase({
           src={textImageSrc}
           alt={textImageAlt}
           fill
+          sizes="100vw"
           className="object-contain object-center"
           aria-label={textImageAlt}
         />
@@ -170,13 +169,14 @@ function MobileShowcase({
           src={topMiddleImageSrc}
           alt={topMiddleImageAlt}
           fill
+          sizes="100vw"
           className="object-cover object-center"
           aria-label={topMiddleImageAlt}
         />
       </div>
 
       {/* Sticky CTA unten */}
-      <div className="sticky bottom-0 inset-x-0 z-30 border-t backdrop-blur supports-[backdrop-filter]:bg-white/60">
+      <div className="sticky inset-x-0 bottom-0 z-30 border-t border-border bg-background/95 backdrop-blur">
         <div className="mx-auto max-w-screen-sm px-4 py-3 flex items-center justify-between gap-3">
           <div className="leading-tight">
             <div className="text-base font-semibold">{price}</div>

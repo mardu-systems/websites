@@ -1,93 +1,83 @@
-import React from 'react';
+import type { ReactNode } from 'react';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import SharedSiteShell from '@mardu/layout/site-shell';
-import type { FooterSocialLinkDto, HeaderNavItemDto } from '@mardu/layout/types';
-import { defaultHeaderItems } from '@/data/default-header-items';
-import { defaultFooterNavLinks } from '@/data/default-footer-items';
+import type { FooterSocialLinkDto } from '@mardu/layout/types';
+import { Button } from '@mardu/ui/components/button';
 import { getSiteConfig } from '@mardu/site-config';
-import { isBlogEnabled, isIntegrationsEnabled } from '@mardu/site-config/feature-flags.server';
-import NewsletterButton from '@/components/utilities/newsletter-button';
+import { defaultFooterMetaLinks, defaultFooterNavLinks } from '@/data/default-footer-items';
+import { defaultHeaderItems } from '@/data/default-header-items';
 
 const baseSocialLinks: ReadonlyArray<FooterSocialLinkDto> = [
   { href: 'https://www.instagram.com/mardu.de', label: 'Instagram', icon: 'instagram' },
-  { href: 'https://www.linkedin.com/company/marduofficial', label: 'LinkedIn', icon: 'linkedin' },
+  {
+    href: 'https://www.linkedin.com/company/marduofficial',
+    label: 'LinkedIn',
+    icon: 'linkedin',
+  },
   { href: 'https://github.com/mardu-systems', label: 'GitHub', icon: 'github' },
 ];
 
-export default async function SiteShell({ children }: { children: React.ReactNode }) {
+export default function SiteShell({ children }: { children: ReactNode }) {
   const siteConfig = getSiteConfig('mardu-de');
   const socialLinks: ReadonlyArray<FooterSocialLinkDto> = [
     ...baseSocialLinks,
-    { href: `mailto:${siteConfig.supportEmail}`, label: `E-Mail: ${siteConfig.supportEmail}`, icon: 'mail' },
-    { href: siteConfig.contactPhoneHref, label: `Telefon: ${siteConfig.contactPhone}`, icon: 'phone' },
+    {
+      href: `mailto:${siteConfig.supportEmail}`,
+      label: `E-Mail: ${siteConfig.supportEmail}`,
+      icon: 'mail',
+    },
+    {
+      href: siteConfig.contactPhoneHref,
+      label: `Telefon: ${siteConfig.contactPhone}`,
+      icon: 'phone',
+    },
   ];
-  const [blogEnabled, integrationsEnabled] = await Promise.all([
-    isBlogEnabled('mardu-de'),
-    isIntegrationsEnabled('mardu-de'),
-  ]);
-
-  const footerNavLinks = defaultFooterNavLinks.filter((item) => {
-    if (item.href === '/blog') {
-      return blogEnabled;
-    }
-
-    if (item.href === '/integrations') {
-      return integrationsEnabled;
-    }
-
-    return true;
-  });
-
-  const headerItems: HeaderNavItemDto[] = defaultHeaderItems.filter((item) => {
-    if (item.type !== 'link') {
-      return true;
-    }
-
-    if (item.href === '/blog') {
-      return blogEnabled;
-    }
-
-    if (item.href === '/integrations') {
-      return integrationsEnabled;
-    }
-
-    return true;
-  });
 
   return (
     <SharedSiteShell
       header={{
+        variant: 'editorial-index',
         brand: {
           homeHref: '/',
           logoSrc: '/logos/Logo.svg',
-          logoAlt: 'Mardu Logo',
+          logoAlt: 'Zur Mardu-Startseite',
+          logoWidth: 156,
+          logoHeight: 44,
         },
-        items: headerItems,
+        items: defaultHeaderItems,
         cta: {
-          label: 'Demo vereinbaren',
-          href: 'https://cal.meetergo.com/infomardu/30-min-meeting-or-info',
-          mode: 'meetergo',
+          label: 'Jetzt beraten lassen',
+          href: '/contact',
+          mode: 'link',
         },
       }}
       footer={{
+        variant: 'editorial-index',
+        theme: 'dark',
         brand: {
           homeHref: '/',
-          logoSrc: '/logos/LogoWeiss.svg',
-          logoAlt: 'Mardu Logo',
+          logoSrc: '/logos/Logo.svg',
+          logoAlt: 'Mardu',
+          logoWidth: 156,
+          logoHeight: 44,
           copyrightName: 'Mardu GmbH',
         },
-        description:
-          'Mardu digitalisiert Zutritt und Maschinenfreigabe für Werkstatt, Industrie und Baustelle und reduziert dabei Verwaltungsaufwand, Abstimmung und manuelle Prozesse.',
+        description: 'Wo Nutzung beginnt, ist Mardu.',
         primaryActionSlot: (
-          <NewsletterButton
-            primaryButtonText="Newsletter abonnieren"
-            variant="outline"
-            className="border-white/28 bg-transparent text-white hover:bg-white hover:text-neutral-950"
-          />
+          <Button
+            asChild
+            className="h-12 rounded-none bg-primary px-6 text-base text-primary-foreground hover:bg-primary/90"
+          >
+            <Link href="/contact">
+              Jetzt beraten lassen
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </Link>
+          </Button>
         ),
-        navLinks: footerNavLinks,
-        metaLinks: siteConfig.footerMetaLinks,
+        navLinks: defaultFooterNavLinks,
+        metaLinks: [...defaultFooterMetaLinks, ...siteConfig.footerMetaLinks],
         socialLinks,
-        theme: 'dark',
       }}
     >
       {children}

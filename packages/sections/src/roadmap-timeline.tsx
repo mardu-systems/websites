@@ -1,10 +1,10 @@
 // roadmap-timeline.tsx
-import { ReactNode } from 'react';
-import { cn } from '@mardu/ui/lib/utils';
-import { Card, CardContent } from '@mardu/ui/components/card';
-import { Badge } from '@mardu/ui/components/badge';
-import { LucideIcon } from 'lucide-react';
-import { SectionIntro } from './section-intro';
+import { ReactNode } from "react";
+import { cn } from "@mardu/ui/lib/utils";
+import { Card, CardContent } from "@mardu/ui/components/card";
+import { Badge } from "@mardu/ui/components/badge";
+import { LucideIcon } from "lucide-react";
+import { SectionIntro } from "./section-intro";
 
 export type RoadmapCard = {
   description: string | ReactNode;
@@ -27,7 +27,7 @@ export interface RoadmapTimelineProps {
   items: RoadmapMilestone[];
   className?: string;
   compact?: boolean; // tighter spacing
-  variant?: 'default' | 'plain';
+  variant?: "default" | "plain";
 }
 
 export default function RoadmapTimeline({
@@ -37,10 +37,12 @@ export default function RoadmapTimeline({
   items,
   className,
   compact = false,
-  variant = 'default',
+  variant = "default",
 }: RoadmapTimelineProps) {
   return (
-    <section className={cn('py-16 px-6 md:px-8 max-w-7xl mx-auto w-full', className)}>
+    <section
+      className={cn("py-16 px-6 md:px-8 max-w-7xl mx-auto w-full", className)}
+    >
       {title || intro || eyebrow ? (
         <SectionIntro
           eyebrow={eyebrow}
@@ -48,34 +50,39 @@ export default function RoadmapTimeline({
           intro={intro}
           className="mb-10"
           titleClassName={cn(
-            intro ? 'text-[clamp(1.9rem,4vw,3.5rem)]' : 'mx-auto max-w-4xl text-center text-3xl font-bold text-primary md:text-4xl',
+            intro
+              ? "text-[clamp(1.9rem,4vw,3.5rem)]"
+              : "mx-auto max-w-4xl text-center text-3xl font-bold text-primary md:text-4xl",
           )}
-          layout={intro ? 'split' : 'stacked'}
+          layout={intro ? "split" : "stacked"}
           balanceTitle
         />
       ) : null}
 
-      <div className={cn('relative', compact ? 'space-y-5' : 'space-y-7')}>
+      <div className={cn("relative", compact ? "space-y-5" : "space-y-7")}>
         {/* vertical line */}
         <div
           className={cn(
-            'absolute left-[18px] top-0 bottom-0 w-px',
-            variant === 'plain' ? 'bg-black/10' : 'bg-primary/10',
+            "absolute left-[18px] top-0 bottom-0 w-px",
+            variant === "plain" ? "bg-black/10" : "bg-primary/10",
           )}
           aria-hidden="true"
         />
 
         {items.map((m, idx) => (
-          <div key={`${m.title}-${idx}`} className="relative flex gap-6 md:gap-8">
+          <div
+            key={`${m.title}-${idx}`}
+            className="relative flex gap-6 md:gap-8"
+          >
             {/* timeline column */}
             <div className="w-11 shrink-0">
               <div>
                 <div
                   className={cn(
-                    'flex h-9 w-9 items-center justify-center text-xs font-semibold shadow-sm',
-                    variant === 'plain'
-                      ? 'rounded-full bg-foreground text-background ring-[6px] ring-[color:var(--paper)]'
-                      : 'rounded-full bg-primary text-primary-foreground ring-[6px] ring-background',
+                    "flex h-9 w-9 items-center justify-center text-xs font-semibold shadow-sm",
+                    variant === "plain"
+                      ? "rounded-full bg-foreground text-background ring-[6px] ring-background"
+                      : "rounded-full bg-primary text-primary-foreground ring-[6px] ring-background",
                   )}
                 >
                   {idx + 1}
@@ -85,16 +92,16 @@ export default function RoadmapTimeline({
 
             {/* content column */}
             <div className="flex-1 pb-2">
-              <div className={cn('space-y-3', compact && 'space-y-2')}>
+              <div className={cn("space-y-3", compact && "space-y-2")}>
                 {/* milestone header */}
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <h3
                       className={cn(
-                        'text-lg md:text-xl',
-                        variant === 'plain'
-                          ? 'font-semibold tracking-[-0.01em] text-foreground'
-                          : 'font-semibold text-primary',
+                        "text-lg md:text-xl",
+                        variant === "plain"
+                          ? "font-semibold tracking-[-0.01em] text-foreground"
+                          : "font-semibold text-primary",
                       )}
                     >
                       {m.title}
@@ -102,10 +109,10 @@ export default function RoadmapTimeline({
                     {m.note && (
                       <div
                         className={cn(
-                          'mt-1 text-xs font-semibold uppercase',
-                          variant === 'plain'
-                            ? 'tracking-[0.16em] text-foreground/50'
-                            : 'tracking-wide text-primary/70',
+                          "mt-1 text-xs font-semibold uppercase",
+                          variant === "plain"
+                            ? "tracking-[0.16em] text-foreground/50"
+                            : "tracking-wide text-primary/70",
                         )}
                       >
                         {m.note}
@@ -115,24 +122,36 @@ export default function RoadmapTimeline({
                 </div>
 
                 {/* right cards */}
-                <div className={cn('grid gap-6', m.cards.length > 1 ? 'md:grid-cols-2' : '')}>
+                <div
+                  className={cn(
+                    "grid gap-6",
+                    m.cards.length > 1 ? "md:grid-cols-2" : "",
+                  )}
+                >
                   {m.cards.map((c, cIdx) => {
                     const topRight = c.badge ?? m.time;
 
                     return (
                       <Card
-                        key={`${c.title ?? 'card'}-${cIdx}`}
+                        key={`${c.title ?? "card"}-${cIdx}`}
                         className={cn(
-                          'relative h-full',
-                          variant === 'plain'
-                            ? 'border border-black/10 bg-card shadow-none'
-                            : 'rounded-3xl bg-card shadow-sm transition-shadow duration-300 hover:shadow-md',
-                          compact && variant !== 'plain' && 'shadow-none hover:shadow-sm',
+                          "relative h-full",
+                          variant === "plain"
+                            ? "border border-black/10 bg-card shadow-none"
+                            : "rounded-3xl bg-card shadow-sm transition-shadow duration-300 hover:shadow-md",
+                          compact &&
+                            variant !== "plain" &&
+                            "shadow-none hover:shadow-sm",
                         )}
                       >
                         {topRight && (
-                          <div className={cn('absolute', compact ? 'top-4 right-4' : 'top-6 right-6')}>
-                            {variant === 'plain' ? (
+                          <div
+                            className={cn(
+                              "absolute",
+                              compact ? "top-4 right-4" : "top-6 right-6",
+                            )}
+                          >
+                            {variant === "plain" ? (
                               <div className="border border-black/10 bg-background px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-foreground/62">
                                 {topRight}
                               </div>
@@ -149,17 +168,19 @@ export default function RoadmapTimeline({
 
                         <CardContent
                           className={cn(
-                            compact ? 'p-6' : 'p-8',
-                            topRight ? (compact ? 'pr-20' : 'pr-24') : null,
+                            compact ? "p-6" : "p-8",
+                            topRight ? (compact ? "pr-20" : "pr-24") : null,
                           )}
                         >
                           {c.title && (
                             <div
                               className={cn(
-                                compact ? 'text-base md:text-lg' : 'text-lg md:text-xl',
-                                variant === 'plain'
-                                  ? 'font-semibold tracking-[-0.01em] text-foreground'
-                                  : 'font-semibold text-primary',
+                                compact
+                                  ? "text-base md:text-lg"
+                                  : "text-lg md:text-xl",
+                                variant === "plain"
+                                  ? "font-semibold tracking-[-0.01em] text-foreground"
+                                  : "font-semibold text-primary",
                               )}
                             >
                               {c.title}
@@ -168,15 +189,19 @@ export default function RoadmapTimeline({
 
                           <div
                             className={cn(
-                              c.title ? (compact ? 'mt-3' : 'mt-4') : null,
-                              variant === 'plain'
-                                ? 'leading-relaxed text-foreground/72'
-                                : 'text-muted-foreground leading-relaxed',
-                              compact ? 'text-sm' : 'text-sm md:text-base',
-                              '[&_ul]:my-0 [&_ul]:pl-5 [&_ol]:my-0 [&_ol]:pl-5 [&_p]:my-0',
+                              c.title ? (compact ? "mt-3" : "mt-4") : null,
+                              variant === "plain"
+                                ? "leading-relaxed text-foreground/72"
+                                : "text-muted-foreground leading-relaxed",
+                              compact ? "text-sm" : "text-sm md:text-base",
+                              "[&_ul]:my-0 [&_ul]:pl-5 [&_ol]:my-0 [&_ol]:pl-5 [&_p]:my-0",
                             )}
                           >
-                            {typeof c.description === 'string' ? <p>{c.description}</p> : c.description}
+                            {typeof c.description === "string" ? (
+                              <p>{c.description}</p>
+                            ) : (
+                              c.description
+                            )}
                           </div>
                         </CardContent>
                       </Card>

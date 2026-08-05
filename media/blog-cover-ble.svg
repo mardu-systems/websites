@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1200" height="630" viewBox="0 0 1200 630" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="ble-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0B0914"/>
+            <stop offset="50%" stop-color="#1E1B4B"/>
+            <stop offset="100%" stop-color="#351B5A"/>
+        </linearGradient>
+    </defs>
+    <rect width="1200" height="630" fill="url(#ble-grad)"/>
+    <circle cx="1000" cy="150" r="300" fill="#8B5CF6" opacity="0.15"/>
+    <circle cx="200" cy="500" r="200" fill="#351B5A" opacity="0.3"/>
+
+    <!-- Bluetooth Icon Graphic -->
+    <g transform="translate(600, 240) scale(2.5)">
+        <path d="M 0,-40 L 15,-20 L -10,5 L -10,-45 L 15,-20 L 0,0 L 15,20 L -10,45 L -10,-5 L 15,20 L 0,40" stroke="#8B5CF6" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <text x="600" y="440" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="42" font-weight="800" fill="#FFFFFF" text-anchor="middle">Bluetooth Low Energy (BLE)</text>
+    <text x="600" y="490" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="400" fill="#94A3B8" text-anchor="middle">Moderne Kommunikation im IoT & Embedded Bereich</text>
+</svg>

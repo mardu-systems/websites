@@ -229,17 +229,13 @@ export function ContactForm({
   const content = (
     <div className="w-full">
       <Form {...form}>
-        <form
-          noValidate
-          onSubmit={submitHandler}
-          className="space-y-6"
-        >
-          <div className="grid gap-6 sm:grid-cols-2 sm:gap-8">
+        <form noValidate onSubmit={submitHandler} className="space-y-6">
+          <div className="contact-form-group--identity grid gap-6 sm:grid-cols-2 sm:gap-8">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="contact-form-field--name">
                   <FormLabel>Name*</FormLabel>
                   <FormControl>
                     <input
@@ -264,7 +260,7 @@ export function ContactForm({
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="contact-form-field--email">
                   <FormLabel>E-Mail*</FormLabel>
                   <FormControl>
                     <input
@@ -294,7 +290,7 @@ export function ContactForm({
             control={form.control}
             name="company"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="contact-form-field--company">
                 <FormLabel>Firma (optional)</FormLabel>
                 <FormControl>
                   <input
@@ -318,7 +314,7 @@ export function ContactForm({
             control={form.control}
             name="phone"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="contact-form-field--phone">
                 <FormLabel>Telefon</FormLabel>
                 <FormControl>
                   <input
@@ -350,7 +346,7 @@ export function ContactForm({
             control={form.control}
             name="message"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="contact-form-field--message">
                 <FormLabel>Nachricht</FormLabel>
                 <FormControl>
                   <Textarea
@@ -358,9 +354,7 @@ export function ContactForm({
                     {...field}
                     placeholder="Ihre Nachricht..."
                     className={textareaClasses}
-                    onBlur={(
-                      event: React.FocusEvent<HTMLTextAreaElement>,
-                    ) => {
+                    onBlur={(event: React.FocusEvent<HTMLTextAreaElement>) => {
                       const trimmed = event.target.value.trim();
                       field.onChange(trimmed);
                       field.onBlur();
@@ -380,7 +374,7 @@ export function ContactForm({
             control={form.control}
             name="newsletterOptIn"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="contact-form-field--newsletter">
                 <div className="flex items-start gap-3">
                   <FormControl>
                     <Checkbox
@@ -423,7 +417,7 @@ export function ContactForm({
             control={form.control}
             name="consent"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="contact-form-field--consent">
                 <div className="flex items-start gap-3">
                   <FormControl>
                     <Checkbox
@@ -455,7 +449,7 @@ export function ContactForm({
           />
 
           {submit ? (
-            <div>
+            <div className="contact-form-submit">
               <Button type="submit" disabled={submitting} className="min-w-40">
                 {submitting ? (
                   <>

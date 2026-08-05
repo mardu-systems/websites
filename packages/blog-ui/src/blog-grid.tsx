@@ -10,7 +10,7 @@ export interface BlogGridProps {
 export function BlogGrid({ posts, emptyState, buildPostHref }: BlogGridProps) {
   if (posts.length === 0) {
     return (
-      <div className="border border-dashed border-black/20 bg-white/50 p-10 text-center text-foreground/70">
+      <div className="border border-dashed border-border bg-muted/50 p-10 text-center text-muted-foreground">
         {emptyState ??
           "Keine Blogposts gefunden. Passe Suche oder Kategoriefilter an."}
       </div>

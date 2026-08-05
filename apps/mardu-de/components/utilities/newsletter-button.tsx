@@ -35,7 +35,7 @@ export default function NewsletterButton({
           {primaryButtonText}
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-150 max-h-[90vh] overflow-y-auto bg-white">
+      <DialogContent className="max-h-[90vh] overflow-y-auto bg-background sm:max-w-150">
         <DialogHeader>
           <DialogTitle>Anmelden</DialogTitle>
           <DialogDescription>

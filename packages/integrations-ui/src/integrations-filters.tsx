@@ -3,6 +3,13 @@ import type {
   IntegrationProtocolDto,
   IntegrationStatus,
 } from "@mardu/content-core";
+import { Badge } from "@mardu/ui/components/badge";
+import { Button } from "@mardu/ui/components/button";
+import { Input } from "@mardu/ui/components/input";
+import {
+  NativeSelect,
+  NativeSelectOption,
+} from "@mardu/ui/components/native-select";
 import Link from "next/link";
 
 const STATUS_ITEMS: Array<{ label: string; value: "" | IntegrationStatus }> = [
@@ -79,32 +86,35 @@ export function IntegrationsFilters({
 
   return (
     <div className="mt-8 grid gap-5 lg:grid-cols-[280px_minmax(0,1fr)]">
-      <aside className="hidden h-fit border border-black/10 bg-white/45 p-4 lg:block">
+      <aside className="hidden h-fit border border-border bg-card p-4 lg:block">
         <div>
           <p className="text-xs uppercase tracking-[0.18em] text-foreground/55">
             Kategorien
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
-            <Link
-              href={toHref({ q: query, protocol, status, sort })}
-              className={`border px-2 py-1 text-xs ${category ? "border-black/20 text-foreground/65" : "border-black/45 text-foreground"}`}
-            >
-              Alle
-            </Link>
-            {categories.map((item) => (
-              <Link
-                key={item.id}
-                href={toHref({
-                  q: query,
-                  category: item.slug,
-                  protocol,
-                  status,
-                  sort,
-                })}
-                className={`border px-2 py-1 text-xs ${category === item.slug ? "border-black/45 text-foreground" : "border-black/20 text-foreground/65"}`}
-              >
-                {item.title}
+            <Badge asChild variant={category ? "outline" : "default"}>
+              <Link href={toHref({ q: query, protocol, status, sort })}>
+                Alle
               </Link>
+            </Badge>
+            {categories.map((item) => (
+              <Badge
+                key={item.id}
+                asChild
+                variant={category === item.slug ? "default" : "outline"}
+              >
+                <Link
+                  href={toHref({
+                    q: query,
+                    category: item.slug,
+                    protocol,
+                    status,
+                    sort,
+                  })}
+                >
+                  {item.title}
+                </Link>
+              </Badge>
             ))}
           </div>
         </div>
@@ -114,26 +124,29 @@ export function IntegrationsFilters({
             Protokolle
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
-            <Link
-              href={toHref({ q: query, category, status, sort })}
-              className={`border px-2 py-1 text-xs ${protocol ? "border-black/20 text-foreground/65" : "border-black/45 text-foreground"}`}
-            >
-              Alle
-            </Link>
-            {protocols.map((item) => (
-              <Link
-                key={item.id}
-                href={toHref({
-                  q: query,
-                  category,
-                  protocol: item.slug,
-                  status,
-                  sort,
-                })}
-                className={`border px-2 py-1 text-xs ${protocol === item.slug ? "border-black/45 text-foreground" : "border-black/20 text-foreground/65"}`}
-              >
-                {item.title}
+            <Badge asChild variant={protocol ? "outline" : "default"}>
+              <Link href={toHref({ q: query, category, status, sort })}>
+                Alle
               </Link>
+            </Badge>
+            {protocols.map((item) => (
+              <Badge
+                key={item.id}
+                asChild
+                variant={protocol === item.slug ? "default" : "outline"}
+              >
+                <Link
+                  href={toHref({
+                    q: query,
+                    category,
+                    protocol: item.slug,
+                    status,
+                    sort,
+                  })}
+                >
+                  {item.title}
+                </Link>
+              </Badge>
             ))}
           </div>
         </div>
@@ -148,45 +161,44 @@ export function IntegrationsFilters({
           <input type="hidden" name="protocol" value={protocol} />
           <input type="hidden" name="status" value={status} />
           <input type="hidden" name="sort" value={sort} />
-          <input
+          <Input
             type="search"
             name="q"
             placeholder="Integrationen durchsuchen"
             defaultValue={query}
-            className="h-12 border border-black/15 bg-white/70 px-4 text-sm"
+            className="h-12"
           />
-          <select
-            name="sort"
-            defaultValue={sort}
-            className="h-12 border border-black/15 bg-white/70 px-3 text-sm"
-          >
-            <option value="featured">Empfohlen</option>
-            <option value="alphabetical">Alphabetisch</option>
-            <option value="latest">Neueste</option>
-          </select>
-          <button
-            type="submit"
-            className="h-12 border border-black/20 bg-foreground px-4 text-sm text-background"
-          >
+          <NativeSelect name="sort" defaultValue={sort} className="h-12 w-full">
+            <NativeSelectOption value="featured">Empfohlen</NativeSelectOption>
+            <NativeSelectOption value="alphabetical">
+              Alphabetisch
+            </NativeSelectOption>
+            <NativeSelectOption value="latest">Neueste</NativeSelectOption>
+          </NativeSelect>
+          <Button type="submit" size="lg" className="h-12">
             Filtern
-          </button>
+          </Button>
         </form>
 
         <div className="mt-4 flex flex-wrap gap-2">
           {STATUS_ITEMS.map((item) => (
-            <Link
+            <Badge
               key={item.label}
-              href={toHref({
-                q: query,
-                category,
-                protocol,
-                status: item.value,
-                sort,
-              })}
-              className={`border px-3 py-1.5 text-xs uppercase tracking-[0.12em] ${status === item.value ? "border-black/45 bg-white/80 text-foreground" : "border-black/20 text-foreground/65"}`}
+              asChild
+              variant={status === item.value ? "default" : "outline"}
             >
-              {item.label}
-            </Link>
+              <Link
+                href={toHref({
+                  q: query,
+                  category,
+                  protocol,
+                  status: item.value,
+                  sort,
+                })}
+              >
+                {item.label}
+              </Link>
+            </Badge>
           ))}
         </div>
       </div>

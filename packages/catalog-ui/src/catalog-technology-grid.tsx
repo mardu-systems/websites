@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import type { CatalogTechnologyDto } from '@mardu/content-core';
-import { Overline } from '@mardu/ui/components/typography';
+import Image from "next/image";
+import type { CatalogTechnologyDto } from "@mardu/content-core";
+import { Overline } from "@mardu/ui/components/typography";
 
 export interface CatalogTechnologyGridProps {
   eyebrow?: string;
@@ -36,8 +36,11 @@ export function CatalogTechnologyGrid({
 
         <div className="mt-8 grid gap-5 md:grid-cols-3 xl:grid-cols-4">
           {items.map((item) => (
-            <article key={item.id} className="border border-black/10 bg-card p-6">
-              <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden border border-black/8 bg-white p-6">
+            <article
+              key={item.id}
+              className="border border-black/10 bg-card p-6"
+            >
+              <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden border border-border bg-card p-6">
                 {item.imageUrl ? (
                   <Image
                     src={item.imageUrl}

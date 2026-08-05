@@ -5,6 +5,7 @@
   "type": "module",
   "dependencies": {
     "@mardu/content-core": "workspace:*",
+    "@mardu/ui": "workspace:*",
     "next": "16.2.1"
   },
   "exports": {

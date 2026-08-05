@@ -41,7 +41,8 @@ export default function ContactPage() {
       }
       description="Melde dich bei uns – wir antworten so schnell wie möglich."
       details={{
-        intro: 'Du hast Fragen oder möchtest uns besuchen? Melde dich gerne bei uns.',
+        intro: null,
+        addressTitle: 'Adresse',
         companyBlock: (
           <>
             <p>
@@ -80,11 +81,21 @@ export default function ContactPage() {
             </p>
           </>
         ),
-        contactTitle: 'Schreib uns',
+        contactTitle: 'Beratung',
         contactContent:
-          'Gib uns einfach deine Kontaktdaten und eine kurze Beschreibung deines Vorhabens.',
+          'Gib uns einfach deine Kontaktdaten und eine kurze Beschreibung deines Vorhabens – das Formular steht auf der rechten Seite bereit.',
       }}
-      form={<ContactForm submit action="/api/contact" extra={{ source: 'contact-form' }} layout="card" />}
+      formTitle="Kontaktformular"
+      form={
+        <div className="contact-editorial-form">
+          <ContactForm
+            submit
+            action="/api/contact"
+            extra={{ source: 'contact-form' }}
+            layout="plain"
+          />
+        </div>
+      }
     />
   );
 }

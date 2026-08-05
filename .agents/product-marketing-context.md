@@ -4,47 +4,48 @@
 
 ## Product Overview
 **One-liner:**  
-Mardu ist die Plattformmarke für physische Zugriffssteuerung in sicherheitsrelevanten Umgebungen.
+Mardu ist ein junges Startup, das sich auf digitale Zutritts- und Verwaltungssysteme spezialisiert hat und vernetzte Zutritts- und Zugriffskontrolllösungen entwickelt.
 
 **What it does:**  
-Mardu digitalisiert Zutritt und Maschinenfreigabe in Werkstatt, Industrie und Baustelle. Die Marke verbindet digitale Verwaltung, IP500-Funksystem und die Einbindung in bestehende Systeme, damit Betreiber weniger manuellen Aufwand haben und mehr Übersicht über Zugänge und Nutzung gewinnen.
+Mardu entwickelt vernetzte Zutritts- und Zugriffskontrolllösungen, die sich flexibel an die Bedürfnisse unserer Kunden anpassen – von kleinen Makerspaces bis hin zu Großbaustellen. Unser Fokus liegt auf zwei Bereichen:
+* **mardu.space (Spaces):** In Spaces (wie Werkstätten, Lernräumen und Arbeitsplätzen) ermöglichen wir flexible Zutritts- und Zugriffskontrolllösungen, die gemeinschaftlich genutzte Räume und Maschinen einfach und sicher zugänglich machen.
+* **mardu.construction (Construction):** Im Construction-Bereich unterstützen unsere Geräte Baustellen beim effizienten Management von Zugängen und Personalbewegungen auf und um die Baustelle.
 
 **Product category:**  
-Physische Zugriffssteuerung, Zutrittskontrolle, Maschinenfreigabe
+Digitale Zutritts- und Verwaltungssysteme, vernetzte Zugriffskontrolllösungen
 
 **Product type:**  
-B2B/B2Institution Hardware- und Softwareplattform
+Vernetzte Hardware- und Softwareplattform (B2B / Spaces & Construction)
 
 **Business model:**  
-Projekt- und lösungsorientierter Vertrieb mit Hardware, Inbetriebnahme, Konfiguration, optionalen Software- und Supportbestandteilen
+Vertrieb von IoT-Hardwaregeräten, cloudbasierten Zugriffskontrolllösungen und digitalen Verwaltungssystemen
 
 ## Target Audience
 **Target companies:**  
-Unternehmenswerkstätten, Hochschulen, Labore, Makerspaces, Betreiber sicherheitsrelevanter Zugänge, Baustellenkoordination
+Gemeinschaftlich genutzte Spaces (Werkstätten, Makerspaces, Lernräume, Arbeitsplätze, Co-Working), Baustellenbetreiber, Generalunternehmer und Großbaustellen
 
 **Decision-makers:**  
-Werkstattleitung, Sicherheitsverantwortliche, technische Leitung, Hochschulbetrieb, Facility- oder Standortverantwortliche, Baustellenkoordination
+Space-Betreiber, Werkstattleitung, Baustellenkoordination, Bauleitung, Sicherheitsverantwortliche
 
 **Primary use case:**  
-Zutritte und Maschinennutzung digital organisieren statt über Schlüssel, Listen und informelle Freigaben
+Zutritte, Maschinennutzung und Personalbewegungen digital und flexibel steuern, ohne aufwendige Schlüssel- und Zettelwirtschaft
 
 **Jobs to be done:**  
-- Nur berechtigte Personen in sensible Bereiche oder an Maschinen lassen  
-- Qualifikationen, Regeln und Freigaben technisch durchsetzen  
-- Nachweise für Betrieb, Sicherheit und Vorfälle belastbar dokumentieren
+- Gemeinschaftlich genutzte Räume und Maschinen einfach und sicher zugänglich machen  
+- Zugänge und Personalbewegungen auf und um Baustellen effizient managen  
+- Vernetzte Lösungen bereitstellen, die sich flexibel vom kleinen Makerspace bis zur Großbaustelle anpassen
 
 **Use cases:**  
-- Werkstatt- und Laborzugänge  
-- Maschinenfreigabe in Ausbildungs-, Hochschul- und Produktionsumgebungen  
-- Baustellenzugang für Mitarbeitende, Lieferanten und Nachunternehmer
+- Zutritts- und Zugriffskontrolle in Werkstätten, Lernräumen und Arbeitsplätzen  
+- Baustellenzugang, Personalbewegungs- und Anwesenheitsmanagement
+- Flexible Maschinenfreigabe in gemeinschaftlichen Werkbereichen
 
 ## Personas
 | Persona | Cares about | Challenge | Value we promise |
 |---------|-------------|-----------|------------------|
-| Werkstattleitung | sicherer Betrieb, reibungsarme Freigaben | viele Nutzer, Maschinen und Regeln im Alltag | Freigaben, Qualifikationen und Nachweise in einem operativen System |
-| Sicherheitsverantwortliche | Regelkonformität, Nachvollziehbarkeit | Regeln werden oft nicht konsequent technisch durchgesetzt | technische Durchsetzung plus saubere Protokolle |
-| Hochschul- / Laborbetrieb | wechselnde Nutzergruppen, Schulungslogik | Fluktuation, Einweisungen und Berechtigungen laufen auseinander | Qualifikation, Zutritt und Maschinennutzung bleiben gekoppelt |
-| Baustellenkoordination | Übersicht, Zutritt, temporäre Organisation | wechselnde Teams und temporäre Flächen | skalierbare Zutrittssteuerung für dynamische Projektumgebungen |
+| Space-Betreiber / Werkstattleitung | flexibler Zutritt, einfache Maschinenfreigabe | wechselnde Nutzergruppen, Sicherheit an Maschinen | Räume und Geräte sicher zugänglich machen bei minimalem Verwaltungsaufwand |
+| Baustellenkoordinator / Bauleiter | effizientes Management, Personalbewegungen | hohe Fluktuation von Arbeitern, Subunternehmer-Kontrolle | lückenloses Anwesenheitsmanagement und Zutrittssteuerung auf Baustellen |
+| Sicherheitsverantwortliche | Regelkonformität, Nachvollziehbarkeit | Regeln werden im Alltag oft umgangen | technische Durchsetzung von Berechtigungen und lückenlose Protokollierung |
 
 ## Problems & Pain Points
 **Core problem:**  

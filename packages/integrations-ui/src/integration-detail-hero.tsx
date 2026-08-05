@@ -11,7 +11,7 @@ export function IntegrationDetailHero({
   integration,
 }: IntegrationDetailHeroProps) {
   return (
-    <header className="relative overflow-hidden border border-black/8 bg-gradient-to-r from-white via-white to-[color:var(--paper)] p-6 md:p-8">
+    <header className="relative overflow-hidden border border-border bg-gradient-to-r from-card via-card to-background p-6 md:p-8">
       <div className="grid gap-6 lg:grid-cols-[1fr_260px] lg:items-center">
         <div>
           <h1 className="headline-balance font-serif text-[clamp(2.2rem,4.5vw,5rem)] leading-[0.94] tracking-[-0.03em] text-foreground">
@@ -34,7 +34,7 @@ export function IntegrationDetailHero({
         </div>
 
         {integration.heroImageUrl ? (
-          <div className="relative aspect-[4/3] overflow-hidden border border-black/10 bg-white/70">
+          <div className="relative aspect-[4/3] overflow-hidden border border-border bg-card">
             <Image
               src={integration.heroImageUrl}
               alt={integration.heroImageAlt || integration.title}
@@ -44,7 +44,7 @@ export function IntegrationDetailHero({
             />
           </div>
         ) : integration.logoUrl ? (
-          <div className="relative mx-auto h-40 w-40 overflow-hidden rounded-md border border-black/10 bg-white p-4">
+          <div className="relative mx-auto h-40 w-40 overflow-hidden rounded-md border border-border bg-background p-4">
             <Image
               src={integration.logoUrl}
               alt={integration.logoAlt || integration.title}

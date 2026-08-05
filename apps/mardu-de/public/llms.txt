@@ -1,6 +1,6 @@
 # Mardu (mardu.de)
 
-> Mardu ist die Plattformmarke für physische Zugriffssteuerung. Die Marke verbindet Identität, Berechtigung, Hardware und Protokollierung für digitale Zutrittssteuerung und Maschinenfreigabe. Produktlinien: `mardu.space` für Werkstätten, Labore, Hochschulen und Makerspaces sowie `mardu.construction` für Baustellen im Early-Access-Stadium.
+> Mardu ist ein junges Startup, das sich auf digitale Zutritts- und Verwaltungssysteme spezialisiert hat. Unser Fokus liegt auf zwei Bereichen: `mardu.space` für Werkstätten, Lernräume, Arbeitsplätze und Makerspaces, sowie `mardu.construction` für Baustellen. Wir entwickeln vernetzte Zutritts- und Zugriffskontrolllösungen, die sich flexibel an die Bedürfnisse unserer Kunden anpassen – von kleinen Makerspaces bis hin zu Großbaustellen.
 
 Wichtige Hinweise für LLM-Crawler und Agents:
 - Primäre, kanonische Website: https://mardu.de/

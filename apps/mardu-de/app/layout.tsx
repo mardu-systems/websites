@@ -7,43 +7,58 @@ import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { getSiteConfig } from '@mardu/site-config';
 import localFont from 'next/font/local';
+import { IBM_Plex_Sans, JetBrains_Mono } from 'next/font/google';
 
 const siteConfig = getSiteConfig('mardu-de');
 const SITE_URL = siteConfig.origin;
 
-const geist = localFont({
+const aktivGrotesk = localFont({
   src: [
-    { path: '../public/fonts/Inter-Regular.woff2', weight: '400', style: 'normal' },
-    { path: '../public/fonts/Inter-Medium.woff2', weight: '500', style: 'normal' },
-    { path: '../public/fonts/Inter-Bold.woff2', weight: '700', style: 'normal' },
-    { path: '../public/fonts/Inter-ExtraBold.woff2', weight: '800', style: 'normal' },
+    { path: '../public/fonts/AktivGrotesk-Light.ttf', weight: '300', style: 'normal' },
+    { path: '../public/fonts/AktivGrotesk-Regular.ttf', weight: '400', style: 'normal' },
+    { path: '../public/fonts/AktivGrotesk-Medium.ttf', weight: '500', style: 'normal' },
+    { path: '../public/fonts/AktivGrotesk-Bold.ttf', weight: '700', style: 'normal' },
   ],
-  variable: '--font-geist-sans',
+  variable: '--font-aktiv-grotesk',
+});
+
+const ibmPlexSans = IBM_Plex_Sans({
+  subsets: ['latin'],
+  variable: '--font-ibm-plex-sans',
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
 });
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  userScalable: false,
-  themeColor: '#ffffff',
+  userScalable: true,
+  themeColor: '#f4f4f4',
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   applicationName: siteConfig.appName,
   title: {
-    default: 'Mardu – Plattform für physische Zugriffssteuerung',
+    default: 'Mardu – Maschinenfreigabe, Zutritt und Zufahrt',
     template: '%s | Mardu',
   },
   description:
-    'Mardu ist die Plattformmarke für digitale Zutrittssteuerung und Maschinenfreigabe. Entdecken Sie mardu.space für Werkstatt und Labor sowie mardu.construction für Baustellen.',
+    'Mardu verbindet Maschinenfreigabe, Gebäudezutritt und Zufahrtssteuerung mit zentraler Verwaltung für Identitäten, Berechtigungen und Ereignisse.',
   keywords: [
-    'Zugriffskontrollsysteme',
+    'Maschinenfreigabe',
+    'Zutrittssteuerung',
+    'Zufahrtssteuerung',
+    'Schrankensteuerung',
+    'Lehrwerkstatt',
+    'Unternehmenswerkstatt',
     'Makerspace',
     'FabLab',
-    'Schülerlabor',
-    'Open Education Badges',
+    'Labor',
   ],
   alternates: {
     canonical: '/',
@@ -74,9 +89,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Mardu – Plattform für physische Zugriffssteuerung',
+    title: 'Mardu – Maschinenfreigabe, Zutritt und Zufahrt',
     description:
-      'Mardu verbindet Identität, Regeln, Hardware und Protokollierung in klaren Produktlinien für Werkstatt, Labor und Baustelle.',
+      'Von der Maschine bis zur Schranke: Mardu verbindet Identität, Berechtigung und physische Zugänge in einem System.',
     url: SITE_URL,
     siteName: siteConfig.appName,
     locale: 'de_DE',
@@ -99,9 +114,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mardu – Plattform für physische Zugriffssteuerung',
+    title: 'Mardu – Maschinenfreigabe, Zutritt und Zufahrt',
     description:
-      'Mardu führt in die passende Produktlinie für digitale Zutrittssteuerung und Maschinenfreigabe.',
+      'Von der Maschine bis zur Schranke: digitale Berechtigungen für physische Infrastruktur.',
     images: ['/_A7_9072_quer.webp', '/_A7_9072_quer.jpg'],
   },
   verification: {
@@ -140,14 +155,16 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="de">
+    <html lang="de" data-scroll-behavior="smooth">
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${geist.variable} bg-background text-foreground overflow-x-hidden`}>
+      <body
+        className={`${aktivGrotesk.variable} ${ibmPlexSans.variable} ${jetBrainsMono.variable} bg-background text-foreground overflow-x-hidden`}
+      >
         <RecaptchaProvider>
           <SiteShell>{children}</SiteShell>
           <Analytics />

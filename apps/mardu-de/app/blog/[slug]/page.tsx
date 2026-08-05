@@ -220,7 +220,7 @@ export default async function BlogDetailPage({ params }: { params: Params }) {
 
           <div className="mt-6 grid gap-10 lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-14">
             <aside className="space-y-8 lg:sticky lg:top-28 lg:self-start">
-              <div className="border border-black/10 bg-white/65 p-5">
+              <div className="border border-border bg-card p-5">
                 <p className="text-[1.1rem] font-medium text-foreground">{post.author.name}</p>
                 <p className="mt-1 text-foreground/65">
                   {new Date(post.publishedAt).toLocaleDateString('de-DE', {
@@ -252,7 +252,7 @@ export default async function BlogDetailPage({ params }: { params: Params }) {
             </aside>
 
             <article>
-              <header className="relative overflow-hidden border border-black/8 bg-gradient-to-r from-white via-white to-[color:var(--paper)] p-6 md:p-8">
+              <header className="relative overflow-hidden border border-border bg-gradient-to-r from-card via-card to-background p-6 md:p-8">
                 <h1 className="headline-balance max-w-5xl font-serif text-[clamp(2.2rem,5vw,5.4rem)] leading-[0.94] tracking-[-0.03em] text-foreground">
                   {post.title}
                 </h1>
@@ -261,7 +261,7 @@ export default async function BlogDetailPage({ params }: { params: Params }) {
                 </p>
               </header>
 
-              <div className="mt-6 overflow-hidden border border-black/10 bg-white/40">
+              <div className="mt-6 overflow-hidden border border-border bg-card">
                 <Image
                   src={post.coverImageUrl}
                   alt={post.coverImageAlt}

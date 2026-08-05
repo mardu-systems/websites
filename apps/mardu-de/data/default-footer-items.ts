@@ -1,14 +1,25 @@
 import type { LayoutLinkDto } from '@mardu/layout/types';
+import { defaultHeaderItems } from '@/data/default-header-items';
 
-export const defaultFooterNavLinks: LayoutLinkDto[] = [
-  { href: '/', label: 'Startseite' },
-  { href: '/#produkte', label: 'Lösungen' },
-  { href: '/#loesung', label: 'Nutzen' },
-  { href: '/#argumente', label: 'Vorteile' },
-  { href: '/#vorgehen', label: 'Vorgehen' },
-  { href: '/#team', label: 'Team' },
-  { href: '/integrations', label: 'Integrationen' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/brand', label: 'Markenressourcen' },
-  { href: '/contact', label: 'Kontakt' },
+/** Reuses the main destinations and adds lower-priority editorial content. */
+export const defaultFooterNavLinks: ReadonlyArray<LayoutLinkDto> = [
+  ...defaultHeaderItems.map((item) => ({
+    label: item.label,
+    href: item.href,
+    index: item.index,
+    description: item.description,
+    external: item.external,
+  })),
+  {
+    index: '06',
+    label: 'Blog',
+    description: 'Praxis & Hintergründe',
+    href: '/blog',
+  },
+];
+
+export const defaultFooterMetaLinks: ReadonlyArray<LayoutLinkDto> = [
+  { label: 'Whitepaper', href: '/whitepaper' },
+  { label: 'Roadmap', href: '/roadmap' },
+  { label: 'Markenressourcen', href: '/brand' },
 ];

@@ -8,6 +8,7 @@ import { cn } from '@mardu/ui/lib/utils';
  */
 export interface ContactPageDetailsDto {
   intro: ReactNode;
+  addressTitle?: ReactNode;
   companyBlock: ReactNode;
   travelTitle?: ReactNode;
   travelContent?: ReactNode;
@@ -25,6 +26,7 @@ export interface ContactPageSectionProps {
   title: ReactNode;
   description: ReactNode;
   details: ContactPageDetailsDto;
+  formTitle?: ReactNode;
   form: ReactNode;
   className?: string;
 }
@@ -34,6 +36,7 @@ export default function ContactPageSection({
   title,
   description,
   details,
+  formTitle,
   form,
   className,
 }: ContactPageSectionProps) {
@@ -45,41 +48,69 @@ export default function ContactPageSection({
       )}
     >
       <section className="mardu-container w-full py-12 md:py-16">
-        <header className="max-w-3xl space-y-4 pb-8">
-          <Overline>{overline}</Overline>
-          <h1 className="headline-balance text-[clamp(2rem,4.5vw,3.75rem)] leading-[0.95] tracking-[-0.03em] text-foreground">
+        <header className="max-w-3xl space-y-5 pb-10">
+          <Overline className="text-mardu-purple">{overline}</Overline>
+          <h1 className="headline-balance max-w-[15ch] text-[clamp(2.85rem,7.4vw,3.75rem)] font-light leading-[0.98] tracking-[-0.04em] text-foreground">
             {title}
           </h1>
-          <div className="max-w-2xl text-base leading-relaxed text-foreground/75 md:text-lg">
+          <div className="max-w-2xl text-base leading-relaxed text-foreground/68">
             {description}
           </div>
         </header>
 
-        <div className="grid items-start gap-12 lg:grid-cols-2">
-          <div className="space-y-6 pt-2 text-base leading-relaxed text-foreground/85">
-            <div>{details.intro}</div>
-            <div className="space-y-1">{details.companyBlock}</div>
+        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="text-base leading-relaxed text-foreground/72 [&_strong]:font-medium [&_strong]:text-foreground/90">
+            {details.intro ? <div className="border-b border-black/15 pb-10">{details.intro}</div> : null}
+
+            <section className="border-b border-black/15 py-10 first:pt-2">
+              {details.addressTitle ? (
+                <h2 className="mb-8 text-xs font-normal uppercase tracking-[0.08em] text-mardu-purple">
+                  <span className="mr-1 text-[0.625rem] text-mardu-purple/70">[02]</span>
+                  {details.addressTitle}
+                </h2>
+              ) : null}
+              <div className="space-y-4">{details.companyBlock}</div>
+            </section>
 
             {details.travelTitle || details.travelContent ? (
-              <div className="space-y-2">
+              <section className="border-b border-black/15 py-10">
                 {details.travelTitle ? (
-                  <h2 className="text-lg font-semibold tracking-[-0.01em]">{details.travelTitle}</h2>
+                  <h2 className="mb-8 text-xs font-normal uppercase tracking-[0.08em] text-mardu-purple">
+                    <span className="mr-1 text-[0.625rem] text-mardu-purple/70">[03]</span>
+                    {details.travelTitle}
+                  </h2>
                 ) : null}
-                {details.travelContent ? <div>{details.travelContent}</div> : null}
-              </div>
+                {details.travelContent ? (
+                  <div className="space-y-5">{details.travelContent}</div>
+                ) : null}
+              </section>
             ) : null}
 
             {details.contactTitle || details.contactContent ? (
-              <div className="space-y-2">
+              <section className="py-10">
                 {details.contactTitle ? (
-                  <h2 className="text-lg font-semibold tracking-[-0.01em]">{details.contactTitle}</h2>
+                  <h2 className="mb-8 text-xs font-normal uppercase tracking-[0.08em] text-mardu-purple">
+                    <span className="mr-1 text-[0.625rem] text-mardu-purple/70">[04]</span>
+                    {details.contactTitle}
+                  </h2>
                 ) : null}
                 {details.contactContent ? <div>{details.contactContent}</div> : null}
-              </div>
+              </section>
             ) : null}
           </div>
 
-          <div className="mx-auto w-full max-w-2xl">{form}</div>
+          <section className="mx-auto w-full max-w-2xl lg:pt-2" aria-labelledby="contact-form-title">
+            {formTitle ? (
+              <h2
+                id="contact-form-title"
+                className="mb-8 text-xs font-normal uppercase tracking-[0.08em] text-mardu-purple"
+              >
+                <span className="mr-1 text-[0.625rem] text-mardu-purple/70">[01]</span>
+                {formTitle}
+              </h2>
+            ) : null}
+            {form}
+          </section>
         </div>
       </section>
     </main>

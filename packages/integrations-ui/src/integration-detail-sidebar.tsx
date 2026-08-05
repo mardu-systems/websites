@@ -10,7 +10,7 @@ export function IntegrationDetailSidebar({
 }: IntegrationDetailSidebarProps) {
   return (
     <aside className="space-y-5 lg:sticky lg:top-28 lg:self-start">
-      <div className="border border-black/10 bg-white/65 p-4">
+      <div className="border border-border bg-card p-4">
         <p className="text-xs uppercase tracking-[0.18em] text-foreground/50">
           Status
         </p>
@@ -30,7 +30,7 @@ export function IntegrationDetailSidebar({
         ) : null}
       </div>
 
-      <div className="border border-black/10 bg-white/65 p-4">
+      <div className="border border-border bg-card p-4">
         <p className="text-xs uppercase tracking-[0.18em] text-foreground/50">
           Kategorien
         </p>
@@ -47,7 +47,7 @@ export function IntegrationDetailSidebar({
       </div>
 
       {integration.compatibilityNotes ? (
-        <div className="border border-black/10 bg-white/65 p-4">
+        <div className="border border-border bg-card p-4">
           <p className="text-xs uppercase tracking-[0.18em] text-foreground/50">
             Kompatibilität
           </p>

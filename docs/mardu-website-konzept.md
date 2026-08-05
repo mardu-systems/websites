@@ -123,6 +123,18 @@ Beim Einmalkauf kann optional ein Servicevertrag ergänzt werden. Dieser Service
 
 Hardware as a Service soll als hybrides Angebot gezeigt werden.
 
+### HaaS Tiers im Vergleich
+
+| Leistung / Feature | HaaS Basic | HaaS Plus | HaaS Premium |
+| :--- | :--- | :--- | :--- |
+| **Monatlicher Preis** | 25 € brutto | 35 € brutto | 55 € brutto |
+| **Ersatzgerät-Garantie** | Innerhalb 1 Woche | Innerhalb 1 Woche | Innerhalb 48 Stunden |
+| **Vor-Ort-Service** | ❌ (Nur Remote) | ✅ Inklusive | ✅ Inklusive (Priorisiert) |
+| **Support-Tickets / Monat** | 5 Tickets | 10 Tickets | Unbegrenzt |
+| **Antwortzeit (SLA)** | Best-Effort | Best-Effort | Max. 4 Stunden (in Arbeitszeit) |
+| **Software-Umfang** | Alle Basisfunktionen | Alle Basisfunktionen | Alle Premiumfunktionen |
+| **Eignung** | Kleine Werkstätten / Vereine | Ambitionierte Makerspaces / Labs | Professionelle Betreiber / Hochschulen |
+
 ### HaaS Basic
 
 25 € brutto
@@ -160,10 +172,10 @@ Geplante Produktübersicht:
 
 - D1: Maschinenfreigabe mit BLE
 - D1-Pro: Maschinenfreigabe mit IP500 und Strommessung
-- DO1: elektronischer Halbzylinder
-- DO1-1: elektronischer Knaufzylinder
-- DO1-2: elektronischer Doppelknaufzylinder
-- B1: Türbeschläge
+- DO1: elektronischer Halbzylinder (ab 495 €)
+- DO1-1: elektronischer Knaufzylinder (ab 545 €)
+- DO1-2: elektronischer Doppelknaufzylinder (ab 849 €)
+- B1: Türbeschlag (ab 795 €)
 
 D1 und D1-Pro werden als Produkte für Maschinenfreigabe eingeordnet. DO1, DO1-1, DO1-2 und B1 gehören zur Tür-Hardware.
 
@@ -179,7 +191,7 @@ Der CTA soll zu Anfrage, Kontakt oder Konfigurator führen.
 
 ## Integrationen
 
-Die Integrationsseite soll zeigen, welche Anbindungen und Erweiterungen das Mardu-System bietet.
+Die Integrationsseite soll zeigen, welche Anbindungen und Erweiterungen das Mardu-System bietet. Diese Seite ist nicht direkt im Hauptmenü oder auf der Startseite prominent sichtbar, sondern wird primär über den Footer verlinkt.
 
 Beispiele:
 
@@ -199,7 +211,7 @@ Die Integrationen sind ein wichtiger Vertrauens- und Skalierungsfaktor: Mardu so
 
 ## Roadmap
 
-Die Roadmap soll zeigen, welche Funktionen und Integrationen für die nächsten Wochen und Monate geplant sind.
+Die Roadmap soll zeigen, welche Funktionen und Integrationen für die nächsten Wochen und Monate geplant sind. Um den Fokus auf der Hauptseite auf die Kernprodukte zu legen, wird die Roadmap nicht auf der Hauptseite dargestellt, sondern ist ausschließlich über den Footer verlinkt.
 
 Sie soll öffentlich verständlich bleiben und nicht zu intern wirken. Sinnvoll sind Gruppierungen wie:
 
@@ -259,7 +271,9 @@ Inhalte:
 
 ## Fotos
 
-Die Fotos-Seite soll Bildmaterial bereitstellen, zum Beispiel:
+Die Fotos-Seite soll Bildmaterial bereitstellen und wird als unterstützende Ressource ausschließlich über den Footer verlinkt.
+
+Beispiele:
 
 - Produktbilder
 - Hardware im Einsatz

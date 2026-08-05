@@ -24,7 +24,7 @@ export function IntegrationsHero({
             </div>
           ) : null}
         </div>
-        <div className="border border-black/10 bg-white/55 p-4 text-sm text-foreground/70">
+        <div className="border border-border bg-muted/50 p-4 text-sm text-muted-foreground">
           <p>
             <strong>{available}</strong> verfügbar · <strong>{beta}</strong> in
             Beta · <strong>{planned}</strong> geplant

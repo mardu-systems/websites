@@ -1,5 +1,6 @@
-import { SectionIntro } from '@mardu/sections';
-import { cn } from '@mardu/ui/lib/utils';
+import { SectionIntro } from "@mardu/sections";
+import { Badge } from "@mardu/ui/components/badge";
+import { cn } from "@mardu/ui/lib/utils";
 
 export interface SolutionsHeroProps {
   eyebrow?: string;
@@ -10,14 +11,19 @@ export interface SolutionsHeroProps {
 }
 
 export function SolutionsHero({
-  eyebrow = 'Lösungen',
+  eyebrow = "Lösungen",
   title,
   intro,
   highlights,
   className,
 }: SolutionsHeroProps) {
   return (
-    <section className={cn('section-hairline overflow-hidden py-18 md:py-22', className)}>
+    <section
+      className={cn(
+        "section-hairline overflow-hidden py-18 md:py-22",
+        className,
+      )}
+    >
       <div className="mardu-container relative">
         <div
           aria-hidden="true"
@@ -44,12 +50,9 @@ export function SolutionsHero({
           {highlights?.length ? (
             <div className="mt-8 flex flex-wrap gap-3 border-t border-black/8 pt-5">
               {highlights.map((highlight) => (
-                <span
-                  key={highlight}
-                  className="inline-flex rounded-full border border-black/10 bg-white/72 px-3 py-1.5 text-[11px] uppercase tracking-[0.16em] text-foreground/60"
-                >
+                <Badge key={highlight} variant="outline">
                   {highlight}
-                </span>
+                </Badge>
               ))}
             </div>
           ) : null}

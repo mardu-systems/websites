@@ -24,12 +24,16 @@ Shared site-layout components for Mardu frontends.
 - renders the shared fixed header with scroll state and a mobile menu
 - accepts branding, navigation items, and an optional CTA DTO
 - supports a regular link CTA or the current Meetergo scheduler CTA
+- supports `variant: "editorial-index"` for a flexible numbered page grid
+  with an optional description per link and CTA; smaller viewports use the existing menu
 
 ### `SiteFooter`
 
 - renders the shared footer shell based on the `mardu.space` footer structure
 - accepts branding, description, nav/meta/social links, and optional footer actions
 - supports an optional `onAction` callback for non-link footer interactions such as cookie settings
+- supports `variant: "editorial-index"` for a dark, gridded editorial layout;
+  its optional primary action is rendered in the brand column
 
 ### `SiteShell`
 

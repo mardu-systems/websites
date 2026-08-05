@@ -15,7 +15,9 @@ const contentSecurityPolicy = `
   object-src 'none';
   base-uri 'self';
   form-action 'self' https://cal.meetergo.com;
-`.replace(/\s{2,}/g, ' ').trim();
+`
+  .replace(/\s{2,}/g, ' ')
+  .trim();
 
 const securityHeaders = [
   {
@@ -33,10 +35,6 @@ const securityHeaders = [
   {
     key: 'Referrer-Policy',
     value: 'strict-origin-when-cross-origin',
-  },
-  {
-    key: 'X-Frame-Options',
-    value: 'DENY',
   },
   {
     key: 'X-Content-Type-Options',
@@ -62,11 +60,13 @@ const nextConfig: NextConfig = {
   },
   outputFileTracingRoot: workspaceRoot,
   transpilePackages: [
+    '@mardu/catalog-ui',
     '@mardu/layout',
     '@mardu/content-core',
     '@mardu/lead-core',
     '@mardu/sections',
     '@mardu/site-config',
+    '@mardu/solutions-ui',
     '@mardu/styles',
     '@mardu/ui',
   ],
@@ -95,7 +95,12 @@ const nextConfig: NextConfig = {
         hostname: 'localhost',
         port: '4000',
       },
-        ]},
+      {
+        protocol: 'https',
+        hostname: '*.r2.dev',
+      },
+    ],
+  },
   async headers() {
     return [
       {

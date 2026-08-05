@@ -20,11 +20,11 @@ export function IntegrationCard({
   const itemHref = href ?? buildHref?.(item) ?? `${hrefBase}/${item.slug}`;
 
   return (
-    <article className="group border border-black/12 bg-white/45 p-4 transition-colors hover:bg-white/65">
+    <article className="group border border-border bg-card p-4 transition-colors hover:bg-muted/50">
       <Link href={itemHref} className="block">
         <div className="flex items-start gap-3">
           {item.logoUrl ? (
-            <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-md border border-black/10 bg-white">
+            <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-md border border-border bg-background">
               <Image
                 src={item.logoUrl}
                 alt={item.logoAlt || item.title}
@@ -34,7 +34,7 @@ export function IntegrationCard({
               />
             </div>
           ) : (
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-md border border-black/10 bg-white text-sm font-medium text-foreground/55">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-md border border-border bg-background text-sm font-medium text-muted-foreground">
               {item.title.slice(0, 2).toUpperCase()}
             </div>
           )}

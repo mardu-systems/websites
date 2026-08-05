@@ -39,7 +39,7 @@ export function SectionIntro({
         {title ? (
           <h2
             className={cn(
-              'max-w-4xl text-[clamp(1.95rem,4vw,3.5rem)] leading-[1.02] tracking-[-0.03em] text-foreground',
+              'max-w-4xl text-[clamp(1.95rem,4vw,3.75rem)] leading-[1.02] tracking-[-0.03em] text-foreground',
               balanceTitle && 'headline-balance',
               titleClassName,
             )}
@@ -48,7 +48,7 @@ export function SectionIntro({
           </h2>
         ) : null}
         {intro ? (
-          <div className={cn('max-w-[42rem] text-sm leading-relaxed text-foreground/68 md:text-base', introClassName)}>
+          <div className={cn('max-w-[42rem] text-base leading-relaxed text-foreground/68', introClassName)}>
             {typeof intro === 'string' ? <p>{intro}</p> : intro}
           </div>
         ) : null}
@@ -72,7 +72,7 @@ export function SectionIntro({
         {title ? (
           <h2
             className={cn(
-              'max-w-[10ch] text-[clamp(1.75rem,7vw,4.25rem)] leading-[0.96] tracking-[-0.05em] text-foreground sm:max-w-[12ch] sm:text-[clamp(2rem,5vw,4.25rem)] sm:leading-[0.94]',
+              'max-w-[10ch] text-[clamp(1.75rem,7vw,3.75rem)] leading-[0.98] tracking-[-0.04em] text-foreground sm:max-w-[12ch] sm:text-[clamp(2rem,5vw,3.75rem)]',
               balanceTitle && 'text-balance md:headline-balance md:max-w-none md:leading-[1.02] md:tracking-[-0.03em]',
               titleClassName,
             )}
@@ -84,7 +84,7 @@ export function SectionIntro({
       {intro ? (
         <div
           className={cn(
-            'max-w-[34ch] text-[15px] leading-relaxed text-foreground/68 sm:max-w-[38ch] sm:text-sm md:justify-self-end md:text-base',
+            'max-w-[34ch] text-base leading-relaxed text-foreground/68 sm:max-w-[38ch] md:justify-self-end',
             introClassName,
           )}
         >

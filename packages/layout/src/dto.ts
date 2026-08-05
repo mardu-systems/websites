@@ -1,4 +1,4 @@
-import type * as React from 'react';
+import type * as React from "react";
 
 /**
  * Optional CMS reference fields that keep the DTOs Payload-ready without
@@ -18,6 +18,10 @@ export interface LayoutLinkDto extends PayloadReferenceDto {
   label: string;
   href: string;
   external?: boolean;
+  /** Optional two-digit label used by editorial index navigation. */
+  index?: string;
+  /** Optional explanatory line rendered below an editorial navigation label. */
+  description?: string;
 }
 
 /**
@@ -26,7 +30,7 @@ export interface LayoutLinkDto extends PayloadReferenceDto {
 export interface HeaderNavImageDto {
   src: string;
   alt?: string;
-  aspect?: 'wide' | 'square';
+  aspect?: "wide" | "square";
 }
 
 /**
@@ -42,7 +46,6 @@ export interface HeaderNavHeroDto {
  * One item inside a future mega-menu group.
  */
 export interface HeaderNavMegaItemDto extends LayoutLinkDto {
-  description?: string;
   image?: HeaderNavImageDto;
   badge?: string;
 }
@@ -51,14 +54,14 @@ export interface HeaderNavMegaItemDto extends LayoutLinkDto {
  * Current flat navigation link used by both sites.
  */
 export interface HeaderNavLinkDto extends LayoutLinkDto {
-  type: 'link';
+  type: "link";
 }
 
 /**
  * Payload-ready navigation group for future mega-menu expansion.
  */
 export interface HeaderNavMegaGroupDto extends PayloadReferenceDto {
-  type: 'mega';
+  type: "mega";
   label: string;
   hero?: HeaderNavHeroDto;
   items: ReadonlyArray<HeaderNavMegaItemDto>;
@@ -99,7 +102,7 @@ export interface MeetergoPrefillDto {
  * scheduler behavior, while `mode: "link"` renders a normal link CTA.
  */
 export interface HeaderCtaDto extends LayoutLinkDto {
-  mode?: 'link' | 'meetergo';
+  mode?: "link" | "meetergo";
   prefill?: MeetergoPrefillDto;
 }
 
@@ -121,6 +124,8 @@ export interface SiteHeaderProps {
   brand: SiteHeaderBrandingDto;
   items: ReadonlyArray<HeaderNavItemDto>;
   cta?: HeaderCtaDto;
+  /** Keeps the shared default header or enables the numbered Mardu editorial layout. */
+  variant?: "default" | "editorial-index";
   navigationLabel?: string;
   menuOpenLabel?: string;
   menuCloseLabel?: string;
@@ -129,7 +134,12 @@ export interface SiteHeaderProps {
 /**
  * Supported icon keys for shared footer social links.
  */
-export type FooterSocialIcon = 'instagram' | 'linkedin' | 'github' | 'mail' | 'phone';
+export type FooterSocialIcon =
+  | "instagram"
+  | "linkedin"
+  | "github"
+  | "mail"
+  | "phone";
 
 /**
  * Footer social link DTO. The icon key keeps the DTO serializable and easy to
@@ -171,7 +181,9 @@ export interface SiteFooterProps {
   socialLinks?: ReadonlyArray<FooterSocialLinkDto>;
   actions?: ReadonlyArray<FooterActionDto>;
   onAction?: (actionId: string) => void;
-  theme?: 'dark' | 'light';
+  theme?: "dark" | "light";
+  /** Keeps the shared default footer or enables the compact editorial layout. */
+  variant?: "default" | "editorial-index";
 }
 
 /**
@@ -182,5 +194,5 @@ export interface SiteShellProps {
   header: SiteHeaderProps;
   footer: SiteFooterProps;
   disabled?: boolean;
-  contentTheme?: 'light' | 'dark';
+  contentTheme?: "light" | "dark";
 }
