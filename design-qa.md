@@ -137,3 +137,54 @@ Der fokussierte Vergleich bestätigt die gleiche Informationsfolge und Flächenb
 - Frischer Browserlauf nach Neustart des Entwicklungsservers: keine Hydration- oder sonstigen Laufzeitfehler; nur die bekannte lokale reCAPTCHA-Konfigurationswarnung und blockierte Vercel-Analyse-Skripte.
 
 final result: passed
+
+---
+
+# Design QA: Sticky Story Section
+
+## Sources
+
+- `/Users/lucaschoeneberg/Desktop/Bildschirmfoto 2026-08-06 um 10.59.54.png` — 2928 × 1326 px, desktop state 01.
+- `/Users/lucaschoeneberg/Desktop/Bildschirmfoto 2026-08-06 um 11.00.00.png` — 2924 × 1404 px, transition between states.
+- `/Users/lucaschoeneberg/Desktop/Bildschirmfoto 2026-08-06 um 11.00.05.png` — 2906 × 1224 px, desktop state 02.
+
+The references establish the interaction and composition: long-form copy on the left, a sticky media stage on the right, controlled state changes at the next story heading, and a circular down control.
+
+## Implementation evidence
+
+- `.codex-artifacts/sticky-story/implementation-desktop-state-01-final.jpg` — requested viewport 1440 × 900 CSS px, captured browser content 1425 × 891 px, DPR 1, first story state.
+- `.codex-artifacts/sticky-story/implementation-desktop-final.jpg` — requested viewport 1440 × 900 CSS px, captured browser content 1425 × 891 px, DPR 1, later story state.
+- `.codex-artifacts/sticky-story/implementation-mobile-final.jpg` — requested viewport 390 × 844 CSS px, captured browser content 375 × 812 px, DPR 1, stacked mobile layout.
+- `.codex-artifacts/sticky-story/comparison-desktop-state-01-final.png` — source and implementation in one comparison image.
+- `.codex-artifacts/sticky-story/comparison-desktop-final.png` — source and later implementation state in one comparison image.
+
+## Comparison
+
+The focused comparison uses the first reference state and the first Mardu story state. The implementation intentionally retains the existing Mardu brand system instead of cloning doinstruct's colors, rounded container, or typography. The following structural characteristics match the reference:
+
+- the text and media columns share one viewport composition;
+- the right media stage remains fixed while the left narrative advances;
+- copy width, open whitespace, and vertical activation point remain editorial rather than card-like;
+- the next-step control advances to the following narrative state;
+- the image change uses a short opacity and scale transition instead of an uncontrolled slide;
+- mobile removes the sticky behavior and keeps each image with its corresponding copy.
+
+## Findings
+
+- P0: none.
+- P1: none.
+- P2: none.
+- P3: the implementation includes a small media caption strip that is not present in the source. It is consistent with the established Mardu editorial system and does not affect the requested behavior.
+- Browser console: no runtime or hydration errors after a fresh development-server restart. Remaining warnings are the existing missing reCAPTCHA development key and blocked Vercel analytics scripts.
+- Responsive check: no horizontal overflow at 390 CSS px; all three mobile media blocks render at equal height; the desktop sticky stage is hidden on mobile.
+- Accessibility check: meaningful alt text is exposed only for the active desktop image; inactive desktop states are hidden from assistive technology; reduced-motion preferences disable smooth transitions.
+
+## Iteration history
+
+1. Initial implementation used the correct sticky interaction and layout but the running preview still served a stale `sizes` value for the mobile images.
+2. The preview was restarted, the server/client image attributes matched, and the final browser pass showed no hydration mismatch.
+3. Final source-versus-implementation comparison passed without P0, P1, or P2 visual issues.
+
+## Final result
+
+passed

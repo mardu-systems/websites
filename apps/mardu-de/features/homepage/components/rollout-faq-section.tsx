@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Faq, SectionIntro } from '@mardu/sections';
+import { EditorialFaqSection, SectionIntro } from '@mardu/sections';
 import { faqItems, rolloutSteps } from '../homepage-content';
 
 export function RolloutFaqSection() {
@@ -72,27 +72,19 @@ export function RolloutFaqSection() {
         </div>
       </section>
 
-      <section
-        className="border-b border-border bg-card py-16 md:py-24"
-        aria-labelledby="faq-title"
-      >
-        <div className="mardu-container grid gap-14 lg:grid-cols-[0.38fr_0.62fr] lg:gap-18">
-          <div className="lg:sticky lg:top-28 lg:self-start">
-            <p className="text-xs tracking-[0.08em] text-mardu-purple">FAQ</p>
-            <h2 id="faq-title" className="mardu-homepage-section-title mt-6 max-w-[17ch]">
-              Fragen vor dem{' '}
-              <em className="font-serif italic font-normal tracking-[-0.02em] text-foreground/90">
-                ersten Standortgespräch.
-              </em>
-            </h2>
-          </div>
-          <Faq
-            items={renderedFaqItems}
-            variant="lined"
-            className="[&_button]:min-h-12 [&_button]:text-left [&_button]:!text-[1.375rem] [&_button]:font-light [&_button]:leading-tight [&_button]:tracking-[-0.015em]"
-          />
-        </div>
-      </section>
+      <EditorialFaqSection
+        eyebrow="FAQ"
+        titleId="faq-title"
+        title={
+          <>
+            Fragen vor dem{' '}
+            <em className="font-serif italic font-normal tracking-[-0.02em] text-foreground/90">
+              ersten Standortgespräch.
+            </em>
+          </>
+        }
+        items={renderedFaqItems}
+      />
     </>
   );
 }

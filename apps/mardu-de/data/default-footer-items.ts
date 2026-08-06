@@ -11,7 +11,7 @@ export const defaultFooterNavLinks: ReadonlyArray<LayoutLinkDto> = [
     external: item.external,
   })),
   {
-    index: '06',
+    index: '04',
     label: 'Blog',
     description: 'Praxis & Hintergründe',
     href: '/blog',

@@ -1,4 +1,5 @@
 import type { HeaderNavLinkDto } from '@mardu/layout/types';
+import type { StickyStoryItem } from '@mardu/sections';
 
 export interface HomepageNavigationItem extends HeaderNavLinkDto {
   index: string;
@@ -203,6 +204,41 @@ export const systemLayers: ReadonlyArray<HomepageNumberedItem> = [
     title: 'Zentrale Übersicht',
     description:
       'Verantwortliche verwalten Ressourcen, Zustände und vorgesehene Ereignisse an einer Stelle.',
+  },
+];
+
+export const permissionsStory: ReadonlyArray<StickyStoryItem> = [
+  {
+    id: 'identities',
+    index: '01',
+    label: 'Identitäten',
+    title: 'Menschen, Rollen und Qualifikationen zentral verwalten.',
+    description:
+      'Personen, Identmedien, Rollen und Qualifikationen werden an einer Stelle gepflegt.',
+    emphasis: 'Eine Änderung wirkt bis zur physischen Freigabe.',
+    imageSrc: '/verwaltungssoftware/benutzerverwaltung.png',
+    imageAlt: 'Mardu-Verwaltungssoftware mit Benutzerkonten und zugeordneten Identmedien',
+  },
+  {
+    id: 'events',
+    index: '02',
+    label: 'Ereignisse',
+    title: 'Zugriffe nachvollziehen, statt Listen abzugleichen.',
+    description: 'Freigaben und abgelehnte Zugriffe werden mit dem vorgesehenen Kontext sichtbar.',
+    emphasis: 'Verantwortliche sehen, was wann an welchem Zugangspunkt passiert ist.',
+    imageSrc: '/verwaltungssoftware/zugriffsprotokolle.png',
+    imageAlt: 'Mardu-Verwaltungssoftware mit Zugriffsprotokollen und Ereignissen',
+  },
+  {
+    id: 'access-points',
+    index: '03',
+    label: 'Infrastruktur',
+    title: 'Geräte und Zugangspunkte gemeinsam im Blick behalten.',
+    description:
+      'Maschinen, Türen, Tore und weitere Ressourcen bleiben Teil derselben Verwaltungsstruktur.',
+    emphasis: 'So wird aus einzelnen Geräten ein steuerbares System.',
+    imageSrc: '/verwaltungssoftware/zutrittspunkte-und-geraete.png',
+    imageAlt: 'Mardu-Verwaltungssoftware mit verwalteten Geräten und Zugangspunkten',
   },
 ];
 

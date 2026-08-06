@@ -27,6 +27,10 @@ export {
 } from "./three-arguments";
 export { default as Faq, type FaqItem, type FaqProps } from "./faq";
 export {
+  default as EditorialFaqSection,
+  type EditorialFaqSectionProps,
+} from "./editorial-faq-section";
+export {
   default as FeatureSection,
   type FeatureSectionProps,
 } from "./feature-section";
@@ -121,6 +125,11 @@ export {
   type EditorialPanelsSectionProps,
   type EditorialPanelTheme,
 } from "./editorial-panels-section";
+export {
+  default as StickyStorySection,
+  type StickyStoryItem,
+  type StickyStorySectionProps,
+} from "./sticky-story-section";
 export {
   default as EditorialLinkPanelsSection,
   type EditorialLinkPanelItem,

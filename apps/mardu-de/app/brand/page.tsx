@@ -5,7 +5,12 @@ import { getSiteConfig } from '@mardu/site-config';
 const siteConfig = getSiteConfig('mardu-de');
 const brandAssetsPageContent = {
   ...marduBrandAssetsPageContent,
-  contactDescription: `${marduBrandAssetsPageContent.contactDescription} Du erreichst uns per E-Mail unter ${siteConfig.supportEmail} oder telefonisch unter ${siteConfig.contactPhone}.`,
+  description:
+    'Freigegebene Logos und kompakte Anwendungsregeln für Presse, Partnerkommunikation und Marketingmaterialien.',
+  downloadsDescription:
+    'Beide Logo-Varianten liegen als skalierbare SVG-Datei vor. Wählen Sie die Version passend zum Kontrast der vorgesehenen Fläche.',
+  usageDescription: '',
+  contactDescription: `Sie benötigen ein Sonderformat oder möchten eine Anwendung abstimmen? Sie erreichen uns unter ${siteConfig.supportEmail} oder telefonisch unter ${siteConfig.contactPhone}.`,
   contactHref: `mailto:${siteConfig.supportEmail}?subject=Anfrage%20zu%20Brand%20Assets`,
 };
 
@@ -29,5 +34,5 @@ export const metadata: Metadata = {
 };
 
 export default function BrandPage() {
-  return <BrandAssetsPage content={brandAssetsPageContent} />;
+  return <BrandAssetsPage content={brandAssetsPageContent} variant="editorial-index" />;
 }

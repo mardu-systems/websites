@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import SharedSiteShell from '@mardu/layout/site-shell';
 import type { FooterSocialLinkDto } from '@mardu/layout/types';
 import { Button } from '@mardu/ui/components/button';
@@ -67,11 +67,16 @@ export default function SiteShell({ children }: { children: ReactNode }) {
         primaryActionSlot: (
           <Button
             asChild
-            className="h-12 rounded-none bg-primary px-6 text-base text-primary-foreground hover:bg-primary/90"
+            className="group h-12 rounded-none border-y border-white/30 bg-transparent px-0 text-base font-normal text-white shadow-none hover:border-white hover:bg-transparent hover:text-white"
           >
             <Link href="/contact">
+              <span
+                className="flex size-7 shrink-0 items-center justify-center rounded-full bg-white text-black"
+                aria-hidden="true"
+              >
+                <ArrowUpRight className="size-3.5 stroke-[1.8] transition-transform duration-200 ease-out group-hover:rotate-45 group-focus-visible:rotate-45 motion-reduce:transition-none" />
+              </span>
               Jetzt beraten lassen
-              <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
           </Button>
         ),

@@ -75,7 +75,7 @@ export function HomepageHero() {
         </div>
 
         <div className="min-w-0">
-          <figure className="relative min-h-80 overflow-hidden bg-muted sm:min-h-[32rem] xl:min-h-[42rem]">
+          <figure className="relative min-h-80 overflow-hidden bg-muted sm:min-h-[32rem] xl:min-h-[clamp(34rem,calc(100svh-18rem),42rem)]">
             <Image
               src="/landing/mardu-modern-cnc.webp"
               alt="Mardu-Terminal an einer modernen CNC-Maschine bei der Identifikation mit einer Zugangskarte"

@@ -134,6 +134,7 @@ function HeaderNavLink({
     return (
       <Link
         href={href}
+        aria-current={isCurrentRoute ? "page" : undefined}
         onClick={(event) => {
           handleAnchorNavigation(item.href, event);
           onNavigate?.();
@@ -144,25 +145,34 @@ function HeaderNavLink({
           className,
         )}
       >
-        {item.index ? (
-          <span className="text-xs leading-none text-mardu-purple">
-            [{item.index}
-          </span>
-        ) : null}
-        <span
-          data-label
-          className="mt-1.5 truncate text-sm font-normal uppercase leading-none tracking-[0.02em]"
-        >
-          {item.label}]
-        </span>
-        {item.description ? (
+        <span data-nav-copy className="flex min-w-0 flex-col">
+          {item.index ? (
+            <span className="text-[0.6875rem] leading-none text-mardu-purple">
+              [{item.index}
+            </span>
+          ) : null}
           <span
-            data-description
-            className="mt-1 whitespace-pre-line text-[0.6875rem] leading-[1.35] text-foreground/55 group-hover:text-mardu-purple/80"
+            data-label
+            className="mt-1 truncate text-[0.8125rem] font-normal uppercase leading-none tracking-[0.02em]"
           >
-            {item.description}
+            {item.label}]
           </span>
-        ) : null}
+          {item.description ? (
+            <span
+              data-description
+              className="mt-1 whitespace-pre-line text-[0.6875rem] leading-[1.35] text-foreground/55 group-hover:text-mardu-purple/80"
+            >
+              {item.description}
+            </span>
+          ) : null}
+        </span>
+        <span
+          data-nav-arrow
+          className="hidden size-9 shrink-0 items-center justify-center rounded-full bg-foreground text-background"
+          aria-hidden="true"
+        >
+          <ArrowUpRight className="size-4 stroke-[1.8] transition-transform duration-200 ease-out group-hover:rotate-45 group-focus-visible:rotate-45 motion-reduce:transition-none" />
+        </span>
       </Link>
     );
   }
@@ -170,6 +180,7 @@ function HeaderNavLink({
   return (
     <Link
       href={href}
+      aria-current={isCurrentRoute ? "page" : undefined}
       onClick={(event) => {
         handleAnchorNavigation(item.href, event);
         onNavigate?.();
@@ -415,7 +426,33 @@ export default function SiteHeader({
 
     const previousOverflow = document.body.style.overflow;
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMobileOpen(false);
+      if (event.key === "Escape") {
+        setMobileOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const header = headerRef.current;
+      if (!header) return;
+
+      const focusableElements = Array.from(
+        header.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((element) => element.getClientRects().length > 0);
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements.at(-1);
+      if (!firstElement || !lastElement) return;
+
+      const activeElement = document.activeElement;
+      if (event.shiftKey && activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
     };
 
     document.body.style.overflow = "hidden";
@@ -450,7 +487,7 @@ export default function SiteHeader({
           )}
         >
           <nav
-            className="mardu-container flex h-24 items-center gap-4 xl:gap-12"
+            className="mardu-container flex h-16 items-center gap-4 md:h-20 xl:gap-10"
             aria-label={navigationLabel}
           >
             <Link
@@ -476,13 +513,13 @@ export default function SiteHeader({
               </div>
             </Link>
 
-            <div className="hidden h-full min-w-0 flex-1 grid-flow-col auto-cols-fr xl:grid">
+            <div className="hidden h-full min-w-0 flex-1 items-center justify-end gap-5 xl:flex 2xl:gap-7">
               {navItems.map((item) => (
                 <HeaderNavLink
                   key={`${item.label}:${item.href}`}
                   item={item}
                   variant="editorial-index"
-                  className="px-2 py-3"
+                  className="min-w-[6.75rem] px-0 py-2"
                 />
               ))}
             </div>
@@ -491,13 +528,13 @@ export default function SiteHeader({
               <HeaderCtaButton
                 cta={cta}
                 showArrow
-                className="group hidden h-12 shrink-0 gap-3 rounded-none border-y border-border bg-transparent px-0 text-base font-normal text-foreground shadow-none hover:border-primary hover:bg-transparent hover:text-primary xl:inline-flex"
+                className="group hidden h-10 shrink-0 gap-2.5 rounded-none border-y border-border bg-transparent px-0 text-sm font-normal text-foreground shadow-none hover:border-primary hover:bg-transparent hover:text-primary xl:inline-flex"
               />
             ) : null}
 
             <Button
               variant="ghost"
-              className="ml-auto h-11 gap-2 px-3 text-sm font-normal text-foreground hover:bg-muted hover:text-foreground xl:hidden"
+              className="ml-auto h-11 gap-2 px-2 text-sm font-normal text-foreground hover:bg-muted hover:text-foreground xl:hidden"
               onClick={() => setMobileOpen((value) => !value)}
               aria-label={mobileOpen ? menuCloseLabel : menuOpenLabel}
               aria-expanded={mobileOpen}
@@ -513,21 +550,19 @@ export default function SiteHeader({
           </nav>
 
           {mobileOpen ? (
-            <div
+            <nav
               id="mobile-nav"
-              className="max-h-[calc(100svh-10rem)] overflow-y-auto border-t border-border bg-background xl:hidden"
+              aria-label={`${navigationLabel} mobil`}
+              className="absolute inset-x-0 top-full h-[calc(100svh-4rem)] overflow-y-auto border-t border-border bg-background md:h-[calc(100svh-5rem)] xl:hidden"
             >
-              <div className="mardu-container py-5">
-                <p className="mb-4 text-xs leading-relaxed text-muted-foreground">
-                  Maschinenfreigabe · Zutritt · Zufahrt
-                </p>
+              <div className="mardu-container flex min-h-full flex-col py-4 md:py-5">
                 <div className="grid border-t border-border sm:grid-cols-2">
                   {navItems.map((item) => (
                     <HeaderNavLink
                       key={`${item.label}:${item.href}`}
                       item={item}
                       variant="editorial-index"
-                      className="border-b border-border py-5 sm:px-5 sm:odd:border-r sm:odd:pl-0 [&_[data-label]]:text-[1.375rem]"
+                      className="min-h-[4.5rem] flex-row items-center justify-between border-b border-border py-3 sm:px-5 sm:odd:border-r sm:odd:pl-0 [&_[data-label]]:text-lg [&_[data-nav-arrow]]:flex"
                       onNavigate={() => setMobileOpen(false)}
                     />
                   ))}
@@ -536,11 +571,12 @@ export default function SiteHeader({
                   <HeaderCtaButton
                     cta={cta}
                     onNavigate={() => setMobileOpen(false)}
-                    className="mt-6 h-12 w-full rounded-none bg-primary text-base text-primary-foreground hover:bg-primary/90"
+                    showArrow
+                    className="group mt-auto h-[3.25rem] w-full justify-start gap-3 rounded-none border-y border-border bg-transparent px-0 text-base font-normal text-foreground shadow-none hover:border-primary hover:bg-transparent hover:text-primary"
                   />
                 ) : null}
               </div>
-            </div>
+            </nav>
           ) : null}
         </div>
       </header>
@@ -620,8 +656,9 @@ export default function SiteHeader({
         </nav>
 
         {mobileOpen ? (
-          <div
+          <nav
             id="mobile-nav"
+            aria-label={`${navigationLabel} mobil`}
             className="border-t border-black/8 bg-background/95 xl:hidden"
           >
             <div className="mardu-container flex flex-col gap-5 py-5">
@@ -639,7 +676,7 @@ export default function SiteHeader({
                 className="mt-2 w-full sm:ml-0 sm:mt-2 sm:w-full"
               />
             </div>
-          </div>
+          </nav>
         ) : null}
       </div>
     </header>
