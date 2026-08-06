@@ -87,8 +87,6 @@ export default buildConfig({
         if (process.env.NODE_ENV === 'production') {
           if (site === 'mardu-de') {
             frontendBaseURL = 'https://www.mardu.de';
-          } else if (site === 'mardu-space') {
-            frontendBaseURL = 'https://mardu.space';
           } else {
             frontendBaseURL = 'https://platform.mardu.de';
           }
@@ -96,8 +94,6 @@ export default buildConfig({
           // Local development URLs
           if (site === 'mardu-de') {
             frontendBaseURL = process.env.NEXT_PUBLIC_MARDU_DE_URL || 'http://localhost:3000';
-          } else if (site === 'mardu-space') {
-            frontendBaseURL = process.env.NEXT_PUBLIC_MARDU_SPACE_URL || 'http://localhost:3001';
           } else {
             frontendBaseURL = process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:4000';
           }
@@ -108,19 +104,21 @@ export default buildConfig({
           return frontendBaseURL;
         }
 
-        if (collectionConfig.slug === 'legal-pages') {
+        const collectionSlug = collectionConfig?.slug;
+
+        if (collectionSlug === 'legal-pages') {
           return `${frontendBaseURL}/${slug}`;
         }
-        if (collectionConfig.slug === 'integrations') {
+        if (collectionSlug === 'integrations') {
           return `${frontendBaseURL}/integrations/${slug}`;
         }
-        if (collectionConfig.slug === 'solutions') {
+        if (collectionSlug === 'solutions') {
           return `${frontendBaseURL}/solutions/${slug}`;
         }
-        if (collectionConfig.slug === 'products') {
+        if (collectionSlug === 'products') {
           return `${frontendBaseURL}/products/${slug}`;
         }
-        if (collectionConfig.slug === 'blog-posts') {
+        if (collectionSlug === 'blog-posts') {
           return `${frontendBaseURL}/blog/${slug}`;
         }
         return frontendBaseURL;
@@ -203,7 +201,7 @@ export default buildConfig({
         },
         'roadmap-items': {
           description:
-            'Pflege öffentlicher Roadmap-Einträge für mardu.space inklusive Drafts, Status und Zeiträumen.',
+            'Pflege öffentlicher Roadmap-Einträge für mardu.de inklusive Drafts, Status und Zeiträumen.',
           enabled: {
             create: true,
             delete: true,

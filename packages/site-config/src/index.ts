@@ -1,4 +1,4 @@
-export type SiteKey = 'mardu-de' | 'mardu-space' | 'platform';
+export type SiteKey = 'mardu-de' | 'platform';
 
 export type SiteLink = {
   href: string;
@@ -91,35 +91,6 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
       { href: '/privacy', label: 'Datenschutz' },
     ],
   },
-  'mardu-space': {
-    key: 'mardu-space',
-    label: 'mardu.space',
-    appName: 'mardu.space',
-    domain: 'mardu.space',
-    origin: 'https://mardu.space',
-    apiOrigin: 'https://platform.mardu.de',
-    theme: '@mardu/styles/theme-mardu-space.css',
-    supportEmail: 'info@mardu.space',
-    contactPhone: '+49 721 25510624',
-    contactPhoneHref: 'tel:+4972125510624',
-    vatId: 'DE461239481',
-    newsletterSourceLabel: 'mardu.space newsletter',
-    contactPath: '/contact',
-    newsletterSuccessPath: '/newsletter/success',
-    newsletterUnsubscribePath: '/newsletter/success',
-    whitepaperSuccessPath: '/whitepaper/success',
-    whitepaperDownloadPath: '/api/whitepaper/download',
-    emailLogoUrl: 'https://mardu.space/marduspace_logo_bg_white.svg',
-    emailBrandName: 'Mardu GmbH',
-    features: {
-      blog: false,
-      integrations: false,
-    },
-    footerMetaLinks: [
-      { href: '/privacy', label: 'Datenschutz' },
-      { href: '/publisher', label: 'Impressum' },
-    ],
-  },
   platform: {
     key: 'platform',
     label: 'platform.mardu.de',
@@ -169,22 +140,6 @@ export const siteFeatureFlagDefinitions: Record<SiteKey, SiteFeatureFlagDefiniti
       description:
         'Steuert Integrations-Navigation, Integrations-Routen und Sitemap-Einträge auf mardu.de.',
       origin: `${siteConfigs['mardu-de'].origin}/integrations`,
-      options: booleanSiteFlagOptions,
-    },
-  },
-  'mardu-space': {
-    blog: {
-      key: 'blog',
-      defaultValue: siteConfigs['mardu-space'].features.blog,
-      description: 'Steuert Blog-Features auf mardu.space.',
-      origin: `${siteConfigs['mardu-space'].origin}/blog`,
-      options: booleanSiteFlagOptions,
-    },
-    integrations: {
-      key: 'integrations',
-      defaultValue: siteConfigs['mardu-space'].features.integrations,
-      description: 'Steuert Integrations-Features auf mardu.space.',
-      origin: `${siteConfigs['mardu-space'].origin}/integrations`,
       options: booleanSiteFlagOptions,
     },
   },
@@ -240,10 +195,6 @@ export const featureEnvVarNames: Record<SiteKey, Record<SiteFeatureKey, string>>
   'mardu-de': {
     blog: 'MARDU_DE_ENABLE_BLOG',
     integrations: 'MARDU_DE_ENABLE_INTEGRATIONS',
-  },
-  'mardu-space': {
-    blog: 'MARDU_SPACE_ENABLE_BLOG',
-    integrations: 'MARDU_SPACE_ENABLE_INTEGRATIONS',
   },
   platform: {
     blog: 'MARDU_PLATFORM_ENABLE_BLOG',

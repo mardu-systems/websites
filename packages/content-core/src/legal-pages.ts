@@ -33,7 +33,7 @@ type PayloadRestCollectionResult<T> = {
 };
 
 const DEFAULT_REVALIDATE_SECONDS = 60;
-const DEFAULT_SHARED_SITES: VisibleSite[] = ['mardu-de', 'mardu-space', 'platform'];
+const DEFAULT_SHARED_SITES: VisibleSite[] = ['mardu-de', 'platform'];
 const DEFAULT_FETCH_TIMEOUT_MS = 3_000;
 
 const DEFAULT_PAGE_COPY: Record<

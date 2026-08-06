@@ -107,7 +107,7 @@ export const RoadmapItems: CollectionConfig = {
       required: true,
       admin: {
         description:
-          'Markdown-Inhalt für die öffentliche Roadmap. Listen und kurze Absätze werden direkt auf mardu.space dargestellt.',
+          'Markdown-Inhalt für die öffentliche Roadmap. Listen und kurze Absätze werden direkt auf mardu.de dargestellt.',
       },
     },
     {

@@ -56,7 +56,7 @@ export default function Page() {
   return (
     <main className="min-h-screen bg-background">
       <HeroSection
-        title="Wie Software, Hardware und Integrationen in mardu.space zusammenspielen"
+        title="Wie Software, Hardware und Integrationen bei Mardu zusammenspielen"
         description={heroDescription}
         overline="Plattform"
         buttonText="Whitepaper ansehen"

@@ -1,6 +1,6 @@
 # Roadmap Content Contracts
 
-Die öffentliche Roadmap für `mardu.space` wird über die Payload-Collection `roadmap-items` gepflegt und in `@mardu/content-core` in renderfähige DTOs übersetzt.
+Die öffentliche Roadmap für `mardu.de` wird über die Payload-Collection `roadmap-items` gepflegt und in `@mardu/content-core` in renderfähige DTOs übersetzt.
 
 ## Rollenverteilung
 
@@ -10,7 +10,7 @@ Die öffentliche Roadmap für `mardu.space` wird über die Payload-Collection `r
 - `packages/content-core`
   - definiert die öffentlichen DTOs `RoadmapItemDto` und `RoadmapPhaseDto`
   - liefert die Fetcher `getPlatformRoadmapItems(origin, site)` und `getPlatformRoadmapPhases(origin, site)`
-- `apps/mardu-space`
+- `apps/mardu-de`
   - rendert `/roadmap`
   - bleibt Owner von Metadata und Seitenkomposition
 
@@ -35,7 +35,7 @@ Redaktionelle Regeln:
 - Ein Dokument entspricht genau einem Vorhaben oder Feature.
 - `phaseLabel` und `timeLabel` definieren die Gruppierung auf der öffentlichen Seite.
 - `sortOrder` steuert die Reihenfolge innerhalb einer Phase.
-- `bodyMarkdown` ist das öffentliche Inhaltsfeld und wird auf `mardu.space` als Markdown dargestellt.
+- `bodyMarkdown` ist das öffentliche Inhaltsfeld und wird auf `mardu.de` als Markdown dargestellt.
 
 ## Öffentliche DTOs
 
@@ -64,4 +64,4 @@ Redaktionelle Regeln:
 - Es werden nur veröffentlichte (`_status = published`) und für die angefragte Site sichtbare Dokumente verwendet.
 - Gruppierung erfolgt über `phaseLabel + timeLabel`.
 - Sortierung erfolgt zuerst über `sortOrder`, danach stabil über `title`.
-- Die öffentliche `mardu.space`-Roadmap hat in v1 keine Detailseiten, Filter oder sichtbare Status-UI.
+- Die öffentliche `mardu.de`-Roadmap hat in v1 keine Detailseiten, Filter oder sichtbare Status-UI.

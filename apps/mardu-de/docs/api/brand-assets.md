@@ -10,7 +10,7 @@
 
 - Die Route rendert die gemeinsame Paket-Komponente `BrandAssetsPage` aus `@mardu/sections`.
 - Der sichtbare Inhalt stammt aus `marduBrandAssetsPageContent`.
-- Dadurch bleiben Sections und Nutzungsregeln auf `mardu.de` und `mardu.space` identisch, während die gezeigten Assets markenspezifisch bleiben.
+- Dadurch bleiben Sections und Nutzungsregeln auf `mardu.de` und der internen Plattform identisch, während die gezeigten Assets markenspezifisch bleiben.
 
 ## Download-Assets
 

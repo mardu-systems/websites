@@ -1,6 +1,6 @@
-# mardu.space Contributor Guide
+# mardu.de Contributor Guide
 
-This repository powers **mardu.space**, a content-rich Next.js 15 (App Router) experience with Tailwind CSS 4 and a collection of reusable UI primitives. The goal of these guidelines is to keep the project approachable, performant, and easy to extend.
+This repository powers **mardu.de**, a content-rich Next.js 15 (App Router) experience with Tailwind CSS 4 and a collection of reusable UI primitives. The goal of these guidelines is to keep the project approachable, performant, and easy to extend.
 
 ## Project Snapshot
 - **App Router**: Pages, layouts, and API routes live under `app/` (`app/api/*` for endpoints).

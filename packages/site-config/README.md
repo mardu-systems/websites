@@ -11,7 +11,6 @@ Shared site metadata and feature-flag helpers for the public Mardu frontends.
 Supported site identifiers:
 
 - `mardu-de`
-- `mardu-space`
 - `platform`
 
 #### `SiteLink`
@@ -111,8 +110,6 @@ Recognized env variables:
 
 - `MARDU_DE_ENABLE_BLOG`
 - `MARDU_DE_ENABLE_INTEGRATIONS`
-- `MARDU_SPACE_ENABLE_BLOG`
-- `MARDU_SPACE_ENABLE_INTEGRATIONS`
 - `MARDU_PLATFORM_ENABLE_BLOG`
 - `MARDU_PLATFORM_ENABLE_INTEGRATIONS`
 

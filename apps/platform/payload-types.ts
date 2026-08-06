@@ -302,7 +302,7 @@ export interface BlogPost {
   /**
    * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
    */
-  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
+  sites: ('mardu-de' | 'platform')[];
   /**
    * Hebt diesen Beitrag als Hauptbeitrag auf der Startseite hervor.
    */
@@ -343,7 +343,7 @@ export interface LegalPage {
   /**
    * Steuert auf welchen Frontends dieser Inhalt sichtbar ist.
    */
-  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
+  sites: ('mardu-de' | 'platform')[];
   seoTitle?: string | null;
   seoDescription?: string | null;
   canonicalUrl?: string | null;
@@ -369,7 +369,7 @@ export interface RoadmapItem {
   phaseLabel: string;
   timeLabel: string;
   /**
-   * Markdown-Inhalt für die öffentliche Roadmap. Listen und kurze Absätze werden direkt auf mardu.space dargestellt.
+   * Markdown-Inhalt für die öffentliche Roadmap. Listen und kurze Absätze werden direkt auf mardu.de dargestellt.
    */
   bodyMarkdown: string;
   status: 'planned' | 'in-progress' | 'beta' | 'done';
@@ -379,7 +379,7 @@ export interface RoadmapItem {
    */
   sortOrder?: number | null;
   featured?: boolean | null;
-  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
+  sites: ('mardu-de' | 'platform')[];
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -496,7 +496,7 @@ export interface Integration {
   categories: (number | IntegrationCategory)[];
   sortOrder?: number | null;
   featured?: boolean | null;
-  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
+  sites: ('mardu-de' | 'platform')[];
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -518,7 +518,7 @@ export interface NewsletterSubscriber {
   twentySyncStatus: 'pending' | 'synced' | 'failed' | 'skipped';
   twentyLastSyncedAt?: string | null;
   twentyLastError?: string | null;
-  site: 'mardu-de' | 'mardu-space';
+  site: 'mardu-de';
   role: 'newsletter' | 'whitepaper';
   status: 'pending' | 'confirmed' | 'unsubscribed';
   consentModel?: 'double-opt-in' | null;
@@ -567,7 +567,7 @@ export interface ContactLead {
   twentySyncStatus: 'pending' | 'synced' | 'failed' | 'skipped';
   twentyLastSyncedAt?: string | null;
   twentyLastError?: string | null;
-  site: 'mardu-de' | 'mardu-space';
+  site: 'mardu-de';
   source: 'contact-form' | 'configurator' | 'admin-software';
   /**
    * Einwilligung in Datenschutzerklärung erteilt.
@@ -588,7 +588,7 @@ export interface ContactLead {
 export interface PreorderRequest {
   id: number;
   email: string;
-  site: 'mardu-de' | 'mardu-space';
+  site: 'mardu-de';
   status: 'received';
   emailDeliveryStatus: 'pending' | 'sent' | 'failed';
   updatedAt: string;
@@ -667,7 +667,7 @@ export interface Solution {
      */
     image?: (number | null) | Media;
   };
-  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
+  sites: ('mardu-de' | 'platform')[];
   publishedAt?: string | null;
   featured?: boolean | null;
   updatedAt: string;
@@ -714,7 +714,7 @@ export interface ProductCategory {
    * Niedrigere Zahlen werden zuerst angezeigt.
    */
   sortOrder?: number | null;
-  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
+  sites: ('mardu-de' | 'platform')[];
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -830,7 +830,7 @@ export interface Product {
    */
   sortOrder?: number | null;
   featured?: boolean | null;
-  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
+  sites: ('mardu-de' | 'platform')[];
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -879,7 +879,7 @@ export interface ProductVariant {
    * Niedrigere Zahlen werden zuerst angezeigt.
    */
   sortOrder?: number | null;
-  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
+  sites: ('mardu-de' | 'platform')[];
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -919,7 +919,7 @@ export interface ProductTechnology {
    * Niedrigere Zahlen werden zuerst angezeigt.
    */
   sortOrder?: number | null;
-  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
+  sites: ('mardu-de' | 'platform')[];
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -963,7 +963,7 @@ export interface ProductCarrier {
    * Niedrigere Zahlen werden zuerst angezeigt.
    */
   sortOrder?: number | null;
-  sites: ('mardu-de' | 'mardu-space' | 'platform')[];
+  sites: ('mardu-de' | 'platform')[];
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;

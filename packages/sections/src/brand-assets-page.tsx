@@ -378,39 +378,6 @@ const sharedBrandAssetCopy = {
   contactCtaLabel: "Kontaktiere uns",
 };
 
-export const marduSpaceBrandAssetsPageContent: BrandAssetsPageContentDto = {
-  ...sharedBrandAssetCopy,
-  description:
-    "Hier findest du die Logos von mardu.space für Presse, Partnerkommunikation und Marketingmaterialien.",
-  downloadsDescription:
-    "Hier liegen die freigegebenen Logo-Dateien von mardu.space. Beide Varianten sind als SVG angelegt und für unterschiedliche Hintergründe gedacht.",
-  downloads: [
-    {
-      id: "logo-light",
-      fileName: "marduspace_logo_bg_white.svg",
-      href: "/marduspace_logo_bg_white.svg",
-      previewSrc: "/marduspace_logo_bg_white.svg",
-      previewAlt: "mardu.space Logo für helle Hintergründe",
-      previewSurface: "light",
-      downloadLabel: "Logo für helle Hintergründe herunterladen",
-      description:
-        "Diese Variante passt am besten auf helle, weiße oder papierartige Flächen.",
-    },
-    {
-      id: "logo-dark",
-      fileName: "marduspace_logo_bg_black.svg",
-      href: "/marduspace_logo_bg_black.svg",
-      previewSrc: "/marduspace_logo_bg_black.svg",
-      previewAlt: "mardu.space Logo für dunkle Hintergründe",
-      previewSurface: "dark",
-      downloadLabel: "Logo für dunkle Hintergründe herunterladen",
-      description:
-        "Diese Variante funktioniert am besten auf dunklen oder schwarzen Flächen.",
-    },
-  ],
-  contactHref: "mailto:info@mardu.space?subject=Anfrage%20zu%20Brand%20Assets",
-};
-
 export const marduBrandAssetsPageContent: BrandAssetsPageContentDto = {
   ...sharedBrandAssetCopy,
   description:

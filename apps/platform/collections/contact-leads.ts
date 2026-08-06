@@ -111,7 +111,6 @@ export const ContactLeads: CollectionConfig = {
       admin: { position: 'sidebar' },
       options: [
         { label: 'mardu.de', value: 'mardu-de' },
-        { label: 'mardu.space', value: 'mardu-space' },
       ],
     },
     {

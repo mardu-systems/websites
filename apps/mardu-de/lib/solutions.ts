@@ -10,7 +10,7 @@ import {
   getSolutionSlugs as getLocalSolutionSlugs,
 } from '@/data/solutions';
 
-const site = 'mardu-space' as const;
+const site = 'mardu-de' as const;
 
 /** Returns published solution teasers and falls back to the app-owned editorial content. */
 export const getSolutions = async () => {

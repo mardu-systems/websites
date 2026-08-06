@@ -29,7 +29,7 @@ Shared site-layout components for Mardu frontends.
 
 ### `SiteFooter`
 
-- renders the shared footer shell based on the `mardu.space` footer structure
+- renders the shared footer shell for the Mardu applications
 - accepts branding, description, nav/meta/social links, and optional footer actions
 - supports an optional `onAction` callback for non-link footer interactions such as cookie settings
 - supports `variant: "editorial-index"` for a dark, gridded editorial layout;

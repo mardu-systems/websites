@@ -1,6 +1,6 @@
 # `@mardu/ui`
 
-Shared UI layer for `mardu.de`, `mardu.space`, and `platform`.
+Shared UI layer for `mardu.de` and `platform`.
 
 The package mirrors the `components/ui` baseline from `../mardu.de` and is the canonical home for the shared shadcn-style component set plus shared UI utilities.
 

@@ -62,7 +62,7 @@ Ausgewertet wurden:
 - das Gesprächstranskript „Mardu – Katze im Sack“ vom 10. Juli 2026,
 - `mardu_ideen-und-loesungsansaetze_2026-07-11.md`,
 - `mardu_gesamtauswertung_2026-07-11.md`,
-- der bestehende Code von `mardu.de` und `mardu.space`,
+- der bestehende Code von `mardu.de` und der internen Plattform,
 - das bestehende Website-Konzept im Repository,
 - die MAY-STUDIO-Entwürfe im Repository und die Adobe-XD-Ansicht.
 
@@ -1595,10 +1595,9 @@ Der aktuelle Arbeitsbaum enthält bereits einen umfangreichen, nicht eingecheckt
 
 #### CMS und Daten
 
-- `mardu-de` lädt Produkt- und Lösungsinhalte derzeit mit dem Site-Key `mardu-space`,
-- die Platform-Seeds veröffentlichen ausschließlich für `mardu-space`,
-- unversionierte `mardu-de`-Daten sind dadurch aktuell faktisch nicht die verwendete Content-Quelle,
-- vor dem Redesign ist eine eindeutige Site- und Migrationsstrategie nötig,
+- `mardu-de` lädt Produkt- und Lösungsinhalte mit dem eigenen Site-Key,
+- die Platform-Seeds veröffentlichen für `mardu-de`,
+- lokale Seed-Daten und Runtime-Inhalte verwenden dadurch dieselbe Content-Zuordnung,
 - bestehende `content-core`-DTOs weiterverwenden und öffentlich sichtbare Vertragsänderungen dokumentieren.
 
 #### Navigation und Auffindbarkeit
@@ -1824,7 +1823,7 @@ Diese Positionierung beschreibt die Zielcopy. Sie darf erst als aktuelle Produkt
 - `docs/mardu-website-konzept.md`
 - `apps/mardu-de/docs/redesign-reference.md`
 - `apps/mardu-de/docs/new-design/*`
-- vorhandene Implementierungen und Inhaltsdaten in `apps/mardu-de`, `apps/mardu-space`, `apps/platform` und den gemeinsamen Paketen
+- vorhandene Implementierungen und Inhaltsdaten in `apps/mardu-de`, `apps/platform` und den gemeinsamen Paketen
 
 ### 27.2 Offizielle Rechts-, Arbeits- und Datenschutzquellen
 

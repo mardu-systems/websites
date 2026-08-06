@@ -161,7 +161,6 @@ Shared content sections for multiple Mardu frontends.
   - `question: string`
   - `answer: string`
 - Shared content:
-  - `marduSpaceBrandAssetsPageContent` exports the canonical copy and section order for the public `mardu.space` brand-assets page.
   - `marduBrandAssetsPageContent` exports the same section structure and shared usage copy for the public `Mardu` brand-assets page.
 - Behavior:
   - renders a shared brand-assets page with hero, download grid, usage rules and contact section
@@ -178,7 +177,7 @@ Shared content sections for multiple Mardu frontends.
 - `InfoGrid` supports `variant: 'default' | 'cards'` plus `eyebrow` and `intro`.
 - `ProcessSteps` supports `variant: 'default' | 'plain'`.
 - `RoadmapTimeline` supports `variant: 'default' | 'plain'` plus `eyebrow` and `intro`.
-- `SplitContent` supports `variant: 'immersive' | 'plain'` so `mardu-space` can keep a light editorial layout without a local fork.
+- `SplitContent` supports `variant: 'immersive' | 'plain'` for light editorial layouts without a local fork.
 - `FeatureSection`, `ThreeArguments`, `TripleImageSection`, `Foerderung`, `InfoGrid`, `ProcessSteps` and `RoadmapTimeline` expose eyebrow/intro metadata so the same layouts can tell different stories without forking the component.
 - `NewsletterStatusPage` keeps the newsletter semantics, but primary and secondary action links are now configurable.
 - `ContactPageSection` standardizes the `/contact` page shell while the consuming app still owns the actual form renderer and submit route. Optional `addressTitle` and `formTitle` fields expose the numbered editorial section headings without moving app-owned copy into the package.

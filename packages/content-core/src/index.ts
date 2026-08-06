@@ -1,4 +1,4 @@
-export type VisibleSite = 'mardu-de' | 'mardu-space' | 'platform';
+export type VisibleSite = 'mardu-de' | 'platform';
 
 export type SiteVisibility = {
   sites?: VisibleSite[] | null;
@@ -655,7 +655,6 @@ const DEFAULT_REVALIDATE_SECONDS = 60;
 
 export const visibleSiteOptions = [
   { label: 'mardu.de', value: 'mardu-de' },
-  { label: 'mardu.space', value: 'mardu-space' },
   { label: 'platform.mardu.de', value: 'platform' },
 ] satisfies Array<{ label: string; value: VisibleSite }>;
 
@@ -667,7 +666,7 @@ export function isVisibleOnSite(visibility: SiteVisibility, site: VisibleSite) {
   return visibility.sites.includes(site);
 }
 
-export function buildSiteVisibilityField(defaultSites: VisibleSite[] = ['mardu-de', 'mardu-space']) {
+export function buildSiteVisibilityField(defaultSites: VisibleSite[] = ['mardu-de']) {
   return {
     name: 'sites',
     type: 'select' as const,
@@ -740,7 +739,7 @@ function toMeta(value: unknown): PayloadMeta | null {
 
 function normalizeMediaUrl(url: string | undefined, origin: string): string {
   if (!url) {
-    return '/mardu-space.webp';
+    return '/Mardu-System.webp';
   }
 
   if (/^https?:\/\//i.test(url)) {

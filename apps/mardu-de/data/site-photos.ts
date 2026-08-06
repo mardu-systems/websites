@@ -22,7 +22,7 @@ export type SitePhotoAsset = {
 export const sitePhotoAssets: SitePhotoAsset[] = [
   {
     src: '/_A7_9094_quer.jpg',
-    alt: 'mardu.space-System in einer Werkstatt',
+    alt: 'Mardu-System in einer Werkstatt',
     title: 'Werkstattansicht',
     description: 'Leitmotiv der Startseite und gleichzeitig Hero-Motiv im Hardware-Bereich.',
     usedOn: [

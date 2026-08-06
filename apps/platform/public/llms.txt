@@ -17,8 +17,7 @@ Wichtige Hinweise für LLM-Crawler und Agents:
 
 ## Produkte
 
-- [mardu.space](https://mardu.de/#produkte): Produktlinie für Werkstätten, Produktionsumgebungen und Labore (Zutritt + Maschinenfreigabe)
-- [mardu.space (Produktseite)](https://mardu.space): Externe Produktseite/Vertiefung (falls verfügbar und aktuell)
+- [Mardu für Werkstätten und Labore](https://mardu.de/#produkte): Zutritt und Maschinenfreigabe für Werkstätten, Produktionsumgebungen und Labore
 - [mardu.construction](https://mardu.de/#produkte): Produktlinie für Baustellen-Zutrittskontrolle (Early Access/Projektstadium)
 
 ## Technik & Funktionsumfang

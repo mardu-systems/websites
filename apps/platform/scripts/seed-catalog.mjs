@@ -3,8 +3,8 @@ import {
   catalogCarriers,
   catalogCategories,
   catalogTechnologies,
-} from '../../mardu-space/data/catalog/categories.ts';
-import { catalogProducts } from '../../mardu-space/data/catalog/products.ts';
+} from '../../mardu-de/data/catalog/categories.ts';
+import { catalogProducts } from '../../mardu-de/data/catalog/products.ts';
 import { getPayload } from 'payload';
 
 async function findBySlug(payload, collection, slug) {
@@ -62,7 +62,7 @@ const run = async () => {
       imageAlt: category.imageAlt,
       featured: category.featured ?? false,
       sortOrder: index,
-      sites: ['mardu-space'],
+      sites: ['mardu-de'],
       _status: 'published',
     });
 
@@ -78,7 +78,7 @@ const run = async () => {
       imageUrl: technology.imageUrl,
       imageAlt: technology.imageAlt,
       sortOrder: index,
-      sites: ['mardu-space'],
+      sites: ['mardu-de'],
       _status: 'published',
     });
 
@@ -95,7 +95,7 @@ const run = async () => {
       imageUrl: carrier.imageUrl,
       imageAlt: carrier.imageAlt,
       sortOrder: index,
-      sites: ['mardu-space'],
+      sites: ['mardu-de'],
       _status: 'published',
     });
 
@@ -116,7 +116,7 @@ const run = async () => {
           value: attribute.value,
         })),
         sortOrder: index,
-        sites: ['mardu-space'],
+        sites: ['mardu-de'],
         _status: 'published',
       });
 
@@ -172,7 +172,7 @@ const run = async () => {
       secondaryCtaLabel: product.secondaryCtaLabel,
       featured: product.featured ?? false,
       sortOrder: index,
-      sites: ['mardu-space'],
+      sites: ['mardu-de'],
       _status: 'published',
     });
 

@@ -37,7 +37,7 @@ Die Collection nutzt fuer diese Felder einen eigenen SEO-Tab und nicht die gener
 ## Site-Sichtbarkeit
 
 - `sites` steuert, auf welchen Frontends ein Dokument sichtbar ist
-- v1 Default fuer Legal Pages: `mardu-de`, `mardu-space`, `platform`
+- v1 Default für Legal Pages: `mardu-de`, `platform`
 
 ## Seed und Bootstrap
 

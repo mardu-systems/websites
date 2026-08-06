@@ -69,7 +69,7 @@ export async function generateMetadata({
       canonical: `/products/${product.slug}`,
     },
     openGraph: {
-      title: product.seoTitle || `${product.name} | mardu.space`,
+      title: product.seoTitle || `${product.name} | Mardu`,
       description: product.seoDescription || product.summary,
       url: `/products/${product.slug}`,
       type: 'website',

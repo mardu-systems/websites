@@ -1,6 +1,6 @@
 # Product Catalog Contracts
 
-Dieses Dokument beschreibt den öffentlichen Vertrag für den wiederverwendbaren Produktkatalog von `mardu.space`.
+Dieses Dokument beschreibt den öffentlichen Vertrag für den wiederverwendbaren Produktkatalog von `mardu.de`.
 
 ## Zielbild
 
@@ -25,7 +25,7 @@ Dieses Dokument beschreibt den öffentlichen Vertrag für den wiederverwendbaren
 - darf keine App-Routen hart codieren
 - bekommt Links und CTA-Ziele ausschließlich über Props
 
-### `apps/mardu-space`
+### `apps/mardu-de`
 
 - bleibt Eigentümer von:
   - Routing

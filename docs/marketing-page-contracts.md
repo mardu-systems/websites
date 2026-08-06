@@ -1,11 +1,11 @@
 # Marketing Page Contracts
 
-Dieses Dokument beschreibt den inhaltlichen Vertrag für die Marketing-Seiten von `mardu.de` und `mardu.space`.
+Dieses Dokument beschreibt den inhaltlichen Vertrag für die Marketing-Seiten von `mardu.de`.
 
 ## Zielbild
 
 - `Mardu` ist die Dachseite für digitale Zutrittssteuerung und Maschinenfreigabe in klaren Einsatzfeldern.
-- `mardu.space` ist die konkrete Produktlinie für Werkstätten, Labore, Hochschulen und Makerspaces.
+- Mardu adressiert Werkstätten, Labore, Hochschulen und Makerspaces direkt unter der Dachmarke.
 - `mardu.construction` ist die zweite Produktlinie für Baustellen-Zutritt und bleibt sichtbar, befindet sich aber im Early-Access-Stadium.
 
 ## Seitenrollen
@@ -19,21 +19,9 @@ Dieses Dokument beschreibt den inhaltlichen Vertrag für die Marketing-Seiten vo
   - Was ist heute konkret verfügbar?
   - Was befindet sich im Early Access?
 - CTA-Logik:
-  - `mardu.space` => Mehr erfahren / direkte Produktvertiefung
+  - Werkstätten und Labore => Mehr erfahren / direkte Produktvertiefung
   - `mardu.construction` => Interesse / Kontakt / Early Access
   - Dachmarke => Mehr erfahren / Demo
-
-### `apps/mardu-space/app/page.tsx`
-
-- Rolle: produktnahe Haupt-Landingpage
-- Muss in den ersten Screens klar beantworten:
-  - welches Problem für Werkstatt- und Laborbetreiber gelöst wird
-  - wie Zutritt, Qualifikation und Maschinenfreigabe zusammenhängen
-  - welcher nächste Schritt sinnvoll ist
-- CTA-Logik:
-  - früher Funnel => Whitepaper
-  - mittlerer Funnel => Konfigurator
-  - später Funnel => Demo / Kontakt
 
 ## Content Contracts
 
@@ -45,7 +33,7 @@ Dieses Dokument beschreibt den inhaltlichen Vertrag für die Marketing-Seiten vo
 - Sicherheit und Compliance sind Vertrauensebene, nicht austauschbarer Hauptclaim.
 - Sichtbare Nutzertexte vermeiden Begriffe wie `Produktlinie`, `Plattformmarke`, `Proof` oder `einordnen`.
 
-### `mardu.space`
+### Werkstätten, Labore, Hochschulen und Makerspaces
 
 - Hero und Kurzfassung müssen Werkstätten, Labore, Hochschulen und Makerspaces priorisieren.
 - Nutzenformulierung muss über reine Zutrittskontrolle hinausgehen:
@@ -69,6 +57,6 @@ Dieses Dokument beschreibt den inhaltlichen Vertrag für die Marketing-Seiten vo
 
 - Stimmen Hero, Meta-Description und Footer auf derselben Seitenrolle überein?
 - Ist sofort klar, ob eine Seite Dachmarke oder Produktseite ist?
-- Sind `mardu.space` und `mardu.construction` sauber voneinander getrennt?
+- Sind die Einsatzfelder und das Early-Access-Angebot sauber voneinander getrennt?
 - Passt jeder CTA zur jeweiligen Funnel-Stufe?
 - Sind Header- und Footer-Links konsistent mit den Feature-Flags sichtbar oder verborgen?

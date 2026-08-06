@@ -7,9 +7,7 @@ import { renderEmailLayout, sendEmail } from '@/lib/email';
 import type { NewsletterCrmEventDto } from '@/types/api/newsletter-crm';
 import { getSiteConfig } from '@mardu/site-config';
 
-function resolveSite(value: string | null): SiteKey {
-  return value === 'mardu-space' ? 'mardu-space' : 'mardu-de';
-}
+const activeSite: SiteKey = 'mardu-de';
 
 function redirectWithStatus(site: SiteKey, status: string) {
   const url = new URL(getSiteConfig(site).newsletterUnsubscribePath, getSiteConfig(site).origin);
@@ -20,7 +18,7 @@ function redirectWithStatus(site: SiteKey, status: string) {
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const token = searchParams.get('token');
-  const fallbackSite = resolveSite(searchParams.get('site'));
+  const fallbackSite = activeSite;
   if (!token) {
     return redirectWithStatus(fallbackSite, 'missing-token');
   }
@@ -30,7 +28,7 @@ export async function GET(req: Request) {
     return redirectWithStatus(fallbackSite, 'invalid-token');
   }
 
-  const site = resolveSite(data.site);
+  const site = activeSite;
   let unsubscribed: Awaited<ReturnType<typeof unsubscribeNewsletterSubscriber>> = null;
   try {
     unsubscribed = await unsubscribeNewsletterSubscriber({

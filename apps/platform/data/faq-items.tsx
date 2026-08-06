@@ -23,7 +23,7 @@ export const faqItems: FaqItem[] = [
                 Aktuell befindet sich das System noch in der Erprobungsphase und ist deshalb
                 noch nicht offiziell zertifiziert. Wir führen jedoch Testphasen mit ausgewählten
                 Partnern durch. So helft ihr uns bei der Weiterentwicklung, während ihr
-                vergünstigten Zugriff auf das <strong>mardu.space</strong>-System erhaltet.
+                vergünstigten Zugriff auf das <strong>Mardu-System</strong> erhaltet.
                 Meldet euch bei Interesse einfach unter{" "}
                 <a
                     href="mailto:info@mardu.de"
@@ -80,7 +80,7 @@ export const faqItems: FaqItem[] = [
         answer: (
             <>
                 Ja, die Schulungsnachweise basieren auf Open Educational Badges, die europaweit anerkannt sind.
-                Wenn ein anderer Makerspace ebenfalls mardu.space einsetzt, kannst du deine einmal erworbenen Badges
+                Wenn ein anderer Makerspace ebenfalls Mardu einsetzt, kannst du deine einmal erworbenen Badges
                 dort weiterverwenden.
             </>
         ),

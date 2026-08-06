@@ -203,7 +203,7 @@ Die neue Website führt mit einer Marke: **Mardu**.
 
 - Maschinenfreigabe, Türzugang und Plattform sind Lösungsbereiche, keine eigenständigen Marken.
 - Zielgruppenseiten erklären Anwendungsfälle, keine neuen Produktlinien.
-- `mardu.space` wird inhaltlich in die neue `mardu.de` überführt, sofern die Domainstrategie bestätigt ist.
+- Sämtliche Produkt- und Lösungsinhalte werden unter `mardu.de` geführt.
 - Construction wird nicht als aktueller Lösungsbereich geführt, sofern die Einstellung dieser Vertikale bestätigt bleibt.
 
 ## 12. Elevator Pitch

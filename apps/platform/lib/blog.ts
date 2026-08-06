@@ -78,7 +78,7 @@ const toMeta = (value: unknown): PayloadMeta | null => {
 
 const normalizeMediaUrl = (url: string | undefined): string => {
   if (!url) {
-    return '/mardu-space.webp';
+    return '/Mardu-System.webp';
   }
 
   return url;

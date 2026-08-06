@@ -1,6 +1,6 @@
 # Mardu (mardu.de)
 
-> Mardu ist ein junges Startup, das sich auf digitale Zutritts- und Verwaltungssysteme spezialisiert hat. Unser Fokus liegt auf zwei Bereichen: `mardu.space` für Werkstätten, Lernräume, Arbeitsplätze und Makerspaces, sowie `mardu.construction` für Baustellen. Wir entwickeln vernetzte Zutritts- und Zugriffskontrolllösungen, die sich flexibel an die Bedürfnisse unserer Kunden anpassen – von kleinen Makerspaces bis hin zu Großbaustellen.
+> Mardu ist ein junges Startup für digitale Zutritts- und Verwaltungssysteme in Werkstätten, Lernräumen, Arbeitsplätzen, Makerspaces und auf Baustellen. Wir entwickeln vernetzte Zutritts- und Zugriffskontrolllösungen, die sich flexibel an die Bedürfnisse unserer Kunden anpassen – von kleinen Makerspaces bis hin zu Großbaustellen.
 
 Wichtige Hinweise für LLM-Crawler und Agents:
 - Primäre, kanonische Website: https://mardu.de/
@@ -17,8 +17,7 @@ Wichtige Hinweise für LLM-Crawler und Agents:
 
 ## Produkte
 
-- [mardu.space](https://mardu.de/#produkte): Produktlinie für Werkstätten, Labore, Hochschulen und Makerspaces
-- [mardu.space (Produktseite)](https://mardu.space): vertiefende Produktseite für Zutritt, Maschinenfreigabe und Qualifikation
+- [Mardu für Werkstätten und Labore](https://mardu.de/#produkte): Zutritt, Maschinenfreigabe und Qualifikation für Werkstätten, Labore, Hochschulen und Makerspaces
 - [mardu.construction](https://mardu.de/#produkte): Produktlinie für Baustellen-Zutrittskontrolle (Early Access)
 
 ## Technik & Funktionsumfang

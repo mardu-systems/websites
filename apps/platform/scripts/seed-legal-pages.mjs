@@ -49,7 +49,7 @@ const run = async () => {
     const data = {
       ...item,
       contentMarkdown,
-      sites: ['mardu-de', 'mardu-space', 'platform'],
+      sites: ['mardu-de', 'platform'],
       _status: 'published',
     };
 

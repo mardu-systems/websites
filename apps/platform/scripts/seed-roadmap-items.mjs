@@ -22,7 +22,7 @@ const run = async () => {
     const roadmapData = {
       ...item,
       featured: false,
-      sites: ['mardu-space'],
+      sites: ['mardu-de'],
       _status: 'published',
     };
 

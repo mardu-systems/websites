@@ -1,6 +1,6 @@
 # Lead Platform API
 
-Zentrale Lead- und Newsletter-API fuer `mardu.de` und `mardu.space`.
+Zentrale Lead- und Newsletter-API für `mardu.de`.
 
 ## Verantwortung
 
@@ -10,7 +10,7 @@ Zentrale Lead- und Newsletter-API fuer `mardu.de` und `mardu.space`.
   - Preorder-Requests
 - Persistenz erfolgt über Payload + PostgreSQL.
 - Abuse-Protection fuer oeffentliche Lead-POSTs erfolgt zentral in `apps/platform`.
-- `mardu.space` und `mardu.de` nutzen dafuer oeffentliche API-Routen oder Proxy-Routen.
+- `mardu.de` nutzt dafür öffentliche API-Routen oder Proxy-Routen.
 
 ## Gemeinsame DTOs
 
@@ -19,7 +19,7 @@ Quelle: [`packages/lead-core/src/index.ts`](/Users/lucaschoeneberg/Documents/Git
 ```ts
 interface NewsletterRequestDto {
   email: string;
-  site: 'mardu-de' | 'mardu-space';
+  site: 'mardu-de';
   role: string;
   firstName?: string;
   lastName?: string;
@@ -35,7 +35,7 @@ interface ContactRequestDto {
   message?: string;
   consent: boolean;
   newsletterOptIn: boolean;
-  site: 'mardu-de' | 'mardu-space';
+  site: 'mardu-de';
   source: 'contact-form' | 'configurator' | 'admin-software';
   token?: string;
   config?: unknown;
@@ -43,7 +43,7 @@ interface ContactRequestDto {
 
 interface PreorderRequestDto {
   email: string;
-  site: 'mardu-de' | 'mardu-space';
+  site: 'mardu-de';
 }
 ```
 
@@ -61,7 +61,7 @@ Quelle: [`apps/platform/app/api/newsletter/route.ts`](/Users/lucaschoeneberg/Doc
 - persistiert/aktualisiert einen Subscriber mit Status `pending`
 - versendet die DOI-Mail
 - Response: `{ ok: true }`
-- Whitepaper-Requests aus `mardu.space` laufen ueber denselben Endpunkt mit `role = whitepaper`
+- Whitepaper-Requests laufen über denselben Endpunkt mit `role = whitepaper`.
 
 ### `GET /api/newsletter/confirm`
 

@@ -6,7 +6,7 @@ Diese Dokumentation beschreibt den API-Vertrag für den Produktkatalog auf Basis
 
 - Produktdaten, Taxonomien und Varianten zentral in Payload verwalten.
 - Öffentliche Katalogausspielung nur für publizierte Datensätze.
-- `mardu.space` konsumiert die Daten über `@mardu/content-core` als renderfähige DTOs.
+- `mardu.de` konsumiert die Daten über `@mardu/content-core` als renderfähige DTOs.
 
 ## DTO-Vertrag
 
@@ -53,8 +53,8 @@ Bereitstellung über:
 
 Statische Ausgangsdaten:
 
-- [apps/mardu-space/data/catalog/categories.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-space/data/catalog/categories.ts)
-- [apps/mardu-space/data/catalog/products.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-space/data/catalog/products.ts)
+- [apps/mardu-de/data/catalog/categories.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/data/catalog/categories.ts)
+- [apps/mardu-de/data/catalog/products.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/data/catalog/products.ts)
 
 Seed-Skript:
 
@@ -64,5 +64,5 @@ Vertrag des Seed-Skripts:
 
 - Upsert über `slug`
 - publiziert Datensätze direkt mit `_status=published`
-- setzt `sites=['mardu-space']`
+- setzt `sites=['mardu-de']`
 - verknüpft Kategorien, Technologien, Carrier, Varianten und optionale Related Products deterministisch

@@ -91,7 +91,6 @@ export {
 export {
   BrandAssetsPage,
   marduBrandAssetsPageContent,
-  marduSpaceBrandAssetsPageContent,
   type BrandAssetDownloadDto,
   type BrandAssetsPageContentDto,
   type BrandAssetsPageProps,

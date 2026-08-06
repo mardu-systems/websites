@@ -16,12 +16,6 @@ const adminActions = [
     icon: Globe,
   },
   {
-    title: 'mardu.space',
-    description: 'Öffentliche Produktsite für Werkstätten, Labs und Whitepaper-Flows.',
-    href: 'https://mardu.space',
-    icon: Globe,
-  },
-  {
     title: 'API Entry',
     description: 'Zentraler API für Payload-Endpunkte dieser Plattform.',
     href: '/api/contact',
@@ -51,9 +45,6 @@ export default function HomePage() {
             </Button>
             <Button asChild variant="outline">
               <Link href="https://www.mardu.de">Zu mardu.de</Link>
-            </Button>
-            <Button asChild variant="outline">
-              <Link href="https://mardu.space">Zu mardu.space</Link>
             </Button>
           </div>
         </div>

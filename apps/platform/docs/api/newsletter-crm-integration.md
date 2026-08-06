@@ -17,7 +17,7 @@ Quelle: [`apps/platform/types/api/newsletter-crm.ts`](/Users/lucaschoeneberg/Doc
 interface NewsletterCrmEventDto {
   type: 'newsletter_confirmed' | 'newsletter_unsubscribed';
   email: string;
-  site: 'mardu-de' | 'mardu-space';
+  site: 'mardu-de';
   role: string;
   source: 'newsletter' | 'whitepaper';
   firstName?: string;
@@ -40,7 +40,7 @@ interface TwentyContactLeadDto {
   phone?: string;
   message?: string;
   source?: 'contact-form' | 'configurator' | 'admin-software';
-  site: 'mardu-de' | 'mardu-space';
+  site: 'mardu-de';
   consent?: boolean;
   newsletterOptIn?: boolean;
   config?: unknown;

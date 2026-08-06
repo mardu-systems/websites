@@ -17,7 +17,7 @@ export {
   type NormalizePhoneNumber,
 } from './contact-form';
 
-export const siteSchema = z.enum(['mardu-de', 'mardu-space']);
+export const siteSchema = z.enum(['mardu-de']);
 export type SiteKey = z.infer<typeof siteSchema>;
 
 export const newsletterRoleSchema = z

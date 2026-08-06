@@ -36,7 +36,7 @@ export const meta: Metadata = {
     default: 'Mardu Platform',
     template: '%s | Mardu Platform',
   },
-  description: 'Zentrales Payload-, Content- und Lead-Backend fuer mardu.de und mardu.space.',
+  description: 'Zentrales Payload-, Content- und Lead-Backend für mardu.de.',
   keywords: ['Payload CMS', 'Lead API', 'Newsletter', 'Mardu Platform', 'Content Backend'],
   alternates: {
     canonical: '/',
@@ -68,7 +68,7 @@ export const meta: Metadata = {
   },
   openGraph: {
     title: 'Mardu Platform',
-    description: 'Zentrales Payload-, Content- und Lead-Backend fuer mardu.de und mardu.space.',
+    description: 'Zentrales Payload-, Content- und Lead-Backend für mardu.de.',
     url: SITE_URL,
     siteName: 'Mardu Platform',
     locale: 'de_DE',
@@ -85,7 +85,7 @@ export const meta: Metadata = {
   twitter: {
     card: 'summary',
     title: 'Mardu Platform',
-    description: 'Zentrales Payload-, Content- und Lead-Backend fuer mardu.de und mardu.space.',
+    description: 'Zentrales Payload-, Content- und Lead-Backend für mardu.de.',
   },
 };
 

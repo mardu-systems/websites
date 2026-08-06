@@ -1,14 +1,13 @@
 # Vercel Deployment
 
-Diese Anleitung macht die drei deploybaren Apps in diesem Monorepo reproduzierbar auf Vercel konfigurierbar.
+Diese Anleitung macht die beiden deploybaren Apps in diesem Monorepo reproduzierbar auf Vercel konfigurierbar.
 
 ## Zielbild
 
 - ein Git-Repository
-- drei getrennte Vercel-Projekte
+- zwei getrennte Vercel-Projekte
 - jeweils ein Root Directory pro Projekt:
   - `apps/mardu-de`
-  - `apps/mardu-space`
   - `apps/platform`
 
 ## Repo-Status
@@ -22,13 +21,11 @@ Dieses Repository ist fuer das Setup vorbereitet:
 
 ## Vercel-Projekte anlegen
 
-Lege in Vercel drei Projekte an, jeweils aus demselben Git-Repository:
+Lege in Vercel zwei Projekte an, jeweils aus demselben Git-Repository:
 
 1. Projekt `mardu-de`
    - Root Directory: `apps/mardu-de`
-2. Projekt `mardu-space`
-   - Root Directory: `apps/mardu-space`
-3. Projekt `platform`
+2. Projekt `platform`
    - Root Directory: `apps/platform`
 
 ## Empfohlene Build Settings
@@ -69,10 +66,8 @@ In den Project Settings sollte zusätzlich pro Projekt aktiviert werden:
 ```bash
 bun install
 bun run --cwd apps/mardu-de type-check
-bun run --cwd apps/mardu-space type-check
 bun run --cwd apps/platform type-check
 bun run --cwd apps/mardu-de build
-bun run --cwd apps/mardu-space build
 bun run --cwd apps/platform build
 ```
 

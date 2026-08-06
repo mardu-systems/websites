@@ -1,5 +1,5 @@
 import config from '../payload.config.ts';
-import { solutions } from '../../mardu-space/data/solutions.ts';
+import { solutions } from '../../mardu-de/data/solutions.ts';
 import { getPayload } from 'payload';
 
 const run = async () => {
@@ -51,7 +51,7 @@ const run = async () => {
       })),
       featured: false,
       publishedAt: new Date().toISOString(),
-      sites: ['mardu-space'],
+      sites: ['mardu-de'],
       _status: 'published',
     };
 

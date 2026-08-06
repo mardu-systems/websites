@@ -100,7 +100,7 @@ export const LegalPages: CollectionConfig = {
                 description: 'Der rechtliche Hauptinhalt der Seite im Markdown-Format (GFM).',
               },
             },
-            buildSiteVisibilityField(['mardu-de', 'mardu-space', 'platform']),
+            buildSiteVisibilityField(['mardu-de', 'platform']),
           ],
         },
         {

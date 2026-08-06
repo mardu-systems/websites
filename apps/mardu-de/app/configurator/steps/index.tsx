@@ -55,7 +55,7 @@ export const createSteps = (
   {
     id: 'gates',
     title: 'Gibt es elektrische Tore zum Gelände?',
-    tip: 'Elektrische Schiebetore schützen den äußeren Zugang zum Gelände. Um den Zugang zum Gelände für jeden Berechtigten gewährleisten zu können kann das mardu.space System auch mit diesen Verbunden werden. Hierzu muss in die Torsteuerung eingegriffen werden.',
+    tip: 'Elektrische Schiebetore schützen den äußeren Zugang zum Gelände. Damit alle Berechtigten Zugang erhalten, kann das Mardu-System auch mit diesen verbunden werden. Hierzu muss in die Torsteuerung eingegriffen werden.',
     view: (
       <NumberStep
         value={state.gates.count}

@@ -31,7 +31,6 @@ export const PreorderRequests: CollectionConfig = {
           admin: { width: '50%' },
           options: [
             { label: 'mardu.de', value: 'mardu-de' },
-            { label: 'mardu.space', value: 'mardu-space' },
           ],
         },
       ],

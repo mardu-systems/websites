@@ -5,7 +5,7 @@ export type { State } from './configurator-page-client';
 
 export const metadata: Metadata = {
   title: 'Konfigurator',
-  description: 'Stelle dein individuelles mardu.space System zusammen.',
+  description: 'Stelle dein individuelles Mardu-System zusammen.',
 };
 
 export default function ConfiguratorPage() {

@@ -1,13 +1,13 @@
 # Solutions Content Contracts
 
-Diese Notiz dokumentiert den öffentlichen Daten- und UI-Vertrag für Branchen- und Lösungsseiten in `mardu.space`.
+Diese Notiz dokumentiert den öffentlichen Daten- und UI-Vertrag für Branchen- und Lösungsseiten in `mardu.de`.
 
 ## Rollenverteilung
 
 - `@mardu/content-core` definiert die renderfähigen DTOs.
 - `@mardu/content-core` kapselt ebenfalls die Payload-Read-Layer und Mapper fuer Runtime-Consumer.
 - `@mardu/solutions-ui` rendert ausschließlich UI.
-- `apps/mardu-space` bleibt Owner von:
+- `apps/mardu-de` bleibt Owner von:
   - Routen
   - Metadaten
   - Linkzielen und CTA-Zielen
@@ -83,13 +83,13 @@ Zusätzliche Felder gegenüber `SolutionListItemDto`:
 
 Wichtige Regel:
 
-- Das Package kennt keine festen `mardu.space`-Pfade.
+- Das Package kennt keine festen App-Pfade.
 - Überblicksseiten übergeben Links über `buildHref`.
 - Detailseiten werden in der App zusammengesetzt.
 
 ## V1-Umfang
 
-- Seed-Daten liegen weiterhin app-nah in `apps/mardu-space/data/solutions.ts`, dienen aber primär als Importquelle.
+- Seed-Daten liegen weiterhin app-nah in `apps/mardu-de/data/solutions.ts`, dienen aber primär als Importquelle.
 - Runtime-Ausspielung erfolgt über Payload in `apps/platform` und den Read-Layer in `@mardu/content-core`.
 - Keine Filter und keine zusätzliche Taxonomie-UI.
 - Fokus liegt weiterhin auf branchenspezifischer Einordnung mit Text und Bild.

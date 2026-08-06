@@ -6,7 +6,7 @@ Diese Dokumentation beschreibt den API-Vertrag für Branchen- und Lösungsseiten
 
 - `solutions` zentral redaktionell pflegen.
 - Öffentliche Ausspielung nur für publizierte Datensätze.
-- `mardu.space` konsumiert die Inhalte über `@mardu/content-core`.
+- `mardu.de` konsumiert die Inhalte über `@mardu/content-core`.
 
 ## DTO-Vertrag
 
@@ -42,7 +42,7 @@ Bereitstellung über:
 
 Statische Ausgangsdaten:
 
-- [apps/mardu-space/data/solutions.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-space/data/solutions.ts)
+- [apps/mardu-de/data/solutions.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/data/solutions.ts)
 
 Seed-Skript:
 
@@ -52,5 +52,5 @@ Vertrag des Seed-Skripts:
 
 - Upsert über `slug`
 - publiziert Datensätze direkt mit `_status=published`
-- setzt `sites=['mardu-space']`
+- setzt `sites=['mardu-de']`
 - überführt Hero-, Problem-, Content-Block- und CTA-Daten verlustfrei aus der statischen Seed-Quelle

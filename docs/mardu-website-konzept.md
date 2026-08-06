@@ -2,7 +2,7 @@
 
 ## Ausgangslage
 
-Mardu.de und mardu.space sollen zu einer gemeinsamen Website zusammengeführt werden. Die zentrale Website ist künftig mardu.de. Mardu.space bleibt nicht als eigenständige Produktwebsite bestehen, sondern soll auf die passenden Inhalte von mardu.de weiterleiten.
+Mardu.de ist die zentrale Website für sämtliche Produkt-, Lösungs- und Unternehmensinhalte.
 
 Das bisher angedachte Baustellenprodukt wird eingestellt und nicht weiter als eigener Produktbereich kommuniziert. Die neue Website konzentriert sich auf die beiden klaren Einsatzrichtungen Tür und Maschine sowie auf die Software-Plattform, die beides einfach steuerbar macht.
 
@@ -229,7 +229,7 @@ Mögliche Kategorien:
 
 ## Konfigurator
 
-Der Konfigurator soll ähnlich wie auf der bisherigen mardu.space-Seite weitergeführt werden. Er soll Besuchern helfen, ihr Projekt grob einzuordnen.
+Der Konfigurator soll Besuchern helfen, ihr Projekt grob einzuordnen.
 
 Der Konfigurator ist besonders wichtig, weil Mardu kein Standardprodukt für den Warenkorb ist. Besucher sollen Schritt für Schritt angeben können:
 
@@ -308,7 +308,6 @@ Die Seite soll nicht zu verspielt und nicht zu generisch wirken. Mardu soll als 
 ## Wichtige Entscheidungen aus der Planung
 
 - Mardu.de wird die zentrale Website.
-- Mardu.space wird nicht als eigenständige Website weitergeführt.
 - Das Baustellenprodukt wird eingestellt.
 - Die Hauptseite startet mit Tür und Maschine.
 - Die Software wird als verbindende und einfache Plattform erklärt.

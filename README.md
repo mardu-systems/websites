@@ -1,11 +1,10 @@
 # Mardu Websites Monorepo
 
-Dieses Repository bündelt die öffentlichen Frontends `mardu.de` und `mardu.space` sowie die zentrale Payload-/Lead-Plattform in einem gemeinsamen Workspace.
+Dieses Repository bündelt das öffentliche Frontend `mardu.de` sowie die zentrale Payload-/Lead-Plattform in einem gemeinsamen Workspace.
 
 ## Apps
 
 - `apps/mardu-de`: öffentliche Marketing- und Produktseite von `mardu.de`
-- `apps/mardu-space`: öffentliche Marketing- und Whitepaper-Site von `mardu.space`
 - `apps/platform`: zentrales Payload-Admin, Content-API und Lead-Backend
 
 ## Packages
@@ -32,7 +31,6 @@ Für einzelne Apps:
 
 ```bash
 bun run dev:mardu-de
-bun run dev:mardu-space
 bun run dev:platform
 ```
 

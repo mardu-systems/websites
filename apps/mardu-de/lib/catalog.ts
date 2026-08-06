@@ -10,7 +10,7 @@ import {
 } from '@mardu/content-core';
 import { getPlatformOrigin } from '@mardu/site-config';
 
-const site = 'mardu-space' as const;
+const site = 'mardu-de' as const;
 
 export const getCatalogCategories = async () =>
   getPlatformCatalogCategories(getPlatformOrigin(), site);

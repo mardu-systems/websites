@@ -1,1 +1,0 @@
-"Website von Mardu GmbH"

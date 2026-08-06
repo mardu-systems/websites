@@ -71,16 +71,6 @@ const nextConfig: NextConfig = {
         hostname: 'mardu.de',
         pathname: '/api/media/**',
       },
-      {
-        protocol: 'https',
-        hostname: 'mardu.space',
-        pathname: '/api/media/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'www.mardu.space',
-        pathname: '/api/media/**',
-      },
     ],
   },
 };

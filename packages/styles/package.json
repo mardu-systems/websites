@@ -10,7 +10,6 @@
   "exports": {
     "./base.css": "./base.css",
     "./theme-mardu-de.css": "./theme-mardu-de.css",
-    "./theme-mardu-space.css": "./theme-mardu-space.css",
     "./theme-platform.css": "./theme-platform.css"
   }
 }

@@ -13,12 +13,10 @@ const workspaceRoot = findMonorepoRoot(__dirname);
 const defaultSources = {
   newsletters: [
     { site: 'mardu-de', file: path.join(workspaceRoot, 'apps/mardu-de/data/newsletter.json') },
-    { site: 'mardu-space', file: path.join(workspaceRoot, 'apps/mardu-space/data/newsletter.json') },
     { site: 'platform', file: path.join(workspaceRoot, 'apps/platform/data/newsletter.json') },
   ],
   preorders: [
     { site: 'mardu-de', file: path.join(workspaceRoot, 'apps/mardu-de/data/preorders.json') },
-    { site: 'mardu-space', file: path.join(workspaceRoot, 'apps/mardu-space/data/preorders.json') },
     { site: 'platform', file: path.join(workspaceRoot, 'apps/platform/data/preorders.json') },
   ],
 };
@@ -64,7 +62,7 @@ function readBoolean(record, keys) {
 }
 
 function normalizeSite(site) {
-  return site === 'mardu-space' || site === 'platform' ? site : 'mardu-de';
+  return site === 'platform' ? site : 'mardu-de';
 }
 
 function normalizeNewsletterStatus(record) {
@@ -251,23 +249,6 @@ async function main() {
   for (const source of defaultSources.newsletters) {
     for (const entry of readJsonArray(source.file)) {
       const normalized = normalizeNewsletterEntry(entry, source.site);
-      if (!normalized) {
-        continue;
-      }
-
-      const result = await importNewsletterEntry(payload, normalized);
-      if (result === 'created') {
-        summary.newsletterCreated += 1;
-      } else {
-        summary.newsletterUpdated += 1;
-      }
-    }
-  }
-
-  const legacySubscribersExport = process.env.SPACE_SUBSCRIBERS_EXPORT;
-  if (legacySubscribersExport) {
-    for (const entry of readJsonArray(legacySubscribersExport)) {
-      const normalized = normalizeNewsletterEntry(entry, 'mardu-space');
       if (!normalized) {
         continue;
       }

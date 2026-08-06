@@ -7,9 +7,7 @@ import { renderEmailLayout, sendEmail } from '@/lib/email';
 import type { NewsletterCrmEventDto } from '@/types/api/newsletter-crm';
 import { getSiteConfig } from '@mardu/site-config';
 
-function resolveSite(value: string | null): SiteKey {
-  return value === 'mardu-space' ? 'mardu-space' : 'mardu-de';
-}
+const activeSite: SiteKey = 'mardu-de';
 
 function redirectWithStatus(site: SiteKey, status: string, role = 'newsletter') {
   const siteConfig = getSiteConfig(site);
@@ -25,7 +23,7 @@ function redirectWithStatus(site: SiteKey, status: string, role = 'newsletter') 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const token = searchParams.get('token');
-  const fallbackSite = resolveSite(searchParams.get('site'));
+  const fallbackSite = activeSite;
   if (!token) {
     return redirectWithStatus(fallbackSite, 'missing-token');
   }
@@ -35,7 +33,7 @@ export async function GET(req: Request) {
     return redirectWithStatus(fallbackSite, 'invalid-token');
   }
 
-  const site = resolveSite(data.site);
+  const site = activeSite;
   const role = data.role === 'whitepaper_requester' ? 'whitepaper' : data.role;
   let subscriber: Awaited<ReturnType<typeof confirmNewsletterSubscriber>> | null = null;
   try {
@@ -94,7 +92,7 @@ export async function GET(req: Request) {
     const unsubscribeUrl = `${process.env.MARDU_PLATFORM_ORIGIN?.trim() || 'https://platform.mardu.de'}/api/newsletter/unsubscribe?token=${encodeURIComponent(unsubscribeToken)}`;
     const whitepaperDownloadUrl =
       role === 'whitepaper' && getSiteConfig(site).whitepaperDownloadPath
-        ? `${site === 'mardu-space' ? getSiteConfig(site).origin : process.env.MARDU_PLATFORM_ORIGIN?.trim() || 'https://platform.mardu.de'}${getSiteConfig(site).whitepaperDownloadPath}?token=${encodeURIComponent(
+        ? `${getSiteConfig(site).origin}${getSiteConfig(site).whitepaperDownloadPath}?token=${encodeURIComponent(
             createNewsletterToken({
               email: data.email,
               site,

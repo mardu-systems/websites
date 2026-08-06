@@ -42,7 +42,7 @@ export async function generateMetadata({
       canonical: `/solutions/${solution.slug}`,
     },
     openGraph: {
-      title: `${solution.title} | mardu.space`,
+      title: `${solution.title} | Mardu`,
       description: solution.summary,
       url: `/solutions/${solution.slug}`,
       type: 'website',

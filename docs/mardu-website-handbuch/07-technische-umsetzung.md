@@ -89,7 +89,7 @@ Weitere Seiten werden erst ergänzt, wenn ihre Inhalte und Belege vorhanden sind
 
 ### Site-Key und CMS
 
-`mardu-de` lädt Produkt- und Lösungsinhalte derzeit teilweise mit dem Site-Key `mardu-space`. Platform-Seeds veröffentlichen Inhalte ebenfalls für `mardu-space`. Dadurch können neue lokale `mardu-de`-Daten ungenutzt bleiben.
+`mardu-de` lädt Produkt- und Lösungsinhalte mit dem Site-Key `mardu-de`. Platform-Seeds veröffentlichen Inhalte für `mardu-de`, damit lokale Daten und Runtime-Inhalte dieselbe Site-Zuordnung verwenden.
 
 Vor dem Redesign ist eine eindeutige Strategie nötig:
 
