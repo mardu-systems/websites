@@ -43,6 +43,11 @@ export interface WhitepaperSectionProps {
   successTitle?: string;
   successDescription?: string;
   onSubmitRequest?: (payload: WhitepaperLeadRequestDto) => Promise<void>;
+  /**
+   * `editorial-index` uses the numbered, square-edged Mardu marketing layout.
+   * The default variant preserves the existing compact lead-magnet card.
+   */
+  variant?: 'default' | 'editorial-index';
 }
 
 export default function WhitepaperSection({
@@ -59,13 +64,16 @@ export default function WhitepaperSection({
   successTitle = 'Fast geschafft!',
   successDescription = 'Vielen Dank für Ihr Interesse. Wir haben Ihnen eine E-Mail mit dem Download-Link gesendet.\n\nBitte prüfen Sie Ihr Postfach (und den Spam-Ordner). Der Link ist aus Sicherheitsgründen nur begrenzt gültig.',
   onSubmitRequest,
+  variant = 'default',
 }: WhitepaperSectionProps) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
+    setFormError(null);
 
     const formData = new FormData(event.currentTarget);
     const payload: WhitepaperLeadRequestDto = {
@@ -94,11 +102,170 @@ export default function WhitepaperSection({
       setIsSubmitted(true);
     } catch (error) {
       console.error(error);
-      alert('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
+      setFormError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
     } finally {
       setIsLoading(false);
     }
   };
+
+  const renderLeadForm = (editorial = false) => (
+    <form onSubmit={handleSubmit} className={cn('space-y-4', editorial && 'space-y-0')} noValidate>
+      <div className={cn('grid grid-cols-1 gap-4 md:grid-cols-2', editorial && 'gap-0')}>
+        <div className={cn('space-y-2', editorial && 'border-b border-border py-5 md:pr-5')}>
+          <Label htmlFor="wp-vorname">Vorname</Label>
+          <Input
+            type="text"
+            id="wp-vorname"
+            name="firstName"
+            autoComplete="given-name"
+            placeholder="Ihr Vorname"
+            className={cn(editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none')}
+          />
+        </div>
+        <div
+          className={cn(
+            'space-y-2',
+            editorial && 'border-b border-border py-5 md:border-l md:pl-5',
+          )}
+        >
+          <Label htmlFor="wp-nachname">Nachname</Label>
+          <Input
+            type="text"
+            id="wp-nachname"
+            name="lastName"
+            autoComplete="family-name"
+            placeholder="Ihr Nachname"
+            className={cn(editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none')}
+          />
+        </div>
+      </div>
+
+      <div className={cn('space-y-2', editorial && 'border-b border-border py-5')}>
+        <Label
+          htmlFor="wp-email"
+          className="after:ml-0.5 after:text-destructive after:content-['*']"
+        >
+          E-Mail-Adresse
+        </Label>
+        <Input
+          type="email"
+          id="wp-email"
+          name="email"
+          required
+          autoComplete="email"
+          inputMode="email"
+          autoCapitalize="none"
+          autoCorrect="off"
+          spellCheck={false}
+          placeholder="name@unternehmen.de"
+          className={cn(editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none')}
+        />
+      </div>
+
+      <div className={cn('flex items-start gap-3 pt-2', editorial && 'border-b border-border py-6')}>
+        <Checkbox id="wp-consent" name="consent" required className="mt-1" />
+        <Label
+          htmlFor="wp-consent"
+          className="text-xs font-normal leading-relaxed text-muted-foreground"
+        >
+          {consentLabel}
+        </Label>
+      </div>
+
+      <div
+        className={cn(
+          'flex items-center gap-3 text-xs text-muted-foreground',
+          editorial && 'py-5',
+        )}
+      >
+        <Lock className="h-4 w-4 shrink-0" aria-hidden="true" />
+        <span>Die Verarbeitung erfolgt nur für Whitepaper-Download und Newsletter.</span>
+      </div>
+
+      {formError ? (
+        <p className="pb-4 text-sm text-destructive" role="alert" aria-live="assertive">
+          {formError}
+        </p>
+      ) : null}
+
+      <Button
+        type="submit"
+        className={cn(
+          'h-12 w-full text-base font-medium',
+          editorial &&
+            'rounded-none border-y border-border bg-transparent px-0 text-foreground shadow-none hover:border-primary hover:bg-transparent hover:text-primary',
+        )}
+        disabled={isLoading}
+      >
+        <Mail className="size-4" aria-hidden="true" />
+        {isLoading ? submitPendingLabel : submitLabel}
+      </Button>
+    </form>
+  );
+
+  if (variant === 'editorial-index') {
+    return (
+      <section className={cn('border-b border-border py-16 md:py-24', className)}>
+        <div className="mardu-container grid min-w-0 gap-14 lg:grid-cols-[0.42fr_0.58fr] lg:gap-18">
+          <div className="min-w-0 lg:sticky lg:top-28 lg:self-start">
+            <p className="font-mono text-xs tracking-[0.18em] text-mardu-purple">[01] {eyebrow}</p>
+            <h2 className="mt-6 max-w-[17ch] text-[clamp(2.35rem,4vw,3.75rem)] font-light leading-[1] tracking-[-0.035em] text-foreground">
+              {title}
+            </h2>
+            <p className="mt-6 max-w-[42rem] text-base leading-relaxed text-muted-foreground">
+              {description}
+            </p>
+
+            {benefits.length > 0 ? (
+              <ul className="mt-8 border-t border-border">
+                {benefits.map((benefit) => (
+                  <li
+                    key={benefit}
+                    className="flex min-h-12 items-start gap-3 border-b border-border py-3 text-sm leading-relaxed text-foreground/78"
+                  >
+                    <Check className="mt-0.5 size-4 shrink-0 text-mardu-purple" aria-hidden="true" />
+                    <span>{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
+
+          <div className="min-w-0 border-t border-border">
+            <div className="border-b border-border py-6">
+              <p className="font-mono text-xs tracking-[0.14em] text-mardu-purple">[02] Download</p>
+              <h3 className="mt-4 text-2xl font-light tracking-[-0.025em] text-foreground">
+                Whitepaper per E-Mail anfordern
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                Der persönliche Download-Link wird direkt an Ihre E-Mail-Adresse gesendet.
+              </p>
+            </div>
+            {renderLeadForm(true)}
+          </div>
+        </div>
+
+        <Dialog open={isSubmitted} onOpenChange={setIsSubmitted}>
+          <DialogContent className="rounded-none border-border bg-background sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2 text-foreground">
+                <Check className="h-6 w-6 text-mardu-purple" aria-hidden="true" />
+                {successTitle}
+              </DialogTitle>
+              <DialogDescription className="pt-2 whitespace-pre-line text-base">
+                {successDescription}
+              </DialogDescription>
+            </DialogHeader>
+            <div className="mt-4 flex justify-end">
+              <Button variant="secondary" onClick={() => setIsSubmitted(false)}>
+                Verstanden
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      </section>
+    );
+  }
 
   return (
     <section className={cn('w-full px-4 py-16 md:px-8', className)}>
@@ -169,64 +336,7 @@ export default function WhitepaperSection({
                   </div>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    <div className="space-y-2">
-                      <Label htmlFor="wp-vorname">Vorname</Label>
-                      <Input type="text" id="wp-vorname" name="firstName" placeholder="Max" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="wp-nachname">Nachname</Label>
-                      <Input
-                        type="text"
-                        id="wp-nachname"
-                        name="lastName"
-                        placeholder="Mustermann"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label
-                      htmlFor="wp-email"
-                      className="after:ml-0.5 after:text-destructive after:content-['*']"
-                    >
-                      E-Mail Adresse
-                    </Label>
-                    <Input
-                      type="email"
-                      id="wp-email"
-                      name="email"
-                      required
-                      placeholder="max@beispiel.de"
-                    />
-                  </div>
-
-                  <div className="flex items-start space-x-3 pt-2">
-                    <Checkbox id="wp-consent" name="consent" required className="mt-1" />
-                    <Label
-                      htmlFor="wp-consent"
-                      className="text-xs font-normal leading-relaxed text-muted-foreground"
-                    >
-                      {consentLabel}
-                    </Label>
-                  </div>
-
-                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                    <Lock className="h-4 w-4" />
-                    <span>
-                      Die Verarbeitung erfolgt nur für Whitepaper-Download und Newsletter.
-                    </span>
-                  </div>
-
-                  <Button
-                    type="submit"
-                    className="h-12 w-full text-base font-medium"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? submitPendingLabel : submitLabel}
-                  </Button>
-                </form>
+                {renderLeadForm()}
               </div>
             </div>
           </ScrollReveal>

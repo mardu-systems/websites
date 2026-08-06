@@ -4,14 +4,14 @@ import { SolutionsPage as SolutionsPageContent } from '@/features/solutions/solu
 export const metadata: Metadata = {
   title: 'Lösungen',
   description:
-    'Branchenlösungen für Werkstätten, Labore, Hochschulen, Makerspaces und technische Betriebsräume auf mardu.space.',
+    'Mardu-Lösungen für Werkstätten, Labore, Hochschulen, Makerspaces und technische Betriebsräume.',
   alternates: {
     canonical: '/solutions',
   },
   openGraph: {
-    title: 'Lösungen | mardu.space',
+    title: 'Lösungen | Mardu',
     description:
-      'Branchenlösungen für Werkstätten, Labore, Hochschulen, Makerspaces und technische Betriebsräume auf mardu.space.',
+      'Mardu-Lösungen für Werkstätten, Labore, Hochschulen, Makerspaces und technische Betriebsräume.',
     url: '/solutions',
     type: 'website',
   },

@@ -113,9 +113,9 @@ export default async function IntegrationsPage({ searchParams }: { searchParams:
       <section className="section-hairline mt-10 py-10 md:mt-14 md:py-14">
         <div className="mardu-container">
           <Overline>Integrationskatalog</Overline>
-          <h1 className="mt-2 text-[clamp(2rem,4.5vw,3.6rem)] leading-[0.95] tracking-[-0.03em] text-foreground">
+          <h2 className="mt-2 text-[clamp(2rem,4.5vw,3.6rem)] leading-[0.95] tracking-[-0.03em] text-foreground">
             Alle Integrationen
-          </h1>
+          </h2>
 
           <p className="mt-4 text-sm text-foreground/65">{result.total} Integrationen gefunden</p>
 

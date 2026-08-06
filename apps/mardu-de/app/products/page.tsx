@@ -18,14 +18,14 @@ import {
 export const metadata: Metadata = {
   title: 'Produkte',
   description:
-    'Hardware, Credentials und Zubehör für mardu.space als modularer Produktkatalog mit Angebotsanfrage statt Checkout.',
+    'Hardware, Identmedien und Zubehör für Mardu-Installationen – von der Maschine bis zum weiteren Zugangspunkt.',
   alternates: {
     canonical: '/products',
   },
   openGraph: {
-    title: 'Produkte | mardu.space',
+    title: 'Produkte | Mardu',
     description:
-      'Hardware, Credentials und Zubehör für mardu.space als modularer Produktkatalog mit Angebotsanfrage statt Checkout.',
+      'Hardware, Identmedien und Zubehör für Mardu-Installationen – von der Maschine bis zum weiteren Zugangspunkt.',
     url: '/products',
     type: 'website',
   },
@@ -47,7 +47,7 @@ export default async function ProductsPage() {
         title="Hardware, Credentials und Zubehör für reale Mardu-Installationen"
         description="Dieser Bereich ist für konkrete Projektbausteine gedacht: Produkte verstehen, typische Kombinationen prüfen, Richtpreise sehen und anschließend gezielt anfragen. Nicht als Einstieg in die Lösung, sondern als vertiefender Schritt."
         primaryCta={{ label: 'Angebot anfragen', href: '/contact?source=contact-form' }}
-        secondaryCta={{ label: 'Zur Plattform', href: '/platform' }}
+        secondaryCta={{ label: 'Integrationen ansehen', href: '/integrations' }}
       />
 
       <CatalogCategoryGrid
@@ -101,11 +101,11 @@ export default async function ProductsPage() {
 
       <CTASection
         title="Noch nicht sicher, welche Kombination passt?"
-        description="Dann starten Sie nicht mit einer Einzelposition, sondern mit Plattform, Hardware oder Konfigurator. Daraus ergibt sich, welche Produktkombination wirklich Sinn ergibt."
-        primaryButtonText="Konfigurator starten"
-        primaryButtonHref="/configurator"
-        secondaryButtonText="Zur Plattform"
-        secondaryButtonHref="/platform"
+        description="Dann starten Sie nicht mit einer Einzelposition. Gemeinsam klären wir den Zugangspunkt, die vorhandene Infrastruktur und die passende Produktkombination."
+        primaryButtonText="Projekt besprechen"
+        primaryButtonHref="/contact"
+        secondaryButtonText="Integrationen ansehen"
+        secondaryButtonHref="/integrations"
       />
     </main>
   );

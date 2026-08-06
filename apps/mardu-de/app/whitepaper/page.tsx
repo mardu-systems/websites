@@ -2,47 +2,44 @@ import { WhitepaperSection } from '@mardu/sections';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Whitepaper Download | Mardu',
+  title: 'Whitepaper',
   description:
     'Whitepaper für Werkstatt-, Labor- und Hochschulverantwortliche: Zutritt, Maschinenfreigabe und Qualifikationen nachvollziehbar organisieren.',
 };
 
 export default function WhitepaperPage() {
   return (
-    <main className="min-h-screen bg-background flex flex-col">
-      <div className="min-h-screen pt-40 pb-20">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 mb-12 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-            Digitale Zutritts- und Maschinenfreigabe
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Das Whitepaper für Unternehmenswerkstätten, Hochschulen, Makerspaces und private
+    <main className="min-h-screen bg-background pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))]">
+      <section className="border-b border-border py-16 md:py-24">
+        <div className="mardu-container grid min-w-0 gap-12 xl:grid-cols-[0.62fr_0.38fr] xl:items-end xl:gap-20">
+          <div className="min-w-0">
+            <p className="font-mono text-xs tracking-[0.18em] text-mardu-purple">[WHITEPAPER]</p>
+            <h1 className="mt-6 max-w-[15ch] text-[var(--font-size-h1-fluid)] font-light leading-[0.98] tracking-[-0.04em] text-foreground">
+              Zutritt und Maschinenfreigabe{' '}
+              <em className="font-serif font-normal italic tracking-[-0.025em] text-mardu-purple">
+                klar organisieren.
+              </em>
+            </h1>
+          </div>
+          <p className="max-w-[38rem] text-base leading-relaxed text-muted-foreground xl:pb-1">
+            Ein Praxisleitfaden für Unternehmenswerkstätten, Hochschulen, Labore und offene
             Werkstätten.
           </p>
         </div>
+      </section>
 
+      <div className="pb-20 md:pb-24">
         <WhitepaperSection
           title="Whitepaper: Sicherheit & Organisation"
-          description="Wie Werkstattleitungen und Sicherheitsverantwortliche Zutritt, Maschinenfreigaben und Unterweisungen zuverlässig organisieren. Erfahren Sie, wie mardu.space Schlüssel und Listen durch ein konsistentes Berechtigungsmodell ersetzt."
+          description="Wie Werkstattleitungen und Sicherheitsverantwortliche Zutritt, Maschinenfreigaben und Unterweisungen nachvollziehbar organisieren – von der Identität bis zum realen Zugangspunkt."
           benefits={[
-            'Sicherheit & Nachvollziehbarkeit: Personenbezogene, zeitlich definierte Berechtigungen und Ereignisprotokolle',
-            'Reduzierter Verwaltungsaufwand: Digitale Vergabe, Anpassung und Entzug von Rechten ohne Schlüsselmanagement',
-            'Flexibler Betrieb: Lokal oder zentral administrierbar, passend zu Ihrer Infrastruktur',
-            'Compliance: Technische Durchsetzung von Unterweisungen (DGUV/TRBS) und lückenlose Dokumentation',
-            'Skalierbarkeit: Vom einzelnen Makerspace bis zum Produktionsstandort',
+            'Personenbezogene und zeitlich definierte Berechtigungen nachvollziehbar abbilden',
+            'Vergabe, Anpassung und Entzug von Rechten zentral organisieren',
+            'Vorhandene Identitäten und reale Betriebsabläufe einbeziehen',
+            'Unterweisungen und Ereignisse sauber dokumentieren',
           ]}
+          variant="editorial-index"
         />
-
-        <div className="max-w-3xl mx-auto mt-16 text-center px-4">
-          <h3 className="text-lg font-semibold text-primary mb-2">
-            Bereits für den Newsletter angemeldet?
-          </h3>
-          <p className="text-muted-foreground">
-            Kein Problem! Geben Sie einfach erneut Ihre E-Mail-Adresse im Formular oben ein. Unser
-            System erkennt Sie und sendet Ihnen den aktuellen Download-Link direkt zu, ohne dass Sie
-            sich erneut bestätigen müssen.
-          </p>
-        </div>
       </div>
     </main>
   );

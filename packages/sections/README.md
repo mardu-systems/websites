@@ -29,6 +29,32 @@ Shared content sections for multiple Mardu frontends.
 - `EditorialPanelsSection`
 - `EditorialLinkPanelsSection`
 - `EditorialBenefitsSection`
+- `StickyStorySection`
+
+## `StickyStorySection` contract
+
+- Props:
+  - `id?: string`
+  - `eyebrow?: ReactNode`
+  - `title: ReactNode`
+  - `intro?: ReactNode`
+  - `items: ReadonlyArray<StickyStoryItem>`
+  - `nextSectionId?: string`
+  - `className?: string`
+- `StickyStoryItem`:
+  - `id: string`
+  - `index: string`
+  - `label: string`
+  - `title: string`
+  - `description: string`
+  - `emphasis?: string`
+  - `imageSrc: string`
+  - `imageAlt: string`
+- Behavior:
+  - keeps the text steps in the normal document flow
+  - pins one media stage on desktop and switches its image when a text step reaches the activation point
+  - renders each image next to its text on smaller screens instead of forcing sticky behavior
+  - exposes an optional step button that respects `prefers-reduced-motion` and can continue to `nextSectionId`
 
 ## `WhitepaperSection` contract
 

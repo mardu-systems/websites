@@ -10,22 +10,22 @@ import { sitePhotoAssets } from '@/data/site-photos';
 export const metadata: Metadata = {
   title: 'Fotos',
   description:
-    'Kuratiertes Fotoarchiv mit allen fotografischen Motiven, die aktuell auf mardu.space erscheinen.',
+    'Kuratiertes Fotoarchiv mit freigegebenem Presse- und Bildmaterial der Mardu GmbH.',
   alternates: {
     canonical: '/fotos',
   },
   openGraph: {
-    title: 'Fotos | mardu.space',
+    title: 'Fotos | Mardu',
     description:
-      'Kuratiertes Fotoarchiv mit allen fotografischen Motiven, die aktuell auf mardu.space erscheinen.',
+      'Kuratiertes Fotoarchiv mit freigegebenem Presse- und Bildmaterial der Mardu GmbH.',
     url: '/fotos',
     type: 'website',
   },
   twitter: {
     card: 'summary',
-    title: 'Fotos | mardu.space',
+    title: 'Fotos | Mardu',
     description:
-      'Kuratiertes Fotoarchiv mit allen fotografischen Motiven, die aktuell auf mardu.space erscheinen.',
+      'Kuratiertes Fotoarchiv mit freigegebenem Presse- und Bildmaterial der Mardu GmbH.',
   },
 };
 
@@ -56,7 +56,7 @@ export default async function FotosPage() {
             Fotos
           </h1>
           <p className="text-base leading-relaxed text-foreground/72 md:text-lg">
-            Presse- und Bildmaterial von mardu.space.
+            Presse- und Bildmaterial der Mardu GmbH.
           </p>
         </div>
 

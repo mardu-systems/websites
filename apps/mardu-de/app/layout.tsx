@@ -8,6 +8,11 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { getSiteConfig } from '@mardu/site-config';
 import localFont from 'next/font/local';
 import { IBM_Plex_Sans, JetBrains_Mono } from 'next/font/google';
+import {
+  MARDU_APPLE_TOUCH_ICON_PATH,
+  MARDU_FAVICON_PATH,
+  MARDU_LOGO_LIGHT_PATH,
+} from '@/lib/brand-assets';
 
 const siteConfig = getSiteConfig('mardu-de');
 const SITE_URL = siteConfig.origin;
@@ -69,11 +74,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon/favicon.ico', sizes: 'any' },
-      { url: '/favicon/favicon.svg', type: 'image/svg+xml' },
+      { url: MARDU_FAVICON_PATH, type: 'image/svg+xml' },
       { url: '/favicon/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/favicon/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
     ],
-    apple: [{ url: '/favicon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    apple: [{ url: MARDU_APPLE_TOUCH_ICON_PATH, sizes: '180x180', type: 'image/svg+xml' }],
     shortcut: [{ url: '/favicon/favicon.ico' }],
   },
   manifest: '/manifest.webmanifest',
@@ -131,7 +136,7 @@ const jsonLd = {
       '@type': 'Organization',
       name: siteConfig.appName,
       url: SITE_URL,
-      logo: `${SITE_URL}/logos/Logo.svg`,
+      logo: `${SITE_URL}${MARDU_LOGO_LIGHT_PATH}`,
       email: siteConfig.supportEmail,
       telephone: siteConfig.contactPhone,
       vatID: siteConfig.vatId,
@@ -145,7 +150,7 @@ const jsonLd = {
         '@type': 'Organization',
         name: 'Mardu',
         url: SITE_URL,
-        logo: `${SITE_URL}/logos/Logo.svg`,
+        logo: `${SITE_URL}${MARDU_LOGO_LIGHT_PATH}`,
         telephone: siteConfig.contactPhone,
         vatID: siteConfig.vatId,
       },

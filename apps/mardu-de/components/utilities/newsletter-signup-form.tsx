@@ -7,6 +7,8 @@ import { Button } from '@mardu/ui/components/button';
 import { Checkbox } from '@mardu/ui/components/checkbox';
 import { Input } from '@mardu/ui/components/input';
 import { Label } from '@mardu/ui/components/label';
+import { cn } from '@mardu/ui/lib/utils';
+import { ArrowUpRight } from 'lucide-react';
 
 /**
  * Public props for the reusable newsletter signup form.
@@ -15,15 +17,20 @@ import { Label } from '@mardu/ui/components/label';
  */
 export interface NewsletterSignupFormProps {
   onSuccess?: () => void;
+  variant?: 'default' | 'editorial-index';
 }
 
-export default function NewsletterSignupForm({ onSuccess }: NewsletterSignupFormProps) {
+export default function NewsletterSignupForm({
+  onSuccess,
+  variant = 'default',
+}: NewsletterSignupFormProps) {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [consentChecked, setConsentChecked] = useState(false);
   const idPrefix = useId();
   const executeRecaptcha = useRecaptcha();
+  const editorial = variant === 'editorial-index';
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -88,9 +95,9 @@ export default function NewsletterSignupForm({ onSuccess }: NewsletterSignupForm
   }
 
   return (
-    <form className="space-y-6" onSubmit={handleSubmit} noValidate>
-      <div className="grid gap-4 md:grid-cols-2">
-        <div className="space-y-2">
+    <form className={cn('space-y-6', editorial && 'space-y-0')} onSubmit={handleSubmit} noValidate>
+      <div className={cn('grid gap-4 md:grid-cols-2', editorial && 'gap-0')}>
+        <div className={cn('space-y-2', editorial && 'border-b border-border py-5 md:pr-5')}>
           <Label htmlFor={`${idPrefix}-firstName`}>Vorname</Label>
           <Input
             type="text"
@@ -98,10 +105,16 @@ export default function NewsletterSignupForm({ onSuccess }: NewsletterSignupForm
             name="firstName"
             autoComplete="given-name"
             placeholder="Ihr Vorname"
+            className={cn(editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none')}
           />
         </div>
 
-        <div className="space-y-2">
+        <div
+          className={cn(
+            'space-y-2',
+            editorial && 'border-b border-border py-5 md:border-l md:pl-5',
+          )}
+        >
           <Label htmlFor={`${idPrefix}-lastName`}>Nachname</Label>
           <Input
             type="text"
@@ -109,11 +122,12 @@ export default function NewsletterSignupForm({ onSuccess }: NewsletterSignupForm
             name="lastName"
             autoComplete="family-name"
             placeholder="Ihr Nachname"
+            className={cn(editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none')}
           />
         </div>
       </div>
 
-      <div className="space-y-2">
+      <div className={cn('space-y-2', editorial && 'border-b border-border py-5')}>
         <Label htmlFor={`${idPrefix}-company`}>Firma</Label>
         <Input
           type="text"
@@ -121,10 +135,11 @@ export default function NewsletterSignupForm({ onSuccess }: NewsletterSignupForm
           name="company"
           autoComplete="organization"
           placeholder="Ihre Firma"
+          className={cn(editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none')}
         />
       </div>
 
-      <div className="space-y-2">
+      <div className={cn('space-y-2', editorial && 'border-b border-border py-5')}>
         <Label
           htmlFor={`${idPrefix}-email`}
           className="after:ml-0.5 after:text-destructive after:content-['*']"
@@ -142,10 +157,11 @@ export default function NewsletterSignupForm({ onSuccess }: NewsletterSignupForm
           autoCorrect="off"
           spellCheck={false}
           placeholder="name@unternehmen.de"
+          className={cn(editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none')}
         />
       </div>
 
-      <div className="space-y-2 pt-1">
+      <div className={cn('space-y-2 pt-1', editorial && 'border-b border-border py-6')}>
         <Label className="flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-muted-foreground">
           <Checkbox
             id={`${idPrefix}-consent`}
@@ -160,8 +176,23 @@ export default function NewsletterSignupForm({ onSuccess }: NewsletterSignupForm
         </Label>
       </div>
 
-      <Button type="submit" disabled={pending}>
+      <Button
+        type="submit"
+        disabled={pending}
+        className={cn(
+          editorial &&
+            'group h-12 w-full justify-between rounded-none border-y border-border bg-transparent px-0 text-base font-normal text-foreground shadow-none hover:border-primary hover:bg-transparent hover:text-primary',
+        )}
+      >
         {pending ? 'Wird gesendet...' : 'Newsletter abonnieren'}
+        {editorial ? (
+          <span className="flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
+            <ArrowUpRight
+              className="size-4 transition-transform duration-200 group-hover:rotate-45 group-focus-visible:rotate-45 motion-reduce:transition-none"
+              aria-hidden="true"
+            />
+          </span>
+        ) : null}
       </Button>
 
       {success ? (

@@ -195,7 +195,7 @@ export default function StickyStorySection({
                 ref={(node) => {
                   stepRefs.current[index] = node;
                 }}
-                className="border-t border-border py-12 first:border-t-0 first:pt-0 lg:flex lg:min-h-[72svh] lg:items-center lg:py-20 lg:first:pt-20"
+                className="border-t border-border py-12 first:border-t-0 first:pt-0 lg:flex lg:min-h-[72svh] lg:items-center lg:border-t-0 lg:py-20 lg:first:pt-20"
               >
                 <StoryCopy
                   item={item}
@@ -220,45 +220,52 @@ export default function StickyStorySection({
             ))}
           </div>
 
-          <div className="hidden lg:block">
-            <div className="sticky top-24 h-[calc(100svh-9rem)] min-h-[24rem] max-h-[48rem] overflow-hidden border border-border bg-[#171820]">
-              {items.map((item, index) => {
-                const active = index === activeIndex;
+          <div className="hidden lg:block [container-type:inline-size]">
+            <div
+              className="h-full"
+              style={{
+                paddingTop:
+                  "max(0px, calc((72svh - min(62.5cqw, 100svh - 10rem)) / 2))",
+              }}
+            >
+              <div
+                className="sticky aspect-[16/10] max-h-[calc(100svh-10rem)] overflow-hidden border border-border bg-[#171820]"
+                style={{
+                  top: "calc(50svh - min(31.25cqw, (100svh - 10rem) / 2))",
+                }}
+              >
+                {items.map((item, index) => {
+                  const active = index === activeIndex;
 
-                return (
-                  <motion.figure
-                    key={item.id}
-                    initial={false}
-                    animate={{
-                      opacity: active ? 1 : 0,
-                      scale: prefersReducedMotion ? 1 : active ? 1 : 0.985,
-                    }}
-                    transition={{
-                      duration: prefersReducedMotion ? 0 : 0.38,
-                      ease: "easeOut",
-                    }}
-                    aria-hidden={!active}
-                    className={cn(
-                      "absolute inset-0",
-                      !active && "pointer-events-none",
-                    )}
-                  >
-                    <Image
-                      src={item.imageSrc}
-                      alt={active ? item.imageAlt : ""}
-                      fill
-                      sizes="(min-width: 1280px) 58vw, 52vw"
-                      priority={index === 0}
-                      className="object-contain object-center p-6 xl:p-10"
-                    />
-                  </motion.figure>
-                );
-              })}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 flex items-center justify-between border-t border-white/12 bg-black/45 px-5 py-3 text-xs text-white/64 backdrop-blur-sm">
-                <span>
-                  [{items[activeIndex]?.index}] {items[activeIndex]?.label}
-                </span>
-                <span>Mardu-Verwaltungssoftware</span>
+                  return (
+                    <motion.figure
+                      key={item.id}
+                      initial={false}
+                      animate={{
+                        opacity: active ? 1 : 0,
+                        scale: prefersReducedMotion ? 1 : active ? 1 : 0.985,
+                      }}
+                      transition={{
+                        duration: prefersReducedMotion ? 0 : 0.38,
+                        ease: "easeOut",
+                      }}
+                      aria-hidden={!active}
+                      className={cn(
+                        "absolute inset-0",
+                        !active && "pointer-events-none",
+                      )}
+                    >
+                      <Image
+                        src={item.imageSrc}
+                        alt={active ? item.imageAlt : ""}
+                        fill
+                        sizes="(min-width: 1280px) 58vw, 52vw"
+                        priority={index === 0}
+                        className="object-contain object-center"
+                      />
+                    </motion.figure>
+                  );
+                })}
               </div>
             </div>
           </div>

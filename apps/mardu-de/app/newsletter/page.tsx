@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import NewsletterSignupForm from '@/components/utilities/newsletter-signup-form';
-import { Button } from '@mardu/ui/components/button';
-import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Newsletter abonnieren',
@@ -15,27 +13,34 @@ export const metadata: Metadata = {
 export default function NewsletterPage() {
   return (
     <main className="min-h-screen pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))]">
-      <section className="mardu-container py-10 md:py-14">
-        <div className="mx-auto max-w-3xl border border-border/70 bg-card p-6 shadow-sm md:p-10">
-          <div className="space-y-4">
-            <p className="text-xs uppercase tracking-[0.18em] text-foreground/46">Newsletter</p>
-            <h1 className="headline-balance text-[clamp(1.9rem,4vw,3.1rem)] leading-[0.96] tracking-[-0.03em] text-foreground">
-              Updates von Mardu direkt per E-Mail
+      <section className="border-b border-border py-16 md:py-24">
+        <div className="mardu-container grid min-w-0 gap-14 lg:grid-cols-[0.42fr_0.58fr] lg:gap-18">
+          <header className="min-w-0 lg:sticky lg:top-28 lg:self-start">
+            <p className="font-mono text-xs tracking-[0.18em] text-mardu-purple">[NEWSLETTER]</p>
+            <h1 className="mt-6 max-w-[15ch] text-[var(--font-size-h1-fluid)] font-light leading-[0.98] tracking-[-0.04em] text-foreground">
+              Neues von Mardu{' '}
+              <em className="font-serif font-normal italic tracking-[-0.025em] text-mardu-purple">
+                direkt per E-Mail.
+              </em>
             </h1>
-            <p className="max-w-2xl text-base leading-relaxed text-foreground/72 md:text-lg">
-              Erhalten Sie Einblicke zu Zutrittssteuerung, Maschinenfreigabe, Produktneuheiten und
-              ausgewählten Entwicklungen rund um Mardu.
+            <p className="mt-6 max-w-[42rem] text-base leading-relaxed text-muted-foreground">
+              Ausgewählte Einblicke zu Maschinenfreigabe, physischen Zugängen, Integrationen und
+              aktuellen Entwicklungen.
             </p>
-          </div>
+          </header>
 
-          <div className="mt-8">
-            <NewsletterSignupForm />
-          </div>
+          <div className="min-w-0 border-t border-border">
+            <div className="border-b border-border py-6">
+              <p className="font-mono text-xs tracking-[0.14em] text-mardu-purple">[01] Anmeldung</p>
+              <h2 className="mt-4 text-2xl font-light tracking-[-0.025em] text-foreground">
+                Newsletter abonnieren
+              </h2>
+              <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                Nach dem Absenden erhalten Sie eine E-Mail zur Bestätigung Ihrer Anmeldung.
+              </p>
+            </div>
 
-          <div className="mt-8">
-            <Button asChild variant="outline">
-              <Link href="/#contact">Zurück zur Startseite</Link>
-            </Button>
+            <NewsletterSignupForm variant="editorial-index" />
           </div>
         </div>
       </section>

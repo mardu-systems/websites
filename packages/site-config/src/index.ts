@@ -80,7 +80,7 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
     contactPath: '/contact',
     newsletterSuccessPath: '/newsletter/anmeldung',
     newsletterUnsubscribePath: '/newsletter/abmeldung',
-    emailLogoUrl: 'https://www.mardu.de/logos/Logo.svg',
+    emailLogoUrl: 'https://www.mardu.de/mardu-branding/logo/mardu_logo_side_for_white_bg.svg',
     emailBrandName: 'Mardu GmbH',
     features: {
       blog: true,

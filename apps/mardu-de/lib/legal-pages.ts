@@ -11,7 +11,9 @@ export async function getLegalPage(slug: LegalPageSlug) {
 }
 
 export function buildLegalPageMetadata(slug: LegalPageSlug, page: Awaited<ReturnType<typeof getLegalPage>>): Metadata {
-  const title = page?.seoTitle ?? `${page?.title ?? (slug === 'privacy' ? 'Datenschutzerklärung' : 'Impressum')} | ${siteConfig.appName}`;
+  const pageTitle = page?.title ?? (slug === 'privacy' ? 'Datenschutzerklärung' : 'Impressum');
+  const title = page?.seoTitle?.replace(/\s*\|\s*Mardu\s*$/i, '') ?? pageTitle;
+  const socialTitle = `${title} | ${siteConfig.appName}`;
   const description =
     page?.seoDescription ??
     page?.summary ??
@@ -27,14 +29,14 @@ export function buildLegalPageMetadata(slug: LegalPageSlug, page: Awaited<Return
       canonical: `/${slug}`,
     },
     openGraph: {
-      title,
+      title: socialTitle,
       description,
       url,
       type: 'article',
     },
     twitter: {
       card: 'summary',
-      title,
+      title: socialTitle,
       description,
     },
   };

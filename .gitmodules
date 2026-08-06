@@ -1,0 +1,3 @@
+[submodule "apps/mardu-de/public/mardu-branding"]
+	path = apps/mardu-de/public/mardu-branding
+	url = https://github.com/mardu-systems/mardu_branding.git

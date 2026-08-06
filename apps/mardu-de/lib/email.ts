@@ -1,4 +1,7 @@
 import {Resend} from "resend";
+import {getSiteConfig} from "@mardu/site-config";
+
+const siteConfig = getSiteConfig("mardu-de");
 
 export async function sendEmail({
                                     subject,
@@ -88,7 +91,7 @@ export function renderEmailLayout(title: string, content: string): string {
 <body>
     <main style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px;background-color:#f9f9f9;">
         <div style="text-align:center;margin-bottom:24px;">
-            <img src="https://www.mardu.de/logos/Logo.svg" alt="Mardu GmbH Logo" style="width:150px;height:auto;" />
+            <img src="${siteConfig.emailLogoUrl}" alt="Mardu GmbH Logo" style="width:150px;height:auto;" />
         </div>
         <h1 style="text-align:center;font-size:24px;font-weight:bold;margin-bottom:24px;color:#333;">${title}</h1>
         <div style="font-size:16px;line-height:1.5;color:#333;">${content}</div>

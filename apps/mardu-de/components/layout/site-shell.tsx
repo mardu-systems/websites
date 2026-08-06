@@ -7,6 +7,7 @@ import { Button } from '@mardu/ui/components/button';
 import { getSiteConfig } from '@mardu/site-config';
 import { defaultFooterMetaLinks, defaultFooterNavLinks } from '@/data/default-footer-items';
 import { defaultHeaderItems } from '@/data/default-header-items';
+import { MARDU_LOGO_DARK_PATH, MARDU_LOGO_LIGHT_PATH } from '@/lib/brand-assets';
 
 const baseSocialLinks: ReadonlyArray<FooterSocialLinkDto> = [
   { href: 'https://www.instagram.com/mardu.de', label: 'Instagram', icon: 'instagram' },
@@ -40,7 +41,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
         variant: 'editorial-index',
         brand: {
           homeHref: '/',
-          logoSrc: '/logos/Logo.svg',
+          logoSrc: MARDU_LOGO_LIGHT_PATH,
           logoAlt: 'Zur Mardu-Startseite',
           logoWidth: 156,
           logoHeight: 44,
@@ -57,7 +58,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
         theme: 'dark',
         brand: {
           homeHref: '/',
-          logoSrc: '/logos/Logo.svg',
+          logoSrc: MARDU_LOGO_DARK_PATH,
           logoAlt: 'Mardu',
           logoWidth: 156,
           logoHeight: 44,
