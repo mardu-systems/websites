@@ -92,28 +92,31 @@ export function IntegrationsFilters({
             Kategorien
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
-            <Badge asChild variant={category ? "outline" : "default"}>
-              <Link href={toHref({ q: query, protocol, status, sort })}>
-                Alle
-              </Link>
+            <Badge
+              render={
+                <Link href={toHref({ q: query, protocol, status, sort })} />
+              }
+              variant={category ? "outline" : "default"}
+            >
+              Alle
             </Badge>
             {categories.map((item) => (
               <Badge
                 key={item.id}
-                asChild
+                render={
+                  <Link
+                    href={toHref({
+                      q: query,
+                      category: item.slug,
+                      protocol,
+                      status,
+                      sort,
+                    })}
+                  />
+                }
                 variant={category === item.slug ? "default" : "outline"}
               >
-                <Link
-                  href={toHref({
-                    q: query,
-                    category: item.slug,
-                    protocol,
-                    status,
-                    sort,
-                  })}
-                >
-                  {item.title}
-                </Link>
+                {item.title}
               </Badge>
             ))}
           </div>
@@ -124,28 +127,31 @@ export function IntegrationsFilters({
             Protokolle
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
-            <Badge asChild variant={protocol ? "outline" : "default"}>
-              <Link href={toHref({ q: query, category, status, sort })}>
-                Alle
-              </Link>
+            <Badge
+              render={
+                <Link href={toHref({ q: query, category, status, sort })} />
+              }
+              variant={protocol ? "outline" : "default"}
+            >
+              Alle
             </Badge>
             {protocols.map((item) => (
               <Badge
                 key={item.id}
-                asChild
+                render={
+                  <Link
+                    href={toHref({
+                      q: query,
+                      category,
+                      protocol: item.slug,
+                      status,
+                      sort,
+                    })}
+                  />
+                }
                 variant={protocol === item.slug ? "default" : "outline"}
               >
-                <Link
-                  href={toHref({
-                    q: query,
-                    category,
-                    protocol: item.slug,
-                    status,
-                    sort,
-                  })}
-                >
-                  {item.title}
-                </Link>
+                {item.title}
               </Badge>
             ))}
           </div>
@@ -184,20 +190,20 @@ export function IntegrationsFilters({
           {STATUS_ITEMS.map((item) => (
             <Badge
               key={item.label}
-              asChild
+              render={
+                <Link
+                  href={toHref({
+                    q: query,
+                    category,
+                    protocol,
+                    status: item.value,
+                    sort,
+                  })}
+                />
+              }
               variant={status === item.value ? "default" : "outline"}
             >
-              <Link
-                href={toHref({
-                  q: query,
-                  category,
-                  protocol,
-                  status: item.value,
-                  sort,
-                })}
-              >
-                {item.label}
-              </Link>
+              {item.label}
             </Badge>
           ))}
         </div>
