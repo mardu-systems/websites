@@ -1,0 +1,867 @@
+                                                                                                                                                                                       Ideenpapier
+
+Inhaltsverzeichnis
+
+............................................................................................................................................. 1
+
+1 Geschäftsidee ................................................................................................................ 1
+
+   1.1 Innovation ..........................................................................................................................................................1
+
+   1.2 Kundennutzen ..................................................................................................................................................3
+
+   1.3. Gründungsvorgeschichte .............................................................................................................................4
+
+   1.4 Stand der Umsetzung .....................................................................................................................................5
+
+   1.5 Projektplanung .................................................................................................................................................6
+
+2 Team ................................................................................................................................ 7
+       Luca Schöneberg (Co-Founder) ............................................................................................................................................................ 8
+       Erik Frey (Co-Founder) ............................................................................................................................................................................ 8
+       Melvin Valerius (Kaufmännischer Leiter)....................................................................................................................................... 9
+
+3 Unternehmerische Umsetzung .................................................................................... 10
+
+   3.1 Wettbewerb .................................................................................................................................................... 10
+       Akii.................................................................................................................................................................................................................. 10
+       NH-Baulogistik .......................................................................................................................................................................................... 11
+       Bigguard ....................................................................................................................................................................................................... 11
+       Baustellen-Card ........................................................................................................................................................................................ 11
+
+   3.2 Markteintritt .................................................................................................................................................. 12
+
+   3.3 Finanzplanung ............................................................................................................................................... 13
+
+   3.4 Nachhaltigkeit ................................................................................................................................................ 15
+
+4 Mittelplanung für die Vorhabenslaufzeit ..................................................................... 16
+
+   4.1 Sachkosten ...................................................................................................................................................... 16
+
+   4.2 Coaching ........................................................................................................................................................... 16
+
+5. Anhang ......................................................................................................................... 17
+
+   Anhang 1: 2-Jahres Finanzplanung................................................................................................................ 17
+
+   Anhang 2: Absichtserklärungen der Testkunden (Letter of Intents) ............................................... 17
+                                                                                           Ideenpapier
+
+
+1 Geschäftsidee
+
+1.1 Innovation
+
+In Deutschland arbeiten auf jeder Baustelle verschiedene Bauunternehmen zu unterschied-
+lichen Zeiten, in unterschiedlichen Zielsetzungen und mit unterschiedlichen Anforderungen.
+Um einen effizienten Ablauf zu ermöglichen, ist es zwingend erforderlich, dass ein sicherer
+und zuverlässiger Zugang zu allen Bereichen einer Baustelle für alle Handwerker und
+Baustellenmitarbeiter gewährleistet ist. Mardu ersetzt das traditionelle „Schlüsselchaos“
+durch eine digitale, flexible und einfache Lösung. Hierdurch können Bauunternehmen Zeit,
+Geld und Organisationsarbeit einsparen und insgesamt effizienter arbeiten.
+
+Status Quo und Problemstellung
+
+Um aktuell Sicherheit auf größeren Baustellen zu gewährleisten, werden Zutrittspunkte mit
+klassischen analogen Metallschlüsseln abgesichert. Dieses Vorgehen ist systembedingt
+unübersichtlich, chaotisch und ineffizient. Innerhalb der Gebäude auf einer Baustelle, also
+der Bauprojekte selbst, werden bestimmte Bereiche, z.B. temporäre Lager- oder
+Arbeitsplätze, mit vorübergehend installierten Bautüren und herkömmlichen Schlössern
+gesichert. Außerhalb des Gebäudes befinden sich Baucontainer auf der Baustelle, die als
+temporäre Büros, Umkleiden, Pausenräume, Werkstätten oder Lagerräume verwendet
+werden. Um Zutritt auf die Baustelle zu erlangen, werden Drehkreuze aufgestellt, die die
+Baustelle vor unbefugtem Zugriff schützen. Die unten aufgeführten Bilder veranschaulichen
+die genannten, herkömmlichen Baustellenzutritte.
+
+
+
+
+               Abbildung 1: Herkömmliche Baustellenzutritte (Bautür, Baucontainer, Drehkreuz)
+
+
+
+1
+                                                                             Ideenpapier
+
+Mit diesen traditionellen Zutritten, welche allesamt analog mit physischen Schlüsseln
+gesichert werden, kann es zum Beispiel vorkommen, dass ein Fliesenleger einen Bereich
+absperrt und erst eine Woche später zurückkehrt. Falls währenddessen dann ein Elektriker
+oder Heizungsinstallateur mit der Arbeit auf derselben Baustelle beginnen will, findet er eine
+verschlossene Bautür vor. In einem anderen Beispiel wurde ein Subunternehmen
+beauftragt, das „Schwarzarbeiter“ anstellt. Werden diese „Schwarzarbeiter“ ohne Kontrolle,
+also nicht durch einen Pförtner oder ein Drehkreuz auf die Baustelle gelassen, haftet der
+Bauunternehmer – auch wenn er sie nicht direkt eingestellt hat. Bei herkömmlichen
+Bauzutritten können zudem Werkzeug- oder Dokumentendiebstähle vorfallen, falls die
+Werkzeug- und Bürocontainer versehentlich nicht abgeschlossen wurden.
+
+Lösung
+
+Durch Mardus innovatives, digitales Zutrittskontrollsystem werden diese Probleme und
+Risiken auf Baustellen nun endgültig beseitigt. Mardu bietet eine Lösung, bei der jeder
+Berechtigte einen persönlichen digitalen Baustellenausweis erhält. Mit diesem Ausweis
+erhalten Mitarbeitende auf allen für sie freigegebenen Baustellen Zugang zu den benötigten
+Bereichen. Dafür müssen sie nur einen Transponder oder ihr Smartphone vor den
+Empfänger am jeweiligen Zutrittspunkt halten, welcher mit einer von Mardu entwickelten
+Hardware ausgestattet ist. Alle Zutrittspunkte vernetzen sich untereinander und bilden so
+ein ausfallsicheres, selbstheilendes und weitreichendes Funknetzwerk. Dies geschieht mit
+der speziell für sicherheitskritische Anwendungen wie Zutrittskontrollen und Outdoor-
+Anwendungen entwickelten Funktechnologie IP500. Diese flexible Lösung erlaubt es
+Generalunter-nehmern,      Bauunternehmen      und    Handwerksbetrieben,      ihre   eigenen
+Zutrittspunkte zu nutzen. Diese vernetzen sich automatisch und erhöhen so die
+Ausfallsicherheit. Verwaltet werden die Zutrittspunkte über eine von Mardu bereitgestellte
+Web- oder Mobile-App. Diese wird zusätzlich eine API-Schnittstelle beinhalten, die mit
+externen Bauablaufplanungsprogrammen wie Bausicht oder Planradar kompatibel ist. In
+das Mardu Ökosystem können ohne Probleme weitere Produkte integriert werden. Denkbar
+sind hierbei bspw. Sensoren, die Temperatur und Luftfeuchtigkeit erfassen, um z.B. den
+Trocknungs- oder Aushärtvorgang von Beton zu überwachen oder ein Assettracking
+System, um Material und Werkzeugflüsse oder Diebstähle auf der Baustelle nachverfolgen
+zu können. Ein Assettracking System agiert wie ein lokales GPS auf der Baustelle.
+Langfristig schafft Mardu ein digitales Ökosystem, welches sämtliche Prozesse auf
+Baustellen optimiert und in das 21. Jahrhundert bringt.
+
+2
+                                                                               Ideenpapier
+
+Patentschutz
+
+Mardu plant keinen Patentschutz. Wir würden es sogar begrüßen, wenn andere Hersteller
+Produkte für das Mardu Ökosystem entwickeln. Hierbei würde Mardu mit einem
+Lizenzmodell als Kommunikationsprotokoll ähnlich wie etwa Bluetooth agieren. Dabei
+werden keine Baupläne oder Produkte offengelegt, sondern es handelt sich nur um das
+Kommunikationsprotokoll. Dadurch kommt es dazu, dass eine moderne Baustelle nicht
+mehr ohne die Technologie von Mardu denkbar ist.
+
+
+1.2 Kundennutzen
+
+Mardus Zielgruppe besteht primär aus General-
+und Bauunternehmen, die von optimierten
+Kontroll- und Sicherheitsmechanismen profi-
+tieren wollen. Auch Subunternehmer und andere
+an Bauprojekten Beteiligte können Kunden der
+Mardu Systeme sein, vor allem, wenn sie in
+Logistik oder Verwaltung involviert sind. Für die
+Integration in bestehende Baustellenmanage-
+mentprozesse bieten sich Partnerschaften mit
+spezialisierten Softwareunternehmen, wie Bau-
+sicht, Planradar oder Baustellencard an.
+                                                            Abbildung 2: Mardus Lesegerät
+
+Mit dem Zutrittskontrollsystem von Mardu, dessen Lesegerät in Abbildung 2 dargestellt ist,
+erhalten Bauunternehmer eine umfassende Kontrolle über ihre Baustellen. Das System
+ermöglicht es, Diebstahlsfälle zu verringern, die Aktivitäten auf der Baustelle in Echtzeit zu
+überwachen und bei Unregelmäßigkeiten sofort reagieren zu können. Ein weiterer
+entscheidender Vorteil liegt in der Möglichkeit, die Zutrittsrechte digital und ortsunabhängig
+zu verwalten. Dadurch entfällt die klassische Schlüsselverwaltung, im Sinne der Ausgabe
+und Rückgabe, sowie die damit evtl. verbundenen Verluste. Das reduziert organisatorische
+Probleme und Sicherheitsrisiken.
+
+Ein Beispiel dafür ist die zeitgesteuerte Zutrittskontrolle. Benötigt ein Lieferant z.B. nur
+mittwochs Zugang zu einem bestimmten Bereich, kann dies genau konfiguriert werden,
+
+
+
+
+3
+                                                                         Ideenpapier
+
+ohne, dass physische Schlüssel ausgegeben und eingesammelt werden müssen. Das spart
+Zeit und minimiert Risiken durch verlorene oder kopierte Schlüssel.
+
+Darüber hinaus können sensible Bereiche bereits während der Bauphase gesichert werden,
+etwa um wertvolle Maschinen, Computer und andere hochwertige Geräte vor Bauschäden
+zu schützen. Hierdurch ist es möglich, dass die Bauzeit signifikant verkürzt werden kann,
+da bereits während des Baus Teile der wertvollen Innenausstattung eingebaut werden
+können.
+
+Mardu bietet also ein Werkzeug an, mit dessen Hilfe die Organisation der Baustelle stark
+vereinfacht werden kann, wobei gleichzeitig die Sicherheit gemeinsam mit dem Wert der
+Baustelle und dem Baufortschritt wächst.
+
+
+1.3. Gründungsvorgeschichte
+
+Die Geschäftsidee für Mardu entstand im Makerspace ARTandTECH.space Rheine, dessen
+Gründung zwei der drei Gründer Mardus – Luca Schöneberg und Erik Frey – aktiv
+mitgestaltet haben. Im Rahmen des Aufbaus des ARTandTECH.space Rheine wurde eine
+maßgeschneiderte Zutrittskontrolle benötigt, die Maschinenfreigabe, Türsteuerung und
+Benutzerverwaltung in einem System integriert. Da eine solche Lösung nicht existierte, das
+nötige Know-how aber verfügbar war, entwickelte das Team eine kabellose Zutrittskontrolle.
+Diese wurde Anfang 2025 an den wichtigsten Eingängen sowie an den Maschinen des
+ARTandTECH.space installiert.
+
+Durch die Werkstudententätigkeit von Luca Schöneberg bei der siganet GmbH, einem
+führenden Unternehmen für die Planung der technischen Gebäudeausrüstung, konnte auf
+die damals neu entwickelte Funkschnittstelle IP500 zurückgegriffen werden. Durch die Nähe
+zur Baubranche von der siganet GmbH ist auch die Idee der Anwendung der
+Zutrittskontrollen auf Baustellen entstanden. Durch Hausarbeiten und Uni-Projekte zum
+Thema Funkkommunikation mit IP500 ist das Team von Mardu auf das StartupLab der
+Hochschule Osnabrück (RISE)       aufmerksam geworden. Die entwickelte Lösung ist im
+Kontext der Hochschule sowohl für die Hochschule selbst als auch für das RISE einsetzbar,
+da auch hier eine Vielzahl an Maschinen verwaltet werden soll.
+
+
+
+
+4
+                                                                                     Ideenpapier
+
+1.4 Stand der Umsetzung
+
+In der Vergangenheit entwickelte das Mardu-Team bereits einige Prototypen, die sich über
+IP500 vernetzen und elektronische Schlösser schalten. Der letzte Prototyp wurde auf der
+Messe FeuerTrutz-2024 auf dem Messestand der IP500-Allianz ausgestellt, an dem das
+Mardu-Team dank siganet teilnehmen durften. Die Elektronik lief während des gesamten
+Messe-Zeitraums einwandfrei, ohne, dass es zu Unterbrechungen kam. Die Proof-of-
+Concept-Phase kann damit als erfolgreich abgeschlossen betrachtet werden. Eine
+Explosionszeichnung der von Mardu entwickelten Elektronik, die auch auf der Messe
+verwendet wurde, ist in Abbildung 3 dargestellt.
+
+Die     Benutzerverwaltung     im    Hintergrund
+befindet sich noch in der Entwicklungsphase,
+ist aber bereits in ihren Grundfunktionen
+einsatzbereit.   Die    Hardware       wurde    so
+entwickelt, dass sie flexibel einsetzbar ist, etwa
+in    einer   Unterputzdose    sowie    auch     in
+handelsüblichen Gehäusen. Hierdurch und
+durch den modularen Aufbau kann die gleiche
+Elektronik in unterschiedlichen Gehäusen für
+unterschiedliche    Anwendungen        verwendet
+werden. Um Erfahrung an einem echten
+System zu sammeln, wird ab Neujahr 2025 der
+ARTandTECH.space Rheine vollständig mit
+dem      Mardu-System      ausgestattet.       Dies
+beinhaltet die Ausstattung von 15 Maschinen,
+5 Türen und zwei Toren sowie ca. 50-70                Abbildung 3: Explosionszeichnung Mardu Elektronik
+
+aktiven Nutzern.
+
+In Zukunft wird in Zusammenarbeit mit siganet und der agn-Gruppe ein Baustellen-
+Pilotprojekt mit einigen Bautüren gestartet. Hierdurch wird das Minimum Viable Product
+(MVP) in realistischer Umgebung getestet. Vor der Markteinführung wird das MVP
+entsprechend den identifizierten Kundenbedürfnissen zu einem marktreifen Produkt
+weiterentwickelt werden, eine Verwaltungs- und Benutzerapplikation entwickelt werden,
+sowie eine CE-Zertifizierung der Hardware erfolgen.
+
+5
+                     Ideenpapier
+
+1.5 Projektplanung
+
+
+
+
+6
+                                                                             Ideenpapier
+
+
+
+
+                                  Abbildung 4: Projektplanung
+
+Die obige Abbildung stellt Mardus Projektplanung bis 2029 dar. Beginnend mit der
+Installation des Prototypen im ARTandTECH.space im Januar 2025 und dem geplanten
+Markteintritt im September 2025 umfasst die Projektplanung verschiedene Entwicklungs-
+Optimierungs- und Zertifizierungsphasen. In den darauffolgenden Jahren bis 2029 sind
+Expansionen    in   neue   Anwendungsbereiche,         Produktportfolio-Erweiterungen   sowie
+strategische Kooperationen zur Weiterentwicklung vorgesehen.
+
+
+
+2 Team
+Die Ideengeber und Hauptgründer von Mardu sind Erik Frey und Luca Schöneberg.
+Unterstützt werden sie von Melvin Valerius, der als weiterer Mitgründer aufgeführt wird und
+für die wirtschaftlichen Aspekte zuständig ist. Erik Frey und Luca Schöneberg kennen sich
+aus dem ARTandTECH.space. Sie haben bereits zuvor gemeinsam Elektronikprojekte
+entwickelt und werden jetzt die Mardu Systeme entwickeln. Jascha Wallmeier, Student der
+Mechatronik und Informationstechnik am Karlsruher Institut für Technologie, unterstützt bei
+der Umsetzung der mechanischen Komponenten.
+
+
+7
+                                                                                   Ideenpapier
+
+Luca Schöneberg (Co-Founder)
+
+                                    Luca Schöneberg ist 25 Jahre alt und studierte
+                                    Medieninformatik an der Hochschule Osnabrück. Zuvor
+                                    besuchte        er      die        höhere     Berufsfachschule
+                                    Informationstechnik in Rheine und absolvierte eine
+                                    Ausbildung            zum            Fachinformatiker           für
+                                    Systemintegration.       Er    ist    Gründungsmitglied        des
+                                    ARTandTECH.space              (ATS)     und   sammelte         dort
+                                    Erfahrung im Projektmanagement, insbesondere bei
+                                    der Entwicklung großflächiger LED-Wände, im Aufbau
+der IT-Infrastruktur und in der Leitung eines 5-köpfigen IT-Teams. Zudem übernahm er
+Vereinsführungsaufgaben und kümmerte sich gemeinsam mit dem Schatzmeister um die
+Abrechnungen. Während des Studiums beschäftigte er sich intensiv mit der IP500-
+Schnittstelle sowie der Entwicklung von Webseiten, Apps und Backends mit Datenbank-
+und Benutzerverwaltungsfunktionen. Am 17. Dezember 2024 schloss er seine
+Bachelorarbeit zum Thema „Entwicklung einer Over-the-Air-Update-Plattform für ein IP500-
+funkbasiertes Zutrittskontrollsystem“ ab.
+
+
+Erik Frey (Co-Founder)
+
+                                    Erik Frey, 22 Jahre alt, studierte Elektrotechnik und
+                                    Informationstechnik           am     Karlsruher   Institut      für
+                                    Technologie. Zuvor absolvierte er sein Abitur mit den
+                                    Leistungskursen Elektrotechnik und Mathematik am
+                                    Berufskolleg Rheine. Bereits drei Jahre vor der
+                                    Gründung des ATS engagierte er sich im Makerspace
+                                    Projektlabor, aus dem der ATS hervorging. Er nahm
+                                    dreimal    am        Jugend-forscht-Wettbewerb          teil   und
+                                    gewann     zweimal        den        Regionalwettbewerb        mit
+Projekten zur Batterie-Degradation (R.A.L.F.) und Detonationsdurchschlagsfestigkeit
+(Mathilda). Im Studium vertiefte er sich in Hochfrequenzschaltungen, Antennentechnik,
+Quantenelektronik und Embedded Software sowie in Entrepreneurship und agilem
+Projektmanagement. Von 2022 bis 2025 arbeitete er als Werksstudent bei Frickly-Systems
+(Stuttgart) an fünf verschiedenen Produkten. Seine Bachelorarbeit mit dem Titel
+
+8
+                                                                            Ideenpapier
+
+„Entwicklung von integrierten, zweistufigen Stromsensor-dc-SQUIDs“ wurde am 2. Januar
+2025 abgeschlossen.
+
+
+Melvin Valerius (Kaufmännischer Leiter)
+
+                                    Melvin Valerius, 24 Jahre alt, studiert Volkswirtschafts-
+                                    lehre an der Universität Münster. Nach dem Abitur
+                                    absolvierte    er   zunächst   eine   Ausbildung    zum
+                                    Industriekaufmann. Neben dem Studium hat er sich
+                                    bereits einmal selbstständig gemacht und bringt viel
+                                    Erfahrung im Vertrieb mit. Weiterhin verfügt er über
+                                    starke Kenntnisse in sämtlichen finanzwirtschaftlichen
+                                    Themen wie Buchhaltung und Controlling. Bei Mardu
+                                    verantwortet er die betriebswirtschaftlichen Aspekte.
+
+Holger Wallmeier, der maßgeblich an der Idee und unter anderem auch an der Finanzierung
+erster Prototypen beteiligt ist, ist Geschäftsführer von siganet. Er ist Diplom-Ingenieur für
+Elektrotechnik und arbeitet seit 23 Jahren bei siganet. Durch die lange Erfahrung in der
+Baubranche bringt er wertvolle Kontakte mit in das Projekt.
+
+Prof. Dr.-Ing. Clemens Westerkamp ist ein Begleiter. Durch seinen Hinweis ist das Mardu-
+Team auf EXIST aufmerksam geworden. Er hat acht Jahre Industrieerfahrung und ist
+Professor an der Hochschule Osnabrück für Informatik mit den Schwerpunkten intelligenter
+verteilter Systeme, Industrie 4.0 und Internet of Things.
+
+Durch dieses interdisziplinär aufgestellte Team können alle Entwicklungsschritte einer
+Zutrittskontrolle abgedeckt werden. Luca Schöneberg bringt eine fundierte Expertise für die
+Server-/Benutzerverwaltung sowie die Softwareentwicklung mit. Erik Frey übernimmt mit
+seinen weitreichenden Erfahrungen und Kenntnissen die Entwicklung der Elektronik und
+Funkkommunikation. Jascha Wallmeier ist mit seinen Fachkenntnissen für die Entwicklung
+einer robusten, baustellengeeigneten, mechanischen Umsetzung verantwortlich. Melvin
+Valerius ist für die Buchhaltung, Finanzbuchhaltung und weitere betriebswirtschaftliche
+Prozesse wie Vertrieb verantwortlich. Desweiteren hat Mardu mit Holger Wallmeier einen
+Berater und Netzwerker im Bereich Bau. Prof. Dr.-Ing. Clemens Westerkamp berät das
+Team im Bereich Technologie.
+
+
+
+9
+                                                                             Ideenpapier
+
+Um den Belangen der Sicherheitstechnik gerecht zu werden, wird die Firma Mardu als
+GmbH gegründet. Als Standort dienen zunächst Rheine und Osnabrück und im weiteren
+Verlauf Karlsruhe. Die voraussichtliche Anteilsverteilung ist wie folgt: Erik Frey: 45 %, Luca
+Schöneberg: 45 %, Melvin Valerius: 6 %, Holger Wallmeier: 4 %.
+
+Bei der Auswahl neuer Mitarbeiter wird Mardu nicht nur auf Fachkompetenz achten, sondern
+auch auf eine ausgewogene Repräsentation von Geschlecht, Herkunft und kulturellen sowie
+sozialen Erfahrungen. Diese Diversität ist für Mardu ein Schlüssel zur Förderung von
+Kreativität, Innovation und einer inklusiven Unternehmenskultur. Wir sind überzeugt, dass
+diese Ausrichtung einen positiven Beitrag zu unserer langfristigen Entwicklung und dem
+Erfolg unseres Unternehmens leisten wird.
+
+
+
+3 Unternehmerische Umsetzung
+
+3.1 Wettbewerb
+
+Klassische Zutrittskontrollen wie die von Bosch oder Siemens sind nicht als Konkurrenten
+Mardus anzusehen, da sich diese auf fertig gebaute Gebäude beschränken. Hier wird sich
+daher auf Firmen fokussiert, die sich auf Baustellensicherheit spezialisiert haben.
+
+
+Akii
+
+     -   Self Service Ansatz (Selbstinstallation durch den Benutzer)
+     -   Eingeschränkte Reichweite aufgrund von Bluetooth
+     -   Keine Analogschlüssel Fallbacklösung
+     -   Keine Ökosystemgesamtlösung
+     -   Keine direkte Internetanbindung
+     -   Eingeschränkte Flexibilität aufgrund extern zugekaufter Hardware
+
+Diese Einschränkungen können dazu führen, dass Unternehmen eher nach Lösungen
+suchen, die wie Mardu eine größere Reichweite, umfassendere Verwaltungsmöglichkeiten
+und flexibel anpassbare Hardware bieten.
+
+
+
+
+10
+                                                                                 Ideenpapier
+
+NH-Baulogistik
+
+     -   Schwerpunkt auf Baustellenmanagement, Anlieferung und Prozessüberwachung
+     -   Zutrittskontrolle wird ausschließlich durch eine Hauptzutrittskontrolle durch
+         Drehkreuze abgebildet
+     -   Ausschließlich als Gesamtpaket buchbar
+     -   Daher wenig flexible Gesamtlösung
+
+Für weitergehende flexible Anforderungen werden keine Alternativen angeboten. Das
+Mardu-Team       betrachtet     die   NH-Baulogistik   als   einen   möglichen    Kunden   oder
+Kooperationspartner, welcher mit dem Mardu-System sein Portfolio erweitern könnte.
+
+
+Bigguard
+
+     -   Videoüberwachung von Baustellen
+     -   Schwerpunkt nicht auf Regelung von Zutritten auf der Baustelle
+     -   Sondern auf der Aufzeichnung und Beobachtung von Vandalismus
+     -   Ähnlich wie Bauwatch oder Liveye
+
+Die genannten Überwachungsanbieter bieten kein unmittelbares Eingreifen in die
+Zugangssteuerung, wie es Mardu durch eine physische Kontrollinfrastruktur ermöglicht und
+können daher als Partner aufgefasst werden, bei dem beide Systeme verbunden werden.
+
+
+Baustellen-Card
+
+     -   Extern zugekaufte Zutrittskontrollsysteme an Schranken und Drehkreuzen
+     -   Kontinuierliche, teure und nicht optimale Konnektivität über LTE
+     -   Fokus auf Verwaltungssoftware und Baustellencompliance
+     -   Nutzung eines Baustellenausweises
+     -   Keine Langfristige Kosteneffizienz, da ausschließlich Mietmodell
+     -   Ähnlich wie Bausicht
+
+Die Lösung von Baustellen-Card ist im Vergleich zu der Lösung von Mardu nicht skalierbar,
+aufgrund der kostspieligen, zugekauften Hardware, sowie der verwendeten LTE
+Schnittstelle. Von dem direkten Konkurrenten Bausicht wurde bereits Interesse bekundet
+
+
+
+
+11
+                                                                            Ideenpapier
+
+das Mardu-System zu verwenden. Hierdurch sieht man Baustellen-Card eher als Kunden
+von Mardus Hardware.
+
+Mardu ist ein Hard- und Softwareentwickler und nutzt im Vergleich zu all seinen
+Konkurrenten ein Funk-Mesh-Netzwerk auf der Baustelle. Hierdurch ist es möglich, beliebig
+viele Endknoten unterschiedlichster Funktionen zu verknüpfen. Die Anwendungen reichen
+von Zutrittspunkten an Eingängen, Baucontainern, Bautüren und Schranken zu Sensoren
+und Positionierungssystemen. Somit wird die Baustelle nicht nur um Verwaltungssoftware
+und einen Zutrittspunkt erweitert (wie bei der Konkurrenz), sondern es entsteht ein
+Ökosystem, in das bei Bedarf weitere Produkte integriert werden können. Dieses digitale
+Baustellen-Ökosystem ist das übergeordnete Alleinstellungsmerkmal, welches Mardu
+gegenüber seiner Konkurrenz abgrenzt. Mardu wird die Baustelle in ein neues Zeitalter
+befördern, sodass Baustellen in Zukunft ohne die Ausstattung von Mardu nicht mehr
+denkbar sind.
+
+
+3.2 Markteintritt
+
+Bauunternehmen und Handwerksbetriebe haben das Bedürfnis, einen reibungslosen
+Bauablauf ohne Vandalismus und Diebstahl bei gleichzeitig effizienter Organisation
+sicherzustellen. Mit den flexibel aufbaubaren und mit der Baustelle mitwachsenden
+Sicherheitseinrichtungen von Mardu wird diesem Bedürfnis nachgekommen.
+
+Die Partner aus der Baubranche, die Mardu bereits für sich gewinnen konnte, werden den
+Einstieg erleichtern. Durch den Partner Dipl.-Ing. Holger Wallmeier von siganet, Teil der agn
+Gruppe, sowie B.Eng. Christian Methner (Kornhage + Schubert Architektur und Ingenieur
+GmbH) bestehen enge Kontakte direkt in die Baubranche. Von diesen Kontakten erhielt das
+Team viel positives Feedback sowie Anregungen zur Preisgestaltung und den wichtigsten
+Funktionen. Von beiden Firmen wurde auch die Zusage für die Realisierung eines
+Pilotprojektes des Mardu Prototypen auf einer ihrer Baustellen erhalten (Anhang 2). Des
+Weiteren fanden mit der Firma Bausicht aus Münster erste Gespräche über den Einsatz
+ihrer Compliance-Software für das Baustellenmanagement in Verbindung mit dem Mardu
+System statt.
+
+Auch mit den Firmen ECO Schulte und Owipex wurden auf Messen Kontakte für eine
+potentielle zukünftige Zusammenarbeit geknüpft. ECO Schulte stellt Schließsysteme her
+
+
+12
+                                                                              Ideenpapier
+
+und hat Interesse an der Entwicklung eines gemeinsamen IP500-Schaltschlosses bekundet.
+Mit Owipex, einem Containerdienstleister aus der Schweiz, der unter anderem auch
+Baustellen beliefert, haben ebenfalls Gespräche über eine Zusammenarbeit stattgefunden.
+
+Dank dem ARTandTECH.space sowie RISE der Hochschule Osnabrück hat Mardu Zugang
+zu Laboren, einem voll ausgestatteten Makerspace und wertvollen Kontakten in die Industrie
+und zu Startup-Inkubatoren. Dies hilft dem Gründerteam, den Markteintritt strukturiert
+anzugehen und erfolgreich umzusetzen.
+
+Um ein elektronisches Produkt in den Markt einzuführen, ist es notwendig, dass dieses eine
+CE-Zertifizierung besitzt. Der größte Aufwand besteht hierbei aus einer sogenannten EMV-
+Prüfung. Diese wird wie im Zeitplan beschrieben durchgeführt. Sicherheitsnormen, die für
+fertige Gebäude gelten, müssen auf einer Baustelle nicht eingehalten werden. Da es keine
+direkten Normen für die Baustelle gibt, wird die Baustelle wie ein normales Gebäude
+betrachtet und die Mardus Systeme werden entsprechend den geltenden Normen
+entwickelt.
+
+Der Vertrieb von Mardu wird über mehrere Medien erfolgen. Fachzeitschriften und Online-
+Werbung sind geeignete Mittel, um Kunden in der traditionellen Baubranche ohne direkten
+Kontakt zu akquirieren. Weiterhin wird das Mardu-Team auch regelmäßig aktiv auf Messen
+sowie bei großen Bauunternehmen, Architekturbüros und anderen Branchenakteuren
+auftreten, um dort in persönlichen Gesprächen und Testphasen Kunden zu gewinnen. Diese
+Methode hat sich bereits bewährt. Durch eine professionelle und aktive LinkedIn-Präsenz,
+sowie weiterer Online-Kanäle, erwartet man zudem, dass vermehrt Leads aktiv auf Mardu
+zukommen werden.
+
+
+3.3 Finanzplanung
+
+Mardu erzielt seine Einnahmen durch den Verkauf und die Vermietung von kompletten
+Zutrittskontrollsystemen. Das heißt, dass das Endprodukt nicht nur aus dem Gehäuse
+inklusive digitaler Nutzer-Applikation besteht, sondern das gesamte Zutrittssystem inklusive
+Bautür oder Modifikationssätze für Drehkreuze und Baucontainer, sowie potentiellen
+Installationsservice inkludiert. Damit stellt Mardu seinen Kunden eine Komplettlösung bereit,
+ohne, dass weitere Elemente oder Services anderweitig zugekauft werden müssen. Durch
+Gespräche mit potentiellen Kunden hat sich herausgestellt, dass für Bautüren sowohl ein
+Kauf als auch eine Miete, bei welcher die Erstinstallation inbegriffen ist, interessant sind.
+
+13
+                                                                                        Ideenpapier
+
+Der durchschnittliche Mietzeitraum liegt bei mindestens zwei Jahren – basierend auf der
+mittleren Bauzeit größerer Projekte der Zielgruppe. Dies wurde als Grundlage verwendet,
+um den Mietpreis von 50,00 € pro Monat sowie die Finanzplanung aufzustellen. Die folgende
+Tabelle bietet eine Übersicht über die Material- und Herstellungskosten sowie die
+Verkaufspreise bei Einmal-Kauf für alle Zutritte und für das monatliche Mietmodell für
+Bautüren.
+
+
+
+
+                              Abbildung 5: Übersicht Kosten und Preise
+
+
+
+
+Die Finanzierung des Projektes erfolgt durch eine Kombination aus Eigenmitteln und
+externen Kapitalgebern. Da die Markteinführung bereits für Oktober geplant ist und die
+Pilotprojekte bis dahin auch Erträge erwirtschaften, kann die Gründung weitgehend aus
+Eigenmitteln erfolgen. Weitere Fördermittel werden jedoch benötigt, weil zu diesem
+Zeitpunkt   noch    verschiedene    entscheidende         Entwicklungsprojekte           (Assettracking,
+Sensorik) anstehen. Diese sollen in Form von Risikokapital akquiriert werden. Die folgende
+Abbildung stellt die zu erwartende Entwicklung des Cashflows bis 2027 dar, wobei der
+Tiefpunkt   des    akkumulierten   Cashflows       bei    20.000         €   liegt.   Somit   wird   eine
+Investitionssumme von ca. 25.000 € zur Kostendeckung erwartet.
+
+
+
+
+14
+                                                                                      Ideenpapier
+
+
+
+
+                               Abbildung 6: Entwicklung des Cashflows bis 2027
+
+
+3.4 Nachhaltigkeit
+
+Mardu setzt auf eine nachhaltige und ressourcenschonende Lösung für die Bauwirtschaft.
+Die Geräte sind modular aufgebaut. So können zurückgegebene oder ausgemusterte
+Komponenten einzeln geprüft, wiederverwendet und neu zusammengebaut werden.
+Dadurch wird die Lebensdauer der Produkte verlängert und die Förderung einer
+Kreislaufwirtschaft für Elektrogeräte gewährleistet.
+
+Um Materialverbrauch zu minimieren, ersetzt Mardu physische Verpackungen und
+Anleitungen        durch   digitale   Versionen,      die      per   QR-Code     abrufbar    sind.   Die
+Funkkommunikationstechnik ermöglicht zudem eine ressourcenschonende Alternative zu
+kabelgebundenen Systemen, da sie den Materialeinsatz verringert und energieeffizienter
+arbeitet.
+
+Durch       eine   algorithmische     Optimierung        der     Servicerouten   senkt      Mardu    den
+Treibhausgasausstoß, indem unnötige Fahrten vermieden und Wege effizienter geplant
+werden. Zudem trägt das System zur Verkürzung von Bauzeiten bei, was den CO₂-Ausstoß
+auf Baustellen signifikant reduziert.
+
+Wie zuvor beschrieben, achtet Mardu bei neuen Mitarbeitern auf ein ausgeglichenes
+Verhältnis aller Geschlechter und Ethnien. Dies fördert den Austausch und lässt das Team
+mit unterschiedlichsten Blickwinkeln auf die Prozesse und Produkte schauen.
+
+
+15
+                                                                       Ideenpapier
+
+4 Mittelplanung für die Vorhabenslaufzeit
+
+4.1 Sachkosten
+
+Die im Förderzeitraum anfallenden Sachkosten von Mardu setzen sich unter anderem aus
+Laborgeräten, Werkzeugen, Prototypenmaterialien und Marketingartikeln zusammen und
+belaufen sich insgesamt auf 30.000 €. Die folgende Abbildung veranschaulicht die
+Zusammensetzung der Sachkosten.
+
+
+
+
+                                   Abbildung 7: Sachkosten
+
+
+4.2 Coaching
+
+Weiterhin plant Mardu während des Förderzeitraums Ausgaben für Coaching in Form von
+Beratung für Gründung, Vertrieb, Innovationsschutz und Geschäftsmodellen. Dadurch
+entstehen Gesamtkosten für Coaching in Höhe von 5.000 €, wie in der folgenden Abbildung
+dargestellt.
+
+
+
+
+                              Abbildung 8: Ausgaben für Coaching
+
+
+16
+                                                 Ideenpapier
+
+5. Anhang
+
+Anhang 1: 2-Jahres Finanzplanung
+
+
+
+
+Anhang 2: Absichtserklärungen der Testkunden (Letter of
+Intents)
+
+
+
+
+17
+Letter of Intent
+Zusammenarbeit im Rahmen des Projekts Mardu
+
+
+
+
+Sehr geehrte Damen und Herren,
+wir bekunden hiermit unser Interesse an einer Zusammenarbeit im Rahmen des Projekts
+Mardu. Unser Ziel ist es, das digitale Baustellenzutrittskontrollsystem von Mardu umfassend
+zu testen und durch unsere Unterstützung die erfolgreiche Weiterentwicklung zu
+ermöglichen. Die Schwerpunkte der Kooperation liegen dabei auf:
+    ·   Praxistest: Einrichtung des Mardu-Systems auf einer Testbaustelle zur
+        realitätsnahen Erprobung.
+    ·   Feedback: Sammlung wertvoller Einblicke durch Rückmeldungen von
+        Branchenexperten sowie den Beteiligten auf der Testbaustelle.
+    ·   Anpassung an Kundenbedürfnisse: Weiterentwicklung des Systems auf Basis der
+        spezifischen Anforderungen von Bauherren und Nutzern.
+    ·   Netzwerk und Sichtbarkeit: Nutzung des Netzwerks von siganet, um die
+        Bekanntheit von Mardu in der Branche zu steigern.
+    ·   Langfristige Kooperation: Evaluierung der Ergebnisse des Pilotprojekts mit dem
+        Ziel einer weiterführenden Zusammenarbeit zur Etablierung von Mardu als integralen
+        Bestandteil digitaler Baustellenmanagement-Lösungen
+Ein erfolgreicher Abschluss dieses Projekts bietet die Grundlage für den Ausbau der
+Zusammenarbeit und die Etablierung von Mardu als Schlüsseltechnologie für die
+Bauwirtschaft. Hierdurch sind sowohl siganet Vorreiter im Einsatz eines solchen Systems auf
+der Baustelle.
+Wir freuen uns auf die gemeinsame Umsetzung und einen produktiven Austausch.
+Mit freundlichen Grüßen,
+Holger Wallmeier
+                                                                                 TCC GmbH
+ TCC GmbH  Buchholzstraße 89-101  51469 Bergisch Gladbach                      Buchholzstraße 89-101
+                                                                                 51469 Bergisch Gladbach
+                                                                                 Fon +49(0)2202/9542-150
+                                                                                 Fax +49 (0)2202/9542-100
+                                                                                 E-Mail: schiefer@tcc.de
+                                                                                 USt. - Nr.: 204/5763/0085
+ Erik Frey                                                                       VAT ID: DE120500260
+
+                                                                                 Bankverbindungen:
+ Team Mardu                                                                      Commerzbank Köln
+                                                                                 Konto 501 105 100
+                                                                                 BLZ 370 400 44
+                                                                                 DE 79 3704 0044 0501 1051 00
+ Lindenstrasse 11                                                                SWIFT-BIC.: COBA DEFF XXX
+                                                                                 Sparkasse Köln-Bonn
+                                                                                 Konto 67 442 954
+                                                                                 BLZ 370 501 98
+ 48431 Rheine                                                                    DE 49 3705 0198 0067 4429 54
+                                                                                 SWIFT-BIC.: COLS DE 33
+
+
+                                                                                 Geschäftsführung:
+                                                                                 Sabine vom Stein
+                                                                                 Ralph Schiefer
+                                                                                 Rolf Schiefer
+                                                                                 HRB Köln
+                                                                                 Nr. 46506
+                                                                                 Gerichtsstand Köln
+
+
+
+
+Unverbindliche Absichtserklärung zur Zusammenarbeit mit Mardu                    20.02.2025/Sc
+
+
+Sehr geehrte Damen und Herren,
+
+die TCC GmbH bestätigt hiermit, dass sie bereits erfolgreich mit dem Team von Mardu im Rah-
+men eines gemeinsamen Projekts zusammengearbeitet hat. In diesem Projekt wurde ein
+RS485-zu-IP500-Übersetzer entwickelt, wobei Mardu fundierte Fachkenntnisse in der IP500-
+Technologie, Funkkommunikation und der Integration komplexer Schnittstellen bewiesen hat.
+
+Während der Zusammenarbeit hat sich das Team von Mardu durch hohes technisches Know-
+how, eine strukturierte Arbeitsweise und innovative Lösungsansätze ausgezeichnet. Die erfolg-
+reiche Umsetzung des Proof of Concept bestätigt, dass Mardu über die notwendige Expertise
+verfügt, um anspruchsvolle Entwicklungsprojekte im Bereich drahtloser Kommunikationstechno-
+logien durchzuführen.
+
+Die IP500-Technologie spielt eine zunehmend wichtige Rolle in der industriellen Kommunika-
+tion, und die TCC GmbH sieht großes Potenzial in ihrem zukünftigen Einsatz. Daher sind wir an
+der Weiterentwicklung und Implementierung dieser Technologie interessiert.
+
+Da die TCC GmbH ihrerseits Entwicklungen im IP 500 Umfeld plant, können wir uns vorstellen,
+in der Zukunft erneut mit Mardu zusammenzuarbeiten.
+
+Mit freundlichen Grüßen
+TCC GmbH
+
+
+
+Rolf Schiefer, GF
+Brief Mardu                                                          Seite 1/1
+Kornhage + Schubert I Postfach 1247 I 49126 Wallenhorst                                                Kornhage + Schubert
+                                                                                              Architektur + Ingenieur GmbH
+Mardu
+                                                                                                            Postfach 1247
+Luca Schöneberg                                                                                         49126 Wallenhorst
+Robberskamp 24
+                                                                                                    Fon 0 54 07 – 81392-0
+48432 Rheine                                                                                      Fax 0 54 07 – 81392-299
+
+                                                                                               info@kornhage-schubert.de
+
+
+
+
+Projekt Nr.                     Unser Zeichen/DW          Datum
+.                               cm/-223                   25.02.2025
+
+
+
+
+Absichtserklärung
+.
+
+
+Sehr geehrte Damen und Herren,
+
+in unseren Gesprächen mit dem Gründungsteam von Mardu haben wir bereits
+wertvolle Ansatzpunkte für eine vernetzte Baustellenzutrittskontrolle über IP 500
+identifiziert. Wir schätzen das Potenzial dieser Technologie, um die Abläufe auf
+unseren Baustellen sowohl effizienter als auch sicherer zu gestalten. Durch diese
+Absichtserklärung möchten wir unser Interesse an einer engen Zusammenarbeit
+bekräftigen, in der wir das Mardu-System praxisnah erproben und dessen
+Weiterentwicklung aktiv unterstützen.                                                                       Große Str. 40
+                                                                                                        49134 Wallenhorst
+
+Unseren Bauherren werden wir diese Zugangslösungen empfehlen und versuchen,                         St. – Nr. 65/200/07688
+
+hierdurch mindestens drei Pilotprojekte zu initiieren. Auf diese Weise können wir mit                       AG Osnabrück
+Mardu zusammen in realen Projekten gezielt Erfahrungen sammeln und das System                                HRB 201949
+
+weiter an die spezifischen Anforderungen der Branche anpassen. Durch                                       Geschäftsführer
+kontinuierliche Rückmeldungen zum Nutzungserlebnis und zur Systemstabilität
+                                                                                                                 Dipl. Ing.
+leisten wir einen relevanten Beitrag zur Marktreife von Mardu.                                         Johannes Kornhage
+
+                                                                                                   Dipl. Ing. Architekt BDA
+Darüber hinaus möchten wir unsere Vernetzung in der Bauwirtschaft gezielt nutzen,
+                                                                                                         Dangard Schubert
+um die Sichtbarkeit von Mardu zu erhöhen. Bei einem erfolgreichen Verlauf der
+Pilotprojekte sehen wir die Möglichkeit einer langfristigen Kooperation. Aus unserer                          Mitglied im
+                                                                                               Bund Deutscher Architekten
+Sicht bietet diese Zusammenarbeit die Chance, moderne Baustellenprozesse gezielt
+weiterzuentwickeln und unser Unternehmen im Wandel hin zu einem innovativen
+Baustellenmanagement nachhaltig zu stärken. Dabei sehen wir großes Potenzial
+                                                                                                            BDA
+                                                                                                             Landesverband
+über die reine Zutrittskontrolle hinaus, etwa in den Bereichen Sensorik, Lokalisierung                       Niedersachsen e.V.
+
+und weiterer digitaler Vernetzung.
+
+
+                                                                                                               Mitglied der
+                                                                                                       Architektenkammer
+                                                                                                           Niedersachsen
+
+
+
+
+                                                                                         www.kornhage-schubert.de
+Wir freuen uns auf die bevorstehenden Tests, auf einen konstruktiven Austausch
+und darauf, Mardu gemeinsam mit unserem Unternehmen zu einer praxisfähigen
+Lösung weiterzuentwickeln.
+
+
+Mit freundlichen Grüßen
+
+B.Eng.
+Christian Methner
+Bauleitung
+
+
+Anlage : - keien
+
+
+
+
+                                                                                 www.kornhage-schubert.de
+Bausicht GmbH
+Emdener Str. 11
+48155 Münster
+
+
+
+Letter of Intent Mardu
+
+Absichtserklärung zur Nutzung einer vollintegrierten
+Zutrittskontrolllösung auf Baustellen
+Sehr geehrte Damen und Herren,
+die Bausicht GmbH entwickelt Softwarelösungen für die digitale Verwaltung und
+Organisation moderner Baustellen. Ein zentraler Bestandteil hierbei ist die
+Zutrittskontrolle, die über Drehkreuze an den Baustelleneingängen realisiert wird, um
+eine sichere und effiziente Alternative zur klassischen Schlüsselverwaltung zu bieten.
+Das von Mardu entwickelte System bietet eine maßgeschneiderte Hardwareplattform,
+die sich perfekt für die Anforderungen auf Baustellen eignet. Besonders die Flexibilität
+in der Anwendung für sowohl Baucontainer, als auch Bautüren, Drehkreuze und
+vergleichbares. Die einfache Skalierbarkeit und Ausfallsicherheit durch ein
+selbstheilendes Funknetzwerk sind essenzielle Merkmale, die eine Zutrittskontrolle für
+Baustellen auszeichnen sollte. Zusätzlich ist die Erweiterung des Netzwerks um
+Technologien wie Asset-Tracking oder Sensorendpunkte hochinteressant für die
+Baustelle der Zukunft.
+Vor diesem Hintergrund sehen wir einen klaren Bedarf für eine vollintegrierte
+Zutrittskontrolllösung speziell für Baustellen und wären grundsätzlich bereit, ein System
+in unseren Baustellenmanagementprozess zu integrieren. Eine mögliche
+Zusammenarbeit könnte folgende Aspekte umfassen:
+   •   Einsatz des Mardu-Systems auf unseren Baustellen, um dessen Praxistauglichkeit zu
+       testen.
+   •   Zusammenführung der Softwareplattformen mithilfe von geeigneten APIs um alle
+       Informationen gebündelt auf einer Plattform verfügbar zu haben.
+   •   Ersterprobung neuer Technologien wie etwa Asset-Tracking oder Sensornetzwerke.
+   •   Unterstützung durch Feedback zur Weiterentwicklung des Systems und zur
+       Marktreife.
+
+
+Mit freundlichen Grüßen
+Christopher Sura
+Geschäftsführer Bausicht GmbH
+
+
+
+
+27.02.2025                LOI | Bausicht GmbH                                   Seite 2 von 2
+

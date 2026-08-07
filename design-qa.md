@@ -188,3 +188,129 @@ The focused comparison uses the first reference state and the first Mardu story 
 ## Final result
 
 passed
+
+---
+
+# Design QA – Integrationen
+
+## Vergleichsgrundlage
+
+- Visuelle Quelle: `/Users/lucaschoeneberg/.codex/generated_images/019fd73d-04a2-77e3-8039-4fca6644fd7a/exec-3152d73b-02a2-4e6e-b712-e55c911aa697.png`.
+- Browser-Aufnahme Umsetzung: `/Users/lucaschoeneberg/Documents/GitHub/websites/tmp/design-qa/mardu-integrations-final-4.jpg`.
+- Normalisierte Quelle: `/Users/lucaschoeneberg/Documents/GitHub/websites/tmp/design-qa/mardu-integrations-source-normalized.png`.
+- Quelle: 1672 × 941 Pixel; für den direkten Vollvergleich proportional auf 1265 × 712 Pixel normalisiert.
+- Implementierungsaufnahme: 1265 × 712 Pixel, Desktopzustand `/integrations`, leere Suche, Status „Alle Status“, sechs Einträge sichtbar beziehungsweise direkt unterhalb des Browserausschnitts.
+- Angeforderter Browser-Viewport: 2048 × 1152 CSS-Pixel. Die eingebettete Browserfläche lieferte eine auf 1265 × 712 Pixel skalierte Aufnahme; Quelle und Umsetzung wurden deshalb bei identischen Pixeldimensionen verglichen.
+
+## Vollansicht und fokussierter Vergleich
+
+Der kombinierte Vergleich zeigt Quelle und Umsetzung im selben Bildkontext. Die Umsetzung übernimmt die zweigeteilte Hero-Komposition, die technische Werkstattillustration, den schwarzen Plattformstrang, die vier verbundenen Systemgruppen sowie die reduzierte Suche mit einem Statusfilter. Die Integrationszeilen wurden zusätzlich in einem gescrollten Browserzustand geprüft; Logos, Nutzenzeile, Status und Pfeil bleiben in einer ruhigen Zeile lesbar. Ein weiterer Ausschnitt war nicht nötig, weil die relevanten Typografie-, Asset- und Tabellenmerkmale in der normalisierten Vollansicht erkennbar sind.
+
+## Pflichtflächen
+
+- Schrift und Typografie: Aktiv Grotesk, IBM Plex Sans und JetBrains Mono folgen dem bestehenden Mardu-System. Die Headline ist wie in der Quelle fest zweizeilig; Gewicht, Laufweite und Zeilenhöhe wurden im zweiten Durchgang angeglichen.
+- Abstände und Layout-Rhythmus: Hero, Plattformstrang, Systemgruppen und Filter bilden dieselbe Reihenfolge und klare vertikale Hierarchie. Bei der schmaleren eingebetteten Desktopfläche erscheinen weniger Listenzeilen gleichzeitig; das ist die erwartete responsive Verdichtung und vermeidet den vom Nutzer kritisierten Informationsüberfluss.
+- Farben und Tokens: Papierweiß, Schwarz, Mardu-Violett und die feinen Haarlinien verwenden vorhandene globale Tokens. Status bleibt als Text erkennbar und wird nicht allein über Farbe vermittelt.
+- Bildqualität und Assettreue: Die Werkstattgrafik ist ein eigenständiges hochauflösendes Line-Art-Asset. Anbieterlogos werden aus echten Markenassets beziehungsweise der für LDAP erzeugten Einzelillustration geladen; es gibt keine CSS- oder Platzhaltergrafik für die sichtbaren sechs Einträge.
+- Copy und Inhalt: Headline, Intro, Systemgruppen, Zählungen, sechs kuratierte Integrationen und Status entsprechen der ausgewählten Vorlage. Zusätzliche Daten aus dem vorhandenen Integrationskatalog werden erst über „Alle Integrationen anzeigen“ sichtbar.
+
+## Interaktionen und Zugänglichkeit
+
+- Suche nach „Stripe“ reduziert die Liste auf Stripe.
+- Der Statusfilter lässt sich mit der Suche kombinieren; ein leerer Trefferzustand und „Filter zurücksetzen“ funktionieren.
+- „Alle Integrationen anzeigen“ erweitert auf die übrigen vorhandenen Integrationen und wechselt korrekt zu „Weniger anzeigen“.
+- Veröffentlichte CMS-Einträge verlinken auf ihre Detailseite; Fallback-Einträge führen bis zur Veröffentlichung mit vorausgewähltem Integrationsparameter zur bestehenden Kontaktseite und erzeugen keine 404-Navigation.
+- Eingaben besitzen sichtbare Fokuszustände und zugängliche Bezeichnungen; die Ergebnisliste wird als Live-Region aktualisiert.
+- Im Browser waren weder ein Next.js-Laufzeitfehler-Overlay noch eine Application-Error-Ansicht vorhanden.
+
+## Findings und Vergleichshistorie
+
+1. Erster Vergleich: Headline brach auf drei Zeilen um, Hero und Systemgruppen waren zu hoch, und der Plattformstrang nahm nahezu die gesamte Seitenbreite ein. Einstufung P2.
+2. Korrektur: Headline auf zwei Zeilen festgelegt, Hero- und Zeilenrhythmus verdichtet, Plattformstrang proportional zentriert und Illustration neu skaliert.
+3. Zweiter Vergleich: „Verwaltung & Organisation“ brach im schmaleren Desktopausschnitt um. Einstufung P2.
+4. Korrektur: Gruppentypografie auf die kompakte Quellgröße reduziert. Der finale Vergleich zeigt keine offenen P0-, P1- oder P2-Abweichungen.
+
+## Follow-up Polish
+
+- P3: Die globale Website-Navigation bleibt bewusst die aktuelle Mardu-Header-Variante mit den bestehenden Hauptlinks und dem Beratungs-CTA, statt den im Mock vereinfachten Menüpunkt zu duplizieren.
+
+final result: passed
+
+---
+
+# Design QA – Mobile-Menü-Icon und Partnerlogos
+
+## Vergleichsgrundlage
+
+- Icon-Quelle: `/var/folders/rn/v1p_nhxx1871gd0_1sbxp8zh0000gn/T/codex-clipboard-99374b5a-65fb-4907-8de2-f84578aaec1b.png` (82 × 62 Pixel, RGBA).
+- Fehlerquelle Partnersektion: `/var/folders/rn/v1p_nhxx1871gd0_1sbxp8zh0000gn/T/codex-clipboard-f3cf6426-5cac-4f8c-bc18-4e334ed2a0f8.png` (2994 × 716 Pixel, RGBA).
+- Zielzustände: `/` bei 390 × 844 CSS-Pixeln, Mobile-Menü geschlossen und geöffnet; Partnersektion bei mindestens 1280 CSS-Pixeln Breite.
+- Implementierungsaufnahme: nicht verfügbar. Der bereits laufende Next.js-Prozess lieferte zunächst einen veralteten Bundle-Stand; der anschließende Browserzugriff auf die lokale Vorschau wurde von der Browserfreigabe blockiert.
+
+## Pflichtflächen
+
+- Schrift und Typografie: Drawer-Typografie und Beschriftungen wurden nicht verändert.
+- Abstände und Layout-Rhythmus: Drawer, Headerhöhe, 44-Pixel-Menüfläche und Partner-Grid bleiben strukturell bestehen.
+- Farben und Tokens: Das bereitgestellte Fünf-Punkt-Asset wird unverändert verwendet; vorhandene Mardu-Tokens bleiben unverändert.
+- Bildqualität und Assettreue: Das bereitgestellte PNG wurde bytegenau in das Projekt kopiert. Partnerlogos verwenden weiterhin die vorhandenen Originalassets; überlaufende Transform-Skalierungen wurden entfernt.
+- Copy und Inhalt: Navigation, CTA, Partnernamen und Direkteinstiege wurden nicht verändert.
+
+## Findings und Vergleichshistorie
+
+1. Ausgangszustand: Partnerlogos wurden nach der Layoutberechnung per `transform: scale(...)` bis auf 155 % vergrößert und überlappten benachbarte Grid-Zellen. Das Mobile-Menü verwendete Lucide Menu/X.
+2. Korrektur: Logoabmessungen werden wieder durch `max-width` und `max-height` innerhalb ihrer Grid-Zelle begrenzt. Der gemeinsame Header akzeptiert optional ein projektseitiges Mobile-Menü-Asset; ohne Konfiguration bleiben die bisherigen Lucide-Symbole erhalten.
+3. Statische Nachkontrolle: ESLint ohne neue Fehler, React Doctor 86/100 mit fünf ausschließlich bestehenden Hinweisen außerhalb der geänderten Dateien, `git diff --check` bestanden.
+4. Visuelle Nachkontrolle: blockiert, da keine aktuelle Browseraufnahme der geänderten Implementierung erstellt werden konnte.
+
+## Offener Blocker
+
+Für einen bestandenen Abschluss muss der lokale Entwicklungsserver frisch gestartet und die beiden Zielzustände erneut im Browser aufgenommen werden.
+
+final result: blocked
+
+---
+
+# Design QA – Blog
+
+## Vergleichsgrundlage
+
+- Visuelle Referenz des bestehenden Mardu-Designsystems: `/Users/lucaschoeneberg/Documents/GitHub/websites/tmp/design-qa/mardu-integrations-implemented-top.jpg`.
+- Implementierung Desktop: `/Users/lucaschoeneberg/Documents/GitHub/websites/tmp/design-qa/blog-typography-desktop.png` bei 1440 × 1000 CSS-Pixeln.
+- Implementierung Mobile: `/Users/lucaschoeneberg/Documents/GitHub/websites/tmp/design-qa/blog-typography-mobile.png` bei 390 × 844 CSS-Pixeln.
+- Direkter Referenzvergleich: `/Users/lucaschoeneberg/Documents/GitHub/websites/tmp/design-qa/blog-typography-comparison.png`.
+- Geprüfter Zustand: `/blog` ohne lokal verfügbare CMS-Beiträge; Suche, Filterleiste, leerer Zustand, Header und Footer sind sichtbar.
+
+## Pflichtflächen
+
+- Schrift und Typografie: Aktiv Grotesk, die vorhandene Serifenschrift und JetBrains Mono bilden dieselbe Hierarchie wie die bestehenden Mardu-Seiten. Die Blog-Hauptüberschrift nutzt jetzt denselben Desktop-Maximalwert von 4 rem wie die Integrationsseite; mobil liegt sie bei 44 Pixeln. Abschnittsüberschrift, Karten und Rich-Text-Zwischenüberschriften wurden proportional darunter abgestuft.
+- Abstände und Layout: Der Blog verwendet das bestehende Containermaß, großzügige vertikale Abstände, feine Haarlinien und eckige Flächen. Bei 390 Pixeln gibt es keinen horizontalen Überlauf; Überschriften, Suche und Filter brechen kontrolliert um.
+- Farben und Tokens: Hintergrund, Text, Mardu-Violett und Mardu-Orange stammen aus den vorhandenen globalen Tokens. Es wurden keine neuen Farbsysteme oder generischen Schatten eingeführt.
+- Bild- und Assettreue: Beitragsbilder bleiben echte CMS-Assets mit `next/image`. Das Redesign entfernt die frühere dunkle Verlaufsüberlagerung und zeigt Bilder künftig klar und unbeschnitten im editorialen Raster.
+- Icons: Suche, Zurück-Navigation und Artikelaktionen verwenden die bereits installierten Lucide-Icons. Das bestehende farbige Mobile-Menü-Asset bleibt unverändert.
+- Copy: Englische Standardtexte wurden auf Deutsch umgestellt (`Ausgewählter Beitrag`, `Beiträge durchsuchen`, `Alle`, `Von`).
+
+## Interaktion und Zugänglichkeit
+
+- Die Blog-Suche wurde im Browser mit „Zutritt“ ausgeführt und erzeugt korrekt `/blog?category=&q=Zutritt`.
+- Suchfeld und Suchbutton besitzen getrennte semantische Rollen, zugängliche Namen und sichtbare Fokuszustände.
+- Filter und Pagination behalten ihre vorhandene URL-Logik; mobile Ziele sind mindestens 44 Pixel hoch.
+- Reduced-Motion-Klassen verhindern Bild- und Iconanimationen bei entsprechender Systemeinstellung.
+- Der doppelte Blog-Eintrag im Footer wurde entfernt; dadurch ist auch der zugehörige doppelte React-Key im aktuellen Zustand behoben.
+
+## Findings
+
+- P0: keine.
+- P1: keine.
+- P2: keine.
+- P3: Die lokale CMS-Verbindung liefert derzeit keine Beiträge. Deshalb wurde die Listenansicht visuell im realen Leerzustand geprüft; Hero-, Karten- und Artikeldetail-Darstellung wurden zusätzlich statisch über die vorhandenen typisierten Datenverträge und Komponenten geprüft, aber nicht mit Live-CMS-Inhalt aufgenommen.
+- Bestehende Browserwarnungen betreffen den fehlenden lokalen reCAPTCHA-Schlüssel und zwei bereits vorhandene Bildabmessungen im Footer.
+
+## Vergleichsergebnis
+
+1. Erster Blog-Vergleich: Hero- und Detail-H1 skalierten bis 6,5 beziehungsweise 6,4 rem; die Archivüberschrift bis 5,2 rem. Gegenüber den bestehenden Seiten wirkten sie überproportional. Einstufung P2.
+2. Korrektur: H1 auf den bestehenden Standard von maximal 4 rem begrenzt, Archivüberschrift auf 3,75 rem und nachgelagerte Überschriften proportional reduziert. Zeilenhöhe und Laufweite wurden an „Integrationen“ angeglichen.
+3. Finaler Vergleich: Desktop zeigt H1 mit 64 Pixeln und Archivüberschrift mit 57,6 Pixeln; mobil 44 beziehungsweise 36 Pixel. Kein horizontaler Überlauf bei 390 oder 1440 Pixeln.
+
+Der kombinierte Vergleich zeigt nun dieselbe Typografiedichte, Papierfläche, Haarlinien und nummerierten Informationslabels wie die bestehende Website. Es bleiben keine offenen P0-, P1- oder P2-Abweichungen.
+
+final result: passed
