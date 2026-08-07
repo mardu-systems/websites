@@ -1,8 +1,8 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import type { CatalogProductListItemDto } from '@mardu/content-core';
-import { Badge } from '@mardu/ui/components/badge';
-import { Button } from '@mardu/ui/components/button';
+import Image from "next/image";
+import Link from "next/link";
+import type { CatalogProductListItemDto } from "@mardu/content-core";
+import { Badge } from "@mardu/ui/components/badge";
+import { Button } from "@mardu/ui/components/button";
 
 export interface CatalogProductCardProps {
   product: CatalogProductListItemDto;
@@ -42,7 +42,9 @@ export function CatalogProductCard({ product, href }: CatalogProductCardProps) {
               {product.name}
             </Link>
           </h3>
-          <p className="text-sm font-medium text-foreground/82 md:text-base">{product.tagline}</p>
+          <p className="text-sm font-medium text-foreground/82 md:text-base">
+            {product.tagline}
+          </p>
           <p className="text-sm leading-relaxed text-foreground/72 md:text-base">
             {product.summary}
           </p>
@@ -62,13 +64,15 @@ export function CatalogProductCard({ product, href }: CatalogProductCardProps) {
 
           <div className="flex items-center justify-between gap-4 border-t border-black/8 pt-4">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.16em] text-foreground/46">Ab</p>
+              <p className="text-[11px] uppercase tracking-[0.16em] text-foreground/46">
+                Ab
+              </p>
               <p className="text-lg font-semibold tracking-[-0.02em] text-foreground">
-                {product.priceFromLabel || 'Auf Anfrage'}
+                {product.priceFromLabel || "Auf Anfrage"}
               </p>
             </div>
-            <Button asChild variant="outline">
-              <Link href={href}>Details ansehen</Link>
+            <Button render={<Link href={href} />} variant="outline">
+              Details ansehen
             </Button>
           </div>
         </div>

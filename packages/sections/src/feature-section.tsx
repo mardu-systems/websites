@@ -61,9 +61,7 @@ export default function FeatureSection({
           {ctaSlot ? (
             ctaSlot
           ) : buttonText && buttonHref ? (
-            <Button asChild>
-              <Link href={buttonHref}>{buttonText}</Link>
-            </Button>
+            <Button render={<Link href={buttonHref} />}>{buttonText}</Button>
           ) : null}
         </div>
 

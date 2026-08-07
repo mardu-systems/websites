@@ -222,8 +222,8 @@ function MainContent({
         <Alert className="mt-4 animate-fade-in" variant="default" role="status" aria-live="polite">
           <AlertDescription>Danke! Anfrage versendet.</AlertDescription>
         </Alert>
-        <Button asChild className="mt-6 h-11 px-4 touch-manipulation">
-          <Link href="/">Zur Startseite</Link>
+        <Button render={<Link href="/" />} className="mt-6 h-11 px-4 touch-manipulation">
+          Zur Startseite
         </Button>
       </main>
     );
@@ -237,8 +237,8 @@ function MainContent({
           System grob konfigurieren
         </h1>
         <p className="text-base leading-relaxed text-foreground/72 md:text-lg">
-          In wenigen Schritten erfassen wir Tueren, Tore, Maschinen und die wichtigsten
-          Kontaktdaten fuer ein erstes Angebot.
+          In wenigen Schritten erfassen wir Tueren, Tore, Maschinen und die wichtigsten Kontaktdaten
+          fuer ein erstes Angebot.
         </p>
       </div>
 
@@ -347,7 +347,9 @@ function ResponsiveHelp({
     <div className="mx-auto block min-h-[44px] text-left">
       {title ? (
         <>
-          <Overline>Schritt {Math.min(_stepIndex + 1, _stepCount)} von {_stepCount}</Overline>
+          <Overline>
+            Schritt {Math.min(_stepIndex + 1, _stepCount)} von {_stepCount}
+          </Overline>
           <div className="mt-3">
             <h2 className="headline-balance text-[clamp(1.6rem,4vw,3rem)] leading-[0.98] tracking-[-0.03em] text-foreground">
               {title}

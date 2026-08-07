@@ -176,13 +176,11 @@ export default function AboutPage() {
             </h2>
           </div>
           <Button
-            asChild
+            render={<Link href="/contact" />}
             className="group h-12 rounded-none bg-primary-foreground px-5 text-primary hover:bg-primary-foreground/90 hover:text-primary"
           >
-            <Link href="/contact">
-              Gespräch vereinbaren
-              <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:rotate-45" />
-            </Link>
+            Gespräch vereinbaren
+            <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:rotate-45" />
           </Button>
         </div>
       </section>

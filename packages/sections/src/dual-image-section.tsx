@@ -55,8 +55,11 @@ export default function DualImageSection({
                   )}
                 </div>
                 {card.buttonText && card.buttonHref ? (
-                  <Button asChild variant="outline">
-                    <Link href={card.buttonHref}>{card.buttonText}</Link>
+                  <Button
+                    render={<Link href={card.buttonHref} />}
+                    variant="outline"
+                  >
+                    {card.buttonText}
                   </Button>
                 ) : null}
               </div>

@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import { Button } from '@mardu/ui/components/button';
-import { Overline } from '@mardu/ui/components/typography';
+import Link from "next/link";
+import { Button } from "@mardu/ui/components/button";
+import { Overline } from "@mardu/ui/components/typography";
 
 export interface CatalogHeroProps {
   eyebrow?: string;
@@ -39,13 +39,22 @@ export function CatalogHero({
 
           <div className="flex flex-col gap-3 lg:items-start">
             {primaryCta ? (
-              <Button asChild size="lg" className="w-full lg:w-auto">
-                <Link href={primaryCta.href}>{primaryCta.label}</Link>
+              <Button
+                render={<Link href={primaryCta.href} />}
+                size="lg"
+                className="w-full lg:w-auto"
+              >
+                {primaryCta.label}
               </Button>
             ) : null}
             {secondaryCta ? (
-              <Button asChild variant="outline" size="lg" className="w-full lg:w-auto">
-                <Link href={secondaryCta.href}>{secondaryCta.label}</Link>
+              <Button
+                render={<Link href={secondaryCta.href} />}
+                variant="outline"
+                size="lg"
+                className="w-full lg:w-auto"
+              >
+                {secondaryCta.label}
               </Button>
             ) : null}
           </div>

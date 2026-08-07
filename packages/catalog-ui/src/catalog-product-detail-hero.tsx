@@ -1,8 +1,8 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import type { CatalogProductDetailDto } from '@mardu/content-core';
-import { Badge } from '@mardu/ui/components/badge';
-import { Button } from '@mardu/ui/components/button';
+import Image from "next/image";
+import Link from "next/link";
+import type { CatalogProductDetailDto } from "@mardu/content-core";
+import { Badge } from "@mardu/ui/components/badge";
+import { Button } from "@mardu/ui/components/button";
 
 export interface CatalogProductDetailHeroProps {
   product: CatalogProductDetailDto;
@@ -80,7 +80,7 @@ export function CatalogProductDetailHero({
                   Richtpreis ab
                 </p>
                 <p className="mt-1 text-[clamp(2rem,3vw,2.7rem)] font-semibold tracking-[-0.03em] text-foreground">
-                  {product.priceFromLabel || 'Auf Anfrage'}
+                  {product.priceFromLabel || "Auf Anfrage"}
                 </p>
               </div>
               <div>
@@ -92,14 +92,21 @@ export function CatalogProductDetailHero({
                 </p>
               </div>
               <div className="flex flex-col gap-3 md:items-start">
-                <Button asChild size="lg" className="w-full md:w-auto">
-                  <Link href={inquiryHref}>{product.primaryCtaLabel || 'Angebot anfragen'}</Link>
+                <Button
+                  render={<Link href={inquiryHref} />}
+                  size="lg"
+                  className="w-full md:w-auto"
+                >
+                  {product.primaryCtaLabel || "Angebot anfragen"}
                 </Button>
                 {configuratorHref ? (
-                  <Button asChild variant="outline" size="lg" className="w-full md:w-auto">
-                    <Link href={configuratorHref}>
-                      {product.secondaryCtaLabel || 'Im Konfigurator einordnen'}
-                    </Link>
+                  <Button
+                    render={<Link href={configuratorHref} />}
+                    variant="outline"
+                    size="lg"
+                    className="w-full md:w-auto"
+                  >
+                    {product.secondaryCtaLabel || "Im Konfigurator einordnen"}
                   </Button>
                 ) : null}
               </div>

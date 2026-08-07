@@ -214,30 +214,17 @@ function LinkButton({
 
   if (external) {
     return (
-      <Button asChild className={className}>
-        <a
-          href={cta.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={onNavigate}
-        >
-          {showArrow ? (
-            <span
-              className="flex size-7 shrink-0 items-center justify-center rounded-full bg-mardu-purple text-white"
-              aria-hidden="true"
-            >
-              <ArrowUpRight className="size-3.5 stroke-[1.8] transition-transform duration-200 ease-out group-hover:rotate-45 group-focus-visible:rotate-45 motion-reduce:transition-none" />
-            </span>
-          ) : null}
-          {cta.label}
-        </a>
-      </Button>
-    );
-  }
-
-  return (
-    <Button asChild className={className}>
-      <Link href={cta.href} onClick={onNavigate}>
+      <Button
+        render={
+          <a
+            href={cta.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onNavigate}
+          />
+        }
+        className={className}
+      >
         {showArrow ? (
           <span
             className="flex size-7 shrink-0 items-center justify-center rounded-full bg-mardu-purple text-white"
@@ -247,7 +234,24 @@ function LinkButton({
           </span>
         ) : null}
         {cta.label}
-      </Link>
+      </Button>
+    );
+  }
+
+  return (
+    <Button
+      render={<Link href={cta.href} onClick={onNavigate} />}
+      className={className}
+    >
+      {showArrow ? (
+        <span
+          className="flex size-7 shrink-0 items-center justify-center rounded-full bg-mardu-purple text-white"
+          aria-hidden="true"
+        >
+          <ArrowUpRight className="size-3.5 stroke-[1.8] transition-transform duration-200 ease-out group-hover:rotate-45 group-focus-visible:rotate-45 motion-reduce:transition-none" />
+        </span>
+      ) : null}
+      {cta.label}
     </Button>
   );
 }

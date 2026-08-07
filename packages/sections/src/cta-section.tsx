@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useRef, useState, type ReactNode } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Loader2 } from 'lucide-react';
-import { Alert, AlertDescription } from '@mardu/ui/components/alert';
-import { Button } from '@mardu/ui/components/button';
-import { Checkbox } from '@mardu/ui/components/checkbox';
+import { useRef, useState, type ReactNode } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Loader2 } from "lucide-react";
+import { Alert, AlertDescription } from "@mardu/ui/components/alert";
+import { Button } from "@mardu/ui/components/button";
+import { Checkbox } from "@mardu/ui/components/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -14,10 +14,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@mardu/ui/components/dialog';
-import { Input } from '@mardu/ui/components/input';
-import { Label } from '@mardu/ui/components/label';
-import { cn } from '@mardu/ui/lib/utils';
+} from "@mardu/ui/components/dialog";
+import { Input } from "@mardu/ui/components/input";
+import { Label } from "@mardu/ui/components/label";
+import { cn } from "@mardu/ui/lib/utils";
 
 /**
  * Shared newsletter dialog config for CTA sections.
@@ -25,7 +25,7 @@ import { cn } from '@mardu/ui/lib/utils';
  */
 export interface CTASectionNewsletterDialogProps {
   requestUrl?: string;
-  requestRole?: 'newsletter' | 'whitepaper';
+  requestRole?: "newsletter" | "whitepaper";
   dialogTitle?: string;
   dialogDescription?: string;
   submitLabel?: string;
@@ -52,18 +52,19 @@ export interface CTASectionProps {
 }
 
 const DEFAULT_DIALOG = {
-  requestUrl: '/api/newsletter',
-  requestRole: 'newsletter',
-  dialogTitle: 'Anmelden',
+  requestUrl: "/api/newsletter",
+  requestRole: "newsletter",
+  dialogTitle: "Anmelden",
   dialogDescription:
-    'Unser Newsletter informiert Sie regelmäßig über Produktneuheiten und Sonderaktionen.',
-  submitLabel: 'Anmelden',
-  submitPendingLabel: 'Anmelden',
-  successMessage: 'Fast geschafft: Bitte bestätigen Sie die Anmeldung per E-Mail.',
-  errorMessage: 'Newsletter-Anmeldung fehlgeschlagen',
+    "Unser Newsletter informiert Sie regelmäßig über Produktneuheiten und Sonderaktionen.",
+  submitLabel: "Anmelden",
+  submitPendingLabel: "Anmelden",
+  successMessage:
+    "Fast geschafft: Bitte bestätigen Sie die Anmeldung per E-Mail.",
+  errorMessage: "Newsletter-Anmeldung fehlgeschlagen",
   consentLabel:
-    'Ihre Daten werden nur für den Newsletter genutzt. Mit dem Absenden bestätigen Sie die Datenverarbeitung und unsere Datenschutzerklärung.',
-} satisfies Omit<Required<CTASectionNewsletterDialogProps>, 'getRequestToken'>;
+    "Ihre Daten werden nur für den Newsletter genutzt. Mit dem Absenden bestätigen Sie die Datenverarbeitung und unsere Datenschutzerklärung.",
+} satisfies Omit<Required<CTASectionNewsletterDialogProps>, "getRequestToken">;
 
 export default function CTASection({
   title,
@@ -73,8 +74,8 @@ export default function CTASection({
   secondaryButtonText,
   primaryButtonHref,
   secondaryButtonHref,
-  eyebrow = 'Nächster Schritt',
-  backgroundImageSrc = '/landing/granieBackground.png',
+  eyebrow = "Nächster Schritt",
+  backgroundImageSrc = "/landing/granieBackground.png",
   secondaryActionSlot,
   newsletterDialog,
   className,
@@ -83,8 +84,8 @@ export default function CTASection({
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [consentChecked, setConsentChecked] = useState(false);
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
   const [formErrors, setFormErrors] = useState<{
     firstName?: string;
     lastName?: string;
@@ -101,34 +102,37 @@ export default function CTASection({
     setFormErrors({});
     setIsSubmitting(false);
     setConsentChecked(false);
-    setStatus('idle');
-    setErrorMessage('');
+    setStatus("idle");
+    setErrorMessage("");
   };
 
-  const handleNewsletterSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleNewsletterSubmit = async (
+    event: React.FormEvent<HTMLFormElement>,
+  ) => {
     event.preventDefault();
     if (isSubmitting) return;
 
     const form = event.currentTarget;
     const formData = new FormData(form);
-    const firstName = String(formData.get('firstName') ?? '').trim();
-    const lastName = String(formData.get('lastName') ?? '').trim();
-    const company = String(formData.get('company') ?? '').trim();
-    const email = String(formData.get('email') ?? '').trim();
+    const firstName = String(formData.get("firstName") ?? "").trim();
+    const lastName = String(formData.get("lastName") ?? "").trim();
+    const company = String(formData.get("company") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
 
     const nextErrors: typeof formErrors = {};
 
-    if (!firstName) nextErrors.firstName = 'Bitte geben Sie Ihren Vornamen ein.';
-    if (!lastName) nextErrors.lastName = 'Bitte geben Sie Ihren Nachnamen ein.';
+    if (!firstName)
+      nextErrors.firstName = "Bitte geben Sie Ihren Vornamen ein.";
+    if (!lastName) nextErrors.lastName = "Bitte geben Sie Ihren Nachnamen ein.";
 
     if (!email) {
-      nextErrors.email = 'Bitte geben Sie eine E-Mail-Adresse ein.';
+      nextErrors.email = "Bitte geben Sie eine E-Mail-Adresse ein.";
     } else if (emailInputRef.current && !emailInputRef.current.validity.valid) {
-      nextErrors.email = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+      nextErrors.email = "Bitte geben Sie eine gültige E-Mail-Adresse ein.";
     }
 
     if (!consentChecked) {
-      nextErrors.consent = 'Bitte bestätigen Sie Ihre Einwilligung.';
+      nextErrors.consent = "Bitte bestätigen Sie Ihre Einwilligung.";
     }
 
     if (Object.keys(nextErrors).length > 0) {
@@ -140,18 +144,18 @@ export default function CTASection({
       return;
     }
 
-      setFormErrors({});
-      setStatus('idle');
-      setErrorMessage('');
+    setFormErrors({});
+    setStatus("idle");
+    setErrorMessage("");
 
     try {
       setIsSubmitting(true);
       const token = dialogConfig.getRequestToken
-        ? await dialogConfig.getRequestToken('newsletter_signup')
+        ? await dialogConfig.getRequestToken("newsletter_signup")
         : null;
       const response = await fetch(dialogConfig.requestUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email,
           role: dialogConfig.requestRole,
@@ -162,28 +166,32 @@ export default function CTASection({
         }),
       });
 
-      const payload = (await response.json().catch(() => null)) as { error?: string } | null;
+      const payload = (await response.json().catch(() => null)) as {
+        error?: string;
+      } | null;
 
       if (!response.ok) {
         throw new Error(payload?.error || dialogConfig.errorMessage);
       }
 
-      setStatus('success');
+      setStatus("success");
       form.reset();
       setConsentChecked(false);
       setTimeout(() => {
         setOpen(false);
       }, 1500);
     } catch (error: unknown) {
-      setStatus('error');
-      setErrorMessage(error instanceof Error ? error.message : dialogConfig.errorMessage);
+      setStatus("error");
+      setErrorMessage(
+        error instanceof Error ? error.message : dialogConfig.errorMessage,
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <section className={cn('section-hairline py-18 md:py-24', className)}>
+    <section className={cn("section-hairline py-18 md:py-24", className)}>
       <div className="">
         <div className="relative overflow-hidden border border-black/20 p-8 md:p-12">
           <Image
@@ -198,7 +206,9 @@ export default function CTASection({
           <div className="absolute inset-y-0 right-[8%] w-[22%] bg-[repeating-linear-gradient(to_right,rgba(255,255,255,0.08)_0,rgba(255,255,255,0.08)_1px,transparent_1px,transparent_12px)] opacity-35" />
 
           <div className="relative mx-auto max-w-4xl text-center">
-            <p className="mb-4 text-xs uppercase tracking-[0.2em] text-white/55">{eyebrow}</p>
+            <p className="mb-4 text-xs uppercase tracking-[0.2em] text-white/55">
+              {eyebrow}
+            </p>
             <h2 className="headline-balance text-[clamp(1.8rem,3.6vw,3.2rem)] leading-[1.05] tracking-[-0.02em] text-white">
               {title}
             </h2>
@@ -224,10 +234,16 @@ export default function CTASection({
                   <DialogContent className="max-h-[90vh] overflow-y-auto border border-black/10 bg-background sm:max-w-175">
                     <DialogHeader>
                       <DialogTitle>{dialogConfig.dialogTitle}</DialogTitle>
-                      <DialogDescription>{dialogConfig.dialogDescription}</DialogDescription>
+                      <DialogDescription>
+                        {dialogConfig.dialogDescription}
+                      </DialogDescription>
                     </DialogHeader>
 
-                    <form className="space-y-5 pt-2" onSubmit={handleNewsletterSubmit} noValidate>
+                    <form
+                      className="space-y-5 pt-2"
+                      onSubmit={handleNewsletterSubmit}
+                      noValidate
+                    >
                       <input
                         type="text"
                         tabIndex={-1}
@@ -253,12 +269,17 @@ export default function CTASection({
                             ref={firstNameInputRef}
                             onChange={() => {
                               if (formErrors.firstName) {
-                                setFormErrors((prev) => ({ ...prev, firstName: undefined }));
+                                setFormErrors((prev) => ({
+                                  ...prev,
+                                  firstName: undefined,
+                                }));
                               }
                             }}
                             aria-invalid={Boolean(formErrors.firstName)}
                             aria-describedby={
-                              formErrors.firstName ? 'cta.first-name-error' : undefined
+                              formErrors.firstName
+                                ? "cta.first-name-error"
+                                : undefined
                             }
                           />
                           {formErrors.firstName ? (
@@ -287,11 +308,18 @@ export default function CTASection({
                             ref={lastNameInputRef}
                             onChange={() => {
                               if (formErrors.lastName) {
-                                setFormErrors((prev) => ({ ...prev, lastName: undefined }));
+                                setFormErrors((prev) => ({
+                                  ...prev,
+                                  lastName: undefined,
+                                }));
                               }
                             }}
                             aria-invalid={Boolean(formErrors.lastName)}
-                            aria-describedby={formErrors.lastName ? 'cta.last-name-error' : undefined}
+                            aria-describedby={
+                              formErrors.lastName
+                                ? "cta.last-name-error"
+                                : undefined
+                            }
                           />
                           {formErrors.lastName ? (
                             <p
@@ -307,7 +335,12 @@ export default function CTASection({
 
                       <div className="space-y-2">
                         <Label htmlFor="cta.company">Firma</Label>
-                        <Input type="text" id="cta.company" name="company" autoComplete="organization" />
+                        <Input
+                          type="text"
+                          id="cta.company"
+                          name="company"
+                          autoComplete="organization"
+                        />
                       </div>
 
                       <div className="space-y-2">
@@ -329,11 +362,16 @@ export default function CTASection({
                           ref={emailInputRef}
                           onChange={() => {
                             if (formErrors.email) {
-                              setFormErrors((prev) => ({ ...prev, email: undefined }));
+                              setFormErrors((prev) => ({
+                                ...prev,
+                                email: undefined,
+                              }));
                             }
                           }}
                           aria-invalid={Boolean(formErrors.email)}
-                          aria-describedby={formErrors.email ? 'cta.email-error' : undefined}
+                          aria-describedby={
+                            formErrors.email ? "cta.email-error" : undefined
+                          }
                         />
                         {formErrors.email ? (
                           <p
@@ -351,16 +389,25 @@ export default function CTASection({
                           <Checkbox
                             id="cta.consent"
                             checked={consentChecked}
-                            onCheckedChange={(checked: boolean | 'indeterminate') => {
+                            onCheckedChange={(
+                              checked: boolean | "indeterminate",
+                            ) => {
                               setConsentChecked(checked === true);
                               if (formErrors.consent) {
-                                setFormErrors((prev) => ({ ...prev, consent: undefined }));
+                                setFormErrors((prev) => ({
+                                  ...prev,
+                                  consent: undefined,
+                                }));
                               }
                             }}
                             ref={consentRef}
                             className="mt-1"
                             aria-invalid={Boolean(formErrors.consent)}
-                            aria-describedby={formErrors.consent ? 'cta.consent-error' : undefined}
+                            aria-describedby={
+                              formErrors.consent
+                                ? "cta.consent-error"
+                                : undefined
+                            }
                           />
                           {dialogConfig.consentLabel}
                         </Label>
@@ -375,21 +422,36 @@ export default function CTASection({
                         ) : null}
                       </div>
 
-                      <Button type="submit" disabled={isSubmitting} aria-busy={isSubmitting}>
+                      <Button
+                        type="submit"
+                        disabled={isSubmitting}
+                        aria-busy={isSubmitting}
+                      >
                         {isSubmitting ? (
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />
+                          <Loader2
+                            className="mr-2 h-4 w-4 animate-spin"
+                            aria-hidden="true"
+                          />
                         ) : null}
-                        {isSubmitting ? dialogConfig.submitPendingLabel : dialogConfig.submitLabel}
+                        {isSubmitting
+                          ? dialogConfig.submitPendingLabel
+                          : dialogConfig.submitLabel}
                       </Button>
 
-                      {status === 'success' ? (
+                      {status === "success" ? (
                         <Alert role="status" aria-live="polite">
-                          <AlertDescription>{dialogConfig.successMessage}</AlertDescription>
+                          <AlertDescription>
+                            {dialogConfig.successMessage}
+                          </AlertDescription>
                         </Alert>
                       ) : null}
 
-                      {status === 'error' ? (
-                        <Alert variant="destructive" role="alert" aria-live="assertive">
+                      {status === "error" ? (
+                        <Alert
+                          variant="destructive"
+                          role="alert"
+                          aria-live="assertive"
+                        >
                           <AlertDescription>{errorMessage}</AlertDescription>
                         </Alert>
                       ) : null}
@@ -397,8 +459,8 @@ export default function CTASection({
                   </DialogContent>
                 </Dialog>
               ) : (
-                <Button asChild>
-                  <Link href={primaryButtonHref}>{primaryButtonText}</Link>
+                <Button render={<Link href={primaryButtonHref} />}>
+                  {primaryButtonText}
                 </Button>
               )}
 
@@ -406,11 +468,11 @@ export default function CTASection({
                 secondaryActionSlot
               ) : secondaryButtonText && secondaryButtonHref ? (
                 <Button
-                  asChild
+                  render={<Link href={secondaryButtonHref} />}
                   variant="outline"
                   className="border-white/35 bg-white/12 px-5 text-white hover:bg-white/18 hover:text-white"
                 >
-                  <Link href={secondaryButtonHref}>{secondaryButtonText}</Link>
+                  {secondaryButtonText}
                 </Button>
               ) : null}
             </div>

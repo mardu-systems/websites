@@ -37,14 +37,12 @@ export default function HomePage() {
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild>
-              <Link href="/admin">
-                Admin Login
-                <ArrowRight className="size-4" />
-              </Link>
+            <Button render={<Link href="/admin" />}>
+              Admin Login
+              <ArrowRight className="size-4" />
             </Button>
-            <Button asChild variant="outline">
-              <Link href="https://www.mardu.de">Zu mardu.de</Link>
+            <Button render={<Link href="https://www.mardu.de" />} variant="outline">
+              Zu mardu.de
             </Button>
           </div>
         </div>

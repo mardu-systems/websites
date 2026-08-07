@@ -1,11 +1,12 @@
-import Link from 'next/link';
-import type { ComponentType } from 'react';
-import { ArrowLeft, CheckCircle2, MailWarning, XCircle } from 'lucide-react';
-import { Overline } from '@mardu/ui/components/typography';
-import { Button } from '@mardu/ui/components/button';
+import Link from "next/link";
+import type { ComponentType } from "react";
+import { ArrowLeft, CheckCircle2, MailWarning, XCircle } from "lucide-react";
+import { Overline } from "@mardu/ui/components/typography";
+import { Button } from "@mardu/ui/components/button";
 
-type NewsletterStatusVariant = 'confirm' | 'unsubscribe';
-type NewsletterStatusState = 'success' | 'missing-token' | 'invalid-token' | 'error';
+type NewsletterStatusVariant = "confirm" | "unsubscribe";
+type NewsletterStatusState =
+  "success" | "missing-token" | "invalid-token" | "error";
 
 type NewsletterStatusCopy = {
   overline: string;
@@ -21,85 +22,87 @@ const STATUS_COPY: Record<
 > = {
   confirm: {
     success: {
-      overline: 'Newsletter',
-      title: 'Anmeldung erfolgreich bestätigt',
+      overline: "Newsletter",
+      title: "Anmeldung erfolgreich bestätigt",
       description:
-        'Vielen Dank. Ihre Newsletter-Anmeldung wurde bestätigt und in unserem System übernommen.',
+        "Vielen Dank. Ihre Newsletter-Anmeldung wurde bestätigt und in unserem System übernommen.",
       icon: CheckCircle2,
-      iconClassName: 'text-emerald-600',
+      iconClassName: "text-emerald-600",
     },
-    'missing-token': {
-      overline: 'Newsletter',
-      title: 'Bestätigungslink unvollständig',
+    "missing-token": {
+      overline: "Newsletter",
+      title: "Bestätigungslink unvollständig",
       description:
-        'Der Link enthält keinen Token. Öffnen Sie den vollständigen Link aus Ihrer E-Mail erneut.',
+        "Der Link enthält keinen Token. Öffnen Sie den vollständigen Link aus Ihrer E-Mail erneut.",
       icon: MailWarning,
-      iconClassName: 'text-amber-600',
+      iconClassName: "text-amber-600",
     },
-    'invalid-token': {
-      overline: 'Newsletter',
-      title: 'Bestätigungslink ungültig',
+    "invalid-token": {
+      overline: "Newsletter",
+      title: "Bestätigungslink ungültig",
       description:
-        'Der Link ist ungültig oder abgelaufen. Fordern Sie bitte eine neue Newsletter-Anmeldung an.',
+        "Der Link ist ungültig oder abgelaufen. Fordern Sie bitte eine neue Newsletter-Anmeldung an.",
       icon: XCircle,
-      iconClassName: 'text-destructive',
+      iconClassName: "text-destructive",
     },
     error: {
-      overline: 'Newsletter',
-      title: 'Bestätigung derzeit nicht möglich',
+      overline: "Newsletter",
+      title: "Bestätigung derzeit nicht möglich",
       description:
-        'Die Verarbeitung konnte nicht abgeschlossen werden. Bitte versuchen Sie es später erneut.',
+        "Die Verarbeitung konnte nicht abgeschlossen werden. Bitte versuchen Sie es später erneut.",
       icon: XCircle,
-      iconClassName: 'text-destructive',
+      iconClassName: "text-destructive",
     },
   },
   unsubscribe: {
     success: {
-      overline: 'Newsletter',
-      title: 'Abmeldung erfolgreich',
+      overline: "Newsletter",
+      title: "Abmeldung erfolgreich",
       description:
-        'Sie wurden vom Newsletter abgemeldet. Sie erhalten künftig keine Newsletter-E-Mails mehr.',
+        "Sie wurden vom Newsletter abgemeldet. Sie erhalten künftig keine Newsletter-E-Mails mehr.",
       icon: CheckCircle2,
-      iconClassName: 'text-emerald-600',
+      iconClassName: "text-emerald-600",
     },
-    'missing-token': {
-      overline: 'Newsletter',
-      title: 'Abmeldelink unvollständig',
+    "missing-token": {
+      overline: "Newsletter",
+      title: "Abmeldelink unvollständig",
       description:
-        'Der Link enthält keinen Token. Öffnen Sie den vollständigen Link aus Ihrer E-Mail erneut.',
+        "Der Link enthält keinen Token. Öffnen Sie den vollständigen Link aus Ihrer E-Mail erneut.",
       icon: MailWarning,
-      iconClassName: 'text-amber-600',
+      iconClassName: "text-amber-600",
     },
-    'invalid-token': {
-      overline: 'Newsletter',
-      title: 'Abmeldelink ungültig',
+    "invalid-token": {
+      overline: "Newsletter",
+      title: "Abmeldelink ungültig",
       description:
-        'Der Link ist ungültig oder abgelaufen. Falls nötig, melden Sie sich erneut über den Newsletter ab.',
+        "Der Link ist ungültig oder abgelaufen. Falls nötig, melden Sie sich erneut über den Newsletter ab.",
       icon: XCircle,
-      iconClassName: 'text-destructive',
+      iconClassName: "text-destructive",
     },
     error: {
-      overline: 'Newsletter',
-      title: 'Abmeldung derzeit nicht möglich',
+      overline: "Newsletter",
+      title: "Abmeldung derzeit nicht möglich",
       description:
-        'Die Verarbeitung konnte nicht abgeschlossen werden. Bitte versuchen Sie es später erneut.',
+        "Die Verarbeitung konnte nicht abgeschlossen werden. Bitte versuchen Sie es später erneut.",
       icon: XCircle,
-      iconClassName: 'text-destructive',
+      iconClassName: "text-destructive",
     },
   },
 };
 
-function normalizeStatus(status: string | string[] | undefined): NewsletterStatusState {
+function normalizeStatus(
+  status: string | string[] | undefined,
+): NewsletterStatusState {
   const value = Array.isArray(status) ? status[0] : status;
   if (
-    value === 'success' ||
-    value === 'missing-token' ||
-    value === 'invalid-token' ||
-    value === 'error'
+    value === "success" ||
+    value === "missing-token" ||
+    value === "invalid-token" ||
+    value === "error"
   ) {
     return value;
   }
-  return 'error';
+  return "error";
 }
 
 export type NewsletterStatusPageProps = {
@@ -114,10 +117,10 @@ export type NewsletterStatusPageProps = {
 export function NewsletterStatusPage({
   variant,
   searchParams,
-  primaryHref = '/',
-  primaryLabel = 'Zur Startseite',
-  secondaryHref = '/#contact',
-  secondaryLabel = 'Zurück zum Newsletter',
+  primaryHref = "/",
+  primaryLabel = "Zur Startseite",
+  secondaryHref = "/#contact",
+  secondaryLabel = "Zurück zum Newsletter",
 }: NewsletterStatusPageProps) {
   const status = normalizeStatus(searchParams?.status);
   const content = STATUS_COPY[variant][status];
@@ -142,14 +145,18 @@ export function NewsletterStatusPage({
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Button asChild>
-              <Link href={primaryHref}>{primaryLabel}</Link>
-            </Button>
-            <Button asChild variant="outline">
-              <Link href={secondaryHref} className="inline-flex items-center gap-2">
-                <ArrowLeft className="h-4 w-4" />
-                {secondaryLabel}
-              </Link>
+            <Button render={<Link href={primaryHref} />}>{primaryLabel}</Button>
+            <Button
+              render={
+                <Link
+                  href={secondaryHref}
+                  className="inline-flex items-center gap-2"
+                />
+              }
+              variant="outline"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              {secondaryLabel}
             </Button>
           </div>
         </div>

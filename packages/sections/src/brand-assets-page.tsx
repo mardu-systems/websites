@@ -195,18 +195,16 @@ function EditorialBrandAssetsPage({
               </p>
             </div>
             <Button
-              asChild
+              render={<Link href={content.contactHref} />}
               className="group h-12 rounded-none border-y border-border bg-transparent px-0 text-base font-normal text-foreground shadow-none hover:border-primary hover:bg-transparent hover:text-primary"
             >
-              <Link href={content.contactHref}>
-                <span
-                  className="flex size-7 shrink-0 items-center justify-center rounded-full bg-mardu-purple text-white"
-                  aria-hidden="true"
-                >
-                  <ArrowUpRight className="size-3.5 stroke-[1.8] transition-transform duration-200 ease-out group-hover:rotate-45 group-focus-visible:rotate-45 motion-reduce:transition-none" />
-                </span>
-                {content.contactCtaLabel}
-              </Link>
+              <span
+                className="flex size-7 shrink-0 items-center justify-center rounded-full bg-mardu-purple text-white"
+                aria-hidden="true"
+              >
+                <ArrowUpRight className="size-3.5 stroke-[1.8] transition-transform duration-200 ease-out group-hover:rotate-45 group-focus-visible:rotate-45 motion-reduce:transition-none" />
+              </span>
+              {content.contactCtaLabel}
             </Button>
           </div>
         </div>
@@ -327,10 +325,8 @@ export function BrandAssetsPage({
             </div>
 
             <div className="pt-6">
-              <Button asChild>
-                <Link href={content.contactHref}>
-                  {content.contactCtaLabel}
-                </Link>
+              <Button render={<Link href={content.contactHref} />}>
+                {content.contactCtaLabel}
               </Button>
             </div>
           </div>
