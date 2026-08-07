@@ -390,6 +390,42 @@ function HeaderCtaButton({
   );
 }
 
+function MobileMenuTriggerIcon({
+  iconSrc,
+  open,
+  fallbackClassName = "size-4",
+}: {
+  iconSrc?: string;
+  open: boolean;
+  fallbackClassName?: string;
+}) {
+  if (!iconSrc) {
+    return open ? (
+      <X className={fallbackClassName} />
+    ) : (
+      <Menu className={fallbackClassName} />
+    );
+  }
+
+  return (
+    <span
+      className={cn(
+        "relative block size-8 shrink-0 overflow-hidden transition-transform duration-200 motion-reduce:transition-none",
+        open && "rotate-6 scale-105",
+      )}
+      aria-hidden="true"
+    >
+      <Image
+        src={iconSrc}
+        alt=""
+        fill
+        sizes="32px"
+        className="object-contain"
+      />
+    </span>
+  );
+}
+
 export default function SiteHeader({
   brand,
   items,
@@ -540,11 +576,10 @@ export default function SiteHeader({
               aria-expanded={mobileOpen}
               aria-controls="mobile-nav"
             >
-              {mobileOpen ? (
-                <X className="size-4" />
-              ) : (
-                <Menu className="size-4" />
-              )}
+              <MobileMenuTriggerIcon
+                iconSrc={brand.mobileMenuIconSrc}
+                open={mobileOpen}
+              />
               {mobileOpen ? "Schließen" : "Menü"}
             </Button>
           </nav>
@@ -647,11 +682,11 @@ export default function SiteHeader({
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
           >
-            {mobileOpen ? (
-              <X className="size-5" />
-            ) : (
-              <Menu className="size-5" />
-            )}
+            <MobileMenuTriggerIcon
+              iconSrc={brand.mobileMenuIconSrc}
+              open={mobileOpen}
+              fallbackClassName="size-5"
+            />
           </Button>
         </nav>
 

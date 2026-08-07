@@ -10,12 +10,6 @@ export const defaultFooterNavLinks: ReadonlyArray<LayoutLinkDto> = [
     description: item.description,
     external: item.external,
   })),
-  {
-    index: '04',
-    label: 'Blog',
-    description: 'Praxis & Hintergründe',
-    href: '/blog',
-  },
 ];
 
 export const defaultFooterMetaLinks: ReadonlyArray<LayoutLinkDto> = [

@@ -14,6 +14,7 @@ import {
 import { Button } from "@mardu/ui/components/button";
 import { cn } from "@mardu/ui/lib/utils";
 import type {
+  FooterAiSummaryLinkDto,
   FooterSocialIcon,
   FooterSocialLinkDto,
   LayoutLinkDto,
@@ -22,6 +23,7 @@ import type {
 
 const EMPTY_LINKS: ReadonlyArray<LayoutLinkDto> = [];
 const EMPTY_SOCIAL_LINKS: ReadonlyArray<FooterSocialLinkDto> = [];
+const EMPTY_AI_SUMMARY_LINKS: ReadonlyArray<FooterAiSummaryLinkDto> = [];
 const EMPTY_ACTIONS: ReadonlyArray<{ id: string; label: string }> = [];
 
 const SOCIAL_ICONS: Record<
@@ -33,6 +35,22 @@ const SOCIAL_ICONS: Record<
   github: Github,
   mail: Mail,
   phone: Phone,
+};
+
+const AI_SUMMARY_MARKS: Record<
+  FooterAiSummaryLinkDto["provider"],
+  { src: string; className?: string }
+> = {
+  claude: {
+    src: "/ai-summary/claude.svg",
+  },
+  chatgpt: {
+    src: "/ai-summary/chatgpt.svg",
+    className: "brightness-0 invert",
+  },
+  perplexity: {
+    src: "/ai-summary/perplexity.svg",
+  },
 };
 
 function isExternalHref(href: string, external?: boolean) {
@@ -87,7 +105,7 @@ function FooterSocialLink({
   const newTab = opensInNewTab(link.href);
   const className =
     variant === "editorial-index"
-      ? "inline-flex size-10 items-center justify-center border border-white/18 text-white/72 transition-colors hover:border-[var(--footer-accent,#b9a7ff)] hover:text-[var(--footer-accent,#b9a7ff)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--footer-accent,#b9a7ff)]"
+      ? "inline-flex size-9 items-center justify-center border border-white/18 text-white/72 transition-colors hover:border-[var(--footer-accent,#b9a7ff)] hover:text-[var(--footer-accent,#b9a7ff)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--footer-accent,#b9a7ff)]"
       : theme === "dark"
         ? "inline-flex size-10 items-center justify-center rounded-full border border-white/20 bg-white/6 text-white/90 transition-colors hover:bg-white hover:text-neutral-950"
         : "inline-flex size-10 items-center justify-center rounded-full border border-black/12 bg-black/4 text-foreground/80 transition-colors hover:bg-black hover:text-white";
@@ -102,7 +120,7 @@ function FooterSocialLink({
         aria-label={link.label}
         title={link.label}
       >
-        <Icon className="size-4" />
+        <Icon className="size-3.5" />
       </a>
     );
   }
@@ -114,8 +132,59 @@ function FooterSocialLink({
       aria-label={link.label}
       title={link.label}
     >
-      <Icon className="size-4" />
+      <Icon className="size-3.5" />
     </Link>
+  );
+}
+
+function FooterAiSummaryLinks({
+  links,
+  variant = "default",
+}: {
+  links: ReadonlyArray<FooterAiSummaryLinkDto>;
+  variant?: "default" | "editorial-index";
+}) {
+  if (links.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="mt-4 border-t border-white/14 pt-4">
+      <p className="mb-2 text-[0.6875rem] tracking-[0.08em] text-white/44">
+        KI-Zusammenfassung
+      </p>
+      <ul className="flex flex-wrap gap-2">
+        {links.map((link) => {
+          const { className: imageClassName, src } =
+            AI_SUMMARY_MARKS[link.provider];
+          const className =
+            variant === "editorial-index"
+              ? "inline-flex size-9 items-center justify-center border border-white/18 text-white/72 transition-colors hover:border-[var(--footer-accent,#b9a7ff)] hover:text-[var(--footer-accent,#b9a7ff)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--footer-accent,#b9a7ff)]"
+              : "inline-flex size-10 items-center justify-center rounded-full border border-white/20 bg-white/6 text-white/90 transition-colors hover:bg-white hover:text-neutral-950";
+
+          return (
+            <li key={`${link.provider}:${link.href}`}>
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={className}
+                aria-label={link.label}
+                title={link.label}
+              >
+                <Image
+                  src={src}
+                  alt=""
+                  width={16}
+                  height={16}
+                  className={cn("size-4 object-contain", imageClassName)}
+                />
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 
@@ -128,6 +197,95 @@ function useScrollToTop() {
   }, []);
 }
 
+function FooterWordmark({ src }: { src: string }) {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const container = containerRef.current;
+    if (!container) {
+      return;
+    }
+
+    let animationFrame: number | null = null;
+    let listening = false;
+
+    const updatePointerPosition = (event: PointerEvent) => {
+      if (animationFrame !== null) {
+        return;
+      }
+
+      animationFrame = window.requestAnimationFrame(() => {
+        const rect = container.getBoundingClientRect();
+        container.style.setProperty("--wordmark-x", `${event.clientX - rect.left}px`);
+        container.style.setProperty("--wordmark-y", `${event.clientY - rect.top}px`);
+        animationFrame = null;
+      });
+    };
+
+    const startListening = () => {
+      if (!listening) {
+        window.addEventListener("pointermove", updatePointerPosition, {
+          passive: true,
+        });
+        listening = true;
+      }
+    };
+
+    const stopListening = () => {
+      if (listening) {
+        window.removeEventListener("pointermove", updatePointerPosition);
+        listening = false;
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          startListening();
+        } else {
+          stopListening();
+        }
+      },
+      { rootMargin: "160px 0px" },
+    );
+
+    observer.observe(container);
+
+    return () => {
+      observer.disconnect();
+      stopListening();
+      if (animationFrame !== null) {
+        window.cancelAnimationFrame(animationFrame);
+      }
+    };
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative mt-12 -mb-8 pt-8 sm:mt-16 sm:-mb-12 lg:-mb-16 lg:pt-12"
+      aria-hidden="true"
+    >
+      <div
+        className="relative aspect-[904/140] w-full [mask-position:center] [mask-repeat:no-repeat] [mask-size:contain] [-webkit-mask-position:center] [-webkit-mask-repeat:no-repeat] [-webkit-mask-size:contain]"
+        style={{
+          maskImage: `url("${src}")`,
+          WebkitMaskImage: `url("${src}")`,
+        }}
+      >
+        <div className="absolute inset-0 bg-white/[0.018]" />
+        <div
+          className="absolute inset-0 opacity-100"
+          style={{
+            background:
+              "radial-gradient(circle 30rem at var(--wordmark-x, -40rem) var(--wordmark-y, -40rem), rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.14) 32%, rgba(255,255,255,0.035) 58%, transparent 76%)",
+          }}
+        />
+      </div>
+    </div>
+  );
+}
+
 function EditorialSiteFooter({
   brand,
   description,
@@ -135,6 +293,7 @@ function EditorialSiteFooter({
   navLinks = EMPTY_LINKS,
   metaLinks = EMPTY_LINKS,
   socialLinks = EMPTY_SOCIAL_LINKS,
+  aiSummaryLinks = EMPTY_AI_SUMMARY_LINKS,
   actions = EMPTY_ACTIONS,
   onAction,
 }: SiteFooterProps) {
@@ -145,7 +304,7 @@ function EditorialSiteFooter({
     <footer
       id="kontakt"
       data-site-footer
-      className="scroll-mt-28 bg-black pb-16 text-white lg:pb-20"
+      className="group/footer scroll-mt-28 overflow-hidden bg-black pb-8 text-white lg:pb-10"
     >
       <div className="mardu-container">
         <div className="border-b border-white/14 pb-10 pt-14 lg:pb-14 lg:pt-20">
@@ -155,7 +314,7 @@ function EditorialSiteFooter({
         </div>
 
         <div className="grid border-b border-white/14 lg:grid-cols-[0.9fr_1.1fr_0.75fr]">
-          <div className="space-y-8 border-b border-white/14 py-10 lg:border-b-0 lg:border-r lg:pr-10">
+          <div className="space-y-6 border-b border-white/14 py-8 lg:border-b-0 lg:border-r lg:pr-10">
             <Link
               href={brand.homeHref}
               className="inline-block focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--footer-accent,#b9a7ff)]"
@@ -193,11 +352,11 @@ function EditorialSiteFooter({
               <FooterLink
                 key={`${link.label}:${link.href}`}
                 link={link}
-                className="group min-w-0 border-b border-r border-white/10 px-5 py-4 transition-colors even:border-r-0 hover:bg-white/[0.04] lg:py-7 [&:nth-last-child(-n+2)]:border-b-0"
+                className="group min-w-0 border-b border-r border-white/10 px-5 py-4 transition-colors even:border-r-0 hover:bg-white/[0.04] lg:py-5 [&:nth-last-child(-n+2)]:border-b-0"
               >
                 <span className="flex flex-col">
                   {link.index ? (
-                    <span className="mb-3 text-xs text-[var(--footer-accent,#b9a7ff)] lg:mb-5">
+                    <span className="mb-2 text-xs text-[var(--footer-accent,#b9a7ff)] lg:mb-3">
                       [{link.index}]
                     </span>
                   ) : null}
@@ -214,12 +373,12 @@ function EditorialSiteFooter({
             ))}
           </nav>
 
-          <div className="flex flex-col justify-between gap-10 py-10 lg:pl-9">
+          <div className="flex flex-col justify-between gap-6 py-8 lg:pl-7">
             <div>
-              <p className="mb-5 text-xs tracking-[0.08em] text-white/44">
+              <p className="mb-3 text-[0.6875rem] tracking-[0.08em] text-white/44">
                 Wissen & Recht
               </p>
-              <ul className="space-y-3 text-sm">
+              <ul className="space-y-2 text-sm">
                 {metaLinks.map((link) => (
                   <li key={`${link.label}:${link.href}`}>
                     <FooterLink
@@ -253,6 +412,10 @@ function EditorialSiteFooter({
                 </li>
               ))}
             </ul>
+            <FooterAiSummaryLinks
+              links={aiSummaryLinks}
+              variant="editorial-index"
+            />
           </div>
         </div>
 
@@ -269,6 +432,8 @@ function EditorialSiteFooter({
             <ArrowUp className="size-3" aria-hidden="true" />
           </button>
         </div>
+
+        {brand.wordmarkSrc ? <FooterWordmark src={brand.wordmarkSrc} /> : null}
       </div>
     </footer>
   );
@@ -281,6 +446,7 @@ function DefaultSiteFooter({
   navLinks = EMPTY_LINKS,
   metaLinks = EMPTY_LINKS,
   socialLinks = EMPTY_SOCIAL_LINKS,
+  aiSummaryLinks = EMPTY_AI_SUMMARY_LINKS,
   actions = EMPTY_ACTIONS,
   onAction,
   theme = "dark",
@@ -410,6 +576,7 @@ function DefaultSiteFooter({
                 </li>
               ))}
             </ul>
+            <FooterAiSummaryLinks links={aiSummaryLinks} />
           </div>
         </div>
 

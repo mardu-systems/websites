@@ -20,4 +20,16 @@ export const defaultHeaderItems: ReadonlyArray<HeaderNavLinkDto> = [
     label: 'Integrationen',
     href: '/integrations',
   },
+  {
+    type: 'link',
+    index: '04',
+    label: 'Über uns',
+    href: '/about',
+  },
+  {
+    type: 'link',
+    index: '05',
+    label: 'Blog',
+    href: '/blog',
+  },
 ];

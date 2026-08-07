@@ -115,6 +115,8 @@ export interface SiteHeaderBrandingDto {
   logoAlt: string;
   logoWidth?: number;
   logoHeight?: number;
+  /** Optional image asset that replaces the mobile menu and close glyphs. */
+  mobileMenuIconSrc?: string;
 }
 
 /**
@@ -150,6 +152,19 @@ export interface FooterSocialLinkDto extends LayoutLinkDto {
 }
 
 /**
+ * Supported providers for an externally generated AI summary of the current website.
+ */
+export type FooterAiSummaryProvider = "claude" | "chatgpt" | "perplexity";
+
+/**
+ * Footer link to an AI provider with a prefilled prompt for a website summary.
+ * The consumer owns the prompt, source URL, and external target URL.
+ */
+export interface FooterAiSummaryLinkDto extends LayoutLinkDto {
+  provider: FooterAiSummaryProvider;
+}
+
+/**
  * Optional non-link footer interactions such as opening cookie settings.
  */
 export interface FooterActionDto extends PayloadReferenceDto {
@@ -166,6 +181,8 @@ export interface SiteFooterBrandingDto {
   logoAlt: string;
   logoWidth?: number;
   logoHeight?: number;
+  /** Optional standalone wordmark used for the interactive editorial footer finish. */
+  wordmarkSrc?: string;
   copyrightName: string;
 }
 
@@ -179,6 +196,8 @@ export interface SiteFooterProps {
   navLinks?: ReadonlyArray<LayoutLinkDto>;
   metaLinks?: ReadonlyArray<LayoutLinkDto>;
   socialLinks?: ReadonlyArray<FooterSocialLinkDto>;
+  /** Optional external links for AI-generated summaries of the site. */
+  aiSummaryLinks?: ReadonlyArray<FooterAiSummaryLinkDto>;
   actions?: ReadonlyArray<FooterActionDto>;
   onAction?: (actionId: string) => void;
   theme?: "dark" | "light";

@@ -2,12 +2,17 @@ import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import SharedSiteShell from '@mardu/layout/site-shell';
-import type { FooterSocialLinkDto } from '@mardu/layout/types';
+import type { FooterAiSummaryLinkDto, FooterSocialLinkDto } from '@mardu/layout/types';
 import { Button } from '@mardu/ui/components/button';
 import { getSiteConfig } from '@mardu/site-config';
 import { defaultFooterMetaLinks, defaultFooterNavLinks } from '@/data/default-footer-items';
 import { defaultHeaderItems } from '@/data/default-header-items';
-import { MARDU_LOGO_DARK_PATH, MARDU_LOGO_LIGHT_PATH } from '@/lib/brand-assets';
+import {
+  MARDU_LOGO_DARK_PATH,
+  MARDU_LOGO_LIGHT_PATH,
+  MARDU_MOBILE_MENU_ICON_PATH,
+  MARDU_WORDMARK_DARK_PATH,
+} from '@/lib/brand-assets';
 
 const baseSocialLinks: ReadonlyArray<FooterSocialLinkDto> = [
   { href: 'https://www.instagram.com/mardu.de', label: 'Instagram', icon: 'instagram' },
@@ -17,6 +22,28 @@ const baseSocialLinks: ReadonlyArray<FooterSocialLinkDto> = [
     icon: 'linkedin',
   },
   { href: 'https://github.com/mardu-systems', label: 'GitHub', icon: 'github' },
+];
+
+const aiSummaryPrompt =
+  'Fasse zusammen, was Mardu macht und was das zentrale Nutzenversprechen ist. Nutze https://www.mardu.de als Quelle.';
+const encodedAiSummaryPrompt = encodeURIComponent(aiSummaryPrompt);
+
+const aiSummaryLinks: ReadonlyArray<FooterAiSummaryLinkDto> = [
+  {
+    provider: 'claude',
+    label: 'Mardu mit Claude zusammenfassen',
+    href: `https://claude.ai/new?q=${encodedAiSummaryPrompt}`,
+  },
+  {
+    provider: 'chatgpt',
+    label: 'Mardu mit ChatGPT zusammenfassen',
+    href: `https://chatgpt.com/?q=${encodedAiSummaryPrompt}`,
+  },
+  {
+    provider: 'perplexity',
+    label: 'Mardu mit Perplexity zusammenfassen',
+    href: `https://www.perplexity.ai/search/new?q=${encodedAiSummaryPrompt}`,
+  },
 ];
 
 export default function SiteShell({ children }: { children: ReactNode }) {
@@ -45,6 +72,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
           logoAlt: 'Zur Mardu-Startseite',
           logoWidth: 156,
           logoHeight: 44,
+          mobileMenuIconSrc: MARDU_MOBILE_MENU_ICON_PATH,
         },
         items: defaultHeaderItems,
         cta: {
@@ -62,6 +90,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
           logoAlt: 'Mardu',
           logoWidth: 156,
           logoHeight: 44,
+          wordmarkSrc: MARDU_WORDMARK_DARK_PATH,
           copyrightName: 'Mardu GmbH',
         },
         description: 'Wo Nutzung beginnt, ist Mardu.',
@@ -84,6 +113,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
         navLinks: defaultFooterNavLinks,
         metaLinks: [...defaultFooterMetaLinks, ...siteConfig.footerMetaLinks],
         socialLinks,
+        aiSummaryLinks,
       }}
     >
       {children}

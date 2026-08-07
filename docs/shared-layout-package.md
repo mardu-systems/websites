@@ -59,14 +59,25 @@ in ihr responsives Menü. Ankerauflösung und CTA-Verträge bleiben unverändert
 - `icon: "instagram" | "linkedin" | "github" | "mail" | "phone"`
 - optionale Payload-Referenzfelder
 
+### `FooterAiSummaryLinkDto`
+
+- `provider: "claude" | "chatgpt" | "perplexity"`
+- `label`: zugängliche Beschreibung des externen Ziels
+- `href`: Deeplink mit dem von der App vorbefüllten Prompt
+- optionale Payload-Referenzfelder
+
 ### `SiteFooterProps`
 
-- `brand`
+- `brand`: enthält Logo, Copyright-Namen und optional `wordmarkSrc` für eine eigenständige
+  SVG-Wortmarke im interaktiven Footerabschluss
 - `description?`
 - `primaryActionSlot?`
 - `navLinks?`
 - `metaLinks?`
 - `socialLinks?`
+- `aiSummaryLinks?`: optionale Deeplinks für externe KI-Zusammenfassungen; jeder Link enthält
+  einen Provider (`claude`, `chatgpt` oder `perplexity`) sowie einen von der App verantworteten,
+  vorbefüllten Prompt.
 - `actions?`
 - `onAction?`
 - `theme?: "dark" | "light"`
@@ -74,6 +85,9 @@ in ihr responsives Menü. Ankerauflösung und CTA-Verträge bleiben unverändert
 
 `editorial-index` rendert einen dunklen, gerasterten Footer. Ein optionaler
 `primaryActionSlot` erscheint in der Markenspalte unter dem Abschlussslogan.
+Wenn `brand.wordmarkSrc` gesetzt ist, wird die Wortmarke als SVG-Maske am unteren Rand
+gerendert und durch einen mausfolgenden Lichtverlauf sichtbar. Der Bewegungslistener ist
+nur aktiv, solange der Abschluss im oder nahe am sichtbaren Bereich liegt.
 Ohne Angabe der Variante bleibt das bisherige Standardlayout aktiv.
 
 ### `SiteShellProps`
