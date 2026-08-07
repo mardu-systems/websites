@@ -4,9 +4,6 @@ import { fileURLToPath } from 'node:url';
 
 const workspaceRoot = fileURLToPath(new URL('../../', import.meta.url));
 const nextConfig: NextConfig = {
-  experimental: {
-    viewTransition: true,
-  },
   outputFileTracingRoot: workspaceRoot,
   transpilePackages: [
     '@mardu/layout',
