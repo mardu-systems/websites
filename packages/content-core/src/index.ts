@@ -1,3 +1,7 @@
+import { fetchPayloadCollection, mapPayloadDocumentsStrict } from './content-api';
+
+export { ContentApiError } from './content-api';
+
 export type VisibleSite = 'mardu-de' | 'platform';
 
 export type SiteVisibility = {
@@ -396,14 +400,8 @@ export type ContentSitemapEntry = {
   updatedAt?: string;
 };
 
-type NextFetchInit = RequestInit & {
-  next?: {
-    revalidate?: number;
-  };
-};
-
 type PayloadRestCollectionResult<T> = {
-  docs?: T[];
+  docs: T[];
 };
 
 type PayloadMedia = {
@@ -651,7 +649,6 @@ const MAX_INTEGRATION_FETCH = 400;
 const MAX_CATALOG_FETCH = 400;
 const MAX_TAXONOMY_FETCH = 400;
 const MAX_SOLUTION_FETCH = 200;
-const DEFAULT_REVALIDATE_SECONDS = 60;
 
 export const visibleSiteOptions = [
   { label: 'mardu.de', value: 'mardu-de' },
@@ -690,27 +687,8 @@ function buildRestUrl(origin: string, pathname: string, params: Record<string, s
   return url;
 }
 
-async function fetchJson<T>(url: URL): Promise<T | null> {
-  let response: Response;
-
-  try {
-    response = await fetch(url, {
-      headers: {
-        Accept: 'application/json',
-      },
-      next: {
-        revalidate: DEFAULT_REVALIDATE_SECONDS,
-      },
-    } satisfies NextFetchInit);
-  } catch {
-    return null;
-  }
-
-  if (!response.ok) {
-    return null;
-  }
-
-  return (await response.json()) as T;
+async function fetchJson<T>(url: URL): Promise<T> {
+  return (await fetchPayloadCollection(url)) as T;
 }
 
 function toId(value: string | number | undefined): string {
@@ -931,18 +909,18 @@ export async function getPlatformBlogCategories(origin: string): Promise<BlogCat
   });
   const result = await fetchJson<PayloadRestCollectionResult<PayloadCategory>>(url);
 
-  return (result?.docs ?? [])
-    .map((doc) => mapBlogCategory(doc))
-    .filter((item): item is BlogCategoryDto => item !== null);
+  return mapPayloadDocumentsStrict(result.docs, mapBlogCategory, url.toString());
 }
 
 export async function getPlatformFeaturedPost(
   origin: string,
   site: VisibleSite,
 ): Promise<BlogPostListItemDto | null> {
-  const posts = (await fetchPublishedBlogDocs(origin, site))
-    .map((doc) => mapBlogPost(doc, origin))
-    .filter((item): item is BlogPostListItemDto => item !== null);
+  const posts = mapPayloadDocumentsStrict(
+    await fetchPublishedBlogDocs(origin, site),
+    (doc) => mapBlogPost(doc, origin),
+    '/api/blog-posts',
+  );
 
   return posts.find((post) => post.featured) ?? posts[0] ?? null;
 }
@@ -954,9 +932,11 @@ export async function getPlatformBlogPosts(
 ): Promise<PaginatedBlogPostsDto> {
   const normalized = normalizeBlogQuery(query);
   const posts = filterBlogPosts(
-    (await fetchPublishedBlogDocs(origin, site))
-      .map((doc) => mapBlogPost(doc, origin))
-      .filter((item): item is BlogPostListItemDto => item !== null),
+    mapPayloadDocumentsStrict(
+      await fetchPublishedBlogDocs(origin, site),
+      (doc) => mapBlogPost(doc, origin),
+      '/api/blog-posts',
+    ),
     query,
   );
 
@@ -985,13 +965,13 @@ export async function getPlatformBlogPostBySlug(
     return null;
   }
 
-  const base = mapBlogPost(doc, origin);
+  const [base] = mapPayloadDocumentsStrict(
+    [doc],
+    (item) => mapBlogPost(item, origin),
+    '/api/blog-posts',
+  );
   const meta = toMeta(doc.meta);
   const ogImage = toMedia(meta?.image);
-
-  if (!base) {
-    return null;
-  }
 
   return {
     ...base,
@@ -1216,9 +1196,11 @@ export async function getPlatformRoadmapItems(
   site: VisibleSite,
 ): Promise<RoadmapItemDto[]> {
   return sortRoadmapItems(
-    (await fetchPublishedRoadmapDocs(origin, site))
-      .map((doc) => mapRoadmapItem(doc))
-      .filter((item): item is RoadmapItemDto => Boolean(item)),
+    mapPayloadDocumentsStrict(
+      await fetchPublishedRoadmapDocs(origin, site),
+      mapRoadmapItem,
+      '/api/roadmap-items',
+    ),
   );
 }
 
@@ -1297,9 +1279,11 @@ async function getPublishedIntegrationList(
   origin: string,
   site: VisibleSite,
 ): Promise<IntegrationListItemDto[]> {
-  return (await fetchPublishedIntegrationDocs(origin, site))
-    .map((doc) => mapIntegrationListItem(doc, origin))
-    .filter((item): item is IntegrationListItemDto => Boolean(item));
+  return mapPayloadDocumentsStrict(
+    await fetchPublishedIntegrationDocs(origin, site),
+    (doc) => mapIntegrationListItem(doc, origin),
+    '/api/integrations',
+  );
 }
 
 export async function getPlatformIntegrationCategories(
@@ -1312,9 +1296,7 @@ export async function getPlatformIntegrationCategories(
   });
   const result = await fetchJson<PayloadRestCollectionResult<PayloadCategory>>(url);
 
-  return (result?.docs ?? [])
-    .map((doc) => mapIntegrationCategory(doc))
-    .filter((item): item is IntegrationCategoryDto => Boolean(item));
+  return mapPayloadDocumentsStrict(result.docs, mapIntegrationCategory, url.toString());
 }
 
 export async function getPlatformIntegrationProtocols(
@@ -1327,9 +1309,7 @@ export async function getPlatformIntegrationProtocols(
   });
   const result = await fetchJson<PayloadRestCollectionResult<PayloadProtocol>>(url);
 
-  return (result?.docs ?? [])
-    .map((doc) => mapIntegrationProtocol(doc))
-    .filter((item): item is IntegrationProtocolDto => Boolean(item));
+  return mapPayloadDocumentsStrict(result.docs, mapIntegrationProtocol, url.toString());
 }
 
 export async function getPlatformFeaturedIntegrations(
@@ -1807,11 +1787,12 @@ export async function getPlatformCatalogCategories(
   }
 
   return sortCatalogCategories(
-    categoryDocs
-      .map((doc) =>
+    mapPayloadDocumentsStrict(
+      categoryDocs,
+      (doc) =>
         mapCatalogCategory(doc, origin, productIdsByCategory.get(toId(doc.id)) ?? []),
-      )
-      .filter((item): item is CatalogCategoryDto => Boolean(item)),
+      '/api/product-categories',
+    ),
   );
 }
 
@@ -1820,9 +1801,11 @@ export async function getPlatformCatalogTechnologies(
   site: VisibleSite,
 ): Promise<CatalogTechnologyDto[]> {
   return sortCatalogTaxonomy(
-    (await fetchPublishedCatalogTechnologyDocs(origin, site))
-      .map((doc) => mapCatalogTechnology(doc, origin))
-      .filter((item): item is CatalogTechnologyDto => Boolean(item)),
+    mapPayloadDocumentsStrict(
+      await fetchPublishedCatalogTechnologyDocs(origin, site),
+      (doc) => mapCatalogTechnology(doc, origin),
+      '/api/product-technologies',
+    ),
   );
 }
 
@@ -1831,9 +1814,11 @@ export async function getPlatformCatalogCarriers(
   site: VisibleSite,
 ): Promise<CatalogCarrierDto[]> {
   return sortCatalogTaxonomy(
-    (await fetchPublishedCatalogCarrierDocs(origin, site))
-      .map((doc) => mapCatalogCarrier(doc, origin))
-      .filter((item): item is CatalogCarrierDto => Boolean(item)),
+    mapPayloadDocumentsStrict(
+      await fetchPublishedCatalogCarrierDocs(origin, site),
+      (doc) => mapCatalogCarrier(doc, origin),
+      '/api/product-carriers',
+    ),
   );
 }
 
@@ -1842,9 +1827,11 @@ export async function getPlatformCatalogProducts(
   site: VisibleSite,
 ): Promise<CatalogProductListItemDto[]> {
   return sortCatalogProducts(
-    (await fetchPublishedCatalogProductDocs(origin, site))
-      .map((doc) => mapCatalogProductListItem(doc, origin))
-      .filter((item): item is CatalogProductListItemDto => Boolean(item)),
+    mapPayloadDocumentsStrict(
+      await fetchPublishedCatalogProductDocs(origin, site),
+      (doc) => mapCatalogProductListItem(doc, origin),
+      '/api/products',
+    ),
   );
 }
 
@@ -1870,18 +1857,22 @@ export async function getPlatformCatalogProductBySlug(
     return null;
   }
 
-  const detail = mapCatalogProductDetail(doc, origin);
+  const [detail] = mapPayloadDocumentsStrict(
+    [doc],
+    (item) => mapCatalogProductDetail(item, origin),
+    '/api/products',
+  );
 
-  if (!detail) {
-    return null;
-  }
-
-  const allProducts = docs
-    .map((item) => mapCatalogProductListItem(item, origin))
-    .filter((item): item is CatalogProductListItemDto => Boolean(item));
-  const explicitRelated = toRelationshipDocs<PayloadCatalogProductDoc>(doc.relatedProducts)
-    .map((item) => mapCatalogProductListItem(item, origin))
-    .filter((item): item is CatalogRelatedProductDto => Boolean(item));
+  const allProducts = mapPayloadDocumentsStrict(
+    docs,
+    (item) => mapCatalogProductListItem(item, origin),
+    '/api/products',
+  );
+  const explicitRelated = mapPayloadDocumentsStrict(
+    toRelationshipDocs<PayloadCatalogProductDoc>(doc.relatedProducts),
+    (item) => mapCatalogProductListItem(item, origin),
+    '/api/products.relatedProducts',
+  );
 
   const relatedProducts =
     explicitRelated.length > 0
@@ -2016,9 +2007,22 @@ export async function getPlatformSolutions(
   origin: string,
   site: VisibleSite,
 ): Promise<SolutionListItemDto[]> {
-  return (await fetchPublishedSolutionDocs(origin, site))
-    .map((doc) => mapSolutionListItem(doc, origin))
-    .filter((item): item is SolutionListItemDto => Boolean(item));
+  return mapPayloadDocumentsStrict(
+    await fetchPublishedSolutionDocs(origin, site),
+    (doc) => mapSolutionListItem(doc, origin),
+    '/api/solutions',
+  );
+}
+
+export async function getPlatformSolutionDetails(
+  origin: string,
+  site: VisibleSite,
+): Promise<SolutionDetailDto[]> {
+  return mapPayloadDocumentsStrict(
+    await fetchPublishedSolutionDocs(origin, site),
+    (doc) => mapSolutionDetail(doc, origin),
+    '/api/solutions',
+  );
 }
 
 export async function getPlatformSolutionBySlug(
@@ -2032,7 +2036,11 @@ export async function getPlatformSolutionBySlug(
     return null;
   }
 
-  return mapSolutionDetail(doc, origin);
+  return mapPayloadDocumentsStrict(
+    [doc],
+    (item) => mapSolutionDetail(item, origin),
+    '/api/solutions',
+  )[0];
 }
 
 export async function getPlatformSolutionSlugs(

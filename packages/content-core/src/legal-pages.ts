@@ -1,13 +1,6 @@
 import type { LegalPageDto, LegalPageSlug, SiteVisibility, VisibleSite } from './index';
 import { isVisibleOnSite } from './index';
-import privacyMarkdown from './legal/privacy.md';
-import publisherMarkdown from './legal/publisher.md';
-
-type NextFetchInit = RequestInit & {
-  next?: {
-    revalidate?: number;
-  };
-};
+import { fetchPayloadCollection, mapPayloadDocumentsStrict } from './content-api';
 
 type PayloadMeta = {
   title?: string;
@@ -16,43 +9,18 @@ type PayloadMeta = {
 };
 
 type PayloadLegalPageDoc = SiteVisibility & {
-  canonicalUrl?: string;
-  slug?: string;
-  title?: string;
-  pageKind?: LegalPageSlug;
-  summary?: string;
-  seoDescription?: string;
-  seoTitle?: string;
-  contentMarkdown?: string;
-  updatedLabel?: string;
+  canonicalUrl?: string | null;
+  slug?: string | null;
+  title?: string | null;
+  pageKind?: LegalPageSlug | null;
+  summary?: string | null;
+  seoDescription?: string | null;
+  seoTitle?: string | null;
+  contentMarkdown?: string | null;
+  updatedLabel?: string | null;
   meta?: unknown;
 };
 
-type PayloadRestCollectionResult<T> = {
-  docs?: T[];
-};
-
-const DEFAULT_REVALIDATE_SECONDS = 60;
-const DEFAULT_SHARED_SITES: VisibleSite[] = ['mardu-de', 'platform'];
-const DEFAULT_FETCH_TIMEOUT_MS = 3_000;
-
-const DEFAULT_PAGE_COPY: Record<
-  LegalPageSlug,
-  Pick<LegalPageDto, 'title' | 'pageKind' | 'summary' | 'updatedLabel'>
-> = {
-  privacy: {
-    title: 'Datenschutzerklärung',
-    pageKind: 'privacy',
-    summary: 'Informationen zum Datenschutz.',
-    updatedLabel: '30.04.2026',
-  },
-  publisher: {
-    title: 'Impressum',
-    pageKind: 'publisher',
-    summary: 'Angaben gemäß § 5 TMG.',
-    updatedLabel: '30.04.2026',
-  },
-};
 
 function buildRestUrl(origin: string, pathname: string, params: Record<string, string>) {
   const url = new URL(pathname, origin);
@@ -64,30 +32,6 @@ function buildRestUrl(origin: string, pathname: string, params: Record<string, s
   return url;
 }
 
-async function fetchJson<T>(url: URL): Promise<T | null> {
-  let response: Response;
-
-  try {
-    response = await fetch(url, {
-      headers: {
-        Accept: 'application/json',
-      },
-      signal: AbortSignal.timeout(DEFAULT_FETCH_TIMEOUT_MS),
-      next: {
-        revalidate: DEFAULT_REVALIDATE_SECONDS,
-      },
-    } satisfies NextFetchInit);
-  } catch {
-    return null;
-  }
-
-  if (!response.ok) {
-    return null;
-  }
-
-  return (await response.json()) as T;
-}
-
 function toMeta(value: unknown): PayloadMeta | null {
   if (!value || typeof value !== 'object') {
     return null;
@@ -96,11 +40,7 @@ function toMeta(value: unknown): PayloadMeta | null {
   return value as PayloadMeta;
 }
 
-async function readBundledLegalMarkdown(slug: LegalPageSlug): Promise<string | null> {
-  return slug === 'privacy' ? privacyMarkdown : publisherMarkdown;
-}
-
-function mapLegalPageDoc(
+export function mapLegalPageDocument(
   doc: PayloadLegalPageDoc,
   site: VisibleSite,
 ): LegalPageDto | null {
@@ -139,32 +79,6 @@ function mapLegalPageDoc(
   };
 }
 
-export async function getBundledLegalPage(
-  site: VisibleSite,
-  slug: LegalPageSlug,
-): Promise<LegalPageDto | null> {
-  if (!DEFAULT_SHARED_SITES.includes(site)) {
-    return null;
-  }
-
-  const contentMarkdown = await readBundledLegalMarkdown(slug);
-
-  if (!contentMarkdown) {
-    return null;
-  }
-
-  const defaults = DEFAULT_PAGE_COPY[slug];
-
-  return {
-    slug,
-    title: defaults.title,
-    pageKind: defaults.pageKind,
-    contentMarkdown,
-    summary: defaults.summary,
-    updatedLabel: defaults.updatedLabel,
-  };
-}
-
 export async function getPlatformLegalPage(
   origin: string,
   site: VisibleSite,
@@ -178,14 +92,14 @@ export async function getPlatformLegalPage(
     'where[slug][equals]': slug,
   });
 
-  const result = await fetchJson<PayloadRestCollectionResult<PayloadLegalPageDoc>>(url);
-  const doc = (result?.docs ?? [])
-    .map((item) => mapLegalPageDoc(item, site))
-    .find((item): item is LegalPageDto => Boolean(item));
+  const result = await fetchPayloadCollection<PayloadLegalPageDoc>(url);
+  const visibleDocuments = result.docs.filter((document) => isVisibleOnSite(document, site));
 
-  if (doc) {
-    return doc;
-  }
-
-  return getBundledLegalPage(site, slug);
+  return (
+    mapPayloadDocumentsStrict(
+      visibleDocuments,
+      (document) => mapLegalPageDocument(document, site),
+      url.toString(),
+    )[0] ?? null
+  );
 }

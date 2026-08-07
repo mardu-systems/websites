@@ -3,6 +3,8 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { buildLegalPageMetadata, getLegalPage } from '@/lib/legal-pages';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getLegalPage('publisher');
   return buildLegalPageMetadata('publisher', page);

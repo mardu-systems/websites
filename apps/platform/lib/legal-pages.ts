@@ -1,21 +1,30 @@
 import type { LegalPageSlug } from '@mardu/content-core';
-import { getBundledLegalPage, getPlatformLegalPage } from '@mardu/content-core/legal-pages';
+import { mapLegalPageDocument } from '@mardu/content-core/legal-pages';
 import { getSiteConfig } from '@mardu/site-config';
 import type { Metadata } from 'next';
+import { getPayload } from 'payload';
+import config from '@/payload.config';
 
 const site = 'platform' as const;
 const siteConfig = getSiteConfig(site);
 
-function getPlatformContentOrigin() {
-  return process.env.PAYLOAD_PUBLIC_SERVER_URL?.trim() || 'http://localhost:3000';
-}
-
 export async function getLegalPage(slug: LegalPageSlug) {
-  if (process.env.NEXT_PHASE === 'phase-production-build') {
-    return getBundledLegalPage(site, slug);
-  }
+  const payload = await getPayload({ config });
+  const result = await payload.find({
+    collection: 'legal-pages',
+    depth: 0,
+    limit: 1,
+    pagination: false,
+    where: {
+      and: [
+        { _status: { equals: 'published' } },
+        { slug: { equals: slug } },
+      ],
+    },
+  });
+  const document = result.docs[0];
 
-  return getPlatformLegalPage(getPlatformContentOrigin(), site, slug);
+  return document ? mapLegalPageDocument(document, site) : null;
 }
 
 export function buildLegalPageMetadata(slug: LegalPageSlug, page: Awaited<ReturnType<typeof getLegalPage>>): Metadata {
