@@ -1,14 +1,17 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import type { CatalogFeatureGroupDto, CatalogSpecGroupDto } from '@mardu/content-core';
-import { Overline } from '@mardu/ui/components/typography';
+import * as React from "react";
+import type {
+  CatalogFeatureGroupDto,
+  CatalogSpecGroupDto,
+} from "@mardu/content-core";
+import { Overline } from "@mardu/ui/components/typography";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@mardu/ui/components/accordion';
+} from "@mardu/ui/components/accordion";
 
 export interface CatalogFeatureSpecSectionsProps {
   featureGroups: CatalogFeatureGroupDto[];
@@ -24,9 +27,12 @@ export function CatalogFeatureSpecSections({
   );
   const hasSingleGenericFeatureGroup =
     featureGroups.length === 1 &&
-    ['features', 'funktionen', 'eigenschaften', 'funktionen und eigenschaften'].includes(
-      featureGroups[0]?.title.trim().toLowerCase() ?? '',
-    );
+    [
+      "features",
+      "funktionen",
+      "eigenschaften",
+      "funktionen und eigenschaften",
+    ].includes(featureGroups[0]?.title.trim().toLowerCase() ?? "");
 
   return (
     <>
@@ -39,8 +45,8 @@ export function CatalogFeatureSpecSections({
                 Funktionen und Eigenschaften
               </h2>
               <p className="max-w-xl text-sm leading-relaxed text-foreground/68 md:text-base">
-                Keine Datenwand ohne Einordnung, sondern die Punkte, die im Betrieb wirklich relevant
-                sind.
+                Keine Datenwand ohne Einordnung, sondern die Punkte, die im
+                Betrieb wirklich relevant sind.
               </p>
             </div>
 
@@ -50,8 +56,8 @@ export function CatalogFeatureSpecSections({
                   key={group.title}
                   className={
                     hasSingleGenericFeatureGroup
-                      ? 'py-8'
-                      : 'grid gap-8 py-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start'
+                      ? "py-8"
+                      : "grid gap-8 py-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start"
                   }
                 >
                   {!hasSingleGenericFeatureGroup ? (
@@ -93,7 +99,9 @@ export function CatalogFeatureSpecSections({
                   <button
                     type="button"
                     className="text-primary transition-colors hover:text-primary/80"
-                    onClick={() => setExpandedSpecs(specGroups.map((group) => group.title))}
+                    onClick={() =>
+                      setExpandedSpecs(specGroups.map((group) => group.title))
+                    }
                   >
                     Alles erweitern
                   </button>
@@ -108,7 +116,7 @@ export function CatalogFeatureSpecSections({
                 </div>
 
                 <Accordion
-                  type="multiple"
+                  multiple
                   value={expandedSpecs}
                   onValueChange={setExpandedSpecs}
                   className="w-full border-t border-black/8"
@@ -125,7 +133,9 @@ export function CatalogFeatureSpecSections({
                       <AccordionContent className="pb-8">
                         <dl className="grid gap-y-4 md:grid-cols-[0.34fr_0.66fr] md:gap-x-6">
                           {group.specs.map((spec) => (
-                            <React.Fragment key={`${group.title}-${spec.label}`}>
+                            <React.Fragment
+                              key={`${group.title}-${spec.label}`}
+                            >
                               <dt className="text-base font-semibold text-foreground md:text-[1.02rem]">
                                 {spec.label}
                               </dt>
