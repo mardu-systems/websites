@@ -227,8 +227,8 @@ export default function CTASection({
                     if (!nextOpen) resetDialogState();
                   }}
                 >
-                  <DialogTrigger asChild>
-                    <Button>{primaryButtonText}</Button>
+                  <DialogTrigger render={<Button />}>
+                    {primaryButtonText}
                   </DialogTrigger>
 
                   <DialogContent className="max-h-[90vh] overflow-y-auto border border-black/10 bg-background sm:max-w-175">

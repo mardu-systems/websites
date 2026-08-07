@@ -62,8 +62,8 @@ export default function NewsletterButton({ primaryButtonText }: { primaryButtonT
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button className="w-full sm:w-auto">{primaryButtonText}</Button>
+      <DialogTrigger render={<Button className="w-full sm:w-auto" />}>
+        {primaryButtonText}
       </DialogTrigger>
       <DialogContent className="sm:max-w-150 max-h-[90vh] overflow-y-auto bg-white">
         <DialogHeader>
@@ -103,11 +103,17 @@ export default function NewsletterButton({ primaryButtonText }: { primaryButtonT
           </div>
 
           <div className="flex items-start space-x-3 pt-2">
-            <Checkbox id="privacyConsent" name="privacyConsent" value="accept" required className="mt-1" />
+            <Checkbox
+              id="privacyConsent"
+              name="privacyConsent"
+              value="accept"
+              required
+              className="mt-1"
+            />
             <Label htmlFor="privacyConsent" className="text-xs font-normal leading-relaxed">
               Ihre hier eingegebenen Daten werden lediglich zur Personalisierung des Newsletters
-              verwendet und nicht an Dritte weitergegeben. Durch Absenden der von Ihnen
-              eingegebenen Daten willigen Sie in die Datenverarbeitung ein und bestätigen unsere
+              verwendet und nicht an Dritte weitergegeben. Durch Absenden der von Ihnen eingegebenen
+              Daten willigen Sie in die Datenverarbeitung ein und bestätigen unsere
               Datenschutzerklärung.
             </Label>
           </div>

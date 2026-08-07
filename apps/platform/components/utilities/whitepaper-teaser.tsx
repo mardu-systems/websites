@@ -174,11 +174,9 @@ export default function WhitepaperTeaser({ className }: WhitepaperTeaserProps) {
                       }
                     }}
                   >
-                    <DialogTrigger asChild>
-                      <Button>
-                        Jetzt kostenlos anfordern
-                        <ArrowRight className="ml-2 w-5 h-5" />
-                      </Button>
+                    <DialogTrigger render={<Button />}>
+                      Jetzt kostenlos anfordern
+                      <ArrowRight className="ml-2 w-5 h-5" />
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-md bg-card text-foreground">
                       <DialogHeader>

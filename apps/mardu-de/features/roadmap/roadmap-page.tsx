@@ -102,19 +102,21 @@ function RoadmapCard({ item }: { item: RoadmapItemDto }) {
 function FeatureRequestDialog() {
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <button
-          type="button"
-          className="group flex min-h-12 w-full cursor-pointer items-center justify-between border-y border-border py-2.5 text-left text-base text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
-        >
-          Funktion vorschlagen
-          <span className="flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
-            <ArrowRight
-              className="size-4 -rotate-45 transition-transform duration-200 group-hover:rotate-0 motion-reduce:transition-none"
-              aria-hidden="true"
-            />
-          </span>
-        </button>
+      <DialogTrigger
+        render={
+          <button
+            type="button"
+            className="group flex min-h-12 w-full cursor-pointer items-center justify-between border-y border-border py-2.5 text-left text-base text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+          />
+        }
+      >
+        Funktion vorschlagen
+        <span className="flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
+          <ArrowRight
+            className="size-4 -rotate-45 transition-transform duration-200 group-hover:rotate-0 motion-reduce:transition-none"
+            aria-hidden="true"
+          />
+        </span>
       </DialogTrigger>
       <DialogContent
         showCloseButton={false}

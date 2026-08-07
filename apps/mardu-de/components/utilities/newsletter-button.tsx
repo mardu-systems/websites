@@ -30,10 +30,12 @@ export default function NewsletterButton({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant={variant} size={size} className={cn('w-full sm:w-auto', className)}>
-          {primaryButtonText}
-        </Button>
+      <DialogTrigger
+        render={
+          <Button variant={variant} size={size} className={cn('w-full sm:w-auto', className)} />
+        }
+      >
+        {primaryButtonText}
       </DialogTrigger>
       <DialogContent className="max-h-[90vh] overflow-y-auto bg-background sm:max-w-150">
         <DialogHeader>
