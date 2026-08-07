@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client';
 
 import * as React from 'react';
@@ -137,10 +136,7 @@ export function MeetergoCTAButton({
   return (
     <Button
       onClick={handleClick}
-      className={cn(
-        'mt-3 w-full sm:ml-4 sm:mt-0 sm:w-auto',
-        className,
-      )}
+      className={cn('mt-3 w-full sm:ml-4 sm:mt-0 sm:w-auto', className)}
       size={size}
       disabled={loading || props.disabled}
       aria-busy={loading}

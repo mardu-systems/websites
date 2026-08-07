@@ -32,6 +32,15 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const databaseURL =
   process.env.DATABASE_URI || 'postgres://postgres:postgres@127.0.0.1:5432/mardu_payload';
 
+function getRelationshipId(value: unknown): string | number | undefined {
+  if (typeof value !== 'object' || value === null || !('id' in value)) {
+    return undefined;
+  }
+
+  const { id } = value;
+  return typeof id === 'string' || typeof id === 'number' ? id : undefined;
+}
+
 export default buildConfig({
   secret: process.env.PAYLOAD_SECRET || 'payload-dev-secret-please-change',
   db: postgresAdapter({
@@ -321,23 +330,13 @@ export default buildConfig({
         return '';
       },
       generateImage: ({ doc }) => {
-        if (typeof doc?.heroImage === 'object' && doc.heroImage && 'id' in doc.heroImage) {
-          return (doc.heroImage as any).id;
-        }
-
-        if (typeof doc?.image === 'object' && doc.image && 'id' in doc.image) {
-          return (doc.image as any).id;
-        }
-
-        if (typeof doc?.logo === 'object' && doc.logo && 'id' in doc.logo) {
-          return (doc.logo as any).id;
-        }
-
-        if (typeof doc?.coverImage === 'object' && doc.coverImage && 'id' in doc.coverImage) {
-          return (doc.coverImage as any).id;
-        }
-
-        return '';
+        return (
+          getRelationshipId(doc?.heroImage) ??
+          getRelationshipId(doc?.image) ??
+          getRelationshipId(doc?.logo) ??
+          getRelationshipId(doc?.coverImage) ??
+          ''
+        );
       },
       generateTitle: ({ doc }) => {
         if (typeof doc?.seoTitle === 'string') {
@@ -365,7 +364,10 @@ export default buildConfig({
           return doc.canonicalUrl;
         }
 
-        if ((doc?.slug === 'privacy' || doc?.slug === 'publisher') && typeof doc?.slug === 'string') {
+        if (
+          (doc?.slug === 'privacy' || doc?.slug === 'publisher') &&
+          typeof doc?.slug === 'string'
+        ) {
           return `${baseURL}/${doc.slug}`;
         }
 

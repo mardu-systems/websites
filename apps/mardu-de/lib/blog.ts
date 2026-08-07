@@ -18,4 +18,3 @@ export const getBlogPosts = async (query: BlogListQueryDto) =>
 
 export const getBlogPostBySlug = async (slug: string) =>
   getPlatformBlogPostBySlug(getPlatformOrigin(), site, slug);
-1

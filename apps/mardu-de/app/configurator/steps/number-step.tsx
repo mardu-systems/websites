@@ -14,15 +14,7 @@ export default function NumberStep({
   note?: string;
   ariaLabel?: string;
 }) {
-  const clamp = React.useCallback((v: number) => Math.max(0, Math.min(999, v)), []);
-  const [display, setDisplay] = React.useState(value === 0 ? '' : String(value));
-
-  React.useEffect(() => {
-    const numericDisplay = clamp(Number(display || 0));
-    if (value !== numericDisplay) {
-      setDisplay(value === 0 ? '' : String(value));
-    }
-  }, [value, display, clamp]);
+  const clamp = (input: number) => Math.max(0, Math.min(999, input));
 
   return (
     <>
@@ -40,15 +32,13 @@ export default function NumberStep({
               inputMode="numeric"
               pattern="[0-9]*"
               aria-label={ariaLabel}
-              value={display}
+              value={value === 0 ? '' : String(value)}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 const raw = e.target.value;
                 if (raw === '') {
-                  setDisplay('');
                   onChange(0);
                   return;
                 }
-                setDisplay(raw);
                 if (/^\d+$/.test(raw)) {
                   const safe = clamp(Number(raw));
                   onChange(safe);
@@ -57,7 +47,6 @@ export default function NumberStep({
               onBlur={(e: React.FocusEvent<HTMLInputElement>) => {
                 const normalized = e.target.value.replace(/[^\d]/g, '');
                 const parsed = normalized ? clamp(Number(normalized)) : 0;
-                setDisplay(parsed === 0 ? '' : String(parsed));
                 onChange(parsed);
               }}
               placeholder="z. B. 3…"

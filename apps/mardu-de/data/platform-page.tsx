@@ -1,6 +1,6 @@
 import type { LucideIcon } from 'lucide-react';
 import type { EditorialPanelItem } from '@mardu/sections';
-import { Activity, KeyRound, LockKeyhole, MapPinned, Server, UsersRound, Wifi, Smartphone, Radio } from 'lucide-react';
+import { Activity, KeyRound, LockKeyhole, Radio, Smartphone, UsersRound, Wifi } from 'lucide-react';
 
 /**
  * DTO for a sellable WebQ capability block on the `/platform` page.
@@ -25,7 +25,6 @@ export type PlatformEditorialPanelsDto = [
 /**
  * DTO tuple for the 2-panel editorial link stage on the `/platform` page.
  */
-
 
 /**
  * DTO for Network topologies (IP500 vs BLE).
@@ -93,27 +92,29 @@ export const platformNetworks: PlatformNetworkDto[] = [
   {
     id: 'ip500',
     title: 'IP500: Das Industrie-Mesh für extreme Reichweiten',
-    description: 'Das IP500 Funk-Protokoll bildet ein selbstheilendes Dualband-Mesh (Sub-GHz und 2,4 GHz). Es ist VdS-abgenommen und wurde für hochsichere Gebäudeautomation entwickelt.',
+    description:
+      'Das IP500 Funk-Protokoll bildet ein selbstheilendes Dualband-Mesh (Sub-GHz und 2,4 GHz). Es ist VdS-abgenommen und wurde für hochsichere Gebäudeautomation entwickelt.',
     benefits: [
       'Extrem hohe Reichweite und Wändedurchdringung (Ideal für Altbau/Industrie)',
       'Dualband-Mesh für Ausfallsicherheit und Selbstheilung',
       'VdS-Zertifiziert – relevant für den Versicherungsschutz',
-      'Einsatz in Pro-Geräten: Gateway Pro, Access Point Pro, Smart Akteur Pro'
+      'Einsatz in Pro-Geräten: Gateway Pro, Access Point Pro, Smart Akteur Pro',
     ],
     icon: Radio,
   },
   {
     id: 'ble',
     title: 'Bluetooth LE: Der effiziente Standard',
-    description: 'Die Bluetooth Low Energy (BLE) Lösung baut ebenfalls ein zuverlässiges Mesh-Netzwerk auf und eignet sich perfekt für normale Distanzen und kompakte Installationen.',
+    description:
+      'Die Bluetooth Low Energy (BLE) Lösung baut ebenfalls ein zuverlässiges Mesh-Netzwerk auf und eignet sich perfekt für normale Distanzen und kompakte Installationen.',
     benefits: [
       'Reichweiten von bis zu 10m von Gerät zu Gerät',
       'Direkte Smartphone-Integration (App Key)',
       'Kosteneffizient für Standard-Werkstätten und Vereinsräume',
-      'Einsatz in Standard-Geräten: Gateway, Access Point, Smart Akteur, Schließzylinder'
+      'Einsatz in Standard-Geräten: Gateway, Access Point, Smart Akteur, Schließzylinder',
     ],
     icon: Wifi,
-  }
+  },
 ];
 
 export const platformEditorialPanels: PlatformEditorialPanelsDto = [
@@ -151,4 +152,3 @@ export const platformEditorialPanels: PlatformEditorialPanelsDto = [
     accentTone: 'sky',
   },
 ];
-
