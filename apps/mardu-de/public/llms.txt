@@ -12,6 +12,7 @@ Wichtige Hinweise für LLM-Crawler und Agents:
 ## Start & Überblick
 
 - [Startseite](https://mardu.de/): Dachmarke, Produktlinien und gemeinsamer Plattformansatz
+- [Über uns](https://mardu.de/about): Entstehungsgeschichte, Arbeitsweise und Team hinter Mardu
 - [Plattform](https://mardu.de/#loesung): Beschreibung der gemeinsamen Technologie- und Betriebslogik
 - [Proof](https://mardu.de/#argumente): Sicherheits-, Prozess- und Betriebsargumente
 
