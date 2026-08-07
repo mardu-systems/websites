@@ -86,9 +86,7 @@ export default function CookieSettings({ onSave }: CookieSettingsProps) {
           <div className="mt-2 space-y-3 text-sm md:text-base">
             <div className="flex items-center justify-between">
               <Tooltip>
-                <TooltipTrigger asChild>
-                  <span>Statistik-Cookies</span>
-                </TooltipTrigger>
+                <TooltipTrigger render={<span />}>Statistik-Cookies</TooltipTrigger>
                 <TooltipContent className="z-[10000]">
                   Helfen uns zu verstehen, wie unsere Website genutzt wird.
                 </TooltipContent>
@@ -102,9 +100,7 @@ export default function CookieSettings({ onSave }: CookieSettingsProps) {
             </div>
             <div className="flex items-center justify-between">
               <Tooltip>
-                <TooltipTrigger asChild>
-                  <span>Marketing-Cookies</span>
-                </TooltipTrigger>
+                <TooltipTrigger render={<span />}>Marketing-Cookies</TooltipTrigger>
                 <TooltipContent className="z-[10000]">
                   Ermöglichen personalisierte Werbung und Tracking.
                 </TooltipContent>
@@ -118,9 +114,7 @@ export default function CookieSettings({ onSave }: CookieSettingsProps) {
             </div>
             <div className="flex items-center justify-between opacity-70">
               <Tooltip>
-                <TooltipTrigger asChild>
-                  <span>Notwendige Cookies</span>
-                </TooltipTrigger>
+                <TooltipTrigger render={<span />}>Notwendige Cookies</TooltipTrigger>
                 <TooltipContent className="z-[10000]">
                   Erforderlich für grundlegende Funktionen der Website.
                 </TooltipContent>
