@@ -46,17 +46,17 @@ export function BlogCategoryFilter({
     });
 
   return (
-    <div className="mt-6 flex flex-wrap items-center gap-2.5 md:mt-8">
+    <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 border-b border-black/15 pb-5 md:mt-6">
       <Link
         href={hrefFor("")}
         className={[
-          "inline-flex h-9 items-center border px-3 text-sm transition-colors",
+          "inline-flex min-h-11 items-center font-mono text-[0.68rem] uppercase tracking-[0.14em] transition-colors",
           activeCategory.length === 0
-            ? "border-foreground bg-foreground text-background"
-            : "border-border bg-card text-foreground/75 hover:text-foreground",
+            ? "text-mardu-purple underline decoration-mardu-orange decoration-2 underline-offset-8"
+            : "text-foreground/55 hover:text-foreground",
         ].join(" ")}
       >
-        All
+        [00] Alle
       </Link>
 
       {categories.map((category) => (
@@ -64,10 +64,10 @@ export function BlogCategoryFilter({
           key={category.id}
           href={hrefFor(category.slug)}
           className={[
-            "inline-flex h-9 items-center border px-3 text-sm transition-colors",
+            "inline-flex min-h-11 items-center font-mono text-[0.68rem] uppercase tracking-[0.14em] transition-colors",
             activeCategory === category.slug
-              ? "border-foreground bg-foreground text-background"
-              : "border-border bg-card text-foreground/75 hover:text-foreground",
+              ? "text-mardu-purple underline decoration-mardu-orange decoration-2 underline-offset-8"
+              : "text-foreground/55 hover:text-foreground",
           ].join(" ")}
         >
           {category.title}

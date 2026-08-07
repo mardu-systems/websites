@@ -1,6 +1,5 @@
 import { BlogCategoryFilter, BlogGrid, BlogHero, BlogPagination, BlogSearch } from '@mardu/blog-ui';
 import { isBlogEnabled } from '@mardu/site-config/feature-flags.server';
-import { Overline } from '@mardu/ui/components/typography';
 import { getBlogCategories, getBlogPosts, getFeaturedPost } from '@/lib/blog';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -62,15 +61,22 @@ export default async function BlogPage({ searchParams }: { searchParams: SearchP
   ]);
 
   return (
-    <main className="pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))] pb-16 md:pb-24">
+    <main className="min-h-screen bg-background pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))] pb-16 text-foreground md:pb-24">
       <BlogHero featuredPost={featuredPost} />
 
-      <section className="section-hairline mt-10 py-10 md:mt-14 md:py-14">
+      <section className="py-14 md:py-20">
         <div className="mardu-container">
-          <Overline>Knowledge Base</Overline>
-          <h1 className="mt-2 text-[clamp(2rem,4.5vw,3.6rem)] leading-[0.95] tracking-[-0.03em] text-foreground">
-            Blog
-          </h1>
+          <div className="grid gap-6 md:grid-cols-[0.42fr_1fr] md:items-end">
+            <p className="font-mono text-xs tracking-[0.18em] text-mardu-purple">
+              [02 / ALLE BEITRÄGE]
+            </p>
+            <h2 className="max-w-3xl text-[clamp(2.25rem,4vw,3.75rem)] font-light leading-[0.97] tracking-[-0.04em]">
+              Perspektiven auf Zutritt,
+              <em className="block font-serif font-normal italic tracking-[-0.025em] text-mardu-purple">
+                Systeme und Betrieb.
+              </em>
+            </h2>
+          </div>
 
           <BlogSearch query={q} category={category} />
           <BlogCategoryFilter categories={categories} activeCategory={category} query={q} />

@@ -10,7 +10,7 @@ export interface BlogGridProps {
 export function BlogGrid({ posts, emptyState, buildPostHref }: BlogGridProps) {
   if (posts.length === 0) {
     return (
-      <div className="border border-dashed border-border bg-muted/50 p-10 text-center text-muted-foreground">
+      <div className="border-y border-black/15 py-16 text-center text-foreground/55">
         {emptyState ??
           "Keine Blogposts gefunden. Passe Suche oder Kategoriefilter an."}
       </div>
@@ -18,7 +18,7 @@ export function BlogGrid({ posts, emptyState, buildPostHref }: BlogGridProps) {
   }
 
   return (
-    <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+    <div className="grid border-l border-t border-black/15 md:grid-cols-2 xl:grid-cols-3">
       {posts.map((post) => (
         <BlogPostCard key={post.id} post={post} buildHref={buildPostHref} />
       ))}

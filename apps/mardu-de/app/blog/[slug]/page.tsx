@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 
 type Params = Promise<{ slug: string }>;
 
@@ -121,14 +122,17 @@ const buildNestedToc = (items: TocFlatItem[]): TocNode[] => {
 const renderTocItems = (items: TocNode[], depth = 0): React.ReactNode => {
   const listClass =
     depth === 0
-      ? 'mt-3 space-y-2.5 text-sm text-foreground/68'
-      : 'mt-2 space-y-1.5 border-l border-black/10 pl-3 text-[0.86rem] text-foreground/56';
+      ? 'mt-4 space-y-3 text-sm text-foreground/68'
+      : 'mt-2 space-y-2 border-l border-black/15 pl-3 text-[0.82rem] text-foreground/55';
 
   return (
     <ul className={listClass}>
       {items.map((item) => (
         <li key={item.id}>
-          <a href={`#${item.id}`} className="transition-colors hover:text-foreground">
+          <a
+            href={`#${item.id}`}
+            className="transition-colors hover:text-mardu-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mardu-purple focus-visible:ring-offset-2"
+          >
             {item.title}
           </a>
           {item.children.length > 0 ? renderTocItems(item.children, depth + 1) : null}
@@ -211,68 +215,72 @@ export default async function BlogDetailPage({ params }: { params: Params }) {
   const nestedToc = buildNestedToc(toc);
 
   return (
-    <main className="pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))] pb-16 md:pb-24">
-      <section className="section-hairline py-8 md:py-12">
+    <main className="min-h-screen bg-background pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))] pb-16 text-foreground md:pb-24">
+      <section className="section-hairline border-b border-black/15 py-10 md:py-16">
         <div className="mardu-container">
-          <Link href="/blog" className="text-sm text-foreground/65 underline underline-offset-2">
-            Zurück zum Blog
+          <Link
+            href="/blog"
+            className="inline-flex min-h-11 items-center gap-2 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-foreground/55 transition-colors hover:text-mardu-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mardu-purple focus-visible:ring-offset-2"
+          >
+            <ArrowLeft className="size-4" />
+            [Zurück zum Blog]
           </Link>
 
-          <div className="mt-6 grid gap-10 lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-14">
-            <aside className="space-y-8 lg:sticky lg:top-28 lg:self-start">
-              <div className="border border-border bg-card p-5">
-                <p className="text-[1.1rem] font-medium text-foreground">{post.author.name}</p>
-                <p className="mt-1 text-foreground/65">
+          <header className="mt-8 grid gap-8 border-t border-black/15 pt-8 lg:grid-cols-[0.7fr_1.3fr] lg:gap-14">
+            <div className="space-y-6">
+              <p className="font-mono text-xs tracking-[0.18em] text-mardu-purple">
+                [01 / FACHBEITRAG]
+              </p>
+              <div className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-foreground/55">
+                <p>Von {post.author.name}</p>
+                <p className="mt-2">
                   {new Date(post.publishedAt).toLocaleDateString('de-DE', {
                     day: '2-digit',
                     month: 'long',
                     year: 'numeric',
                   })}
                 </p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {post.categories.map((category) => (
-                    <span
-                      key={category.id}
-                      className="border border-black/15 px-2 py-1 text-xs uppercase tracking-[0.12em] text-foreground/70"
-                    >
-                      {category.title}
-                    </span>
-                  ))}
-                </div>
               </div>
+              <p className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-mardu-purple">
+                [{post.categories.map((category) => category.title).join(' · ') || 'Mardu'}]
+              </p>
+            </div>
 
+            <div>
+              <h1 className="headline-balance max-w-4xl text-[clamp(2.5rem,4.5vw,4rem)] font-light leading-[0.96] tracking-[-0.045em] text-foreground">
+                {post.title}
+              </h1>
+              <p className="mt-6 max-w-3xl text-lg leading-relaxed text-foreground/68 md:text-xl">
+                {post.excerpt}
+              </p>
+            </div>
+          </header>
+
+          <div className="mt-10 overflow-hidden border-y border-black/15 py-4 md:mt-14 md:py-6">
+            <Image
+              src={post.coverImageUrl}
+              alt={post.coverImageAlt}
+              width={1440}
+              height={840}
+              className="aspect-[16/8.5] h-auto w-full object-cover"
+              priority
+            />
+          </div>
+
+          <div className="mt-10 grid gap-10 lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-14">
+            <aside className="lg:sticky lg:top-28 lg:self-start">
               {nestedToc.length > 0 ? (
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-foreground/45">
-                    Inhalt
+                <div className="border-t border-black/15 pt-5">
+                  <p className="font-mono text-[0.68rem] uppercase tracking-[0.16em] text-mardu-purple">
+                    [02 / INHALT]
                   </p>
                   {renderTocItems(nestedToc)}
                 </div>
               ) : null}
             </aside>
 
-            <article>
-              <header className="relative overflow-hidden border border-border bg-gradient-to-r from-card via-card to-background p-6 md:p-8">
-                <h1 className="headline-balance max-w-5xl font-serif text-[clamp(2.2rem,5vw,5.4rem)] leading-[0.94] tracking-[-0.03em] text-foreground">
-                  {post.title}
-                </h1>
-                <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground/72">
-                  {post.excerpt}
-                </p>
-              </header>
-
-              <div className="mt-6 overflow-hidden border border-border bg-card">
-                <Image
-                  src={post.coverImageUrl}
-                  alt={post.coverImageAlt}
-                  width={1440}
-                  height={840}
-                  className="h-auto w-full object-cover"
-                  priority
-                />
-              </div>
-
-              <div id="blog-article-content" className="mt-8 border-t border-black/10 pt-8">
+            <article className="min-w-0">
+              <div id="blog-article-content" className="border-t border-black/15 pt-8">
                 <BlogHeadingAnchors containerId="blog-article-content" headings={toc} />
                 <BlogRichText content={post.content} />
               </div>
