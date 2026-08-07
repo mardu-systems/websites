@@ -9,15 +9,16 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
-    "dev:mardu-de": "bun --cwd apps/mardu-de run dev",
-    "dev:platform": "bun --cwd apps/platform run dev",
+    "dev:mardu-de": "bun run --cwd apps/mardu-de dev",
+    "dev:platform": "bun run --cwd apps/platform dev",
     "payload": "cd apps/platform && bun run payload",
     "lint": "turbo run lint",
     "type-check": "turbo run type-check",
     "format": "turbo run format",
     "format:check": "turbo run format:check",
     "clean": "turbo run clean",
-    "build:analyze": "turbo run build:analyze"
+    "build:analyze": "turbo run build:analyze",
+    "test": "bun test"
   },
   "devDependencies": {
     "raw-loader": "^4.0.2",
