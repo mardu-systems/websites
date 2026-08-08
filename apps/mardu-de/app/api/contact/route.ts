@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
-import { contactRequestSchema } from '@mardu/lead-core';
+import { contactRequestSchema, readRequestJson } from '@mardu/lead-core';
 import { normalizePhoneNumber } from '@/lib/phone';
 import { forwardPlatformJson } from '@/lib/platform-api';
 import type { ContactRequestDto, ContactResponseDto } from '@mardu/lead-core';
@@ -15,11 +15,14 @@ const PhoneSchema = z
   .transform((value) => normalizePhoneNumber(value));
 
 export async function POST(req: Request) {
-  const json = await req.json();
+  const jsonResult = await readRequestJson(req);
+  if (!jsonResult.success) {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+  }
   const parsed = contactRequestSchema
     .omit({ site: true })
     .extend({ phone: PhoneSchema })
-    .safeParse(json);
+    .safeParse(jsonResult.data);
   if (!parsed.success) {
     const details = parsed.error.flatten().fieldErrors;
     return NextResponse.json({ error: 'Invalid payload', details }, { status: 400 });

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { contactRequestSchema } from '@mardu/lead-core';
+import { contactRequestSchema, readRequestJson } from '@mardu/lead-core';
 import { attachContactLeadToSubscriber, createContactLead, setContactLeadStatuses, upsertPendingNewsletterSubscriber } from '@/lib/lead-store';
 import { sendContactEmail } from '@/lib/email';
 import { syncContactLeadToTwenty } from '@/lib/integrations/twenty';
@@ -9,9 +9,16 @@ import { enforcePublicLeadProtection } from '@/lib/abuse-protection';
 import type { ContactRequestDto, ContactResponseDto } from '@mardu/lead-core';
 
 export async function POST(req: Request) {
-  const json = await req.json();
+  const jsonResult = await readRequestJson(req);
+  if (!jsonResult.success) {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+  }
+  const json = jsonResult.data;
   let lead: Awaited<ReturnType<typeof createContactLead>> | null = null;
-  const rawPhone = typeof json?.phone === 'string' ? json.phone : undefined;
+  const rawPhone =
+    json && typeof json === 'object' && 'phone' in json && typeof json.phone === 'string'
+      ? json.phone
+      : undefined;
   const normalizedPhone = rawPhone ? normalizePhoneNumber(rawPhone) : undefined;
 
   if (rawPhone && rawPhone.trim().length > 0 && !normalizedPhone) {
@@ -22,7 +29,7 @@ export async function POST(req: Request) {
   }
 
   const parsed = contactRequestSchema.safeParse({
-    ...json,
+    ...(json && typeof json === 'object' ? json : {}),
     phone: normalizedPhone,
   });
   if (!parsed.success) {

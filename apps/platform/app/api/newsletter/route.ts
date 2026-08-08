@@ -1,21 +1,22 @@
 import { NextResponse } from 'next/server';
-import { newsletterRequestSchema, type NewsletterRequestDto, type NewsletterSignupRole } from '@mardu/lead-core';
+import { newsletterRequestSchema, readRequestJson, type NewsletterRequestDto } from '@mardu/lead-core';
 import { upsertPendingNewsletterSubscriber } from '@/lib/lead-store';
 import { sendNewsletterConfirmationEmail } from '@/lib/newsletter-confirmation';
 import { enforcePublicLeadProtection } from '@/lib/abuse-protection';
 
 export async function POST(req: Request) {
-  const json = await req.json();
-  const parsed = newsletterRequestSchema.safeParse(json);
+  const jsonResult = await readRequestJson(req);
+  if (!jsonResult.success) {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+  }
+  const parsed = newsletterRequestSchema.safeParse(jsonResult.data);
   if (!parsed.success) {
     return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
   }
 
   const { token, ...rawPayload } = parsed.data;
-  const role: NewsletterSignupRole = rawPayload.role === 'whitepaper' ? 'whitepaper' : 'newsletter';
   const payload: NewsletterRequestDto = {
     ...rawPayload,
-    role,
   };
   const protection = await enforcePublicLeadProtection({
     req,
@@ -32,7 +33,7 @@ export async function POST(req: Request) {
     await upsertPendingNewsletterSubscriber(payload);
     await sendNewsletterConfirmationEmail({
       email: payload.email,
-      role,
+      role: payload.role,
       site: payload.site,
       firstName: payload.firstName,
       lastName: payload.lastName,

@@ -25,3 +25,8 @@ Shared DTOs, schemas, and lead-flow helpers for the public Mardu frontends.
 - `token` remains formally optional in the shared DTOs for compatibility, but production lead endpoints may require it server-side.
 - Apps using `ContactForm` or `CTASection` newsletter flows are expected to wire `executeRecaptcha` or `getRequestToken` when the backend enforces captcha.
 - `RecaptchaProvider` and `useRecaptcha` centralize the client integration so public apps do not duplicate provider or hook logic.
+- `role` accepts only `newsletter` or `whitepaper`; retired role aliases are rejected.
+- `source` accepts only `contact-form`, `configurator` or `admin-software`; retired aliases are rejected.
+- Newsletter tokens use only the signed JSON format and must match site and purpose at the consuming endpoint.
+- Malformed JSON is returned as HTTP `400` by the public API routes.
+- Missing reCAPTCHA keys disable captcha only in development; production protection remains mandatory.

@@ -4,6 +4,7 @@ import { cookies } from 'next/headers';
 import {
   CONSENT_COOKIE,
   DEFAULT_CONSENT_PREFERENCES,
+  consentPreferencesSchema,
   type ConsentPreferences,
 } from './consent';
 
@@ -18,7 +19,8 @@ export async function getConsent(): Promise<ConsentPreferences> {
   }
 
   try {
-    return JSON.parse(cookie) as ConsentPreferences;
+    const parsed = consentPreferencesSchema.safeParse(JSON.parse(cookie));
+    return parsed.success ? parsed.data : DEFAULT_CONSENT_PREFERENCES;
   } catch {
     return DEFAULT_CONSENT_PREFERENCES;
   }

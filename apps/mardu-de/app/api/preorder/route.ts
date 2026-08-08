@@ -1,10 +1,13 @@
 import { NextResponse } from 'next/server';
-import { preorderRequestSchema } from '@mardu/lead-core';
+import { preorderRequestSchema, readRequestJson } from '@mardu/lead-core';
 import { forwardPlatformJson } from '@/lib/platform-api';
 
 export async function POST(req: Request) {
-  const json = await req.json();
-  const parsed = preorderRequestSchema.omit({ site: true }).safeParse(json);
+  const jsonResult = await readRequestJson(req);
+  if (!jsonResult.success) {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+  }
+  const parsed = preorderRequestSchema.omit({ site: true }).safeParse(jsonResult.data);
   if (!parsed.success) {
     return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
   }

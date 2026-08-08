@@ -3,6 +3,7 @@ import { z } from 'zod';
 export {
   CONSENT_COOKIE,
   DEFAULT_CONSENT_PREFERENCES,
+  consentPreferencesSchema,
   type ConsentPreferences,
 } from './consent';
 export { getConsent, setConsent } from './consent-server';
@@ -20,10 +21,8 @@ export {
 export const siteSchema = z.enum(['mardu-de']);
 export type SiteKey = z.infer<typeof siteSchema>;
 
-export const newsletterRoleSchema = z
-  .enum(['newsletter', 'whitepaper', 'whitepaper_requester'])
-  .transform((role) => (role === 'whitepaper_requester' ? 'whitepaper' : role));
-export type NewsletterSignupRole = 'newsletter' | 'whitepaper';
+export const newsletterRoleSchema = z.enum(['newsletter', 'whitepaper']);
+export type NewsletterSignupRole = z.infer<typeof newsletterRoleSchema>;
 
 export const newsletterTokenPurposeSchema = z.enum([
   'confirm',
@@ -41,20 +40,12 @@ export type TwentySyncStatus = z.infer<typeof twentySyncStatusSchema>;
 export const emailDeliveryStatusSchema = z.enum(['pending', 'sent', 'failed']);
 export type EmailDeliveryStatus = z.infer<typeof emailDeliveryStatusSchema>;
 
-export const contactSourceInputSchema = z.enum([
-  'contact',
-  'wizard',
+export const contactSourceSchema = z.enum([
   'contact-form',
   'configurator',
   'admin-software',
 ]);
-
-export const contactSourceSchema = contactSourceInputSchema.transform((source) => {
-  if (source === 'contact') return 'contact-form';
-  if (source === 'wizard') return 'configurator';
-  return source;
-});
-export type ContactSource = 'contact-form' | 'configurator' | 'admin-software';
+export type ContactSource = z.infer<typeof contactSourceSchema>;
 
 const optionalTrimmedString = (max: number) =>
   z
@@ -67,11 +58,7 @@ const optionalTrimmedString = (max: number) =>
 export const newsletterRequestSchema = z.object({
   email: z.string().trim().email(),
   site: siteSchema.default('mardu-de'),
-  role: z
-    .string()
-    .trim()
-    .min(1)
-    .transform((role) => (role === 'whitepaper_requester' ? 'whitepaper' : role)),
+  role: newsletterRoleSchema,
   firstName: optionalTrimmedString(100),
   lastName: optionalTrimmedString(100),
   company: optionalTrimmedString(150),
@@ -100,7 +87,7 @@ export const preorderRequestSchema = z.object({
 export const newsletterTokenPayloadSchema = z.object({
   email: z.string().trim().email(),
   site: siteSchema,
-  role: z.string().trim().min(1),
+  role: newsletterRoleSchema,
   purpose: newsletterTokenPurposeSchema,
   firstName: optionalTrimmedString(100),
   lastName: optionalTrimmedString(100),
@@ -110,7 +97,7 @@ export const newsletterTokenPayloadSchema = z.object({
 export interface NewsletterRequestDto {
   email: string;
   site: SiteKey;
-  role: string;
+  role: NewsletterSignupRole;
   firstName?: string;
   lastName?: string;
   company?: string;
@@ -139,7 +126,7 @@ export interface PreorderRequestDto {
 export interface NewsletterTokenPayload {
   email: string;
   site: SiteKey;
-  role: string;
+  role: NewsletterSignupRole;
   purpose: NewsletterTokenPurpose;
   firstName?: string;
   lastName?: string;
@@ -165,6 +152,19 @@ export interface NewsletterErrorResponseDto {
   error: string;
 }
 
+export type JsonRequestResult =
+  | { success: true; data: unknown }
+  | { success: false };
+
+/** Parses a JSON request body without turning malformed JSON into an unhandled 500 response. */
+export async function readRequestJson(request: Request): Promise<JsonRequestResult> {
+  try {
+    return { success: true, data: await request.json() };
+  } catch {
+    return { success: false };
+  }
+}
+
 function getSecret() {
   const secret = process.env.NEWSLETTER_SECRET;
   if (!secret) {
@@ -185,67 +185,33 @@ export function createNewsletterToken(payload: NewsletterTokenPayload): string {
 }
 
 function parseCurrentToken(token: string): NewsletterTokenPayload | null {
-  const [encodedPayload, signature] = token.split('.');
-  if (!encodedPayload || !signature) {
-    return null;
-  }
-
-  const decoded = Buffer.from(encodedPayload, 'base64url').toString('utf8');
-  if (sign(decoded) !== signature) {
-    return null;
-  }
-
-  const parsed = JSON.parse(decoded) as unknown;
-  const result = newsletterTokenPayloadSchema.safeParse(parsed);
-  return result.success ? result.data : null;
-}
-
-function parseLegacyToken(token: string, fallbackSite?: SiteKey): NewsletterTokenPayload | null {
   try {
-    let base64 = token.replace(/-/g, '+').replace(/_/g, '/');
-    const pad = base64.length % 4;
-    if (pad) {
-      base64 += '='.repeat(4 - pad);
-    }
-
-    const decoded = Buffer.from(base64, 'base64').toString('utf8');
-    const [email, role, signature] = decoded.split(':');
-    if (!email || !role || !signature) {
+    const [encodedPayload, signature, unexpectedPart] = token.split('.');
+    if (!encodedPayload || !signature || unexpectedPart) {
       return null;
     }
 
-    const expected = createHmac('sha256', getSecret()).update(`${email}:${role}`).digest('hex');
-    if (expected !== signature) {
+    const decoded = Buffer.from(encodedPayload, 'base64url').toString('utf8');
+    if (sign(decoded) !== signature) {
       return null;
     }
 
-    const normalizedRole = role === 'whitepaper_requester' ? 'whitepaper' : role;
-    const purpose: NewsletterTokenPurpose =
-      normalizedRole === 'unsubscribe' ? 'unsubscribe' : 'confirm';
-    const safeRole = normalizedRole === 'unsubscribe' ? 'newsletter' : normalizedRole;
-
-    return {
-      email,
-      role: safeRole,
-      purpose,
-      site: fallbackSite ?? 'mardu-de',
-      firstName: undefined,
-      lastName: undefined,
-      company: undefined,
-    };
+    const parsed = JSON.parse(decoded) as unknown;
+    const result = newsletterTokenPayloadSchema.safeParse(parsed);
+    return result.success ? result.data : null;
   } catch {
     return null;
   }
 }
 
-export function verifyNewsletterToken(token: string, fallbackSite?: SiteKey): NewsletterTokenPayload | null {
-  return parseCurrentToken(token) ?? parseLegacyToken(token, fallbackSite);
+export function verifyNewsletterToken(token: string): NewsletterTokenPayload | null {
+  return parseCurrentToken(token);
 }
 
 export function buildSubscriptionKey(site: SiteKey, email: string, role: string): string {
   return `${site}:${role.toLowerCase()}:${email.trim().toLowerCase()}`;
 }
 
-export function normalizeNewsletterRole(role: string): string {
-  return role === 'whitepaper_requester' ? 'whitepaper' : role.trim().toLowerCase();
+export function normalizeNewsletterRole(role: string): NewsletterSignupRole {
+  return newsletterRoleSchema.parse(role.trim().toLowerCase());
 }

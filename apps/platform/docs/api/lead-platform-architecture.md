@@ -20,7 +20,7 @@ Quelle: [`packages/lead-core/src/index.ts`](/Users/lucaschoeneberg/Documents/Git
 interface NewsletterRequestDto {
   email: string;
   site: 'mardu-de';
-  role: string;
+  role: 'newsletter' | 'whitepaper';
   firstName?: string;
   lastName?: string;
   company?: string;
@@ -62,12 +62,13 @@ Quelle: [`apps/platform/app/api/newsletter/route.ts`](/Users/lucaschoeneberg/Doc
 - versendet die DOI-Mail
 - Response: `{ ok: true }`
 - Whitepaper-Requests laufen über denselben Endpunkt mit `role = whitepaper`.
+- Ungültiges oder syntaktisch fehlerhaftes JSON ergibt HTTP `400`.
 
 ### `GET /api/newsletter/confirm`
 
 Quelle: [`apps/platform/app/api/newsletter/confirm/route.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/api/newsletter/confirm/route.ts)
 
-- bestaetigt den DOI-Token
+- bestätigt ausschließlich aktuelle DOI-Tokens mit passendem `site` und `purpose = confirm`
 - setzt den Subscriber auf `confirmed`
 - erzeugt ein Twenty-Event `newsletter_confirmed`
 - versendet eine Folge-Mail
@@ -78,7 +79,7 @@ Quelle: [`apps/platform/app/api/newsletter/confirm/route.ts`](/Users/lucaschoene
 
 Quelle: [`apps/platform/app/api/newsletter/unsubscribe/route.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/api/newsletter/unsubscribe/route.ts)
 
-- validiert den Unsubscribe-Token
+- validiert ausschließlich aktuelle Tokens mit passendem `site` und `purpose = unsubscribe`
 - setzt den Subscriber auf `unsubscribed`
 - erzeugt ein Twenty-Event `newsletter_unsubscribed`
 - versendet optional eine Bestaetigungs-Mail
@@ -107,6 +108,15 @@ Quelle: [`apps/platform/app/api/preorder/route.ts`](/Users/lucaschoeneberg/Docum
 - persistiert/updatet den Request in `preorder-requests`
 - versendet die interne Preorder-Mail
 - Response: `{ ok: true }`
+
+## Fehlerstatus
+
+- `400`: ungültiges JSON, ungültiger DTO-Vertrag oder Captcha
+- `429`: Rate-Limit überschritten
+- `503`: produktive Captcha-Konfiguration fehlt
+- `500`: Persistenz- oder Versandfehler
+
+Die früheren Rollen-/Source-Aliase und das colon-delimited Tokenformat werden nicht akzeptiert.
 
 ## Persistenzmodell
 

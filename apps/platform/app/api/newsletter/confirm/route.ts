@@ -23,18 +23,17 @@ function redirectWithStatus(site: SiteKey, status: string, role = 'newsletter') 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const token = searchParams.get('token');
-  const fallbackSite = activeSite;
   if (!token) {
-    return redirectWithStatus(fallbackSite, 'missing-token');
+    return redirectWithStatus(activeSite, 'missing-token');
   }
 
-  const data = verifyNewsletterToken(token, fallbackSite);
-  if (!data) {
-    return redirectWithStatus(fallbackSite, 'invalid-token');
+  const data = verifyNewsletterToken(token);
+  if (!data || data.site !== activeSite || data.purpose !== 'confirm') {
+    return redirectWithStatus(activeSite, 'invalid-token');
   }
 
-  const site = activeSite;
-  const role = data.role === 'whitepaper_requester' ? 'whitepaper' : data.role;
+  const site = data.site;
+  const role = data.role;
   let subscriber: Awaited<ReturnType<typeof confirmNewsletterSubscriber>> | null = null;
   try {
     subscriber = await confirmNewsletterSubscriber({

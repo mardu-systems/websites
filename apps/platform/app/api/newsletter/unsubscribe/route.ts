@@ -18,17 +18,16 @@ function redirectWithStatus(site: SiteKey, status: string) {
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const token = searchParams.get('token');
-  const fallbackSite = activeSite;
   if (!token) {
-    return redirectWithStatus(fallbackSite, 'missing-token');
+    return redirectWithStatus(activeSite, 'missing-token');
   }
 
-  const data = verifyNewsletterToken(token, fallbackSite);
-  if (!data || data.purpose !== 'unsubscribe') {
-    return redirectWithStatus(fallbackSite, 'invalid-token');
+  const data = verifyNewsletterToken(token);
+  if (!data || data.site !== activeSite || data.purpose !== 'unsubscribe') {
+    return redirectWithStatus(activeSite, 'invalid-token');
   }
 
-  const site = activeSite;
+  const site = data.site;
   let unsubscribed: Awaited<ReturnType<typeof unsubscribeNewsletterSubscriber>> = null;
   try {
     unsubscribed = await unsubscribeNewsletterSubscriber({

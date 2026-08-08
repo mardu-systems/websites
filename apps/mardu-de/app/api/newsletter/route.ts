@@ -1,11 +1,14 @@
 import { NextResponse } from 'next/server';
-import { newsletterRequestSchema } from '@mardu/lead-core';
+import { newsletterRequestSchema, readRequestJson } from '@mardu/lead-core';
 import { forwardPlatformJson } from '@/lib/platform-api';
 import type { NewsletterErrorResponseDto, NewsletterRequestDto, NewsletterResponseDto } from '@mardu/lead-core';
 
 export async function POST(req: Request) {
-  const json = await req.json();
-  const parsed = newsletterRequestSchema.omit({ site: true }).safeParse(json);
+  const jsonResult = await readRequestJson(req);
+  if (!jsonResult.success) {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+  }
+  const parsed = newsletterRequestSchema.omit({ site: true }).safeParse(jsonResult.data);
   if (!parsed.success) {
     return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
   }
