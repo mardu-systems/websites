@@ -4,6 +4,7 @@ import {
   ContentApiError,
   fetchPayloadCollection,
   mapPayloadDocumentsStrict,
+  resolveContentApiTimeoutMs,
 } from './content-api';
 
 const originalFetch = globalThis.fetch;
@@ -51,6 +52,19 @@ describe('fetchPayloadCollection', () => {
       fetchPayloadCollection(new URL('https://platform.mardu.de/api/examples')),
       (error: unknown) => error instanceof ContentApiError && error.code === 'NETWORK',
     );
+  });
+});
+
+describe('resolveContentApiTimeoutMs', () => {
+  test('uses a cold-start-safe default', () => {
+    assert.equal(resolveContentApiTimeoutMs(undefined), 10_000);
+  });
+
+  test('accepts bounded overrides and rejects unsafe values', () => {
+    assert.equal(resolveContentApiTimeoutMs('15000'), 15_000);
+    assert.equal(resolveContentApiTimeoutMs('999'), 10_000);
+    assert.equal(resolveContentApiTimeoutMs('30001'), 10_000);
+    assert.equal(resolveContentApiTimeoutMs('invalid'), 10_000);
   });
 });
 

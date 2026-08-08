@@ -28,8 +28,21 @@ export type PayloadCollectionResult<T> = {
   docs: T[];
 };
 
-const DEFAULT_FETCH_TIMEOUT_MS = 3_000;
+const DEFAULT_FETCH_TIMEOUT_MS = 10_000;
+const MIN_FETCH_TIMEOUT_MS = 1_000;
+const MAX_FETCH_TIMEOUT_MS = 30_000;
 const DEFAULT_REVALIDATE_SECONDS = 60;
+
+export function resolveContentApiTimeoutMs(value = process.env.PAYLOAD_FETCH_TIMEOUT_MS): number {
+  if (!value) {
+    return DEFAULT_FETCH_TIMEOUT_MS;
+  }
+
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed >= MIN_FETCH_TIMEOUT_MS && parsed <= MAX_FETCH_TIMEOUT_MS
+    ? parsed
+    : DEFAULT_FETCH_TIMEOUT_MS;
+}
 
 function isPayloadCollectionResult(value: unknown): value is PayloadCollectionResult<unknown> {
   return Boolean(value) && typeof value === 'object' && Array.isArray((value as { docs?: unknown }).docs);
@@ -43,7 +56,7 @@ export async function fetchPayloadCollection<T>(url: URL): Promise<PayloadCollec
       headers: {
         Accept: 'application/json',
       },
-      signal: AbortSignal.timeout(DEFAULT_FETCH_TIMEOUT_MS),
+      signal: AbortSignal.timeout(resolveContentApiTimeoutMs()),
       next: {
         revalidate: DEFAULT_REVALIDATE_SECONDS,
       },

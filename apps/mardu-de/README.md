@@ -43,12 +43,14 @@ The newsletter signup uses a double opt-in process. `APP_URL` should match the f
 If `TWENTY_API_KEY` is set, confirmed newsletter/whitepaper events and contact leads are synchronized to Twenty. This integration is optional and non-blocking.
 
 For contact leads, optional custom field mappings can be configured:
+
 - `TWENTY_CONTACT_MESSAGE_FIELD`: stores the contact message on the person record.
 - `TWENTY_CONTACT_SOURCE_FIELD`: stores the source (`contact-form`, `configurator` or `admin-software`).
 - `TWENTY_CONTACT_NEWSLETTER_OPT_IN_FIELD`: stores whether newsletter opt-in was checked.
 
-
 Open [http://localhost:3000](http://localhost:3000) with your browser. Payload content is read from `MARDU_PLATFORM_ORIGIN`; there are no local runtime content fallbacks.
+
+`PAYLOAD_FETCH_TIMEOUT_MS` controls the server-side content request timeout. It defaults to 10 seconds so that a cold local Payload start does not fail at the previous three-second boundary; accepted values range from 1,000 to 30,000 milliseconds.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
