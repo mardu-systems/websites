@@ -7,7 +7,9 @@ import {
   CatalogStickyInquiryBar,
 } from '@mardu/catalog-ui';
 import { DetailMarkdown } from '@/components/content/detail-markdown';
-import { buildCatalogInquiryHref, getCatalogProductBySlug, getCatalogProductSlugs } from '@/lib/catalog';
+import { buildCatalogInquiryHref, getCatalogProductBySlug } from '@/lib/catalog';
+
+export const dynamic = 'force-dynamic';
 
 function buildProductDetailMarkdown(product: CatalogProductDetailDto) {
   if (product.detailMarkdown) {
@@ -44,10 +46,6 @@ function buildProductDetailMarkdown(product: CatalogProductDetailDto) {
   }
 
   return parts.join('\n\n');
-}
-
-export async function generateStaticParams() {
-  return (await getCatalogProductSlugs()).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({

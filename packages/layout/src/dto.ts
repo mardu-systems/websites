@@ -76,11 +76,6 @@ export type HeaderNavItemDto = HeaderNavLinkDto | HeaderNavMegaGroupDto;
  * Backwards-compatible aliases for app-local imports that previously lived in
  * duplicated `types/header.ts` files.
  */
-export type NavItem = HeaderNavMegaItemDto;
-export type MegaGroup = HeaderNavMegaGroupDto;
-export type SimpleLink = HeaderNavLinkDto;
-export type NavEntry = HeaderNavItemDto;
-
 /**
  * Meetergo prefill payload kept intentionally permissive because the upstream
  * scheduler accepts free-form string keys.

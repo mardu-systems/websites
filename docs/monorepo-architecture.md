@@ -8,12 +8,12 @@ Diese Dokumentation beschreibt die Zielstruktur des Monorepos unter `../websites
 
 - öffentliche Produkt- und Marketingseite für `mardu.de`
 - konsumiert gemeinsame UI-, Style- und Site-Config-Pakete
-- konsumiert mittelfristig Content und Lead-APIs aus `apps/platform`
+- konsumiert Content und Lead-APIs ausschließlich aus `apps/platform`
 
 ### `apps/platform`
 
 - einziges Payload-Admin
-- zentrale Content-API für Blog, Integrationen und Media
+- zentrale Content-API für Blog, Integrationen, Lösungen, Roadmap, Produktkatalog, Rechtstexte und Media
 - zentrales Lead-Backend für Newsletter, Kontakt, Whitepaper und Preorder
 
 ## Gemeinsame Packages
@@ -36,8 +36,9 @@ Diese Dokumentation beschreibt die Zielstruktur des Monorepos unter `../websites
 
 ### `packages/content-core`
 
-- gemeinsame Site-Sichtbarkeit und spätere Payload-Mapper
+- gemeinsame Site-Sichtbarkeit, öffentliche DTOs und strikte Payload-Mapper
 - kapselt die geteilte Inhaltsdomäne
+- unterscheidet Netzwerk-, HTTP- und Vertragsfehler von leeren Collections
 
 ## Tooling
 
@@ -55,9 +56,9 @@ Diese Dokumentation beschreibt die Zielstruktur des Monorepos unter `../websites
   - `apps/platform`
 - geteilte Packages werden über den Workspace aufgelöst
 
-## Offene Migrationsschritte
+## Verbindliche Grenzen
 
-- Payload von `apps/platform` fachlich vom aktuellen `mardu.de`-Stand trennen
-- Blog-/Integrations-Collections site-fähig machen
-- Lead-Flows aus `mardu.de` vollständig über `apps/platform` betreiben
-- Media-Uploads von lokalem Dateisystem auf Vercel Blob umstellen
+- `apps/platform` ist System of Record für CMS- und Lead-Daten.
+- `apps/mardu-de` enthält keine Runtime-Fallback-Datensätze für Payload-Inhalte.
+- Seed-Daten liegen ausschließlich unter `apps/platform/data` und werden nur durch explizite Seed-Skripte verwendet.
+- Historische Datenmigrationen in `apps/platform/migrations` bleiben unverändert; alte JSON-Importer und Aliasverträge sind entfernt.

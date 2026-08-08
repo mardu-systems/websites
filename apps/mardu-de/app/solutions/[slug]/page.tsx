@@ -3,7 +3,9 @@ import type { SolutionDetailDto } from '@mardu/content-core';
 import { notFound } from 'next/navigation';
 import { SolutionDetailHero } from '@mardu/solutions-ui';
 import { DetailMarkdown } from '@/components/content/detail-markdown';
-import { getSolutionBySlug, getSolutionSlugs } from '@/lib/solutions';
+import { getSolutionBySlug } from '@/lib/solutions';
+
+export const dynamic = 'force-dynamic';
 
 function buildSolutionDetailMarkdown(solution: SolutionDetailDto) {
   if (solution.detailMarkdown) {
@@ -17,10 +19,6 @@ function buildSolutionDetailMarkdown(solution: SolutionDetailDto) {
         `${block.eyebrow ? `## ${block.eyebrow}\n\n` : ''}### ${block.title}\n\n${block.body}`,
     ),
   ].join('\n\n');
-}
-
-export async function generateStaticParams() {
-  return (await getSolutionSlugs()).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({

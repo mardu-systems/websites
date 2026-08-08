@@ -1,5 +1,5 @@
 import config from '../payload.config.ts';
-import { solutions } from '../../mardu-de/data/solutions.ts';
+import { solutions } from '../data/solution-seed-items.ts';
 import { getPayload } from 'payload';
 
 const run = async () => {

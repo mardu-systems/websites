@@ -4,11 +4,8 @@ import { fileURLToPath } from 'node:url';
 import config from '../payload.config.ts';
 import { getPayload } from 'payload';
 
-import { findMonorepoRoot } from './utils.mjs';
-
 const CURRENT_DIR = dirname(fileURLToPath(import.meta.url));
-const monorepoRoot = findMonorepoRoot(CURRENT_DIR);
-const LEGAL_ROOT = join(monorepoRoot, 'packages/content-core/src/legal');
+const LEGAL_ROOT = join(CURRENT_DIR, '../data/legal');
 
 const legalSeedItems = [
   {

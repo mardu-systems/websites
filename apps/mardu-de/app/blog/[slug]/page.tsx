@@ -9,7 +9,7 @@ import { ArrowLeft } from 'lucide-react';
 
 type Params = Promise<{ slug: string }>;
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 type TocFlatItem = {
   id: string;

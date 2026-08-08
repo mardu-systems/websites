@@ -129,10 +129,10 @@ function FeatureRequestDialog() {
         <DialogHeader className="border-b border-border px-6 py-7 pr-14 text-left md:px-9 md:py-9">
           <p className="font-mono text-xs tracking-[0.14em] text-mardu-purple">[FUNKTIONSWUNSCH]</p>
           <DialogTitle className="max-w-[18ch] text-[clamp(2rem,5vw,3rem)] font-light leading-[0.98] tracking-[-0.035em] text-foreground">
-            Welche Funktion fehlt Ihnen?
+            Welche Funktion fehlt dir?
           </DialogTitle>
           <DialogDescription className="max-w-xl text-base leading-relaxed text-muted-foreground">
-            Beschreiben Sie kurz den Anwendungsfall. Wir prüfen den Wunsch im Kontext der
+            Beschreibe kurz den Anwendungsfall. Wir prüfen den Wunsch im Kontext der
             bestehenden Roadmap und melden uns persönlich zurück.
           </DialogDescription>
         </DialogHeader>
@@ -143,7 +143,7 @@ function FeatureRequestDialog() {
             initialMessage={'Funktionswunsch zur Mardu-Roadmap:\n\n'}
             extra={{ source: featureRequestSource }}
             submitLabel="Funktionswunsch senden"
-            successMessage="Danke! Wir prüfen den Funktionswunsch und melden uns bei Ihnen."
+            successMessage="Danke! Wir prüfen den Funktionswunsch und melden uns bei dir."
             layout="plain"
           />
         </div>
@@ -183,7 +183,7 @@ export function RoadmapPage({ items }: { items: RoadmapItemDto[] }) {
   }, [activeFilter, deferredQuery, items]);
 
   return (
-    <main className="border-t border-border bg-background pt-24">
+    <main className="border-t border-border bg-background">
       <section aria-labelledby="roadmap-title" className="pb-20 md:pb-24">
         <div className="w-full px-5 pt-14 md:px-8 md:pt-18 xl:px-12 xl:pt-20">
           <header className="grid gap-12 border-b border-border pb-14 md:pb-16 xl:grid-cols-[minmax(0,1fr)_minmax(22rem,0.42fr)] xl:items-end xl:gap-20">
@@ -320,10 +320,14 @@ export function RoadmapPage({ items }: { items: RoadmapItemDto[] }) {
             <div className="grid min-h-80 place-items-center border-b border-border py-16 text-center">
               <div className="max-w-md">
                 <p className="text-[1.375rem] font-light leading-tight text-foreground">
-                  Keine passenden Entwicklungsfelder gefunden.
+                  {items.length === 0
+                    ? 'Derzeit sind keine Roadmap-Einträge veröffentlicht.'
+                    : 'Keine passenden Entwicklungsfelder gefunden.'}
                 </p>
                 <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-                  Ändern Sie den Suchbegriff oder setzen Sie die Filter zurück.
+                  {items.length === 0
+                    ? 'Sobald neue Entwicklungsfelder veröffentlicht werden, erscheinen sie hier.'
+                    : 'Ändere den Suchbegriff oder setze die Filter zurück.'}
                 </p>
               </div>
             </div>

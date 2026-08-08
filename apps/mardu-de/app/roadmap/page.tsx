@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { getPlatformRoadmapItems } from '@mardu/content-core';
 import { getPlatformOrigin } from '@mardu/site-config';
-import { roadmapFallbackItems } from '@/features/roadmap/roadmap-fallback-items';
 import { RoadmapPage } from '@/features/roadmap/roadmap-page';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Roadmap',
@@ -29,5 +30,5 @@ export const metadata: Metadata = {
 export default async function RoadmapRoute() {
   const items = await getPlatformRoadmapItems(getPlatformOrigin(), 'mardu-de');
 
-  return <RoadmapPage items={items.length > 0 ? items : roadmapFallbackItems} />;
+  return <RoadmapPage items={items} />;
 }

@@ -7,17 +7,19 @@ Diese Matrix dokumentiert den Ist-Zustand nach der Implementierung der Payload-M
 | UI / Route | Aktueller Datenursprung | Payload angebunden | Import möglich | DTOs aus `@mardu/content-core` | Öffentliche API-Doku | Fehlende Bausteine | Empfohlene nächste Maßnahme |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `mardu.de /blog` | `apps/platform` via `packages/content-core` | Ja | Ja, redaktionell / Payload | Ja | Ja | Keine produktkritische Lücke im Audit | optional Feature-Flag-Aktivierung produktiv prüfen |
-| `mardu.de /integrations` | `apps/platform` via `packages/content-core` und lokaler Proxy | Ja | Ja, Seed über `seed:integrations` | Ja | Ja | keine Import-Automation aus Fremdquellen | optional zusätzliche externe Importquellen definieren |
+| `mardu.de /integrations` | `apps/platform` via `packages/content-core` | Ja | Ja, Seed über `seed:integrations` | Ja | Ja | keine | redaktionelle Prozesse im Payload-Admin nutzen |
 | `mardu.de /privacy`, `/publisher` | `apps/platform` via `packages/content-core/legal-pages` | Ja | Ja, Seed über `seed:legal-pages` | Ja | Ja | keine | redaktionelle Prozesse im Payload-Admin nutzen |
 | `mardu.de /solutions` | `apps/platform` via neue `content-core`-Fetcher | Ja | Ja, Seed über `seed:solutions` | Ja | Ja | noch kein dediziertes Bulk-Importformat jenseits Seed-Datei | bei Bedarf CSV-/MDX-Import später ergänzen |
 | `mardu.de /products` | `apps/platform` via neue `content-core`-Fetcher | Ja | Ja, Seed über `seed:catalog` | Ja | Ja | noch kein dediziertes Bulk-Importformat jenseits Seed-Dateien | bei Bedarf ERP/PIM-Import spezifizieren |
+| `mardu.de /roadmap` | `apps/platform` via `packages/content-core` | Ja | Ja, Seed über `seed:roadmap-items` | Ja | Ja | keine | redaktionelle Prozesse im Payload-Admin nutzen |
 
 ## Wichtige Befunde
 
 - `apps/platform` ist jetzt auch für `solutions` und `products` der zentrale Runtime-Owner.
 - `packages/content-core` ist nun der gemeinsame Read-/Mapping-Layer für Blog, Integrationen, Legal Pages, Catalog und Solutions.
-- Die statischen Dateien in `apps/mardu-de/data/` dienen als Seed-Quelle, aber nicht als primäre Runtime-Quelle.
+- Content-Seeds liegen ausschließlich unter `apps/platform/data`; `apps/mardu-de` enthält keine Payload-Fallbackdaten.
 - Die öffentlichen Collection-Endpunkte für Catalog und Solutions sind dokumentiert.
+- Netzwerk-, HTTP- und DTO-Fehler werden als `ContentApiError` erhalten; nur ein erfolgreiches leeres `docs`-Array gilt als leerer Inhalt.
 
 ## Seed- und Migrationspfade
 
@@ -31,4 +33,4 @@ Diese Matrix dokumentiert den Ist-Zustand nach der Implementierung der Payload-M
 
 - Neue öffentliche Content-Collections dürfen nur eingeführt werden, wenn DTO-Vertrag, Consumer-Vertrag und Plattform-Endpunkte dokumentiert sind.
 - `mardu.de` bleibt Owner von Routing, Metadaten und CTA-Zielen.
-- App-nahe Seed-Dateien sind kein Ersatz für Runtime-Content aus Payload.
+- Seeds sind kein Ersatz für Runtime-Content aus Payload und dürfen nicht von `apps/mardu-de` importiert werden.

@@ -33,7 +33,7 @@ Dieses Dokument beschreibt den öffentlichen Vertrag für den wiederverwendbaren
   - Anfragefluss
   - Seitenkomposition
 - konsumiert renderfähige Payload-Daten über `@mardu/content-core`
-- kann app-nahe Seed-Daten weiterhin als Importquelle halten, aber nicht mehr als primäre Runtime-Quelle
+- enthält keine Katalog-Seeds; Seed-Daten gehören ausschließlich zu `apps/platform/data/catalog`
 
 ## Öffentliche DTOs
 
@@ -73,4 +73,4 @@ Wenn Produktanfragen aus dem Katalog entstehen, muss mindestens folgender Kontex
 - `sourcePage`
 - `technologyIds?`
 
-Dieser Kontext darf im Contact-Flow als `config` oder über Query-Params übergeben werden, bleibt aber Eigentum der App und nicht des UI-Pakets.
+`buildCatalogInquiryHref` transportiert diesen vollständigen Kontext über Query-Parameter. `/contact` validiert die Pflichtfelder, übernimmt den Kontext als `config` in `ContactRequestDto` und verwirft unvollständige Kontexte vollständig. Der Vertrag bleibt Eigentum der App und nicht des UI-Pakets.

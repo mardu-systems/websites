@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ContactPageSection } from '@mardu/sections';
 import ContactForm from '@/components/forms/contact';
 import { getSiteConfig } from '@mardu/site-config';
+import { parseCatalogInquiryContext } from '@/lib/catalog';
 
 const siteConfig = getSiteConfig('mardu-de');
 
@@ -27,7 +28,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ContactPage() {
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const inquiryContext = parseCatalogInquiryContext(await searchParams);
+
   return (
     <ContactPageSection
       overline="Kontakt"
@@ -91,7 +98,15 @@ export default function ContactPage() {
           <ContactForm
             submit
             action="/api/contact"
-            extra={{ source: 'contact-form' }}
+            extra={{
+              source: 'contact-form',
+              ...(inquiryContext ? { config: inquiryContext } : {}),
+            }}
+            initialMessage={
+              inquiryContext
+                ? `Ich interessiere mich für ${inquiryContext.productName} und wünsche eine Beratung.`
+                : undefined
+            }
             layout="plain"
           />
         </div>

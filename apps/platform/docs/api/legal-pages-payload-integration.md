@@ -42,6 +42,6 @@ Die Collection nutzt fuer diese Felder einen eigenen SEO-Tab und nicht die gener
 ## Seed und Bootstrap
 
 - Seed-Skript: [`scripts/seed-legal-pages.mjs`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/scripts/seed-legal-pages.mjs)
-- Gemeinsame Markdown-Basis: [`packages/content-core/src/legal/privacy.md`](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/legal/privacy.md) und [`packages/content-core/src/legal/publisher.md`](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/legal/publisher.md)
+- Seed-Markdown: `apps/platform/data/legal/privacy.md` und `apps/platform/data/legal/publisher.md`
 
-Wenn noch keine Payload-Datensaetze existieren, nutzen die Shared-Fetcher diese gebuendelte Markdown-Basis als Bootstrap-Fallback.
+Die Markdown-Dateien werden ausschließlich beim expliziten Seeding gelesen. Zur Laufzeit gibt es keinen gebündelten Fallback: Ein fehlendes veröffentlichtes Dokument ergibt `null`/404, ein API- oder Vertragsfehler bleibt sichtbar.

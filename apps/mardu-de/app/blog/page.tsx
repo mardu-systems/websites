@@ -4,6 +4,8 @@ import { getBlogCategories, getBlogPosts, getFeaturedPost } from '@/lib/blog';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Blog',
   description: 'Fachbeiträge rund um Zugangssysteme, Engineering und AI-Workflows.',

@@ -1,4 +1,4 @@
-import type { IntegrationListItemDto, IntegrationStatus } from '@mardu/content-core';
+import type { IntegrationListItemDto } from '@mardu/content-core';
 import { isIntegrationsEnabled } from '@mardu/site-config/feature-flags.server';
 import { LockKeyhole } from 'lucide-react';
 import type { Metadata } from 'next';
@@ -8,9 +8,10 @@ import {
   IntegrationsDirectory,
   type IntegrationsDirectoryItem,
 } from '@/components/integrations/integrations-directory';
-import { integrationSeedItems } from '@/data/integration-seed-items';
 import { MARDU_FAVICON_PATH } from '@/lib/brand-assets';
 import { getIntegrations } from '@/lib/integrations';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Integrationen',
@@ -34,58 +35,14 @@ export const metadata: Metadata = {
   },
 };
 
-const CURATED_INTEGRATIONS: ReadonlyArray<
-  Omit<IntegrationsDirectoryItem, 'shortDescription'> & { shortDescription: string }
-> = [
-  {
-    title: 'LDAP',
-    slug: 'ldap',
-    shortDescription: 'IT- und Verzeichnisdienste verbinden und Identitäten zentral verwalten.',
-    status: 'available',
-    logoSrc: '/integrations/logos/ldap.png',
-    href: '/contact?integration=ldap',
-  },
-  {
-    title: 'OIDC',
-    slug: 'oidc',
-    shortDescription: 'Moderne Authentifizierung und Autorisierung mit OpenID Connect.',
-    status: 'available',
-    logoSrc: '/integrations/logos/openid.svg',
-    href: '/contact?integration=oidc',
-  },
-  {
-    title: 'Microsoft Entra ID',
-    slug: 'microsoft-entra-id',
-    shortDescription: 'SSO und Provisionierung über Microsoft Entra ID (Azure AD).',
-    status: 'available',
-    logoSrc: '/integrations/logos/microsoft.svg',
-    href: '/contact?integration=microsoft-entra-id',
-  },
-  {
-    title: 'MQTT',
-    slug: 'mqtt',
-    shortDescription: 'Geräte und Sensoren per MQTT anbinden und steuern.',
-    status: 'beta',
-    logoSrc: '/integrations/logos/mqtt.svg',
-    href: '/contact?integration=mqtt',
-  },
-  {
-    title: 'easyVerein',
-    slug: 'easyverein',
-    shortDescription: 'Mitglieder und Berechtigungen mit easyVerein abgleichen.',
-    status: 'available',
-    logoSrc: '/integrations/logos/easyverein.ico',
-    href: '/contact?integration=easyverein',
-  },
-  {
-    title: 'Stripe',
-    slug: 'stripe',
-    shortDescription: 'Zahlungen, Abos und Abwicklung mit Stripe integrieren.',
-    status: 'available',
-    logoSrc: '/integrations/logos/stripe.svg',
-    href: '/contact?integration=stripe',
-  },
-];
+const CURATED_INTEGRATIONS = [
+  { slug: 'ldap', logoSrc: '/integrations/logos/ldap.png' },
+  { slug: 'oidc', logoSrc: '/integrations/logos/openid.svg' },
+  { slug: 'microsoft-entra-id', logoSrc: '/integrations/logos/microsoft.svg' },
+  { slug: 'mqtt', logoSrc: '/integrations/logos/mqtt.svg' },
+  { slug: 'easyverein', logoSrc: '/integrations/logos/easyverein.ico' },
+  { slug: 'stripe', logoSrc: '/integrations/logos/stripe.svg' },
+] as const;
 
 const SYSTEM_GROUPS = [
   { index: '02', title: 'Identität & Zugriff', count: 3 },
@@ -105,17 +62,13 @@ const toDirectoryItem = (item: IntegrationListItemDto): IntegrationsDirectoryIte
 
 const buildDirectoryItems = (items: IntegrationListItemDto[]): IntegrationsDirectoryItem[] => {
   const itemsBySlug = new Map(items.map((item) => [item.slug, item]));
-  const curatedSlugs = new Set(CURATED_INTEGRATIONS.map((item) => item.slug));
+  const curatedSlugs = new Set<string>(CURATED_INTEGRATIONS.map((item) => item.slug));
 
-  const curated = CURATED_INTEGRATIONS.map((fallback) => {
-    const item = itemsBySlug.get(fallback.slug);
-
+  const curated = CURATED_INTEGRATIONS.flatMap((presentation) => {
+    const item = itemsBySlug.get(presentation.slug);
     return item
-      ? {
-          ...toDirectoryItem(item),
-          logoSrc: fallback.logoSrc ?? item.logoUrl,
-        }
-      : fallback;
+      ? [{ ...toDirectoryItem(item), logoSrc: presentation.logoSrc ?? item.logoUrl }]
+      : [];
   });
 
   const remaining: IntegrationsDirectoryItem[] = [];
@@ -126,25 +79,7 @@ const buildDirectoryItems = (items: IntegrationListItemDto[]): IntegrationsDirec
     }
   }
 
-  if (remaining.length > 0) {
-    return [...curated, ...remaining];
-  }
-
-  const seedRemaining: IntegrationsDirectoryItem[] = [];
-
-  for (const item of integrationSeedItems) {
-    if (!curatedSlugs.has(item.slug)) {
-      seedRemaining.push({
-        title: item.title,
-        slug: item.slug,
-        shortDescription: item.shortDescription,
-        status: item.status as IntegrationStatus,
-        href: `/contact?integration=${encodeURIComponent(item.slug)}`,
-      });
-    }
-  }
-
-  return [...curated, ...seedRemaining];
+  return [...curated, ...remaining];
 };
 
 export default async function IntegrationsPage() {
@@ -156,7 +91,7 @@ export default async function IntegrationsPage() {
   const directoryItems = buildDirectoryItems(result.items);
 
   return (
-    <main className="min-h-screen bg-background pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))] text-foreground">
+    <main className="min-h-screen bg-background text-foreground">
       <section className="section-hairline">
         <div className="mardu-container grid gap-6 py-7 md:py-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-8 xl:px-24">
           <div className="max-w-3xl">

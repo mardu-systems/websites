@@ -898,7 +898,7 @@ async function fetchPublishedBlogDocs(origin: string, site: VisibleSite): Promis
   });
   const result = await fetchJson<PayloadRestCollectionResult<PayloadBlogDoc>>(url);
 
-  return (result?.docs ?? []).filter((doc) => isVisibleOnSite(doc, site));
+  return result.docs.filter((doc) => isVisibleOnSite(doc, site));
 }
 
 export async function getPlatformBlogCategories(origin: string): Promise<BlogCategoryDto[]> {
@@ -1188,7 +1188,7 @@ async function fetchPublishedRoadmapDocs(origin: string, site: VisibleSite): Pro
   });
   const result = await fetchJson<PayloadRestCollectionResult<PayloadRoadmapDoc>>(url);
 
-  return (result?.docs ?? []).filter((doc) => isVisibleOnSite(doc, site));
+  return result.docs.filter((doc) => isVisibleOnSite(doc, site));
 }
 
 export async function getPlatformRoadmapItems(
@@ -1272,7 +1272,7 @@ async function fetchPublishedIntegrationDocs(
   });
   const result = await fetchJson<PayloadRestCollectionResult<PayloadIntegrationDoc>>(url);
 
-  return (result?.docs ?? []).filter((doc) => isVisibleOnSite(doc, site));
+  return result.docs.filter((doc) => isVisibleOnSite(doc, site));
 }
 
 async function getPublishedIntegrationList(
@@ -1697,7 +1697,7 @@ async function fetchPublishedCatalogCategoryDocs(
   });
   const result = await fetchJson<PayloadRestCollectionResult<PayloadCatalogCategoryDoc>>(url);
 
-  return (result?.docs ?? []).filter((doc) => isVisibleOnSite(doc, site));
+  return result.docs.filter((doc) => isVisibleOnSite(doc, site));
 }
 
 async function fetchPublishedCatalogTechnologyDocs(
@@ -1713,7 +1713,7 @@ async function fetchPublishedCatalogTechnologyDocs(
   });
   const result = await fetchJson<PayloadRestCollectionResult<PayloadCatalogTechnologyDoc>>(url);
 
-  return (result?.docs ?? []).filter((doc) => isVisibleOnSite(doc, site));
+  return result.docs.filter((doc) => isVisibleOnSite(doc, site));
 }
 
 async function fetchPublishedCatalogCarrierDocs(
@@ -1729,7 +1729,7 @@ async function fetchPublishedCatalogCarrierDocs(
   });
   const result = await fetchJson<PayloadRestCollectionResult<PayloadCatalogCarrierDoc>>(url);
 
-  return (result?.docs ?? []).filter((doc) => isVisibleOnSite(doc, site));
+  return result.docs.filter((doc) => isVisibleOnSite(doc, site));
 }
 
 async function fetchPublishedCatalogProductDocs(
@@ -1745,7 +1745,7 @@ async function fetchPublishedCatalogProductDocs(
   });
   const result = await fetchJson<PayloadRestCollectionResult<PayloadCatalogProductDoc>>(url);
 
-  return (result?.docs ?? []).filter((doc) => isVisibleOnSite(doc, site));
+  return result.docs.filter((doc) => isVisibleOnSite(doc, site));
 }
 
 async function fetchPublishedSolutionDocs(
@@ -1761,7 +1761,7 @@ async function fetchPublishedSolutionDocs(
   });
   const result = await fetchJson<PayloadRestCollectionResult<PayloadSolutionDoc>>(url);
 
-  return (result?.docs ?? []).filter((doc) => isVisibleOnSite(doc, site));
+  return result.docs.filter((doc) => isVisibleOnSite(doc, site));
 }
 
 export async function getPlatformCatalogCategories(
@@ -1892,15 +1892,6 @@ export async function getPlatformCatalogProductBySlug(
     ...detail,
     relatedProducts,
   };
-}
-
-export async function getPlatformCatalogProductSlugs(
-  origin: string,
-  site: VisibleSite,
-): Promise<string[]> {
-  return (await fetchPublishedCatalogProductDocs(origin, site))
-    .map((doc) => doc.slug ?? '')
-    .filter(Boolean);
 }
 
 function mapSolutionListItem(doc: PayloadSolutionDoc, origin: string): SolutionListItemDto | null {
@@ -2041,15 +2032,6 @@ export async function getPlatformSolutionBySlug(
     (item) => mapSolutionDetail(item, origin),
     '/api/solutions',
   )[0];
-}
-
-export async function getPlatformSolutionSlugs(
-  origin: string,
-  site: VisibleSite,
-): Promise<string[]> {
-  return (await fetchPublishedSolutionDocs(origin, site))
-    .map((doc) => doc.slug ?? '')
-    .filter(Boolean);
 }
 
 export async function getPlatformContentSitemapEntries(

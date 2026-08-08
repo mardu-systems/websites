@@ -47,14 +47,15 @@ Bereitstellung über:
 - Upload-Felder können über Payload `media` gepflegt werden.
 - Alternativ können relative oder absolute Asset-URLs über `imageUrl` / `heroImageUrl` gepflegt werden.
 - `@mardu/content-core` bevorzugt Media-Uploads und fällt sonst auf URL-Felder zurück.
-- `relatedProducts` ist optional. Fehlt die Relation, darf der Consumer kontextbasierte Fallback-Empfehlungen ableiten.
+- `relatedProducts` ist optional. Fehlt die Relation, leitet der Mapper Empfehlungen deterministisch aus Kategorie und Technologien ab; es werden keine app-lokalen Produktdaten verwendet.
+- Ungültige Collection-Envelopes oder nicht abbildbare veröffentlichte Dokumente erzeugen `ContentApiError` statt still herausgefiltert zu werden.
 
 ## Seed- und Importpfad
 
 Statische Ausgangsdaten:
 
-- [apps/mardu-de/data/catalog/categories.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/data/catalog/categories.ts)
-- [apps/mardu-de/data/catalog/products.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/data/catalog/products.ts)
+- `apps/platform/data/catalog/categories.ts`
+- `apps/platform/data/catalog/products.ts`
 
 Seed-Skript:
 
@@ -66,3 +67,7 @@ Vertrag des Seed-Skripts:
 - publiziert Datensätze direkt mit `_status=published`
 - setzt `sites=['mardu-de']`
 - verknüpft Kategorien, Technologien, Carrier, Varianten und optionale Related Products deterministisch
+
+## Product-Inquiry
+
+Die App transportiert `productId`, `productSlug`, `productName`, `category`, `sourcePage` sowie optionale `variantId`, `priceFrom` und `technologyIds` zur Kontaktseite. Nur vollständige Pflichtfelder werden als `CatalogInquiryContextDto` unter `ContactRequestDto.config` weitergesendet.

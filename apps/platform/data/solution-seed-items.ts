@@ -1,4 +1,4 @@
-import type { SolutionDetailDto, SolutionListItemDto } from '@mardu/content-core';
+import type { SolutionDetailDto } from '@mardu/content-core';
 
 export const solutions: SolutionDetailDto[] = [
   {
@@ -392,15 +392,3 @@ So wird der Alltag ruhiger und belastbarer.`,
     ctaHref: '/contact?source=contact-form',
   },
 ];
-
-export function getSolutionListItems(): SolutionListItemDto[] {
-  return solutions;
-}
-
-export function getSolutionBySlug(slug: string): SolutionDetailDto | undefined {
-  return solutions.find((solution) => solution.slug === slug);
-}
-
-export function getSolutionSlugs(): string[] {
-  return solutions.map((solution) => solution.slug);
-}

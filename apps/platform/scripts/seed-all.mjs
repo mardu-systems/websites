@@ -12,7 +12,6 @@ const scripts = [
   'seed-roadmap-items.mjs',
   'seed-solutions.mjs',
   'seed-catalog.mjs',
-  'migrate-legacy-data.mjs',
 ];
 
 async function runScriptsSequentially() {

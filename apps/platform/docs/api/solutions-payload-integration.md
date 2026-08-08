@@ -35,14 +35,15 @@ Bereitstellung über:
 ## Mapping-Regeln
 
 - Bildquellen können entweder über Payload `media` oder über `imageUrl` / `heroImageUrl` gepflegt werden.
-- Content-Blocks unterstützen dieselbe Fallback-Strategie.
+- Content-Blocks unterstützen dieselbe Priorität zwischen Payload-Media und dokumentiertem URL-Feld.
 - `themeTone` verwendet die DTO-Werte `forest | sand | mist | clay | ink`.
+- Ungültige Collection-Envelopes oder nicht abbildbare veröffentlichte Dokumente erzeugen `ContentApiError`.
 
 ## Seed- und Importpfad
 
 Statische Ausgangsdaten:
 
-- [apps/mardu-de/data/solutions.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/data/solutions.ts)
+- `apps/platform/data/solution-seed-items.ts`
 
 Seed-Skript:
 
@@ -53,4 +54,4 @@ Vertrag des Seed-Skripts:
 - Upsert über `slug`
 - publiziert Datensätze direkt mit `_status=published`
 - setzt `sites=['mardu-de']`
-- überführt Hero-, Problem-, Content-Block- und CTA-Daten verlustfrei aus der statischen Seed-Quelle
+- überführt Hero-, Problem-, Content-Block- und CTA-Daten verlustfrei aus der plattformeigenen Seed-Quelle

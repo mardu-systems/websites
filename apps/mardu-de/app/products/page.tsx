@@ -15,6 +15,8 @@ import {
   getFeaturedCatalogProducts,
 } from '@/lib/catalog';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Produkte',
   description:
@@ -101,7 +103,7 @@ export default async function ProductsPage() {
 
       <CTASection
         title="Noch nicht sicher, welche Kombination passt?"
-        description="Dann starten Sie nicht mit einer Einzelposition. Gemeinsam klären wir den Zugangspunkt, die vorhandene Infrastruktur und die passende Produktkombination."
+        description="Dann starte nicht mit einer Einzelposition. Gemeinsam klären wir den Zugangspunkt, die vorhandene Infrastruktur und die passende Produktkombination."
         primaryButtonText="Projekt besprechen"
         primaryButtonHref="/contact"
         secondaryButtonText="Integrationen ansehen"

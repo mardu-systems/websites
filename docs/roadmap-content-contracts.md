@@ -64,4 +64,5 @@ Redaktionelle Regeln:
 - Es werden nur veröffentlichte (`_status = published`) und für die angefragte Site sichtbare Dokumente verwendet.
 - Gruppierung erfolgt über `phaseLabel + timeLabel`.
 - Sortierung erfolgt zuerst über `sortOrder`, danach stabil über `title`.
-- Die öffentliche `mardu.de`-Roadmap hat in v1 keine Detailseiten, Filter oder sichtbare Status-UI.
+- Die öffentliche Roadmap besitzt Suche und sichtbare Statusfilter.
+- Ein leeres veröffentlichtes Ergebnis wird als eigener Leerzustand angezeigt; lokale Fallback-Einträge existieren nicht.

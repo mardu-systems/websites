@@ -12,7 +12,7 @@ import { notFound } from 'next/navigation';
 
 type Params = Promise<{ slug: string }>;
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   if (!(await isIntegrationsEnabled('mardu-de'))) {

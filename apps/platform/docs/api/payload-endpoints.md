@@ -35,6 +35,13 @@ DTO-Vertrag fuer Blog-Consumer:
 Shared DTO- und Client-Logik:
 [packages/content-core/src/index.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/index.ts)
 
+Runtime-Fehlervertrag:
+
+- `ContentApiError.code = NETWORK`: Plattform nicht erreichbar oder Timeout nach 3 Sekunden
+- `ContentApiError.code = HTTP`: nicht erfolgreiche HTTP-Antwort, Status in `error.status`
+- `ContentApiError.code = INVALID_PAYLOAD`: ungültiges JSON, fehlendes `docs`-Array oder nicht abbildbares öffentliches DTO
+- Nur ein erfolgreiches Payload-Envelope mit leerem `docs`-Array bedeutet „keine Inhalte“.
+
 Erweiterte Blog-Details:
 [docs/api/blog-payload-integration.md](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/docs/api/blog-payload-integration.md)
 
@@ -88,7 +95,7 @@ Erweiterte Catalog-Dokumentation:
 DTO-Vertrag fuer Legal-Page-Consumer:
 [packages/content-core/src/index.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/index.ts)
 
-Shared Fetch- und Bootstrap-Logik:
+Shared Fetch- und Mapping-Logik:
 [packages/content-core/src/legal-pages.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/legal-pages.ts)
 
 Erweiterte Legal-Page-Dokumentation:

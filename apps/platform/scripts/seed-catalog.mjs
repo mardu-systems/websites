@@ -3,8 +3,8 @@ import {
   catalogCarriers,
   catalogCategories,
   catalogTechnologies,
-} from '../../mardu-de/data/catalog/categories.ts';
-import { catalogProducts } from '../../mardu-de/data/catalog/products.ts';
+} from '../data/catalog/categories.ts';
+import { catalogProducts } from '../data/catalog/products.ts';
 import { getPayload } from 'payload';
 
 async function findBySlug(payload, collection, slug) {
