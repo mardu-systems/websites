@@ -71,7 +71,7 @@ export default function RoadmapTimeline({
 
         {items.map((m, idx) => (
           <div
-            key={`${m.title}-${idx}`}
+            key={`${m.title}-${m.time}`}
             className="relative flex gap-6 md:gap-8"
           >
             {/* timeline column */}

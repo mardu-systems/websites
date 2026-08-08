@@ -45,6 +45,7 @@ export function IntegrationSection() {
               src="/landing/mardu-modern-cnc.webp"
               alt="Mardu-Terminal an einer modernen CNC-Maschine bei der Identifikation mit einer Zugangskarte"
               fill
+              loading="eager"
               sizes="(max-width: 1023px) 100vw, 58vw"
               className="object-cover object-center"
             />

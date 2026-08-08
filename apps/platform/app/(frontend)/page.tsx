@@ -1,6 +1,13 @@
 import { Button } from '@mardu/ui/components/button';
 import { ArrowRight, Globe, LayoutDashboard, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Mardu Platform',
+  description: 'Interne Admin- und Betriebsoberfläche der zentralen Mardu Plattform.',
+  robots: { index: false, follow: false },
+};
 
 const adminActions = [
   {
@@ -25,7 +32,7 @@ const adminActions = [
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(28,97,255,0.08),transparent_35%),linear-gradient(180deg,#f7f8fb_0%,#ffffff_100%)] pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))]">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(28,97,255,0.08),transparent_35%),linear-gradient(180deg,#f7f8fb_0%,#ffffff_100%)]">
       <section className="mardu-container py-14 md:py-20">
         <div className="max-w-4xl">
           <p className="text-xs uppercase tracking-[0.24em] text-foreground/50">Mardu Platform</p>

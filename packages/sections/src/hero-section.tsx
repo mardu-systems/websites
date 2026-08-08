@@ -44,9 +44,7 @@ export type HeroCardMedia = HeroImageMedia | HeroVideoMedia | HeroEmbedMedia;
 export interface HeroMediaCard {
   href: string;
   ariaLabel: string;
-  media?: HeroCardMedia;
-  imageSrc?: string;
-  imageAlt?: string;
+  media: HeroCardMedia;
   badge?: ReactNode;
   description?: ReactNode;
   scrollTargetId?: string;
@@ -101,20 +99,6 @@ function scrollToSection(event: MouseEvent<HTMLAnchorElement>, targetId?: string
     const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     section.scrollIntoView({behavior: prefersReduced ? 'auto' : 'smooth', block: 'start'});
     window.history.replaceState(null, '', `#${targetId}`);
-}
-
-function resolveHeroCardMedia(
-  card: HeroMediaCard,
-): HeroCardMedia {
-  if (card.media) {
-    return card.media;
-  }
-
-  return {
-    type: 'image',
-    src: card.imageSrc || '',
-    alt: card.imageAlt || card.ariaLabel,
-  };
 }
 
 function renderLandingMedia(media: HeroCardMedia, card: HeroMediaCard, defaultSizes: string) {
@@ -176,7 +160,6 @@ function LandingMediaCard({
   card: HeroMediaCard;
   defaultSizes: string;
 }) {
-  const media = resolveHeroCardMedia(card);
   const badgePosition = card.badgePosition ?? 'top-left';
   const descriptionPosition = card.descriptionPosition ?? 'bottom-left';
   const descriptionNeedsOffset =
@@ -192,7 +175,7 @@ function LandingMediaCard({
       )}
       aria-label={card.ariaLabel}
     >
-      {renderLandingMedia(media, card, defaultSizes)}
+      {renderLandingMedia(card.media, card, defaultSizes)}
       <div
         className={cn(
           'absolute inset-0 bg-linear-to-t from-black/44 via-black/10 to-transparent',

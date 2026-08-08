@@ -56,14 +56,14 @@ const DEFAULT_DIALOG = {
   requestRole: "newsletter",
   dialogTitle: "Anmelden",
   dialogDescription:
-    "Unser Newsletter informiert Sie regelmäßig über Produktneuheiten und Sonderaktionen.",
+    "Unser Newsletter informiert dich regelmäßig über Produktneuheiten und Sonderaktionen.",
   submitLabel: "Anmelden",
   submitPendingLabel: "Anmelden",
   successMessage:
-    "Fast geschafft: Bitte bestätigen Sie die Anmeldung per E-Mail.",
+    "Fast geschafft: Bitte bestätige die Anmeldung per E-Mail.",
   errorMessage: "Newsletter-Anmeldung fehlgeschlagen",
   consentLabel:
-    "Ihre Daten werden nur für den Newsletter genutzt. Mit dem Absenden bestätigen Sie die Datenverarbeitung und unsere Datenschutzerklärung.",
+    "Deine Daten werden nur für den Newsletter genutzt. Mit dem Absenden bestätigst du die Datenverarbeitung und unsere Datenschutzerklärung.",
 } satisfies Omit<Required<CTASectionNewsletterDialogProps>, "getRequestToken">;
 
 export default function CTASection({
@@ -122,17 +122,17 @@ export default function CTASection({
     const nextErrors: typeof formErrors = {};
 
     if (!firstName)
-      nextErrors.firstName = "Bitte geben Sie Ihren Vornamen ein.";
-    if (!lastName) nextErrors.lastName = "Bitte geben Sie Ihren Nachnamen ein.";
+      nextErrors.firstName = "Bitte gib deinen Vornamen ein.";
+    if (!lastName) nextErrors.lastName = "Bitte gib deinen Nachnamen ein.";
 
     if (!email) {
-      nextErrors.email = "Bitte geben Sie eine E-Mail-Adresse ein.";
+      nextErrors.email = "Bitte gib eine E-Mail-Adresse ein.";
     } else if (emailInputRef.current && !emailInputRef.current.validity.valid) {
-      nextErrors.email = "Bitte geben Sie eine gültige E-Mail-Adresse ein.";
+      nextErrors.email = "Bitte gib eine gültige E-Mail-Adresse ein.";
     }
 
     if (!consentChecked) {
-      nextErrors.consent = "Bitte bestätigen Sie Ihre Einwilligung.";
+      nextErrors.consent = "Bitte bestätige deine Einwilligung.";
     }
 
     if (Object.keys(nextErrors).length > 0) {
@@ -166,11 +166,10 @@ export default function CTASection({
         }),
       });
 
-      const payload = (await response.json().catch(() => null)) as {
-        error?: string;
-      } | null;
-
       if (!response.ok) {
+        const payload = (await response.json().catch(() => null)) as {
+          error?: string;
+        } | null;
         throw new Error(payload?.error || dialogConfig.errorMessage);
       }
 

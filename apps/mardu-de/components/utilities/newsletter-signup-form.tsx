@@ -48,13 +48,13 @@ export default function NewsletterSignupForm({
     };
 
     if (!payload.email) {
-      setError('Bitte geben Sie eine E-Mail-Adresse ein.');
+      setError('Bitte gib eine E-Mail-Adresse ein.');
       setSuccess(null);
       return;
     }
 
     if (!consentChecked) {
-      setError('Bitte bestätigen Sie Ihre Einwilligung.');
+      setError('Bitte bestätige deine Einwilligung.');
       setSuccess(null);
       return;
     }
@@ -81,7 +81,7 @@ export default function NewsletterSignupForm({
         throw new Error(body?.error ?? 'Newsletter-Anmeldung fehlgeschlagen');
       }
 
-      setSuccess('Fast geschafft: Bitte bestätigen Sie Ihre Anmeldung über den Link in der E-Mail.');
+      setSuccess('Fast geschafft: Bitte bestätige deine Anmeldung über den Link in der E-Mail.');
       form.reset();
       setConsentChecked(false);
       onSuccess?.();
@@ -104,7 +104,7 @@ export default function NewsletterSignupForm({
             id={`${idPrefix}-firstName`}
             name="firstName"
             autoComplete="given-name"
-            placeholder="Ihr Vorname"
+            placeholder="Dein Vorname"
             className={cn(editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none')}
           />
         </div>
@@ -121,7 +121,7 @@ export default function NewsletterSignupForm({
             id={`${idPrefix}-lastName`}
             name="lastName"
             autoComplete="family-name"
-            placeholder="Ihr Nachname"
+            placeholder="Dein Nachname"
             className={cn(editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none')}
           />
         </div>
@@ -134,7 +134,7 @@ export default function NewsletterSignupForm({
           id={`${idPrefix}-company`}
           name="company"
           autoComplete="organization"
-          placeholder="Ihre Firma"
+          placeholder="Deine Firma"
           className={cn(editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none')}
         />
       </div>
@@ -171,8 +171,8 @@ export default function NewsletterSignupForm({
             }}
             className="mt-1"
           />
-          Ihre hier eingegebenen Daten werden ausschließlich für den Newsletter verwendet. Mit dem
-          Absenden bestätigen Sie die Datenverarbeitung und unsere Datenschutzerklärung.
+          Deine hier eingegebenen Daten werden ausschließlich für den Newsletter verwendet. Mit dem
+          Absenden bestätigst du die Datenverarbeitung und unsere Datenschutzerklärung.
         </Label>
       </div>
 

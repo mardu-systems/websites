@@ -52,7 +52,7 @@ export interface WhitepaperSectionProps {
 
 export default function WhitepaperSection({
   title = 'Unser exklusives Whitepaper',
-  description = 'Erhalten Sie tiefe Einblicke und wertvolle Strategien in unserem kostenlosen Whitepaper. Melden Sie sich zum Newsletter an, um den Download-Link direkt in Ihr Postfach zu erhalten.',
+  description = 'Erhalte tiefe Einblicke und wertvolle Strategien in unserem kostenlosen Whitepaper. Melde dich zum Newsletter an, um den Download-Link direkt in dein Postfach zu erhalten.',
   benefits = [],
   coverImageSrc,
   className,
@@ -62,7 +62,7 @@ export default function WhitepaperSection({
   submitPendingLabel = 'Wird verarbeitet...',
   consentLabel = 'Ich stimme zu, dass ich den Newsletter erhalten möchte. Ich kann mich jederzeit wieder abmelden. Das Whitepaper wird mir nach Bestätigung zugesendet.',
   successTitle = 'Fast geschafft!',
-  successDescription = 'Vielen Dank für Ihr Interesse. Wir haben Ihnen eine E-Mail mit dem Download-Link gesendet.\n\nBitte prüfen Sie Ihr Postfach (und den Spam-Ordner). Der Link ist aus Sicherheitsgründen nur begrenzt gültig.',
+  successDescription = 'Vielen Dank für dein Interesse. Wir haben dir eine E-Mail mit dem Download-Link gesendet.\n\nBitte prüfe dein Postfach (und den Spam-Ordner). Der Link ist aus Sicherheitsgründen nur begrenzt gültig.',
   onSubmitRequest,
   variant = 'default',
 }: WhitepaperSectionProps) {
@@ -102,7 +102,7 @@ export default function WhitepaperSection({
       setIsSubmitted(true);
     } catch (error) {
       console.error(error);
-      setFormError('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
+      setFormError('Ein Fehler ist aufgetreten. Bitte versuche es später erneut.');
     } finally {
       setIsLoading(false);
     }
@@ -118,7 +118,7 @@ export default function WhitepaperSection({
             id="wp-vorname"
             name="firstName"
             autoComplete="given-name"
-            placeholder="Ihr Vorname"
+            placeholder="Dein Vorname"
             className={cn(editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none')}
           />
         </div>
@@ -134,7 +134,7 @@ export default function WhitepaperSection({
             id="wp-nachname"
             name="lastName"
             autoComplete="family-name"
-            placeholder="Ihr Nachname"
+            placeholder="Dein Nachname"
             className={cn(editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none')}
           />
         </div>
@@ -238,7 +238,7 @@ export default function WhitepaperSection({
                 Whitepaper per E-Mail anfordern
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Der persönliche Download-Link wird direkt an Ihre E-Mail-Adresse gesendet.
+                Der persönliche Download-Link wird direkt an deine E-Mail-Adresse gesendet.
               </p>
             </div>
             {renderLeadForm(true)}
@@ -331,7 +331,7 @@ export default function WhitepaperSection({
                   <div>
                     <h3 className="font-semibold text-foreground">Download anfordern</h3>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      Tragen Sie Ihre Daten ein. Der Download-Link kommt direkt per E-Mail.
+                      Trage deine Daten ein. Der Download-Link kommt direkt per E-Mail.
                     </p>
                   </div>
                 </div>

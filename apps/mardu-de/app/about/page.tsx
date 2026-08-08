@@ -50,7 +50,7 @@ const team: ReadonlyArray<TeamMember> = [
 
 const title = 'Über uns';
 const description =
-  'Lernen Sie die Geschichte und das Team hinter Mardu kennen - von der ersten Lösung im Makerspace bis zum System für professionelle Werkstätten, Hochschulen und Labore.';
+  'Lerne die Geschichte und das Team hinter Mardu kennen – von der ersten Lösung im Makerspace bis zum System für professionelle Werkstätten, Hochschulen und Labore.';
 
 export const metadata: Metadata = {
   title,
@@ -172,7 +172,7 @@ export default function AboutPage() {
               [GEMEINSAM WEITERDENKEN]
             </p>
             <h2 className="mt-5 max-w-[18ch] text-[clamp(2.2rem,4.5vw,4.25rem)] font-light leading-[0.96] tracking-[-0.04em]">
-              Sie möchten wissen, wie Mardu zu Ihrem Standort passt?
+              Du möchtest wissen, wie Mardu zu deinem Standort passt?
             </h2>
           </div>
           <Button

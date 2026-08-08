@@ -146,8 +146,8 @@ export default function Page() {
                   <div className="mt-auto">
                     <h4 className="font-medium text-foreground mb-3">Vorteile & Anwendungsbereiche</h4>
                     <ul className="list-inside list-disc space-y-2 text-sm text-foreground/70">
-                      {network.benefits.map((benefit, i) => (
-                        <li key={i}>{benefit}</li>
+                      {network.benefits.map((benefit) => (
+                        <li key={benefit}>{benefit}</li>
                       ))}
                     </ul>
                   </div>
@@ -169,7 +169,7 @@ export default function Page() {
 
       <CTASectionWithRecaptcha
         title="Die Plattform macht erst im Projektkontext wirklich Sinn."
-        description="Wenn Sie klären möchten, welche Software-, Hardware- und Produktkombination zu Ihrem Betrieb oder Makerspace passt, gehen wir das gemeinsam durch."
+        description="Wenn du klären möchtest, welche Software-, Hardware- und Produktkombination zu deinem Betrieb oder Makerspace passt, gehen wir das gemeinsam durch."
         primaryButtonText="Konfigurator starten"
         primaryButtonHref="/configurator"
         secondaryButtonText="Kontakt aufnehmen"

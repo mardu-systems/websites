@@ -3,7 +3,7 @@ import { NewsletterStatusPage } from '@mardu/sections';
 
 export const metadata: Metadata = {
   title: 'Newsletter Anmeldung',
-  description: 'Status Ihrer Newsletter-Anmeldung bei Mardu.',
+  description: 'Status deiner Newsletter-Anmeldung bei Mardu.',
   alternates: {
     canonical: '/newsletter/anmeldung',
   },

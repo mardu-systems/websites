@@ -66,7 +66,7 @@ export const platformFeatures: PlatformFeatureDto[] = [
     id: 'integrations',
     title: 'Einfache Integration (SSO & UniNow)',
     description:
-      'Wir integrieren uns in Ihre bestehende Infrastruktur: Single Sign-On (SSO) oder Campus-Apps wie UniNow für Hochschulen stehen auf der Roadmap.',
+      'Wir integrieren uns in deine bestehende Infrastruktur: Single Sign-On (SSO) oder Campus-Apps wie UniNow für Hochschulen stehen auf der Roadmap.',
     proof: 'Reduziert den administrativen Aufwand auf ein Minimum.',
     icon: LockKeyhole,
   },
@@ -74,7 +74,7 @@ export const platformFeatures: PlatformFeatureDto[] = [
     id: 'audit',
     title: 'Volle Übersicht für die Leitungsebene',
     description:
-      'Protokolle, Maschinenzustände und Zugriffsrechte sind auf einen Blick einsehbar. Sie müssen nicht permanent vor Ort sein, um die Kontrolle zu behalten.',
+      'Protokolle, Maschinenzustände und Zugriffsrechte sind auf einen Blick einsehbar. Du musst nicht permanent vor Ort sein, um die Kontrolle zu behalten.',
     proof: 'Vereinfacht Audits und den Nachweis der Aufsichtspflicht.',
     icon: Activity,
   },
@@ -123,7 +123,7 @@ export const platformEditorialPanels: PlatformEditorialPanelsDto = [
     badge: 'Software (WebQ)',
     title: 'Nutzer, Rollen und Qualifikationen zentral steuern.',
     description:
-      'Hier pflegen Sie Berechtigungen und Einweisungen digital. Das System prüft diese in Echtzeit und übersetzt sie in echte Freigaben an den Maschinen.',
+      'Hier pflegst du Berechtigungen und Einweisungen digital. Das System prüft diese in Echtzeit und übersetzt sie in echte Freigaben an den Maschinen.',
     imageSrc: '/verwaltungssoftware/benutzerverwaltung.png',
     imageAlt: 'WebQ Oberfläche mit Benutzerverwaltung und zentralem Überblick',
     theme: 'dark',
@@ -134,7 +134,7 @@ export const platformEditorialPanels: PlatformEditorialPanelsDto = [
     badge: 'Regelwerk',
     title: 'Verantwortung und Nachweise sicher dokumentieren.',
     description:
-      'Zeitfenster, Bedingungen und Protokolle werden transparent erfasst. Das System sorgt dafür, dass Ihre Aufsichtspflicht stets erfüllt und nachweisbar bleibt.',
+      'Zeitfenster, Bedingungen und Protokolle werden transparent erfasst. Das System sorgt dafür, dass deine Aufsichtspflicht stets erfüllt und nachweisbar bleibt.',
     imageSrc: '/verwaltungssoftware/zugriffsprotokolle.png',
     imageAlt: 'WebQ Oberfläche mit Zugriffsprotokollen und nachvollziehbaren Ereignissen',
     theme: 'light',

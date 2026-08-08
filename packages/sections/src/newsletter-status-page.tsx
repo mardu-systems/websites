@@ -25,7 +25,7 @@ const STATUS_COPY: Record<
       overline: "Newsletter",
       title: "Anmeldung erfolgreich bestätigt",
       description:
-        "Vielen Dank. Ihre Newsletter-Anmeldung wurde bestätigt und in unserem System übernommen.",
+        "Vielen Dank. Deine Newsletter-Anmeldung wurde bestätigt und in unserem System übernommen.",
       icon: CheckCircle2,
       iconClassName: "text-emerald-600",
     },
@@ -33,7 +33,7 @@ const STATUS_COPY: Record<
       overline: "Newsletter",
       title: "Bestätigungslink unvollständig",
       description:
-        "Der Link enthält keinen Token. Öffnen Sie den vollständigen Link aus Ihrer E-Mail erneut.",
+        "Der Link enthält keinen Token. Öffne den vollständigen Link aus deiner E-Mail erneut.",
       icon: MailWarning,
       iconClassName: "text-amber-600",
     },
@@ -41,7 +41,7 @@ const STATUS_COPY: Record<
       overline: "Newsletter",
       title: "Bestätigungslink ungültig",
       description:
-        "Der Link ist ungültig oder abgelaufen. Fordern Sie bitte eine neue Newsletter-Anmeldung an.",
+        "Der Link ist ungültig oder abgelaufen. Fordere bitte eine neue Newsletter-Anmeldung an.",
       icon: XCircle,
       iconClassName: "text-destructive",
     },
@@ -49,7 +49,7 @@ const STATUS_COPY: Record<
       overline: "Newsletter",
       title: "Bestätigung derzeit nicht möglich",
       description:
-        "Die Verarbeitung konnte nicht abgeschlossen werden. Bitte versuchen Sie es später erneut.",
+        "Die Verarbeitung konnte nicht abgeschlossen werden. Bitte versuche es später erneut.",
       icon: XCircle,
       iconClassName: "text-destructive",
     },
@@ -59,7 +59,7 @@ const STATUS_COPY: Record<
       overline: "Newsletter",
       title: "Abmeldung erfolgreich",
       description:
-        "Sie wurden vom Newsletter abgemeldet. Sie erhalten künftig keine Newsletter-E-Mails mehr.",
+        "Du wurdest vom Newsletter abgemeldet. Du erhältst künftig keine Newsletter-E-Mails mehr.",
       icon: CheckCircle2,
       iconClassName: "text-emerald-600",
     },
@@ -67,7 +67,7 @@ const STATUS_COPY: Record<
       overline: "Newsletter",
       title: "Abmeldelink unvollständig",
       description:
-        "Der Link enthält keinen Token. Öffnen Sie den vollständigen Link aus Ihrer E-Mail erneut.",
+        "Der Link enthält keinen Token. Öffne den vollständigen Link aus deiner E-Mail erneut.",
       icon: MailWarning,
       iconClassName: "text-amber-600",
     },
@@ -75,7 +75,7 @@ const STATUS_COPY: Record<
       overline: "Newsletter",
       title: "Abmeldelink ungültig",
       description:
-        "Der Link ist ungültig oder abgelaufen. Falls nötig, melden Sie sich erneut über den Newsletter ab.",
+        "Der Link ist ungültig oder abgelaufen. Falls nötig, melde dich erneut über den Newsletter ab.",
       icon: XCircle,
       iconClassName: "text-destructive",
     },
@@ -83,7 +83,7 @@ const STATUS_COPY: Record<
       overline: "Newsletter",
       title: "Abmeldung derzeit nicht möglich",
       description:
-        "Die Verarbeitung konnte nicht abgeschlossen werden. Bitte versuchen Sie es später erneut.",
+        "Die Verarbeitung konnte nicht abgeschlossen werden. Bitte versuche es später erneut.",
       icon: XCircle,
       iconClassName: "text-destructive",
     },

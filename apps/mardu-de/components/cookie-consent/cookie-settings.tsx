@@ -71,7 +71,7 @@ export default function CookieSettings({ onSave }: CookieSettingsProps) {
 
           <p className="text-sm md:text-base leading-relaxed">
             Wir verwenden notwendige, statistische und Marketing-Cookies, um unsere Website zu
-            betreiben, die Nutzung zu analysieren und Ihre Erfahrung zu verbessern. Details in der{' '}
+            betreiben, die Nutzung zu analysieren und deine Erfahrung zu verbessern. Details in der{' '}
             <Link href="/privacy" className="underline underline-offset-2">
               Datenschutzerklärung
             </Link>

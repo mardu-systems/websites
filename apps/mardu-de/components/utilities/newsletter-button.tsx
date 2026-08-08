@@ -41,7 +41,7 @@ export default function NewsletterButton({
         <DialogHeader>
           <DialogTitle>Anmelden</DialogTitle>
           <DialogDescription>
-            Unser kostenloser Newsletter informiert Sie regelmäßig über Produktneuheiten und
+            Unser kostenloser Newsletter informiert dich regelmäßig über Produktneuheiten und
             Sonderaktionen.
           </DialogDescription>
         </DialogHeader>

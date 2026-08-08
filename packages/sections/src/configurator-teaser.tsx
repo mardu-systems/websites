@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { domAnimation, LazyMotion, m, useReducedMotion } from "framer-motion";
 import { ArrowRight, Settings, Sparkles } from "lucide-react";
 import { Button } from "@mardu/ui/components/button";
 import { cn } from "@mardu/ui/lib/utils";
@@ -61,7 +61,7 @@ export default function ConfiguratorTeaser({
     </>
   ),
   title = "Der schnellste Weg zu einer belastbaren Erstplanung",
-  description = "Erfassen Sie Zugänge, Maschinen und Rahmenbedingungen in wenigen Schritten und schaffen Sie eine belastbare Grundlage für ein erstes Angebot.",
+  description = "Erfasse Zugänge, Maschinen und Rahmenbedingungen in wenigen Schritten und schaffe eine belastbare Grundlage für ein erstes Angebot.",
   ctaLabel = "Konfigurator starten",
   ctaHref = "/configurator",
   highlights = DEFAULT_HIGHLIGHTS,
@@ -125,15 +125,16 @@ export default function ConfiguratorTeaser({
               </div>
 
               <div className="relative">
-                <motion.div
-                  className="relative z-10 border border-black/10 bg-background p-4 md:p-5"
-                  animate={shouldReduceMotion ? undefined : { y: [0, -4, 0] }}
-                  transition={
-                    shouldReduceMotion
-                      ? undefined
-                      : { duration: 7, repeat: Infinity, ease: "easeInOut" }
-                  }
-                >
+                <LazyMotion features={domAnimation}>
+                  <m.div
+                    className="relative z-10 border border-black/10 bg-background p-4 md:p-5"
+                    animate={shouldReduceMotion ? undefined : { y: [0, -4, 0] }}
+                    transition={
+                      shouldReduceMotion
+                        ? undefined
+                        : { duration: 7, repeat: Infinity, ease: "easeInOut" }
+                    }
+                  >
                   <div className="border border-black/10 bg-card p-5 md:p-6">
                     {previewEyebrow ? (
                       <p className="text-[11px] uppercase tracking-[0.16em] text-foreground/46">
@@ -190,7 +191,8 @@ export default function ConfiguratorTeaser({
                       </div>
                     ) : null}
                   </div>
-                </motion.div>
+                  </m.div>
+                </LazyMotion>
 
                 <div className="absolute -bottom-5 -left-4 -z-10 h-[92%] w-[92%] rotate-[5deg] border border-black/8 bg-muted/20" />
               </div>

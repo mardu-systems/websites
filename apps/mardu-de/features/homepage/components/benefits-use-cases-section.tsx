@@ -81,7 +81,7 @@ export function BenefitsUseCasesSection() {
             eyebrow="[05] Einsatzbereiche"
             title={
               <>
-                Lösungen für Ihren{' '}
+                Lösungen für deinen{' '}
                 <em className="font-serif italic font-normal tracking-[-0.02em] text-foreground/90">
                   Anwendungsfall.
                 </em>

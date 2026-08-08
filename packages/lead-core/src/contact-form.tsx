@@ -295,7 +295,7 @@ export function ContactForm({
                 <FormControl>
                   <input
                     {...field}
-                    placeholder="Ihr Unternehmen"
+                    placeholder="Dein Unternehmen"
                     autoComplete="organization"
                     className={inputClasses}
                     onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
@@ -352,7 +352,7 @@ export function ContactForm({
                   <Textarea
                     rows={3}
                     {...field}
-                    placeholder="Ihre Nachricht..."
+                    placeholder="Deine Nachricht …"
                     className={textareaClasses}
                     onBlur={(event: React.FocusEvent<HTMLTextAreaElement>) => {
                       const trimmed = event.target.value.trim();
@@ -363,7 +363,7 @@ export function ContactForm({
                   />
                 </FormControl>
                 <FormDescription>
-                  Optional. Beschreiben Sie kurz Ihr Vorhaben oder Ihre Frage.
+                  Optional. Beschreibe kurz dein Vorhaben oder deine Frage.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -396,7 +396,7 @@ export function ContactForm({
                       per E-Mail erhalten.
                     </FormLabel>
                     <FormDescription className="mt-1 text-xs text-muted-foreground">
-                      Ihre Daten werden für den Newsletter genutzt. Anmeldung
+                      Deine Daten werden für den Newsletter genutzt. Anmeldung
                       per Double-Opt-in mit Bestätigungs-E-Mail. Details in der{" "}
                       <Link
                         href="/privacy"
@@ -438,7 +438,7 @@ export function ContactForm({
                       Anfrage verarbeitet werden.
                     </FormLabel>
                     <FormDescription className="mt-1 text-xs text-muted-foreground">
-                      Ihre Daten werden gemäß DSGVO verarbeitet und nicht an
+                      Deine Daten werden gemäß DSGVO verarbeitet und nicht an
                       Dritte weitergegeben.
                     </FormDescription>
                     <FormMessage />
@@ -473,7 +473,7 @@ export function ContactForm({
             <Alert variant="destructive">
               <AlertDescription>
                 {errorMessage ||
-                  "Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."}
+                  "Beim Senden ist ein Fehler aufgetreten. Bitte versuche es erneut."}
               </AlertDescription>
             </Alert>
           ) : null}

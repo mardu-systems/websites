@@ -9,7 +9,7 @@ const brandAssetsPageContent = {
   description:
     'Freigegebene Logos und kompakte Anwendungsregeln für Presse, Partnerkommunikation und Marketingmaterialien.',
   downloadsDescription:
-    'Beide Logo-Varianten liegen als skalierbare SVG-Datei vor. Wählen Sie die Version passend zum Kontrast der vorgesehenen Fläche.',
+    'Beide Logo-Varianten liegen als skalierbare SVG-Datei vor. Wähle die Version passend zum Kontrast der vorgesehenen Fläche.',
   downloads: marduBrandAssetsPageContent.downloads.map((asset) =>
     asset.id === 'logo-light'
       ? {
@@ -26,7 +26,7 @@ const brandAssetsPageContent = {
         },
   ),
   usageDescription: '',
-  contactDescription: `Sie benötigen ein Sonderformat oder möchten eine Anwendung abstimmen? Sie erreichen uns unter ${siteConfig.supportEmail} oder telefonisch unter ${siteConfig.contactPhone}.`,
+  contactDescription: `Du benötigst ein Sonderformat oder möchtest eine Anwendung abstimmen? Du erreichst uns unter ${siteConfig.supportEmail} oder telefonisch unter ${siteConfig.contactPhone}.`,
   contactHref: `mailto:${siteConfig.supportEmail}?subject=Anfrage%20zu%20Brand%20Assets`,
 };
 

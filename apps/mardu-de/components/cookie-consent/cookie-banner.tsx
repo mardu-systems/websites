@@ -136,7 +136,7 @@ export default function CookieConsentBanner() {
             )}
           >
             <p className="mb-3 text-md md:text-sm md:max-w-[350px] md:pb-8 md:px-0 px-[20vw]">
-              Wir verwenden erforderliche, leistungsbezogene und Marketing-Cookies, um Ihre
+              Wir verwenden erforderliche, leistungsbezogene und Marketing-Cookies, um deine
               Erfahrung zu messen, zu analysieren und zu personalisieren. Mehr dazu in unserer{' '}
               <Link href="/privacy" className="underline underline-offset-2 after:content-['_↗']">
                 Datenschutzerklärung

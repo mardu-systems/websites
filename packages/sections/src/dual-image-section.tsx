@@ -29,7 +29,7 @@ export default function DualImageSection({
         <div className="grid grid-cols-1 gap-7 md:grid-cols-2">
           {cards.map((card, index) => (
             <article
-              key={card.title ?? index}
+              key={card.title}
               className="border border-border bg-card p-4 md:p-5"
             >
               <div className="relative mb-5 aspect-16/10 overflow-hidden border border-black/10">

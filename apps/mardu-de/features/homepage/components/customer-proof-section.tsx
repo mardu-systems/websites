@@ -37,7 +37,7 @@ export function CustomerProofSection() {
             return (
               <div
                 key={partner.name}
-                className="relative flex h-24 items-center justify-center px-2 py-2"
+                className="relative flex h-24 items-center justify-center overflow-hidden px-2 py-2"
               >
                 <Image
                   src={partner.logoSrc}
@@ -45,11 +45,11 @@ export function CustomerProofSection() {
                   width={partner.width}
                   height={partner.height}
                   sizes="(min-width: 1280px) 170px, (min-width: 640px) 150px, 42vw"
-                  style={isRotated ? { width: 'auto' } : undefined}
+                  style={isRotated ? { width: 'auto', height: '9rem' } : undefined}
                   className={cn(
                     'object-contain opacity-90',
                     isRotated
-                      ? 'absolute h-36 w-auto max-w-none rotate-90 grayscale invert contrast-75 brightness-125'
+                      ? 'absolute max-w-none rotate-90 grayscale invert contrast-75 brightness-125'
                       : isNativeSquare
                         ? 'size-16 grayscale'
                         : 'h-auto max-h-[4.75rem] w-auto max-w-full brightness-0 invert',

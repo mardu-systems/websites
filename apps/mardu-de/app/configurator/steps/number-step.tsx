@@ -3,6 +3,8 @@
 import * as React from 'react';
 import { Input } from '@mardu/ui/components/input';
 
+const clamp = (input: number) => Math.max(0, Math.min(999, input));
+
 export default function NumberStep({
   value,
   onChange,
@@ -14,8 +16,6 @@ export default function NumberStep({
   note?: string;
   ariaLabel?: string;
 }) {
-  const clamp = (input: number) => Math.max(0, Math.min(999, input));
-
   return (
     <>
       {note && (

@@ -4,7 +4,7 @@ import NewsletterSignupForm from '@/components/utilities/newsletter-signup-form'
 export const metadata: Metadata = {
   title: 'Newsletter abonnieren',
   description:
-    'Abonnieren Sie den Mardu Newsletter und erhalten Sie Updates zu Zutrittssteuerung, Maschinenfreigabe und Produktneuheiten.',
+    'Abonniere den Mardu Newsletter und erhalte Updates zu Zutrittssteuerung, Maschinenfreigabe und Produktneuheiten.',
   alternates: {
     canonical: '/newsletter',
   },
@@ -36,7 +36,7 @@ export default function NewsletterPage() {
                 Newsletter abonnieren
               </h2>
               <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-                Nach dem Absenden erhalten Sie eine E-Mail zur Bestätigung Ihrer Anmeldung.
+                Nach dem Absenden erhältst du eine E-Mail zur Bestätigung deiner Anmeldung.
               </p>
             </div>
 

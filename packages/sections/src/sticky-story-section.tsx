@@ -3,7 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { ArrowDown } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { domAnimation, LazyMotion, m, useReducedMotion } from "framer-motion";
 import { Button } from "@mardu/ui/components/button";
 import { cn } from "@mardu/ui/lib/utils";
 import { SectionIntro } from "./section-intro";
@@ -234,38 +234,40 @@ export default function StickyStorySection({
                   top: "calc(50svh - min(31.25cqw, (100svh - 10rem) / 2))",
                 }}
               >
-                {items.map((item, index) => {
-                  const active = index === activeIndex;
+                <LazyMotion features={domAnimation}>
+                  {items.map((item, index) => {
+                    const active = index === activeIndex;
 
-                  return (
-                    <motion.figure
-                      key={item.id}
-                      initial={false}
-                      animate={{
-                        opacity: active ? 1 : 0,
-                        scale: prefersReducedMotion ? 1 : active ? 1 : 0.985,
-                      }}
-                      transition={{
-                        duration: prefersReducedMotion ? 0 : 0.38,
-                        ease: "easeOut",
-                      }}
-                      aria-hidden={!active}
-                      className={cn(
-                        "absolute inset-0",
-                        !active && "pointer-events-none",
-                      )}
-                    >
-                      <Image
-                        src={item.imageSrc}
-                        alt={active ? item.imageAlt : ""}
-                        fill
-                        sizes="(min-width: 1280px) 58vw, 52vw"
-                        priority={index === 0}
-                        className="object-contain object-center"
-                      />
-                    </motion.figure>
-                  );
-                })}
+                    return (
+                      <m.figure
+                        key={item.id}
+                        initial={false}
+                        animate={{
+                          opacity: active ? 1 : 0,
+                          scale: prefersReducedMotion ? 1 : active ? 1 : 0.985,
+                        }}
+                        transition={{
+                          duration: prefersReducedMotion ? 0 : 0.38,
+                          ease: "easeOut",
+                        }}
+                        aria-hidden={!active}
+                        className={cn(
+                          "absolute inset-0",
+                          !active && "pointer-events-none",
+                        )}
+                      >
+                        <Image
+                          src={item.imageSrc}
+                          alt={active ? item.imageAlt : ""}
+                          fill
+                          sizes="(min-width: 1280px) 58vw, 52vw"
+                          priority={index === 0}
+                          className="object-contain object-center"
+                        />
+                      </m.figure>
+                    );
+                  })}
+                </LazyMotion>
               </div>
             </div>
           </div>

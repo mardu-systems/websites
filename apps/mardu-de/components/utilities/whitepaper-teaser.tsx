@@ -57,21 +57,21 @@ export default function WhitepaperTeaser({ className }: WhitepaperTeaserProps) {
       {};
 
     if (!trimmedFirstName) {
-      nextErrors.firstName = 'Bitte geben Sie Ihren Vornamen ein.';
+      nextErrors.firstName = 'Bitte gib deinen Vornamen ein.';
     }
 
     if (!trimmedLastName) {
-      nextErrors.lastName = 'Bitte geben Sie Ihren Nachnamen ein.';
+      nextErrors.lastName = 'Bitte gib deinen Nachnamen ein.';
     }
 
     if (!trimmedEmail) {
-      nextErrors.email = 'Bitte geben Sie eine E-Mail-Adresse ein.';
+      nextErrors.email = 'Bitte gib eine E-Mail-Adresse ein.';
     } else if (emailInputRef.current && !emailInputRef.current.validity.valid) {
-      nextErrors.email = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+      nextErrors.email = 'Bitte gib eine gültige E-Mail-Adresse ein.';
     }
 
     if (!consent) {
-      nextErrors.consent = 'Bitte stimmen Sie der Kontaktaufnahme zu.';
+      nextErrors.consent = 'Bitte stimme der Kontaktaufnahme zu.';
     }
 
     if (Object.keys(nextErrors).length > 0) {
@@ -157,7 +157,7 @@ export default function WhitepaperTeaser({ className }: WhitepaperTeaserProps) {
                 </h2>
 
                 <p className="text-lg text-primary-foreground/80 leading-relaxed max-w-xl">
-                  Erfahren Sie, wie Sie Zutritt, Maschinenfreigaben und Unterweisungen zuverlässig
+                  Erfahre, wie du Zutritt, Maschinenfreigaben und Unterweisungen zuverlässig
                   organisieren – für Unternehmenswerkstätten, Hochschulen und Makerspaces.
                 </p>
 
@@ -182,7 +182,7 @@ export default function WhitepaperTeaser({ className }: WhitepaperTeaserProps) {
                       <DialogHeader>
                         <DialogTitle>Whitepaper anfordern</DialogTitle>
                         <DialogDescription>
-                          Melden Sie sich an, um das Whitepaper zu erhalten. Wir senden Ihnen einen
+                          Melde dich an, um das Whitepaper zu erhalten. Wir senden dir einen
                           Bestätigungslink per E-Mail.
                         </DialogDescription>
                       </DialogHeader>
@@ -194,8 +194,8 @@ export default function WhitepaperTeaser({ className }: WhitepaperTeaserProps) {
                           </div>
                           <p className="text-lg font-medium">Vielen Dank!</p>
                           <p className="text-muted-foreground">
-                            Wir haben Ihnen eine Bestätigungs-E-Mail gesendet. Bitte klicken Sie auf
-                            den Link darin, um Ihre Anmeldung abzuschließen.
+                            Wir haben dir eine Bestätigungs-E-Mail gesendet. Bitte klicke auf
+                            den Link darin, um deine Anmeldung abzuschließen.
                           </p>
                           <Button
                             type="button"

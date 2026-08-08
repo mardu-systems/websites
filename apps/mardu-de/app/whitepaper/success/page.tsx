@@ -24,7 +24,7 @@ export default async function WhitepaperSuccessPage({
         <div className="space-y-4">
           <h1 className="text-3xl md:text-4xl font-bold text-primary">Vielen Dank!</h1>
           <p className="text-muted-foreground text-lg leading-relaxed max-w-md mx-auto">
-            Ihre E-Mail-Adresse wurde bestätigt. Sie können das Whitepaper nun herunterladen.
+            Deine E-Mail-Adresse wurde bestätigt. Du kannst das Whitepaper nun herunterladen.
           </p>
         </div>
 
@@ -50,8 +50,8 @@ export default async function WhitepaperSuccessPage({
         </div>
 
         <p className="text-sm text-muted-foreground mt-4">
-          Wir haben Ihnen den Download-Link zusätzlich <br className="hidden md:block" />
-          für Ihre Unterlagen per E-Mail zugesendet.
+          Wir haben dir den Download-Link zusätzlich <br className="hidden md:block" />
+          für deine Unterlagen per E-Mail zugesendet.
         </p>
 
         <Button render={<Link href="/" />} variant="ghost" className="mt-2">
