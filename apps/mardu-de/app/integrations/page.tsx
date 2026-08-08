@@ -56,6 +56,7 @@ const toDirectoryItem = (item: IntegrationListItemDto): IntegrationsDirectoryIte
   slug: item.slug,
   shortDescription: item.shortDescription,
   status: item.status,
+  categories: item.categories.map(({ slug, title }) => ({ slug, title })),
   logoSrc: item.logoUrl,
   href: `/integrations/${item.slug}`,
 });
@@ -87,7 +88,7 @@ export default async function IntegrationsPage() {
     notFound();
   }
 
-  const result = await getIntegrations({ limit: 100, sort: 'featured' });
+  const result = await getIntegrations({ limit: 400, sort: 'alphabetical' });
   const directoryItems = buildDirectoryItems(result.items);
 
   return (

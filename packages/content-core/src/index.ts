@@ -1131,7 +1131,10 @@ function normalizeIntegrationQuery(query: IntegrationListQueryDto) {
   const q = query.q?.trim().toLowerCase() || '';
   const category = query.category?.trim().toLowerCase() || '';
   const protocol = query.protocol?.trim().toLowerCase() || '';
-  const limit = Math.max(1, Math.min(50, query.limit ?? DEFAULT_INTEGRATION_LIMIT));
+  const limit = Math.max(
+    1,
+    Math.min(MAX_INTEGRATION_FETCH, query.limit ?? DEFAULT_INTEGRATION_LIMIT),
+  );
   const page = Math.max(1, query.page ?? 1);
   const sort = query.sort ?? 'featured';
 
