@@ -14,7 +14,7 @@ export function HomepageHero() {
   return (
     <section
       id="home"
-      className="relative scroll-mt-24 border-b border-border bg-background pb-14 pt-28 md:pb-20 md:pt-32 xl:flex xl:min-h-[calc(100svh-5rem)] xl:items-center xl:py-28"
+      className="relative scroll-mt-24 border-b border-border bg-background pb-14 pt-12 md:pb-20 md:pt-12 xl:flex xl:min-h-[calc(100svh-5rem)] xl:items-center xl:py-28"
     >
       <div className="mardu-container grid gap-12 xl:grid-cols-[0.82fr_1.18fr] xl:items-end xl:gap-14">
         <div className="max-w-[43rem]">

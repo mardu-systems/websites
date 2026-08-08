@@ -48,7 +48,7 @@ export default async function FotosPage() {
   const items = await getPhotoGalleryItems();
 
   return (
-    <main className="min-h-screen bg-background pb-10 pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))] text-foreground">
+    <main className="min-h-screen bg-background pb-10 text-foreground">
       <section className="mardu-container py-12 md:py-16">
         <div className="max-w-3xl space-y-3">
           <Overline>Medien</Overline>

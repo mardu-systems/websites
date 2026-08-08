@@ -1,6 +1,6 @@
 export default function IntegrationsLoading() {
   return (
-    <main className="pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))] pb-16 md:pb-24">
+    <main className="pb-16 md:pb-24">
       <section className="section-hairline py-10 md:py-14">
         <div className="mardu-container animate-pulse">
           <div className="h-4 w-36 bg-black/8" />

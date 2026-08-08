@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { cn } from '@mardu/ui';
+import { cn } from '@mardu/ui/lib/utils';
 import { ArrowUpRight } from 'lucide-react';
 import { customerProof } from '../homepage-content';
 
@@ -45,6 +45,7 @@ export function CustomerProofSection() {
                   width={partner.width}
                   height={partner.height}
                   sizes="(min-width: 1280px) 170px, (min-width: 640px) 150px, 42vw"
+                  style={isRotated ? { width: 'auto' } : undefined}
                   className={cn(
                     'object-contain opacity-90',
                     isRotated

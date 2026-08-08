@@ -61,7 +61,7 @@ export default async function BlogPage({ searchParams }: { searchParams: SearchP
   ]);
 
   return (
-    <main className="min-h-screen bg-background pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))] pb-16 text-foreground md:pb-24">
+    <main className="min-h-screen bg-background pb-16 text-foreground md:pb-24">
       <BlogHero featuredPost={featuredPost} />
 
       <section className="py-14 md:py-20">

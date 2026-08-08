@@ -59,7 +59,7 @@ function EditorialBrandAssetsPage({
   return (
     <main
       className={cn(
-        "min-h-screen bg-background pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))] text-foreground",
+        "min-h-screen bg-background text-foreground",
         className,
       )}
     >
@@ -225,7 +225,7 @@ export function BrandAssetsPage({
   return (
     <main
       className={cn(
-        "min-h-screen bg-background pb-10 pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))] text-foreground",
+        "min-h-screen bg-background pb-10 text-foreground",
         className,
       )}
     >

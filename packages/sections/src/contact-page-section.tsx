@@ -43,7 +43,7 @@ export default function ContactPageSection({
   return (
     <main
       className={cn(
-        'min-h-screen pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))]',
+        'min-h-screen',
         className,
       )}
     >

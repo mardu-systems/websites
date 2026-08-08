@@ -215,7 +215,7 @@ export default async function BlogDetailPage({ params }: { params: Params }) {
   const nestedToc = buildNestedToc(toc);
 
   return (
-    <main className="min-h-screen bg-background pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))] pb-16 text-foreground md:pb-24">
+    <main className="min-h-screen bg-background pb-16 text-foreground md:pb-24">
       <section className="section-hairline border-b border-black/15 py-10 md:py-16">
         <div className="mardu-container">
           <Link

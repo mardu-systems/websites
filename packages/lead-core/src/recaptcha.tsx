@@ -11,9 +11,6 @@ export function RecaptchaProvider({ children }: RecaptchaProviderProps) {
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   if (!siteKey) {
-    if (process.env.NODE_ENV === 'development') {
-      console.warn('NEXT_PUBLIC_RECAPTCHA_SITE_KEY is missing. Recaptcha will not work.');
-    }
     return <>{children}</>;
   }
 

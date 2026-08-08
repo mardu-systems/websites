@@ -177,7 +177,8 @@ function FooterAiSummaryLinks({
                   alt=""
                   width={16}
                   height={16}
-                  className={cn("size-4 object-contain", imageClassName)}
+                  className={cn("h-4 w-auto object-contain", imageClassName)}
+                  style={{ width: "auto" }}
                 />
               </a>
             </li>

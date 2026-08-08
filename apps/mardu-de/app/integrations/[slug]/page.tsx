@@ -88,7 +88,7 @@ export default async function IntegrationDetailPage({ params }: { params: Params
   const related = await getRelatedIntegrations(integration, 3);
 
   return (
-    <main className="pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))] pb-16 md:pb-24">
+    <main className="pb-16 md:pb-24">
       <section className="section-hairline py-8 md:py-12">
         <div className="mardu-container">
           <div className="mb-5 flex flex-wrap items-center gap-2 text-sm text-foreground/65">

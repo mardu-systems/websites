@@ -94,7 +94,7 @@ export default async function ProductDetailPage({
 
   return (
     <main className="min-h-screen bg-background">
-      <div className="mardu-container pt-24 pb-2 md:pt-28 md:pb-3">
+      <div className="mardu-container pt-8 pb-2 md:pt-10 md:pb-3">
         <CatalogBreadcrumbs
           items={[
             { label: 'Home', href: '/' },

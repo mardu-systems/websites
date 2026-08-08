@@ -18,7 +18,6 @@ export function LegalPage({
   return (
     <main
       className={cn(
-        'pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))]',
         className,
       )}
     >

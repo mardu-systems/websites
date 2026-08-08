@@ -1,6 +1,6 @@
 export default function BlogLoading() {
   return (
-    <main className="min-h-screen bg-background pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))] pb-16 md:pb-24">
+    <main className="min-h-screen bg-background pb-16 md:pb-24">
       <section className="section-hairline border-b border-black/15 py-12 md:py-20">
         <div className="mardu-container grid animate-pulse gap-8 lg:grid-cols-[0.72fr_1.28fr]">
           <div className="space-y-5">

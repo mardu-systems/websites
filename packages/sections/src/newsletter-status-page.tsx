@@ -127,8 +127,8 @@ export function NewsletterStatusPage({
   const Icon = content.icon;
 
   return (
-    <main className="min-h-screen pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))]">
-      <section className="mardu-container flex min-h-[calc(100vh-var(--app-header-height,64px)-env(safe-area-inset-top))] items-center py-8 md:py-10">
+    <main className="min-h-screen">
+      <section className="mardu-container flex min-h-[calc(100vh-4rem)] items-center py-8 md:min-h-[calc(100vh-5rem)] md:py-10">
         <div className="mx-auto max-w-3xl border border-border/70 bg-card p-6 shadow-sm md:p-10">
           <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-muted">
             <Icon className={`h-7 w-7 ${content.iconClassName}`} />

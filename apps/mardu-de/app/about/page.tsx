@@ -83,7 +83,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-background pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))]">
+    <main className="min-h-screen bg-background">
       <section className="border-b border-border py-16 md:py-24">
         <div className="mardu-container grid min-w-0 gap-12 xl:grid-cols-[0.62fr_0.38fr] xl:items-end xl:gap-20">
           <div className="min-w-0">

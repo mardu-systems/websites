@@ -103,7 +103,7 @@ export default function ConfiguratorPageClient() {
         'min-h-screen bg-background',
         'flex items-start justify-center',
         'px-4 sm:px-6 lg:px-10',
-        'pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))] pb-14 md:pb-18',
+        'pb-14 md:pb-18',
       )}
     >
       <Wizard.Scoped>

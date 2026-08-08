@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function NewsletterPage() {
   return (
-    <main className="min-h-screen pt-[calc(var(--app-header-height,64px)+env(safe-area-inset-top))]">
+    <main className="min-h-screen">
       <section className="border-b border-border py-16 md:py-24">
         <div className="mardu-container grid min-w-0 gap-14 lg:grid-cols-[0.42fr_0.58fr] lg:gap-18">
           <header className="min-w-0 lg:sticky lg:top-28 lg:self-start">
