@@ -8,7 +8,6 @@ The package mirrors the `components/ui` baseline from `../mardu.de` and is the c
 
 - Preferred imports use subpaths such as `@mardu/ui/components/button`
 - Shared helpers use `@mardu/ui/lib/*` and `@mardu/ui/hooks/*`
-- [`src/index.ts`](./src/index.ts) exists only as a compatibility barrel and should not be the default import path for app code
 - Full shared `components/ui/*` set is copied from `../mardu.de`
 - Additional shared building blocks exposed by this package:
   - `@mardu/ui/lib/utils` for the canonical `cn(...)` Tailwind merge helper
@@ -77,6 +76,8 @@ Interne Struktur:
 
 - Components are site-neutral UI building blocks.
 - Business logic, API calls, DTO validation, and site-specific routing stay outside this package.
+- The package has no root compatibility barrel; consumers must use explicit component, hook or utility subpaths.
+- `Button` automatically switches `nativeButton` off when Base UI renders a non-button element such as a Next.js link.
 - Styling relies on the consuming app importing `@mardu/styles/base.css` and its site theme.
 
 ## Defaults and Side Effects

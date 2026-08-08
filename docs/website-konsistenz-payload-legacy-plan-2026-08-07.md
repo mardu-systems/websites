@@ -2,6 +2,8 @@
 
 Stand: 7. August 2026
 
+Umsetzungsstatus: am 8. August 2026 umgesetzt; Abschlussmatrix und Prüfnachweise stehen in `docs/website-konsistenz-payload-legacy-abschluss-2026-08-08.md`.
+
 ## Zielbild
 
 Die öffentliche Website `apps/mardu-de` soll als ein konsistentes Produkt wirken und ausschließlich dokumentierte, validierte Verträge der zentralen Plattform `apps/platform` konsumieren. Für jeden Inhalt und jeden Lead-Flow gibt es genau einen Runtime-Owner. Lokale Seed-Daten, alte Tokens, Alias-Typen und Kompatibilitäts-Props dürfen nach Abschluss nicht mehr still als zweite Produktionsquelle wirken.

@@ -103,9 +103,7 @@ Shared content sections for multiple Mardu frontends.
 - `HeroMediaCard`:
   - `href: string`
   - `ariaLabel: string`
-  - `media?: HeroCardMedia`
-  - `imageSrc?: string`
-  - `imageAlt?: string`
+  - `media: HeroCardMedia`
   - `badge?: ReactNode`
   - `description?: ReactNode`
   - `scrollTargetId?: string`
@@ -122,8 +120,7 @@ Shared content sections for multiple Mardu frontends.
   - `{ type: 'video'; src: string; poster?: string; muted?: boolean; autoPlay?: boolean; loop?: boolean; playsInline?: boolean; controls?: boolean }`
   - `{ type: 'embed'; src: string; title: string }`
 - Notes:
-  - `media` is the preferred API for landing cards
-  - `imageSrc` and `imageAlt` remain supported as a compatibility fallback for existing image cards
+  - `media` is required; the retired `imageSrc`/`imageAlt` card fallback is no longer accepted
   - badge and description positioning stay card-owned so apps can place labels differently for primary vs. secondary cards
 
 ## `BrandAssetsPage` contract

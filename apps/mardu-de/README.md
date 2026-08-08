@@ -10,16 +10,11 @@ This project is not open source. The source code is available for viewing and ed
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies at the repository root and start the public frontend:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun install
+bun run dev:mardu-de
 ```
 
 ## Environment Variables
@@ -49,12 +44,12 @@ If `TWENTY_API_KEY` is set, confirmed newsletter/whitepaper events and contact l
 
 For contact leads, optional custom field mappings can be configured:
 - `TWENTY_CONTACT_MESSAGE_FIELD`: stores the contact message on the person record.
-- `TWENTY_CONTACT_SOURCE_FIELD`: stores the source (`contact` or `wizard`).
+- `TWENTY_CONTACT_SOURCE_FIELD`: stores the source (`contact-form`, `configurator` or `admin-software`).
 - `TWENTY_CONTACT_NEWSLETTER_OPT_IN_FIELD`: stores whether newsletter opt-in was checked.
 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser. Payload content is read from `MARDU_PLATFORM_ORIGIN`; there are no local runtime content fallbacks.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The app uses Next.js 16 and Bun workspace tooling.

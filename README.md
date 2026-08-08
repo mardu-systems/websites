@@ -24,6 +24,7 @@ Dieses Repository bündelt das öffentliche Frontend `mardu.de` sowie die zentra
 bun install
 bun run lint
 bun run type-check
+bun test
 bun run build
 ```
 

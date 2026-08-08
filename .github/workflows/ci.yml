@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: mardu_ci
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d mardu_ci"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URI: postgresql://postgres:postgres@127.0.0.1:5432/mardu_ci
+      MARDU_PLATFORM_ORIGIN: http://127.0.0.1:4000
+      NEWSLETTER_SECRET: ci-newsletter-secret
+      PAYLOAD_PUBLIC_SERVER_URL: http://127.0.0.1:4000
+      PAYLOAD_SECRET: ci-payload-secret-that-is-long-enough
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+      - run: bun install --frozen-lockfile
+      - run: bun run lint
+      - run: bun run type-check
+      - run: bun test
+      - run: bun run --cwd apps/platform payload:migrate
+      - run: bun run --cwd apps/platform seed:all
+      - run: bun run --cwd apps/platform build
+      - name: Start Payload platform
+        run: |
+          PORT=4000 bun run --cwd apps/platform start > /tmp/mardu-platform.log 2>&1 &
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:4000/api/products?limit=1 > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/mardu-platform.log
+          exit 1
+      - run: bun run --cwd apps/mardu-de build
