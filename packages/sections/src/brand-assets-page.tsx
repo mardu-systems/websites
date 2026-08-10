@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Download } from "lucide-react";
 import { Button } from "@mardu/ui/components/button";
-import { Overline } from "@mardu/ui/components/typography";
+import { EditorialAccent, Overline } from "@mardu/ui/components/typography";
 import { cn } from "@mardu/ui/lib/utils";
 import EditorialFaqSection from "./editorial-faq-section";
 import Faq from "./faq";
@@ -58,10 +58,7 @@ function EditorialBrandAssetsPage({
 }: BrandAssetsPageProps) {
   return (
     <main
-      className={cn(
-        "min-h-screen bg-background text-foreground",
-        className,
-      )}
+      className={cn("min-h-screen bg-background text-foreground", className)}
     >
       <section className="border-b border-border py-16 md:py-24 xl:py-32">
         <div className="mardu-container grid gap-12 xl:grid-cols-[0.62fr_0.38fr] xl:items-end xl:gap-20">
@@ -71,9 +68,7 @@ function EditorialBrandAssetsPage({
             </p>
             <h1 className="mt-7 max-w-[15ch] text-[clamp(3rem,5vw,3.75rem)] font-light leading-[0.94] tracking-[-0.04em]">
               Markenressourcen von der{" "}
-              <em className="font-serif font-normal italic tracking-[-0.025em] text-mardu-purple">
-                Mardu GmbH.
-              </em>
+              <EditorialAccent>Mardu GmbH.</EditorialAccent>
             </h1>
           </div>
           <p className="max-w-[38rem] text-base leading-relaxed text-muted-foreground xl:pb-2">
@@ -97,9 +92,9 @@ function EditorialBrandAssetsPage({
                 className="text-[clamp(2.2rem,4.6vw,4.5rem)] font-light leading-[0.96] tracking-[-0.035em]"
               >
                 Logo-Dateien für{" "}
-                <em className="font-serif font-normal italic tracking-[-0.02em] text-white/88">
+                <EditorialAccent className="text-white/88">
                   helle und dunkle Flächen.
-                </em>
+                </EditorialAccent>
               </h2>
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/62">
                 {content.downloadsDescription}
@@ -165,10 +160,7 @@ function EditorialBrandAssetsPage({
         titleId="brand-usage"
         title={
           <>
-            Hinweise zur{" "}
-            <em className="font-serif font-normal italic tracking-[-0.02em] text-foreground/88">
-              Verwendung.
-            </em>
+            Hinweise zur <EditorialAccent>Verwendung.</EditorialAccent>
           </>
         }
         items={content.usageRules.map((rule) => ({

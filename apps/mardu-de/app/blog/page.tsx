@@ -68,17 +68,9 @@ export default async function BlogPage({ searchParams }: { searchParams: SearchP
 
       <section className="py-14 md:py-20">
         <div className="mardu-container">
-          <div className="grid gap-6 md:grid-cols-[0.42fr_1fr] md:items-end">
-            <p className="font-mono text-xs tracking-[0.18em] text-mardu-purple">
-              [02 / ALLE BEITRÄGE]
-            </p>
-            <h2 className="max-w-3xl text-[clamp(2.25rem,4vw,3.75rem)] font-light leading-[0.97] tracking-[-0.04em]">
-              Perspektiven auf Zutritt,
-              <em className="block font-serif font-normal italic tracking-[-0.025em] text-mardu-purple">
-                Systeme und Betrieb.
-              </em>
-            </h2>
-          </div>
+          <p className="font-mono text-xs tracking-[0.18em] text-mardu-purple">
+            [02 / ALLE BEITRÄGE]
+          </p>
 
           <BlogSearch query={q} category={category} />
           <BlogCategoryFilter categories={categories} activeCategory={category} query={q} />

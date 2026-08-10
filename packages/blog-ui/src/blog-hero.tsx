@@ -2,6 +2,7 @@ import type { BlogPostListItemDto } from "@mardu/content-core";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { EditorialAccent } from "@mardu/ui/components/typography";
 
 export interface BlogHeroProps {
   featuredPost: BlogPostListItemDto | null;
@@ -40,9 +41,9 @@ export function BlogHero({
             {title ?? (
               <h1 className="mt-5 max-w-3xl text-[clamp(2.75rem,4.5vw,4rem)] font-light leading-[0.96] tracking-[-0.045em] text-foreground">
                 Wissen, das im Betrieb
-                <em className="block font-serif font-normal italic tracking-[-0.025em] text-mardu-purple">
+                <EditorialAccent className="block">
                   weiterhilft.
-                </em>
+                </EditorialAccent>
               </h1>
             )}
             {intro ? (

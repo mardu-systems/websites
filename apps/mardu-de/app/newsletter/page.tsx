@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { EditorialAccent } from '@mardu/ui/components/typography';
 import NewsletterSignupForm from '@/components/utilities/newsletter-signup-form';
 
 export const metadata: Metadata = {
@@ -18,10 +19,7 @@ export default function NewsletterPage() {
           <header className="min-w-0 lg:sticky lg:top-28 lg:self-start">
             <p className="font-mono text-xs tracking-[0.18em] text-mardu-purple">[NEWSLETTER]</p>
             <h1 className="mt-6 max-w-[15ch] text-[var(--font-size-h1-fluid)] font-light leading-[0.98] tracking-[-0.04em] text-foreground">
-              Neues von Mardu{' '}
-              <em className="font-serif font-normal italic tracking-[-0.025em] text-mardu-purple">
-                direkt per E-Mail.
-              </em>
+              Neues von Mardu <EditorialAccent>direkt per E-Mail.</EditorialAccent>
             </h1>
             <p className="mt-6 max-w-[42rem] text-base leading-relaxed text-muted-foreground">
               Ausgewählte Einblicke zu Maschinenfreigabe, physischen Zugängen, Integrationen und
@@ -31,7 +29,9 @@ export default function NewsletterPage() {
 
           <div className="min-w-0 border-t border-border">
             <div className="border-b border-border py-6">
-              <p className="font-mono text-xs tracking-[0.14em] text-mardu-purple">[01] Anmeldung</p>
+              <p className="font-mono text-xs tracking-[0.14em] text-mardu-purple">
+                [01] Anmeldung
+              </p>
               <h2 className="mt-4 text-2xl font-light tracking-[-0.025em] text-foreground">
                 Newsletter abonnieren
               </h2>

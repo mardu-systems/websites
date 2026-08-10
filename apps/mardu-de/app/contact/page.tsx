@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { ContactPageSection } from '@mardu/sections';
+import { EditorialAccent } from '@mardu/ui/components/typography';
 import ContactForm from '@/components/forms/contact';
 import { getSiteConfig } from '@mardu/site-config';
 import { parseCatalogInquiryContext } from '@/lib/catalog';
@@ -40,10 +41,7 @@ export default async function ContactPage({
       overline="Kontakt"
       title={
         <>
-          Lass uns über dein{' '}
-          <em className="font-serif italic font-normal tracking-[-0.02em] text-foreground/90">
-            Projekt sprechen.
-          </em>
+          Lass uns über dein <EditorialAccent>Projekt sprechen.</EditorialAccent>
         </>
       }
       description="Melde dich bei uns – wir antworten so schnell wie möglich."
@@ -63,7 +61,10 @@ export default async function ContactPage({
             </p>
             <p>
               E-Mail:{' '}
-              <a href={`mailto:${siteConfig.supportEmail}`} className="underline underline-offset-3">
+              <a
+                href={`mailto:${siteConfig.supportEmail}`}
+                className="underline underline-offset-3"
+              >
                 {siteConfig.supportEmail}
               </a>
               <br />
@@ -79,8 +80,8 @@ export default async function ContactPage({
           <>
             <p>
               Unser Büro befindet sich im Kreativpark Alter Schlachthof in Karlsruhe. Die
-              Straßenbahnhaltestellen Tullastraße sowie Gottesauer Platz/BGV (Linien 1 und 2)
-              liegen nur wenige Minuten zu Fuß entfernt.
+              Straßenbahnhaltestellen Tullastraße sowie Gottesauer Platz/BGV (Linien 1 und 2) liegen
+              nur wenige Minuten zu Fuß entfernt.
             </p>
             <p>
               Mit dem Auto erreichst du uns über die Durlacher Allee. Folge der Beschilderung zum

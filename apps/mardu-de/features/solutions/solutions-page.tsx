@@ -1,3 +1,4 @@
+import { EditorialAccent } from '@mardu/ui/components/typography';
 import { SolutionsExplorer } from './solutions-explorer';
 import { solutionsPageIntro, type SolutionExplorerViewModel } from './solutions-page-content';
 
@@ -7,10 +8,7 @@ export function SolutionsPage({ items }: { items: readonly SolutionExplorerViewM
       <div className="w-full px-5 md:px-8 xl:px-6">
         <header>
           <h1 className="max-w-[18ch] pb-[0.08em] text-[clamp(2.35rem,4vw,3.75rem)] font-light leading-none tracking-[-0.035em] text-foreground">
-            Lösungen für deinen{' '}
-            <em className="font-serif italic font-normal tracking-[-0.02em] text-foreground/90">
-              Anwendungsfall.
-            </em>
+            Lösungen für deinen <EditorialAccent>Anwendungsfall.</EditorialAccent>
           </h1>
           <p className="mt-10 max-w-[49rem] text-base leading-relaxed text-muted-foreground md:mt-12">
             {solutionsPageIntro.descriptionPrefix}{' '}

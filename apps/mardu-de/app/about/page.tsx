@@ -5,9 +5,10 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { Button } from '@mardu/ui/components/button';
+import { EditorialAccent } from '@mardu/ui/components/typography';
 import aboutContent from './about-content.md';
-import lucaPhoto from '@/media/Bild2.jpg';
-import erikPhoto from '@/media/Erik.webp';
+import lucaPhoto from '@/public/people/luca_schoeneberg.jpg';
+import erikPhoto from '@/public/people/erik_frey.jpg';
 import melvinPhoto from '@/media/Melvin.webp';
 
 interface TeamMember {
@@ -89,10 +90,7 @@ export default function AboutPage() {
           <div className="min-w-0">
             <p className="font-mono text-xs tracking-[0.18em] text-mardu-purple">[ÜBER MARDU]</p>
             <h1 className="mt-6 max-w-[14ch] text-[var(--font-size-h1-fluid)] font-light leading-[0.98] tracking-[-0.04em] text-foreground">
-              Aus der Werkstatt gedacht.{' '}
-              <em className="font-serif font-normal italic tracking-[-0.025em] text-mardu-purple">
-                Für den Betrieb gebaut.
-              </em>
+              Aus der Werkstatt gedacht. <EditorialAccent>Für den Betrieb gebaut.</EditorialAccent>
             </h1>
           </div>
           <p className="max-w-[38rem] text-base leading-relaxed text-muted-foreground xl:pb-1">
@@ -124,8 +122,7 @@ export default function AboutPage() {
                 id="team-heading"
                 className="max-w-[15ch] text-[clamp(2.35rem,5vw,4.75rem)] font-light leading-[0.94] tracking-[-0.04em]"
               >
-                Gemeinsam bauen wir{' '}
-                <em className="font-serif font-normal italic text-mardu-purple">Mardu.</em>
+                Gemeinsam bauen wir <EditorialAccent>Mardu.</EditorialAccent>
               </h2>
             </div>
           </div>
@@ -134,7 +131,7 @@ export default function AboutPage() {
             {team.map((member, index) => (
               <article
                 key={member.name}
-                className="border-b border-border py-8 md:border-r md:px-6 md:py-10 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
+                className="border-b border-border py-8 md:border-r md:px-6 md:py-10 md:last:border-r-0"
               >
                 <div className="relative aspect-[4/5] overflow-hidden bg-muted">
                   <Image

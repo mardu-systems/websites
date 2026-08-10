@@ -13,6 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@mardu/ui/components/dialog';
+import { EditorialAccent } from '@mardu/ui/components/typography';
 import { cn } from '@mardu/ui/lib/utils';
 import SiteContactForm from '@/components/forms/contact';
 
@@ -132,8 +133,8 @@ function FeatureRequestDialog() {
             Welche Funktion fehlt dir?
           </DialogTitle>
           <DialogDescription className="max-w-xl text-base leading-relaxed text-muted-foreground">
-            Beschreibe kurz den Anwendungsfall. Wir prüfen den Wunsch im Kontext der
-            bestehenden Roadmap und melden uns persönlich zurück.
+            Beschreibe kurz den Anwendungsfall. Wir prüfen den Wunsch im Kontext der bestehenden
+            Roadmap und melden uns persönlich zurück.
           </DialogDescription>
         </DialogHeader>
         <div className="contact-editorial-form px-6 py-7 md:px-9 md:py-9">
@@ -193,11 +194,7 @@ export function RoadmapPage({ items }: { items: RoadmapItemDto[] }) {
                 id="roadmap-title"
                 className="mt-6 max-w-[15ch] text-[clamp(3rem,5vw,3.75rem)] font-light leading-[0.94] tracking-[-0.04em] text-foreground"
               >
-                Was als{' '}
-                <em className="font-serif font-normal italic tracking-[-0.025em] text-mardu-purple">
-                  Nächstes
-                </em>{' '}
-                entsteht.
+                Was als <EditorialAccent>Nächstes</EditorialAccent> entsteht.
               </h1>
               <p className="mt-10 max-w-[52rem] text-base leading-relaxed text-muted-foreground">
                 Mardu entwickelt Hardware, Software, Plattformfunktionen und Integrationen

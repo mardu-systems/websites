@@ -1,4 +1,5 @@
 import { WhitepaperSection } from '@mardu/sections';
+import { EditorialAccent } from '@mardu/ui/components/typography';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -15,10 +16,7 @@ export default function WhitepaperPage() {
           <div className="min-w-0">
             <p className="font-mono text-xs tracking-[0.18em] text-mardu-purple">[WHITEPAPER]</p>
             <h1 className="mt-6 max-w-[15ch] text-[var(--font-size-h1-fluid)] font-light leading-[0.98] tracking-[-0.04em] text-foreground">
-              Zutritt und Maschinenfreigabe{' '}
-              <em className="font-serif font-normal italic tracking-[-0.025em] text-mardu-purple">
-                klar organisieren.
-              </em>
+              Zutritt und Maschinenfreigabe <EditorialAccent>klar organisieren.</EditorialAccent>
             </h1>
           </div>
           <p className="max-w-[38rem] text-base leading-relaxed text-muted-foreground xl:pb-1">

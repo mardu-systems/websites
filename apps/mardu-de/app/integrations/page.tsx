@@ -132,12 +132,12 @@ export default async function IntegrationsPage() {
         <div className="mardu-container">
           <div className="relative mx-auto lg:w-[78%]">
             <div className="relative flex min-h-10 items-center justify-between bg-[#101010] px-5 text-[10px] uppercase tracking-[0.045em] text-white md:px-24 md:text-[11px]">
-              <span>Mardu – Identitäts- und Zugriffsplattform</span>
+              <span className="pr-16 sm:pr-0">Mardu – Identitäts- und Zugriffsplattform</span>
               <span className="hidden items-center gap-2 text-white/86 sm:flex">
                 Einheitlicher Zugriff, Richtlinien &amp; Audit
                 <LockKeyhole aria-hidden="true" className="size-3.5 stroke-[1.5]" />
               </span>
-              <span className="absolute left-1/2 top-1/2 z-10 flex size-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-mardu-purple md:size-13">
+              <span className="absolute right-3 top-1/2 z-10 flex size-12 -translate-y-1/2 items-center justify-center bg-mardu-purple sm:left-1/2 sm:right-auto sm:-translate-x-1/2 md:size-13">
                 <Image
                   src={MARDU_FAVICON_PATH}
                   alt=""
