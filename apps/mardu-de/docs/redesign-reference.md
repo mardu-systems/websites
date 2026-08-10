@@ -241,25 +241,17 @@ Es gibt **keine separaten Unterseiten pro Integration** (keine Routen `/integrat
 ---
 
 ### 2.14 Impressum
-*   `[01] ANGABEN GEMÄß § 5 TMG` (Firmenadresse, HRB 757158, Geschäftsführer).
-*   `[02] VERANTWORTLICH FÜR DEN INHALT NACH § 55 ABS. 2 RSTV / MSTV` (Mardu GmbH).
-*   `[03] EU-STREITSCHLICHTUNG` (Link zur OS-Plattform).
-*   `[04] WEBDESIGN` (May Studio Details).
-*   `[05] VERBRAUCHERSTREITBEILEGUNG` (Erklärung der Nichtteilnahme).
-*   `[06] HAFTUNG FÜR INHALTE` (Gesetzliche Grundlagen nach § 7 TMG).
-*   `[07] HAFTUNG FÜR LINKS` (Haftungsausschluss für externe Links).
-*   `[08] URHEBERRECHT` (Deutsches Urheberrecht).
+*   Angaben gemäß § 5 DDG (Firmenadresse, Registergericht, HRB 757158, Geschäftsführer und Umsatzsteuer-ID).
+*   Verantwortliche für journalistisch-redaktionelle Inhalte gemäß § 18 Abs. 2 MStV.
+*   Erklärung zur Verbraucherstreitbeilegung.
+*   Hinweise zum Urheberrecht.
 
 ---
 
 ### 2.15 Datenschutz (Struktur & Abschnitte)
-*   `[01] DATENSCHUTZ AUF EINEN BLICK` (Zusammenfassende Hinweise zur Datenerfassung, Rechten und Analyse-Tools).
-*   `[02] ALLGEMEINE HINWEISE UND PFLICHTINFORMATIONEN` (Verantwortliche Stelle, Speicherdauer, Rechtsgrundlagen, Datenübermittlungen, Widerrufsrecht, Widerspruchsrecht, Beschwerderecht, Auskunfts-/Löschungsrecht).
-*   `[03] DATENERFASSUNG AUF DIESER WEBSITE` (Cookies, Server-Log-Dateien, Kontaktformular, Anfragen per Mail/Telefon).
-*   `[04] SOZIALE MEDIEN` (Instagram-Plugin, Meta Plattformen Richtlinien).
-*   `[05] NEWSLETTER` (Newsletterdaten, Einwilligung, Austragungslinks, Blacklisting-Logik).
-*   `[06] PLUG-INS UND TOOLS` (Google reCAPTCHA Integration und Einwilligungsgrundlage).
-*   `[07] GOOGLE ANALYTICS` (GA4 Einstellungen, IP-Anonymisierung, Widerrufsoptionen).
-*   `[08] VERARBEITEN VON KUNDEN- UND VERTRAGSDATEN` (Abwicklung von Verträgen und gesetzliche Pflichten).
-*   `[09] DATENÜBERMITTLUNG BEI VERTRAGSSCHLUSS FÜR ONLINE-SHOPS, HÄNDLER UND WARENVERSAND` (Logistik- und Zahlungsdienstleister-Anbindung).
-*   `[10] DATENÜBERMITTLUNG BEI VERTRAGSSCHLUSS FÜR DIENSTLEISTUNGEN UND DIGITALE INHALTE` (Zahlungsabwicklung und Support).
+*   Verantwortlicher und Rechtsgrundlagen.
+*   Vercel-Hosting, Server-Protokolle und Missbrauchsabwehr.
+*   Cookie-Einstellungen sowie Vercel Web Analytics und Speed Insights.
+*   Kontakt, Konfigurator, Newsletter und Whitepaper einschließlich Resend und internem CRM.
+*   Google reCAPTCHA und einfache Links zu sozialen Netzwerken.
+*   Empfänger, internationale Übermittlungen, Speicherdauer und Betroffenenrechte.

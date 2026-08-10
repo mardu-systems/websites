@@ -16,10 +16,7 @@ export async function getLegalPage(slug: LegalPageSlug) {
     limit: 1,
     pagination: false,
     where: {
-      and: [
-        { _status: { equals: 'published' } },
-        { slug: { equals: slug } },
-      ],
+      and: [{ _status: { equals: 'published' } }, { slug: { equals: slug } }],
     },
   });
   const document = result.docs[0];
@@ -27,14 +24,19 @@ export async function getLegalPage(slug: LegalPageSlug) {
   return document ? mapLegalPageDocument(document, site) : null;
 }
 
-export function buildLegalPageMetadata(slug: LegalPageSlug, page: Awaited<ReturnType<typeof getLegalPage>>): Metadata {
-  const title = page?.seoTitle ?? `${page?.title ?? (slug === 'privacy' ? 'Datenschutzerklärung' : 'Impressum')} | ${siteConfig.appName}`;
+export function buildLegalPageMetadata(
+  slug: LegalPageSlug,
+  page: Awaited<ReturnType<typeof getLegalPage>>,
+): Metadata {
+  const title =
+    page?.seoTitle ??
+    `${page?.title ?? (slug === 'privacy' ? 'Datenschutzerklärung' : 'Impressum')} | ${siteConfig.appName}`;
   const description =
     page?.seoDescription ??
     page?.summary ??
     (slug === 'privacy'
       ? `Informationen zum Datenschutz bei ${siteConfig.label}.`
-      : `Angaben gemäß § 5 TMG für ${siteConfig.label}.`);
+      : `Angaben gemäß § 5 DDG für ${siteConfig.label}.`);
   const url = page?.canonicalUrl ?? new URL(`/${slug}`, siteConfig.origin).toString();
 
   return {

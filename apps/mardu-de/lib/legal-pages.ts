@@ -10,7 +10,10 @@ export async function getLegalPage(slug: LegalPageSlug) {
   return getPlatformLegalPage(getPlatformOrigin(), site, slug);
 }
 
-export function buildLegalPageMetadata(slug: LegalPageSlug, page: Awaited<ReturnType<typeof getLegalPage>>): Metadata {
+export function buildLegalPageMetadata(
+  slug: LegalPageSlug,
+  page: Awaited<ReturnType<typeof getLegalPage>>,
+): Metadata {
   const pageTitle = page?.title ?? (slug === 'privacy' ? 'Datenschutzerklärung' : 'Impressum');
   const title = page?.seoTitle?.replace(/\s*\|\s*Mardu\s*$/i, '') ?? pageTitle;
   const socialTitle = `${title} | ${siteConfig.appName}`;
@@ -19,7 +22,7 @@ export function buildLegalPageMetadata(slug: LegalPageSlug, page: Awaited<Return
     page?.summary ??
     (slug === 'privacy'
       ? `Informationen zum Datenschutz bei ${siteConfig.label}.`
-      : `Angaben gemäß § 5 TMG für ${siteConfig.label}.`);
+      : `Angaben gemäß § 5 DDG für ${siteConfig.label}.`);
   const url = page?.canonicalUrl ?? new URL(`/${slug}`, siteConfig.origin).toString();
 
   return {

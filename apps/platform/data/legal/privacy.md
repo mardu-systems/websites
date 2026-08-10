@@ -1,362 +1,130 @@
-## 1. Datenschutz auf einen Blick
+## 1. Verantwortlicher
 
-### Allgemeine Hinweise
-Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen.
-Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.
-Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.
+Verantwortlich für die Verarbeitung personenbezogener Daten auf dieser Website ist:
 
-### Datenerfassung auf dieser Website
+**Mardu GmbH** · Alter Schlachthof 39 A1 · 76131 Karlsruhe · Deutschland
 
-#### Wer ist verantwortlich für die Datenerfassung auf dieser Website?
-Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber.
-Dessen Kontaktdaten können Sie dem Abschnitt **„Hinweis zur Verantwortlichen Stelle“** in dieser Datenschutzerklärung entnehmen.
+E-Mail: [info@mardu.de](mailto:info@mardu.de) · Telefon: [+49 721 25510624](tel:+4972125510624)
 
-#### Wie erfassen wir Ihre Daten?
-Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z. B. um Daten handeln, die Sie in ein Kontaktformular eingeben.
+## 2. Grundsätze der Datenverarbeitung
 
-Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst.
-Das sind vor allem technische Daten (z. B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs).
-Die Erfassung dieser Daten erfolgt automatisch, sobald Sie diese Website betreten.
+Wir verarbeiten personenbezogene Daten nur, soweit dies zur Bereitstellung dieser Website, zur Bearbeitung von Anfragen, zur Durchführung vorvertraglicher oder vertraglicher Maßnahmen, zur Missbrauchsabwehr oder aufgrund einer Einwilligung erforderlich ist.
 
-#### Wofür nutzen wir Ihre Daten?
-Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten.
-Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.
+Je nach Verarbeitung stützen wir uns insbesondere auf folgende Rechtsgrundlagen:
 
-Sofern über die Website Verträge geschlossen oder angebahnt werden können, werden die übermittelten Daten auch für Vertragsangebote, Bestellungen oder sonstige Auftragsanfragen verarbeitet.
+- **Art. 6 Abs. 1 lit. a DSGVO** für Verarbeitungen aufgrund Ihrer Einwilligung,
+- **Art. 6 Abs. 1 lit. b DSGVO** für vorvertragliche Maßnahmen und die Vertragserfüllung,
+- **Art. 6 Abs. 1 lit. c DSGVO** zur Erfüllung rechtlicher Verpflichtungen,
+- **Art. 6 Abs. 1 lit. f DSGVO** für unsere berechtigten Interessen an einem sicheren, stabilen und wirtschaftlichen Betrieb der Website sowie an der Bearbeitung von Anfragen.
 
-#### Welche Rechte haben Sie bezüglich Ihrer Daten?
-Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten.
+Soweit wir Informationen auf Ihrem Endgerät speichern oder darauf zugreifen, beachten wir zusätzlich § 25 TDDDG. Eine Einwilligung ist nicht erforderlich, wenn die Speicherung oder der Zugriff unbedingt erforderlich ist, um einen von Ihnen ausdrücklich gewünschten digitalen Dienst bereitzustellen.
 
-Sie haben außerdem ein Recht, die **Berichtigung** oder **Löschung** dieser Daten zu verlangen.
-Wenn Sie eine Einwilligung zur Datenverarbeitung erteilt haben, können Sie diese jederzeit für die Zukunft widerrufen.
+## 3. Hosting und Auslieferung der Website
 
-Außerdem haben Sie das Recht, unter bestimmten Umständen die **Einschränkung der Verarbeitung** Ihrer personenbezogenen Daten zu verlangen.
-Des Weiteren steht Ihnen ein **Beschwerderecht** bei der zuständigen Aufsichtsbehörde zu.
+Diese Website und die zugehörige Plattform werden über **Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA** bereitgestellt. Beim Aufruf der Website verarbeitet Vercel insbesondere technische Verbindungsdaten, darunter IP-Adresse, Zeitpunkt und Ziel der Anfrage, Referrer, Browser- und Geräteinformationen sowie technische Protokolldaten. Diese Verarbeitung ist erforderlich, um die Website auszuliefern, ihre Sicherheit zu gewährleisten und technische Fehler zu analysieren.
 
-Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit an uns wenden.
+Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt im sicheren und zuverlässigen Betrieb unseres Webangebots. Soweit Vercel Daten in unserem Auftrag verarbeitet, erfolgt dies auf Grundlage eines Vertrags zur Auftragsverarbeitung. Für mögliche Übermittlungen in die USA verwendet Vercel die gesetzlich vorgesehenen Garantien, insbesondere Standardvertragsklauseln und – soweit anwendbar – das EU-US Data Privacy Framework.
 
-### Analyse-Tools und Tools von Drittanbietern
-Beim Besuch dieser Website kann Ihr Surfverhalten statistisch ausgewertet werden.
-Das geschieht vor allem mit sogenannten Analyseprogrammen.
+Weitere Informationen finden Sie in der [Datenschutzerklärung von Vercel](https://vercel.com/legal/privacy-notice) und im [Data Processing Addendum](https://vercel.com/legal/dpa).
 
-Detaillierte Informationen zu diesen Analyseprogrammen finden Sie in der folgenden Datenschutzerklärung.
+## 4. Server-Protokolle und Missbrauchsabwehr
 
----
+Beim Aufruf der Website fallen technische Protokolldaten an. Dazu können insbesondere IP-Adresse, Browsertyp und -version, Betriebssystem, Referrer, Hostname, Zeitpunkt der Anfrage sowie aufgerufene Adresse gehören. Wir verwenden diese Daten zur technischen Bereitstellung, Fehleranalyse sowie zur Erkennung und Abwehr von Angriffen.
 
-## 2. Allgemeine Hinweise und Pflichtinformationen
+Bei öffentlich erreichbaren Formularen begrenzen wir die Anzahl von Anfragen innerhalb eines Zeitfensters. Hierfür wird die IP-Adresse in einen nicht rückrechenbaren Hashwert umgewandelt und zusammen mit Endpunkt, Zeitfenster und Anzahl der Anfragen verarbeitet. Sicherheitsereignisse können mit diesem Hashwert protokolliert werden.
 
-### Datenschutz
-Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst.
-Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.
+Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt in der Verfügbarkeit und Sicherheit unserer Systeme sowie im Schutz vor Spam und automatisiertem Missbrauch. Die Daten werden gelöscht oder anonymisiert, sobald sie für diese Zwecke nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
 
-Wenn Sie diese Website benutzen, werden verschiedene personenbezogene Daten erhoben.
-Personenbezogene Daten sind Daten, mit denen Sie persönlich identifiziert werden können.
+## 5. Cookies und Einwilligungseinstellungen
 
-Die vorliegende Datenschutzerklärung erläutert, welche Daten wir erheben und wofür wir sie nutzen.
-Sie erläutert auch, wie und zu welchem Zweck das geschieht.
+Wir verwenden das technisch notwendige Cookie **`cookie_preferences`**, um Ihre Auswahl in den Cookie-Einstellungen zu speichern. Das Cookie enthält ausschließlich die gewählten Kategorien und den Status der Entscheidung. Es ist nicht für JavaScript zugänglich, wird nur an unsere Website übertragen und läuft nach einem Jahr ab.
 
-Wir weisen darauf hin, dass die Datenübertragung im Internet (z. B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann.
-Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.
+Die Speicherung ist erforderlich, um Ihre Auswahl nachzuweisen und bei weiteren Seitenaufrufen zu berücksichtigen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO in Verbindung mit § 25 Abs. 2 Nr. 2 TDDDG.
 
-### Hinweis zur verantwortlichen Stelle
-Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:
+Sie können Ihre Auswahl jederzeit über **„Cookie-Einstellungen“** im Footer ändern. Zusätzlich können Sie Cookies über Ihren Browser löschen. Beim Löschen des Einstellungs-Cookies wird die Auswahl erneut abgefragt.
 
-**Mardu GmbH**
-Alter Schlachthof 39 A1
-76131 Karlsruhe
+## 6. Reichweiten- und Leistungsmessung mit Vercel
 
-E-Mail: info@mardu.de
-Telefon: +49 721 25510624
+Wir verwenden **Vercel Web Analytics** und **Vercel Speed Insights**, um aggregierte Aufrufzahlen und die technische Leistung der Website zu verstehen. Dabei können unter anderem aufgerufene Seite, Zeitpunkt, Referrer, grober Standort, Gerätetyp, Betriebssystem, Browser sowie technische Leistungswerte wie Lade- und Reaktionszeiten verarbeitet werden.
 
-Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z. B. Namen, E-Mail-Adressen o. Ä.) entscheidet.
+Vercel Web Analytics verwendet nach Angaben des Anbieters keine Drittanbieter-Cookies und speichert keine IP-Adresse zusammen mit einem Analyseereignis. Zur Unterscheidung von Aufrufen wird aus der eingehenden Anfrage ein Hash gebildet; die zugrunde liegende Sitzung wird nach 24 Stunden verworfen. Wir verwenden keine Analyseereignisse, die Namen, E-Mail-Adressen oder andere unmittelbar identifizierende Angaben enthalten.
 
-### Speicherdauer
-Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die Datenverarbeitung entfällt.
-Wenn Sie ein berechtigtes Löschersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen, werden Ihre Daten gelöscht, sofern wir keine anderen rechtlich zulässigen Gründe für die Speicherung Ihrer personenbezogenen Daten haben (z. B. steuer- oder handelsrechtliche Aufbewahrungsfristen); im letztgenannten Fall erfolgt die Löschung nach Fortfall dieser Gründe.
+Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt in der datensparsamen Reichweitenmessung und der technischen Optimierung unseres Webangebots. Sie können dieser Verarbeitung aus Gründen, die sich aus Ihrer besonderen Situation ergeben, über [info@mardu.de](mailto:info@mardu.de) widersprechen.
 
-### Allgemeine Hinweise zu den Rechtsgrundlagen der Datenverarbeitung auf dieser Website
-Sofern Sie in die Datenverarbeitung eingewilligt haben, verarbeiten wir Ihre personenbezogenen Daten auf Grundlage von **Art. 6 Abs. 1 lit. a DSGVO** bzw. **Art. 9 Abs. 2 lit. a DSGVO**, sofern besondere Datenkategorien nach Art. 9 Abs. 1 DSGVO verarbeitet werden.
+Weitere Informationen finden Sie in den Hinweisen von Vercel zu [Datenschutz und Web Analytics](https://vercel.com/docs/analytics/privacy-policy) sowie zu [Speed Insights](https://vercel.com/docs/speed-insights).
 
-Im Falle einer ausdrücklichen Einwilligung in die Übertragung personenbezogener Daten in Drittstaaten erfolgt die Datenverarbeitung außerdem auf Grundlage von **Art. 49 Abs. 1 lit. a DSGVO**.
+## 7. Kontaktformular, Konfigurator und sonstige Anfragen
 
-Sofern Sie in die Speicherung von Cookies oder in den Zugriff auf Informationen in Ihr Endgerät (z. B. via Device-Fingerprinting) eingewilligt haben, erfolgt die Datenverarbeitung zusätzlich auf Grundlage von **§ 25 Abs. 1 TDDDG**.
-Die Einwilligung ist jederzeit widerrufbar.
+Wenn Sie uns über ein Formular, per E-Mail oder telefonisch kontaktieren, verarbeiten wir die von Ihnen mitgeteilten Angaben. Je nach Formular können dies insbesondere Name, E-Mail-Adresse, Unternehmen, Telefonnummer, Nachricht, ausgewählte Produkt- oder Konfigurationsdaten sowie der Zeitpunkt der Anfrage sein.
 
-Sind Ihre Daten zur Vertragserfüllung oder zur Durchführung vorvertraglicher Maßnahmen erforderlich, verarbeiten wir Ihre Daten auf Grundlage des **Art. 6 Abs. 1 lit. b DSGVO**.
+Wir verwenden diese Daten, um Ihre Anfrage zu bearbeiten, Rückfragen zu beantworten, ein Angebot vorzubereiten und – soweit gewünscht – weitere Schritte zur Zusammenarbeit einzuleiten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, wenn die Anfrage auf einen Vertrag oder vorvertragliche Maßnahmen gerichtet ist. Bei allgemeinen Anfragen erfolgt die Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO; unser berechtigtes Interesse liegt in der sachgerechten Bearbeitung Ihrer Anfrage.
 
-Des Weiteren verarbeiten wir Ihre Daten, sofern diese zur Erfüllung einer rechtlichen Verpflichtung erforderlich sind, auf Grundlage von **Art. 6 Abs. 1 lit. c DSGVO**.
+Anfragen werden in unserer zugangsgeschützten Mardu-Plattform und in unserem selbst betriebenen CRM-System gespeichert. Für den Versand und Empfang von E-Mails verwenden wir **Resend**, einen Dienst der Plus Five Five, Inc., USA. Dabei werden insbesondere Absender- und Empfängeradresse, technische Versanddaten und der Inhalt der Nachricht verarbeitet.
 
-Die Datenverarbeitung kann ferner auf Grundlage unseres berechtigten Interesses nach **Art. 6 Abs. 1 lit. f DSGVO** erfolgen.
-Über die jeweils im Einzelfall einschlägigen Rechtsgrundlagen wird in den folgenden Absätzen dieser Datenschutzerklärung informiert.
+Soweit Dienstleister Daten in unserem Auftrag verarbeiten, bestehen Verträge zur Auftragsverarbeitung. Bei Übermittlungen in die USA stützt Resend die Verarbeitung insbesondere auf Standardvertragsklauseln und das EU-US Data Privacy Framework. Weitere Informationen finden Sie im [Data Processing Addendum von Resend](https://resend.com/legal/dpa) und in der [Datenschutzerklärung von Resend](https://resend.com/legal/privacy-policy).
 
-### Empfänger von personenbezogenen Daten
-Im Rahmen unserer Geschäftstätigkeit arbeiten wir mit verschiedenen externen Stellen zusammen. Dabei ist teilweise auch eine Übermittlung von personenbezogenen Daten an diese externen Stellen erforderlich.
+Wir speichern Anfragen so lange, wie dies zur Bearbeitung und Dokumentation der Geschäftsbeziehung erforderlich ist. Soweit sich aus einer Anfrage ein Vertrag ergibt, gelten zusätzlich die handels- und steuerrechtlichen Aufbewahrungsfristen. Im Übrigen löschen wir die Daten, wenn der Zweck entfällt und keine gesetzlichen oder berechtigten Gründe für eine weitere Speicherung bestehen.
 
-Wir geben personenbezogene Daten nur dann an externe Stellen weiter, wenn dies im Rahmen einer Vertragserfüllung erforderlich ist, wenn wir gesetzlich hierzu verpflichtet sind (z. B. Weitergabe von Daten an Steuerbehörden), wenn wir ein berechtigtes Interesse nach **Art. 6 Abs. 1 lit. f DSGVO** an der Weitergabe haben oder wenn eine sonstige Rechtsgrundlage die Datenweitergabe erlaubt.
+## 8. Newsletter und Whitepaper
 
-Beim Einsatz von Auftragsverarbeitern geben wir personenbezogene Daten unserer Kunden nur auf Grundlage eines gültigen Vertrags über Auftragsverarbeitung weiter.
-Im Falle einer gemeinsamen Verarbeitung wird ein Vertrag über gemeinsame Verarbeitung geschlossen.
+Für Newsletter-Anmeldungen und bestimmte Whitepaper-Downloads verarbeiten wir Ihre E-Mail-Adresse sowie freiwillig angegebene Daten wie Vorname, Nachname und Unternehmen. Die Anmeldung erfolgt im Double-Opt-in-Verfahren: Nach der Anmeldung erhalten Sie eine E-Mail mit einem Bestätigungslink. Erst nach der Bestätigung wird die Anmeldung aktiv.
 
-### Widerruf Ihrer Einwilligung zur Datenverarbeitung
-Viele Datenverarbeitungsvorgänge sind nur mit Ihrer ausdrücklichen Einwilligung möglich.
-Sie können eine bereits erteilte Einwilligung jederzeit widerrufen.
-Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.
+Rechtsgrundlage für den Versand ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Die Protokollierung von Anmeldung, Bestätigung und Abmeldung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt im Nachweis einer ordnungsgemäßen Anmeldung und in der Verhinderung missbräuchlicher Anmeldungen.
 
-### Widerspruchsrecht gegen die Datenerhebung in besonderen Fällen sowie gegen Direktwerbung (Art. 21 DSGVO)
-WENN DIE DATENVERARBEITUNG AUF GRUNDLAGE VON ART. 6 ABS. 1 LIT. E ODER F DSGVO ERFOLGT, HABEN SIE JEDERZEIT DAS RECHT, AUS GRÜNDEN, DIE SICH AUS IHRER BESONDEREN SITUATION ERGEBEN, GEGEN DIE VERARBEITUNG IHRER PERSONENBEZOGENEN DATEN WIDERSPRUCH EINZULEGEN; DIES GILT AUCH FÜR EIN AUF DIESE BESTIMMUNGEN GESTÜTZTES PROFILING.
+Für den Versand der Bestätigungs- und Newsletter-E-Mails verwenden wir Resend. Bestätigte Kontaktdaten werden außerdem in unserer zugangsgeschützten Mardu-Plattform und unserem selbst betriebenen CRM-System verwaltet.
 
-DIE JEWEILIGE RECHTSGRUNDLAGE, AUF DENEN EINE VERARBEITUNG BERUHT, ENTNEHMEN SIE DIESER DATENSCHUTZERKLÄRUNG.
+Sie können Ihre Einwilligung jederzeit mit Wirkung für die Zukunft über den Abmeldelink in jeder Newsletter-E-Mail oder per Nachricht an [info@mardu.de](mailto:info@mardu.de) widerrufen. Nach der Abmeldung verwenden wir die Daten nicht mehr für den Newsletterversand. Eine minimale Sperr- und Nachweisinformation kann gespeichert bleiben, soweit dies erforderlich ist, um den Widerruf zu beachten oder rechtliche Ansprüche nachzuweisen.
 
-WENN SIE WIDERSPRUCH EINLEGEN, WERDEN WIR IHRE BETROFFENEN PERSONENBEZOGENEN DATEN NICHT MEHR VERARBEITEN, ES SEI DENN, WIR KÖNNEN ZWINGENDE SCHUTZWÜRDIGE GRÜNDE FÜR DIE VERARBEITUNG NACHWEISEN, DIE IHRE INTERESSEN, RECHTE UND FREIHEITEN ÜBERWIEGEN ODER DIE VERARBEITUNG DIENT DER GELTENDMACHUNG, AUSÜBUNG ODER VERTEIDIGUNG VON RECHTSANSPRÜCHEN (**WIDERSPRUCH NACH ART. 21 ABS. 1 DSGVO**).
+## 9. Google reCAPTCHA
 
-WERDEN IHRE PERSONENBEZOGENEN DATEN VERARBEITET, UM DIREKTWERBUNG ZU BETREIBEN, SO HABEN SIE DAS RECHT, JEDERZEIT WIDERSPRUCH GEGEN DIE VERARBEITUNG SIE BETREFFENDER PERSONENBEZOGENER DATEN ZUM ZWECKE DERARTIGER WERBUNG EINZULEGEN; DIES GILT AUCH FÜR DAS PROFILING, SOWEIT ES MIT SOLCHER DIREKTWERBUNG IN VERBINDUNG STEHT.
+Zum Schutz unserer Formulare vor automatisierten Eingaben und Spam verwenden wir **Google reCAPTCHA**. Anbieter für Nutzer im Europäischen Wirtschaftsraum ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.
 
-WENN SIE WIDERSPRECHEN, WERDEN IHRE PERSONENBEZOGENEN DATEN ANSCHLIESSEND NICHT MEHR ZUM ZWECKE DER DIREKTWERBUNG VERWENDET (**WIDERSPRUCH NACH ART. 21 ABS. 2 DSGVO**).
+reCAPTCHA analysiert technische und verhaltensbezogene Informationen, um menschliche Eingaben von automatisierten Zugriffen zu unterscheiden. Dabei können insbesondere IP-Adresse, Browser- und Geräteinformationen, Referrer, Verweildauer, Interaktionen sowie von Google gesetzte oder ausgelesene Kennungen verarbeitet und an Google übermittelt werden.
 
-### Beschwerderecht bei der zuständigen Aufsichtsbehörde
-Im Falle von Verstößen gegen die DSGVO steht den Betroffenen ein Beschwerderecht bei einer Aufsichtsbehörde, insbesondere in dem Mitgliedstaat ihres gewöhnlichen Aufenthalts, ihres Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes zu.
-Das Beschwerderecht besteht unbeschadet anderweitiger verwaltungsrechtlicher oder gerichtlicher Rechtsbehelfe.
+Die Verarbeitung erfolgt zur Sicherung unserer Formulare auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt im Schutz vor Spam, Missbrauch und einer Beeinträchtigung unserer Systeme. Soweit reCAPTCHA für den von Ihnen gewünschten Formularversand unbedingt erforderlich auf Informationen in Ihrem Endgerät zugreift, stützen wir dies zusätzlich auf § 25 Abs. 2 Nr. 2 TDDDG.
 
-### Recht auf Datenübertragbarkeit
-Sie haben das Recht, Daten, die wir auf Grundlage Ihrer Einwilligung oder in Erfüllung eines Vertrags automatisiert verarbeiten, an sich oder an einen Dritten in einem gängigen, maschinenlesbaren Format aushändigen zu lassen.
-Sofern Sie die direkte Übertragung der Daten an einen anderen Verantwortlichen verlangen, erfolgt dies nur, soweit es technisch machbar ist.
+Eine Übermittlung in die USA ist möglich. Google verwendet hierfür nach eigenen Angaben geeignete Garantien und nimmt am EU-US Data Privacy Framework teil. Weitere Informationen finden Sie in der [Datenschutzerklärung von Google](https://policies.google.com/privacy?hl=de) und den [Nutzungsbedingungen von Google](https://policies.google.com/terms?hl=de).
 
-### Auskunft, Berichtigung und Löschung
-Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung und ggf. ein Recht auf Berichtigung oder Löschung dieser Daten.
-Hierzu sowie zu weiteren Fragen zum Thema personenbezogene Daten können Sie sich jederzeit an uns wenden.
+## 10. Links zu sozialen Netzwerken und externen Angeboten
 
-### Recht auf Einschränkung der Verarbeitung
-Sie haben das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.
-Das Recht auf Einschränkung der Verarbeitung besteht in folgenden Fällen:
+Unsere Website enthält einfache Links zu externen Angeboten, unter anderem zu Instagram, LinkedIn und GitHub. Beim bloßen Aufruf unserer Website wird über diese Links keine Verbindung zu den jeweiligen Anbietern hergestellt. Erst wenn Sie einen Link öffnen, verlassen Sie unsere Website; der jeweilige Anbieter verarbeitet Daten in eigener Verantwortung.
 
-- Wenn Sie die Richtigkeit Ihrer bei uns gespeicherten personenbezogenen Daten bestreiten, benötigen wir in der Regel Zeit, um dies zu überprüfen. Für die Dauer der Prüfung haben Sie das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.
-- Wenn die Verarbeitung Ihrer personenbezogenen Daten unrechtmäßig geschah/geschieht, können Sie statt der Löschung die Einschränkung der Datenverarbeitung verlangen.
-- Wenn wir Ihre personenbezogenen Daten nicht mehr benötigen, Sie sie jedoch zur Ausübung, Verteidigung oder Geltendmachung von Rechtsansprüchen benötigen, haben Sie das Recht, statt der Löschung die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.
-- Wenn Sie einen Widerspruch nach Art. 21 Abs. 1 DSGVO eingelegt haben, muss eine Abwägung zwischen Ihren und unseren Interessen vorgenommen werden. Solange noch nicht feststeht, wessen Interessen überwiegen, haben Sie das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.
+Informationen zur dortigen Verarbeitung finden Sie in den Datenschutzhinweisen des jeweiligen Anbieters.
 
-Wenn Sie die Verarbeitung Ihrer personenbezogenen Daten eingeschränkt haben, dürfen diese Daten – von ihrer Speicherung abgesehen – nur mit Ihrer Einwilligung oder zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen oder zum Schutz der Rechte einer anderen natürlichen oder juristischen Person oder aus Gründen eines wichtigen öffentlichen Interesses der Europäischen Union oder eines Mitgliedstaats verarbeitet werden.
+## 11. Empfänger und internationale Datenübermittlungen
 
-### SSL- bzw. TLS-Verschlüsselung
-Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel Bestellungen oder Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung.
+Innerhalb der Mardu GmbH erhalten nur Personen Zugriff auf personenbezogene Daten, die diese für ihre Aufgaben benötigen. Darüber hinaus können von uns eingesetzte IT-, Hosting-, E-Mail- und Support-Dienstleister Daten als Auftragsverarbeiter erhalten. Eine Weitergabe an andere Empfänger erfolgt nur, wenn sie zur Vertragserfüllung erforderlich ist, eine gesetzliche Pflicht besteht, Sie eingewilligt haben oder eine andere Rechtsgrundlage dies erlaubt.
 
-Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://“ auf „https://“ wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.
+Bei Übermittlungen in Staaten außerhalb des Europäischen Wirtschaftsraums achten wir auf die Voraussetzungen der Art. 44 ff. DSGVO. Je nach Anbieter erfolgt die Übermittlung auf Grundlage eines Angemessenheitsbeschlusses, insbesondere des EU-US Data Privacy Framework, oder auf Grundlage der Standardvertragsklauseln der Europäischen Kommission und ergänzender Schutzmaßnahmen.
 
-Wenn die SSL- bzw. TLS-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns übermitteln, nicht von Dritten mitgelesen werden.
+## 12. Speicherdauer
 
-### Widerspruch gegen Werbe-E-Mails
-Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit widersprochen.
-Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-E-Mails, vor.
+Soweit in dieser Erklärung keine konkrete Frist genannt ist, speichern wir personenbezogene Daten nur so lange, wie der jeweilige Zweck besteht. Danach löschen oder anonymisieren wir die Daten, sofern keine gesetzlichen Aufbewahrungspflichten, die Geltendmachung oder Abwehr von Rechtsansprüchen oder andere zulässige Gründe eine weitere Speicherung erfordern.
 
----
+## 13. Ihre Rechte
 
-## 3. Datenerfassung auf dieser Website
+Sie haben nach Maßgabe der gesetzlichen Voraussetzungen insbesondere folgende Rechte:
 
-### Cookies
-Unsere Internetseiten verwenden sogenannte „Cookies“. Cookies sind kleine Datenpakete und richten auf Ihrem Endgerät keinen Schaden an.
+- Recht auf Auskunft nach Art. 15 DSGVO,
+- Recht auf Berichtigung nach Art. 16 DSGVO,
+- Recht auf Löschung nach Art. 17 DSGVO,
+- Recht auf Einschränkung der Verarbeitung nach Art. 18 DSGVO,
+- Recht auf Datenübertragbarkeit nach Art. 20 DSGVO,
+- Recht auf Widerspruch nach Art. 21 DSGVO,
+- Recht, eine Einwilligung jederzeit mit Wirkung für die Zukunft zu widerrufen.
 
-Sie werden entweder **vorübergehend für die Dauer einer Sitzung (Session-Cookies)** oder **dauerhaft (permanente Cookies)** auf Ihrem Endgerät gespeichert.
-Session-Cookies werden nach Ende Ihres Besuchs automatisch gelöscht. Permanente Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese selbst löschen oder eine automatische Löschung durch Ihren Webbrowser erfolgt.
+Wenn wir Daten auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO verarbeiten, können Sie aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit widersprechen. Gegen Direktwerbung können Sie jederzeit ohne besondere Begründung widersprechen.
 
-Cookies können von uns (**First-Party-Cookies**) oder von Drittunternehmen stammen (**Third-Party-Cookies**). Third-Party-Cookies ermöglichen die Einbindung bestimmter Dienstleistungen von Drittunternehmen innerhalb von Webseiten (z. B. Cookies zur Abwicklung von Zahlungsdienstleistungen).
+Zur Ausübung Ihrer Rechte genügt eine Nachricht an [info@mardu.de](mailto:info@mardu.de).
 
-Cookies haben verschiedene Funktionen. Zahlreiche Cookies sind technisch notwendig, da bestimmte Webseitenfunktionen ohne diese nicht funktionieren würden (z. B. die Warenkorbfunktion oder die Anzeige von Videos).
-Andere Cookies können zur Auswertung des Nutzerverhaltens oder zu Werbezwecken verwendet werden.
+Sie haben außerdem das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren. Für uns ist insbesondere der **Landesbeauftragte für den Datenschutz und die Informationsfreiheit Baden-Württemberg** zuständig: [www.baden-wuerttemberg.datenschutz.de](https://www.baden-wuerttemberg.datenschutz.de/).
 
-Cookies, die zur Durchführung des elektronischen Kommunikationsvorgangs, zur Bereitstellung bestimmter, von Ihnen gewünschter Funktionen (z. B. Warenkorbfunktion) oder zur Optimierung der Website (z. B. Cookies zur Messung des Webpublikums) erforderlich sind, werden auf Grundlage von **Art. 6 Abs. 1 lit. f DSGVO** gespeichert, sofern keine andere Rechtsgrundlage angegeben wird.
-Der Websitebetreiber hat ein berechtigtes Interesse an der Speicherung von notwendigen Cookies zur technisch fehlerfreien und optimierten Bereitstellung seiner Dienste.
+## 14. Sicherheit
 
-Sofern eine Einwilligung zur Speicherung von Cookies und vergleichbaren Wiedererkennungstechnologien abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage dieser Einwilligung (**Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG**); die Einwilligung ist jederzeit widerrufbar.
+Wir verwenden Transportverschlüsselung (TLS/HTTPS) und angemessene technische und organisatorische Maßnahmen, um personenbezogene Daten vor Verlust, Manipulation und unbefugtem Zugriff zu schützen. Eine vollständig risikofreie Datenübertragung im Internet kann dennoch nicht garantiert werden.
 
-Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden, Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder generell ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browsers aktivieren.
-Bei der Deaktivierung von Cookies kann die Funktionalität dieser Website eingeschränkt sein.
+## 15. Stand und Änderungen
 
-Welche Cookies und Dienste auf dieser Website eingesetzt werden, können Sie dieser Datenschutzerklärung entnehmen.
+Stand dieser Datenschutzerklärung: **10. August 2026**.
 
-### Server-Log-Dateien
-Der Provider der Seiten erhebt und speichert automatisch Informationen in sogenannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:
-
-- Browsertyp und Browserversion
-- verwendetes Betriebssystem
-- Referrer URL
-- Hostname des zugreifenden Rechners
-- Uhrzeit der Serveranfrage
-- IP-Adresse
-
-Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen.
-
-Die Erfassung dieser Daten erfolgt auf Grundlage von **Art. 6 Abs. 1 lit. f DSGVO**.
-Der Websitebetreiber hat ein berechtigtes Interesse an der technisch fehlerfreien Darstellung und der Optimierung seiner Website – hierzu müssen die Server-Log-Files erfasst werden.
-
-### Kontaktformular
-Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert.
-Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
-
-Die Verarbeitung dieser Daten erfolgt auf Grundlage von **Art. 6 Abs. 1 lit. b DSGVO**, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist.
-In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (**Art. 6 Abs. 1 lit. f DSGVO**) oder auf Ihrer Einwilligung (**Art. 6 Abs. 1 lit. a DSGVO**), sofern diese abgefragt wurde; die Einwilligung ist jederzeit widerrufbar.
-
-Die von Ihnen im Kontaktformular eingegebenen Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt.
-Zwingende gesetzliche Bestimmungen – insbesondere Aufbewahrungsfristen – bleiben unberührt.
-
-### Anfrage per E-Mail, Telefon oder Telefax
-Wenn Sie uns per E-Mail, Telefon oder Telefax kontaktieren, wird Ihre Anfrage inklusive aller daraus hervorgehenden personenbezogenen Daten (Name, Anfrage) zum Zwecke der Bearbeitung Ihres Anliegens bei uns gespeichert und verarbeitet.
-Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
-
-Die Verarbeitung dieser Daten erfolgt auf Grundlage von **Art. 6 Abs. 1 lit. b DSGVO**, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist.
-In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (**Art. 6 Abs. 1 lit. f DSGVO**) oder auf Ihrer Einwilligung (**Art. 6 Abs. 1 lit. a DSGVO**) sofern diese abgefragt wurde; die Einwilligung ist jederzeit widerrufbar.
-
-Die von Ihnen an uns per Kontaktanfragen übersandten Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt.
-Zwingende gesetzliche Bestimmungen – insbesondere gesetzliche Aufbewahrungsfristen – bleiben unberührt.
-
----
-
-## 4. Soziale Medien
-
-### Instagram
-Auf dieser Website sind Funktionen des Dienstes Instagram eingebunden.
-Diese Funktionen werden angeboten durch die **Meta Platforms Ireland Limited, Merrion Road, Dublin 4, D04 X2K5, Irland**.
-
-Wenn das Social-Media-Element aktiv ist, wird eine direkte Verbindung zwischen Ihrem Endgerät und dem Instagram-Server hergestellt.
-Instagram erhält dadurch Informationen über den Besuch dieser Website durch Sie.
-
-Wenn Sie in Ihrem Instagram-Account eingeloggt sind, können Sie durch Anklicken des Instagram-Buttons die Inhalte dieser Website mit Ihrem Instagram-Profil verlinken.
-Dadurch kann Instagram den Besuch dieser Website Ihrem Benutzerkonto zuordnen.
-
-Wir weisen darauf hin, dass wir als Anbieter der Seiten keine Kenntnis vom Inhalt der übermittelten Daten sowie deren Nutzung durch Instagram erhalten.
-
-Die Nutzung dieses Dienstes erfolgt auf Grundlage Ihrer Einwilligung nach **Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG**.
-Die Einwilligung ist jederzeit widerrufbar.
-
-Soweit mit Hilfe des hier beschriebenen Tools personenbezogene Daten auf unserer Website erfasst und an Facebook bzw. Instagram weitergeleitet werden, sind wir und die Meta Platforms Ireland Limited gemeinsam für diese Datenverarbeitung verantwortlich (**Art. 26 DSGVO**).
-
-Die gemeinsame Verantwortlichkeit beschränkt sich dabei ausschließlich auf die Erfassung der Daten und deren Weitergabe an Facebook bzw. Instagram.
-Die nach der Weiterleitung erfolgende Verarbeitung durch Facebook bzw. Instagram ist nicht Teil der gemeinsamen Verantwortung.
-
-Die uns gemeinsam obliegenden Verpflichtungen wurden in einer Vereinbarung über gemeinsame Verarbeitung festgehalten.
-Den Wortlaut der Vereinbarung finden Sie hier:
-[https://www.facebook.com/legal/controller_addendum](https://www.facebook.com/legal/controller_addendum)
-
-Laut dieser Vereinbarung sind wir für die Erteilung der Datenschutzinformationen beim Einsatz des Facebook- bzw. Instagram-Tools und für die datenschutzrechtlich sichere Implementierung des Tools auf unserer Website verantwortlich.
-
-Für die Datensicherheit der Facebook bzw. Instagram-Produkte ist Facebook verantwortlich.
-Betroffenenrechte (z. B. Auskunftsersuchen) hinsichtlich der bei Facebook bzw. Instagram verarbeiteten Daten können Sie direkt bei Facebook geltend machen.
-
-Wenn Sie die Betroffenenrechte bei uns geltend machen, sind wir verpflichtet, diese an Facebook weiterzuleiten.
-
-Die Datenübertragung in die USA wird auf die Standardvertragsklauseln der EU-Kommission gestützt.
-Details finden Sie hier:
-
-- [https://www.facebook.com/legal/EU_data_transfer_addendum](https://www.facebook.com/legal/EU_data_transfer_addendum)
-- [https://privacycenter.instagram.com/policy/](https://privacycenter.instagram.com/policy/)
-- [https://de-de.facebook.com/help/566994660333381](https://de-de.facebook.com/help/566994660333381)
-
-Weitere Informationen hierzu finden Sie in der Datenschutzerklärung von Instagram:
-[https://privacycenter.instagram.com/policy/](https://privacycenter.instagram.com/policy/)
-
-Das Unternehmen verfügt über eine Zertifizierung nach dem **„EU-US Data Privacy Framework“ (DPF)**.
-Weitere Informationen hierzu:
-[https://www.dataprivacyframework.gov/participant/4452](https://www.dataprivacyframework.gov/participant/4452)
-
----
-
-## 5. Newsletter
-
-### Newsletterdaten
-Wenn Sie den auf der Website angebotenen Newsletter beziehen möchten, benötigen wir von Ihnen eine E-Mail-Adresse sowie Informationen, welche uns die Überprüfung gestatten, dass Sie der Inhaber der angegebenen E-Mail-Adresse sind und mit dem Empfang des Newsletters einverstanden sind.
-
-Weitere Daten werden nicht bzw. nur auf freiwilliger Basis erhoben.
-
-Diese Daten verwenden wir ausschließlich für den Versand der angeforderten Informationen und geben diese nicht an Dritte weiter.
-
-Die Verarbeitung der in das Newsletteranmeldeformular eingegebenen Daten erfolgt ausschließlich auf Grundlage Ihrer Einwilligung (**Art. 6 Abs. 1 lit. a DSGVO**).
-
-Die erteilte Einwilligung zur Speicherung der Daten, der E-Mail-Adresse sowie deren Nutzung zum Versand des Newsletters können Sie jederzeit widerrufen, etwa über den „Austragen“-Link im Newsletter.
-Die Rechtmäßigkeit der bereits erfolgten Datenverarbeitungsvorgänge bleibt vom Widerruf unberührt.
-
-Die von Ihnen zum Zwecke des Newsletter-Bezugs bei uns hinterlegten Daten werden von uns bis zu Ihrer Austragung gespeichert und nach der Abbestellung des Newsletters oder nach Zweckfortfall aus der Verteilerliste gelöscht.
-
-Wir behalten uns vor, E-Mail-Adressen aus unserem Newsletterverteiler nach eigenem Ermessen im Rahmen unseres berechtigten Interesses nach **Art. 6 Abs. 1 lit. f DSGVO** zu löschen oder zu sperren.
-
-Nach Ihrer Austragung aus der Newsletterverteilerliste wird Ihre E-Mail-Adresse ggf. in einer Blacklist gespeichert, sofern dies zur Verhinderung künftiger Mailings erforderlich ist.
-Dies dient sowohl Ihrem Interesse als auch unserem Interesse an der Einhaltung der gesetzlichen Vorgaben beim Versand von Newslettern (**berechtigtes Interesse i. S. d. Art. 6 Abs. 1 lit. f DSGVO**).
-
-Die Speicherung in der Blacklist ist zeitlich nicht befristet.
-**Sie können der Speicherung widersprechen, sofern Ihre Interessen unser berechtigtes Interesse überwiegen.**
-
----
-
-## 6. Plugins und Tools
-
-### Google reCAPTCHA
-Wir nutzen **„Google reCAPTCHA“** (im Folgenden „reCAPTCHA“) auf dieser Website.
-Anbieter ist die **Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland**.
-
-Mit reCAPTCHA soll überprüft werden, ob die Dateneingabe auf dieser Website (z. B. in einem Kontaktformular) durch einen Menschen oder durch ein automatisiertes Programm erfolgt.
-Hierzu analysiert reCAPTCHA das Verhalten des Websitebesuchers anhand verschiedener Merkmale.
-Diese Analyse beginnt automatisch, sobald der Websitebesucher die Website betritt.
-
-Zur Analyse wertet reCAPTCHA verschiedene Informationen aus (z. B. IP-Adresse, Verweildauer des Websitebesuchers auf der Website oder vom Nutzer getätigte Mausbewegungen).
-Die bei der Analyse erfassten Daten werden an Google weitergeleitet.
-
-Die reCAPTCHA-Analysen laufen vollständig im Hintergrund.
-Websitebesucher werden nicht darauf hingewiesen, dass eine Analyse stattfindet.
-
-Die Speicherung und Analyse der Daten erfolgt auf Grundlage von **Art. 6 Abs. 1 lit. f DSGVO**.
-Der Websitebetreiber hat ein berechtigtes Interesse daran, seine Webangebote vor missbräuchlicher automatisierter Ausspähung und vor SPAM zu schützen.
-
-Sofern eine entsprechende Einwilligung abgefragt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage von **Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG**, soweit die Einwilligung die Speicherung von Cookies oder den Zugriff auf Informationen im Endgerät des Nutzers umfasst.
-Die Einwilligung ist jederzeit widerrufbar.
-
-Weitere Informationen zu Google reCAPTCHA entnehmen Sie den Google-Datenschutzbestimmungen und den Google-Nutzungsbedingungen:
-
-- [https://policies.google.com/privacy?hl=de](https://policies.google.com/privacy?hl=de)
-- [https://policies.google.com/terms?hl=de](https://policies.google.com/terms?hl=de)
-
-Das Unternehmen verfügt über eine Zertifizierung nach dem **„EU-US Data Privacy Framework“ (DPF)**.
-Weitere Informationen hierzu:
-[https://www.dataprivacyframework.gov/participant/5780](https://www.dataprivacyframework.gov/participant/5780)
-
----
-
-## 7. Google Analytics
-Diese Website nutzt – sofern Sie eingewilligt haben – **Google Analytics**. Anbieter ist die Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland (Mutterunternehmen: Google LLC, USA).
-Google Analytics ermöglicht die Analyse des Website-Verhaltens (z. B. Seitenaufrufe, Verweildauern, Regionen, Geräte).
-
-**Rechtsgrundlage:** Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO; § 25 Abs. 1 TDDDG). Sie können Ihre Einwilligung jederzeit über die Cookie-Einstellungen widerrufen.
-
-**IP-Anonymisierung/GA4:** In Google Analytics 4 werden *keine IP-Adressen von EU-Nutzern gespeichert*; Google verwirft IPs vor dem Logging.
-
-**Datenübermittlung in die USA:** Eine Übermittlung an Google LLC in den USA ist möglich. Google beruft sich u. a. auf Standardvertragsklauseln sowie auf die Teilnahme am *EU-US Data Privacy Framework*.
-
-**Widerruf/Opt-Out:** Sie können Ihre Einwilligung in unserem Consent-Banner anpassen. Zudem können Sie die Datenerfassung durch Google über Browser-Einstellungen/-Add-ons begrenzen.
-
-- Infos zu GA4 & EU-Datenschutz: Google-Hilfecenter
-- Datentransfer-Rahmen von Google: Google „Data transfer frameworks“
-- DPF-Teilnehmerliste: [U.S. Department of Commerce](https://www.dataprivacyframework.gov/)
-
----
-
-## 8. Verarbeiten von Kunden- und Vertragsdaten
-Wir verarbeiten **Kunden-, Vertrags- und Zahlungsdaten** (z. B. Name, Adresse, Kontakt- und Kommunikationsdaten, Bestell-/Vertragsinhalte, Zahlungsinformationen) zur Anbahnung, Durchführung und Abwicklung von Vertragsverhältnissen inkl. Support sowie zur Erfüllung gesetzlicher Pflichten (z. B. steuer-/handelsrechtliche Aufbewahrung).
-
-**Rechtsgrundlagen:**
-- Art. 6 Abs. 1 lit. b DSGVO (Vertrag/vorvertragliche Maßnahmen)
-- Art. 6 Abs. 1 lit. c DSGVO (rechtliche Verpflichtung)
-- Art. 6 Abs. 1 lit. f DSGVO (berechtigte Interessen, z. B. Forderungsmanagement, Missbrauchs-/Betrugsprävention)
-
-Die Daten werden nur so lange gespeichert, wie es für die genannten Zwecke erforderlich ist; gesetzliche Aufbewahrungsfristen bleiben unberührt.
-
----
-
-## 9. Datenübermittlung bei Vertragsschluss für Online-Shops, Händler und Warenversand
-Wenn über unsere Website Waren bestellt werden, geben wir personenbezogene Daten *nur* soweit erforderlich an Dritte weiter (z. B. an Logistik-/Versandunternehmen, Zahlungsdienstleister, Banken, IT-/Hosting-Dienstleister).
-Umfang und Empfänger richten sich nach der konkreten Bestellung und dem gewählten Zahlungsmittel.
-
-**Rechtsgrundlage:** Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung) sowie – soweit erforderlich – Art. 6 Abs. 1 lit. f DSGVO (berechtigte Interessen an effizienter Abwicklung).
-
----
-
-## 10. Datenübermittlung bei Vertragsschluss für Dienstleistungen und digitale Inhalte
-Bei Bestellungen von **Dienstleistungen oder digitalen Inhalten** verarbeiten und übermitteln wir personenbezogene Daten (z. B. Kontakt-, Abrechnungs- und Nutzungsdaten) zweckgebunden an Zahlungs- und Abrechnungsdienstleister sowie an technisch notwendige Erfüllungsgehilfen (z. B. Hosting/Support).
-Eine weitergehende Übermittlung erfolgt nicht, es sei denn, sie ist zur Vertragserfüllung erforderlich oder gesetzlich vorgeschrieben.
-
-**Rechtsgrundlagen:** Art. 6 Abs. 1 lit. b, lit. c DSGVO; ggf. Art. 6 Abs. 1 lit. f DSGVO.
+Wir passen diese Erklärung an, wenn sich rechtliche Anforderungen, unsere Website oder die eingesetzten Dienste ändern. Die jeweils aktuelle Fassung ist dauerhaft unter dieser Adresse abrufbar.

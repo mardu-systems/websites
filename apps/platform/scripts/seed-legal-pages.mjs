@@ -12,15 +12,15 @@ const legalSeedItems = [
     slug: 'privacy',
     title: 'Datenschutzerklärung',
     pageKind: 'privacy',
-    summary: 'Informationen zum Datenschutz.',
-    updatedLabel: '30.04.2026',
+    summary: 'Wie die Mardu GmbH personenbezogene Daten auf mardu.de verarbeitet.',
+    updatedLabel: '10.08.2026',
   },
   {
     slug: 'publisher',
     title: 'Impressum',
     pageKind: 'publisher',
-    summary: 'Angaben gemäß § 5 TMG.',
-    updatedLabel: '30.04.2026',
+    summary: 'Unternehmens- und Kontaktangaben der Mardu GmbH.',
+    updatedLabel: '10.08.2026',
   },
 ];
 
