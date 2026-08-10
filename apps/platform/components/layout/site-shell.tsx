@@ -21,9 +21,9 @@ export default function SiteShell({ children }: { children: React.ReactNode }) {
     { href: siteConfig.contactPhoneHref, label: `Telefon: ${siteConfig.contactPhone}`, icon: 'phone' },
   ];
   const pathname = usePathname();
-  const isPayloadAdminRoute = pathname?.startsWith('/admin');
+  const isBareRoute = pathname === '/' || pathname?.startsWith('/admin');
 
-  if (isPayloadAdminRoute) {
+  if (isBareRoute) {
     return <>{children}</>;
   }
 

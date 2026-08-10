@@ -559,7 +559,7 @@ export default function SiteHeader({
                   key={`${item.label}:${item.href}`}
                   item={item}
                   variant="editorial-index"
-                  className="min-w-[6.75rem] px-0 py-2"
+                  className="shrink-0 px-0 py-2 [&_[data-label]]:mt-0.5"
                 />
               ))}
             </div>

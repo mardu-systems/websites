@@ -1,5 +1,3 @@
-import { Button } from '@mardu/ui/components/button';
-import { ArrowRight, Globe, LayoutDashboard, ShieldCheck } from 'lucide-react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 
@@ -9,82 +7,23 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const adminActions = [
-  {
-    title: 'Admin Login',
-    description: 'Payload Admin für Content, Media, Nutzerverwaltung und Lead-Datensätze.',
-    href: '/admin',
-    icon: LayoutDashboard,
-  },
-  {
-    title: 'mardu.de',
-    description: 'Öffentliche Hauptseite für Kunden, Inhalte und Produktkommunikation.',
-    href: 'https://www.mardu.de',
-    icon: Globe,
-  },
-  {
-    title: 'API Entry',
-    description: 'Zentraler API für Payload-Endpunkte dieser Plattform.',
-    href: '/api/contact',
-    icon: ShieldCheck,
-  },
-] as const;
-
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top_left,rgba(28,97,255,0.08),transparent_35%),linear-gradient(180deg,#f7f8fb_0%,#ffffff_100%)]">
-      <section className="mardu-container py-14 md:py-20">
-        <div className="max-w-4xl">
-          <p className="text-xs uppercase tracking-[0.24em] text-foreground/50">Mardu Platform</p>
-          <h1 className="mt-4 max-w-3xl text-[clamp(2.6rem,5vw,5rem)] leading-[0.92] tracking-[-0.05em] text-foreground">
-            Admin- und Betriebsoberfläche.
-          </h1>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-foreground/72 md:text-lg">
-            Diese App ist nur für interne Nutzung vorgesehen.
-          </p>
+    <main className="p-6">
+      <h1 className="text-xl font-semibold">Mardu Platform</h1>
+      <p className="mt-2">Interne Website.</p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button render={<Link href="/admin" />}>
-              Admin Login
-              <ArrowRight className="size-4" />
-            </Button>
-            <Button render={<Link href="https://www.mardu.de" />} variant="outline">
-              Zu mardu.de
-            </Button>
-          </div>
-        </div>
-
-        <div className="mt-12 grid gap-4 md:grid-cols-2">
-          {adminActions.map((section) => {
-            const Icon = section.icon;
-
-            return (
-              <Link
-                key={section.title}
-                href={section.href}
-                className="group rounded-3xl border border-black/8 bg-white/85 p-6 shadow-[0_12px_40px_rgba(0,0,0,0.04)] transition-transform duration-150 hover:-translate-y-0.5 hover:border-black/14"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="space-y-3">
-                    <div className="inline-flex rounded-2xl bg-foreground/6 p-3 text-foreground">
-                      <Icon className="size-5" />
-                    </div>
-                    <div>
-                      <h2 className="text-2xl tracking-[-0.03em] text-foreground">
-                        {section.title}
-                      </h2>
-                      <p className="mt-2 max-w-md text-sm leading-relaxed text-foreground/70">
-                        {section.description}
-                      </p>
-                    </div>
-                  </div>
-                  <ArrowRight className="mt-1 size-4 shrink-0 text-foreground/40 transition-transform group-hover:translate-x-0.5" />
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
+      <nav aria-label="Platform-Links" className="mt-6 flex flex-wrap gap-x-4 gap-y-2">
+        <Link className="underline" href="/admin">
+          Payload Login
+        </Link>
+        <Link className="underline" href="/publisher">
+          Impressum
+        </Link>
+        <Link className="underline" href="/privacy">
+          Datenschutz
+        </Link>
+      </nav>
     </main>
   );
 }
