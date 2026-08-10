@@ -159,8 +159,8 @@ function FooterAiSummaryLinks({
             AI_SUMMARY_MARKS[link.provider];
           const className =
             variant === "editorial-index"
-              ? "inline-flex size-9 items-center justify-center border border-white/18 text-white/72 transition-colors hover:border-[var(--footer-accent,#b9a7ff)] hover:text-[var(--footer-accent,#b9a7ff)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--footer-accent,#b9a7ff)]"
-              : "inline-flex size-10 items-center justify-center rounded-full border border-white/20 bg-white/6 text-white/90 transition-colors hover:bg-white hover:text-neutral-950";
+              ? "inline-flex size-9 items-center justify-center text-white/72 transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--footer-accent,#b9a7ff)]"
+              : "inline-flex size-10 items-center justify-center text-white/90 transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white";
 
           return (
             <li key={`${link.provider}:${link.href}`}>

@@ -15,6 +15,10 @@ export interface HomepageNumberedItem extends HomepageTextItem {
   index: string;
 }
 
+export interface HomepageLinkedNumberedItem extends HomepageNumberedItem {
+  href: string;
+}
+
 export interface HomepageStatusItem extends HomepageTextItem {
   status?: string;
 }
@@ -89,7 +93,8 @@ export const homepageHero = {
 
 export const customerProof = {
   label: 'Kunden & Partner',
-  description: 'Eine Identität. Klare Berechtigungen. Viele Zugänge.',
+  description:
+    'Gemeinsam mit Hochschulen und Technologiepartnern für den realen Betrieb entwickelt.',
   partners: [
     {
       name: 'Karlsruher Institut für Technologie',
@@ -149,9 +154,9 @@ export const customerProof = {
     },
   ],
   links: [
-    { index: '01', label: 'Konfigurator', href: '/configurator' },
+    { index: '01', label: 'Lösungen', href: '/solutions' },
     { index: '02', label: 'Produkte', href: '/products' },
-    { index: '03', label: 'Lösungen', href: '/solutions' },
+    { index: '03', label: 'Projekt besprechen', href: '/contact' },
   ],
 } as const;
 
@@ -335,30 +340,34 @@ export const benefitItems: ReadonlyArray<HomepageStatusItem> = [
   },
 ];
 
-export const useCases: ReadonlyArray<HomepageNumberedItem> = [
+export const useCases: ReadonlyArray<HomepageLinkedNumberedItem> = [
   {
     index: '01',
-    title: 'Hochschul- und Lehrwerkstätten',
+    title: 'Unternehmenswerkstätten',
     description:
-      'Studierende, Lehrende und Projektgruppen erhalten passende Rechte für Räume und Maschinen.',
+      'Maschinen, Räume und Rollen werden zu einem nachvollziehbaren Werkstattbetrieb verbunden.',
+    href: '/solutions/unternehmenswerkstaetten',
   },
   {
     index: '02',
-    title: 'Unternehmens- und Ausbildungswerkstätten',
+    title: 'Labore',
     description:
-      'Einweisungen, Rollen und Maschinenrechte rücken näher an die tatsächliche Nutzung.',
+      'Zutritt, Gerätefreigaben und wechselnde Nutzergruppen laufen kontrolliert zusammen.',
+    href: '/solutions/labore',
   },
   {
     index: '03',
-    title: 'Labore, Campus und Forschungsumgebungen',
+    title: 'Hochschulen & Universitäten',
     description:
-      'Teams, Projekte, Bereiche und Zeitfenster werden in einer gemeinsamen Struktur organisiert.',
+      'Campus, Fachbereiche, Werkstätten und Spezialräume folgen einer gemeinsamen Zugriffslogik.',
+    href: '/solutions/hochschulen-und-universitaeten',
   },
   {
     index: '04',
-    title: 'Produktions- und Betriebsstandorte',
+    title: 'Makerspaces & offene Werkstätten',
     description:
-      'Maschinenzugang, Gebäudebereiche und Zufahrten lassen sich standortbezogen zusammendenken.',
+      'Einweisungen und Maschinenfreigaben ermöglichen Nutzung auch ohne permanente Aufsicht.',
+    href: '/solutions/makerspaces-und-offene-werkstaetten',
   },
 ];
 
@@ -372,24 +381,23 @@ export const retrofitPoints = [
 export const rolloutSteps: ReadonlyArray<HomepageNumberedItem> = [
   {
     index: '01',
-    title: 'Standort verstehen',
-    description: 'Nutzergruppen, Identitäten, Ressourcen und organisatorische Regeln aufnehmen.',
+    title: 'Anwendungsfall wählen',
+    description: 'Einen repräsentativen Zugangspunkt und die beteiligten Rollen festlegen.',
   },
   {
     index: '02',
     title: 'Passung prüfen',
-    description: 'Repräsentative Maschinen, Türen oder Zufahrten und das Betriebsmodell bewerten.',
+    description: 'Technik, Abläufe und Verantwortlichkeiten vorab klären.',
   },
   {
     index: '03',
     title: 'Pilot betreiben',
-    description:
-      'Freigaben, Administration, Ausfallverhalten und Nutzerverständnis im Alltag prüfen.',
+    description: 'Freigaben und Ausfallverhalten im Alltag prüfen.',
   },
   {
     index: '04',
-    title: 'Bewusst erweitern',
-    description: 'Weitere Ressourcen oder Standorte erst nach gemeinsamer Auswertung einbeziehen.',
+    title: 'Gezielt erweitern',
+    description: 'Erst nach der Auswertung weitere Ressourcen anbinden.',
   },
 ];
 

@@ -119,28 +119,35 @@ export function BenefitsUseCasesSection() {
 
           <div className="mt-4 grid border-t border-border md:grid-cols-2">
             {useCases.map((item) => (
-              <article
+              <Link
                 key={item.index}
-                className="grid grid-cols-[2.5rem_1fr] gap-4 border-b border-border py-7 md:px-7 md:odd:border-r lg:px-9 lg:py-8"
+                href={item.href}
+                className="group grid grid-cols-[2.5rem_1fr] gap-4 border-b border-border py-7 transition-colors hover:bg-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-mardu-purple md:px-7 md:odd:border-r lg:px-9 lg:py-8"
               >
                 <span className="text-xs text-muted-foreground">[{item.index}]</span>
                 <div>
-                  <h3 className="max-w-[23rem] text-[1.375rem] font-light leading-tight tracking-[-0.02em]">
-                    {item.title}
-                  </h3>
+                  <div className="flex items-start justify-between gap-4">
+                    <h3 className="max-w-[23rem] text-[1.375rem] font-light leading-tight tracking-[-0.02em]">
+                      {item.title}
+                    </h3>
+                    <ArrowRight
+                      className="mt-1 size-4 shrink-0 transition-transform group-hover:translate-x-1"
+                      aria-hidden="true"
+                    />
+                  </div>
                   <p className="mt-4 max-w-[30rem] text-base leading-relaxed text-muted-foreground">
                     {item.description}
                   </p>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
 
           <Link
-            href="/contact"
+            href="/solutions"
             className="mt-9 inline-flex min-h-11 items-center gap-3 border-b border-border text-base transition-colors hover:border-mardu-purple hover:text-mardu-purple focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-mardu-purple"
           >
-            Einsatzbereich besprechen
+            Alle Lösungen ansehen
             <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
         </div>
