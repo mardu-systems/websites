@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { SectionIntro } from '@mardu/sections';
+import { EditorialAccent } from '@mardu/ui/components/typography';
 import { accessAreas } from '../homepage-content';
 
 export function AccessPointsSection() {
@@ -12,10 +13,7 @@ export function AccessPointsSection() {
           eyebrow="[02] Physische Zugänge"
           title={
             <>
-              Jeder Zugangspunkt.{' '}
-              <em className="font-serif italic font-normal tracking-[-0.02em] text-foreground/90">
-                Dieselbe Berechtigungslogik.
-              </em>
+              Jeder Zugangspunkt. <EditorialAccent>Dieselbe Berechtigungslogik.</EditorialAccent>
             </>
           }
           intro={

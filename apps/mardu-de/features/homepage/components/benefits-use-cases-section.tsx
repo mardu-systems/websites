@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ChartNoAxesCombined, ListTree, UnlockKeyhole } from 'lucide-react';
 import { SectionIntro } from '@mardu/sections';
+import { EditorialAccent } from '@mardu/ui/components/typography';
 import { benefitItems, mediaBriefs, useCases } from '../homepage-content';
 import { HomepageMediaPlaceholder } from './homepage-media-placeholder';
 
@@ -18,9 +19,7 @@ export function BenefitsUseCasesSection() {
               title={
                 <>
                   Infrastruktur zugänglich machen.{' '}
-                  <em className="font-serif italic font-normal tracking-[-0.02em] text-foreground/90">
-                    Kontrolle behalten.
-                  </em>
+                  <EditorialAccent>Kontrolle behalten.</EditorialAccent>
                 </>
               }
               intro={
@@ -81,10 +80,7 @@ export function BenefitsUseCasesSection() {
             eyebrow="[05] Einsatzbereiche"
             title={
               <>
-                Lösungen für deinen{' '}
-                <em className="font-serif italic font-normal tracking-[-0.02em] text-foreground/90">
-                  Anwendungsfall.
-                </em>
+                Lösungen für deinen <EditorialAccent>Anwendungsfall.</EditorialAccent>
               </>
             }
             layout="stacked"

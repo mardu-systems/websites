@@ -166,7 +166,7 @@ export function HomepageIndex() {
           indexHidden && 'translate-y-full',
         )}
       >
-        <div className="mx-auto grid max-w-[1600px] grid-cols-8 divide-x divide-border">
+        <div className="mx-auto grid max-w-[1600px] grid-cols-7 divide-x divide-border">
           {homepageNavigation.map((item) => (
             <IndexLink
               key={item.index}

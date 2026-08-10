@@ -1,5 +1,6 @@
 import { BadgeCheck, Boxes, ContactRound, MonitorCog } from 'lucide-react';
 import { SectionIntro } from '@mardu/sections';
+import { EditorialAccent } from '@mardu/ui/components/typography';
 import { mediaBriefs, systemLayers } from '../homepage-content';
 import { HomepageMediaPlaceholder } from './homepage-media-placeholder';
 
@@ -13,11 +14,8 @@ export function SystemOverviewSection() {
           eyebrow="[01] Das Mardu-System"
           title={
             <>
-              Das Ökosystem für{' '}
-              <em className="font-serif italic font-normal tracking-[-0.02em] text-foreground/90">
-                Zutritt und Zugriff.
-              </em>{' '}
-              In einem System.
+              Das Ökosystem für <EditorialAccent>Zutritt und Zugriff.</EditorialAccent> In einem
+              System.
             </>
           }
           intro={

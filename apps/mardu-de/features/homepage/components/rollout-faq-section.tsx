@@ -1,4 +1,5 @@
 import { EditorialFaqSection, SectionIntro } from '@mardu/sections';
+import { EditorialAccent } from '@mardu/ui/components/typography';
 import { faqItems, rolloutSteps } from '../homepage-content';
 
 export function RolloutFaqSection() {
@@ -12,14 +13,10 @@ export function RolloutFaqSection() {
       <section id="einfuehrung" className="scroll-mt-24 border-b border-border py-16 md:py-20">
         <div className="mardu-container">
           <SectionIntro
-            eyebrow="[07] Schrittweise einführen"
+            eyebrow="[06] Schrittweise einführen"
             title={
               <>
-                Klein starten.{' '}
-                <em className="font-serif italic font-normal tracking-[-0.02em] text-foreground/90">
-                  Im Betrieb lernen.
-                </em>{' '}
-                Dann erweitern.
+                Klein starten. <EditorialAccent>Im Betrieb lernen.</EditorialAccent> Dann erweitern.
               </>
             }
             intro={
@@ -60,10 +57,7 @@ export function RolloutFaqSection() {
         titleId="faq-title"
         title={
           <>
-            Fragen vor dem{' '}
-            <em className="font-serif italic font-normal tracking-[-0.02em] text-foreground/90">
-              ersten Standortgespräch.
-            </em>
+            Was du vor dem <EditorialAccent>Start wissen solltest.</EditorialAccent>
           </>
         }
         items={renderedFaqItems}

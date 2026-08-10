@@ -64,20 +64,13 @@ export const homepageNavigation: ReadonlyArray<HomepageNavigationItem> = [
   {
     type: 'link',
     index: '06',
-    label: 'Integration',
-    description: 'Bestand anbinden',
-    href: '#integration',
-  },
-  {
-    type: 'link',
-    index: '07',
     label: 'Einführung',
     description: 'Schrittweise starten',
     href: '#einfuehrung',
   },
   {
     type: 'link',
-    index: '08',
+    index: '07',
     label: 'Kontakt',
     description: 'Standortgespräch',
     href: '#kontakt',
@@ -97,13 +90,6 @@ export const customerProof = {
     'Gemeinsam mit Hochschulen und Technologiepartnern für den realen Betrieb entwickelt.',
   partners: [
     {
-      name: 'Karlsruher Institut für Technologie',
-      logoSrc: '/partners/kit.svg',
-      width: 130,
-      height: 75,
-      presentation: 'monochrome',
-    },
-    {
       name: 'FH Aachen',
       logoSrc: '/partners/fh-aachen.svg',
       width: 88,
@@ -122,13 +108,6 @@ export const customerProof = {
       logoSrc: '/partners/artandtech-space.svg',
       width: 1000,
       height: 543,
-      presentation: 'monochrome',
-    },
-    {
-      name: 'FH Münster',
-      logoSrc: '/partners/fh-muenster.svg',
-      width: 316,
-      height: 49,
       presentation: 'monochrome',
     },
     {
@@ -371,13 +350,6 @@ export const useCases: ReadonlyArray<HomepageLinkedNumberedItem> = [
   },
 ];
 
-export const retrofitPoints = [
-  'Maschine oder Zugangspunkt technisch und organisatorisch prüfen',
-  'Schnittstelle, Schutzkonzept und gewünschtes Verhalten klären',
-  'Vorhandene Identmedien und Systeme nach technischer Prüfung einbinden',
-  'Ausfallverhalten, Zuständigkeiten und Datenzweck vorab festlegen',
-] as const;
-
 export const rolloutSteps: ReadonlyArray<HomepageNumberedItem> = [
   {
     index: '01',
@@ -434,16 +406,8 @@ export const mediaBriefs = {
       'Studierende, Werkstattteam und Lieferverkehr in einer glaubwürdigen Campus- oder Betriebsumgebung mit Mardu-Zugangspunkten.',
     format: 'Querformat · 16:9 · dokumentarisch',
   },
-  retrofitExplodedView: {
-    index: 'P06',
-    type: 'Infografik',
-    title: 'Nachrüstung ohne falsches Universalversprechen',
-    brief:
-      'Explosionsansicht einer geprüften Anbindung: Identmedium, Mardu-Hardware, Schnittstelle, Bestandssteuerung und Verantwortungsgrenze.',
-    format: 'Technische Grafik · 4:3',
-  },
   rolloutMap: {
-    index: 'P07',
+    index: 'P06',
     type: 'Infografik',
     title: 'Vom Pilot zur Standortstruktur',
     brief:
@@ -451,7 +415,7 @@ export const mediaBriefs = {
     format: 'Isometrie · 3:2 · Halftone-Akzent',
   },
   contactScene: {
-    index: 'P08',
+    index: 'P07',
     type: 'Fotografie',
     title: 'Standortgespräch in der Werkstatt',
     brief:

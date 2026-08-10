@@ -1,4 +1,5 @@
 import { StickyStorySection } from '@mardu/sections';
+import { EditorialAccent } from '@mardu/ui/components/typography';
 import { permissionsStory } from '../homepage-content';
 
 export function PermissionsSection() {
@@ -8,11 +9,7 @@ export function PermissionsSection() {
       eyebrow="[03] Identität und Berechtigung"
       title={
         <>
-          Eine Identität.{' '}
-          <em className="font-serif italic font-normal tracking-[-0.02em] text-foreground/90">
-            Klare Berechtigungen.
-          </em>{' '}
-          Viele Zugänge.
+          Eine Identität. <EditorialAccent>Klare Berechtigungen.</EditorialAccent> Viele Zugänge.
         </>
       }
       intro={
