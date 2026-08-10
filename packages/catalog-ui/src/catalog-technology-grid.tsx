@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { CatalogTechnologyDto } from "@mardu/content-core";
-import { Overline } from "@mardu/ui/components/typography";
+import { CatalogSectionHeader } from "./catalog-section-header";
 
 export interface CatalogTechnologyGridProps {
   eyebrow?: string;
@@ -21,18 +21,12 @@ export function CatalogTechnologyGrid({
 
   return (
     <section className="section-hairline">
-      <div className="mardu-container py-20 md:py-24">
-        {eyebrow ? <Overline className="mb-3">{eyebrow}</Overline> : null}
-        <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.72fr)] lg:items-start">
-          <h2 className="headline-balance text-[clamp(1.9rem,4vw,3.3rem)] leading-[1.02] tracking-[-0.03em] text-foreground">
-            {title}
-          </h2>
-          {description ? (
-            <p className="max-w-xl text-sm leading-relaxed text-foreground/68 md:text-base">
-              {description}
-            </p>
-          ) : null}
-        </div>
+      <div className="mardu-container py-16 md:py-24">
+        <CatalogSectionHeader
+          eyebrow={eyebrow}
+          title={title}
+          description={description}
+        />
 
         <div className="mt-8 grid gap-5 md:grid-cols-3 xl:grid-cols-4">
           {items.map((item) => (

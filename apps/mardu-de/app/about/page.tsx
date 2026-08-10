@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { Button } from '@mardu/ui/components/button';
+import { EditorialPageHero } from '@mardu/ui/components/editorial-page-hero';
 import { EditorialAccent } from '@mardu/ui/components/typography';
 import aboutContent from './about-content.md';
 import lucaPhoto from '@/public/people/luca_schoeneberg.jpg';
@@ -85,20 +86,15 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-background">
-      <section className="border-b border-border py-16 md:py-24">
-        <div className="mardu-container grid min-w-0 gap-12 xl:grid-cols-[0.62fr_0.38fr] xl:items-end xl:gap-20">
-          <div className="min-w-0">
-            <p className="font-mono text-xs tracking-[0.18em] text-mardu-purple">[ÜBER MARDU]</p>
-            <h1 className="mt-6 max-w-[14ch] text-[var(--font-size-h1-fluid)] font-light leading-[0.98] tracking-[-0.04em] text-foreground">
-              Aus der Werkstatt gedacht. <EditorialAccent>Für den Betrieb gebaut.</EditorialAccent>
-            </h1>
-          </div>
-          <p className="max-w-[38rem] text-base leading-relaxed text-muted-foreground xl:pb-1">
-            Wir verbinden Software, Elektronik und Betreiberwissen zu einem System, das Menschen nur
-            dort Zugang gibt, wo Berechtigungen und Qualifikationen stimmen.
-          </p>
-        </div>
-      </section>
+      <EditorialPageHero
+        eyebrow="[04 / ÜBER MARDU]"
+        title={
+          <>
+            Aus der Werkstatt gedacht. <EditorialAccent>Für den Betrieb gebaut.</EditorialAccent>
+          </>
+        }
+        description="Wir verbinden Software, Elektronik und Betreiberwissen zu einem System, das Menschen nur dort Zugang gibt, wo Berechtigungen und Qualifikationen stimmen."
+      />
 
       <section className="border-y border-border py-16 md:py-24">
         <div className="mardu-container grid gap-10 lg:grid-cols-[minmax(10rem,0.3fr)_minmax(0,0.7fr)] lg:gap-20">

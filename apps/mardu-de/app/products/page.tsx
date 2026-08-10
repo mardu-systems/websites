@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { CTASection } from '@mardu/sections';
+import { EditorialAccent } from '@mardu/ui/components/typography';
 import {
   CatalogCarrierGrid,
   CatalogCategoryGrid,
@@ -45,8 +46,13 @@ export default async function ProductsPage() {
   return (
     <main className="min-h-screen bg-background">
       <CatalogHero
-        eyebrow="Produktkatalog"
-        title="Hardware, Credentials und Zubehör für reale Mardu-Installationen"
+        eyebrow="01 / Produkte"
+        title={
+          <>
+            Hardware, Credentials und Zubehör für{' '}
+            <EditorialAccent>reale Mardu-Installationen.</EditorialAccent>
+          </>
+        }
         description="Dieser Bereich ist für konkrete Projektbausteine gedacht: Produkte verstehen, typische Kombinationen prüfen, Richtpreise sehen und anschließend gezielt anfragen. Nicht als Einstieg in die Lösung, sondern als vertiefender Schritt."
         primaryCta={{ label: 'Angebot anfragen', href: '/contact?source=contact-form' }}
         secondaryCta={{ label: 'Integrationen ansehen', href: '/integrations' }}

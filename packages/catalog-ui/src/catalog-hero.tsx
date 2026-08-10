@@ -1,10 +1,11 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { Button } from "@mardu/ui/components/button";
-import { Overline } from "@mardu/ui/components/typography";
+import { EditorialPageHero } from "@mardu/ui/components/editorial-page-hero";
 
 export interface CatalogHeroProps {
   eyebrow?: string;
-  title: string;
+  title: ReactNode;
   description: string;
   primaryCta?: {
     label: string;
@@ -24,26 +25,15 @@ export function CatalogHero({
   secondaryCta,
 }: CatalogHeroProps) {
   return (
-    <section className="section-hairline">
-      <div className="mardu-container py-20 md:py-24">
-        {eyebrow ? <Overline className="mb-4">{eyebrow}</Overline> : null}
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.72fr)] lg:items-end">
-          <div className="space-y-5">
-            <h1 className="headline-balance text-[clamp(2.4rem,5vw,5rem)] leading-[0.97] tracking-[-0.04em] text-foreground">
-              {title}
-            </h1>
-            <p className="max-w-[62ch] text-base leading-relaxed text-foreground/72 md:text-lg">
-              {description}
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-3 lg:items-start">
+    <EditorialPageHero
+      eyebrow={`[${(eyebrow ?? "Produkte").toUpperCase()}]`}
+      title={title}
+      description={description}
+      actions={
+        primaryCta || secondaryCta ? (
+          <>
             {primaryCta ? (
-              <Button
-                render={<Link href={primaryCta.href} />}
-                size="lg"
-                className="w-full lg:w-auto"
-              >
+              <Button render={<Link href={primaryCta.href} />} size="lg">
                 {primaryCta.label}
               </Button>
             ) : null}
@@ -52,14 +42,13 @@ export function CatalogHero({
                 render={<Link href={secondaryCta.href} />}
                 variant="outline"
                 size="lg"
-                className="w-full lg:w-auto"
               >
                 {secondaryCta.label}
               </Button>
             ) : null}
-          </div>
-        </div>
-      </div>
-    </section>
+          </>
+        ) : null
+      }
+    />
   );
 }

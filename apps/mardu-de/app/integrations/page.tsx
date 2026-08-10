@@ -4,6 +4,8 @@ import { LockKeyhole } from 'lucide-react';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import { EditorialPageHero } from '@mardu/ui/components/editorial-page-hero';
+import { EditorialAccent } from '@mardu/ui/components/typography';
 import {
   IntegrationsDirectory,
   type IntegrationsDirectoryItem,
@@ -93,23 +95,16 @@ export default async function IntegrationsPage() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <section className="section-hairline">
-        <div className="mardu-container grid gap-6 py-7 md:py-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-8 xl:px-24">
-          <div className="max-w-3xl">
-            <p className="font-mono text-xs uppercase tracking-[0.12em] text-mardu-purple">
-              [01] Integrationen
-            </p>
-            <h1 className="mt-4 max-w-3xl text-[clamp(2.75rem,4.5vw,4rem)] font-normal leading-[0.96] tracking-[-0.045em]">
-              <span className="block">Systeme, die</span>
-              <span className="block">miteinander arbeiten.</span>
-            </h1>
-            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-foreground/72 md:text-base">
-              Verbinde Zutritt, Maschinen, Identitäten und Prozesse mit Standards wie LDAP, OIDC,
-              MQTT, ModBus, MCP sowie Plattformen wie n8n, Stripe und easyVerein.
-            </p>
-          </div>
-
-          <div className="relative aspect-[2/1] min-h-58 overflow-hidden lg:-mr-8 xl:-mr-10">
+      <EditorialPageHero
+        eyebrow="[03 / INTEGRATIONEN]"
+        title={
+          <>
+            Systeme, die <EditorialAccent>miteinander arbeiten.</EditorialAccent>
+          </>
+        }
+        description="Verbinde Zutritt, Maschinen, Identitäten und Prozesse mit Standards wie LDAP, OIDC, MQTT, ModBus und MCP sowie Plattformen wie n8n, Stripe und easyVerein."
+        media={
+          <div className="relative h-20 overflow-hidden md:h-24 xl:h-20">
             <Image
               src="/integrations/workshop-access-line-art.png"
               alt="Person authentifiziert sich am Zugang zu einer vernetzten Werkstatt"
@@ -119,13 +114,10 @@ export default async function IntegrationsPage() {
               sizes="(min-width: 1024px) 52vw, 100vw"
             />
           </div>
-        </div>
-      </section>
+        }
+      />
 
-      <section
-        aria-labelledby="systemlandschaft-heading"
-        className="section-hairline pb-5 pt-4 md:pb-6"
-      >
+      <section aria-labelledby="systemlandschaft-heading" className="py-12 md:py-16">
         <h2 id="systemlandschaft-heading" className="sr-only">
           Mardu Systemlandschaft
         </h2>

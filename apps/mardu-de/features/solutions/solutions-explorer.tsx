@@ -53,7 +53,7 @@ export function SolutionsExplorer({ items }: SolutionsExplorerProps) {
   }
 
   return (
-    <div className="grid gap-10 xl:grid-cols-[17rem_minmax(0,1fr)_23rem] xl:items-start xl:gap-14 2xl:grid-cols-[18rem_46.5rem_27.75rem] 2xl:justify-between 2xl:gap-0">
+    <div className="grid min-w-0 gap-10 xl:grid-cols-[17rem_minmax(0,1fr)_23rem] xl:items-start xl:gap-14 2xl:grid-cols-[18rem_minmax(0,1fr)_25rem]">
       <div
         role="tablist"
         aria-label="Einsatzbereich auswählen"

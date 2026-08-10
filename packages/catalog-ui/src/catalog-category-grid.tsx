@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import type { CatalogCategoryDto } from '@mardu/content-core';
-import { Overline } from '@mardu/ui/components/typography';
+import Image from "next/image";
+import Link from "next/link";
+import type { CatalogCategoryDto } from "@mardu/content-core";
+import { CatalogSectionHeader } from "./catalog-section-header";
 
 export interface CatalogCategoryGridProps {
   eyebrow?: string;
@@ -20,18 +20,12 @@ export function CatalogCategoryGrid({
 }: CatalogCategoryGridProps) {
   return (
     <section className="section-hairline">
-      <div className="mardu-container py-20 md:py-24">
-        {eyebrow ? <Overline className="mb-3">{eyebrow}</Overline> : null}
-        <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.72fr)] lg:items-start">
-          <h2 className="headline-balance text-[clamp(1.9rem,4vw,3.5rem)] leading-[1.02] tracking-[-0.03em] text-foreground">
-            {title}
-          </h2>
-          {description ? (
-            <p className="max-w-xl text-sm leading-relaxed text-foreground/68 md:text-base">
-              {description}
-            </p>
-          ) : null}
-        </div>
+      <div className="mardu-container py-16 md:py-24">
+        <CatalogSectionHeader
+          eyebrow={eyebrow}
+          title={title}
+          description={description}
+        />
 
         <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {categories.map((category) => (
@@ -58,7 +52,7 @@ export function CatalogCategoryGrid({
 
               <div className="space-y-3 p-6">
                 <p className="text-[11px] uppercase tracking-[0.16em] text-foreground/46">
-                  {category.eyebrow || 'Produktfamilie'}
+                  {category.eyebrow || "Produktfamilie"}
                 </p>
                 <h3 className="text-2xl font-semibold tracking-[-0.02em] text-foreground">
                   {category.name}
