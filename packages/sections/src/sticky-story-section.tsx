@@ -37,6 +37,8 @@ export interface StickyStorySectionProps {
   items: ReadonlyArray<StickyStoryItem>;
   /** Optional page section reached by the final step button. */
   nextSectionId?: string;
+  /** Reduces vertical travel when the story is part of a long editorial page. */
+  compact?: boolean;
   className?: string;
 }
 
@@ -102,6 +104,7 @@ export default function StickyStorySection({
   intro,
   items,
   nextSectionId,
+  compact = false,
   className,
 }: StickyStorySectionProps) {
   const prefersReducedMotion = useReducedMotion();
@@ -170,7 +173,8 @@ export default function StickyStorySection({
     <section
       id={id}
       className={cn(
-        "scroll-mt-24 border-b border-border py-16 md:py-24",
+        "scroll-mt-24 border-b border-border py-16",
+        compact ? "md:py-20" : "md:py-24",
         className,
       )}
     >
@@ -195,7 +199,12 @@ export default function StickyStorySection({
                 ref={(node) => {
                   stepRefs.current[index] = node;
                 }}
-                className="border-t border-border py-12 first:border-t-0 first:pt-0 lg:flex lg:min-h-[72svh] lg:items-center lg:border-t-0 lg:py-20 lg:first:pt-20"
+                className={cn(
+                  "border-t border-border py-12 first:border-t-0 first:pt-0 lg:flex lg:items-center lg:border-t-0",
+                  compact
+                    ? "lg:min-h-[58svh] lg:py-14 lg:first:pt-14"
+                    : "lg:min-h-[72svh] lg:py-20 lg:first:pt-20",
+                )}
               >
                 <StoryCopy
                   item={item}
@@ -224,8 +233,9 @@ export default function StickyStorySection({
             <div
               className="h-full"
               style={{
-                paddingTop:
-                  "max(0px, calc((72svh - min(62.5cqw, 100svh - 10rem)) / 2))",
+                paddingTop: compact
+                  ? "max(0px, calc((58svh - min(62.5cqw, 100svh - 10rem)) / 2))"
+                  : "max(0px, calc((72svh - min(62.5cqw, 100svh - 10rem)) / 2))",
               }}
             >
               <div

@@ -88,7 +88,7 @@ export const homepageHero = {
   primaryAction: { label: 'Jetzt beraten lassen', href: '/contact' },
   secondaryAction: { label: 'System verstehen', href: '#system' },
   rotatingAccessPoints: ['Maschine', 'Tür', 'Schranke', 'Werkstatt'],
-  trustSignals: ['DSGVO im Projekt', 'ISO 27001 als Referenz', 'Designed in Germany'],
+  trustSignals: ['DSGVO im Projekt', 'Schrittweise nachrüstbar', 'Designed in Germany'],
 } as const;
 
 export const customerProof = {

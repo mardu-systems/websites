@@ -211,9 +211,9 @@ export function ContactForm({
   }
 
   const inputClasses =
-    "w-full rounded-none border-0 border-b border-neutral-800/70 bg-transparent px-0 py-2 text-base text-foreground placeholder:text-muted-foreground focus-visible:border-neutral-900 focus-visible:outline-none focus-visible:ring-0";
+    "w-full rounded-none border-0 border-b border-neutral-800/70 bg-transparent px-0 py-2 text-base text-foreground placeholder:text-muted-foreground focus-visible:border-mardu-purple focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mardu-purple focus-visible:ring-0";
   const textareaClasses =
-    "w-full min-h-28 rounded-none border-0 border-b border-neutral-800/70 bg-transparent px-0 py-2 text-base text-foreground placeholder:text-muted-foreground focus-visible:border-neutral-900 focus-visible:outline-none focus-visible:ring-0";
+    "w-full min-h-28 rounded-none border-0 border-b border-neutral-800/70 bg-transparent px-0 py-2 text-base text-foreground placeholder:text-muted-foreground focus-visible:border-mardu-purple focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mardu-purple focus-visible:ring-0";
   const submitHandler = submit ? form.handleSubmit(handleSubmit) : undefined;
 
   const handleTextareaKeyDown = (

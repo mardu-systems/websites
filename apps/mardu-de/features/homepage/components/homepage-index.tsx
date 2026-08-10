@@ -54,6 +54,7 @@ function IndexLink({
 export function HomepageIndex() {
   const [activeSection, setActiveSection] = React.useState('system');
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [homepageHeroVisible, setHomepageHeroVisible] = React.useState(true);
   const [footerVisible, setFooterVisible] = React.useState(false);
   const { scrollToSection } = useScrollToSection({ updateHash: true, delayMs: 0 });
 
@@ -90,6 +91,23 @@ export function HomepageIndex() {
       window.removeEventListener('scroll', scheduleUpdate);
       window.removeEventListener('resize', scheduleUpdate);
     };
+  }, []);
+
+  React.useEffect(() => {
+    const hero = document.getElementById('home');
+    if (!hero) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const visible = entry?.isIntersecting ?? false;
+        setHomepageHeroVisible(visible);
+        if (visible) setMobileOpen(false);
+      },
+      { threshold: 0.05 },
+    );
+
+    observer.observe(hero);
+    return () => observer.disconnect();
   }, []);
 
   React.useEffect(() => {
@@ -135,14 +153,17 @@ export function HomepageIndex() {
     1,
     homepageNavigation.findIndex((item) => item.index === activeItem.index) + 1,
   );
+  const indexHidden = homepageHeroVisible || footerVisible;
 
   return (
     <>
       <nav
         aria-label="Kapitel der Startseite"
+        aria-hidden={indexHidden}
+        inert={indexHidden}
         className={cn(
           'fixed inset-x-0 bottom-0 z-40 hidden bg-background/95 backdrop-blur-md transition-transform duration-200 [&_[data-index-description]]:hidden 2xl:[&_[data-index-description]]:block lg:block',
-          footerVisible && 'translate-y-full',
+          indexHidden && 'translate-y-full',
         )}
       >
         <div className="mx-auto grid max-w-[1600px] grid-cols-8 divide-x divide-border">
@@ -158,9 +179,11 @@ export function HomepageIndex() {
       </nav>
 
       <div
+        aria-hidden={indexHidden}
+        inert={indexHidden}
         className={cn(
           'fixed inset-x-0 bottom-0 z-40 bg-background/95 backdrop-blur-md transition-transform duration-200 lg:hidden',
-          footerVisible && 'translate-y-full',
+          indexHidden && 'translate-y-full',
         )}
       >
         <div className="h-px bg-black/10" aria-hidden="true">

@@ -28,10 +28,18 @@ bun test
 bun run build
 ```
 
-Für einzelne Apps:
+Die öffentliche Website benötigt die Payload-Plattform für Katalog, Lösungen,
+Integrationen, Blog und Rechtstexte. Der reguläre Startbefehl startet deshalb
+beide Apps gemeinsam:
 
 ```bash
 bun run dev:mardu-de
+```
+
+Für die getrennte Entwicklung stehen weiterhin die einzelnen Prozesse bereit:
+
+```bash
+bun run dev:mardu-de:frontend
 bun run dev:platform
 ```
 

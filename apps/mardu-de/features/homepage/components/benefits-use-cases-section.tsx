@@ -10,7 +10,7 @@ const benefitIcons = [ListTree, UnlockKeyhole, ChartNoAxesCombined] as const;
 export function BenefitsUseCasesSection() {
   return (
     <>
-      <section id="nutzen" className="scroll-mt-24 border-b border-border bg-card py-16 md:py-24">
+      <section id="nutzen" className="scroll-mt-24 border-b border-border bg-card py-16 md:py-20">
         <div className="mardu-container">
           <div className="grid gap-12 lg:grid-cols-[0.46fr_0.54fr] lg:items-end lg:gap-16">
             <SectionIntro
@@ -75,7 +75,7 @@ export function BenefitsUseCasesSection() {
         </div>
       </section>
 
-      <section id="einsatzbereiche" className="scroll-mt-24 border-b border-border py-16 md:py-24">
+      <section id="einsatzbereiche" className="scroll-mt-24 border-b border-border py-16 md:py-20">
         <div className="mardu-container">
           <SectionIntro
             eyebrow="[05] Einsatzbereiche"

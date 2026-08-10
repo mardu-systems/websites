@@ -9,7 +9,7 @@ export function RolloutFaqSection() {
 
   return (
     <>
-      <section id="einfuehrung" className="scroll-mt-24 border-b border-border py-16 md:py-24">
+      <section id="einfuehrung" className="scroll-mt-24 border-b border-border py-16 md:py-20">
         <div className="mardu-container">
           <SectionIntro
             eyebrow="[07] Schrittweise einführen"
@@ -55,6 +55,7 @@ export function RolloutFaqSection() {
       </section>
 
       <EditorialFaqSection
+        className="md:py-20"
         eyebrow="FAQ"
         titleId="faq-title"
         title={

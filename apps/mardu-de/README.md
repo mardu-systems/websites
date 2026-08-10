@@ -10,7 +10,7 @@ This project is not open source. The source code is available for viewing and ed
 
 ## Getting Started
 
-Install dependencies at the repository root and start the public frontend:
+Install dependencies at the repository root and start the public frontend together with its Payload content platform:
 
 ```bash
 bun install
@@ -49,6 +49,8 @@ For contact leads, optional custom field mappings can be configured:
 - `TWENTY_CONTACT_NEWSLETTER_OPT_IN_FIELD`: stores whether newsletter opt-in was checked.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser. Payload content is read from `MARDU_PLATFORM_ORIGIN`; there are no local runtime content fallbacks.
+
+Use `bun run dev:mardu-de:frontend` only when a separate Payload instance is already available at `MARDU_PLATFORM_ORIGIN`.
 
 `PAYLOAD_FETCH_TIMEOUT_MS` controls the server-side content request timeout. It defaults to 10 seconds so that a cold local Payload start does not fail at the previous three-second boundary; accepted values range from 1,000 to 30,000 milliseconds.
 

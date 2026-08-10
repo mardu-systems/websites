@@ -26,6 +26,7 @@ export function PermissionsSection() {
       }
       items={permissionsStory}
       nextSectionId="nutzen"
+      compact
     />
   );
 }

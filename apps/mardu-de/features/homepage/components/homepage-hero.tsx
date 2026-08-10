@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUpRight, Fingerprint, MapPinned, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, MapPinned, ShieldCheck, Wrench } from 'lucide-react';
 import { homepageHero } from '../homepage-content';
 import { CyclingAccessPoint } from './cycling-access-point';
 
 const trustVisuals = [
-  { Icon: Fingerprint, colorClassName: 'bg-muted text-muted-foreground' },
-  { Icon: ShieldCheck, colorClassName: 'bg-secondary text-secondary-foreground' },
+  { Icon: ShieldCheck, colorClassName: 'bg-muted text-muted-foreground' },
+  { Icon: Wrench, colorClassName: 'bg-secondary text-secondary-foreground' },
   { Icon: MapPinned, colorClassName: 'bg-accent text-accent-foreground' },
 ] as const;
 

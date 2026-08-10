@@ -6,7 +6,7 @@ import { accessAreas } from '../homepage-content';
 
 export function AccessPointsSection() {
   return (
-    <section id="zugaenge" className="scroll-mt-24 border-b border-border bg-card py-16 md:py-24">
+    <section id="zugaenge" className="scroll-mt-24 border-b border-border bg-card py-16 md:py-20">
       <div className="mardu-container">
         <SectionIntro
           eyebrow="[02] Physische Zugänge"

@@ -9,7 +9,8 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
-    "dev:mardu-de": "bun run --cwd apps/mardu-de dev",
+    "dev:mardu-de": "turbo run dev --parallel --filter=@mardu/app-mardu-de --filter=@mardu/app-platform",
+    "dev:mardu-de:frontend": "bun run --cwd apps/mardu-de dev",
     "dev:platform": "bun run --cwd apps/platform dev",
     "payload": "cd apps/platform && bun run payload",
     "lint": "turbo run lint",

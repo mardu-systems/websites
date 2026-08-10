@@ -150,7 +150,7 @@ function FooterAiSummaryLinks({
 
   return (
     <div className="mt-4 border-t border-white/14 pt-4">
-      <p className="mb-2 text-[0.6875rem] tracking-[0.08em] text-white/44">
+      <p className="mb-2 text-[0.6875rem] tracking-[0.08em] text-white/60">
         KI-Zusammenfassung
       </p>
       <ul className="flex flex-wrap gap-2">
@@ -217,8 +217,14 @@ function FooterWordmark({ src }: { src: string }) {
 
       animationFrame = window.requestAnimationFrame(() => {
         const rect = container.getBoundingClientRect();
-        container.style.setProperty("--wordmark-x", `${event.clientX - rect.left}px`);
-        container.style.setProperty("--wordmark-y", `${event.clientY - rect.top}px`);
+        container.style.setProperty(
+          "--wordmark-x",
+          `${event.clientX - rect.left}px`,
+        );
+        container.style.setProperty(
+          "--wordmark-y",
+          `${event.clientY - rect.top}px`,
+        );
         animationFrame = null;
       });
     };
@@ -336,7 +342,7 @@ function EditorialSiteFooter({
                 />
               </div>
             </Link>
-            <p className="max-w-[31rem] text-base leading-relaxed text-white/62">
+            <p className="max-w-[31rem] text-base leading-relaxed text-white/72">
               Vernetzte Freigaben für Maschinen, Türen, Tore und Schranken – mit
               zentraler Verwaltung für Identitäten, Regeln und Ereignisse.
             </p>
@@ -365,7 +371,7 @@ function EditorialSiteFooter({
                     {link.label}
                   </span>
                   {link.description ? (
-                    <span className="mt-1 truncate text-xs text-white/48 lg:mt-2">
+                    <span className="mt-1 truncate text-xs text-white/62 lg:mt-2">
                       {link.description}
                     </span>
                   ) : null}
@@ -376,7 +382,7 @@ function EditorialSiteFooter({
 
           <div className="flex flex-col justify-between gap-6 py-8 lg:pl-7">
             <div>
-              <p className="mb-3 text-[0.6875rem] tracking-[0.08em] text-white/44">
+              <p className="mb-3 text-[0.6875rem] tracking-[0.08em] text-white/60">
                 Wissen & Recht
               </p>
               <ul className="space-y-2 text-sm">
@@ -420,7 +426,7 @@ function EditorialSiteFooter({
           </div>
         </div>
 
-        <div className="flex flex-col gap-5 pt-6 text-xs tracking-[0.06em] text-white/44 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-5 pt-6 text-xs tracking-[0.06em] text-white/60 sm:flex-row sm:items-center sm:justify-between">
           <p suppressHydrationWarning>
             Copyright © {year} {brand.copyrightName}.
           </p>

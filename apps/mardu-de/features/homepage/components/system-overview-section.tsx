@@ -7,7 +7,7 @@ const layerIcons = [ContactRound, BadgeCheck, Boxes, MonitorCog] as const;
 
 export function SystemOverviewSection() {
   return (
-    <section id="system" className="scroll-mt-24 border-b border-border py-16 md:py-24">
+    <section id="system" className="scroll-mt-24 border-b border-border py-16 md:py-20">
       <div className="mardu-container">
         <SectionIntro
           eyebrow="[01] Das Mardu-System"
@@ -44,7 +44,7 @@ export function SystemOverviewSection() {
               return (
                 <li
                   key={item.index}
-                  className="relative flex flex-col border-b border-border p-5 md:p-6 md:odd:border-r md:[&:nth-last-child(-n+2)]:border-b-0 xl:min-h-[31rem] xl:border-b-0 xl:border-r xl:border-border xl:last:border-r-0"
+                  className="relative flex flex-col border-b border-border p-5 md:p-6 md:odd:border-r md:[&:nth-last-child(-n+2)]:border-b-0 xl:min-h-[27rem] xl:border-b-0 xl:border-r xl:border-border xl:last:border-r-0"
                 >
                   <div className="flex items-center justify-between gap-3">
                     <span className="text-xs text-mardu-purple">[{item.index}]</span>
@@ -71,7 +71,7 @@ export function SystemOverviewSection() {
 
           <HomepageMediaPlaceholder
             brief={mediaBriefs.accessPanorama}
-            className="min-h-[31rem] border-0"
+            className="min-h-[27rem] border-0"
           />
         </div>
       </div>

@@ -9,7 +9,7 @@ export function IntegrationSection() {
   return (
     <section
       id="integration"
-      className="scroll-mt-24 border-b border-border bg-card py-16 md:py-24"
+      className="scroll-mt-24 border-b border-border bg-card py-16 md:py-20"
     >
       <div className="mardu-container">
         <SectionIntro
