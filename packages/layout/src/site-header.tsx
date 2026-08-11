@@ -396,10 +396,12 @@ function HeaderCtaButton({
 
 function MobileMenuTriggerIcon({
   iconSrc,
+  closeIconSrc,
   open,
   fallbackClassName = "size-4",
 }: {
   iconSrc?: string;
+  closeIconSrc?: string;
   open: boolean;
   fallbackClassName?: string;
 }) {
@@ -408,6 +410,39 @@ function MobileMenuTriggerIcon({
       <X className={fallbackClassName} />
     ) : (
       <Menu className={fallbackClassName} />
+    );
+  }
+
+  if (closeIconSrc) {
+    return (
+      <span
+        className={cn(
+          "relative block size-8 shrink-0 overflow-hidden transition-[rotate,scale] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+          open ? "rotate-[55deg] scale-[0.92]" : "rotate-0 scale-100",
+        )}
+        aria-hidden="true"
+      >
+        <Image
+          src={iconSrc}
+          alt=""
+          fill
+          sizes="32px"
+          className={cn(
+            "object-contain transition-opacity duration-150 ease-out motion-reduce:transition-none",
+            open ? "opacity-0" : "delay-100 opacity-100",
+          )}
+        />
+        <Image
+          src={closeIconSrc}
+          alt=""
+          fill
+          sizes="32px"
+          className={cn(
+            "object-contain transition-opacity duration-150 ease-out motion-reduce:transition-none",
+            open ? "delay-100 opacity-100" : "opacity-0",
+          )}
+        />
+      </span>
     );
   }
 
@@ -426,6 +461,36 @@ function MobileMenuTriggerIcon({
         sizes="32px"
         className="object-contain"
       />
+    </span>
+  );
+}
+
+function MobileMenuTriggerLabel({ open }: { open: boolean }) {
+  return (
+    <span
+      className="inline-grid h-5 overflow-hidden text-left leading-5"
+      aria-hidden="true"
+    >
+      <span
+        className={cn(
+          "col-start-1 row-start-1 transition-[opacity,translate] duration-200 ease-out motion-reduce:transition-none",
+          open
+            ? "-translate-y-full opacity-0"
+            : "delay-75 translate-y-0 opacity-100",
+        )}
+      >
+        Menü
+      </span>
+      <span
+        className={cn(
+          "col-start-1 row-start-1 transition-[opacity,translate] duration-200 ease-out motion-reduce:transition-none",
+          open
+            ? "delay-75 translate-y-0 opacity-100"
+            : "translate-y-full opacity-0",
+        )}
+      >
+        Schließen
+      </span>
     </span>
   );
 }
@@ -582,9 +647,10 @@ export default function SiteHeader({
             >
               <MobileMenuTriggerIcon
                 iconSrc={brand.mobileMenuIconSrc}
+                closeIconSrc={brand.mobileMenuCloseIconSrc}
                 open={mobileOpen}
               />
-              {mobileOpen ? "Schließen" : "Menü"}
+              <MobileMenuTriggerLabel open={mobileOpen} />
             </Button>
           </nav>
 
@@ -688,6 +754,7 @@ export default function SiteHeader({
           >
             <MobileMenuTriggerIcon
               iconSrc={brand.mobileMenuIconSrc}
+              closeIconSrc={brand.mobileMenuCloseIconSrc}
               open={mobileOpen}
               fallbackClassName="size-5"
             />

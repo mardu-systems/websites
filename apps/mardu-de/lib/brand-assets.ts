@@ -8,6 +8,10 @@ export const MARDU_WORDMARK_DARK_PATH = `${MARDU_BRANDING_BASE_PATH}/wordmark/wo
 
 export const MARDU_MOBILE_MENU_ICON_PATH = '/icons/mobile-menu-dots.svg';
 
+export const MARDU_MOBILE_MENU_CLOSE_ICON_PATH = '/icons/mobile-menu-dots-close.svg';
+
 export const MARDU_FAVICON_PATH = `${MARDU_BRANDING_BASE_PATH}/favicons/favicon.svg`;
 
 export const MARDU_APPLE_TOUCH_ICON_PATH = `${MARDU_BRANDING_BASE_PATH}/favicons/apple-touch-icon.svg`;
+
+export const MARDU_FOOTER_MODEL_PATH = '/models/branding/mardu-footer-logo.glb';

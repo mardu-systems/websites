@@ -8,8 +8,10 @@ import { getSiteConfig } from '@mardu/site-config';
 import { defaultFooterMetaLinks, defaultFooterNavLinks } from '@/data/default-footer-items';
 import { defaultHeaderItems } from '@/data/default-header-items';
 import {
+  MARDU_FOOTER_MODEL_PATH,
   MARDU_LOGO_DARK_PATH,
   MARDU_LOGO_LIGHT_PATH,
+  MARDU_MOBILE_MENU_CLOSE_ICON_PATH,
   MARDU_MOBILE_MENU_ICON_PATH,
   MARDU_WORDMARK_DARK_PATH,
 } from '@/lib/brand-assets';
@@ -73,6 +75,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
           logoWidth: 156,
           logoHeight: 44,
           mobileMenuIconSrc: MARDU_MOBILE_MENU_ICON_PATH,
+          mobileMenuCloseIconSrc: MARDU_MOBILE_MENU_CLOSE_ICON_PATH,
         },
         items: defaultHeaderItems,
         cta: {
@@ -91,6 +94,8 @@ export default function SiteShell({ children }: { children: ReactNode }) {
           logoWidth: 156,
           logoHeight: 44,
           wordmarkSrc: MARDU_WORDMARK_DARK_PATH,
+          backgroundMarkModelSrc: MARDU_FOOTER_MODEL_PATH,
+          backgroundMarkColor: '#8D69BF',
           copyrightName: 'Mardu GmbH',
         },
         description: 'Wo Nutzung beginnt, ist Mardu.',

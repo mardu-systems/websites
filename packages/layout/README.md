@@ -36,6 +36,10 @@ Shared site-layout components for Mardu frontends.
   its optional primary action is rendered in the brand column
 - accepts an optional standalone `brand.wordmarkSrc`; the editorial footer uses it as an
   interactive, pointer-lit SVG mask at the lower edge
+- accepts optional `brand.backgroundMarkSrc`, `brand.backgroundMarkModelSrc`, and
+  `brand.backgroundMarkColor`; the editorial footer renders the supplied image mark or static
+  GLB brand model as a subtle halftone background. The GLB variant disables automatic rotation,
+  pointer interaction, parallax, floating, and hover animation.
 
 ### `SiteShell`
 

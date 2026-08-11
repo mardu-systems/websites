@@ -110,8 +110,10 @@ export interface SiteHeaderBrandingDto {
   logoAlt: string;
   logoWidth?: number;
   logoHeight?: number;
-  /** Optional image asset that replaces the mobile menu and close glyphs. */
+  /** Optional image asset that replaces the mobile menu glyph. */
   mobileMenuIconSrc?: string;
+  /** Optional close-state asset paired with `mobileMenuIconSrc` for an animated icon transition. */
+  mobileMenuCloseIconSrc?: string;
 }
 
 /**
@@ -178,6 +180,12 @@ export interface SiteFooterBrandingDto {
   logoHeight?: number;
   /** Optional standalone wordmark used for the interactive editorial footer finish. */
   wordmarkSrc?: string;
+  /** Optional standalone brand mark rendered as a subtle halftone background in editorial footers. */
+  backgroundMarkSrc?: string;
+  /** Optional GLB brand mark rendered as a static halftone background in editorial footers. */
+  backgroundMarkModelSrc?: string;
+  /** CSS color used for the optional image or GLB halftone background mark. */
+  backgroundMarkColor?: string;
   copyrightName: string;
 }
 

@@ -12,6 +12,7 @@ import {
   Phone,
 } from "lucide-react";
 import { Button } from "@mardu/ui/components/button";
+import { Halftone3DIllustration } from "@mardu/ui/components/halftone-3d-illustration";
 import { cn } from "@mardu/ui/lib/utils";
 import type {
   FooterAiSummaryLinkDto,
@@ -293,6 +294,117 @@ function FooterWordmark({ src }: { src: string }) {
   );
 }
 
+function FooterHalftoneMark({
+  color = "#8D69BF",
+  src,
+}: {
+  color?: string;
+  src: string;
+}) {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute -right-24 -top-28 z-0 size-[28rem] opacity-[0.24] sm:-right-28 sm:-top-40 sm:size-[36rem] lg:-right-32 lg:-top-48 lg:size-[44rem]"
+    >
+      <div
+        className="size-full [mask-position:center] [mask-repeat:no-repeat] [mask-size:contain] [-webkit-mask-position:center] [-webkit-mask-repeat:no-repeat] [-webkit-mask-size:contain]"
+        style={{
+          backgroundImage: `radial-gradient(circle, ${color} 0 2.2px, transparent 2.5px)`,
+          backgroundSize: "14px 14px",
+          maskImage: `url("${src}")`,
+          WebkitMaskImage: `url("${src}")`,
+        }}
+      />
+    </div>
+  );
+}
+
+const FOOTER_MODEL_INITIAL_POSE = {
+  autoElapsed: 0,
+  rotateElapsed: 0,
+  rotationX: 0.22,
+  rotationY: -0.55,
+  rotationZ: -0.05,
+  targetRotationX: 0.22,
+  targetRotationY: -0.55,
+  timeElapsed: 0,
+} as const;
+
+const FOOTER_MODEL_ROTATION = [Math.PI / 2, 0, 0] as const;
+
+function FooterStaticModelMark({
+  color = "#8D69BF",
+  src,
+}: {
+  color?: string;
+  src: string;
+}) {
+  const settings = React.useMemo(
+    () => ({
+      lighting: {
+        ambientIntensity: 0.02,
+        angleDegrees: 28,
+        fillIntensity: 0.08,
+        height: 1.4,
+        intensity: 1.3,
+      },
+      material: {
+        color: "#8D69BF",
+        environmentPower: 2.8,
+        metalness: 0,
+        refraction: 1.4,
+        roughness: 0.32,
+        surface: "glass" as const,
+        thickness: 80,
+      },
+      halftone: {
+        dashColor: color,
+        hoverDashColor: color,
+        power: -0.32,
+        scale: 10,
+        width: 0.4,
+      },
+      background: {
+        color: "#000000",
+        transparent: true,
+      },
+      animation: {
+        autoRotateEnabled: false,
+        breatheEnabled: false,
+        cameraParallaxEnabled: false,
+        dragFlowEnabled: false,
+        floatEnabled: false,
+        followDragEnabled: false,
+        followHoverEnabled: false,
+        hoverHalftoneEnabled: true,
+        hoverLightEnabled: false,
+        lightSweepEnabled: true,
+        rotateEnabled: false,
+        waveAmount: 1.15,
+        waveEnabled: false,
+        waveSpeed: 0,
+      },
+    }),
+    [color],
+  );
+
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute -right-12 -top-16 z-0 size-[22rem] opacity-[0.18] sm:-right-16 sm:-top-24 sm:size-[28rem] lg:-right-16 lg:-top-40 lg:size-[34rem]"
+    >
+      <Halftone3DIllustration
+        initialPose={FOOTER_MODEL_INITIAL_POSE}
+        modelRotation={FOOTER_MODEL_ROTATION}
+        modelUrl={src}
+        previewDistance={3.35}
+        settings={settings}
+        shapeKey="box"
+      />
+    </div>
+  );
+}
+
 function EditorialSiteFooter({
   brand,
   description,
@@ -311,9 +423,20 @@ function EditorialSiteFooter({
     <footer
       id="kontakt"
       data-site-footer
-      className="group/footer scroll-mt-28 overflow-hidden bg-black pb-8 text-white lg:pb-10"
+      className="group/footer relative isolate scroll-mt-28 overflow-hidden bg-black pb-8 text-white lg:pb-10"
     >
-      <div className="mardu-container">
+      {brand.backgroundMarkModelSrc ? (
+        <FooterStaticModelMark
+          color={brand.backgroundMarkColor}
+          src={brand.backgroundMarkModelSrc}
+        />
+      ) : brand.backgroundMarkSrc ? (
+        <FooterHalftoneMark
+          color={brand.backgroundMarkColor}
+          src={brand.backgroundMarkSrc}
+        />
+      ) : null}
+      <div className="mardu-container relative z-10">
         <div className="border-b border-white/14 pb-10 pt-14 lg:pb-14 lg:pt-20">
           <h2 className="w-full text-[clamp(2.2rem,4vw,3.25rem)] font-light leading-none tracking-[-0.04em]">
             {description ?? "Wo Nutzung beginnt, ist Mardu."}
