@@ -5,6 +5,8 @@ Die Partnerlogos stammen aus den nachfolgend dokumentierten Marken- oder Projekt
 ## Quellen
 
 - KIT: bereitgestellte SVG-Datei des Karlsruher Instituts für Technologie.
+- KIT-Gründerschmiede: im bereitgestellten Mardu-Flyer verwendete Wortmarke; die lokale PNG-Datei wurde auf den sichtbaren Logobereich zugeschnitten.
+- SmartCityHouse Osnabrück: offizielles Medienasset der Stadtwerke Osnabrück zum Startup Accelerator SmartCityHouse.
 - FH Aachen: `FHAachen-logo2010.svg`, Wikimedia Commons; dort als Quelle die FH Aachen angegeben.
 - Hochschule Osnabrück: offizielles Logo-Asset des Webauftritts unter `hs-osnabrueck.de`.
 - ARTandTECH.space: offizielles weißes Header-Logo des Webauftritts unter `artandtech.space`.
@@ -15,4 +17,4 @@ Die Partnerlogos stammen aus den nachfolgend dokumentierten Marken- oder Projekt
 
 Die PNG-Quelle von ARTandTECH.space ist unverändert in einen lokalen SVG-Container eingebettet. Die Logos werden in der dunklen Referenzfläche per CSS monochrom weiß dargestellt; Geometrie und Seitenverhältnis bleiben unverändert. Das hochformatig angelegte FH-Aachen-Logo wird ausschließlich für die horizontale Darstellung um 90 Grad gedreht.
 
-Vor einer Veröffentlichung außerhalb dieses vereinbarten Kontexts sind Beziehung, Freigabe und jeweils aktuelle Markenrichtlinien erneut zu prüfen. Insbesondere KIT, FH Aachen und Hochschule Osnabrück weisen für externe Logonutzung auf eine erforderliche Abstimmung beziehungsweise Freigabe durch ihre Kommunikation oder Marketingabteilung hin.
+Vor einer Veröffentlichung außerhalb dieses vereinbarten Kontexts sind Beziehung, Freigabe und jeweils aktuelle Markenrichtlinien erneut zu prüfen. Insbesondere KIT, KIT-Gründerschmiede, FH Aachen, Hochschule Osnabrück und SmartCityHouse weisen für externe Logonutzung auf eine erforderliche Abstimmung beziehungsweise Freigabe durch ihre Kommunikation oder Marketingabteilung hin.

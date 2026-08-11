@@ -15,7 +15,7 @@ export function CustomerProofSection() {
         <div>
           <h2
             id="customer-proof-title"
-            className="text-xs font-normal uppercase tracking-[0.18em] text-white/60"
+            className="text-xs font-normal uppercase tracking-[0.18em] text-white/78"
           >
             [{customerProof.label}]
           </h2>
@@ -33,6 +33,7 @@ export function CustomerProofSection() {
           {customerProof.partners.map((partner) => {
             const isRotated = partner.presentation === 'rotated-monochrome';
             const isNativeSquare = partner.presentation === 'native-square';
+            const hasLightBackground = partner.presentation === 'light-background-monochrome';
 
             return (
               <div
@@ -52,7 +53,9 @@ export function CustomerProofSection() {
                       ? 'absolute max-w-none rotate-90 grayscale invert contrast-75 brightness-125'
                       : isNativeSquare
                         ? 'size-16 grayscale'
-                        : 'h-auto max-h-[4.75rem] w-auto max-w-full brightness-0 invert',
+                        : hasLightBackground
+                          ? 'h-auto max-h-[4.75rem] w-auto max-w-full grayscale invert mix-blend-screen contrast-125 brightness-110'
+                          : 'h-auto max-h-[4.75rem] w-auto max-w-full brightness-0 invert',
                   )}
                 />
               </div>

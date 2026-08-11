@@ -1,19 +1,76 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, ChartNoAxesCombined, ListTree, UnlockKeyhole } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { SectionIntro } from '@mardu/sections';
+import { Halftone3DIllustration } from '@mardu/ui/components/halftone-3d-illustration';
 import { EditorialAccent } from '@mardu/ui/components/typography';
-import { benefitItems, mediaBriefs, useCases } from '../homepage-content';
-import { HomepageMediaPlaceholder } from './homepage-media-placeholder';
+import { benefitItems, useCases } from '../homepage-content';
 
-const benefitIcons = [ListTree, UnlockKeyhole, ChartNoAxesCombined] as const;
+const benefitModelUrls = [
+  '/models/benefits/qualification-check.glb',
+  '/models/benefits/supervision-lock.glb',
+  '/models/benefits/evidence-proof.glb',
+] as const;
+
+const benefitModelLabels = [
+  'Interaktives 3D-Häkchen für eine bestätigte Qualifikation',
+  'Interaktives 3D-Schloss für kontrollierte Freigaben',
+  'Interaktives 3D-Diagramm für nachvollziehbare Nachweise',
+] as const;
+
+const benefitHalftoneSettings = {
+  material: {
+    color: '#f3eef9',
+    metalness: 0,
+    roughness: 0.72,
+  },
+  halftone: {
+    dashColor: '#8d69bf',
+    hoverDashColor: '#8d69bf',
+    power: -0.05,
+    scale: 19,
+    width: 0.54,
+  },
+  background: {
+    color: '#f4f4f4',
+    transparent: true,
+  },
+  animation: {
+    autoRotateEnabled: true,
+    autoSpeed: 0.1,
+    autoWobble: 0.16,
+    cameraParallaxEnabled: true,
+    dragFlowEnabled: true,
+    followDragEnabled: true,
+    followHoverEnabled: true,
+    hoverHalftoneEnabled: true,
+    hoverHalftonePowerShift: 0.34,
+    hoverHalftoneRadius: 0.42,
+    hoverHalftoneWidthShift: -0.12,
+    hoverLightEnabled: true,
+    hoverLightIntensity: 0.75,
+    hoverLightRadius: 0.38,
+    rotationConstraint: 'y',
+  },
+} as const;
+
+const benefitHalftoneInitialPose = {
+  autoElapsed: 0,
+  rotateElapsed: 0,
+  rotationX: 0,
+  rotationY: 0,
+  rotationZ: 0,
+  targetRotationX: 0,
+  targetRotationY: 0,
+  timeElapsed: 0,
+} as const;
 
 export function BenefitsUseCasesSection() {
   return (
     <>
       <section id="nutzen" className="scroll-mt-24 border-b border-border bg-card py-16 md:py-20">
         <div className="mardu-container">
-          <div className="grid gap-12 lg:grid-cols-[0.46fr_0.54fr] lg:items-end lg:gap-16">
+          <div className="max-w-[46rem]">
             <SectionIntro
               eyebrow="[04] Nutzen im Betrieb"
               title={
@@ -24,10 +81,12 @@ export function BenefitsUseCasesSection() {
               }
               intro={
                 <p>
-                  Mardu reduziert getrennte Verwaltungswege und schafft eine gemeinsame Sicht auf
-                  Identitäten, Ressourcen und Berechtigungen.{' '}
+                  Mardu verbindet Unterweisungen und Qualifikationen mit Maschinen- und
+                  Türfreigaben. Zugriffe und Nutzungszeiten werden nachvollziehbar dokumentiert.{' '}
                   <strong className="font-medium text-foreground/82">
-                    Mehr Nutzung wird möglich, ohne organisatorische Regeln unsichtbar zu machen.
+                    Das vereinfacht die organisatorische Nachhaltung von Betreiberpflichten und
+                    entlastet die Aufsicht, ohne Gefährdungsbeurteilung oder Schutzeinrichtungen zu
+                    ersetzen.
                   </strong>
                 </p>
               }
@@ -36,23 +95,17 @@ export function BenefitsUseCasesSection() {
               introClassName="text-base"
               eyebrowClassName="text-xs text-mardu-purple"
             />
-            <HomepageMediaPlaceholder brief={mediaBriefs.operationsDashboard} compact />
           </div>
 
           <div className="mt-14 grid border-y border-border lg:grid-cols-3">
             {benefitItems.map((item, index) => {
-              const Icon = benefitIcons[index] ?? ListTree;
-
               return (
                 <article
                   key={item.title}
-                  className="border-b border-border py-8 last:border-b-0 lg:border-b-0 lg:border-r lg:px-9 lg:last:border-r-0"
+                  className="relative border-b border-border py-8 last:border-b-0 lg:border-b-0 lg:border-r lg:px-9 lg:last:border-r-0"
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <span className="flex size-11 items-center justify-center border border-border text-mardu-purple">
-                      <Icon className="size-5 stroke-[1.5]" aria-hidden="true" />
-                    </span>
-                    <div className="flex items-center gap-3">
+                  <div>
+                    <div className="flex h-8 items-start justify-end gap-3">
                       <span className="text-xs text-muted-foreground">[0{index + 1}]</span>
                       {item.status ? (
                         <span className="border border-mardu-purple/25 px-2 py-1 text-xs text-mardu-purple">
@@ -60,11 +113,26 @@ export function BenefitsUseCasesSection() {
                         </span>
                       ) : null}
                     </div>
+                    <div
+                      aria-label={benefitModelLabels[index]}
+                      className="relative mx-auto size-64 overflow-visible sm:size-72"
+                      role="img"
+                    >
+                      <div className="absolute -inset-x-8 -inset-y-4">
+                        <Halftone3DIllustration
+                          initialPose={benefitHalftoneInitialPose}
+                          modelUrl={benefitModelUrls[index]}
+                          previewDistance={3.25}
+                          settings={benefitHalftoneSettings}
+                          shapeKey="box"
+                        />
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="mt-9 text-[1.375rem] font-light leading-tight tracking-[-0.02em]">
+                  <h3 className="mx-auto mt-7 max-w-[20rem] text-[1.375rem] font-light leading-tight tracking-[-0.02em]">
                     {item.title}
                   </h3>
-                  <p className="mt-4 max-w-[28rem] text-base leading-relaxed text-muted-foreground">
+                  <p className="mx-auto mt-4 max-w-[20rem] text-base leading-relaxed text-muted-foreground">
                     {item.description}
                   </p>
                 </article>

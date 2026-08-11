@@ -23,7 +23,7 @@ export function SystemOverviewSection() {
               Eine Identität wird zur gemeinsamen Sprache für Maschine, Tür und Schranke. Mardu
               prüft nicht nur, wer vor einem Zugang steht, sondern{' '}
               <strong className="font-medium text-foreground/82">
-                ob Nutzung, Ort und Zeitpunkt zusammenpassen.
+                ob Qualifikation, Nutzung, Ort und Zeitpunkt zusammenpassen.
               </strong>
             </p>
           }

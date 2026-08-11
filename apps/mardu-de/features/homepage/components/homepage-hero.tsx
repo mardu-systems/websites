@@ -1,13 +1,24 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUpRight, MapPinned, ShieldCheck, Wrench } from 'lucide-react';
+import {
+  ArrowUpRight,
+  ClipboardCheck,
+  HardHat,
+  LockKeyhole,
+  MapPinned,
+  ShieldCheck,
+  Wrench,
+} from 'lucide-react';
 import { homepageHero } from '../homepage-content';
 import { CyclingAccessPoint } from './cycling-access-point';
 
-const trustVisuals = [
-  { Icon: ShieldCheck, colorClassName: 'bg-muted text-muted-foreground' },
-  { Icon: Wrench, colorClassName: 'bg-secondary text-secondary-foreground' },
-  { Icon: MapPinned, colorClassName: 'bg-accent text-accent-foreground' },
+const trustSignalIcons = [
+  ShieldCheck,
+  ClipboardCheck,
+  HardHat,
+  LockKeyhole,
+  Wrench,
+  MapPinned,
 ] as const;
 
 export function HomepageHero() {
@@ -16,7 +27,7 @@ export function HomepageHero() {
       id="home"
       className="relative scroll-mt-24 border-b border-border bg-background pb-14 pt-12 md:pb-20 md:pt-12 xl:flex xl:min-h-[calc(100svh-10rem)] xl:items-center xl:py-28 2xl:min-h-[calc(100svh-11rem)]"
     >
-      <div className="mardu-container grid gap-12 xl:grid-cols-[0.82fr_1.18fr] xl:items-end xl:gap-14">
+      <div className="mardu-container grid gap-12 xl:grid-cols-[0.82fr_1.18fr] xl:items-center xl:gap-14">
         <div className="max-w-[43rem]">
           <h1 className="max-w-[12ch] text-[clamp(2.85rem,7.4vw,3.75rem)] font-light leading-[0.98] tracking-[-0.04em] text-foreground">
             <span className="sr-only">
@@ -51,23 +62,22 @@ export function HomepageHero() {
             ))}
           </nav>
 
-          <ul className="mt-10 grid max-w-[42rem] border-y border-border sm:grid-cols-3">
+          <ul className="mt-10 flex max-w-[42rem] flex-wrap gap-x-6 gap-y-4">
             {homepageHero.trustSignals.map((signal, index) => {
-              const visual = trustVisuals[index] ?? trustVisuals[0];
-              const Icon = visual.Icon;
+              const Icon = trustSignalIcons[index] ?? ShieldCheck;
 
               return (
-                <li
-                  key={signal}
-                  className="flex min-h-14 items-center gap-3 border-b border-border py-3 last:border-b-0 sm:border-b-0 sm:border-r sm:px-4 sm:first:pl-0 sm:last:border-r-0 sm:last:pr-0"
-                >
-                  <span
-                    className={`flex size-9 shrink-0 items-center justify-center ${visual.colorClassName}`}
+                <li key={signal.label} className="inline-flex items-center gap-2">
+                  <Icon
+                    className="size-4 shrink-0 stroke-[1.7] text-mardu-purple"
                     aria-hidden="true"
+                  />
+                  <abbr
+                    title={signal.title}
+                    className="text-xs leading-none font-medium text-foreground/72 no-underline"
                   >
-                    <Icon className="size-[1.125rem] stroke-[1.7]" />
-                  </span>
-                  <p className="text-xs font-medium leading-snug text-muted-foreground">{signal}</p>
+                    {signal.label}
+                  </abbr>
                 </li>
               );
             })}

@@ -81,7 +81,32 @@ export const homepageHero = {
   primaryAction: { label: 'Jetzt beraten lassen', href: '/contact' },
   secondaryAction: { label: 'System verstehen', href: '#system' },
   rotatingAccessPoints: ['Maschine', 'Tür', 'Schranke', 'Werkstatt'],
-  trustSignals: ['DSGVO im Projekt', 'Schrittweise nachrüstbar', 'Designed in Germany'],
+  trustSignals: [
+    {
+      label: 'Verk.-SichPfl.',
+      title: 'Verkehrssicherungspflicht',
+    },
+    {
+      label: 'BetrSichV',
+      title: 'Betriebssicherheitsverordnung',
+    },
+    {
+      label: 'DGUV',
+      title: 'Vorgaben der Deutschen Gesetzlichen Unfallversicherung',
+    },
+    {
+      label: 'DSGVO',
+      title: 'Datenschutz-Grundverordnung',
+    },
+    {
+      label: 'Nachrüstbar',
+      title: 'Schrittweise nachrüstbar',
+    },
+    {
+      label: 'Designed in Germany',
+      title: 'Designed in Germany',
+    },
+  ],
 } as const;
 
 export const customerProof = {
@@ -130,6 +155,20 @@ export const customerProof = {
       width: 180,
       height: 180,
       presentation: 'native-square',
+    },
+    {
+      name: 'KIT-Gründerschmiede',
+      logoSrc: '/partners/kit-gruenderschmiede.png',
+      width: 1564,
+      height: 346,
+      presentation: 'monochrome',
+    },
+    {
+      name: 'SmartCityHouse Osnabrück',
+      logoSrc: '/partners/smartcityhouse-osnabrueck.jpg',
+      width: 701,
+      height: 317,
+      presentation: 'light-background-monochrome',
     },
   ],
   links: [
@@ -302,20 +341,20 @@ export const permissionSteps: ReadonlyArray<HomepageNumberedItem> = [
 
 export const benefitItems: ReadonlyArray<HomepageStatusItem> = [
   {
-    title: 'Zugänge steuern',
+    title: 'Qualifikation prüfen',
     description:
-      'Berechtigungen werden nicht mehr getrennt für Schlüssel, Listen, Maschinen und Räume organisiert.',
+      'Unterweisungen, Qualifikationen, Rollen und Zeitregeln entscheiden gemeinsam, ob eine Maschine oder Tür freigegeben wird.',
   },
   {
-    title: 'Nutzung ermöglichen',
+    title: 'Aufsicht entlasten',
     description:
-      'Berechtigte Personen erhalten den vorgesehenen Zugang selbstständig, soweit Betriebs- und Aufsichtskonzept dies erlauben.',
+      'Berechtigte Personen nutzen vorgesehene Ressourcen selbstständig. Kritische Freigaben lassen sich bei Bedarf durch ein Vier-Augen-Prinzip absichern.',
   },
   {
-    title: 'Überblick behalten',
+    title: 'Nachweise vereinfachen',
     description:
-      'Ressourcen, Regeln und Ereignisse werden zentral sichtbar. Auslastungs-, Energie- und Anomalieauswertungen bleiben ein gesonderter Pilot.',
-    status: 'Datenpilot',
+      'Freigaben, abgelehnte Zugriffe und vereinbarte Nutzungszeiten werden zentral nachvollziehbar – für interne Compliance, Aufsicht und Versicherung.',
+    status: 'Compliance',
   },
 ];
 
@@ -448,7 +487,17 @@ export const faqItems = [
   {
     question: 'Was passiert bei Netzwerk-, Server- oder Funkproblemen?',
     answer:
-      'Das vorgesehene Verhalten hängt von Betriebsmodell, lokaler Architektur und Ressource ab. Zulässige Zustände und Rückfallebenen werden vor der Einführung festgelegt und geprüft.',
+      'Die Berechtigungsentscheidung läuft lokal auf der Mardu-Basisstation oder einem lokalen Server. Ein Internetausfall stoppt den vorgesehenen Betrieb deshalb nicht automatisch. Verhalten bei Funk- oder Geräteausfällen, zulässige Zustände und Rückfallebenen werden für jede Ressource im Projekt festgelegt und geprüft.',
+  },
+  {
+    question: 'Warum nutzt Mardu IP500 statt Werkstatt-WLAN?',
+    answer:
+      'Mardu-Geräte kommunizieren über ein eigenständiges IP500-Funknetz. Dadurch ist für Maschinen- und Türfreigaben weder das Werkstatt-WLAN noch eine Freigabe des lokalen WLANs erforderlich. Funkabdeckung, Redundanz und die konkrete lokale Architektur werden vor der Einführung geprüft.',
+  },
+  {
+    question: 'Wie unterstützt Mardu bei Betreiberpflichten und Nachweisen?',
+    answer:
+      'Mardu verknüpft dokumentierte Unterweisungen und Qualifikationen mit Freigaben und protokolliert vereinbarte Nutzungsereignisse. Das erleichtert die Nachhaltung und Nachweisführung in Prozessen rund um Betriebssicherheit, DGUV-Vorgaben, Verkehrssicherung und Versicherung. Mardu ersetzt keine Gefährdungsbeurteilung, Rechtsberatung oder technische Schutzeinrichtung.',
   },
   {
     question: 'Welche Daten werden protokolliert?',
