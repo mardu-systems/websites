@@ -54,6 +54,51 @@ final result: passed
 
 ---
 
+# Design QA – Nutzenkarten und Footer-Halftone
+
+## Vergleichsgrundlage
+
+- Visuelle Quelle: die drei Browser-Annotationsaufnahmen aus dem aktuellen Auftrag (`browser-comment://current-request/comments-1-3`), aufgenommen bei einem angegebenen Viewport von 1376 × 1324 CSS-Pixeln.
+- Implementierung Nutzenkarten: `/Users/lucaschoeneberg/Documents/GitHub/websites/.codex-artifacts/design-qa/homepage-benefits-centered.png`, 1361 × 1310 Pixel, DPR 1, Desktopzustand der Nutzenkarten.
+- Implementierung Footer: `/Users/lucaschoeneberg/Documents/GitHub/websites/.codex-artifacts/design-qa/homepage-footer-halftone.png`, 1361 × 1310 Pixel, DPR 1, sichtbarer Footeranfang und vollständige Footerstruktur.
+- Responsive Kontrolle: `/Users/lucaschoeneberg/Documents/GitHub/websites/.codex-artifacts/design-qa/homepage-benefits-mobile.png`, 375 × 812 Pixel bei angefordertem Viewport 390 × 844 CSS-Pixeln, DPR 1.
+- Zustand: Startseite, Nutzenkarten ohne aktive Pointerinteraktion; Footer im Ausgangszustand.
+- Die Annotationsaufnahmen und die Browseraufnahmen wurden im selben visuellen Arbeitskontext auf identische Komponenten und Inhalte verglichen. Die Browser-Annotationsbilder besitzen keinen lokalen Dateipfad; deshalb ist kein zusätzliches Dateiartefakt mit physisch zusammengefügten Bildern verfügbar.
+
+## Vollansicht und fokussierter Vergleich
+
+Die Nutzenkarten wurden als fokussierter Vergleich geprüft: Jede Modellmitte liegt innerhalb von einem Pixel auf der jeweiligen Kartenmitte. Die Modelle sind gegenüber der Quelle größer, heller und einfarbig in `#8D69BF`. Nummern und Status stehen in einer eigenen 32-Pixel-Kopfzeile; dadurch überlappt „Compliance“ das Dokumentmodell nicht mehr. Der Footervergleich bestätigt ein großes, schwach sichtbares Mardu-Signet oben rechts. Das echte Favicon-Asset bildet die Maske; der Halftone ist angeschnitten, bleibt aber als Mardu-Signet erkennbar.
+
+## Pflichtflächen
+
+- Schrift und Typografie: Bestehende Schriftfamilien, Größen, Gewichte und Zeilenhöhen bleiben unverändert. Nummern und Status behalten die vorhandene technische Kleintypografie.
+- Abstände und Layout-Rhythmus: Die drei 288 × 288 Pixel großen Desktopbühnen sind exakt zentriert. Titel und Copy liegen in einem mittig positionierten, linksbündigen 20-rem-Textblock. Auf Mobilgeräten werden 256 × 256 Pixel verwendet; es entsteht kein horizontaler Überlauf.
+- Farben und Tokens: Alle drei Halftone-Modelle sowie das Footer-Signet verwenden das verlangte helle Mardu-Violett `#8D69BF`. Der frühere orange Hover-Farbwechsel wurde entfernt. Das Footer-Signet verwendet 16 Prozent Deckkraft auf Schwarz.
+- Bildqualität und Assettreue: Die gelieferten GLB-Modelle bleiben unverändert und werden über den bestehenden WebGL-Halftone-Renderer dargestellt. Das Footer-Signet verwendet das vorhandene originale Mardu-Favicon als Maske; die Logoform wurde nicht nachgezeichnet oder ersetzt.
+- Copy und Inhalt: Titel, Beschreibungen, Nummern und Status der Nutzenkarten bleiben unverändert.
+
+## Interaktion und Zugänglichkeit
+
+- Alle drei Modelle bleiben per Maus steuerbar und auf die Y-Achse begrenzt.
+- Die Modellcontainer behalten ihre zugänglichen Bildbezeichnungen.
+- Das Footer-Signet ist rein dekorativ, `aria-hidden` und ohne Pointerinteraktion.
+- Desktop und Mobil zeigen keinen horizontalen Überlauf.
+- Browser-Konsole: keine Fehler.
+
+## Findings und Vergleichshistorie
+
+1. Erster Implementierungsvergleich: Die Modelle waren korrekt zentriert und heller, der Status „Compliance“ überlagerte jedoch wegen der vergrößerten Bühne das dritte Modell. Einstufung P2.
+2. Korrektur: Nummer und optionaler Status erhielten eine eigene, in allen Karten gleich hohe Kopfzeile.
+3. Finaler Vergleich: Alle Modellmittel stimmen mit den Kartenmitteln überein; Status und Modell überlappen nicht. Das Footer-Signet ist dezent, angeschnitten und eindeutig als Mardu-Marke lesbar. Keine offenen P0-, P1- oder P2-Abweichungen.
+
+## Follow-up Polish
+
+- P3: Die aktuell sehr dezente Footer-Deckkraft kann nach einem Realgerätetest zwischen 14 und 18 Prozent feinjustiert werden, ohne das Layout oder die Assettreue zu verändern.
+
+final result: passed
+
+---
+
 # Design QA – Roadmap
 
 ## Vergleichsgrundlage
