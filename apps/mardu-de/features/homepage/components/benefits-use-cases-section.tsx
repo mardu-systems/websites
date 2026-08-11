@@ -25,11 +25,11 @@ const benefitHalftoneSettings = {
     roughness: 0.72,
   },
   halftone: {
-    dashColor: '#8d69bf',
-    hoverDashColor: '#8d69bf',
-    power: -0.05,
-    scale: 19,
-    width: 0.54,
+    dashColor: '#9c80c2',
+    hoverDashColor: '#9c80c2',
+    power: -0.1,
+    scale: 17,
+    width: 0.48,
   },
   background: {
     color: '#f4f4f4',
@@ -44,11 +44,12 @@ const benefitHalftoneSettings = {
     followDragEnabled: true,
     followHoverEnabled: true,
     hoverHalftoneEnabled: true,
-    hoverHalftonePowerShift: 0.34,
+    hoverHalftonePowerShift: 0.24,
+    lightSweepEnabled: true,
     hoverHalftoneRadius: 0.42,
     hoverHalftoneWidthShift: -0.12,
     hoverLightEnabled: true,
-    hoverLightIntensity: 0.75,
+    hoverLightIntensity: 0.55,
     hoverLightRadius: 0.38,
     rotationConstraint: 'y',
   },
@@ -115,14 +116,14 @@ export function BenefitsUseCasesSection() {
                     </div>
                     <div
                       aria-label={benefitModelLabels[index]}
-                      className="relative mx-auto size-64 overflow-visible sm:size-72"
+                      className="relative mx-auto size-60 overflow-visible sm:size-64"
                       role="img"
                     >
-                      <div className="absolute -inset-x-8 -inset-y-4">
+                      <div className="absolute inset-0">
                         <Halftone3DIllustration
                           initialPose={benefitHalftoneInitialPose}
                           modelUrl={benefitModelUrls[index]}
-                          previewDistance={3.25}
+                          previewDistance={3.75}
                           settings={benefitHalftoneSettings}
                           shapeKey="box"
                         />
