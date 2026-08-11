@@ -96,6 +96,8 @@ export type Halftone3DAnimationSettings = {
   dragSens: number;
   dragFriction: number;
   dragMomentum: boolean;
+  /** Begrenzt sämtliche automatische und pointergesteuerte Objektrotationen auf eine Achse. */
+  rotationConstraint: "free" | "y";
   rotateAxis: "x" | "y" | "z" | "xy" | "-x" | "-y" | "-z" | "-xy";
   rotatePreset: "axis" | "lissajous" | "orbit" | "tumble";
   rotateSpeed: number;
@@ -156,6 +158,13 @@ export type Halftone3DPose = {
  */
 export type Halftone3DIllustrationProps = {
   shapeKey?: Halftone3DShapeKey;
+  /**
+   * Optionaler Pfad zu einem GLB-Modell. Das Modell wird beim Mount geladen,
+   * zentriert, auf die Builtin-Größen normalisiert und mit dem Halftone-Material gerendert.
+   */
+  modelUrl?: string;
+  /** Euler-Rotation des GLB-Modells in Radiant, bevor es zentriert und normalisiert wird. */
+  modelRotation?: readonly [number, number, number];
   settings?: DeepPartial<Halftone3DSettings>;
   initialPose?: Partial<Halftone3DPose>;
   previewDistance?: number;

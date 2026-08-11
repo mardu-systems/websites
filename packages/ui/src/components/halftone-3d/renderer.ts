@@ -1,5 +1,7 @@
 import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 
 import { createBuiltinGeometry } from "./builtin-geometries";
 import type {
@@ -87,6 +89,7 @@ type HalftoneTransmissionUniforms = {
 };
 
 const VIRTUAL_RENDER_HEIGHT = 768;
+const NORMALIZED_MODEL_SIZE = 2.8;
 const passThroughVertexShader =
   "\n  varying vec2 vUv;\n\n  void main() {\n    vUv = uv;\n    gl_Position = vec4(position, 1.0);\n  }\n";
 const blurFragmentShader =
@@ -814,8 +817,120 @@ function resetInteractionState(interactionState: InteractionState): void {
   interactionState.autoElapsed = 0;
 }
 
-function createGeometry(shapeKey: Halftone3DShapeKey): THREE.BufferGeometry {
-  return createBuiltinGeometry(shapeKey);
+async function loadModelGeometry(
+  modelUrl: string,
+  modelRotation: readonly [number, number, number] | undefined,
+  signal: AbortSignal | undefined,
+): Promise<THREE.BufferGeometry> {
+  const response = await fetch(modelUrl, { signal });
+
+  if (!response.ok) {
+    throw new Error(
+      `GLB-Modell konnte nicht geladen werden (${response.status}).`,
+    );
+  }
+
+  const modelBuffer = await response.arrayBuffer();
+  const resolvedModelUrl = new URL(modelUrl, window.location.href);
+  const resourcePath = new URL(".", resolvedModelUrl).href;
+  const loader = new GLTFLoader();
+  const gltf = await new Promise<Awaited<ReturnType<GLTFLoader["parseAsync"]>>>(
+    (resolve, reject) => {
+      loader.parse(modelBuffer, resourcePath, resolve, reject);
+    },
+  );
+  const geometryParts: THREE.BufferGeometry[] = [];
+
+  gltf.scene.updateMatrixWorld(true);
+  gltf.scene.traverse((object) => {
+    const mesh = object as THREE.Mesh;
+
+    if (!mesh.isMesh || !(mesh.geometry instanceof THREE.BufferGeometry)) {
+      return;
+    }
+
+    let geometry = mesh.geometry.clone();
+    geometry.applyMatrix4(mesh.matrixWorld);
+
+    for (const attributeName of Object.keys(geometry.attributes)) {
+      if (attributeName !== "position" && attributeName !== "normal") {
+        geometry.deleteAttribute(attributeName);
+      }
+    }
+
+    geometry.morphAttributes = {};
+    geometry.clearGroups();
+
+    if (!geometry.getAttribute("normal")) {
+      geometry.computeVertexNormals();
+    }
+
+    if (geometry.index) {
+      const nonIndexedGeometry = geometry.toNonIndexed();
+      geometry.dispose();
+      geometry = nonIndexedGeometry;
+    }
+
+    geometryParts.push(geometry);
+  });
+
+  if (geometryParts.length === 0) {
+    throw new Error("Das GLB-Modell enthält keine renderbare Mesh-Geometrie.");
+  }
+
+  const mergedGeometry = mergeGeometries(geometryParts, false);
+
+  for (const geometryPart of geometryParts) {
+    geometryPart.dispose();
+  }
+
+  if (!mergedGeometry) {
+    throw new Error(
+      "Die Mesh-Geometrien des GLB-Modells konnten nicht vereinigt werden.",
+    );
+  }
+
+  if (modelRotation) {
+    mergedGeometry.applyMatrix4(
+      new THREE.Matrix4().makeRotationFromEuler(
+        new THREE.Euler(...modelRotation, "XYZ"),
+      ),
+    );
+  }
+
+  mergedGeometry.center();
+  mergedGeometry.computeBoundingBox();
+
+  const size = mergedGeometry.boundingBox?.getSize(new THREE.Vector3());
+  const largestDimension = size ? Math.max(size.x, size.y, size.z) : 0;
+
+  if (largestDimension <= 0) {
+    mergedGeometry.dispose();
+    throw new Error("Das GLB-Modell besitzt keine gültige Ausdehnung.");
+  }
+
+  const normalizationScale = NORMALIZED_MODEL_SIZE / largestDimension;
+  mergedGeometry.scale(
+    normalizationScale,
+    normalizationScale,
+    normalizationScale,
+  );
+  mergedGeometry.computeVertexNormals();
+  mergedGeometry.computeBoundingBox();
+  mergedGeometry.computeBoundingSphere();
+
+  return mergedGeometry;
+}
+
+async function createGeometry(
+  shapeKey: Halftone3DShapeKey,
+  modelUrl?: string,
+  modelRotation?: readonly [number, number, number],
+  signal?: AbortSignal,
+): Promise<THREE.BufferGeometry> {
+  return modelUrl
+    ? loadModelGeometry(modelUrl, modelRotation, signal)
+    : createBuiltinGeometry(shapeKey);
 }
 
 export type HalftoneCanvasMountOptions = {
@@ -823,6 +938,8 @@ export type HalftoneCanvasMountOptions = {
   shapeKey: Halftone3DShapeKey;
   settings: Halftone3DSettings;
   initialPose: Halftone3DPose;
+  modelRotation?: readonly [number, number, number];
+  modelUrl?: string;
   previewDistance: number;
   onError?: (error: unknown) => void;
   signal?: AbortSignal;
@@ -857,9 +974,16 @@ export async function mountHalftoneCanvas(
   let geometry;
 
   try {
-    geometry = createGeometry(currentShapeKey);
+    geometry = await createGeometry(
+      currentShapeKey,
+      options.modelUrl,
+      options.modelRotation,
+      signal,
+    );
   } catch (error) {
-    onError?.(error);
+    if (!signal?.aborted) {
+      onError?.(error);
+    }
     return null;
   }
 
@@ -1189,10 +1313,15 @@ export async function mountHalftoneCanvas(
     const deltaY =
       (event.clientY - interaction.pointerY) *
       currentSettings.animation.dragSens;
-    interaction.velocityX = deltaY;
+    const rotationLockedToYAxis =
+      currentSettings.animation.rotationConstraint === "y";
+
+    interaction.velocityX = rotationLockedToYAxis ? 0 : deltaY;
     interaction.velocityY = deltaX;
     interaction.targetRotationY += deltaX;
-    interaction.targetRotationX += deltaY;
+    if (!rotationLockedToYAxis) {
+      interaction.targetRotationX += deltaY;
+    }
     interaction.pointerX = event.clientX;
     interaction.pointerY = event.clientY;
   };
@@ -1220,10 +1349,15 @@ export async function mountHalftoneCanvas(
       currentSettings.animation.springStrength * 10,
       1.2,
     );
-    interaction.rotationVelocityX += interaction.velocityX * springImpulse;
+    const rotationLockedToYAxis =
+      currentSettings.animation.rotationConstraint === "y";
+
+    if (!rotationLockedToYAxis) {
+      interaction.rotationVelocityX += interaction.velocityX * springImpulse;
+      interaction.rotationVelocityZ +=
+        interaction.velocityY * springImpulse * 0.12;
+    }
     interaction.rotationVelocityY += interaction.velocityY * springImpulse;
-    interaction.rotationVelocityZ +=
-      interaction.velocityY * springImpulse * 0.12;
     interaction.targetRotationX = 0;
     interaction.targetRotationY = 0;
     interaction.velocityX = 0;
@@ -1272,14 +1406,18 @@ export async function mountHalftoneCanvas(
     let meshScale = 1;
     let lightAngle = currentSettings.lighting.angleDegrees;
     let lightHeight = currentSettings.lighting.height;
+    const rotationLockedToYAxis =
+      currentSettings.animation.rotationConstraint === "y";
 
     if (currentSettings.animation.autoRotateEnabled) {
       interaction.autoElapsed += delta;
       baseRotationY +=
         interaction.autoElapsed * currentSettings.animation.autoSpeed;
-      baseRotationX +=
-        Math.sin(interaction.autoElapsed * 0.2) *
-        currentSettings.animation.autoWobble;
+      if (!rotationLockedToYAxis) {
+        baseRotationX +=
+          Math.sin(interaction.autoElapsed * 0.2) *
+          currentSettings.animation.autoWobble;
+      }
     }
 
     if (currentSettings.animation.floatEnabled) {
@@ -1289,8 +1427,10 @@ export async function mountHalftoneCanvas(
 
       meshOffsetY +=
         Math.sin(floatPhase) * currentSettings.animation.floatAmplitude;
-      baseRotationX += Math.sin(floatPhase * 0.72) * driftAmount * 0.45;
-      baseRotationZ += Math.cos(floatPhase * 0.93) * driftAmount * 0.3;
+      if (!rotationLockedToYAxis) {
+        baseRotationX += Math.sin(floatPhase * 0.72) * driftAmount * 0.45;
+        baseRotationZ += Math.cos(floatPhase * 0.93) * driftAmount * 0.3;
+      }
     }
 
     if (currentSettings.animation.breatheEnabled) {
@@ -1365,6 +1505,11 @@ export async function mountHalftoneCanvas(
         currentSettings.animation.lightSweepHeightRange;
     }
 
+    if (rotationLockedToYAxis) {
+      baseRotationX = initialPose.rotationX;
+      baseRotationZ = initialPose.rotationZ;
+    }
+
     let targetX = baseRotationX;
     let targetY = baseRotationY;
     let easing = 0.12;
@@ -1378,7 +1523,9 @@ export async function mountHalftoneCanvas(
         interaction.mouseX !== 0.5 ||
         interaction.mouseY !== 0.5
       ) {
-        targetX += (interaction.mouseY - 0.5) * rangeRadians;
+        if (!rotationLockedToYAxis) {
+          targetX += (interaction.mouseY - 0.5) * rangeRadians;
+        }
         targetY += (interaction.mouseX - 0.5) * rangeRadians;
       }
 
@@ -1387,13 +1534,17 @@ export async function mountHalftoneCanvas(
 
     if (currentSettings.animation.followDragEnabled) {
       if (!interaction.dragging && currentSettings.animation.dragMomentum) {
-        interaction.targetRotationX += interaction.velocityX;
+        if (!rotationLockedToYAxis) {
+          interaction.targetRotationX += interaction.velocityX;
+        }
         interaction.targetRotationY += interaction.velocityY;
         interaction.velocityX *= 1 - currentSettings.animation.dragFriction;
         interaction.velocityY *= 1 - currentSettings.animation.dragFriction;
       }
 
-      targetX += interaction.targetRotationX;
+      if (!rotationLockedToYAxis) {
+        targetX += interaction.targetRotationX;
+      }
       targetY += interaction.targetRotationY;
       easing = currentSettings.animation.dragFriction;
     }
@@ -1451,6 +1602,13 @@ export async function mountHalftoneCanvas(
         (currentSettings.animation.rotatePingPong ? 0.18 : 0.12);
     }
 
+    if (rotationLockedToYAxis) {
+      interaction.rotationX = initialPose.rotationX;
+      interaction.rotationZ = initialPose.rotationZ;
+      interaction.rotationVelocityX = 0;
+      interaction.rotationVelocityZ = 0;
+    }
+
     mesh.rotation.set(
       interaction.rotationX,
       interaction.rotationY,
@@ -1465,7 +1623,9 @@ export async function mountHalftoneCanvas(
       const centeredX = (interaction.mouseX - 0.5) * 2;
       const centeredY = (0.5 - interaction.mouseY) * 2;
       const orbitYaw = centeredX * cameraRange;
-      const orbitPitch = centeredY * cameraRange * 0.7;
+      const orbitPitch = rotationLockedToYAxis
+        ? 0
+        : centeredY * cameraRange * 0.7;
       const horizontalRadius = Math.cos(orbitPitch) * baseCameraDistance;
       const targetCameraX = Math.sin(orbitYaw) * horizontalRadius;
       const targetCameraY = Math.sin(orbitPitch) * baseCameraDistance * 0.85;
@@ -1576,7 +1736,7 @@ export async function mountHalftoneCanvas(
       }
 
       try {
-        const nextGeometry = createGeometry(nextOptions.shapeKey);
+        const nextGeometry = createBuiltinGeometry(nextOptions.shapeKey);
         const previousGeometry = mesh.geometry;
         mesh.geometry = nextGeometry;
         mesh.geometry.computeBoundingBox();

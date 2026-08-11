@@ -63,6 +63,7 @@ export const defaultHalftone3DSettings: Halftone3DSettings = {
     dragSens: 0.008,
     dragFriction: 0.08,
     dragMomentum: true,
+    rotationConstraint: "free",
     rotateAxis: "y",
     rotatePreset: "axis",
     rotateSpeed: 0.2,

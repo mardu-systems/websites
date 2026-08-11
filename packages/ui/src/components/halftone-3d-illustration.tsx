@@ -40,6 +40,8 @@ export type {
 
 type MountOptionsSnapshot = {
   initialPose: Halftone3DPose;
+  modelRotation?: readonly [number, number, number];
+  modelUrl?: string;
   previewDistance: number;
   settings: Halftone3DSettings;
   shapeKey: Halftone3DShapeKey;
@@ -48,6 +50,8 @@ type MountOptionsSnapshot = {
 export function Halftone3DIllustration({
   className,
   initialPose,
+  modelRotation,
+  modelUrl,
   onError,
   previewDistance = DEFAULT_PREVIEW_DISTANCE,
   settings,
@@ -70,6 +74,8 @@ export function Halftone3DIllustration({
   if (initialMountOptionsReference.current === null) {
     initialMountOptionsReference.current = {
       initialPose: resolveHalftone3DPose(initialPose),
+      modelRotation,
+      modelUrl,
       previewDistance,
       settings: resolvedSettings,
       shapeKey: resolvedShapeKey,

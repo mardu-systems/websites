@@ -59,7 +59,10 @@ Exportierte API:
 Props:
 
 - `shapeKey?: Halftone3DShapeKey` wählt eine Builtin-Geometrie.
+- `modelUrl?: string` lädt alternativ beim Mount ein GLB-Modell, vereinigt dessen Meshes und normalisiert es auf die Größe der Builtin-Geometrien.
+- `modelRotation?: readonly [number, number, number]` dreht ein GLB-Modell vor dem Zentrieren und Normalisieren über Euler-Winkel in Radiant. Beide Modell-Props werden beim Mount gelesen.
 - `settings?: DeepPartial<Halftone3DSettings>` überschreibt Lighting, Material, Halftone, Background und Animation partiell.
+- `settings.animation.rotationConstraint: "free" | "y"` begrenzt automatische, Hover- und Drag-Rotationen optional vollständig auf die Y-Achse.
 - `initialPose?: Partial<Halftone3DPose>` wird beim Mount als Startpose verwendet.
 - `previewDistance?: number` steuert die Kamera-Distanz und wird live übernommen.
 - `className`, `style` und `onError` steuern Container und Fehlerbehandlung.
