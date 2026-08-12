@@ -6,6 +6,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
+import { JsonLd } from '@/components/seo/json-ld';
+import { createBlogPostingJsonLd, createBreadcrumbJsonLd } from '@/lib/seo';
 
 type Params = Promise<{ slug: string }>;
 
@@ -166,7 +168,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     };
   }
 
-  const title = post.seoTitle || `${post.title} | Mardu`;
+  const title = post.seoTitle || post.title;
   const description = post.seoDescription || post.excerpt;
   const canonical = post.canonicalUrl || `/blog/${post.slug}`;
   const socialImageUrl = post.ogImageUrl || post.coverImageUrl;
@@ -213,9 +215,20 @@ export default async function BlogDetailPage({ params }: { params: Params }) {
 
   const toc = extractToc(post.content);
   const nestedToc = buildNestedToc(toc);
+  const publishedDate = new Date(post.publishedAt);
+  const updatedDate = post.updatedAt ? new Date(post.updatedAt) : publishedDate;
+  const hasDistinctUpdateDate = updatedDate.toDateString() !== publishedDate.toDateString();
 
   return (
     <main className="min-h-screen bg-background pb-16 text-foreground md:pb-24">
+      <JsonLd data={createBlogPostingJsonLd(post)} />
+      <JsonLd
+        data={createBreadcrumbJsonLd([
+          { name: 'Home', path: '/' },
+          { name: 'Blog', path: '/blog' },
+          { name: post.title, path: `/blog/${post.slug}` },
+        ])}
+      />
       <section className="section-hairline border-b border-black/15 py-10 md:py-16">
         <div className="mardu-container">
           <Link
@@ -234,12 +247,22 @@ export default async function BlogDetailPage({ params }: { params: Params }) {
               <div className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-foreground/55">
                 <p>Von {post.author.name}</p>
                 <p className="mt-2">
-                  {new Date(post.publishedAt).toLocaleDateString('de-DE', {
+                  {publishedDate.toLocaleDateString('de-DE', {
                     day: '2-digit',
                     month: 'long',
                     year: 'numeric',
                   })}
                 </p>
+                {hasDistinctUpdateDate ? (
+                  <p className="mt-2">
+                    Aktualisiert am{' '}
+                    {updatedDate.toLocaleDateString('de-DE', {
+                      day: '2-digit',
+                      month: 'long',
+                      year: 'numeric',
+                    })}
+                  </p>
+                ) : null}
               </div>
               <p className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-mardu-purple">
                 [{post.categories.map((category) => category.title).join(' · ') || 'Mardu'}]

@@ -8,6 +8,8 @@ import {
 } from '@mardu/catalog-ui';
 import { DetailMarkdown } from '@/components/content/detail-markdown';
 import { buildCatalogInquiryHref, getCatalogProductBySlug } from '@/lib/catalog';
+import { JsonLd } from '@/components/seo/json-ld';
+import { createBreadcrumbJsonLd, createProductJsonLd } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
@@ -57,29 +59,42 @@ export async function generateMetadata({
   const product = await getCatalogProductBySlug(slug);
 
   if (!product) {
-    return {};
+    return {
+      title: 'Produkt nicht gefunden',
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
   }
+
+  const canonical = product.canonicalUrl || `/products/${product.slug}`;
+  const socialImageUrl = product.ogImageUrl || product.imageUrl;
+  const socialImageAlt = product.ogImageAlt || product.imageAlt || product.name;
 
   return {
     title: product.seoTitle || product.name,
     description: product.seoDescription || product.summary,
     alternates: {
-      canonical: `/products/${product.slug}`,
+      canonical,
     },
     openGraph: {
       title: product.seoTitle || `${product.name} | Mardu`,
       description: product.seoDescription || product.summary,
-      url: `/products/${product.slug}`,
+      url: canonical,
       type: 'website',
+      images: socialImageUrl ? [{ url: socialImageUrl, alt: socialImageAlt }] : undefined,
+    },
+    twitter: {
+      card: socialImageUrl ? 'summary_large_image' : 'summary',
+      title: product.seoTitle || `${product.name} | Mardu`,
+      description: product.seoDescription || product.summary,
+      images: socialImageUrl ? [socialImageUrl] : undefined,
     },
   };
 }
 
-export default async function ProductDetailPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const product = await getCatalogProductBySlug(slug);
 
@@ -92,6 +107,14 @@ export default async function ProductDetailPage({
 
   return (
     <main className="min-h-screen bg-background">
+      <JsonLd data={createProductJsonLd(product)} />
+      <JsonLd
+        data={createBreadcrumbJsonLd([
+          { name: 'Home', path: '/' },
+          { name: 'Produkte', path: '/products' },
+          { name: product.name, path: `/products/${product.slug}` },
+        ])}
+      />
       <div className="mardu-container pt-8 pb-2 md:pt-10 md:pb-3">
         <CatalogBreadcrumbs
           items={[

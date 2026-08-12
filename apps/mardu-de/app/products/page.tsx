@@ -1,70 +1,42 @@
 import type { Metadata } from 'next';
 import { CTASection } from '@mardu/sections';
-import { EditorialAccent } from '@mardu/ui/components/typography';
-import {
-  CatalogCarrierGrid,
-  CatalogCategoryGrid,
-  CatalogHero,
-  CatalogProductGrid,
-  CatalogTechnologyGrid,
-} from '@mardu/catalog-ui';
+import { CatalogCarrierGrid, CatalogTechnologyGrid } from '@mardu/catalog-ui';
+import { getPlatformOrigin } from '@mardu/site-config';
+import { ProductsPage as ProductsPageContent } from '@/features/products/products-page';
+import { createProductExplorerCategories } from '@/features/products/products-page-content';
 import {
   getCatalogCarriers,
   getCatalogCategories,
   getCatalogProducts,
   getCatalogTechnologies,
-  getFeaturedCatalogProducts,
 } from '@/lib/catalog';
+import { createPageMetadata } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: 'Produkte',
   description:
     'Hardware, Identmedien und Zubehör für Mardu-Installationen – von der Maschine bis zum weiteren Zugangspunkt.',
-  alternates: {
-    canonical: '/products',
-  },
-  openGraph: {
-    title: 'Produkte | Mardu',
-    description:
-      'Hardware, Identmedien und Zubehör für Mardu-Installationen – von der Maschine bis zum weiteren Zugangspunkt.',
-    url: '/products',
-    type: 'website',
-  },
-};
+  path: '/products',
+});
 
 export default async function ProductsPage() {
-  const [categories, technologies, carriers, featuredProducts, allProducts] = await Promise.all([
+  const [categories, technologies, carriers, products] = await Promise.all([
     getCatalogCategories(),
     getCatalogTechnologies(),
     getCatalogCarriers(),
-    getFeaturedCatalogProducts(3),
     getCatalogProducts(),
   ]);
+  const explorerCategories = createProductExplorerCategories(
+    categories,
+    products,
+    getPlatformOrigin(),
+  );
 
   return (
     <main className="min-h-screen bg-background">
-      <CatalogHero
-        eyebrow="01 / Produkte"
-        title={
-          <>
-            Hardware, Credentials und Zubehör für{' '}
-            <EditorialAccent>reale Mardu-Installationen.</EditorialAccent>
-          </>
-        }
-        description="Dieser Bereich ist für konkrete Projektbausteine gedacht: Produkte verstehen, typische Kombinationen prüfen, Richtpreise sehen und anschließend gezielt anfragen. Nicht als Einstieg in die Lösung, sondern als vertiefender Schritt."
-        primaryCta={{ label: 'Angebot anfragen', href: '/contact?source=contact-form' }}
-        secondaryCta={{ label: 'Integrationen ansehen', href: '/integrations' }}
-      />
-
-      <CatalogCategoryGrid
-        eyebrow="Familien"
-        title="Produkte nach Rolle im System statt nach Einzelteilen aufrufen"
-        description="Der Einstieg erfolgt über Produktfamilien, damit Türen, Maschinen, Credentials und Zubehör nicht als lose SKU-Liste erscheinen, sondern als zusammenhängender Systemaufbau."
-        categories={categories}
-        buildHref={(category) => `/products#category-${category.slug}`}
-      />
+      <ProductsPageContent categories={explorerCategories} />
 
       <CatalogTechnologyGrid
         eyebrow="Technologien"
@@ -79,33 +51,6 @@ export default async function ProductsPage() {
         description="Von günstigen NFC-Tags bis zu robusten Key Fobs oder mobilen Keys. Diese Ebene erklärt die Identitätsseite des Systems und ihre Verbindung zur Software und den Zugriffspunkten."
         items={carriers}
       />
-
-      <CatalogProductGrid
-        eyebrow="Highlights"
-        title="Kuratiert für typische Mardu-Projekte"
-        description="Diese Produkte sind für den Einstieg, für erste Angebote oder für wiederkehrende Hardware-Anfragen besonders relevant."
-        products={featuredProducts}
-        buildHref={(product) => `/products/${product.slug}`}
-      />
-
-      {categories.map((category) => {
-        const products = allProducts.filter((product) => product.categoryId === category.id);
-        if (products.length === 0) {
-          return null;
-        }
-
-        return (
-          <div key={category.id} id={`category-${category.slug}`}>
-            <CatalogProductGrid
-              eyebrow={category.name}
-              title={category.description}
-              description={`Katalogbereich für ${category.name.toLowerCase()}. Jeder Eintrag führt in eine Detailseite mit Varianten, technischen Daten und Angebotsanfrage.`}
-              products={products}
-              buildHref={(product) => `/products/${product.slug}`}
-            />
-          </div>
-        );
-      })}
 
       <CTASection
         title="Noch nicht sicher, welche Kombination passt?"

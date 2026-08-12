@@ -12,30 +12,17 @@ import {
 } from '@/components/integrations/integrations-directory';
 import { MARDU_FAVICON_PATH } from '@/lib/brand-assets';
 import { getIntegrations } from '@/lib/integrations';
+import { createPageMetadata } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: 'Integrationen',
   description:
     'Mardu verbindet Zutritt, Maschinen, Identitäten und Prozesse über offene Standards und bestehende Systeme.',
-  alternates: {
-    canonical: '/integrations',
-  },
-  openGraph: {
-    title: 'Integrationen | Mardu',
-    description:
-      'Systeme, die miteinander arbeiten: Identität, Automation, Organisation und Abrechnung zentral verbinden.',
-    url: '/integrations',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Integrationen | Mardu',
-    description:
-      'Systeme, die miteinander arbeiten: Identität, Automation, Organisation und Abrechnung zentral verbinden.',
-  },
-};
+  path: '/integrations',
+  socialTitle: 'Integrationen | Mardu',
+});
 
 const CURATED_INTEGRATIONS = [
   { slug: 'ldap', logoSrc: '/integrations/logos/ldap.png' },

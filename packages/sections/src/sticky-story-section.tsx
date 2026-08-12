@@ -54,6 +54,11 @@ export interface StickyStorySectionProps {
   compact?: boolean;
   /** Discrete crossfades or scroll-progress-driven transitions on desktop. */
   motionMode?: StickyStoryMotionMode;
+  /**
+   * Optional interactive media renderer. When provided, it replaces each
+   * item's image in both the mobile story step and the desktop sticky stage.
+   */
+  renderMedia?: (item: StickyStoryItem, index: number) => React.ReactNode;
   className?: string;
 }
 
@@ -200,6 +205,7 @@ function StoryStep({
   nextSectionId,
   onContinue,
   progress,
+  renderMedia,
   setReference,
   staticLayout,
 }: {
@@ -212,6 +218,7 @@ function StoryStep({
   nextSectionId?: string;
   onContinue: () => void;
   progress: MotionValue<number>;
+  renderMedia?: (item: StickyStoryItem, index: number) => React.ReactNode;
   setReference: (node: HTMLElement | null) => void;
   staticLayout: boolean;
 }) {
@@ -247,21 +254,26 @@ function StoryStep({
       <figure
         className={cn(
           "relative mt-10 aspect-[16/10] overflow-hidden border border-border bg-[#171820]",
+          renderMedia && "aspect-auto min-h-[30rem]",
           !staticLayout && "lg:hidden",
         )}
       >
-        <Image
-          src={item.imageSrc}
-          alt={item.imageAlt}
-          fill
-          sizes={
-            staticLayout
-              ? "(min-width: 1024px) 70vw, calc(100vw - 2rem)"
-              : "(max-width: 1023px) calc(100vw - 2rem), 1px"
-          }
-          priority={index === 0}
-          className="object-contain object-center"
-        />
+        {renderMedia ? (
+          <div className="h-full w-full">{renderMedia(item, index)}</div>
+        ) : (
+          <Image
+            src={item.imageSrc}
+            alt={item.imageAlt}
+            fill
+            sizes={
+              staticLayout
+                ? "(min-width: 1024px) 70vw, calc(100vw - 2rem)"
+                : "(max-width: 1023px) calc(100vw - 2rem), 1px"
+            }
+            priority={index === 0}
+            className="object-contain object-center"
+          />
+        )}
       </figure>
     </m.article>
   );
@@ -273,12 +285,14 @@ function ContinuousStoryMedia({
   item,
   itemCount,
   progress,
+  renderMedia,
 }: {
   active: boolean;
   index: number;
   item: StickyStoryItem;
   itemCount: number;
   progress: MotionValue<number>;
+  renderMedia?: (item: StickyStoryItem, index: number) => React.ReactNode;
 }) {
   const range = React.useMemo(
     () => getStoryMediaOpacityRange(index, itemCount),
@@ -292,14 +306,18 @@ function ContinuousStoryMedia({
       aria-hidden={!active}
       className={cn("absolute inset-0", !active && "pointer-events-none")}
     >
-      <Image
-        src={item.imageSrc}
-        alt={active ? item.imageAlt : ""}
-        fill
-        sizes="(min-width: 1280px) 58vw, 52vw"
-        priority={index === 0}
-        className="object-contain object-center"
-      />
+      {renderMedia ? (
+        <div className="h-full w-full">{renderMedia(item, index)}</div>
+      ) : (
+        <Image
+          src={item.imageSrc}
+          alt={active ? item.imageAlt : ""}
+          fill
+          sizes="(min-width: 1280px) 58vw, 52vw"
+          priority={index === 0}
+          className="object-contain object-center"
+        />
+      )}
     </m.figure>
   );
 }
@@ -318,6 +336,7 @@ export default function StickyStorySection({
   nextSectionId,
   compact = false,
   motionMode = "step",
+  renderMedia,
   className,
 }: StickyStorySectionProps) {
   const prefersReducedMotion = useReducedMotion();
@@ -452,6 +471,7 @@ export default function StickyStorySection({
                   nextSectionId={nextSectionId}
                   onContinue={() => scrollToStep(index)}
                   progress={continuous ? smoothScrollProgress : scrollYProgress}
+                  renderMedia={renderMedia}
                   setReference={(node) => {
                     stepReferences.current[index] = node;
                   }}
@@ -487,6 +507,7 @@ export default function StickyStorySection({
                           item={item}
                           itemCount={items.length}
                           progress={smoothScrollProgress}
+                          renderMedia={renderMedia}
                         />
                       ) : (
                         <m.figure
@@ -502,14 +523,20 @@ export default function StickyStorySection({
                             index !== activeIndex && "pointer-events-none",
                           )}
                         >
-                          <Image
-                            src={item.imageSrc}
-                            alt={index === activeIndex ? item.imageAlt : ""}
-                            fill
-                            sizes="(min-width: 1280px) 58vw, 52vw"
-                            priority={index === 0}
-                            className="object-contain object-center"
-                          />
+                          {renderMedia ? (
+                            <div className="h-full w-full">
+                              {renderMedia(item, index)}
+                            </div>
+                          ) : (
+                            <Image
+                              src={item.imageSrc}
+                              alt={index === activeIndex ? item.imageAlt : ""}
+                              fill
+                              sizes="(min-width: 1280px) 58vw, 52vw"
+                              priority={index === 0}
+                              className="object-contain object-center"
+                            />
+                          )}
                         </m.figure>
                       ),
                     )}

@@ -22,6 +22,12 @@ bun.lockb
 # tooling
 .turbo
 .vercel
+/.codex-artifacts/
+/.playwright-mcp/
+/tmp/
+**/.design-qa/
+design-qa*.md
+/sticky-story-section-desktop.png
 
 # typescript
 *.tsbuildinfo

@@ -1,29 +1,16 @@
 import { BlogCategoryFilter, BlogGrid, BlogHero, BlogPagination, BlogSearch } from '@mardu/blog-ui';
 import { isBlogEnabled } from '@mardu/site-config/feature-flags.server';
 import { getBlogCategories, getBlogPosts, getFeaturedPost } from '@/lib/blog';
-import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { createPageMetadata } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: 'Blog',
   description: 'Fachbeiträge rund um Zugangssysteme, Engineering und AI-Workflows.',
-  alternates: {
-    canonical: '/blog',
-  },
-  openGraph: {
-    title: 'Blog | Mardu',
-    description: 'Fachbeiträge rund um Zugangssysteme, Engineering und AI-Workflows.',
-    url: '/blog',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Blog | Mardu',
-    description: 'Fachbeiträge rund um Zugangssysteme, Engineering und AI-Workflows.',
-  },
-};
+  path: '/blog',
+});
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 

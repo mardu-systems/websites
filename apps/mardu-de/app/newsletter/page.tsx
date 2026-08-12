@@ -2,15 +2,14 @@ import type { Metadata } from 'next';
 import { EditorialAccent, Overline } from '@mardu/ui/components/typography';
 import { EditorialPageHero } from '@mardu/ui/components/editorial-page-hero';
 import NewsletterSignupForm from '@/components/utilities/newsletter-signup-form';
+import { createPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: 'Newsletter abonnieren',
   description:
     'Abonniere den Mardu Newsletter und erhalte Updates zu Zutrittssteuerung, Maschinenfreigabe und Produktneuheiten.',
-  alternates: {
-    canonical: '/newsletter',
-  },
-};
+  path: '/newsletter',
+});
 
 export default function NewsletterPage() {
   return (

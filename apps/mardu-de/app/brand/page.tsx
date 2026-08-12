@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { BrandAssetsPage, marduBrandAssetsPageContent } from '@mardu/sections';
 import { getSiteConfig } from '@mardu/site-config';
 import { MARDU_LOGO_DARK_PATH, MARDU_LOGO_LIGHT_PATH } from '@/lib/brand-assets';
+import { createPageMetadata } from '@/lib/seo';
 
 const siteConfig = getSiteConfig('mardu-de');
 const brandAssetsPageContent = {
@@ -30,24 +31,11 @@ const brandAssetsPageContent = {
   contactHref: `mailto:${siteConfig.supportEmail}?subject=Anfrage%20zu%20Brand%20Assets`,
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: 'Markenressourcen',
   description: 'Brand-Assets und Verwendungsinfos für die Marke Mardu.',
-  alternates: {
-    canonical: '/brand',
-  },
-  openGraph: {
-    title: 'Markenressourcen | Mardu',
-    description: 'Brand-Assets und Verwendungsinfos für die Marke Mardu.',
-    url: '/brand',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary',
-    title: 'Markenressourcen | Mardu',
-    description: 'Brand-Assets und Verwendungsinfos für die Marke Mardu.',
-  },
-};
+  path: '/brand',
+});
 
 export default function BrandPage() {
   return <BrandAssetsPage content={brandAssetsPageContent} variant="editorial-index" />;

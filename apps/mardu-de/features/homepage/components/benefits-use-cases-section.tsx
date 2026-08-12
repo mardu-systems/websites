@@ -34,9 +34,9 @@ export function BenefitsUseCasesSection() {
               }
               intro={
                 <p>
-                  Mardu verbindet Qualifikationen mit Maschinen- und Türfreigaben. So sinkt die
-                  manuelle Freigaberoutine, ohne Gefährdungsbeurteilung oder Schutzeinrichtungen zu
-                  ersetzen.
+                  Mardu macht nachvollziehbar, wer wann welche Einweisung abgeschlossen und welche
+                  Qualifikation erhalten hat, und berücksichtigt diesen Stand bei Maschinen- und
+                  Türfreigaben.
                 </p>
               }
               layout="stacked"
@@ -52,29 +52,27 @@ export function BenefitsUseCasesSection() {
                 <BenefitLiftCard
                   key={item.title}
                   index={index}
-                  className="relative border-b border-border py-8 last:border-b-0 lg:border-b-0 lg:border-r lg:px-9 lg:last:border-r-0"
+                  className="relative flex flex-col border-b border-border py-8 last:border-b-0 lg:border-b-0 lg:border-r lg:px-9 lg:last:border-r-0"
                 >
-                  <div>
-                    <div className="flex h-8 items-start justify-end gap-3">
-                      <span className="text-xs text-muted-foreground">[0{index + 1}]</span>
-                      {item.status ? (
-                        <span className="border border-mardu-purple/25 px-2 py-1 text-xs text-mardu-purple">
-                          {item.status}
-                        </span>
-                      ) : null}
-                    </div>
-                    <div
-                      aria-label={benefitModelLabels[index]}
-                      className="relative mx-auto size-60 overflow-visible sm:size-64"
-                      role="img"
-                    >
-                      <BenefitHalftoneVisual modelUrl={benefitModelUrls[index]} />
-                    </div>
+                  <div className="flex h-8 items-start justify-between gap-3">
+                    <span className="text-xs text-muted-foreground">[0{index + 1}]</span>
+                    {item.status ? (
+                      <span className="border border-mardu-purple/25 px-2 py-1 text-xs text-mardu-purple">
+                        {item.status}
+                      </span>
+                    ) : null}
                   </div>
-                  <h3 className="mx-auto mt-7 max-w-[20rem] text-[1.375rem] font-light leading-tight tracking-[-0.02em]">
+                  <h3 className="mt-8 text-2xl font-light leading-tight tracking-[-0.02em]">
                     {item.title}
                   </h3>
-                  <p className="mx-auto mt-4 max-w-[20rem] text-base leading-relaxed text-muted-foreground">
+                  <div
+                    aria-label={benefitModelLabels[index]}
+                    className="relative -mt-3 h-64 w-full overflow-visible"
+                    role="img"
+                  >
+                    <BenefitHalftoneVisual modelUrl={benefitModelUrls[index]} />
+                  </div>
+                  <p className="mt-2 text-base leading-relaxed text-muted-foreground">
                     {item.description}
                   </p>
                 </BenefitLiftCard>

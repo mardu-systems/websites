@@ -1,6 +1,18 @@
+'use client';
+
 import { StickyStorySection } from '@mardu/sections';
 import { EditorialAccent } from '@mardu/ui/components/typography';
 import { permissionsStory } from '../homepage-content';
+import {
+  PermissionsEmbeddedPreview,
+  type PermissionsPreviewVariant,
+} from './permissions-embedded-preview';
+
+const previewVariants: Record<string, PermissionsPreviewVariant> = {
+  identities: 'identities',
+  events: 'events',
+  'access-points': 'access-points',
+};
 
 export function PermissionsSection() {
   return (
@@ -22,6 +34,9 @@ export function PermissionsSection() {
       nextSectionId="nutzen"
       compact
       motionMode="continuous"
+      renderMedia={(item) => (
+        <PermissionsEmbeddedPreview variant={previewVariants[item.id] ?? 'identities'} />
+      )}
     />
   );
 }

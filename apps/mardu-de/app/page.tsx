@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import { Homepage } from '@/features/homepage/homepage';
+import { faqItems } from '@/features/homepage/homepage-content';
+import { JsonLd } from '@/components/seo/json-ld';
+import { createFaqJsonLd } from '@/lib/seo';
 
-const title = 'Maschine, Tür und Schranke. Zentral geregelt.';
+const title = 'Mardu: Maschinenfreigabe, Zutritt und Zufahrt';
 const description =
   'Mardu verbindet Maschinenfreigaben, Gebäudezutritt und Zufahrten mit einer zentralen Verwaltung für Identitäten und Berechtigungen.';
 
@@ -35,5 +38,10 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  return <Homepage />;
+  return (
+    <>
+      <JsonLd data={createFaqJsonLd(faqItems)} />
+      <Homepage />
+    </>
+  );
 }

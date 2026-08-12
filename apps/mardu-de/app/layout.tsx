@@ -13,6 +13,7 @@ import {
   MARDU_FAVICON_PATH,
   MARDU_LOGO_LIGHT_PATH,
 } from '@/lib/brand-assets';
+import { JsonLd } from '@/components/seo/json-ld';
 
 const siteConfig = getSiteConfig('mardu-de');
 const SITE_URL = siteConfig.origin;
@@ -65,12 +66,6 @@ export const metadata: Metadata = {
     'FabLab',
     'Labor',
   ],
-  alternates: {
-    canonical: '/',
-    languages: {
-      'de-DE': '/',
-    },
-  },
   icons: {
     icon: [
       { url: '/favicon/favicon.ico', sizes: 'any' },
@@ -134,25 +129,39 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
       name: siteConfig.appName,
+      legalName: 'Mardu GmbH',
       url: SITE_URL,
       logo: `${SITE_URL}${MARDU_LOGO_LIGHT_PATH}`,
       email: siteConfig.supportEmail,
       telephone: siteConfig.contactPhone,
       vatID: siteConfig.vatId,
+      foundingDate: '2026-02-13',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Alter Schlachthof 39 A1',
+        postalCode: '76131',
+        addressLocality: 'Karlsruhe',
+        addressCountry: 'DE',
+      },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer support',
+        email: siteConfig.supportEmail,
+        telephone: siteConfig.contactPhone,
+        availableLanguage: ['de'],
+      },
       sameAs: ['https://www.linkedin.com/company/marduofficial'],
     },
     {
       '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
       name: siteConfig.appName,
       url: SITE_URL,
+      inLanguage: 'de-DE',
       publisher: {
-        '@type': 'Organization',
-        name: 'Mardu',
-        url: SITE_URL,
-        logo: `${SITE_URL}${MARDU_LOGO_LIGHT_PATH}`,
-        telephone: siteConfig.contactPhone,
-        vatID: siteConfig.vatId,
+        '@id': `${SITE_URL}/#organization`,
       },
     },
   ],
@@ -162,10 +171,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="de" data-scroll-behavior="smooth">
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <JsonLd data={jsonLd} />
       </head>
       <body
         className={`${aktivGrotesk.variable} ${ibmPlexSans.variable} ${jetBrainsMono.variable} bg-background text-foreground overflow-x-hidden`}

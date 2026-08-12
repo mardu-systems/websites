@@ -1,14 +1,14 @@
 import CTASectionWithRecaptcha from '@/components/utilities/cta-section-with-recaptcha';
-import {
-  EditorialPanelsSection,
-  HeroSection,
-  SplitContent,
-} from '@mardu/sections';
-import {
-  platformEditorialPanels,
-  platformFeatures,
-  platformNetworks,
-} from '@/data/platform-page';
+import { EditorialPanelsSection, HeroSection, SplitContent } from '@mardu/sections';
+import { platformEditorialPanels, platformFeatures, platformNetworks } from '@/data/platform-page';
+import { createPageMetadata } from '@/lib/seo';
+
+export const metadata = createPageMetadata({
+  title: 'Mardu Plattform',
+  description:
+    'So verbindet die Mardu Plattform Identitäten, Berechtigungen, Software, Hardware und Integrationen zu belastbaren Freigaben vor Ort.',
+  path: '/platform',
+});
 
 const heroDescription = (
   <>
@@ -26,13 +26,20 @@ const heroDescription = (
 const introDescription = (
   <>
     <p className="text-balance">
-      Sicherheit darf kein Widerspruch zur freien und kreativen Entfaltung sein. Die Plattform erklärt nicht nur einzelne Funktionen. Sie zeigt den Weg von der Person über
-      die Regel bis zur tatsächlichen Freigabe an Tür, Tor oder Maschine.
+      Sicherheit darf kein Widerspruch zur freien und kreativen Entfaltung sein. Die Plattform
+      erklärt nicht nur einzelne Funktionen. Sie zeigt den Weg von der Person über die Regel bis zur
+      tatsächlichen Freigabe an Tür, Tor oder Maschine.
     </p>
     <ul className="mt-10 list-inside list-disc space-y-6">
-      <li>Software steuert Personen, Qualifikationen und Regeln (z. B. über UniNow oder SSO-Integrationen)</li>
+      <li>
+        Software steuert Personen, Qualifikationen und Regeln (z. B. über UniNow oder
+        SSO-Integrationen)
+      </li>
       <li>Hardware setzt diese Entscheidungen lokal, kabellos und verlässlich um</li>
-      <li>Integrationen und Produkte machen daraus ein belastbares Projektbild – ideal für Makerspaces und Hochschulen</li>
+      <li>
+        Integrationen und Produkte machen daraus ein belastbares Projektbild – ideal für Makerspaces
+        und Hochschulen
+      </li>
     </ul>
   </>
 );
@@ -40,15 +47,18 @@ const introDescription = (
 const introItems = [
   {
     title: 'Software',
-    description: 'WebQ verwaltet Nutzer, Rollen, Qualifikationen, Regeln und Nachweise. Integrationen via API möglich.',
+    description:
+      'WebQ verwaltet Nutzer, Rollen, Qualifikationen, Regeln und Nachweise. Integrationen via API möglich.',
   },
   {
     title: 'Hardware',
-    description: 'Zugriffspunkte, Gateways und Maschinenanbindung setzen Freigaben vor Ort um. (VdS-Zertifiziert, IP500 oder BLE)',
+    description:
+      'Zugriffspunkte, Gateways und Maschinenanbindung setzen Freigaben vor Ort um. (VdS-Zertifiziert, IP500 oder BLE)',
   },
   {
     title: 'Integrationen & Produkte',
-    description: 'Bestehende Systeme und passende Komponenten werden in ein gemeinsames Setup übersetzt.',
+    description:
+      'Bestehende Systeme und passende Komponenten werden in ein gemeinsames Setup übersetzt.',
   },
 ];
 
@@ -85,8 +95,9 @@ export default function Page() {
               Kernfunktionen, die sich im Alltag auszahlen
             </h2>
             <p className="max-w-xl text-sm leading-relaxed text-foreground/68 md:text-base">
-              Mardu sorgt für Sicherheit ohne permanente Aufsicht. Diese Blöcke zeigen, welche Rolle die Plattform
-              im Zusammenspiel mit Hardware, Integrationen und realen Betriebsabläufen (z.B. Makerspaces) übernimmt.
+              Mardu sorgt für Sicherheit ohne permanente Aufsicht. Diese Blöcke zeigen, welche Rolle
+              die Plattform im Zusammenspiel mit Hardware, Integrationen und realen Betriebsabläufen
+              (z.B. Makerspaces) übernimmt.
             </p>
           </div>
 
@@ -124,7 +135,9 @@ export default function Page() {
               Kabellose Mesh-Netzwerke für jede Reichweite
             </h2>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-foreground/72">
-              Je nach Anforderung setzen wir auf zwei ausfallsichere, kabellose Mesh-Technologien, um selbst in Altbauten oder großen Werkhallen eine störungsfreie Übertragung zu garantieren.
+              Je nach Anforderung setzen wir auf zwei ausfallsichere, kabellose Mesh-Technologien,
+              um selbst in Altbauten oder großen Werkhallen eine störungsfreie Übertragung zu
+              garantieren.
             </p>
           </div>
 
@@ -133,7 +146,10 @@ export default function Page() {
               const Icon = network.icon;
 
               return (
-                <article key={network.id} className="flex flex-col border border-black/10 bg-background p-8">
+                <article
+                  key={network.id}
+                  className="flex flex-col border border-black/10 bg-background p-8"
+                >
                   <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-black/5">
                     <Icon className="h-7 w-7 text-foreground/80" aria-hidden="true" />
                   </div>
@@ -144,7 +160,9 @@ export default function Page() {
                     {network.description}
                   </p>
                   <div className="mt-auto">
-                    <h4 className="font-medium text-foreground mb-3">Vorteile & Anwendungsbereiche</h4>
+                    <h4 className="font-medium text-foreground mb-3">
+                      Vorteile & Anwendungsbereiche
+                    </h4>
                     <ul className="list-inside list-disc space-y-2 text-sm text-foreground/70">
                       {network.benefits.map((benefit) => (
                         <li key={benefit}>{benefit}</li>
@@ -164,8 +182,6 @@ export default function Page() {
         intro="Die Plattform wird erst dann verständlich, wenn Software, Regeln und technische Infrastruktur gemeinsam betrachtet werden."
         items={platformEditorialPanels}
       />
-
-
 
       <CTASectionWithRecaptcha
         title="Die Plattform macht erst im Projektkontext wirklich Sinn."

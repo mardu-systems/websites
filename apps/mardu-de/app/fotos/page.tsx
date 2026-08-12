@@ -6,27 +6,13 @@ import PhotoSwipeGallery, {
   type PhotoSwipeGalleryItem,
 } from '@/components/utilities/photoswipe-gallery';
 import { sitePhotoAssets } from '@/data/site-photos';
+import { createPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: 'Fotos',
   description: 'Kuratiertes Fotoarchiv mit freigegebenem Presse- und Bildmaterial der Mardu GmbH.',
-  alternates: {
-    canonical: '/fotos',
-  },
-  openGraph: {
-    title: 'Fotos | Mardu',
-    description:
-      'Kuratiertes Fotoarchiv mit freigegebenem Presse- und Bildmaterial der Mardu GmbH.',
-    url: '/fotos',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary',
-    title: 'Fotos | Mardu',
-    description:
-      'Kuratiertes Fotoarchiv mit freigegebenem Presse- und Bildmaterial der Mardu GmbH.',
-  },
-};
+  path: '/fotos',
+});
 
 async function getPhotoGalleryItems(): Promise<PhotoSwipeGalleryItem[]> {
   return Promise.all(

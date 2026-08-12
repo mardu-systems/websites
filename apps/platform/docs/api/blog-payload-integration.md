@@ -29,8 +29,10 @@ SEO-Felder im Detail-DTO:
 - `canonicalUrl` (optional)
 - `ogImageUrl` (optional)
 - `ogImageAlt` (optional)
+- `updatedAt` (optional, ISO-8601; für sichtbare und strukturierte Aktualitätssignale)
 
 Hinweis:
+
 - Diese Werte kommen aus dem Payload SEO Plugin (`meta.*`) und nicht aus eigenen Blog-Collection-Feldern.
 
 ## Endpunktmatrix (Blog)
@@ -73,6 +75,7 @@ Quelle: [lib/blog.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/plat
 Mapper garantieren DTO-Stabilitaet und verwerfen unvollstaendige Payload-Dokumente defensiv.
 
 Zusatzregel:
+
 - Blog-Posts sind site-faehig über das Feld `sites` und werden fuer Consumer nur ausgeliefert, wenn die jeweilige Site sichtbar ist.
 
 ## Access-Regeln

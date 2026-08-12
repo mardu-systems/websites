@@ -1485,10 +1485,12 @@ export async function mountHalftoneCanvas(
 
     if (currentSettings.animation.rotateEnabled) {
       interaction.rotateElapsed += delta;
+      const rotateRange =
+        (currentSettings.animation.rotateRange * Math.PI) / 180;
       const rotateProgress = currentSettings.animation.rotatePingPong
         ? Math.sin(
             interaction.rotateElapsed * currentSettings.animation.rotateSpeed,
-          ) * Math.PI
+          ) * rotateRange
         : interaction.rotateElapsed * currentSettings.animation.rotateSpeed;
 
       if (currentSettings.animation.rotatePreset === "axis") {

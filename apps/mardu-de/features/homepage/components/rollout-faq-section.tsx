@@ -2,6 +2,7 @@ import { EditorialFaqSection, SectionIntro } from '@mardu/sections';
 import { EditorialAccent } from '@mardu/ui/components/typography';
 import { ScrollReveal } from '@mardu/ui/components/motion/scroll-reveal';
 import { faqItems, rolloutSteps } from '../homepage-content';
+import { FeatureCollectionSection } from './feature-collection-section';
 
 export function RolloutFaqSection() {
   const renderedFaqItems = faqItems.map((item) => ({
@@ -24,8 +25,8 @@ export function RolloutFaqSection() {
               }
               intro={
                 <p>
-                  Wir starten mit einem klar abgegrenzten Pilot: ein Zugangspunkt, die richtigen
-                  Rollen und ein überprüfbares Ziel.
+                  Wir starten mit einem Pilotprojekt: ein Zugangspunkt, die richtigen Rollen und ein
+                  überprüfbares Ziel.
                 </p>
               }
               layout="stacked"
@@ -56,6 +57,8 @@ export function RolloutFaqSection() {
           </ScrollReveal>
         </div>
       </section>
+
+      <FeatureCollectionSection />
 
       <EditorialFaqSection
         className="md:py-20"

@@ -11,7 +11,6 @@ import {
 } from 'lucide-react';
 import { homepageHero } from '../homepage-content';
 import { CyclingAccessPoint } from './cycling-access-point';
-import { HeroSystemField } from './hero-system-field';
 
 const trustSignalIcons = [
   ShieldCheck,
@@ -89,23 +88,36 @@ export function HomepageHero() {
         </div>
 
         <div className="min-w-0">
-          <figure className="homepage-hero-media relative min-h-80 overflow-hidden bg-muted sm:min-h-[32rem] xl:min-h-[clamp(34rem,calc(100svh-18rem),42rem)]">
-            <div className="homepage-hero-image absolute inset-0">
+          <div
+            className="grid grid-cols-2 gap-1"
+            role="group"
+            aria-label="Mardu an Maschine und Tür"
+          >
+            <figure className="relative min-h-80 overflow-hidden bg-muted sm:min-h-[32rem] xl:min-h-[clamp(34rem,calc(100svh-18rem),42rem)]">
               <Image
-                src="/landing/mardu-modern-cnc.webp"
-                alt="Mardu-Terminal an einer modernen CNC-Maschine bei der Identifikation mit einer Zugangskarte"
+                src="/landing/mardu-maschine-hero.webp"
+                alt="Mardu-Terminal an einer Werkstattmaschine bei der Identifikation mit einer Zugangskarte"
                 fill
                 priority
                 loading="eager"
-                sizes="(max-width: 1279px) 100vw, 60vw"
-                className="object-cover object-center"
+                unoptimized
+                sizes="(max-width: 1279px) 50vw, 30vw"
+                className="object-cover object-[38%_center]"
               />
-            </div>
-            <HeroSystemField />
-            <figcaption className="absolute bottom-4 left-4 z-20 border border-white/25 bg-black/45 px-2.5 py-1.5 text-xs text-white/82 backdrop-blur-sm">
-              Identität → Regel → Freigabe
-            </figcaption>
-          </figure>
+            </figure>
+            <figure className="relative min-h-80 overflow-hidden bg-muted sm:min-h-[32rem] xl:min-h-[clamp(34rem,calc(100svh-18rem),42rem)]">
+              <Image
+                src="/landing/mardu-tuerschloss-transponder.webp"
+                alt="Mardu-Schließzylinder an einer Gebäudetür bei der Identifikation mit einem Transponder"
+                fill
+                priority
+                loading="eager"
+                unoptimized
+                sizes="(max-width: 1279px) 50vw, 30vw"
+                className="object-cover object-[60%_center]"
+              />
+            </figure>
+          </div>
         </div>
       </div>
     </section>

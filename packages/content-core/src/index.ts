@@ -64,6 +64,7 @@ export type BlogPostDetailDto = BlogPostListItemDto & {
   ogImageUrl?: string;
   seoTitle?: string;
   seoDescription?: string;
+  updatedAt?: string;
   content: unknown;
 };
 
@@ -209,6 +210,11 @@ export type CatalogInquiryContextDto = {
 export type CatalogProductDetailDto = CatalogProductListItemDto & {
   seoTitle?: string;
   seoDescription?: string;
+  canonicalUrl?: string;
+  ogImageUrl?: string;
+  ogImageAlt?: string;
+  priceFrom?: number;
+  updatedAt?: string;
   heroDescription: string;
   overview: string;
   /**
@@ -281,6 +287,12 @@ export type SolutionFeatureDto = {
  * Full solution DTO for branch-specific landing pages.
  */
 export type SolutionDetailDto = SolutionListItemDto & {
+  seoTitle?: string;
+  seoDescription?: string;
+  canonicalUrl?: string;
+  ogImageUrl?: string;
+  ogImageAlt?: string;
+  updatedAt?: string;
   heroTitle: string;
   heroIntro: string;
   problemTitle: string;
@@ -380,6 +392,7 @@ export type IntegrationDetailDto = IntegrationListItemDto & {
   canonicalUrl?: string;
   ogImageUrl?: string;
   ogImageAlt?: string;
+  updatedAt?: string;
 };
 
 export type PaginatedIntegrationsDto = {
@@ -559,11 +572,11 @@ type PayloadCatalogProductDoc = SiteVisibility & {
   tagline?: string;
   summary?: string;
   description?: string;
-  heroDescription?: string;
-  overview?: string;
+  heroDescription?: string | null;
+  overview?: string | null;
   detailMarkdown?: string;
   breadcrumbLabel?: string;
-  priceFrom?: number;
+  priceFrom?: number | null;
   priceFromLabel?: string;
   availability?: CatalogAvailabilityStatus;
   availabilityLabel?: string;
@@ -727,14 +740,24 @@ function normalizeMediaUrl(url: string | undefined, origin: string): string {
   return new URL(url, origin).toString();
 }
 
+function normalizeDateString(value: Date | string | undefined): string | undefined {
+  if (value instanceof Date) {
+    return value.toISOString();
+  }
+
+  if (typeof value !== 'string' || Number.isNaN(Date.parse(value))) {
+    return undefined;
+  }
+
+  return value;
+}
+
 function toStringArray(value: unknown): string[] {
   if (!Array.isArray(value)) {
     return [];
   }
 
-  return value
-    .map((item) => (typeof item === 'string' ? item.trim() : ''))
-    .filter(Boolean);
+  return value.map((item) => (typeof item === 'string' ? item.trim() : '')).filter(Boolean);
 }
 
 function toRelationshipDocs<T>(value: unknown): T[] {
@@ -839,9 +862,7 @@ function mapBlogPost(doc: PayloadBlogDoc, origin: string): BlogPostListItemDto |
 
   const coverImage = toMedia(doc.coverImage);
   const categories = Array.isArray(doc.categories)
-    ? doc.categories
-        .map(mapBlogCategory)
-        .filter((item): item is BlogCategoryDto => item !== null)
+    ? doc.categories.map(mapBlogCategory).filter((item): item is BlogCategoryDto => item !== null)
     : [];
 
   if (!coverImage?.url || categories.length === 0) {
@@ -888,7 +909,10 @@ function filterBlogPosts(posts: BlogPostListItemDto[], query: BlogListQueryDto) 
   });
 }
 
-async function fetchPublishedBlogDocs(origin: string, site: VisibleSite): Promise<PayloadBlogDoc[]> {
+async function fetchPublishedBlogDocs(
+  origin: string,
+  site: VisibleSite,
+): Promise<PayloadBlogDoc[]> {
   const url = buildRestUrl(origin, '/api/blog-posts', {
     depth: '2',
     limit: String(MAX_BLOG_FETCH),
@@ -980,6 +1004,9 @@ export async function getPlatformBlogPostBySlug(
     ...(ogImage?.alt ? { ogImageAlt: ogImage.alt } : {}),
     ...(meta?.title ? { seoTitle: meta.title } : {}),
     ...(meta?.description ? { seoDescription: meta.description } : {}),
+    ...(normalizeDateString(doc.updatedAt)
+      ? { updatedAt: normalizeDateString(doc.updatedAt) }
+      : {}),
     content: doc.content,
   };
 }
@@ -1081,7 +1108,10 @@ function asSafeUrl(value?: string): string | undefined {
   return undefined;
 }
 
-function mapIntegrationDetail(doc: PayloadIntegrationDoc, origin: string): IntegrationDetailDto | null {
+function mapIntegrationDetail(
+  doc: PayloadIntegrationDoc,
+  origin: string,
+): IntegrationDetailDto | null {
   const listItem = mapIntegrationListItem(doc, origin);
 
   if (!listItem) {
@@ -1111,7 +1141,10 @@ function mapIntegrationDetail(doc: PayloadIntegrationDoc, origin: string): Integ
     ...(meta?.description ? { seoDescription: meta.description } : {}),
     ...(meta?.url ? { canonicalUrl: meta.url } : {}),
     ...(metaImage?.url
-      ? { ogImageUrl: normalizeMediaUrl(metaImage.url, origin), ogImageAlt: metaImage.alt ?? listItem.title }
+      ? {
+          ogImageUrl: normalizeMediaUrl(metaImage.url, origin),
+          ogImageAlt: metaImage.alt ?? listItem.title,
+        }
       : heroImage?.url
         ? {
             ogImageUrl: normalizeMediaUrl(heroImage.url, origin),
@@ -1123,6 +1156,9 @@ function mapIntegrationDetail(doc: PayloadIntegrationDoc, origin: string): Integ
               ogImageAlt: logo.alt ?? listItem.title,
             }
           : {}),
+    ...(normalizeDateString(doc.updatedAt)
+      ? { updatedAt: normalizeDateString(doc.updatedAt) }
+      : {}),
     content: doc.description,
   };
 }
@@ -1181,7 +1217,10 @@ function sortRoadmapItems(items: RoadmapItemDto[]) {
   });
 }
 
-async function fetchPublishedRoadmapDocs(origin: string, site: VisibleSite): Promise<PayloadRoadmapDoc[]> {
+async function fetchPublishedRoadmapDocs(
+  origin: string,
+  site: VisibleSite,
+): Promise<PayloadRoadmapDoc[]> {
   const url = buildRestUrl(origin, '/api/roadmap-items', {
     depth: '0',
     limit: String(MAX_ROADMAP_FETCH),
@@ -1383,7 +1422,9 @@ export async function getPlatformIntegrationBySlug(
   site: VisibleSite,
   slug: string,
 ): Promise<IntegrationDetailDto | null> {
-  const doc = (await fetchPublishedIntegrationDocs(origin, site)).find((item) => item.slug === slug);
+  const doc = (await fetchPublishedIntegrationDocs(origin, site)).find(
+    (item) => item.slug === slug,
+  );
 
   if (!doc) {
     return null;
@@ -1501,19 +1542,18 @@ function mapCatalogVariant(
     ...(doc.availabilityLabel ? { availabilityLabel: doc.availabilityLabel } : {}),
     ...(doc.recommendation ? { recommendation: doc.recommendation } : {}),
     attributes: Array.isArray(doc.attributes)
-      ? doc.attributes
-          .flatMap((attribute) => {
-            if (!attribute?.label || !attribute.value) {
-              return [];
-            }
+      ? doc.attributes.flatMap((attribute) => {
+          if (!attribute?.label || !attribute.value) {
+            return [];
+          }
 
-            return [
-              {
-                label: attribute.label,
-                value: attribute.value,
-              },
-            ];
-          })
+          return [
+            {
+              label: attribute.label,
+              value: attribute.value,
+            },
+          ];
+        })
       : [],
   };
 }
@@ -1541,7 +1581,7 @@ function mapCatalogProductListItem(
     .map((item) => mapCatalogTechnology(item, origin))
     .filter((item): item is CatalogTechnologyDto => Boolean(item));
 
-  if (categories.length === 0 || technologies.length === 0) {
+  if (categories.length === 0) {
     return null;
   }
 
@@ -1571,8 +1611,10 @@ function mapCatalogProductDetail(
   origin: string,
 ): CatalogProductDetailDto | null {
   const listItem = mapCatalogProductListItem(doc, origin);
+  const heroDescription = doc.heroDescription || doc.description || doc.summary;
+  const overview = doc.overview || doc.description || doc.summary;
 
-  if (!listItem || !doc.heroDescription || !doc.overview) {
+  if (!listItem || !heroDescription || !overview) {
     return null;
   }
 
@@ -1583,13 +1625,32 @@ function mapCatalogProductDetail(
     .map((item) => mapCatalogCarrier(item, origin))
     .filter((item): item is CatalogCarrierDto => Boolean(item));
   const meta = toMeta(doc.meta);
+  const metaImage = toMedia(meta?.image);
 
   return {
     ...listItem,
     ...(meta?.title ? { seoTitle: meta.title } : {}),
     ...(meta?.description ? { seoDescription: meta.description } : {}),
-    heroDescription: doc.heroDescription,
-    overview: doc.overview,
+    ...(meta?.url ? { canonicalUrl: meta.url } : {}),
+    ...(metaImage?.url
+      ? {
+          ogImageUrl: normalizeMediaUrl(metaImage.url, origin),
+          ogImageAlt: metaImage.alt ?? listItem.name,
+        }
+      : listItem.imageUrl
+        ? {
+            ogImageUrl: listItem.imageUrl,
+            ogImageAlt: listItem.imageAlt ?? listItem.name,
+          }
+        : {}),
+    ...(typeof doc.priceFrom === 'number' && Number.isFinite(doc.priceFrom)
+      ? { priceFrom: doc.priceFrom }
+      : {}),
+    ...(normalizeDateString(doc.updatedAt)
+      ? { updatedAt: normalizeDateString(doc.updatedAt) }
+      : {}),
+    heroDescription,
+    overview,
     ...(doc.detailMarkdown ? { detailMarkdown: doc.detailMarkdown } : {}),
     ...(doc.breadcrumbLabel ? { breadcrumbLabel: doc.breadcrumbLabel } : {}),
     ...(doc.technologiesHeading ? { technologiesHeading: doc.technologiesHeading } : {}),
@@ -1606,9 +1667,7 @@ function mapCatalogProductDetail(
           }
 
           const items = Array.isArray(group.items)
-            ? group.items
-                .map((item) => item?.item?.trim() ?? '')
-                .filter(Boolean)
+            ? group.items.map((item) => item?.item?.trim() ?? '').filter(Boolean)
             : [];
 
           return [
@@ -1779,21 +1838,20 @@ export async function getPlatformCatalogCategories(
   const productIdsByCategory = new Map<string, string[]>();
 
   for (const product of productDocs) {
-      const productId = toId(product.id);
-      const stableProductId = product.slug ?? productId;
+    const productId = toId(product.id);
+    const stableProductId = product.slug ?? productId;
 
-      for (const categoryId of toRelationshipIds(product.categories)) {
-        const current = productIdsByCategory.get(categoryId) ?? [];
-        current.push(stableProductId);
-        productIdsByCategory.set(categoryId, current);
-      }
+    for (const categoryId of toRelationshipIds(product.categories)) {
+      const current = productIdsByCategory.get(categoryId) ?? [];
+      current.push(stableProductId);
+      productIdsByCategory.set(categoryId, current);
+    }
   }
 
   return sortCatalogCategories(
     mapPayloadDocumentsStrict(
       categoryDocs,
-      (doc) =>
-        mapCatalogCategory(doc, origin, productIdsByCategory.get(toId(doc.id)) ?? []),
+      (doc) => mapCatalogCategory(doc, origin, productIdsByCategory.get(toId(doc.id)) ?? []),
       '/api/product-categories',
     ),
   );
@@ -1939,8 +1997,23 @@ function mapSolutionDetail(doc: PayloadSolutionDoc, origin: string): SolutionDet
     return null;
   }
 
+  const meta = toMeta(doc.meta);
+  const metaImage = toMedia(meta?.image);
+
   return {
     ...listItem,
+    ...(meta?.title ? { seoTitle: meta.title } : {}),
+    ...(meta?.description ? { seoDescription: meta.description } : {}),
+    ...(meta?.url ? { canonicalUrl: meta.url } : {}),
+    ...(metaImage?.url
+      ? {
+          ogImageUrl: normalizeMediaUrl(metaImage.url, origin),
+          ogImageAlt: metaImage.alt ?? listItem.title,
+        }
+      : { ogImageUrl: heroImage.url, ogImageAlt: heroImage.alt }),
+    ...(normalizeDateString(doc.updatedAt)
+      ? { updatedAt: normalizeDateString(doc.updatedAt) }
+      : {}),
     heroTitle: doc.heroTitle,
     heroIntro: doc.heroIntro,
     problemTitle: doc.problemTitle,
@@ -1949,7 +2022,11 @@ function mapSolutionDetail(doc: PayloadSolutionDoc, origin: string): SolutionDet
     heroImageAlt: heroImage.alt,
     contentBlocks: Array.isArray(doc.contentBlocks)
       ? doc.contentBlocks.flatMap((block, index) => {
-          if (!block?.title || !block.body || (block.imageSide !== 'left' && block.imageSide !== 'right')) {
+          if (
+            !block?.title ||
+            !block.body ||
+            (block.imageSide !== 'left' && block.imageSide !== 'right')
+          ) {
             return [];
           }
 

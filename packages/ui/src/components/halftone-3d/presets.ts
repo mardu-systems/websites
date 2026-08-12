@@ -68,6 +68,7 @@ export const defaultHalftone3DSettings: Halftone3DSettings = {
     rotatePreset: "axis",
     rotateSpeed: 0.2,
     rotatePingPong: false,
+    rotateRange: 180,
     floatAmplitude: 0.16,
     floatSpeed: 0.8,
     lightSweepHeightRange: 0.5,

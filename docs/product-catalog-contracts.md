@@ -49,6 +49,20 @@ Dieses Dokument beschreibt den öffentlichen Vertrag für den wiederverwendbaren
 - `CatalogInquiryContextDto`
 - `PaginatedCatalogProductsDto`
 
+`CatalogProductDetailDto` erweitert den sichtbaren Produktvertrag um optionale SEO- und Aktualitätsfelder:
+
+- `seoTitle` / `seoDescription`
+- `canonicalUrl`
+- `ogImageUrl` / `ogImageAlt`
+- `priceFrom` als numerischer Euro-Wert
+- `updatedAt` als ISO-8601-Zeitpunkt
+
+Diese Felder werden aus demselben Payload-Dokument wie die sichtbaren Produktdaten gemappt. Das Frontend darf ein strukturiertes `Offer` nur erzeugen, wenn `priceFrom` numerisch vorhanden ist; Textwerte wie „auf Anfrage“ werden nicht als Preis interpretiert.
+
+`heroDescription` und `overview` bleiben Pflichtfelder des öffentlichen DTOs. Enthalten ältere Payload-Dokumente dort keinen Text, bildet der Mapper sie deterministisch aus `description` und danach `summary`. Ein `null`-Wert bei `priceFrom` wird nicht veröffentlicht.
+
+Jedes veröffentlichte Produkt benötigt mindestens eine Kategorie. Die Liste `technologies` darf für Zubehör oder passive Komponenten leer sein; Consumer müssen ein leeres Array als gültigen Vertragswert behandeln.
+
 ## Routing- und CTA-Contract
 
 - Katalogseiten leben in der konsumierenden App, z. B.:

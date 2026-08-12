@@ -60,6 +60,12 @@ Vollständiger Datensatz für eine branchenspezifische Detailseite.
 
 Zusätzliche Felder gegenüber `SolutionListItemDto`:
 
+- `seoTitle?`
+- `seoDescription?`
+- `canonicalUrl?`
+- `ogImageUrl?`
+- `ogImageAlt?`
+- `updatedAt?`
 - `heroTitle`
 - `heroIntro`
 - `problemTitle`

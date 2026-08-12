@@ -111,7 +111,8 @@ export const homepageHero = {
 
 export const customerProof = {
   label: 'Kunden & Partner',
-  description: 'Gemeinsam mit Hochschulen und Technologiepartnern für den Betrieb entwickelt.',
+  description:
+    'Gemeinsam mit Kunden, Hochschulen und Technologiepartnern für den Betrieb entwickelt.',
   partners: [
     {
       name: 'FH Aachen',
@@ -208,7 +209,7 @@ export const systemLayers: ReadonlyArray<HomepageNumberedItem> = [
     index: '01',
     title: 'Identität zuordnen',
     description:
-      'Ausweis, Tag oder angebundenes Identitätssystem ordnen Zugriffe eindeutig einer Person zu.',
+      'Ausweis, Zugangs-Tag oder angebundenes Identitätssystem ordnen Zugriffe eindeutig einer Person zu.',
   },
   {
     index: '02',
@@ -235,7 +236,7 @@ export const permissionsStory: ReadonlyArray<StickyStoryItem> = [
     label: 'Identitäten',
     title: 'Menschen, Rollen und Qualifikationen an einem Ort.',
     description: 'Personen, Identmedien, Rollen und Qualifikationen werden zentral gepflegt.',
-    emphasis: 'Änderungen gelten bis zum Zugangspunkt.',
+    emphasis: 'Änderungen gelten sofort am Zugangspunkt.',
     imageSrc: '/verwaltungssoftware/benutzerverwaltung.png',
     imageAlt: 'Mardu-Verwaltungssoftware mit Benutzerkonten und zugeordneten Identmedien',
   },
@@ -256,7 +257,7 @@ export const permissionsStory: ReadonlyArray<StickyStoryItem> = [
     title: 'Alle Zugangspunkte. Eine Übersicht.',
     description:
       'Maschinen, Türen, Tore und weitere Ressourcen bleiben Teil derselben Verwaltungsstruktur.',
-    emphasis: 'Aus einzelnen Geräten wird ein steuerbares System.',
+    emphasis: 'Aus Einzellösungen wird ein gemeinsames System.',
     imageSrc: '/verwaltungssoftware/zutrittspunkte-und-geraete.png',
     imageAlt: 'Mardu-Verwaltungssoftware mit verwalteten Geräten und Zugangspunkten',
   },
@@ -276,16 +277,16 @@ export const accessAreas: ReadonlyArray<
     label: 'Kernanwendung',
     title: 'Qualifikation steuert Maschinenfreigaben',
     description:
-      'Identität, Einweisung, Rolle und Zeitregeln greifen zusammen. Jede Anlage wird technisch geprüft.',
+      'Identität, Einweisung, Rolle und Zeitfenster bestimmen, wer eine Maschine einschalten und nutzen darf.',
     imageSrc: '/landing/mardu-modern-cnc.webp',
     imageAlt: 'Mardu-Terminal an einer modernen CNC-Maschine',
   },
   {
     index: '02',
     label: 'Zutritt',
-    title: 'Ein Ausweis öffnet passende Türen',
+    title: 'Ein Schließsystem arbeitet mit anderen Systemen zusammen',
     description:
-      'Gebäude, Werkstätten, Labore und einzelne Bereiche lassen sich in dieselbe Berechtigungsstruktur einordnen.',
+      'Türen und Bereiche werden gemeinsam verwaltet. Bestehende Identitäts-, Gebäude- und Drittsysteme lassen sich über Schnittstellen anbinden.',
     imageSrc: '/landing/mardu-gebaeudezugang-tuere.webp',
     imageAlt: 'Elektronischer Schließzylinder an einem Gebäudeeingang',
   },
@@ -360,29 +361,29 @@ export const useCases: ReadonlyArray<HomepageLinkedNumberedItem> = [
     index: '01',
     title: 'Unternehmenswerkstätten',
     description:
-      'Maschinen, Räume und Rollen werden zu einem nachvollziehbaren Werkstattbetrieb verbunden.',
-    href: '/solutions/unternehmenswerkstaetten',
+      'Integrationen zu Identitäts-, Zutritts- und Verwaltungssystemen binden bestehende Infrastruktur ein.',
+    href: '/solutions#solution-tab-unternehmenswerkstaetten',
   },
   {
     index: '02',
     title: 'Labore',
     description:
-      'Zutritt, Gerätefreigaben und wechselnde Nutzergruppen laufen kontrolliert zusammen.',
-    href: '/solutions/labore',
+      'Rollen, Qualifikationen und Buchungen bestimmen, wer wann welche Maschine nutzen darf.',
+    href: '/solutions#solution-tab-labore',
   },
   {
     index: '03',
     title: 'Hochschulen & Universitäten',
     description:
-      'Campus, Fachbereiche, Werkstätten und Spezialräume folgen einer gemeinsamen Zugriffslogik.',
-    href: '/solutions/hochschulen-und-universitaeten',
+      'Studierende, Beschäftigte, Lehrende und externe Nutzergruppen greifen mit passenden Rollen und Rechten auf gemeinsam genutzte Ressourcen zu.',
+    href: '/solutions#solution-tab-hochschulen-und-universitaeten',
   },
   {
     index: '04',
     title: 'Makerspaces & offene Werkstätten',
     description:
-      'Einweisungen und Maschinenfreigaben reduzieren manuelle Freigaben bei wechselnden Nutzergruppen.',
-    href: '/solutions/makerspaces-und-offene-werkstaetten',
+      'Längere Öffnungszeiten werden leichter planbar; dokumentierte Einweisungen, Freigaben und Zuständigkeiten schaffen Klarheit in rechtlichen Graubereichen.',
+    href: '/solutions#solution-tab-makerspaces-und-offene-werkstaetten',
   },
 ];
 
@@ -407,6 +408,69 @@ export const rolloutSteps: ReadonlyArray<HomepageNumberedItem> = [
     index: '04',
     title: 'Gezielt skalieren',
     description: 'Erst nach der Auswertung weitere Ressourcen anbinden.',
+  },
+];
+
+export const complianceProofs: ReadonlyArray<HomepageNumberedItem> = [
+  {
+    index: '01',
+    title: 'Qualifikationen im Blick',
+    description:
+      'Gültigkeiten von Einweisungen und Qualifikationen bleiben zentral nachvollziehbar.',
+  },
+  {
+    index: '02',
+    title: 'Entscheidungen dokumentiert',
+    description:
+      'Erteilte und abgelehnte Freigaben werden mit Zeitpunkt und Zugangspunkt protokolliert.',
+  },
+  {
+    index: '03',
+    title: 'Nachweise bereitstellen',
+    description:
+      'Gefilterte Protokolle lassen sich für interne Prüfungen, Aufsicht und Versicherungen bereitstellen.',
+  },
+];
+
+export const featureItems: ReadonlyArray<HomepageTextItem> = [
+  {
+    title: 'Identitäten & RBAC',
+    description:
+      'Nutzer, Gruppen und Rollen mit permission-basiertem RBAC und effektiven Rechten verwalten.',
+  },
+  {
+    title: 'SSO & sichere Anmeldung',
+    description: 'LDAP, OIDC, Passkeys/WebAuthn und TOTP samt Sitzungswiderruf zentral steuern.',
+  },
+  {
+    title: 'Freigaben & Zeitpläne',
+    description:
+      'Berechtigungen für Personen, Gruppen oder Zugangs-Tags mit Gültigkeit und mehreren Zeitfenstern definieren.',
+  },
+  {
+    title: 'Kompetenzen & Badges',
+    description:
+      'OpenBadges und lokale Kompetenzcodes als prüfbare Bedingung in Zugriffsentscheidungen einsetzen.',
+  },
+  {
+    title: 'Access Points & Reader',
+    description:
+      'Maschinen, Türen, Zonen und Reader verwalten, gruppieren und Geräten eindeutig zuordnen.',
+  },
+  {
+    title: 'Sicheres Tag-Enrollment',
+    description:
+      'DESFire-Tags per Smartphone, QR-Auftrag und kurzlebigem Enrollment-Token beschreiben.',
+  },
+  {
+    title: 'Geräte & OTA-Updates',
+    description:
+      'Firmwarestände, Heartbeats und Gerätezustände überwachen; signierte Updates per OTA verteilen.',
+  },
+  {
+    title: 'Audit & Echtzeit',
+    description:
+      'Zugriffe mit Reason Codes protokollieren und Zustände über MQTT sowie SignalR übertragen.',
   },
 ];
 
@@ -465,12 +529,12 @@ export const faqItems = [
   {
     question: 'Welche Zugänge kann Mardu steuern?',
     answer:
-      'Maschinen und Anlagen stehen im Mittelpunkt. Türen, Tore, Schranken und weitere schaltbare Zugänge binden wir nach technischer Prüfung an.',
+      'Mardu steuert CNC-Maschinen, Werkstattmaschinen, Türen, Tore, Schranken, Zufahrten, Schließfächer und weitere elektrisch schaltbare Ressourcen. Bestehende Steuerungen, Identmedien und Drittsysteme lassen sich je nach Schnittstelle einbinden.',
   },
   {
     question: 'Funktioniert Mardu mit jeder Maschine?',
     answer:
-      'Nein. Maschinentyp, Steuerung, elektrische Einbindung, Schutzkonzept und gewünschter Ablauf müssen geprüft werden. Danach bestimmen wir den sinnvollen Umfang.',
+      'Grundsätzlich lässt sich Mardu an viele Maschinen anbinden; der konkrete Umfang hängt von Steuerung und Einsatzkontext ab. Mardu kann beispielsweise einen einfachen Schlüsselschalter ersetzen und nur die Bedienfreigabe steuern, ohne die gesamte Maschine auszuschalten. Schutzkonzept und sicherheitsgerichtete Funktionen bleiben davon unberührt.',
   },
   {
     question: 'Können vorhandene Ausweise genutzt werden?',
@@ -480,22 +544,22 @@ export const faqItems = [
   {
     question: 'Ist Mardu eine sicherheitsgerichtete Steuerung?',
     answer:
-      'Nein. Mardu ist ein organisatorisches Freigabe- und Zugangssystem. Es ersetzt weder Not-Halt und Schutzeinrichtungen noch praktische Unterweisung, Gefährdungsbeurteilung oder erforderliche Aufsicht.',
+      'Nein. Mardu ist die Plattform, die Listen und manuelle Freigaben ersetzt, Qualifikationen prüfbar macht und Zugangsregeln am Nutzungspunkt durchsetzt. Damit hilft Mardu zu verhindern, dass beliebige Personen Maschinen einschalten. Mardu bleibt ein Werkzeug im organisatorischen Schutzkonzept: Unterweisungen, Gefährdungsbeurteilungen und erforderliche Aufsicht kann es weder durchführen noch ersetzen; Not-Halt und Schutzeinrichtungen übernimmt es ebenfalls nicht.',
   },
   {
     question: 'Was passiert bei Netzwerk-, Server- oder Funkproblemen?',
     answer:
-      'Freigaben laufen lokal auf der Mardu-Basisstation oder einem lokalen Server. Ein Internetausfall stoppt den Betrieb deshalb nicht automatisch. Zulässige Zustände und Rückfallebenen legen wir je Ressource fest.',
+      'Freigaben laufen lokal auf der Mardu-Basisstation oder einem lokalen Server und bleiben damit unabhängig von einer dauerhaften Internetverbindung. Das vermaschte IP500-Funknetz kann Daten über alternative Funkwege weiterleiten. Zusätzliche Mardu-Gateways schaffen Redundanz und können Verfügbarkeit sowie Ausfallsicherheit erhöhen. Zulässige Zustände und Rückfallebenen legen wir je Ressource fest.',
   },
   {
     question: 'Warum nutzt Mardu IP500 statt Werkstatt-WLAN?',
     answer:
-      'Mardu-Geräte kommunizieren über ein eigenes IP500-Funknetz. Für Maschinen- und Türfreigaben ist deshalb kein Werkstatt-WLAN erforderlich. Abdeckung, Redundanz und lokale Architektur prüfen wir vorab.',
+      'Bei Freigaben zählt nicht eine hohe Datenrate, sondern dass wenige, entscheidende Daten zuverlässig ankommen. Deshalb ist Mardu nicht vom Werkstatt-WLAN abhängig, sondern nutzt ein eigenes IP500-Mesh auf 868 MHz und 2,4 GHz. Die vermaschte, verschlüsselte Kommunikation kann Daten über alternative Funkwege weiterreichen und schafft so eine robuste Grundlage für Maschinen- und Türfreigaben.',
   },
   {
     question: 'Wie unterstützt Mardu bei Betreiberpflichten und Nachweisen?',
     answer:
-      'Mardu verbindet dokumentierte Qualifikationen mit Freigaben und vereinbarten Nutzungsereignissen. Das erleichtert Nachweise rund um Betriebssicherheit, DGUV, Verkehrssicherung und Versicherung. Gefährdungsbeurteilung, Rechtsberatung und Schutzeinrichtungen ersetzt Mardu nicht.',
+      'Mardu macht nachvollziehbar, wer wann mit welcher Qualifikation eine Freigabe erhalten oder nicht erhalten hat. Protokolle lassen sich filtern, exportieren und als Bericht für interne Prüfungen, Aufsicht, Versicherungen oder DGUV-Nachweise bereitstellen. So bleiben Entscheidungen belegbar, statt in Listen und Einzelabsprachen zu verschwinden. Gefährdungsbeurteilung, Rechtsberatung und Schutzeinrichtungen bleiben Aufgabe der Verantwortlichen.',
   },
   {
     question: 'Welche Daten werden protokolliert?',

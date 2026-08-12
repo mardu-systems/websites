@@ -18,6 +18,16 @@ Kanonische Typen:
 - `SolutionContentBlockDto`
 - `SolutionFeatureDto`
 
+SEO- und Aktualitätsfelder im Detail-DTO:
+
+- `seoTitle` (optional)
+- `seoDescription` (optional)
+- `canonicalUrl` (optional)
+- `ogImageUrl` / `ogImageAlt` (optional)
+- `updatedAt` (optional, ISO-8601)
+
+Diese Werte stammen aus `meta.*` des Payload-SEO-Plugins beziehungsweise aus `updatedAt` des Dokuments. Das Frontend verwendet sie gemeinsam für Metadata und JSON-LD.
+
 ## Endpunkte
 
 Bereitstellung über:

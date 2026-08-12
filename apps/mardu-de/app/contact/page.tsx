@@ -4,30 +4,16 @@ import { EditorialAccent } from '@mardu/ui/components/typography';
 import ContactForm from '@/components/forms/contact';
 import { getSiteConfig } from '@mardu/site-config';
 import { parseCatalogInquiryContext } from '@/lib/catalog';
+import { createPageMetadata } from '@/lib/seo';
 
 const siteConfig = getSiteConfig('mardu-de');
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: 'Kontakt',
   description:
     'Kontaktiere das Team der Mardu GmbH und erfahre, wie du uns im Alten Schlachthof erreichst.',
-  alternates: {
-    canonical: '/contact',
-  },
-  openGraph: {
-    title: 'Kontakt | Mardu',
-    description:
-      'Kontaktiere das Team der Mardu GmbH und erfahre, wie du uns im Alten Schlachthof erreichst.',
-    url: '/contact',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary',
-    title: 'Kontakt | Mardu',
-    description:
-      'Kontaktiere das Team der Mardu GmbH und erfahre, wie du uns im Alten Schlachthof erreichst.',
-  },
-};
+  path: '/contact',
+});
 
 export default async function ContactPage({
   searchParams,

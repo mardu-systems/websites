@@ -51,7 +51,7 @@ const team: ReadonlyArray<TeamMember> = [
 
 const title = 'Über uns';
 const description =
-  'Lerne die Geschichte und das Team hinter Mardu kennen – von der ersten Lösung im Makerspace bis zum System für professionelle Werkstätten, Hochschulen und Labore.';
+  'Lerne Geschichte und Team hinter Mardu kennen – von der Makerspace-Lösung bis zum System für Werkstätten, Hochschulen und Labore.';
 
 export const metadata: Metadata = {
   title,

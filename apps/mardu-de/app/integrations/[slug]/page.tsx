@@ -10,6 +10,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Button } from '@mardu/ui/components/button';
+import { JsonLd } from '@/components/seo/json-ld';
+import { createBreadcrumbJsonLd, createIntegrationJsonLd } from '@/lib/seo';
 
 type Params = Promise<{ slug: string }>;
 
@@ -91,6 +93,14 @@ export default async function IntegrationDetailPage({ params }: { params: Params
 
   return (
     <main className="pb-16 md:pb-24">
+      <JsonLd data={createIntegrationJsonLd(integration)} />
+      <JsonLd
+        data={createBreadcrumbJsonLd([
+          { name: 'Home', path: '/' },
+          { name: 'Integrationen', path: '/integrations' },
+          { name: integration.title, path: `/integrations/${integration.slug}` },
+        ])}
+      />
       <section className="section-hairline py-8 md:py-12">
         <div className="mardu-container">
           <div className="mb-5 flex flex-wrap items-center gap-2 text-sm text-foreground/65">
@@ -107,6 +117,16 @@ export default async function IntegrationDetailPage({ params }: { params: Params
             <IntegrationDetailSidebar integration={integration} />
 
             <article>
+              {integration.updatedAt ? (
+                <p className="mb-5 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-foreground/55">
+                  Aktualisiert am{' '}
+                  {new Date(integration.updatedAt).toLocaleDateString('de-DE', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                </p>
+              ) : null}
               <div className="border-t border-black/10 pt-8">
                 <BlogRichText content={integration.content} />
               </div>

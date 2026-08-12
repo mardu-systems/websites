@@ -2,8 +2,8 @@ import { BadgeCheck, Boxes, ContactRound, MonitorCog } from 'lucide-react';
 import { SectionIntro } from '@mardu/sections';
 import { ScrollReveal } from '@mardu/ui/components/motion/scroll-reveal';
 import { EditorialAccent } from '@mardu/ui/components/typography';
-import { mediaBriefs, systemLayers } from '../homepage-content';
-import { HomepageMediaPlaceholder } from './homepage-media-placeholder';
+import { systemLayers } from '../homepage-content';
+import { SystemProductFamilyVisual } from './system-product-family-visual';
 
 const layerIcons = [ContactRound, BadgeCheck, Boxes, MonitorCog] as const;
 
@@ -41,17 +41,17 @@ export function SystemOverviewSection() {
               return (
                 <li
                   key={item.index}
-                  className="relative flex flex-col border-b border-border p-5 md:p-6 md:odd:border-r md:[&:nth-last-child(-n+2)]:border-b-0 xl:min-h-[27rem] xl:border-b-0 xl:border-r xl:border-border xl:last:border-r-0"
+                  className="relative flex min-h-48 flex-col border-b border-border p-5 md:odd:border-r md:[&:nth-last-child(-n+2)]:border-b-0 xl:min-h-[21rem] xl:border-b-0 xl:border-r xl:border-border xl:last:border-r-0"
                 >
                   <ScrollReveal className="flex h-full flex-col" delay={index * 0.09} distance={30}>
                     <div className="flex items-center justify-between gap-3">
                       <span className="text-xs text-mardu-purple">[{item.index}]</span>
-                      <Icon className="size-5 text-muted-foreground" aria-hidden="true" />
+                      <Icon className="size-6 text-muted-foreground" aria-hidden="true" />
                     </div>
-                    <h3 className="mt-6 max-w-[14ch] text-[1.375rem] font-light leading-tight tracking-[-0.02em] md:mt-10">
+                    <h3 className="mt-6 max-w-[14ch] text-xl font-light leading-tight tracking-[-0.02em]">
                       {item.title}
                     </h3>
-                    <p className="mt-3 text-base leading-snug text-muted-foreground md:mt-auto md:pt-10 md:leading-relaxed">
+                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground md:mt-auto md:pt-6">
                       {item.description}
                     </p>
                   </ScrollReveal>
@@ -68,10 +68,7 @@ export function SystemOverviewSection() {
             })}
           </ol>
 
-          <HomepageMediaPlaceholder
-            brief={mediaBriefs.accessPanorama}
-            className="min-h-[27rem] border-0"
-          />
+          <SystemProductFamilyVisual />
         </div>
       </div>
     </section>

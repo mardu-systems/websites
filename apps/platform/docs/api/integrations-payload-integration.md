@@ -22,6 +22,15 @@ Shared Mapping- und Remote-Client-Layer:
 - `IntegrationDetailDto`
 - `PaginatedIntegrationsDto`
 
+SEO- und Aktualitätsfelder im Detail-DTO:
+
+- `seoTitle` / `seoDescription` (optional)
+- `canonicalUrl` (optional)
+- `ogImageUrl` / `ogImageAlt` (optional)
+- `updatedAt` (optional, ISO-8601)
+
+Das Frontend verwendet dieselben Werte für Metadata, sichtbare Aktualität und `WebPage`-JSON-LD.
+
 ## Endpunktmatrix
 
 Bereitstellung über: [app/api/[...slug]/route.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/api/[...slug]/route.ts)
@@ -69,7 +78,9 @@ Collection: [collections/integrations.ts](/Users/lucaschoeneberg/Documents/GitHu
 ## Seed-Daten
 
 V1 Start-Datenquelle:
+
 - [data/integration-seed-items.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/data/integration-seed-items.ts)
 
 Optionales Seed-Skript:
+
 - [scripts/seed-integrations.mjs](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/scripts/seed-integrations.mjs)

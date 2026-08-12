@@ -1,9 +1,13 @@
 import { ArrowLeft, CheckCircle2, Download, FileText, MailWarning } from 'lucide-react';
 import { EditorialStatusPage } from '@mardu/sections';
+import { createPageMetadata } from '@/lib/seo';
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: 'Whitepaper Download',
-};
+  description: 'Status des persönlichen Mardu-Whitepaper-Downloads.',
+  path: '/whitepaper/success',
+  index: false,
+});
 
 export default async function WhitepaperSuccessPage({
   searchParams,

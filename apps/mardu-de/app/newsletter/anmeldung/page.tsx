@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import { NewsletterStatusPage } from '@mardu/sections';
+import { createPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: 'Newsletter Anmeldung',
   description: 'Status deiner Newsletter-Anmeldung bei Mardu.',
-  alternates: {
-    canonical: '/newsletter/anmeldung',
-  },
-};
+  path: '/newsletter/anmeldung',
+  index: false,
+});
 
 export default async function NewsletterConfirmationPage({
   searchParams,

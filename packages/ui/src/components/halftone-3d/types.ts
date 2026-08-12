@@ -102,6 +102,8 @@ export type Halftone3DAnimationSettings = {
   rotatePreset: "axis" | "lissajous" | "orbit" | "tumble";
   rotateSpeed: number;
   rotatePingPong: boolean;
+  /** Maximale Pendelrotation in Grad, wenn `rotatePingPong` aktiv ist. */
+  rotateRange: number;
   floatAmplitude: number;
   floatSpeed: number;
   lightSweepHeightRange: number;

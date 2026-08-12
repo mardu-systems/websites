@@ -1,5 +1,7 @@
 import { AccessPointsSection } from './components/access-points-section';
 import { BenefitsUseCasesSection } from './components/benefits-use-cases-section';
+import { ComplianceSection } from './components/compliance-section';
+import { ConnectAppSection } from './components/connect-app-section';
 import { CustomerProofSection } from './components/customer-proof-section';
 import { FundingSection } from './components/funding-section';
 import { HomepageHero } from './components/homepage-hero';
@@ -16,7 +18,9 @@ export function Homepage() {
       <SystemOverviewSection />
       <AccessPointsSection />
       <PermissionsSection />
+      <ConnectAppSection />
       <BenefitsUseCasesSection />
+      <ComplianceSection />
       <RolloutFaqSection />
       <FundingSection />
       <HomepageIndex />

@@ -65,6 +65,7 @@ Props:
 - `modelRotation?: readonly [number, number, number]` dreht ein GLB-Modell vor dem Zentrieren und Normalisieren über Euler-Winkel in Radiant. Beide Modell-Props werden beim Mount gelesen.
 - `settings?: DeepPartial<Halftone3DSettings>` überschreibt Lighting, Material, Halftone, Background und Animation partiell.
 - `settings.animation.rotationConstraint: "free" | "y"` begrenzt automatische, Hover- und Drag-Rotationen optional vollständig auf die Y-Achse.
+- `settings.animation.rotatePingPong` aktiviert eine Pendelbewegung; `rotateRange` begrenzt deren Ausschlag in Grad.
 - `initialPose?: Partial<Halftone3DPose>` wird beim Mount als Startpose verwendet.
 - `previewDistance?: number` steuert die Kamera-Distanz und wird live übernommen.
 - `className`, `style` und `onError` steuern Container und Fehlerbehandlung.

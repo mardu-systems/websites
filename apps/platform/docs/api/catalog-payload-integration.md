@@ -24,6 +24,16 @@ Kanonische Typen:
 - `CatalogRelatedProductDto`
 - `CatalogInquiryContextDto`
 
+Zusätzliche SEO-, Preis- und Aktualitätsfelder im Produktdetail-DTO:
+
+- `seoTitle` / `seoDescription` (optional)
+- `canonicalUrl` (optional)
+- `ogImageUrl` / `ogImageAlt` (optional)
+- `priceFrom` (optional, numerischer Netto-Einstiegspreis in Euro)
+- `updatedAt` (optional, ISO-8601)
+
+Das Frontend nutzt diese Felder für Metadata, Social Cards und valides `Product`-JSON-LD. Ein `Offer` wird nur ausgegeben, wenn `priceFrom` numerisch gepflegt ist.
+
 ## Endpunktmatrix
 
 Bereitstellung über:
@@ -47,6 +57,10 @@ Bereitstellung über:
 - Upload-Felder können über Payload `media` gepflegt werden.
 - Alternativ können relative oder absolute Asset-URLs über `imageUrl` / `heroImageUrl` gepflegt werden.
 - `@mardu/content-core` bevorzugt Media-Uploads und fällt sonst auf URL-Felder zurück.
+- `heroDescription` bleibt im öffentlichen Detail-DTO verpflichtend. Für ältere Payload-Dokumente mit leerem Feld nutzt der Mapper zuerst `description` und anschließend `summary` als sichtbaren Fallback.
+- `overview` bleibt ebenfalls verpflichtend und fällt bei älteren Dokumenten auf `description` beziehungsweise `summary` zurück.
+- Ein in Payload gespeichertes `null` für `priceFrom` wird wie ein nicht gepflegter Preis behandelt und nicht in das öffentliche DTO übernommen.
+- Mindestens eine Kategorie ist für veröffentlichte Produkte erforderlich. `technologies` darf bei Zubehör und passiven Komponenten leer sein und wird dann als leeres Array veröffentlicht.
 - `relatedProducts` ist optional. Fehlt die Relation, leitet der Mapper Empfehlungen deterministisch aus Kategorie und Technologien ab; es werden keine app-lokalen Produktdaten verwendet.
 - Ungültige Collection-Envelopes oder nicht abbildbare veröffentlichte Dokumente erzeugen `ContentApiError` statt still herausgefiltert zu werden.
 

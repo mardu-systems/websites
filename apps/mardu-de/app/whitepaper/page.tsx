@@ -2,12 +2,14 @@ import { WhitepaperSection } from '@mardu/sections';
 import { EditorialAccent } from '@mardu/ui/components/typography';
 import { EditorialPageHero } from '@mardu/ui/components/editorial-page-hero';
 import { Metadata } from 'next';
+import { createPageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: 'Whitepaper',
   description:
     'Whitepaper für Werkstatt-, Labor- und Hochschulverantwortliche: Zutritt, Maschinenfreigabe und Qualifikationen nachvollziehbar organisieren.',
-};
+  path: '/whitepaper',
+});
 
 export default function WhitepaperPage() {
   return (

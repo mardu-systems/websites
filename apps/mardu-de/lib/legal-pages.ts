@@ -2,6 +2,7 @@ import type { LegalPageSlug } from '@mardu/content-core';
 import { getPlatformLegalPage } from '@mardu/content-core/legal-pages';
 import { getPlatformOrigin, getSiteConfig } from '@mardu/site-config';
 import type { Metadata } from 'next';
+import { absoluteSiteUrl, DEFAULT_SOCIAL_IMAGE } from '@/lib/seo';
 
 const site = 'mardu-de' as const;
 const siteConfig = getSiteConfig(site);
@@ -24,23 +25,29 @@ export function buildLegalPageMetadata(
       ? `Informationen zum Datenschutz bei ${siteConfig.label}.`
       : `Angaben gemäß § 5 DDG für ${siteConfig.label}.`);
   const url = page?.canonicalUrl ?? new URL(`/${slug}`, siteConfig.origin).toString();
+  const socialImage = {
+    ...DEFAULT_SOCIAL_IMAGE,
+    url: absoluteSiteUrl(DEFAULT_SOCIAL_IMAGE.url),
+  };
 
   return {
     title,
     description,
     alternates: {
-      canonical: `/${slug}`,
+      canonical: url,
     },
     openGraph: {
       title: socialTitle,
       description,
       url,
-      type: 'article',
+      type: 'website',
+      images: [socialImage],
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title: socialTitle,
       description,
+      images: [socialImage.url],
     },
   };
 }
