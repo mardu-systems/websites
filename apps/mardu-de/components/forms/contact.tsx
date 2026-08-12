@@ -7,7 +7,7 @@ import {
   type ContactFormProps,
   type ContactValues,
 } from '@mardu/lead-core/contact-form';
-import { normalizePhoneNumber } from '@/lib/phone';
+import { normalizePhoneNumber } from '@mardu/lead-core/phone';
 
 export const contactSchema = createContactSchema(normalizePhoneNumber);
 

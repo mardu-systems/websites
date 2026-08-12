@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { cn } from "../lib/utils";
+import { Overline } from "./typography";
 
 export interface EditorialPageHeroProps {
   eyebrow: ReactNode;
@@ -36,9 +37,7 @@ export function EditorialPageHero({
     >
       <div className="mardu-container grid min-w-0 gap-12 xl:grid-cols-[minmax(0,0.62fr)_minmax(18rem,0.38fr)] xl:items-start xl:gap-20">
         <div className="min-w-0">
-          <p className="font-mono text-xs tracking-[0.18em] text-mardu-purple">
-            {eyebrow}
-          </p>
+          <Overline variant="editorial">{eyebrow}</Overline>
           <h1
             className={cn(
               "headline-balance mt-6 max-w-[18ch] text-[var(--font-size-h1-fluid)] font-light leading-[0.98] tracking-[-0.04em] text-foreground",

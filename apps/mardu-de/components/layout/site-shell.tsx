@@ -1,9 +1,8 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
 import SharedSiteShell from '@mardu/layout/site-shell';
 import type { FooterAiSummaryLinkDto, FooterSocialLinkDto } from '@mardu/layout/types';
-import { Button } from '@mardu/ui/components/button';
+import { EditorialActionButton } from '@mardu/ui/components/editorial-action-button';
 import { getSiteConfig } from '@mardu/site-config';
 import { defaultFooterMetaLinks, defaultFooterNavLinks } from '@/data/default-footer-items';
 import { defaultHeaderItems } from '@/data/default-header-items';
@@ -100,18 +99,9 @@ export default function SiteShell({ children }: { children: ReactNode }) {
         },
         description: 'Wo Nutzung beginnt, ist Mardu.',
         primaryActionSlot: (
-          <Button
-            render={<Link href="/contact" />}
-            className="group h-12 rounded-none border-y border-white/30 bg-transparent px-0 text-base font-normal text-white shadow-none hover:border-white hover:bg-transparent hover:text-white"
-          >
-            <span
-              className="flex size-7 shrink-0 items-center justify-center rounded-full bg-white text-black"
-              aria-hidden="true"
-            >
-              <ArrowUpRight className="size-3.5 stroke-[1.8] transition-transform duration-200 ease-out group-hover:rotate-45 group-focus-visible:rotate-45 motion-reduce:transition-none" />
-            </span>
+          <EditorialActionButton render={<Link href="/contact" />} tone="dark">
             Jetzt beraten lassen
-          </Button>
+          </EditorialActionButton>
         ),
         navLinks: defaultFooterNavLinks,
         metaLinks: [...defaultFooterMetaLinks, ...siteConfig.footerMetaLinks],

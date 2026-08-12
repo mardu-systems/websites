@@ -5,7 +5,7 @@ import { solutionsPageIntro, type SolutionExplorerViewModel } from './solutions-
 
 export function SolutionsPage({ items }: { items: readonly SolutionExplorerViewModel[] }) {
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
       <EditorialPageHero
         eyebrow="[02 / LÖSUNGEN]"
         title={
@@ -34,6 +34,6 @@ export function SolutionsPage({ items }: { items: readonly SolutionExplorerViewM
           )}
         </div>
       </section>
-    </main>
+    </div>
   );
 }

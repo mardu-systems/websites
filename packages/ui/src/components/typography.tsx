@@ -45,16 +45,23 @@ export function HeroHeadline({
   );
 }
 
-type OverlineProps = {
+export type OverlineProps = {
   children: ReactNode;
   className?: string;
+  variant?: "default" | "editorial";
 };
 
-export function Overline({ children, className }: OverlineProps) {
+export function Overline({
+  children,
+  className,
+  variant = "default",
+}: OverlineProps) {
   return (
     <p
       className={cn(
-        "text-xs uppercase tracking-[0.2em] text-foreground/55",
+        variant === "editorial"
+          ? "font-mono text-xs tracking-[0.18em] text-mardu-purple"
+          : "text-xs uppercase tracking-[0.2em] text-foreground/55",
         className,
       )}
     >

@@ -2,9 +2,8 @@ import type { Metadata } from 'next';
 import type { StaticImageData } from 'next/image';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
-import { Button } from '@mardu/ui/components/button';
+import { EditorialActionButton } from '@mardu/ui/components/editorial-action-button';
 import { EditorialPageHero } from '@mardu/ui/components/editorial-page-hero';
 import { EditorialAccent } from '@mardu/ui/components/typography';
 import aboutContent from './about-content.md';
@@ -168,13 +167,9 @@ export default function AboutPage() {
               Du möchtest wissen, wie Mardu zu deinem Standort passt?
             </h2>
           </div>
-          <Button
-            render={<Link href="/contact" />}
-            className="group h-12 rounded-none bg-primary-foreground px-5 text-primary hover:bg-primary-foreground/90 hover:text-primary"
-          >
+          <EditorialActionButton render={<Link href="/contact" />} tone="dark">
             Gespräch vereinbaren
-            <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:rotate-45" />
-          </Button>
+          </EditorialActionButton>
         </div>
       </section>
     </main>

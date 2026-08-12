@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@mardu/ui/lib/utils";
-import { Button } from "@mardu/ui/components/button";
+import { EditorialActionButton } from "@mardu/ui/components/editorial-action-button";
 
 export interface ImageCardProps {
   imageSrc: string;
@@ -55,12 +55,12 @@ export default function DualImageSection({
                   )}
                 </div>
                 {card.buttonText && card.buttonHref ? (
-                  <Button
+                  <EditorialActionButton
                     render={<Link href={card.buttonHref} />}
-                    variant="outline"
+                    priority="secondary"
                   >
                     {card.buttonText}
-                  </Button>
+                  </EditorialActionButton>
                 ) : null}
               </div>
             </article>

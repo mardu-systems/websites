@@ -1,0 +1,176 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUp } from "lucide-react";
+import { Button } from "@mardu/ui/components/button";
+import { cn } from "@mardu/ui/lib/utils";
+import type { SiteFooterProps } from "./dto";
+import {
+  FooterAiSummaryLinks,
+  FooterLink,
+  FooterSocialLink,
+  useScrollToTop,
+} from "./site-footer-links";
+
+export function DefaultSiteFooter({
+  brand,
+  description,
+  primaryActionSlot,
+  navLinks = [],
+  metaLinks = [],
+  socialLinks = [],
+  aiSummaryLinks = [],
+  actions = [],
+  onAction,
+  theme = "dark",
+}: SiteFooterProps) {
+  const scrollToTop = useScrollToTop();
+  const year = new Date().getFullYear();
+  const isDark = theme === "dark";
+
+  return (
+    <footer
+      className={cn(
+        "section-hairline relative overflow-hidden pb-16 pt-14 md:pb-20",
+        isDark ? "bg-neutral-950 text-white" : "bg-background text-foreground",
+      )}
+    >
+      <div className="mardu-container relative">
+        <div
+          className={cn(
+            "grid gap-10 border-t py-10 md:grid-cols-[1.15fr_0.55fr_0.6fr] md:gap-8",
+            isDark ? "border-white/12" : "border-black/8",
+          )}
+        >
+          <div className="space-y-5">
+            <Link href={brand.homeHref} className="inline-block">
+              <div
+                className="relative"
+                style={{
+                  width: brand.logoWidth ?? 160,
+                  height: brand.logoHeight ?? 48,
+                }}
+              >
+                <Image
+                  src={brand.logoSrc}
+                  alt={brand.logoAlt}
+                  fill
+                  sizes={`${brand.logoWidth ?? 160}px`}
+                  className="object-contain"
+                />
+              </div>
+            </Link>
+            <p
+              className={cn(
+                "max-w-xl text-[15px] leading-relaxed",
+                isDark ? "text-white/84" : "text-foreground/70",
+              )}
+            >
+              {description ??
+                "Verwalte Zutritt und Maschinennutzung mobil auf der Baustelle oder stationär in der Werkstatt."}
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <Button
+                variant="outline"
+                onClick={scrollToTop}
+                className={
+                  isDark
+                    ? "border-white/28 bg-transparent text-white hover:bg-white hover:text-neutral-950"
+                    : undefined
+                }
+              >
+                <ArrowUp className="size-4" />
+                Nach oben
+              </Button>
+              {primaryActionSlot}
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <ul className="space-y-2.5 text-sm">
+              {navLinks.map((link) => (
+                <li key={`${link.label}:${link.href}`}>
+                  <FooterLink
+                    link={link}
+                    className={
+                      isDark
+                        ? "text-white/86 transition-colors hover:text-white"
+                        : "text-foreground/75 transition-colors hover:text-foreground"
+                    }
+                  />
+                </li>
+              ))}
+              {actions.map((action) => (
+                <li key={action.id}>
+                  <button
+                    type="button"
+                    onClick={() => onAction?.(action.id)}
+                    className={
+                      isDark
+                        ? "text-white/86 transition-colors hover:text-white"
+                        : "text-foreground/75 transition-colors hover:text-foreground"
+                    }
+                  >
+                    {action.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="space-y-4">
+            <p
+              className={cn(
+                "text-[11px] uppercase tracking-[0.18em]",
+                isDark ? "text-white/62" : "text-foreground/45",
+              )}
+            >
+              Kontakt & Recht
+            </p>
+            <ul className="space-y-2.5 text-sm">
+              {metaLinks.map((link) => (
+                <li key={`${link.label}:${link.href}`}>
+                  <FooterLink
+                    link={link}
+                    className={
+                      isDark
+                        ? "text-white/86 transition-colors hover:text-white"
+                        : "text-foreground/75 transition-colors hover:text-foreground"
+                    }
+                  />
+                </li>
+              ))}
+            </ul>
+
+            <ul className="flex flex-wrap gap-3 text-sm">
+              {socialLinks.map((link) => (
+                <li key={`${link.label}:${link.href}`}>
+                  <FooterSocialLink link={link} theme={theme} />
+                </li>
+              ))}
+            </ul>
+            <FooterAiSummaryLinks links={aiSummaryLinks} />
+          </div>
+        </div>
+
+        <div
+          className={cn(
+            "border-t pt-5",
+            isDark ? "border-white/12" : "border-black/8",
+          )}
+        >
+          <p
+            className={cn(
+              "text-xs",
+              isDark ? "text-white/68" : "text-foreground/55",
+            )}
+            suppressHydrationWarning
+          >
+            Copyright © {year} {brand.copyrightName}.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}

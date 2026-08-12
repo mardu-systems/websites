@@ -15,6 +15,8 @@ The package mirrors the `components/ui` baseline from `../mardu.de` and is the c
   - `@mardu/ui/components/circle-number`
   - `@mardu/ui/components/dashed-connector`
   - `@mardu/ui/components/halftone-3d-illustration`
+  - `@mardu/ui/components/editorial-action-button` for prominent editorial navigation and marketing CTAs
+  - `@mardu/ui/components/typography` for `EditorialAccent`, headline helpers and `Overline`
 
 ## `halftone-3d-illustration`
 
@@ -81,6 +83,10 @@ Interne Struktur:
 - Business logic, API calls, DTO validation, and site-specific routing stay outside this package.
 - The package has no root compatibility barrel; consumers must use explicit component, hook or utility subpaths.
 - `Button` automatically switches `nativeButton` off when Base UI renders a non-button element such as a Next.js link.
+- `Button` exposes `size="xl"` as the canonical 48-pixel marketing and touch-target size; pages should not rebuild it with local height, padding and font classes.
+- `EditorialActionButton` owns the shared rail, circular icon, hover motion and light/dark treatments used by header, footer, heroes and page-level actions. `priority="secondary"` provides the quieter companion action; callers may replace the default arrow through `icon`.
+- Dialog controls, filters and compact product controls continue to use the generic `Button` because they have a different interaction role. Editorial conversion forms may use `EditorialActionButton` for their prominent submit action.
+- `Overline` exposes `variant="editorial"` for the mono, purple indexed label used by page heroes and numbered editorial sections.
 - Styling relies on the consuming app importing `@mardu/styles/base.css` and its site theme.
 
 ## Defaults and Side Effects

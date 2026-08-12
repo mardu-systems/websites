@@ -10,6 +10,7 @@ Shared DTOs, schemas, and lead-flow helpers for the public Mardu frontends.
 - `ConsentPreferences`
 - `ContactForm`
 - `createContactSchema`
+- `@mardu/lead-core/phone` for the canonical E.164 phone normalizer
 - `RecaptchaProvider`
 - `useRecaptcha`
 - `@mardu/lead-core/consent-server` for cookie persistence helpers
@@ -22,6 +23,7 @@ Shared DTOs, schemas, and lead-flow helpers for the public Mardu frontends.
 - The package does not own app routing or site-specific UI.
 - Consent helpers use the shared `cookie_preferences` cookie contract across all public apps.
 - `ContactForm` standardizes the public contact form UI and submit flow while apps still inject submit routes, phone normalization and optional reCAPTCHA execution.
+- `normalizePhoneNumber` accepts international input and German local numbers, returns E.164, and returns `undefined` for empty or invalid input.
 - `token` remains formally optional in the shared DTOs for compatibility, but production lead endpoints may require it server-side.
 - Apps using `ContactForm` or `CTASection` newsletter flows are expected to wire `executeRecaptcha` or `getRequestToken` when the backend enforces captcha.
 - `RecaptchaProvider` and `useRecaptcha` centralize the client integration so public apps do not duplicate provider or hook logic.

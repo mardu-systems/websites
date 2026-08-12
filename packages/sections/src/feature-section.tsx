@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { cn } from "@mardu/ui/lib/utils";
-import { Button } from "@mardu/ui/components/button";
+import { EditorialActionButton } from "@mardu/ui/components/editorial-action-button";
 
 export type FeatureSectionProps = {
   eyebrow?: ReactNode;
@@ -61,7 +61,9 @@ export default function FeatureSection({
           {ctaSlot ? (
             ctaSlot
           ) : buttonText && buttonHref ? (
-            <Button render={<Link href={buttonHref} />}>{buttonText}</Button>
+            <EditorialActionButton render={<Link href={buttonHref} />}>
+              {buttonText}
+            </EditorialActionButton>
           ) : null}
         </div>
 

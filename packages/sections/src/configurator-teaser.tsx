@@ -3,8 +3,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { domAnimation, LazyMotion, m, useReducedMotion } from "framer-motion";
-import { ArrowRight, Settings, Sparkles } from "lucide-react";
-import { Button } from "@mardu/ui/components/button";
+import { Settings, Sparkles } from "lucide-react";
+import { EditorialActionButton } from "@mardu/ui/components/editorial-action-button";
 import { cn } from "@mardu/ui/lib/utils";
 import { ScrollReveal } from "@mardu/ui/components/motion/scroll-reveal";
 import { Overline } from "@mardu/ui/components/typography";
@@ -117,10 +117,9 @@ export default function ConfiguratorTeaser({
                 </div>
 
                 <div className="pt-2">
-                  <Button render={<Link href={ctaHref} />}>
+                  <EditorialActionButton render={<Link href={ctaHref} />}>
                     {ctaLabel}
-                    <ArrowRight className="size-4" />
-                  </Button>
+                  </EditorialActionButton>
                 </div>
               </div>
 
@@ -135,62 +134,62 @@ export default function ConfiguratorTeaser({
                         : { duration: 7, repeat: Infinity, ease: "easeInOut" }
                     }
                   >
-                  <div className="border border-black/10 bg-card p-5 md:p-6">
-                    {previewEyebrow ? (
-                      <p className="text-[11px] uppercase tracking-[0.16em] text-foreground/46">
-                        {previewEyebrow}
-                      </p>
-                    ) : null}
-                    <h3 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-foreground md:text-2xl">
-                      {previewTitle}
-                    </h3>
-                    <div className="mt-3 text-sm leading-relaxed text-foreground/68 md:text-base">
-                      {typeof previewDescription === "string" ? (
-                        <p>{previewDescription}</p>
-                      ) : (
-                        previewDescription
-                      )}
-                    </div>
+                    <div className="border border-black/10 bg-card p-5 md:p-6">
+                      {previewEyebrow ? (
+                        <p className="text-[11px] uppercase tracking-[0.16em] text-foreground/46">
+                          {previewEyebrow}
+                        </p>
+                      ) : null}
+                      <h3 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-foreground md:text-2xl">
+                        {previewTitle}
+                      </h3>
+                      <div className="mt-3 text-sm leading-relaxed text-foreground/68 md:text-base">
+                        {typeof previewDescription === "string" ? (
+                          <p>{previewDescription}</p>
+                        ) : (
+                          previewDescription
+                        )}
+                      </div>
 
-                    <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                      {previewStats.map((item) => (
-                        <div
-                          key={item.label}
-                          className="border border-black/10 bg-muted/20 p-4"
-                        >
-                          <div className="text-[11px] uppercase tracking-[0.16em] text-foreground/48">
-                            {item.label}
-                          </div>
-                          <div className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-foreground">
-                            {item.value}
-                          </div>
-                          <div className="mt-3 h-1.5 overflow-hidden bg-black/8">
-                            <div
-                              className="h-full bg-foreground"
-                              style={{ width: `${item.progress ?? 50}%` }}
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-
-                    {previewTags.length ? (
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {previewTags.map((item) => (
+                      <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                        {previewStats.map((item) => (
                           <div
-                            key={item}
-                            className="inline-flex items-center gap-2 border border-black/10 bg-card px-3 py-2 text-xs uppercase tracking-[0.14em] text-foreground/64"
+                            key={item.label}
+                            className="border border-black/10 bg-muted/20 p-4"
                           >
-                            <Sparkles
-                              className="h-3.5 w-3.5"
-                              aria-hidden="true"
-                            />
-                            {item}
+                            <div className="text-[11px] uppercase tracking-[0.16em] text-foreground/48">
+                              {item.label}
+                            </div>
+                            <div className="mt-2 text-2xl font-semibold tracking-[-0.03em] text-foreground">
+                              {item.value}
+                            </div>
+                            <div className="mt-3 h-1.5 overflow-hidden bg-black/8">
+                              <div
+                                className="h-full bg-foreground"
+                                style={{ width: `${item.progress ?? 50}%` }}
+                              />
+                            </div>
                           </div>
                         ))}
                       </div>
-                    ) : null}
-                  </div>
+
+                      {previewTags.length ? (
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {previewTags.map((item) => (
+                            <div
+                              key={item}
+                              className="inline-flex items-center gap-2 border border-black/10 bg-card px-3 py-2 text-xs uppercase tracking-[0.14em] text-foreground/64"
+                            >
+                              <Sparkles
+                                className="h-3.5 w-3.5"
+                                aria-hidden="true"
+                              />
+                              {item}
+                            </div>
+                          ))}
+                        </div>
+                      ) : null}
+                    </div>
                   </m.div>
                 </LazyMotion>
 

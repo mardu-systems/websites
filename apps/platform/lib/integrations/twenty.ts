@@ -9,7 +9,7 @@ import {
 } from '@/lib/integrations/twenty/generated/endpoints/people/people';
 import { getCreateOneNoteUrl } from '@/lib/integrations/twenty/generated/endpoints/notes/notes';
 import { getCreateOneNoteTargetUrl } from '@/lib/integrations/twenty/generated/endpoints/note-targets/note-targets';
-import { normalizePhoneNumber } from '@/lib/phone';
+import { normalizePhoneNumber } from '@mardu/lead-core/phone';
 import type { NewsletterCrmEventDto } from '@/types/api/newsletter-crm';
 import type { TwentyContactLeadDto } from '@/types/api/twenty-sync';
 import { getSiteConfig } from '@mardu/site-config';
@@ -367,7 +367,10 @@ function getContactSourceLabel(source: TwentyContactLeadDto['source']): string {
   return 'Unbekannt';
 }
 
-function getContactSourceUrl(site: TwentyContactLeadDto['site'], source: TwentyContactLeadDto['source']): string | undefined {
+function getContactSourceUrl(
+  site: TwentyContactLeadDto['site'],
+  source: TwentyContactLeadDto['source'],
+): string | undefined {
   const siteConfig = getSiteConfig(site);
   const path =
     source === 'configurator'
@@ -544,7 +547,10 @@ export async function sendNewsletterEventToTwenty(
   });
 
   if (personId) {
-    const title = payload.type === 'newsletter_unsubscribed' ? 'Newsletter-Abmeldung' : 'Newsletter-Bestätigung';
+    const title =
+      payload.type === 'newsletter_unsubscribed'
+        ? 'Newsletter-Abmeldung'
+        : 'Newsletter-Bestätigung';
     const lines = [
       `Site: ${payload.site}`,
       `Datum: ${payload.occurredAt}`,

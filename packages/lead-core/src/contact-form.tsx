@@ -1,25 +1,15 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
+import { Alert, AlertDescription } from "@mardu/ui/components/alert";
 import { Button } from "@mardu/ui/components/button";
 import { Card, CardContent } from "@mardu/ui/components/card";
-import { Checkbox } from "@mardu/ui/components/checkbox";
-import { Textarea } from "@mardu/ui/components/textarea";
-import { Alert, AlertDescription } from "@mardu/ui/components/alert";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@mardu/ui/components/form";
-import { Loader2 } from "lucide-react";
+import { Form } from "@mardu/ui/components/form";
+import { ContactFormFields } from "./contact-form-fields";
 import type { ContactErrorResponseDto } from "./index";
 
 export type NormalizePhoneNumber = (value?: string) => string | undefined;
@@ -93,7 +83,6 @@ export function ContactForm({
     () => createContactSchema(normalizePhoneNumber),
     [normalizePhoneNumber],
   );
-
   const form = useForm<ContactValues>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -107,6 +96,13 @@ export function ContactForm({
     },
     mode: submit ? "onSubmit" : "onChange",
   });
+  const [status, setStatus] = React.useState<"idle" | "success" | "error">(
+    "idle",
+  );
+  const [submitting, setSubmitting] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
+  const consentId = React.useId();
+  const newsletterId = React.useId();
 
   React.useEffect(() => {
     if (!initialValues) return;
@@ -125,17 +121,9 @@ export function ContactForm({
 
   React.useEffect(() => {
     if (submit || !onChange) return;
-    const sub = form.watch((values) => onChange(values));
-    return () => sub.unsubscribe();
+    const subscription = form.watch((values) => onChange(values));
+    return () => subscription.unsubscribe();
   }, [form, onChange, submit]);
-
-  const [status, setStatus] = React.useState<"idle" | "success" | "error">(
-    "idle",
-  );
-  const [submitting, setSubmitting] = React.useState(false);
-  const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
-  const consentId = React.useId();
-  const newsletterId = React.useId();
 
   async function handleSubmit(values: ContactValues) {
     if (!submit) return;
@@ -161,7 +149,7 @@ export function ContactForm({
       const normalizedPhone = normalizePhoneNumber
         ? normalizePhoneNumber(values.phone)
         : values.phone;
-      const res = await fetch(action, {
+      const response = await fetch(action, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -172,15 +160,14 @@ export function ContactForm({
         }),
       });
 
-      if (!res.ok) {
-        const payload = (await res
+      if (!response.ok) {
+        const payload = (await response
           .json()
           .catch(() => null)) as ContactErrorResponseDto | null;
         if (payload?.details) {
           for (const [field, messages] of Object.entries(payload.details)) {
             const message = messages?.[0];
-            if (!message) continue;
-            if (field in form.getValues()) {
+            if (message && field in form.getValues()) {
               form.setError(field as keyof ContactValues, {
                 type: "server",
                 message,
@@ -201,26 +188,20 @@ export function ContactForm({
         consent: false,
         newsletterOptIn: false,
       });
-    } catch (e: unknown) {
-      console.error(e);
+    } catch (error: unknown) {
+      console.error(error);
       setStatus("error");
-      setErrorMessage(e instanceof Error ? e.message : null);
+      setErrorMessage(error instanceof Error ? error.message : null);
     } finally {
       setSubmitting(false);
     }
   }
 
-  const inputClasses =
-    "w-full rounded-none border-0 border-b border-neutral-800/70 bg-transparent px-0 py-2 text-base text-foreground placeholder:text-muted-foreground focus-visible:border-mardu-purple focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mardu-purple focus-visible:ring-0";
-  const textareaClasses =
-    "w-full min-h-28 rounded-none border-0 border-b border-neutral-800/70 bg-transparent px-0 py-2 text-base text-foreground placeholder:text-muted-foreground focus-visible:border-mardu-purple focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mardu-purple focus-visible:ring-0";
   const submitHandler = submit ? form.handleSubmit(handleSubmit) : undefined;
-
   const handleTextareaKeyDown = (
     event: React.KeyboardEvent<HTMLTextAreaElement>,
   ) => {
-    if (!submit) return;
-    if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
+    if (submit && (event.metaKey || event.ctrlKey) && event.key === "Enter") {
       event.preventDefault();
       submitHandler?.();
     }
@@ -230,222 +211,11 @@ export function ContactForm({
     <div className="w-full">
       <Form {...form}>
         <form noValidate onSubmit={submitHandler} className="space-y-6">
-          <div className="contact-form-group--identity grid gap-6 sm:grid-cols-2 sm:gap-8">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem className="contact-form-field--name">
-                  <FormLabel>Name*</FormLabel>
-                  <FormControl>
-                    <input
-                      {...field}
-                      placeholder="Max Mustermann"
-                      autoComplete="name"
-                      autoCapitalize="words"
-                      className={inputClasses}
-                      onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
-                        const trimmed = event.target.value.trim();
-                        field.onChange(trimmed);
-                        field.onBlur();
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem className="contact-form-field--email">
-                  <FormLabel>E-Mail*</FormLabel>
-                  <FormControl>
-                    <input
-                      type="email"
-                      {...field}
-                      placeholder="name@beispiel.de"
-                      autoComplete="email"
-                      inputMode="email"
-                      autoCapitalize="none"
-                      autoCorrect="off"
-                      spellCheck={false}
-                      className={inputClasses}
-                      onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
-                        const trimmed = event.target.value.trim();
-                        field.onChange(trimmed);
-                        field.onBlur();
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-
-          <FormField
-            control={form.control}
-            name="company"
-            render={({ field }) => (
-              <FormItem className="contact-form-field--company">
-                <FormLabel>Firma (optional)</FormLabel>
-                <FormControl>
-                  <input
-                    {...field}
-                    placeholder="Dein Unternehmen"
-                    autoComplete="organization"
-                    className={inputClasses}
-                    onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
-                      const trimmed = event.target.value.trim();
-                      field.onChange(trimmed);
-                      field.onBlur();
-                    }}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="phone"
-            render={({ field }) => (
-              <FormItem className="contact-form-field--phone">
-                <FormLabel>Telefon</FormLabel>
-                <FormControl>
-                  <input
-                    type="tel"
-                    {...field}
-                    placeholder="+49 1520 2189213"
-                    autoComplete="tel"
-                    inputMode="tel"
-                    autoCorrect="off"
-                    spellCheck={false}
-                    className={inputClasses}
-                    onBlur={(event: React.FocusEvent<HTMLInputElement>) => {
-                      const trimmed = event.target.value.trim();
-                      field.onChange(trimmed);
-                      field.onBlur();
-                    }}
-                  />
-                </FormControl>
-                <FormDescription>
-                  Optional. Bitte im internationalen Format, z. B.{" "}
-                  <code>+4915202189213</code>.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="message"
-            render={({ field }) => (
-              <FormItem className="contact-form-field--message">
-                <FormLabel>Nachricht</FormLabel>
-                <FormControl>
-                  <Textarea
-                    rows={3}
-                    {...field}
-                    placeholder="Deine Nachricht …"
-                    className={textareaClasses}
-                    onBlur={(event: React.FocusEvent<HTMLTextAreaElement>) => {
-                      const trimmed = event.target.value.trim();
-                      field.onChange(trimmed);
-                      field.onBlur();
-                    }}
-                    onKeyDown={handleTextareaKeyDown}
-                  />
-                </FormControl>
-                <FormDescription>
-                  Optional. Beschreibe kurz dein Vorhaben oder deine Frage.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="newsletterOptIn"
-            render={({ field }) => (
-              <FormItem className="contact-form-field--newsletter">
-                <div className="flex items-start gap-3">
-                  <FormControl>
-                    <Checkbox
-                      id={newsletterId}
-                      checked={field.value}
-                      onCheckedChange={(checked: boolean | "indeterminate") =>
-                        field.onChange(checked === true)
-                      }
-                      name={field.name}
-                      className="mt-0.5 touch-manipulation"
-                    />
-                  </FormControl>
-                  <div className="flex-1">
-                    <FormLabel
-                      htmlFor={newsletterId}
-                      className="cursor-pointer text-sm leading-5"
-                    >
-                      Ich möchte zusätzlich Produkt- und Update-Informationen
-                      per E-Mail erhalten.
-                    </FormLabel>
-                    <FormDescription className="mt-1 text-xs text-muted-foreground">
-                      Deine Daten werden für den Newsletter genutzt. Anmeldung
-                      per Double-Opt-in mit Bestätigungs-E-Mail. Details in der{" "}
-                      <Link
-                        href="/privacy"
-                        className="underline underline-offset-2"
-                      >
-                        Datenschutzerklärung
-                      </Link>
-                      .
-                    </FormDescription>
-                    <FormMessage />
-                  </div>
-                </div>
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="consent"
-            render={({ field }) => (
-              <FormItem className="contact-form-field--consent">
-                <div className="flex items-start gap-3">
-                  <FormControl>
-                    <Checkbox
-                      id={consentId}
-                      checked={field.value}
-                      onCheckedChange={(checked) =>
-                        field.onChange(checked === true)
-                      }
-                      className="mt-0.5"
-                    />
-                  </FormControl>
-                  <div className="flex-1">
-                    <FormLabel
-                      htmlFor={consentId}
-                      className="cursor-pointer text-sm leading-5 after:ml-0.5 after:text-destructive after:content-['*']"
-                    >
-                      Ich stimme zu, dass meine Angaben zur Beantwortung meiner
-                      Anfrage verarbeitet werden.
-                    </FormLabel>
-                    <FormDescription className="mt-1 text-xs text-muted-foreground">
-                      Deine Daten werden gemäß DSGVO verarbeitet und nicht an
-                      Dritte weitergegeben.
-                    </FormDescription>
-                    <FormMessage />
-                  </div>
-                </div>
-              </FormItem>
-            )}
+          <ContactFormFields
+            consentId={consentId}
+            form={form}
+            newsletterId={newsletterId}
+            onTextareaKeyDown={handleTextareaKeyDown}
           />
 
           {submit ? (
@@ -468,7 +238,6 @@ export function ContactForm({
               <AlertDescription>{successMessage}</AlertDescription>
             </Alert>
           ) : null}
-
           {status === "error" ? (
             <Alert variant="destructive">
               <AlertDescription>
@@ -482,15 +251,13 @@ export function ContactForm({
     </div>
   );
 
-  if (layout === "card") {
-    return (
-      <Card className="rounded-none border border-black/10 bg-transparent shadow-none">
-        <CardContent className="p-8 md:p-8">{content}</CardContent>
-      </Card>
-    );
-  }
-
-  return content;
+  return layout === "card" ? (
+    <Card className="rounded-none border border-black/10 bg-transparent shadow-none">
+      <CardContent className="p-8 md:p-8">{content}</CardContent>
+    </Card>
+  ) : (
+    content
+  );
 }
 
 export default ContactForm;

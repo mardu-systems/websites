@@ -1,10 +1,15 @@
 import { NextResponse } from 'next/server';
 import { contactRequestSchema, readRequestJson } from '@mardu/lead-core';
-import { attachContactLeadToSubscriber, createContactLead, setContactLeadStatuses, upsertPendingNewsletterSubscriber } from '@/lib/lead-store';
+import {
+  attachContactLeadToSubscriber,
+  createContactLead,
+  setContactLeadStatuses,
+  upsertPendingNewsletterSubscriber,
+} from '@/lib/lead-store';
 import { sendContactEmail } from '@/lib/email';
 import { syncContactLeadToTwenty } from '@/lib/integrations/twenty';
 import { sendNewsletterConfirmationEmail, splitFullName } from '@/lib/newsletter-confirmation';
-import { normalizePhoneNumber } from '@/lib/phone';
+import { normalizePhoneNumber } from '@mardu/lead-core/phone';
 import { enforcePublicLeadProtection } from '@/lib/abuse-protection';
 import type { ContactRequestDto, ContactResponseDto } from '@mardu/lead-core';
 

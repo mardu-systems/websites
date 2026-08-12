@@ -1,60 +1,19 @@
 'use client';
 
 import * as React from 'react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { defineStepper } from '@stepperize/react';
 import { Button } from '@mardu/ui/components/button';
-import { useRecaptcha } from '@mardu/lead-core/recaptcha';
 import { cn } from '@mardu/ui/lib/utils';
-import { createSteps } from './steps';
-import { ContactSchema } from './steps/contact';
 import { Alert, AlertDescription } from '@mardu/ui/components/alert';
 import { Loader2 } from 'lucide-react';
 import StepIndicator from '@/components/stepper/step-indicator';
-/* ===================== Typen & Defaults ===================== */
 import { Overline } from '@mardu/ui/components/typography';
+import { useConfigurator, type State } from './use-configurator';
 
-/* ===================== Typen & Defaults ===================== */
-
-export type State = {
-  triMachines: { count: number; cablePerUnitM: number; photoUrl?: string };
-  schukoMachines: { count: number; cablePerUnitM: number; photoUrl?: string };
-  doors: { count: number; cablePerDoorM: number; photoUrl?: string };
-  gates: { count: number; cablePerGateM: number; photoUrl?: string };
-  fridges: { count: number; photoUrl?: string };
-  centralRooms: { count: number; photoUrl?: string };
-  contact: {
-    name: string;
-    email: string;
-    company?: string;
-    message?: string;
-    phone?: string;
-    consent?: boolean;
-    newsletterOptIn?: boolean;
-  };
-};
-
-const defaultState: State = {
-  triMachines: { count: 0, cablePerUnitM: 10 },
-  schukoMachines: { count: 0, cablePerUnitM: 10 },
-  doors: { count: 0, cablePerDoorM: 15 },
-  gates: { count: 0, cablePerGateM: 20 },
-  fridges: { count: 0 },
-  centralRooms: { count: 0 },
-  contact: {
-    name: '',
-    email: '',
-    company: '',
-    message: '',
-    phone: '',
-    consent: false,
-    newsletterOptIn: false,
-  },
-};
-
-const STORAGE_KEY = 'configurator-state';
+export type { State } from './use-configurator';
 
 /* ===================== Stepper-Definition ===================== */
 
@@ -72,30 +31,7 @@ const Wizard = defineStepper(
 /* ===================== Seite ===================== */
 
 export default function ConfiguratorPageClient() {
-  const [state, setState] = useState<State>(() => {
-    if (typeof window !== 'undefined') {
-      const stored = window.sessionStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        try {
-          const parsed = JSON.parse(stored);
-          if (parsed && typeof parsed === 'object') {
-            return parsed as State;
-          }
-        } catch {}
-      }
-    }
-    return defaultState;
-  });
-  useEffect(() => {
-    if (typeof window !== 'undefined' && state) {
-      window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    }
-  }, [state]);
-  const steps = useMemo(() => createSteps(state, setState), [state]);
-  const executeRecaptcha = useRecaptcha();
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [submitting, setSubmitting] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const { state, steps, status, submitting, errorMessage, submit } = useConfigurator();
 
   return (
     <div
@@ -110,52 +46,7 @@ export default function ConfiguratorPageClient() {
         <MainContent
           steps={steps}
           state={state}
-          onSubmit={async () => {
-            if (!state) return;
-            const { contact, ...config } = state;
-            const validation = ContactSchema.safeParse(contact);
-            if (!validation.success) {
-              const field = validation.error.issues[0]?.path[0];
-              if (typeof field === 'string' && typeof document !== 'undefined') {
-                const selector =
-                  field === 'consent' ? '[data-contact-consent]' : `[name="${field}"]`;
-                const el = document.querySelector(selector) as HTMLElement | null;
-                el?.focus();
-              }
-              setStatus('idle');
-              setErrorMessage(null);
-              return;
-            }
-
-            try {
-              setSubmitting(true);
-              setStatus('idle');
-              setErrorMessage(null);
-              const token = await executeRecaptcha('contact');
-              const res = await fetch('/api/contact', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  ...validation.data,
-                  config,
-                  ...(token ? { token } : {}),
-                  source: 'configurator',
-                }),
-              });
-              if (!res.ok) throw new Error('Request failed');
-              setStatus('success');
-              setState(defaultState);
-              if (typeof window !== 'undefined') {
-                window.sessionStorage.removeItem(STORAGE_KEY);
-              }
-            } catch (e: unknown) {
-              console.error(e);
-              setStatus('error');
-              setErrorMessage(e instanceof Error ? e.message : null);
-            } finally {
-              setSubmitting(false);
-            }
-          }}
+          onSubmit={submit}
           status={status}
           submitting={submitting}
           errorMessage={errorMessage}
@@ -237,8 +128,8 @@ function MainContent({
           System grob konfigurieren
         </h1>
         <p className="text-base leading-relaxed text-foreground/72 md:text-lg">
-          In wenigen Schritten erfassen wir Tueren, Tore, Maschinen und die wichtigsten Kontaktdaten
-          fuer ein erstes Angebot.
+          In wenigen Schritten erfassen wir Türen, Tore, Maschinen und die wichtigsten Kontaktdaten
+          für ein erstes Angebot.
         </p>
       </div>
 
@@ -271,6 +162,8 @@ function MainContent({
                   src={steps[idx].hoverImg as string}
                   alt=""
                   fill
+                  loading={idx === 0 ? 'eager' : 'lazy'}
+                  fetchPriority={idx === 0 ? 'high' : 'auto'}
                   sizes="(max-width: 1024px) 100vw, 30vw"
                   className="object-cover"
                 />

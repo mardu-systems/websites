@@ -9,7 +9,7 @@ import {
 } from '@/lib/integrations/twenty/generated/endpoints/people/people';
 import { getCreateOneNoteUrl } from '@/lib/integrations/twenty/generated/endpoints/notes/notes';
 import { getCreateOneNoteTargetUrl } from '@/lib/integrations/twenty/generated/endpoints/note-targets/note-targets';
-import { normalizePhoneNumber } from '@/lib/phone';
+import { normalizePhoneNumber } from '@mardu/lead-core/phone';
 import type { NewsletterCrmEventDto } from '@/types/api/newsletter-crm';
 import type { TwentyContactLeadDto } from '@/types/api/twenty-sync';
 import type { ContactSource } from '@mardu/lead-core';

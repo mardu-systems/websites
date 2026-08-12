@@ -89,6 +89,11 @@ export {
   type NewsletterStatusPageProps,
 } from "./newsletter-status-page";
 export {
+  EditorialStatusPage,
+  type EditorialStatusAction,
+  type EditorialStatusPageProps,
+} from "./editorial-status-page";
+export {
   BrandAssetsPage,
   marduBrandAssetsPageContent,
   type BrandAssetDownloadDto,

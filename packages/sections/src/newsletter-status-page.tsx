@@ -1,8 +1,6 @@
-import Link from "next/link";
 import type { ComponentType } from "react";
 import { ArrowLeft, CheckCircle2, MailWarning, XCircle } from "lucide-react";
-import { Overline } from "@mardu/ui/components/typography";
-import { Button } from "@mardu/ui/components/button";
+import { EditorialStatusPage } from "./editorial-status-page";
 
 type NewsletterStatusVariant = "confirm" | "unsubscribe";
 type NewsletterStatusState =
@@ -127,40 +125,18 @@ export function NewsletterStatusPage({
   const Icon = content.icon;
 
   return (
-    <main className="min-h-screen">
-      <section className="mardu-container flex min-h-[calc(100vh-4rem)] items-center py-8 md:min-h-[calc(100vh-5rem)] md:py-10">
-        <div className="mx-auto max-w-3xl border border-border/70 bg-card p-6 shadow-sm md:p-10">
-          <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-muted">
-            <Icon className={`h-7 w-7 ${content.iconClassName}`} />
-          </div>
-
-          <div className="space-y-4">
-            <Overline>{content.overline}</Overline>
-            <h1 className="headline-balance text-[clamp(1.9rem,4vw,3.1rem)] leading-[0.95] tracking-[-0.03em] text-foreground">
-              {content.title}
-            </h1>
-            <p className="max-w-2xl text-base leading-relaxed text-foreground/75 md:text-lg">
-              {content.description}
-            </p>
-          </div>
-
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Button render={<Link href={primaryHref} />}>{primaryLabel}</Button>
-            <Button
-              render={
-                <Link
-                  href={secondaryHref}
-                  className="inline-flex items-center gap-2"
-                />
-              }
-              variant="outline"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              {secondaryLabel}
-            </Button>
-          </div>
-        </div>
-      </section>
-    </main>
+    <EditorialStatusPage
+      eyebrow={content.overline}
+      title={content.title}
+      description={content.description}
+      icon={<Icon className="size-7" />}
+      iconClassName={content.iconClassName}
+      primaryAction={{ href: primaryHref, label: primaryLabel }}
+      secondaryAction={{
+        href: secondaryHref,
+        label: secondaryLabel,
+        icon: <ArrowLeft className="size-4" aria-hidden="true" />,
+      }}
+    />
   );
 }

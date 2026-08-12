@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { contactRequestSchema, readRequestJson } from '@mardu/lead-core';
-import { normalizePhoneNumber } from '@/lib/phone';
+import { normalizePhoneNumber } from '@mardu/lead-core/phone';
 import { forwardPlatformJson } from '@/lib/platform-api';
 import type { ContactRequestDto, ContactResponseDto } from '@mardu/lead-core';
 
@@ -34,9 +34,10 @@ export async function POST(req: Request) {
       site: 'mardu-de',
     };
     const response = await forwardPlatformJson('/api/contact', payload);
-    const responseBody = (await response.json().catch(() => ({ error: 'Upstream request failed' }))) as
-      | ContactResponseDto
-      | { error: string; details?: Record<string, string[] | undefined> };
+    const responseBody = (await response
+      .json()
+      .catch(() => ({ error: 'Upstream request failed' }))) as
+      ContactResponseDto | { error: string; details?: Record<string, string[] | undefined> };
     return NextResponse.json(responseBody, { status: response.status });
   } catch (err) {
     console.error('Failed to send contact email', err);

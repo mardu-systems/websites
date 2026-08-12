@@ -181,7 +181,7 @@ export function IntegrationsFilters({
             </NativeSelectOption>
             <NativeSelectOption value="latest">Neueste</NativeSelectOption>
           </NativeSelect>
-          <Button type="submit" size="lg" className="h-12">
+          <Button type="submit" size="xl">
             Filtern
           </Button>
         </form>

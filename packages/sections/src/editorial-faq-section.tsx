@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { cn } from "@mardu/ui/lib/utils";
+import { Overline } from "@mardu/ui/components/typography";
 import Faq, { type FaqItem } from "./faq";
 
 export type EditorialFaqSectionProps = {
@@ -31,9 +32,7 @@ export default function EditorialFaqSection({
     >
       <div className="mardu-container grid gap-14 lg:grid-cols-[0.38fr_0.62fr] lg:gap-18">
         <div className="lg:sticky lg:top-28 lg:self-start">
-          <p className="text-xs uppercase tracking-[0.18em] text-mardu-purple">
-            {eyebrow}
-          </p>
+          <Overline variant="editorial">{eyebrow}</Overline>
           <h2
             id={titleId}
             className="mardu-homepage-section-title mt-6 max-w-[17ch]"

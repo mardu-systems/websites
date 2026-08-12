@@ -9,6 +9,7 @@ import { getIntegrationBySlug, getRelatedIntegrations } from '@/lib/integrations
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { Button } from '@mardu/ui/components/button';
 
 type Params = Promise<{ slug: string }>;
 
@@ -38,7 +39,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     };
   }
 
-  const title = integration.seoTitle || `${integration.title} Integration | Mardu`;
+  const title = integration.seoTitle || `${integration.title} Integration`;
+  const socialTitle = integration.seoTitle || `${integration.title} Integration | Mardu`;
   const description = integration.seoDescription || integration.shortDescription;
   const canonical = integration.canonicalUrl || `/integrations/${integration.slug}`;
   const socialImageUrl = integration.ogImageUrl || integration.heroImageUrl || integration.logoUrl;
@@ -51,7 +53,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       canonical,
     },
     openGraph: {
-      title,
+      title: socialTitle,
       description,
       url: canonical,
       type: 'article',
@@ -66,7 +68,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     },
     twitter: {
       card: socialImageUrl ? 'summary_large_image' : 'summary',
-      title,
+      title: socialTitle,
       description,
       images: socialImageUrl ? [socialImageUrl] : undefined,
     },
@@ -135,30 +137,33 @@ export default async function IntegrationDetailPage({ params }: { params: Params
                 <h2 className="text-2xl leading-tight tracking-[-0.02em]">Nächster Schritt</h2>
                 <div className="mt-4 flex flex-wrap gap-3">
                   {integration.docsUrl ? (
-                    <a
-                      href={integration.docsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="border border-black/20 bg-foreground px-4 py-2 text-sm text-background"
+                    <Button
+                      render={
+                        <a href={integration.docsUrl} target="_blank" rel="noopener noreferrer" />
+                      }
                     >
                       Technische Details
-                    </a>
+                    </Button>
                   ) : null}
                   {integration.requestUrl ? (
-                    <a
-                      href={integration.requestUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="border border-black/20 px-4 py-2 text-sm"
+                    <Button
+                      render={
+                        <a
+                          href={integration.requestUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        />
+                      }
+                      variant="outline"
                     >
                       {integration.status === 'planned'
                         ? 'Interesse melden'
                         : 'Integration anfragen'}
-                    </a>
+                    </Button>
                   ) : (
-                    <Link href="/contact" className="border border-black/20 px-4 py-2 text-sm">
+                    <Button render={<Link href="/contact" />} variant="outline">
                       {integration.status === 'planned' ? 'Interesse melden' : 'Mehr erfahren'}
-                    </Link>
+                    </Button>
                   )}
                 </div>
               </section>

@@ -1,16 +1,16 @@
 import Link from 'next/link';
-import { ArrowRight, House } from 'lucide-react';
-import { Button } from '@mardu/ui/components/button';
-import { EditorialAccent } from '@mardu/ui/components/typography';
+import { ArrowUpRight, House } from 'lucide-react';
+import { EditorialActionButton } from '@mardu/ui/components/editorial-action-button';
+import { EditorialAccent, Overline } from '@mardu/ui/components/typography';
 
 export default function NotFound() {
   return (
-    <section className="border-b border-border bg-background" aria-labelledby="not-found-title">
+    <main className="border-b border-border bg-background" aria-labelledby="not-found-title">
       <div className="mardu-container grid min-h-[calc(100svh-5rem)] gap-10 py-16 md:py-20 lg:grid-cols-[minmax(0,0.82fr)_minmax(24rem,1.18fr)] lg:items-center lg:gap-16 lg:py-24">
         <div className="max-w-2xl">
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-mardu-purple">
+          <Overline variant="editorial" className="uppercase">
             [404] Zugang nicht gefunden
-          </p>
+          </Overline>
 
           <h1
             id="not-found-title"
@@ -25,23 +25,16 @@ export default function NotFound() {
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <Button
-              size="lg"
-              render={<Link href="/" />}
-              className="h-12 rounded-none px-6 text-base font-normal"
-            >
-              <House aria-hidden="true" />
+            <EditorialActionButton render={<Link href="/" />} icon={<House aria-hidden="true" />}>
               Zur Startseite
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
+            </EditorialActionButton>
+            <EditorialActionButton
               render={<Link href="/solutions" />}
-              className="h-12 rounded-none px-6 text-base font-normal"
+              priority="secondary"
+              icon={<ArrowUpRight aria-hidden="true" />}
             >
               Lösungen ansehen
-              <ArrowRight aria-hidden="true" />
-            </Button>
+            </EditorialActionButton>
           </div>
 
           <p className="mt-5 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-foreground/42">
@@ -69,6 +62,6 @@ export default function NotFound() {
           </div>
         </div>
       </div>
-    </section>
+    </main>
   );
 }

@@ -21,6 +21,7 @@ Shared content sections for multiple Mardu frontends.
 - `TripleImageSection`
 - `Foerderung`
 - `NewsletterStatusPage`
+- `EditorialStatusPage`
 - `BrandAssetsPage`
 - `ProcessSteps`
 - `ScenarioShowcase`
@@ -73,7 +74,7 @@ Shared content sections for multiple Mardu frontends.
   - `onSubmitRequest?: (payload: WhitepaperLeadRequestDto) => Promise<void>`
   - `className?: string`
 - Behavior:
-  - defaults to `POST /api/whitepaper/request`, but the endpoint can be overridden
+  - defaults to `POST /api/newsletter` with `role: 'whitepaper'`, but the endpoint can be overridden
   - alternatively accepts an app-owned `onSubmitRequest` handler
   - shows a success dialog after a successful request
   - contains no site-specific branding, fetch ownership, or DTO validation logic
@@ -177,6 +178,7 @@ Shared content sections for multiple Mardu frontends.
 - `SplitContent` supports `variant: 'immersive' | 'plain'` for light editorial layouts without a local fork.
 - `FeatureSection`, `ThreeArguments`, `TripleImageSection`, `Foerderung`, `InfoGrid`, `ProcessSteps` and `RoadmapTimeline` expose eyebrow/intro metadata so the same layouts can tell different stories without forking the component.
 - `NewsletterStatusPage` keeps the newsletter semantics, but primary and secondary action links are now configurable.
+- `EditorialStatusPage` is the canonical full-page result pattern for confirmations, errors and completed flows. Apps own copy, icons and destinations; the package owns landmark hierarchy, spacing and actions.
 - `ContactPageSection` standardizes the `/contact` page shell while the consuming app still owns the actual form renderer and submit route. Optional `addressTitle` and `formTitle` fields expose the numbered editorial section headings without moving app-owned copy into the package.
 - `CTASection` standardizes the large conversion block near the end of a page. The package owns the shared layout and optional newsletter dialog, while the app still owns hard links and any custom secondary action UI.
 - `CTASection` keeps the `mardu.de` visual baseline as the default and only exposes small hooks for routing, custom secondary actions and optional request tokens.
@@ -321,6 +323,8 @@ Shared content sections for multiple Mardu frontends.
 - `TripleImageCardProps` / `TripleImageSectionProps`
 - `FoerderItem`
 - `NewsletterStatusPageProps`
+- `EditorialStatusAction`
+- `EditorialStatusPageProps`
 - `StepItem` / `ProcessStepsProps`
 - `Feature` / `Scenario` / `ScenarioShowcaseProps`
 - `ContactPageDetailsDto` / `ContactPageSectionProps`

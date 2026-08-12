@@ -5,10 +5,10 @@ import { useRecaptcha } from '@mardu/lead-core/recaptcha';
 import { Alert, AlertDescription } from '@mardu/ui/components/alert';
 import { Button } from '@mardu/ui/components/button';
 import { Checkbox } from '@mardu/ui/components/checkbox';
+import { EditorialActionButton } from '@mardu/ui/components/editorial-action-button';
 import { Input } from '@mardu/ui/components/input';
 import { Label } from '@mardu/ui/components/label';
 import { cn } from '@mardu/ui/lib/utils';
-import { ArrowUpRight } from 'lucide-react';
 
 /**
  * Public props for the reusable newsletter signup form.
@@ -105,7 +105,9 @@ export default function NewsletterSignupForm({
             name="firstName"
             autoComplete="given-name"
             placeholder="Dein Vorname"
-            className={cn(editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none')}
+            className={cn(
+              editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none',
+            )}
           />
         </div>
 
@@ -122,7 +124,9 @@ export default function NewsletterSignupForm({
             name="lastName"
             autoComplete="family-name"
             placeholder="Dein Nachname"
-            className={cn(editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none')}
+            className={cn(
+              editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none',
+            )}
           />
         </div>
       </div>
@@ -176,24 +180,20 @@ export default function NewsletterSignupForm({
         </Label>
       </div>
 
-      <Button
-        type="submit"
-        disabled={pending}
-        className={cn(
-          editorial &&
-            'group h-12 w-full justify-between rounded-none border-y border-border bg-transparent px-0 text-base font-normal text-foreground shadow-none hover:border-primary hover:bg-transparent hover:text-primary',
-        )}
-      >
-        {pending ? 'Wird gesendet...' : 'Newsletter abonnieren'}
-        {editorial ? (
-          <span className="flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
-            <ArrowUpRight
-              className="size-4 transition-transform duration-200 group-hover:rotate-45 group-focus-visible:rotate-45 motion-reduce:transition-none"
-              aria-hidden="true"
-            />
-          </span>
-        ) : null}
-      </Button>
+      {editorial ? (
+        <EditorialActionButton
+          type="submit"
+          disabled={pending}
+          aria-busy={pending}
+          className="w-full justify-start"
+        >
+          {pending ? 'Wird gesendet...' : 'Newsletter abonnieren'}
+        </EditorialActionButton>
+      ) : (
+        <Button type="submit" size="xl" disabled={pending} aria-busy={pending}>
+          {pending ? 'Wird gesendet...' : 'Newsletter abonnieren'}
+        </Button>
+      )}
 
       {success ? (
         <Alert role="status" aria-live="polite">

@@ -6,7 +6,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "dev": "next dev --webpack -p 4000",
-    "build": "next build --webpack",
+    "build": "next build --turbopack",
     "start": "next start",
     "payload": "cross-env PAYLOAD_CONFIG_PATH=payload.config.ts payload",
     "lint": "eslint .",
@@ -62,7 +62,6 @@
     "framer-motion": "^13.0.0",
     "input-otp": "^1.4.2",
     "jose": "^6.2.8",
-    "libphonenumber-js": "^1.13.10",
     "lucide-react": "^0.562.0",
     "next": "16.3.0",
     "next-themes": "^0.4.6",
