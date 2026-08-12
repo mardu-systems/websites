@@ -30,6 +30,7 @@
     "seed:roadmap-items": "bun scripts/seed-roadmap-items.mjs",
     "seed:solutions": "bun scripts/seed-solutions.mjs",
     "seed:all": "bun scripts/seed-all.mjs",
+    "release:content:audit": "bun scripts/audit-release-content.mjs",
     "images:compress:overwrite": "bun scripts/compress-images.mjs --overwrite",
     "api:twenty:pull-openapi": "bun scripts/fetch-twenty-openapi.mjs",
     "api:twenty:generate": "npm run api:twenty:pull-openapi && orval --config orval.config.cjs && node scripts/mark-generated-twenty-no-check.mjs"

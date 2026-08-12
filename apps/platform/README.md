@@ -46,11 +46,21 @@ The newsletter signup uses a double opt-in process. `MARDU_PLATFORM_ORIGIN` shou
 
 If `TWENTY_API_KEY` is set, confirmed newsletter/whitepaper events and contact leads are synchronized to Twenty. This integration is optional and non-blocking.
 
+## Content- und Fixture-Seeds
+
+`seed:all` ist ausschließlich für isolierte Entwicklungs- und CI-Datenbanken vorgesehen. Der Befehl erzeugt neben Content auch einen Demo-Admin, Test-Leads, Test-Abonnenten und Test-Preorders und läuft deshalb nur mit einer bewussten Freigabe:
+
+```bash
+ALLOW_FIXTURE_SEED=true bun run seed:all
+```
+
+Vor produktiven Content-Änderungen zuerst `bun run release:content:audit` ausführen und vorhandene Slugs redaktionell vergleichen. In Produktion dürfen nur die einzelnen, freigegebenen Content-Seeder verwendet werden; der Ablauf ist in `docs/vercel-deployment.md` dokumentiert.
+
 For contact leads, optional custom field mappings can be configured:
+
 - `TWENTY_CONTACT_MESSAGE_FIELD`: stores the contact message on the person record.
 - `TWENTY_CONTACT_SOURCE_FIELD`: stores the source (`contact-form`, `configurator` or `admin-software`).
 - `TWENTY_CONTACT_NEWSLETTER_OPT_IN_FIELD`: stores whether newsletter opt-in was checked.
-
 
 Open [http://localhost:4000](http://localhost:4000) with your browser.
 

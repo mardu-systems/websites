@@ -2,12 +2,15 @@ import type { NextConfig } from 'next';
 import { fileURLToPath } from 'node:url';
 
 const workspaceRoot = fileURLToPath(new URL('../../', import.meta.url));
+const platformOrigin = new URL(
+  process.env.MARDU_PLATFORM_ORIGIN?.trim() || 'https://platform.mardu.de',
+);
 
 const contentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://*.vercel.app https://vitals.vercel-insights.com https://liv-showcase.s3.eu-central-1.amazonaws.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  img-src 'self' data: blob: https://www.mardu.de https://mardu.de;
+  img-src 'self' data: blob: https://www.mardu.de https://mardu.de ${platformOrigin.origin};
   font-src 'self' https://fonts.gstatic.com;
   connect-src 'self' https://vercel.live https://vitals.vercel-insights.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;
   frame-src 'self' https://cal.meetergo.com https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/;
@@ -27,10 +30,6 @@ const securityHeaders = [
   {
     key: 'Permissions-Policy',
     value: 'camera=(), microphone=(), geolocation=(), fullscreen=(self), payment=()',
-  },
-  {
-    key: 'Feature-Policy',
-    value: "camera 'none'; microphone 'none'; geolocation 'none'; fullscreen 'self'",
   },
   {
     key: 'Referrer-Policy',
@@ -85,13 +84,10 @@ const nextConfig: NextConfig = {
     return config;
   },
   images: {
+    dangerouslyAllowLocalIP: process.env.ALLOW_LOCAL_CONTENT_IMAGES === 'true',
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '4000',
-      },
+      new URL('/**', platformOrigin),
       {
         protocol: 'https',
         hostname: '*.r2.dev',

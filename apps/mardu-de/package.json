@@ -17,6 +17,7 @@
     "clean": "rm -rf .next",
     "build:analyze": "ANALYZE=true next build",
     "images:compress:overwrite": "node scripts/compress-images.mjs --overwrite",
+    "release:verify": "node scripts/verify-release.mjs",
     "api:twenty:pull-openapi": "node scripts/fetch-twenty-openapi.mjs",
     "api:twenty:generate": "npm run api:twenty:pull-openapi && orval --config orval.config.cjs && node scripts/mark-generated-twenty-no-check.mjs"
   },

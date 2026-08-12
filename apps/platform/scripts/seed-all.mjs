@@ -4,6 +4,18 @@ import { fileURLToPath } from 'node:url';
 import config from '../payload.config.ts';
 import { getPayload } from 'payload';
 
+if (process.env.VERCEL_ENV === 'production') {
+  console.error('seed:all is permanently disabled in the Vercel production environment.');
+  process.exit(1);
+}
+
+if (process.env.ALLOW_FIXTURE_SEED !== 'true') {
+  console.error(
+    'Refusing to run seed:all without ALLOW_FIXTURE_SEED=true. This command creates demo users, leads, subscribers and preorders and is restricted to isolated development or CI databases.',
+  );
+  process.exit(1);
+}
+
 const CURRENT_DIR = dirname(fileURLToPath(import.meta.url));
 
 const scripts = [

@@ -14,7 +14,7 @@ export function SystemProductFamilyVisual() {
             className="h-auto w-full object-contain"
           />
         </div>
-        <div className="mx-auto w-full sm:w-[24rem] xl:w-[26rem]">
+        <div className="mx-auto w-full sm:max-w-[24rem] xl:max-w-[26rem]">
           <Image
             src="/products/mardu-schliesszylinder-freigestellt.png"
             alt="Freigestellter elektronischer Mardu-Schließzylinder"

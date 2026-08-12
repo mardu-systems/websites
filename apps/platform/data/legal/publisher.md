@@ -2,7 +2,7 @@
 
 **Mardu GmbH** · Alter Schlachthof 39 A1 · 76131 Karlsruhe · Deutschland
 
-E-Mail: [info@mardu.de](mailto:info@mardu.de) · Telefon: [+49 721 25510624](tel:+4972125510624)
+E-Mail: [info@mardu.de](mailto:info@mardu.de) · Telefon: +49 721 25510624
 
 Vertreten durch die Geschäftsführer: Luca Schöneberg und Erik Frey
 

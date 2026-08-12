@@ -100,7 +100,6 @@ export function HomepageHero() {
                 fill
                 priority
                 loading="eager"
-                unoptimized
                 sizes="(max-width: 1279px) 50vw, 30vw"
                 className="object-cover object-[38%_center]"
               />
@@ -110,9 +109,7 @@ export function HomepageHero() {
                 src="/landing/mardu-tuerschloss-transponder.webp"
                 alt="Mardu-Schließzylinder an einer Gebäudetür bei der Identifikation mit einem Transponder"
                 fill
-                priority
                 loading="eager"
-                unoptimized
                 sizes="(max-width: 1279px) 50vw, 30vw"
                 className="object-cover object-[60%_center]"
               />

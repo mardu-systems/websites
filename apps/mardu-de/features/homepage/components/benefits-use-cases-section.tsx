@@ -126,12 +126,12 @@ export function BenefitsUseCasesSection() {
               <Link
                 key={item.index}
                 href={item.href}
-                className="group grid grid-cols-[2.5rem_1fr] gap-4 border-b border-border py-7 transition-colors hover:bg-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-mardu-purple md:px-7 md:odd:border-r lg:px-9 lg:py-8"
+                className="group grid min-w-0 grid-cols-[2.5rem_minmax(0,1fr)] gap-4 border-b border-border py-7 transition-colors hover:bg-card focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-mardu-purple md:px-7 md:odd:border-r lg:px-9 lg:py-8"
               >
                 <span className="text-xs text-muted-foreground">[{item.index}]</span>
-                <div>
+                <div className="min-w-0">
                   <div className="flex items-start justify-between gap-4">
-                    <h3 className="max-w-[23rem] text-[1.375rem] font-light leading-tight tracking-[-0.02em]">
+                    <h3 className="max-w-[23rem] min-w-0 text-[1.375rem] font-light leading-tight tracking-[-0.02em] [overflow-wrap:anywhere]">
                       {item.title}
                     </h3>
                     <ArrowRight

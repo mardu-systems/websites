@@ -745,11 +745,12 @@ function normalizeDateString(value: Date | string | undefined): string | undefin
     return value.toISOString();
   }
 
-  if (typeof value !== 'string' || Number.isNaN(Date.parse(value))) {
+  if (typeof value !== 'string') {
     return undefined;
   }
 
-  return value;
+  const timestamp = Date.parse(value);
+  return Number.isNaN(timestamp) ? undefined : new Date(timestamp).toISOString();
 }
 
 function toStringArray(value: unknown): string[] {
