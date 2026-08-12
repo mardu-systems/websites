@@ -36,11 +36,10 @@
         "cmdk": "^1.1.1",
         "date-fns": "^4.4.0",
         "embla-carousel-react": "^8.6.0",
-        "framer-motion": "^13.0.0",
         "input-otp": "^1.4.2",
         "jose": "^6.2.8",
-        "libphonenumber-js": "^1.13.10",
         "lucide-react": "^0.562.0",
+        "motion": "^13.0.0",
         "next": "16.3.0",
         "next-themes": "^0.4.6",
         "photoswipe": "^5.4.4",
@@ -107,10 +106,8 @@
         "date-fns": "^4.4.0",
         "drizzle-kit": "0.31.10",
         "embla-carousel-react": "^8.6.0",
-        "framer-motion": "^13.0.0",
         "input-otp": "^1.4.2",
         "jose": "^6.2.8",
-        "libphonenumber-js": "^1.13.10",
         "lucide-react": "^0.562.0",
         "next": "16.3.0",
         "next-themes": "^0.4.6",
@@ -239,6 +236,7 @@
       "dependencies": {
         "@hookform/resolvers": "^5.7.1",
         "@mardu/ui": "workspace:*",
+        "libphonenumber-js": "^1.13.10",
         "lucide-react": "^0.562.0",
         "next": "16.3.0",
         "react": "^19.2.8",
@@ -258,8 +256,8 @@
       "dependencies": {
         "@mardu/content-core": "workspace:*",
         "@mardu/ui": "workspace:*",
-        "framer-motion": "^13.0.0",
         "lucide-react": "^0.562.0",
+        "motion": "^13.0.0",
         "react-markdown": "^10.1.0",
       },
       "devDependencies": {
@@ -322,9 +320,9 @@
         "clsx": "^2.1.1",
         "cmdk": "^1.1.1",
         "embla-carousel-react": "^8.6.0",
-        "framer-motion": "^13.0.0",
         "input-otp": "^1.4.2",
         "lucide-react": "^0.562.0",
+        "motion": "^13.0.0",
         "next": "16.3.0",
         "next-themes": "^0.4.6",
         "react-day-picker": "^10.0.1",
@@ -1573,7 +1571,7 @@
 
     "forwarded": ["forwarded@0.2.0", "", {}, "sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow=="],
 
-    "framer-motion": ["framer-motion@13.0.0", "", { "dependencies": { "motion-dom": "^13.0.0", "motion-utils": "^13.0.0", "tslib": "^2.4.0" }, "peerDependencies": { "react": "^18.0.0 || ^19.0.0", "react-dom": "^18.0.0 || ^19.0.0" }, "optionalPeers": ["react", "react-dom"] }, "sha512-nQGZXlsiigN48nzvE7AL1GLekql+etcphp8v+PQ0X04oxO20yVmV9rU9XQ25c136RdeIYoaWlKT9oAwvJza3mg=="],
+    "framer-motion": ["framer-motion@13.1.0", "", { "dependencies": { "motion-dom": "^13.0.0", "motion-utils": "^13.0.0", "tslib": "^2.4.0" }, "peerDependencies": { "react": "^18.0.0 || ^19.0.0", "react-dom": "^18.0.0 || ^19.0.0" }, "optionalPeers": ["react", "react-dom"] }, "sha512-QSZrF0Id3QGuHJ+OL+9PSY9pk86C8ERFalwAGSchzTm65+ZoGH/RM26lmEARLljcHj2lqhv0jZOOks+EI3COOw=="],
 
     "fresh": ["fresh@2.0.0", "", {}, "sha512-Rx/WycZ60HOaqLKAi6cHRKKI7zxWbJ31MhntmtwMoaTeF7XFH9hhBp8vITaMidfljRQ6eYWCKkaTK+ykVJHP2A=="],
 
@@ -1988,6 +1986,8 @@
     "minimizer-webpack-plugin": ["minimizer-webpack-plugin@5.6.1", "", { "dependencies": { "@jridgewell/trace-mapping": "^0.3.25", "jest-worker": "^27.4.5", "schema-utils": "^4.3.0", "terser": "^5.31.1" }, "peerDependencies": { "webpack": "^5.1.0" } }, "sha512-DoeAZz8Q1C1znwsUzej1fdoi4jCf7/+Em27ouLqfK/+3m8G+D7yDhUwrc3CNhjSzGUN1kn7Iv4sWmjflQHenpw=="],
 
     "monaco-editor": ["monaco-editor@0.56.0", "", { "dependencies": { "dompurify": "3.4.8", "marked": "14.0.0" } }, "sha512-sXboRm3BeBeLm938eaiyLMe0OxzfXIlZvbv4ir/jVgQy1zDhWjgmny0WoN45fuDKhCCQsYMbBJrv/A6jd8aCUg=="],
+
+    "motion": ["motion@13.1.0", "", { "dependencies": { "framer-motion": "^13.1.0", "tslib": "^2.4.0" }, "peerDependencies": { "react": "^18.0.0 || ^19.0.0", "react-dom": "^18.0.0 || ^19.0.0" }, "optionalPeers": ["react", "react-dom"] }, "sha512-qtvscq59uCPdWnNW4SdSkrxR+BS/QYsa923bx7ocA+4p+ZGNbbVQwkSnG4aukB81QWjtl3AxX36plxNyZLmHCA=="],
 
     "motion-dom": ["motion-dom@13.0.0", "", { "dependencies": { "motion-utils": "^13.0.0" } }, "sha512-Xk+SJas70uMAUIApg+m3lZDShxI3LBFHq7mFGbBKoRXc2PVPDyAKmzN64Bbzt4CZdP/CItTiJxWtn4TA0v53Ng=="],
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { domAnimation, LazyMotion, m, useReducedMotion } from "framer-motion";
+import { domAnimation, LazyMotion, m, useReducedMotion } from "motion/react";
 import { Settings, Sparkles } from "lucide-react";
 import { EditorialActionButton } from "@mardu/ui/components/editorial-action-button";
 import { cn } from "@mardu/ui/lib/utils";

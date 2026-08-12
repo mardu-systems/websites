@@ -95,6 +95,31 @@ export function Halftone3DIllustration({
       return;
     }
 
+    const reducedMotionQuery = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    let isInViewport = false;
+
+    const syncPlayback = () => {
+      controllerReference.current?.setActive(
+        isInViewport && !document.hidden && !reducedMotionQuery.matches,
+      );
+    };
+
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        isInViewport = Boolean(entry?.isIntersecting);
+        syncPlayback();
+      },
+      { threshold: 0.01 },
+    );
+    const handleVisibilityChange = () => syncPlayback();
+    const handleReducedMotionChange = () => syncPlayback();
+
+    intersectionObserver.observe(container);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    reducedMotionQuery.addEventListener("change", handleReducedMotionChange);
+
     void mountHalftoneCanvas({
       ...mountOptions,
       container,
@@ -107,10 +132,17 @@ export function Halftone3DIllustration({
       }
 
       controllerReference.current = controller;
+      syncPlayback();
     });
 
     return () => {
       abortController.abort();
+      intersectionObserver.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      reducedMotionQuery.removeEventListener(
+        "change",
+        handleReducedMotionChange,
+      );
       controllerReference.current?.dispose();
       controllerReference.current = null;
     };

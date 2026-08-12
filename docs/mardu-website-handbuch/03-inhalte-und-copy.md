@@ -34,6 +34,17 @@ Nicht jede Seite braucht alle Blöcke in derselben Länge. Die Reihenfolge verhi
 
 ## 3. Inhaltsprinzipien
 
+### Weniger ist mehr
+
+Die Headline trägt die Aussage. Der Begleittext ergänzt nur Mechanik, Beleg oder eine notwendige
+Grenze. Wiederholt er lediglich die Headline, entfällt er.
+
+- Sektions-Headlines sollen auch ohne Fließtext verständlich sein.
+- Intros bleiben meist bei ein bis zwei kurzen Sätzen.
+- Karten erhalten eine aussagekräftige Überschrift und ein bis zwei kurze Ergänzungssätze.
+- FAQ-Antworten beginnen mit der Antwort und nennen danach nur relevante Bedingungen.
+- Jede Formulierung muss neue Information liefern. Fülltext wird gestrichen.
+
 ### Eine Aussage pro Abschnitt
 
 Jede Sektion führt genau ein Argument weiter. Headline, Erklärung, Visual und CTA gehören zu diesem Argument.

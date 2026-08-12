@@ -9,6 +9,7 @@ import { cn } from "@mardu/ui/lib/utils";
 import type { HeaderNavLinkDto, SiteHeaderProps } from "./dto";
 import { HeaderCtaButton } from "./site-header-actions";
 import {
+  useHeaderNavigationFit,
   useMeasuredHeaderHeight,
   useMobileMenuFocusTrap,
   useScrolledPast,
@@ -30,13 +31,25 @@ export default function SiteHeader({
 }: SiteHeaderProps) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const headerRef = React.useRef<HTMLElement | null>(null);
+  const editorialNavigationRef = React.useRef<HTMLElement | null>(null);
+  const editorialBrandRef = React.useRef<HTMLAnchorElement | null>(null);
+  const editorialDesktopContentRef = React.useRef<HTMLDivElement | null>(null);
   const headerHeight = useMeasuredHeaderHeight(headerRef);
+  const editorialNavigationCompact = useHeaderNavigationFit(
+    editorialNavigationRef,
+    editorialBrandRef,
+    editorialDesktopContentRef,
+  );
   const closeMobileMenu = React.useCallback(() => setMobileOpen(false), []);
   const pathname = usePathname();
 
   React.useEffect(() => {
     closeMobileMenu();
   }, [closeMobileMenu, pathname]);
+
+  React.useEffect(() => {
+    if (!editorialNavigationCompact) closeMobileMenu();
+  }, [closeMobileMenu, editorialNavigationCompact]);
 
   useMobileMenuFocusTrap(mobileOpen, headerRef, closeMobileMenu);
 
@@ -63,10 +76,15 @@ export default function SiteHeader({
           )}
         >
           <nav
-            className="mardu-container flex h-16 items-center gap-4 md:h-20 xl:gap-10"
+            ref={editorialNavigationRef}
+            className="mardu-container relative flex h-16 items-center gap-4 md:h-20 md:gap-8"
             aria-label={navigationLabel}
+            data-navigation-mode={
+              editorialNavigationCompact ? "compact" : "full"
+            }
           >
             <Link
+              ref={editorialBrandRef}
               href={brand.homeHref}
               aria-label={brand.logoAlt}
               className="block shrink-0 touch-manipulation focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
@@ -89,7 +107,16 @@ export default function SiteHeader({
               </div>
             </Link>
 
-            <div className="hidden h-full min-w-0 flex-1 items-center justify-end gap-5 xl:flex 2xl:gap-7">
+            <div
+              ref={editorialDesktopContentRef}
+              aria-hidden={editorialNavigationCompact || undefined}
+              data-header-desktop-content
+              className={cn(
+                "ml-auto flex h-full w-max shrink-0 items-center gap-5 2xl:gap-7",
+                editorialNavigationCompact &&
+                  "pointer-events-none invisible absolute right-0",
+              )}
+            >
               {navItems.map((item) => (
                 <HeaderNavLink
                   key={`${item.label}:${item.href}`}
@@ -98,38 +125,40 @@ export default function SiteHeader({
                   className="shrink-0 px-0 py-2 [&_[data-label]]:mt-0.5"
                 />
               ))}
+              {cta ? (
+                <HeaderCtaButton
+                  cta={cta}
+                  showArrow
+                  className="h-10 shrink-0 text-sm"
+                />
+              ) : null}
             </div>
 
-            {cta ? (
-              <HeaderCtaButton
-                cta={cta}
-                showArrow
-                className="hidden h-10 shrink-0 text-sm xl:inline-flex"
-              />
+            {editorialNavigationCompact ? (
+              <Button
+                variant="ghost"
+                className="ml-auto h-11 gap-2.5 px-2 text-sm font-normal text-foreground hover:bg-muted hover:text-foreground"
+                onClick={() => setMobileOpen((value) => !value)}
+                aria-label={mobileOpen ? menuCloseLabel : menuOpenLabel}
+                aria-expanded={mobileOpen}
+                aria-controls="mobile-nav"
+                data-header-mobile-trigger
+              >
+                <MobileMenuTriggerIcon
+                  iconSrc={brand.mobileMenuIconSrc}
+                  closeIconSrc={brand.mobileMenuCloseIconSrc}
+                  open={mobileOpen}
+                />
+                <MobileMenuTriggerLabel open={mobileOpen} />
+              </Button>
             ) : null}
-
-            <Button
-              variant="ghost"
-              className="ml-auto h-11 gap-2 px-2 text-sm font-normal text-foreground hover:bg-muted hover:text-foreground xl:hidden"
-              onClick={() => setMobileOpen((value) => !value)}
-              aria-label={mobileOpen ? menuCloseLabel : menuOpenLabel}
-              aria-expanded={mobileOpen}
-              aria-controls="mobile-nav"
-            >
-              <MobileMenuTriggerIcon
-                iconSrc={brand.mobileMenuIconSrc}
-                closeIconSrc={brand.mobileMenuCloseIconSrc}
-                open={mobileOpen}
-              />
-              <MobileMenuTriggerLabel open={mobileOpen} />
-            </Button>
           </nav>
 
-          {mobileOpen ? (
+          {editorialNavigationCompact && mobileOpen ? (
             <nav
               id="mobile-nav"
               aria-label={`${navigationLabel} mobil`}
-              className="absolute inset-x-0 top-full h-[calc(100svh-4rem)] overflow-y-auto border-t border-border bg-background md:h-[calc(100svh-5rem)] xl:hidden"
+              className="absolute inset-x-0 top-full h-[calc(100svh-4rem)] overflow-y-auto border-t border-border bg-background md:h-[calc(100svh-5rem)]"
             >
               <div className="mardu-container flex min-h-full flex-col py-4 md:py-5">
                 <div className="grid border-t border-border sm:grid-cols-2">

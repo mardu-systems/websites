@@ -2,9 +2,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { SectionIntro } from '@mardu/sections';
-import { Halftone3DIllustration } from '@mardu/ui/components/halftone-3d-illustration';
 import { EditorialAccent } from '@mardu/ui/components/typography';
 import { benefitItems, useCases } from '../homepage-content';
+import { BenefitHalftoneVisual } from './benefit-halftone-visual';
+import { BenefitLiftCard } from './benefit-lift-card';
 
 const benefitModelUrls = [
   '/models/benefits/qualification-check.glb',
@@ -18,54 +19,6 @@ const benefitModelLabels = [
   'Interaktives 3D-Diagramm für nachvollziehbare Nachweise',
 ] as const;
 
-const benefitHalftoneSettings = {
-  material: {
-    color: '#f3eef9',
-    metalness: 0,
-    roughness: 0.72,
-  },
-  halftone: {
-    dashColor: '#9c80c2',
-    hoverDashColor: '#9c80c2',
-    power: -0.1,
-    scale: 17,
-    width: 0.48,
-  },
-  background: {
-    color: '#f4f4f4',
-    transparent: true,
-  },
-  animation: {
-    autoRotateEnabled: true,
-    autoSpeed: 0.1,
-    autoWobble: 0.16,
-    cameraParallaxEnabled: true,
-    dragFlowEnabled: true,
-    followDragEnabled: true,
-    followHoverEnabled: true,
-    hoverHalftoneEnabled: true,
-    hoverHalftonePowerShift: 0.24,
-    lightSweepEnabled: true,
-    hoverHalftoneRadius: 0.42,
-    hoverHalftoneWidthShift: -0.12,
-    hoverLightEnabled: true,
-    hoverLightIntensity: 0.55,
-    hoverLightRadius: 0.38,
-    rotationConstraint: 'y',
-  },
-} as const;
-
-const benefitHalftoneInitialPose = {
-  autoElapsed: 0,
-  rotateElapsed: 0,
-  rotationX: 0,
-  rotationY: 0,
-  rotationZ: 0,
-  targetRotationX: 0,
-  targetRotationY: 0,
-  timeElapsed: 0,
-} as const;
-
 export function BenefitsUseCasesSection() {
   return (
     <>
@@ -76,19 +29,14 @@ export function BenefitsUseCasesSection() {
               eyebrow="[04] Nutzen im Betrieb"
               title={
                 <>
-                  Infrastruktur zugänglich machen.{' '}
-                  <EditorialAccent>Kontrolle behalten.</EditorialAccent>
+                  Mehr Nutzung. <EditorialAccent>Weniger Freigabe-Routine.</EditorialAccent>
                 </>
               }
               intro={
                 <p>
-                  Mardu verbindet Unterweisungen und Qualifikationen mit Maschinen- und
-                  Türfreigaben. Zugriffe und Nutzungszeiten werden nachvollziehbar dokumentiert.{' '}
-                  <strong className="font-medium text-foreground/82">
-                    Das vereinfacht die organisatorische Nachhaltung von Betreiberpflichten und
-                    entlastet die Aufsicht, ohne Gefährdungsbeurteilung oder Schutzeinrichtungen zu
-                    ersetzen.
-                  </strong>
+                  Mardu verbindet Qualifikationen mit Maschinen- und Türfreigaben. So sinkt die
+                  manuelle Freigaberoutine, ohne Gefährdungsbeurteilung oder Schutzeinrichtungen zu
+                  ersetzen.
                 </p>
               }
               layout="stacked"
@@ -101,8 +49,9 @@ export function BenefitsUseCasesSection() {
           <div className="mt-14 grid border-y border-border lg:grid-cols-3">
             {benefitItems.map((item, index) => {
               return (
-                <article
+                <BenefitLiftCard
                   key={item.title}
+                  index={index}
                   className="relative border-b border-border py-8 last:border-b-0 lg:border-b-0 lg:border-r lg:px-9 lg:last:border-r-0"
                 >
                   <div>
@@ -119,15 +68,7 @@ export function BenefitsUseCasesSection() {
                       className="relative mx-auto size-60 overflow-visible sm:size-64"
                       role="img"
                     >
-                      <div className="absolute inset-0">
-                        <Halftone3DIllustration
-                          initialPose={benefitHalftoneInitialPose}
-                          modelUrl={benefitModelUrls[index]}
-                          previewDistance={3.75}
-                          settings={benefitHalftoneSettings}
-                          shapeKey="box"
-                        />
-                      </div>
+                      <BenefitHalftoneVisual modelUrl={benefitModelUrls[index]} />
                     </div>
                   </div>
                   <h3 className="mx-auto mt-7 max-w-[20rem] text-[1.375rem] font-light leading-tight tracking-[-0.02em]">
@@ -136,7 +77,7 @@ export function BenefitsUseCasesSection() {
                   <p className="mx-auto mt-4 max-w-[20rem] text-base leading-relaxed text-muted-foreground">
                     {item.description}
                   </p>
-                </article>
+                </BenefitLiftCard>
               );
             })}
           </div>
@@ -149,7 +90,7 @@ export function BenefitsUseCasesSection() {
             eyebrow="[05] Einsatzbereiche"
             title={
               <>
-                Lösungen für deinen <EditorialAccent>Anwendungsfall.</EditorialAccent>
+                Für Werkstatt, Labor <EditorialAccent>und Campus.</EditorialAccent>
               </>
             }
             layout="stacked"

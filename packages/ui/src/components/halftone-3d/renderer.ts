@@ -30,16 +30,13 @@ type ImageFootprintOptions = Omit<ContainedImageRectOptions, "zoom"> & {
   previewDistance: number;
 };
 
-type ProjectBox3Options = {
-  camera: THREE.PerspectiveCamera;
-  localBounds: THREE.Box3;
-  meshMatrixWorld: THREE.Matrix4;
-  viewportHeight: number;
-  viewportWidth: number;
-};
-
-type MeshFootprintOptions = ProjectBox3Options & {
-  lookAtTarget: THREE.Vector3;
+type MeshFootprintScratch = {
+  corners: THREE.Vector3[];
+  currentOffset: THREE.Vector3;
+  currentRect: ViewportRect;
+  referenceCamera: THREE.PerspectiveCamera;
+  referenceOffset: THREE.Vector3;
+  referenceRect: ViewportRect;
 };
 
 type TextureImageSizeSource = {
@@ -58,11 +55,6 @@ type HalftoneMaterialAssets = {
 };
 
 type InteractionState = ReturnType<typeof createInteractionState>;
-
-type SpringStep = {
-  value: number;
-  velocity: number;
-};
 
 type Uniform<T> = {
   value: T;
@@ -104,6 +96,7 @@ function clampRectToViewport(
   rect: ViewportRect,
   viewportWidth: number,
   viewportHeight: number,
+  result?: ViewportRect,
 ): ViewportRect | null {
   const minX = Math.max(rect.x, 0);
   const minY = Math.max(rect.y, 0);
@@ -114,12 +107,12 @@ function clampRectToViewport(
     return null;
   }
 
-  return {
-    x: minX,
-    y: minY,
-    width: maxX - minX,
-    height: maxY - minY,
-  };
+  const clampedRect = result ?? rect;
+  clampedRect.x = minX;
+  clampedRect.y = minY;
+  clampedRect.width = maxX - minX;
+  clampedRect.height = maxY - minY;
+  return clampedRect;
 }
 
 function getRectArea(rect: ViewportRect | null): number {
@@ -143,6 +136,32 @@ function createBox3Corners(bounds: THREE.Box3): THREE.Vector3[] {
     new THREE.Vector3(max.x, max.y, min.z),
     new THREE.Vector3(max.x, max.y, max.z),
   ];
+}
+
+function updateBox3Corners(corners: THREE.Vector3[], bounds: THREE.Box3): void {
+  const { min, max } = bounds;
+
+  corners[0]?.set(min.x, min.y, min.z);
+  corners[1]?.set(min.x, min.y, max.z);
+  corners[2]?.set(min.x, max.y, min.z);
+  corners[3]?.set(min.x, max.y, max.z);
+  corners[4]?.set(max.x, min.y, min.z);
+  corners[5]?.set(max.x, min.y, max.z);
+  corners[6]?.set(max.x, max.y, min.z);
+  corners[7]?.set(max.x, max.y, max.z);
+}
+
+function createMeshFootprintScratch(
+  camera: THREE.PerspectiveCamera,
+): MeshFootprintScratch {
+  return {
+    corners: createBox3Corners(new THREE.Box3()),
+    currentOffset: new THREE.Vector3(),
+    currentRect: { x: 0, y: 0, width: 0, height: 0 },
+    referenceCamera: camera.clone(),
+    referenceOffset: new THREE.Vector3(),
+    referenceRect: { x: 0, y: 0, width: 0, height: 0 },
+  };
 }
 
 function getImagePreviewZoom(previewDistance: number): number {
@@ -231,13 +250,15 @@ function getImageFootprintScale({
   return getFootprintScaleFromRects(currentRect, referenceRect);
 }
 
-function projectBox3ToViewport({
-  camera,
-  localBounds,
-  meshMatrixWorld,
-  viewportHeight,
-  viewportWidth,
-}: ProjectBox3Options): ViewportRect | null {
+function projectBox3ToViewport(
+  camera: THREE.PerspectiveCamera,
+  localBounds: THREE.Box3,
+  meshMatrixWorld: THREE.Matrix4,
+  viewportHeight: number,
+  viewportWidth: number,
+  corners?: THREE.Vector3[],
+  result?: ViewportRect,
+): ViewportRect | null {
   if (localBounds.isEmpty() || viewportWidth <= 0 || viewportHeight <= 0) {
     return null;
   }
@@ -248,7 +269,18 @@ function projectBox3ToViewport({
   let maxY = Number.NEGATIVE_INFINITY;
   let hasProjectedCorner = false;
 
-  for (const corner of createBox3Corners(localBounds)) {
+  const projectedCorners = corners ?? createBox3Corners(localBounds);
+  if (corners) {
+    updateBox3Corners(projectedCorners, localBounds);
+  }
+
+  for (let index = 0; index < projectedCorners.length; index += 1) {
+    const corner = projectedCorners[index];
+
+    if (!corner) {
+      continue;
+    }
+
     corner.applyMatrix4(meshMatrixWorld).project(camera);
 
     if (
@@ -283,43 +315,54 @@ function projectBox3ToViewport({
     },
     viewportWidth,
     viewportHeight,
+    result,
   );
 }
 
-function getMeshFootprintScale({
-  camera,
-  localBounds,
-  lookAtTarget,
-  meshMatrixWorld,
-  viewportHeight,
-  viewportWidth,
-}: MeshFootprintOptions): number {
-  const currentRect = projectBox3ToViewport({
+function getMeshFootprintScale(
+  camera: THREE.PerspectiveCamera,
+  localBounds: THREE.Box3,
+  lookAtTarget: THREE.Vector3,
+  meshMatrixWorld: THREE.Matrix4,
+  viewportHeight: number,
+  viewportWidth: number,
+  scratch?: MeshFootprintScratch,
+): number {
+  const currentRect = projectBox3ToViewport(
     camera,
     localBounds,
     meshMatrixWorld,
     viewportHeight,
     viewportWidth,
-  });
-  const referenceCamera = camera.clone();
-  const currentOffset = referenceCamera.position.clone().sub(lookAtTarget);
-  const referenceOffset =
-    currentOffset.lengthSq() > 0
-      ? currentOffset.setLength(REFERENCE_PREVIEW_DISTANCE)
-      : new THREE.Vector3(0, 0, REFERENCE_PREVIEW_DISTANCE);
+    scratch?.corners,
+    scratch?.currentRect,
+  );
+  const referenceCamera = scratch?.referenceCamera ?? camera.clone();
+  referenceCamera.copy(camera, false);
+  const currentOffset = scratch?.currentOffset ?? new THREE.Vector3();
+  const referenceOffset = scratch?.referenceOffset ?? new THREE.Vector3();
+  currentOffset.copy(referenceCamera.position).sub(lookAtTarget);
+
+  if (currentOffset.lengthSq() > 0) {
+    referenceOffset.copy(currentOffset).setLength(REFERENCE_PREVIEW_DISTANCE);
+  } else {
+    referenceOffset.set(0, 0, REFERENCE_PREVIEW_DISTANCE);
+  }
 
   referenceCamera.position.copy(lookAtTarget).add(referenceOffset);
   referenceCamera.lookAt(lookAtTarget);
   referenceCamera.updateProjectionMatrix();
   referenceCamera.updateMatrixWorld(true);
 
-  const referenceRect = projectBox3ToViewport({
-    camera: referenceCamera,
+  const referenceRect = projectBox3ToViewport(
+    referenceCamera,
     localBounds,
     meshMatrixWorld,
     viewportHeight,
     viewportWidth,
-  });
+    scratch?.corners,
+    scratch?.referenceRect,
+  );
 
   return getFootprintScaleFromRects(currentRect, referenceRect);
 }
@@ -787,22 +830,6 @@ function setPrimaryLightPosition(
   );
 }
 
-function applySpringStep(
-  current: number,
-  target: number,
-  velocity: number,
-  strength: number,
-  damping: number,
-): SpringStep {
-  const nextVelocity = (velocity + (target - current) * strength) * damping;
-  const nextValue = current + nextVelocity;
-
-  return {
-    value: nextValue,
-    velocity: nextVelocity,
-  };
-}
-
 function resetInteractionState(interactionState: InteractionState): void {
   interactionState.dragging = false;
   interactionState.mouseX = 0.5;
@@ -947,6 +974,8 @@ export type HalftoneCanvasMountOptions = {
 
 export type HalftoneCanvasController = {
   dispose: () => void;
+  /** Starts or pauses the render loop without disposing GPU resources. */
+  setActive: (active: boolean) => void;
   update: (nextOptions: {
     previewDistance: number;
     settings: Halftone3DSettings;
@@ -1061,6 +1090,8 @@ export async function mountHalftoneCanvas(
 
   const mesh = new THREE.Mesh(geometry, material);
   scene3d.add(mesh);
+  const footprintScratch = createMeshFootprintScratch(camera);
+  const lookAtTarget = new THREE.Vector3();
 
   const sceneTarget = createRenderTarget(getVirtualWidth(), getVirtualHeight());
   const blurTargetA = createRenderTarget(getVirtualWidth(), getVirtualHeight());
@@ -1228,19 +1259,22 @@ export async function mountHalftoneCanvas(
     mesh.updateMatrixWorld();
     camera.updateMatrixWorld();
 
-    return getMeshFootprintScale({
+    return getMeshFootprintScale(
       camera,
-      localBounds: mesh.geometry.boundingBox,
+      mesh.geometry.boundingBox,
       lookAtTarget,
-      meshMatrixWorld: mesh.matrixWorld,
+      mesh.matrixWorld,
       viewportHeight,
       viewportWidth,
-    });
+      footprintScratch,
+    );
   };
 
   const interaction = createInteractionState(initialPose);
   applyRuntimeSettings(currentSettings);
   let disposed = false;
+  let active = true;
+  let renderStaticFrame = () => {};
 
   const syncSize = () => {
     const width = getWidth();
@@ -1260,6 +1294,7 @@ export async function mountHalftoneCanvas(
       virtualWidth,
       virtualHeight,
     );
+    renderStaticFrame();
   };
 
   const resizeObserver = new ResizeObserver(syncSize);
@@ -1391,8 +1426,16 @@ export async function mountHalftoneCanvas(
   clock.connect(document);
   let animationFrameId = 0;
 
-  const renderFrame = (timestamp = performance.now()) => {
-    animationFrameId = window.requestAnimationFrame(renderFrame);
+  const renderFrame = (
+    timestamp = performance.now(),
+    scheduleNextFrame = true,
+  ) => {
+    animationFrameId = 0;
+
+    if (active && scheduleNextFrame) {
+      animationFrameId = window.requestAnimationFrame(renderFrame);
+    }
+
     clock.update(timestamp);
 
     const delta = 1 / 60;
@@ -1566,34 +1609,24 @@ export async function mountHalftoneCanvas(
     }
 
     if (currentSettings.animation.springReturnEnabled) {
-      const springX = applySpringStep(
-        interaction.rotationX,
-        targetX,
-        interaction.rotationVelocityX,
-        currentSettings.animation.springStrength,
-        currentSettings.animation.springDamping,
-      );
-      const springY = applySpringStep(
-        interaction.rotationY,
-        targetY,
-        interaction.rotationVelocityY,
-        currentSettings.animation.springStrength,
-        currentSettings.animation.springDamping,
-      );
-      const springZ = applySpringStep(
-        interaction.rotationZ,
-        baseRotationZ,
-        interaction.rotationVelocityZ,
-        currentSettings.animation.springStrength,
-        currentSettings.animation.springDamping,
-      );
+      const springStrength = currentSettings.animation.springStrength;
+      const springDamping = currentSettings.animation.springDamping;
 
-      interaction.rotationX = springX.value;
-      interaction.rotationY = springY.value;
-      interaction.rotationZ = springZ.value;
-      interaction.rotationVelocityX = springX.velocity;
-      interaction.rotationVelocityY = springY.velocity;
-      interaction.rotationVelocityZ = springZ.velocity;
+      interaction.rotationVelocityX =
+        (interaction.rotationVelocityX +
+          (targetX - interaction.rotationX) * springStrength) *
+        springDamping;
+      interaction.rotationVelocityY =
+        (interaction.rotationVelocityY +
+          (targetY - interaction.rotationY) * springStrength) *
+        springDamping;
+      interaction.rotationVelocityZ =
+        (interaction.rotationVelocityZ +
+          (baseRotationZ - interaction.rotationZ) * springStrength) *
+        springDamping;
+      interaction.rotationX += interaction.rotationVelocityX;
+      interaction.rotationY += interaction.rotationVelocityY;
+      interaction.rotationZ += interaction.rotationVelocityZ;
     } else {
       interaction.rotationX += (targetX - interaction.rotationX) * easing;
       interaction.rotationY += (targetY - interaction.rotationY) * easing;
@@ -1640,7 +1673,7 @@ export async function mountHalftoneCanvas(
       camera.position.z += (baseCameraDistance - camera.position.z) * 0.12;
     }
 
-    const lookAtTarget = new THREE.Vector3(0, meshOffsetY * 0.2, 0);
+    lookAtTarget.set(0, meshOffsetY * 0.2, 0);
 
     camera.lookAt(lookAtTarget);
     setPrimaryLightPosition(primaryLight, lightAngle, lightHeight);
@@ -1681,6 +1714,12 @@ export async function mountHalftoneCanvas(
     renderer.render(postScene, orthographicCamera);
   };
 
+  renderStaticFrame = () => {
+    if (!disposed && !active) {
+      renderFrame(performance.now(), false);
+    }
+  };
+
   renderFrame();
 
   const dispose = () => {
@@ -1718,6 +1757,22 @@ export async function mountHalftoneCanvas(
 
   return {
     dispose,
+    setActive: (nextActive) => {
+      if (disposed || active === nextActive) {
+        return;
+      }
+
+      active = nextActive;
+
+      if (!active) {
+        window.cancelAnimationFrame(animationFrameId);
+        animationFrameId = 0;
+        handlePointerCancel();
+        return;
+      }
+
+      renderFrame();
+    },
     update: (nextOptions) => {
       if (disposed) {
         return;
@@ -1732,6 +1787,7 @@ export async function mountHalftoneCanvas(
       }
 
       if (nextOptions.shapeKey === currentShapeKey) {
+        renderStaticFrame();
         return;
       }
 
@@ -1743,6 +1799,7 @@ export async function mountHalftoneCanvas(
         mesh.geometry.computeBoundingSphere();
         previousGeometry.dispose();
         currentShapeKey = nextOptions.shapeKey;
+        renderStaticFrame();
       } catch (error) {
         onError?.(error);
       }

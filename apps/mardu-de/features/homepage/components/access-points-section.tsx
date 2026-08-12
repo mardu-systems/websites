@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { SectionIntro } from '@mardu/sections';
+import { ScrollReveal } from '@mardu/ui/components/motion/scroll-reveal';
 import { EditorialAccent } from '@mardu/ui/components/typography';
 import { accessAreas } from '../homepage-content';
 
@@ -13,17 +14,14 @@ export function AccessPointsSection() {
           eyebrow="[02] Physische Zugänge"
           title={
             <>
-              Jeder Zugangspunkt. <EditorialAccent>Dieselbe Berechtigungslogik.</EditorialAccent>
+              Maschine, Tür, Tor. <EditorialAccent>Eine Berechtigungslogik.</EditorialAccent>
             </>
           }
           intro={
             <p>
               Maschine, Tür, Tor oder Schließfach unterscheiden sich technisch. Für den Betrieb
-              zählt dieselbe Frage:{' '}
-              <strong className="font-medium text-foreground/82">
-                Wer darf was – und unter welchen Bedingungen?
-              </strong>{' '}
-              Mardu bringt die Antwort an den passenden Zugangspunkt.
+              zählt dieselbe Frage: Wer darf was – wann und wo? Mardu bringt die Entscheidung an den
+              passenden Zugangspunkt.
             </p>
           }
           layout="stacked"
@@ -40,45 +38,47 @@ export function AccessPointsSection() {
                 key={item.index}
                 className="group border-b border-border p-6 md:odd:border-r md:[&:nth-last-child(-n+2)]:border-b-0 xl:border-b-0 xl:border-r xl:last:border-r-0 xl:p-7"
               >
-                <figure className="relative min-h-48 overflow-hidden bg-neutral-200">
-                  <Image
-                    src={item.imageSrc}
-                    alt={item.imageAlt}
-                    fill
-                    sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 25vw"
-                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.025] motion-reduce:transition-none"
-                  />
-                  <span className="absolute left-3 top-3 bg-black/58 px-2 py-1 text-xs text-white/88 backdrop-blur-sm">
-                    [{item.index}]
-                  </span>
-                  {item.imageCredit ? (
-                    <figcaption className="absolute bottom-2 right-2 bg-black/58 px-2 py-1 text-xs leading-none text-white/76 backdrop-blur-sm">
-                      <a
-                        href={item.imageCredit.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white"
-                      >
-                        {item.imageCredit.label}
-                      </a>
-                    </figcaption>
-                  ) : null}
-                </figure>
-
-                <div className="mt-6 flex items-center justify-between gap-3">
-                  <p className="text-xs tracking-[0.06em] text-mardu-purple">{item.label}</p>
-                  {item.status ? (
-                    <span className="border border-mardu-purple/25 px-2 py-1 text-xs text-mardu-purple">
-                      {item.status}
+                <ScrollReveal delay={(Number(item.index) - 1) * 0.08} distance={30}>
+                  <figure className="relative min-h-48 overflow-hidden bg-neutral-200">
+                    <Image
+                      src={item.imageSrc}
+                      alt={item.imageAlt}
+                      fill
+                      sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 25vw"
+                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.025] motion-reduce:transition-none"
+                    />
+                    <span className="absolute left-3 top-3 bg-black/58 px-2 py-1 text-xs text-white/88 backdrop-blur-sm">
+                      [{item.index}]
                     </span>
-                  ) : null}
-                </div>
-                <h3 className="mt-4 text-[1.375rem] font-light leading-tight tracking-[-0.02em]">
-                  {item.title}
-                </h3>
-                <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-                  {item.description}
-                </p>
+                    {item.imageCredit ? (
+                      <figcaption className="absolute bottom-2 right-2 bg-black/58 px-2 py-1 text-xs leading-none text-white/76 backdrop-blur-sm">
+                        <a
+                          href={item.imageCredit.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white"
+                        >
+                          {item.imageCredit.label}
+                        </a>
+                      </figcaption>
+                    ) : null}
+                  </figure>
+
+                  <div className="mt-6 flex items-center justify-between gap-3">
+                    <p className="text-xs tracking-[0.06em] text-mardu-purple">{item.label}</p>
+                    {item.status ? (
+                      <span className="border border-mardu-purple/25 px-2 py-1 text-xs text-mardu-purple">
+                        {item.status}
+                      </span>
+                    ) : null}
+                  </div>
+                  <h3 className="mt-4 text-[1.375rem] font-light leading-tight tracking-[-0.02em]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+                    {item.description}
+                  </p>
+                </ScrollReveal>
               </article>
             );
           })}

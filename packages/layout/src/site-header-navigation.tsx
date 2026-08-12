@@ -137,7 +137,7 @@ export function MobileMenuTriggerIcon({
   iconSrc,
   closeIconSrc,
   open,
-  fallbackClassName = "size-4",
+  fallbackClassName = "size-5",
 }: {
   iconSrc?: string;
   closeIconSrc?: string;
@@ -145,40 +145,53 @@ export function MobileMenuTriggerIcon({
   fallbackClassName?: string;
 }) {
   if (!iconSrc) {
-    return open ? (
-      <X className={fallbackClassName} />
-    ) : (
-      <Menu className={fallbackClassName} />
+    return (
+      <span
+        className={cn("relative block size-5 shrink-0", fallbackClassName)}
+        aria-hidden="true"
+      >
+        <Menu
+          className={cn(
+            "absolute inset-0 size-full transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+            open ? "rotate-90 opacity-0" : "rotate-0 opacity-100",
+          )}
+          strokeWidth={1.8}
+        />
+        <X
+          className={cn(
+            "absolute inset-0 size-full transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+            open ? "rotate-0 opacity-100" : "-rotate-90 opacity-0",
+          )}
+          strokeWidth={1.8}
+        />
+      </span>
     );
   }
 
   if (closeIconSrc) {
     return (
       <span
-        className={cn(
-          "relative block size-8 shrink-0 overflow-hidden transition-[rotate,scale] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-          open ? "rotate-[55deg] scale-[0.92]" : "rotate-0 scale-100",
-        )}
+        className="relative block size-5 shrink-0 overflow-hidden"
         aria-hidden="true"
       >
         <Image
           src={iconSrc}
           alt=""
           fill
-          sizes="32px"
+          sizes="20px"
           className={cn(
-            "object-contain transition-opacity duration-150 ease-out motion-reduce:transition-none",
-            open ? "opacity-0" : "delay-100 opacity-100",
+            "object-contain transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+            open ? "rotate-90 opacity-0" : "rotate-0 opacity-100",
           )}
         />
         <Image
           src={closeIconSrc}
           alt=""
           fill
-          sizes="32px"
+          sizes="20px"
           className={cn(
-            "object-contain transition-opacity duration-150 ease-out motion-reduce:transition-none",
-            open ? "delay-100 opacity-100" : "opacity-0",
+            "object-contain transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+            open ? "rotate-0 opacity-100" : "-rotate-90 opacity-0",
           )}
         />
       </span>
@@ -188,8 +201,8 @@ export function MobileMenuTriggerIcon({
   return (
     <span
       className={cn(
-        "relative block size-8 shrink-0 overflow-hidden transition-transform duration-200 motion-reduce:transition-none",
-        open && "rotate-6 scale-105",
+        "relative block size-5 shrink-0 overflow-hidden transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+        open && "rotate-90",
       )}
       aria-hidden="true"
     >
@@ -197,7 +210,7 @@ export function MobileMenuTriggerIcon({
         src={iconSrc}
         alt=""
         fill
-        sizes="32px"
+        sizes="20px"
         className="object-contain"
       />
     </span>
@@ -212,20 +225,16 @@ export function MobileMenuTriggerLabel({ open }: { open: boolean }) {
     >
       <span
         className={cn(
-          "col-start-1 row-start-1 transition-[opacity,translate] duration-200 ease-out motion-reduce:transition-none",
-          open
-            ? "-translate-y-full opacity-0"
-            : "delay-75 translate-y-0 opacity-100",
+          "col-start-1 row-start-1 transition-[opacity,translate] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+          open ? "-translate-y-1.5 opacity-0" : "translate-y-0 opacity-100",
         )}
       >
         Menü
       </span>
       <span
         className={cn(
-          "col-start-1 row-start-1 transition-[opacity,translate] duration-200 ease-out motion-reduce:transition-none",
-          open
-            ? "delay-75 translate-y-0 opacity-100"
-            : "translate-y-full opacity-0",
+          "col-start-1 row-start-1 transition-[opacity,translate] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+          open ? "translate-y-0 opacity-100" : "translate-y-1.5 opacity-0",
         )}
       >
         Schließen

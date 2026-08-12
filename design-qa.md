@@ -54,6 +54,52 @@ final result: passed
 
 ---
 
+# Design QA – Inhaltsbasierter Header und Mobile-Menü-Icon
+
+## Vergleichsgrundlage
+
+- Problemreferenz: `/var/folders/rn/v1p_nhxx1871gd0_1sbxp8zh0000gn/T/codex-clipboard-3eebbfe8-8f03-4baf-9f5b-a0041261daa7.png` (131 × 51 Pixel, geöffneter Menübutton mit bisherigem Punkt-Asset).
+- Umsetzung geöffnet: `/Users/lucaschoeneberg/Documents/GitHub/websites/.codex-artifacts/design-qa/mardu-mobile-header-open-final.png` bei 375 × 720 CSS-Pixeln; Aufnahme 375 × 82 Pixel.
+- Umsetzung vollständige Navigation: `/Users/lucaschoeneberg/Documents/GitHub/websites/.codex-artifacts/design-qa/mardu-header-desktop-900.png` bei 900 × 720 CSS-Pixeln; Aufnahme 900 × 96 Pixel.
+- Umsetzung kompakte Navigation: `/Users/lucaschoeneberg/Documents/GitHub/websites/.codex-artifacts/design-qa/mardu-header-compact-890.png` bei 890 × 720 CSS-Pixeln; Aufnahme 890 × 96 Pixel.
+- Gemeinsamer fokussierter Vergleich: `/Users/lucaschoeneberg/Documents/GitHub/websites/.codex-artifacts/design-qa/mardu-mobile-header-icon-comparison.png` (Problemreferenz links, neue Umsetzung rechts).
+- Geprüfte Zustände: Menü geschlossen und geöffnet, Escape-Schließen, Resize von kompakt zu vollständig sowie Breiten von 375, 768, 840, 860, 880, 890, 900, 920 und 960 CSS-Pixeln.
+
+## Pflichtflächen
+
+- Schrift und Typografie: Menü/Schließen verwenden weiterhin die vorhandene Header-Typografie bei unveränderter Größe und Zeilenhöhe. Das neue Icon sitzt auf derselben optischen Grundlinie wie die Beschriftung.
+- Abstände und Layout-Rhythmus: Die komplette Navigation bleibt bis einschließlich 900 Pixel sichtbar. Ab 890 Pixel wechselt der Header in den kompakten Zustand. Die Messung berücksichtigt Logo, alle fünf Links, CTA, Innenabstände und einen Sicherheitsabstand; es entsteht kein horizontaler Überlauf.
+- Farben und Tokens: Hintergrund, Text, Hover- und Fokuszustände bleiben im bestehenden Mardu-System. Das neue Icon ist einfarbig und erhöht gegenüber dem sehr kleinen mehrfarbigen Punktmotiv die Erkennbarkeit.
+- Bild- und Assettreue: Das problematische handgezeichnete Punkt-Asset wird für Mardu nicht mehr als Menüzeichen verwendet. Menü und Schließen stammen aus der bereits installierten Lucide-Iconbibliothek; es gibt keine neue CSS- oder SVG-Ersatzzeichnung.
+- Copy und Inhalt: „Menü“ und „Schließen“, Navigationspunkte und Beratungs-CTA bleiben unverändert.
+
+## Bewegung und Zugänglichkeit
+
+- Menü- und X-Symbol überblenden und drehen sich über 300 ms mit dem vorhandenen Mardu-Easing. Es wird keine Skalierung mehr animiert, sodass das Zeichen weder schrumpft noch springt.
+- Die Beschriftungen wechseln mit einem kurzen vertikalen Versatz und Deckkraft; die Buttonbreite und Headerhöhe bleiben stabil.
+- `prefers-reduced-motion` setzt die Übergänge unmittelbar in den Endzustand.
+- Der Button besitzt weiterhin eindeutige `aria-label`-, `aria-expanded`- und `aria-controls`-Zustände. Escape schließt das Menü und stellt den Body-Scroll wieder her.
+- Beim Wechsel zurück zur vollständigen Navigation wird ein geöffnetes Mobile-Menü automatisch geschlossen; es bleiben weder unsichtbare Navigation noch Scroll-Lock zurück.
+
+## Findings und Vergleichshistorie
+
+1. Ausgangszustand: Die Navigation wechselte pauschal bei `xl` und damit deutlich bevor die fünf Links plus CTA tatsächlich keinen Platz mehr hatten. Das mehrfarbige Punktmotiv wurde beim Öffnen zusätzlich gedreht und verkleinert; der Schließen-Zustand wirkte dadurch unruhig. Einstufung P2.
+2. Erste Messimplementierung: Die benötigte Inhaltsbreite wurde korrekt ermittelt, die verfügbare Breite enthielt aber noch das Container-Padding. Bei 840 Pixeln blieb die Vollnavigation deshalb 18 Pixel zu lange sichtbar. Einstufung P2.
+3. Korrektur: Linkes und rechtes Container-Padding werden von der verfügbaren Breite abgezogen. Der finale Browserlauf zeigt Vollnavigation bei 900 Pixeln und einen sauberen Wechsel bei 890 Pixeln, jeweils ohne Überlauf.
+4. Icon-Korrektur: Das Punkt-Asset wurde für Mardu durch das vorhandene Menü-/X-Paar ersetzt. Die Animation verwendet nur Drehung und Deckkraft; der finale Vergleich zeigt eine klarere Silhouette, gleichmäßige Strichstärke und unveränderte Größe.
+
+## Technische Nachkontrolle
+
+- TypeScript-Typecheck: bestanden.
+- ESLint: bestanden.
+- Webpack-Produktions-Build: bestanden. Der Turbopack-Build konnte in der Ausführungsumgebung keinen internen Port binden; der unterstützte Webpack-Fallback lief vollständig durch.
+- React Doctor: 71/100; sechs bestehende Hinweise außerhalb der geänderten Header-Komponenten, keine neue Diagnose für diese Änderung.
+- Browserkonsole: keine Header-, React- oder Hydrationfehler. Die bestehende LCP-Entwicklungswarnung zum CNC-Herobild liegt außerhalb dieser Änderung.
+
+Es bleiben keine offenen P0-, P1- oder P2-Abweichungen.
+
+final result: passed
+
 # Design QA – Nutzenkarten und Footer-Halftone
 
 ## Vergleichsgrundlage
@@ -357,5 +403,43 @@ final result: blocked
 3. Finaler Vergleich: Desktop zeigt H1 mit 64 Pixeln und Archivüberschrift mit 57,6 Pixeln; mobil 44 beziehungsweise 36 Pixel. Kein horizontaler Überlauf bei 390 oder 1440 Pixeln.
 
 Der kombinierte Vergleich zeigt nun dieselbe Typografiedichte, Papierfläche, Haarlinien und nummerierten Informationslabels wie die bestehende Website. Es bleiben keine offenen P0-, P1- oder P2-Abweichungen.
+
+final result: passed
+
+---
+
+# Design QA – Scrollgebundener Karten-Hub im Nutzenabschnitt
+
+## Vergleichsgrundlage
+
+- Referenz: `/var/folders/rn/v1p_nhxx1871gd0_1sbxp8zh0000gn/T/codex-clipboard-acbd708e-501a-4c31-805d-5ccb0cafc7fe.png` (1568 × 857 Pixel).
+- Implementierung: `/Users/lucaschoeneberg/Documents/GitHub/websites/.codex-artifacts/design-qa/mardu-benefit-lift-mid.jpg` bei 1280 × 720 CSS-Pixeln.
+- Gemeinsamer, auf dieselbe Bildfläche normalisierter Vergleich: `/Users/lucaschoeneberg/Documents/GitHub/websites/.codex-artifacts/design-qa/twenty-mardu-benefit-lift-comparison.jpg`.
+- Geprüfter Zustand: erste und zweite Nutzenkarte angekommen, dritte Karte noch tiefer und abgeblendet. Das entspricht dem sichtbaren Zwischenzustand der Twenty-Referenz; Mardu-Copy, Halftone-Modelle und das bestehende Raster bleiben eigenständig.
+
+## Pflichtflächen
+
+- Bewegung: Der Karten-Hub ist kontinuierlich an den lokalen Scrollfortschritt gebunden. Es gibt kein Scroll-Jacking und keine globale Scrollüberwachung.
+- Staffelung: Am Desktop beginnt die zweite Karte später; die dritte Karte wartet deutlich länger und startet aus größerer Tiefe. Mobil werden Weg und Staffelung kompakter.
+- Typografie, Farben und Raster: Die vorhandenen Mardu-Tokens, Haarlinien, Aktiv-Grotesk-/Serif-Hierarchie und Halftone-Illustrationen bleiben unverändert.
+- Barrierefreiheit: `prefers-reduced-motion` rendert alle Karten unmittelbar in ihrer finalen Position. Die DOM- und Lesereihenfolge bleibt unverändert.
+- Performance: Der Karten-Hub animiert ausschließlich die vertikale `transform`-Position; der Scrollwert wird geglättet, ohne dauerhaftes Timer-Loop. Es gibt weder Skalierung noch scrollgebundene Deckkraftänderung.
+
+## Findings und Vergleichshistorie
+
+1. Erster Browservergleich: Alle drei Karten bewegten sich sichtbar, lagen im relevanten Zwischenzustand aber noch zu dicht beieinander (Deckkraft 1,00 / 0,92 / 0,76; dritte Karte nur rund 40 Pixel versetzt). Einstufung P2.
+2. Korrektur: Desktop-Startpunkte auf 0 / 0,22 / 0,58 und Bewegung auf 132 / 164 / 212 Pixel aufgefächert. Mobile behält kürzere Wege.
+3. Nach Nutzerfeedback wurden Skalierung und Deckkraftstaffelung entfernt. Im finalen Vergleich bleiben alle drei Karten durchgehend bei 100 Prozent Deckkraft und Originalgröße; nur ihre vertikale Restbewegung erzeugt die Staffelung.
+4. Richtungswechsel: Nach schnellem Vor- und Zurückscrollen kehren die Karten reproduzierbar in denselben Zwischenzustand zurück. Am Ende stehen alle Karten stabil ohne Restbewegung, Größen- oder Deckkraftänderung.
+
+## Technische Nachkontrolle
+
+- TypeScript-Typecheck: bestanden.
+- ESLint: bestanden.
+- Tests: 25/25 bestanden.
+- React Doctor: 71/100; sechs bestehende Hinweise außerhalb der geänderten Komponenten, keine neue Diagnose für den Karten-Hub.
+- `git diff --check`: bestanden.
+
+Es bleiben keine offenen P0-, P1- oder P2-Abweichungen für die angefragte Scrollstaffelung.
 
 final result: passed

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@mardu/ui/lib/utils";
 import { SectionIntro } from "./section-intro";
@@ -77,8 +77,14 @@ function EditorialBenefitPanel({
 
   return (
     <motion.article
-      initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-      whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+      initial={
+        shouldReduceMotion
+          ? false
+          : { opacity: 0, transform: "translateY(24px)" }
+      }
+      whileInView={
+        shouldReduceMotion ? undefined : { opacity: 1, transform: "none" }
+      }
       viewport={{ once: true, amount: 0.35 }}
       transition={{
         duration: 0.55,

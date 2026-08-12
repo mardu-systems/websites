@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { homepageHero } from '../homepage-content';
 import { CyclingAccessPoint } from './cycling-access-point';
+import { HeroSystemField } from './hero-system-field';
 
 const trustSignalIcons = [
   ShieldCheck,
@@ -28,8 +29,8 @@ export function HomepageHero() {
       className="relative scroll-mt-24 border-b border-border bg-background pb-14 pt-12 md:pb-20 md:pt-12 xl:flex xl:min-h-[calc(100svh-10rem)] xl:items-center xl:py-28 2xl:min-h-[calc(100svh-11rem)]"
     >
       <div className="mardu-container grid gap-12 xl:grid-cols-[0.82fr_1.18fr] xl:items-center xl:gap-14">
-        <div className="max-w-[43rem]">
-          <h1 className="max-w-[12ch] text-[clamp(2.85rem,7.4vw,3.75rem)] font-light leading-[0.98] tracking-[-0.04em] text-foreground">
+        <div className="homepage-hero-panel relative max-w-[43rem] overflow-hidden border-y border-border px-5 py-8 sm:px-7 xl:-ml-7 xl:px-7 xl:py-10">
+          <h1 className="homepage-hero-heading relative max-w-[12ch] text-[clamp(2.85rem,7.4vw,3.75rem)] font-light leading-[0.98] tracking-[-0.04em] text-foreground">
             <span className="sr-only">
               Zugang zu Maschine, Tür, Schranke, Werkstatt und Zufahrt. Zentral geregelt.
             </span>
@@ -40,7 +41,10 @@ export function HomepageHero() {
             </span>
           </h1>
 
-          <nav className="mt-10 max-w-[30rem] border-t border-border" aria-label="Direkteinstiege">
+          <nav
+            className="homepage-hero-entry homepage-hero-entry--actions relative mt-10 max-w-[30rem] border-t border-border"
+            aria-label="Direkteinstiege"
+          >
             {[homepageHero.primaryAction, homepageHero.secondaryAction].map((action, index) => (
               <Link
                 key={action.href}
@@ -62,7 +66,7 @@ export function HomepageHero() {
             ))}
           </nav>
 
-          <ul className="mt-10 flex max-w-[42rem] flex-wrap gap-x-6 gap-y-4">
+          <ul className="homepage-hero-entry homepage-hero-entry--trust relative mt-10 flex max-w-[42rem] flex-wrap gap-x-6 gap-y-4">
             {homepageHero.trustSignals.map((signal, index) => {
               const Icon = trustSignalIcons[index] ?? ShieldCheck;
 
@@ -85,16 +89,22 @@ export function HomepageHero() {
         </div>
 
         <div className="min-w-0">
-          <figure className="relative min-h-80 overflow-hidden bg-muted sm:min-h-[32rem] xl:min-h-[clamp(34rem,calc(100svh-18rem),42rem)]">
-            <Image
-              src="/landing/mardu-modern-cnc.webp"
-              alt="Mardu-Terminal an einer modernen CNC-Maschine bei der Identifikation mit einer Zugangskarte"
-              fill
-              priority
-              loading="eager"
-              sizes="(max-width: 1279px) 100vw, 60vw"
-              className="object-cover object-center"
-            />
+          <figure className="homepage-hero-media relative min-h-80 overflow-hidden bg-muted sm:min-h-[32rem] xl:min-h-[clamp(34rem,calc(100svh-18rem),42rem)]">
+            <div className="homepage-hero-image absolute inset-0">
+              <Image
+                src="/landing/mardu-modern-cnc.webp"
+                alt="Mardu-Terminal an einer modernen CNC-Maschine bei der Identifikation mit einer Zugangskarte"
+                fill
+                priority
+                loading="eager"
+                sizes="(max-width: 1279px) 100vw, 60vw"
+                className="object-cover object-center"
+              />
+            </div>
+            <HeroSystemField />
+            <figcaption className="absolute bottom-4 left-4 z-20 border border-white/25 bg-black/45 px-2.5 py-1.5 text-xs text-white/82 backdrop-blur-sm">
+              Identität → Regel → Freigabe
+            </figcaption>
           </figure>
         </div>
       </div>

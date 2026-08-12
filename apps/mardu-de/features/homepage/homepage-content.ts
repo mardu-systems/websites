@@ -78,8 +78,8 @@ export const homepageNavigation: ReadonlyArray<HomepageNavigationItem> = [
 ];
 
 export const homepageHero = {
-  primaryAction: { label: 'Jetzt beraten lassen', href: '/contact' },
-  secondaryAction: { label: 'System verstehen', href: '#system' },
+  primaryAction: { label: 'Standort besprechen', href: '/contact' },
+  secondaryAction: { label: 'So funktioniert Mardu', href: '#system' },
   rotatingAccessPoints: ['Maschine', 'Tür', 'Schranke', 'Werkstatt'],
   trustSignals: [
     {
@@ -111,8 +111,7 @@ export const homepageHero = {
 
 export const customerProof = {
   label: 'Kunden & Partner',
-  description:
-    'Gemeinsam mit Hochschulen und Technologiepartnern für den realen Betrieb entwickelt.',
+  description: 'Gemeinsam mit Hochschulen und Technologiepartnern für den Betrieb entwickelt.',
   partners: [
     {
       name: 'FH Aachen',
@@ -207,26 +206,25 @@ export const fundingProof = {
 export const systemLayers: ReadonlyArray<HomepageNumberedItem> = [
   {
     index: '01',
-    title: 'Eine Identität',
-    description: 'Ausweis, Tag oder angebundenes Identitätssystem ordnen eine Person eindeutig zu.',
+    title: 'Identität zuordnen',
+    description:
+      'Ausweis, Tag oder angebundenes Identitätssystem ordnen Zugriffe eindeutig einer Person zu.',
   },
   {
     index: '02',
-    title: 'Klare Regeln',
+    title: 'Regeln prüfen',
     description:
-      'Rollen, Qualifikationen, Bereiche und Zeitfenster bestimmen die vorgesehene Berechtigung.',
+      'Rollen, Qualifikationen, Bereiche und Zeitfenster bestimmen, welcher Zugriff vorgesehen ist.',
   },
   {
     index: '03',
-    title: 'Viele Zugänge',
-    description:
-      'Mardu bringt die Entscheidung an Maschine, Tür, Tor, Schranke oder einen weiteren Zugangspunkt.',
+    title: 'Freigabe wirkt vor Ort',
+    description: 'Die geprüfte Entscheidung wirkt an Maschine, Tür, Tor oder Schranke.',
   },
   {
     index: '04',
-    title: 'Zentrale Übersicht',
-    description:
-      'Verantwortliche verwalten Ressourcen, Zustände und vorgesehene Ereignisse an einer Stelle.',
+    title: 'Ressourcen zentral überblicken',
+    description: 'Verantwortliche verwalten Ressourcen, Zustände und Ereignisse an einer Stelle.',
   },
 ];
 
@@ -235,10 +233,9 @@ export const permissionsStory: ReadonlyArray<StickyStoryItem> = [
     id: 'identities',
     index: '01',
     label: 'Identitäten',
-    title: 'Menschen, Rollen und Qualifikationen zentral verwalten.',
-    description:
-      'Personen, Identmedien, Rollen und Qualifikationen werden an einer Stelle gepflegt.',
-    emphasis: 'Eine Änderung wirkt bis zur physischen Freigabe.',
+    title: 'Menschen, Rollen und Qualifikationen an einem Ort.',
+    description: 'Personen, Identmedien, Rollen und Qualifikationen werden zentral gepflegt.',
+    emphasis: 'Änderungen gelten bis zum Zugangspunkt.',
     imageSrc: '/verwaltungssoftware/benutzerverwaltung.png',
     imageAlt: 'Mardu-Verwaltungssoftware mit Benutzerkonten und zugeordneten Identmedien',
   },
@@ -246,8 +243,8 @@ export const permissionsStory: ReadonlyArray<StickyStoryItem> = [
     id: 'events',
     index: '02',
     label: 'Ereignisse',
-    title: 'Zugriffe nachvollziehen, statt Listen abzugleichen.',
-    description: 'Freigaben und abgelehnte Zugriffe werden mit dem vorgesehenen Kontext sichtbar.',
+    title: 'Jeder Zugriff bleibt nachvollziehbar.',
+    description: 'Freigaben und abgelehnte Zugriffe werden mit ihrem Kontext sichtbar.',
     emphasis: 'Verantwortliche sehen, was wann an welchem Zugangspunkt passiert ist.',
     imageSrc: '/verwaltungssoftware/zugriffsprotokolle.png',
     imageAlt: 'Mardu-Verwaltungssoftware mit Zugriffsprotokollen und Ereignissen',
@@ -256,10 +253,10 @@ export const permissionsStory: ReadonlyArray<StickyStoryItem> = [
     id: 'access-points',
     index: '03',
     label: 'Infrastruktur',
-    title: 'Geräte und Zugangspunkte gemeinsam im Blick behalten.',
+    title: 'Alle Zugangspunkte. Eine Übersicht.',
     description:
       'Maschinen, Türen, Tore und weitere Ressourcen bleiben Teil derselben Verwaltungsstruktur.',
-    emphasis: 'So wird aus einzelnen Geräten ein steuerbares System.',
+    emphasis: 'Aus einzelnen Geräten wird ein steuerbares System.',
     imageSrc: '/verwaltungssoftware/zutrittspunkte-und-geraete.png',
     imageAlt: 'Mardu-Verwaltungssoftware mit verwalteten Geräten und Zugangspunkten',
   },
@@ -277,16 +274,16 @@ export const accessAreas: ReadonlyArray<
   {
     index: '01',
     label: 'Kernanwendung',
-    title: 'Maschinen & Anlagen',
+    title: 'Qualifikation steuert Maschinenfreigaben',
     description:
-      'Maschinenfreigaben werden mit Identität, Einweisung, Rolle und Zeitregeln verbunden. Die technische Einbindung wird für jede Anlage geprüft.',
+      'Identität, Einweisung, Rolle und Zeitregeln greifen zusammen. Jede Anlage wird technisch geprüft.',
     imageSrc: '/landing/mardu-modern-cnc.webp',
     imageAlt: 'Mardu-Terminal an einer modernen CNC-Maschine',
   },
   {
     index: '02',
     label: 'Zutritt',
-    title: 'Türen & Räume',
+    title: 'Ein Ausweis öffnet passende Türen',
     description:
       'Gebäude, Werkstätten, Labore und einzelne Bereiche lassen sich in dieselbe Berechtigungsstruktur einordnen.',
     imageSrc: '/landing/mardu-gebaeudezugang-tuere.webp',
@@ -295,7 +292,7 @@ export const accessAreas: ReadonlyArray<
   {
     index: '03',
     label: 'Zufahrt',
-    title: 'Tore & Schranken',
+    title: 'Rollen und Zeiten steuern Zufahrten',
     description:
       'Fahrzeug- und Lieferzugänge können nach Person, Rolle, Bereich oder vorgesehenem Zeitfenster organisiert werden.',
     imageSrc: '/configurator/tor.jpg',
@@ -304,7 +301,7 @@ export const accessAreas: ReadonlyArray<
   {
     index: '04',
     label: 'Erweiterbar',
-    title: 'Schließfächer & Ressourcen',
+    title: 'Eine Logik für weitere Ressourcen',
     description:
       'Auch Schließfächer und weitere elektrisch schaltbare Ressourcen können Teil derselben Berechtigungslogik werden.',
     imageSrc: '/landing/modern-secure-lockers.webp',
@@ -341,17 +338,17 @@ export const permissionSteps: ReadonlyArray<HomepageNumberedItem> = [
 
 export const benefitItems: ReadonlyArray<HomepageStatusItem> = [
   {
-    title: 'Qualifikation prüfen',
+    title: 'Nur passende Personen kommen weiter',
     description:
       'Unterweisungen, Qualifikationen, Rollen und Zeitregeln entscheiden gemeinsam, ob eine Maschine oder Tür freigegeben wird.',
   },
   {
-    title: 'Aufsicht entlasten',
+    title: 'Mehr Nutzung. Weniger Routine.',
     description:
-      'Berechtigte Personen nutzen vorgesehene Ressourcen selbstständig. Kritische Freigaben lassen sich bei Bedarf durch ein Vier-Augen-Prinzip absichern.',
+      'Berechtigte Personen nutzen vorgesehene Ressourcen selbstständig. Kritische Freigaben können bei Bedarf ein Vier-Augen-Prinzip verlangen.',
   },
   {
-    title: 'Nachweise vereinfachen',
+    title: 'Nachweise statt Listen',
     description:
       'Freigaben, abgelehnte Zugriffe und vereinbarte Nutzungszeiten werden zentral nachvollziehbar – für interne Compliance, Aufsicht und Versicherung.',
     status: 'Compliance',
@@ -384,7 +381,7 @@ export const useCases: ReadonlyArray<HomepageLinkedNumberedItem> = [
     index: '04',
     title: 'Makerspaces & offene Werkstätten',
     description:
-      'Einweisungen und Maschinenfreigaben ermöglichen Nutzung auch ohne permanente Aufsicht.',
+      'Einweisungen und Maschinenfreigaben reduzieren manuelle Freigaben bei wechselnden Nutzergruppen.',
     href: '/solutions/makerspaces-und-offene-werkstaetten',
   },
 ];
@@ -392,8 +389,9 @@ export const useCases: ReadonlyArray<HomepageLinkedNumberedItem> = [
 export const rolloutSteps: ReadonlyArray<HomepageNumberedItem> = [
   {
     index: '01',
-    title: 'Anwendungsfall wählen',
-    description: 'Einen repräsentativen Zugangspunkt und die beteiligten Rollen festlegen.',
+    title: 'Pilot wählen',
+    description:
+      'Einen repräsentativen Zugangspunkt, die beteiligten Rollen und ein Ziel festlegen.',
   },
   {
     index: '02',
@@ -402,12 +400,12 @@ export const rolloutSteps: ReadonlyArray<HomepageNumberedItem> = [
   },
   {
     index: '03',
-    title: 'Pilot betreiben',
-    description: 'Freigaben und Ausfallverhalten im Alltag prüfen.',
+    title: 'Im Alltag testen',
+    description: 'Freigaben und Ausfallverhalten im realen Betrieb prüfen.',
   },
   {
     index: '04',
-    title: 'Gezielt erweitern',
+    title: 'Gezielt skalieren',
     description: 'Erst nach der Auswertung weitere Ressourcen anbinden.',
   },
 ];
@@ -416,7 +414,7 @@ export const mediaBriefs = {
   accessPanorama: {
     index: 'P02',
     type: 'Produktrendering',
-    title: 'Vier Zugangspunkte, eine Produktfamilie',
+    title: 'Maschine, Tür, Tor. Eine Produktfamilie.',
     brief:
       'Freigestellte 3D-Szene mit Mardu-Terminal an Maschine, Schließzylinder, Torsteuerung und Schranke.',
     format: 'Panorama · 16:7 · transparenter Hintergrund',
@@ -467,17 +465,17 @@ export const faqItems = [
   {
     question: 'Welche Zugänge kann Mardu steuern?',
     answer:
-      'Im Mittelpunkt stehen Maschinen und Anlagen. Zusätzlich können Türen, Tore, Schranken und weitere elektrisch schaltbare Zugangspunkte angebunden werden. Ob eine Einbindung passt, wird für die konkrete Ressource geprüft.',
+      'Maschinen und Anlagen stehen im Mittelpunkt. Türen, Tore, Schranken und weitere schaltbare Zugänge binden wir nach technischer Prüfung an.',
   },
   {
     question: 'Funktioniert Mardu mit jeder Maschine?',
     answer:
-      'Nein. Maschinentyp, vorhandene Steuerung, elektrische Einbindung, Schutzkonzept und gewünschter Ablauf müssen geprüft werden. Erst danach lässt sich der sinnvolle Umfang bestimmen.',
+      'Nein. Maschinentyp, Steuerung, elektrische Einbindung, Schutzkonzept und gewünschter Ablauf müssen geprüft werden. Danach bestimmen wir den sinnvollen Umfang.',
   },
   {
     question: 'Können vorhandene Ausweise genutzt werden?',
     answer:
-      'Je nach Karten-, Leser- und Identitätssystem können vorhandene Identmedien eingebunden werden. Die konkrete Kompatibilität und benötigten Schnittstellen prüfen wir für den Standort.',
+      'Oft ja. Welche Identmedien eingebunden werden können, hängt vom Karten-, Leser- und Identitätssystem ab. Kompatibilität und Schnittstellen prüfen wir für den Standort.',
   },
   {
     question: 'Ist Mardu eine sicherheitsgerichtete Steuerung?',
@@ -487,21 +485,21 @@ export const faqItems = [
   {
     question: 'Was passiert bei Netzwerk-, Server- oder Funkproblemen?',
     answer:
-      'Die Berechtigungsentscheidung läuft lokal auf der Mardu-Basisstation oder einem lokalen Server. Ein Internetausfall stoppt den vorgesehenen Betrieb deshalb nicht automatisch. Verhalten bei Funk- oder Geräteausfällen, zulässige Zustände und Rückfallebenen werden für jede Ressource im Projekt festgelegt und geprüft.',
+      'Freigaben laufen lokal auf der Mardu-Basisstation oder einem lokalen Server. Ein Internetausfall stoppt den Betrieb deshalb nicht automatisch. Zulässige Zustände und Rückfallebenen legen wir je Ressource fest.',
   },
   {
     question: 'Warum nutzt Mardu IP500 statt Werkstatt-WLAN?',
     answer:
-      'Mardu-Geräte kommunizieren über ein eigenständiges IP500-Funknetz. Dadurch ist für Maschinen- und Türfreigaben weder das Werkstatt-WLAN noch eine Freigabe des lokalen WLANs erforderlich. Funkabdeckung, Redundanz und die konkrete lokale Architektur werden vor der Einführung geprüft.',
+      'Mardu-Geräte kommunizieren über ein eigenes IP500-Funknetz. Für Maschinen- und Türfreigaben ist deshalb kein Werkstatt-WLAN erforderlich. Abdeckung, Redundanz und lokale Architektur prüfen wir vorab.',
   },
   {
     question: 'Wie unterstützt Mardu bei Betreiberpflichten und Nachweisen?',
     answer:
-      'Mardu verknüpft dokumentierte Unterweisungen und Qualifikationen mit Freigaben und protokolliert vereinbarte Nutzungsereignisse. Das erleichtert die Nachhaltung und Nachweisführung in Prozessen rund um Betriebssicherheit, DGUV-Vorgaben, Verkehrssicherung und Versicherung. Mardu ersetzt keine Gefährdungsbeurteilung, Rechtsberatung oder technische Schutzeinrichtung.',
+      'Mardu verbindet dokumentierte Qualifikationen mit Freigaben und vereinbarten Nutzungsereignissen. Das erleichtert Nachweise rund um Betriebssicherheit, DGUV, Verkehrssicherung und Versicherung. Gefährdungsbeurteilung, Rechtsberatung und Schutzeinrichtungen ersetzt Mardu nicht.',
   },
   {
     question: 'Welche Daten werden protokolliert?',
     answer:
-      'Das richtet sich nach dem vereinbarten Zweck. Rollen, Zugriffe, Aufbewahrung und Löschung werden im Projekt konkretisiert. Auswertungen zu Energie, Auslastung oder Auffälligkeiten sind kein pauschal aktivierter Standard.',
+      'Protokolliert werden nur die für den vereinbarten Zweck benötigten Daten. Rollen, Zugriffe, Aufbewahrung und Löschung werden projektbezogen festgelegt. Auswertungen zu Energie oder Auslastung sind kein pauschal aktivierter Standard.',
   },
 ] as const;

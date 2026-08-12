@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { Homepage } from '@/features/homepage/homepage';
 
-const title = 'Zugang zu Maschine, Tür und Schranke. Zentral geregelt.';
+const title = 'Maschine, Tür und Schranke. Zentral geregelt.';
 const description =
-  'Mardu verbindet Maschinenfreigabe, Gebäudezutritt und Zufahrtssteuerung mit zentraler Verwaltung für Identitäten, Berechtigungen und Ereignisse.';
+  'Mardu verbindet Maschinenfreigaben, Gebäudezutritt und Zufahrten mit einer zentralen Verwaltung für Identitäten und Berechtigungen.';
 
 export const metadata: Metadata = {
   title,

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 import { Check, FileText, Mail } from "lucide-react";
 import { ScrollReveal } from "@mardu/ui/components/motion/scroll-reveal";
 import { Overline } from "@mardu/ui/components/typography";
@@ -60,6 +60,7 @@ export default function WhitepaperSection({
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -187,7 +188,7 @@ export default function WhitepaperSection({
 
               <motion.div
                 className="relative z-10 flex aspect-3/4 w-full max-w-sm items-center justify-center overflow-hidden rounded-xl border border-border bg-card shadow-xl"
-                whileHover={{ y: -5 }}
+                whileHover={shouldReduceMotion ? undefined : { y: -5 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 {coverImageSrc ? (

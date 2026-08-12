@@ -244,20 +244,67 @@
     display: block;
     opacity: 0;
     transform: translateY(-0.28em);
-    animation: homepage-access-cycle 8s ease-in-out infinite;
-    will-change: opacity, transform;
+    animation: homepage-access-cycle-middle 2s ease-in-out both;
+  }
+
+  .homepage-access-cycle__item:first-child {
+    animation-name: homepage-access-cycle-first;
   }
 
   .homepage-access-cycle__item:nth-child(2) {
-    animation-delay: 2s;
+    animation-delay: 1.75s;
   }
 
   .homepage-access-cycle__item:nth-child(3) {
-    animation-delay: 4s;
+    animation-delay: 3.5s;
   }
 
   .homepage-access-cycle__item:nth-child(4) {
-    animation-delay: 6s;
+    animation: homepage-access-cycle-final 1.1s 5.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .homepage-hero-panel::before {
+    position: absolute;
+    inset: 0;
+    content: '';
+    background: color-mix(in srgb, var(--mardu-purple) 9%, transparent);
+    clip-path: inset(0 100% 0 0);
+    animation: homepage-hero-panel-reveal 900ms cubic-bezier(0.22, 1, 0.36, 1) 80ms forwards;
+  }
+
+  .homepage-hero-heading {
+    animation: homepage-hero-heading-reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+  }
+
+  .homepage-hero-entry {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: homepage-hero-entry-reveal 650ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .homepage-hero-entry--actions {
+    animation-delay: 260ms;
+  }
+
+  .homepage-hero-entry--trust {
+    animation-delay: 380ms;
+  }
+
+  .homepage-hero-media::after {
+    position: absolute;
+    inset: 0;
+    z-index: 15;
+    pointer-events: none;
+    content: '';
+    border: 1px solid rgb(255 255 255 / 24%);
+    background: linear-gradient(110deg, rgb(167 139 250 / 10%), transparent 48%);
+    clip-path: inset(0 100% 0 0);
+    animation: homepage-hero-media-reveal 900ms cubic-bezier(0.22, 1, 0.36, 1) 120ms forwards;
+  }
+
+  .homepage-hero-image {
+    transform: scale(1.02);
+    animation: homepage-hero-image-settle 1.2s cubic-bezier(0.22, 1, 0.36, 1) 120ms forwards;
   }
 
   .contact-editorial-form form {
@@ -302,22 +349,108 @@
   }
 }
 
-@keyframes homepage-access-cycle {
+@keyframes homepage-access-cycle-first {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(0.28em);
+  }
+}
+
+@keyframes homepage-access-cycle-middle {
   0% {
     opacity: 0;
     transform: translateY(-0.28em);
   }
 
-  6%,
-  22% {
+  20%,
+  70% {
     opacity: 1;
     transform: translateY(0);
   }
 
-  31%,
   100% {
     opacity: 0;
     transform: translateY(0.28em);
+  }
+}
+
+@keyframes homepage-access-cycle-final {
+  0% {
+    opacity: 0;
+    transform: translateY(-0.28em);
+  }
+
+  30%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes homepage-hero-panel-reveal {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes homepage-hero-heading-reveal {
+  from {
+    transform: translateY(14px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes homepage-hero-entry-reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes homepage-hero-media-reveal {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes homepage-hero-image-settle {
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes sticky-story-mobile-reveal {
+  from {
+    opacity: 0.08;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .sticky-story-step {
+      animation: sticky-story-mobile-reveal linear both;
+      animation-range: entry 22% entry 62%;
+      animation-timeline: view();
+    }
   }
 }
 
@@ -349,5 +482,16 @@
   .homepage-access-cycle__item:first-child {
     display: block;
     opacity: 1;
+  }
+
+  .homepage-hero-panel::before,
+  .homepage-hero-heading,
+  .homepage-hero-entry,
+  .homepage-hero-media::after,
+  .homepage-hero-image {
+    opacity: 1;
+    animation: none;
+    clip-path: none;
+    transform: none;
   }
 }

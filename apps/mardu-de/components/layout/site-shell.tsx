@@ -10,8 +10,6 @@ import {
   MARDU_FOOTER_MODEL_PATH,
   MARDU_LOGO_DARK_PATH,
   MARDU_LOGO_LIGHT_PATH,
-  MARDU_MOBILE_MENU_CLOSE_ICON_PATH,
-  MARDU_MOBILE_MENU_ICON_PATH,
   MARDU_WORDMARK_DARK_PATH,
 } from '@/lib/brand-assets';
 
@@ -73,8 +71,6 @@ export default function SiteShell({ children }: { children: ReactNode }) {
           logoAlt: 'Zur Mardu-Startseite',
           logoWidth: 156,
           logoHeight: 44,
-          mobileMenuIconSrc: MARDU_MOBILE_MENU_ICON_PATH,
-          mobileMenuCloseIconSrc: MARDU_MOBILE_MENU_CLOSE_ICON_PATH,
         },
         items: defaultHeaderItems,
         cta: {

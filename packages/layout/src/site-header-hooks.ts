@@ -51,6 +51,66 @@ export function useMeasuredHeaderHeight(
   return height;
 }
 
+export function useHeaderNavigationFit(
+  navigationRef: React.RefObject<HTMLElement | null>,
+  brandRef: React.RefObject<HTMLElement | null>,
+  desktopContentRef: React.RefObject<HTMLElement | null>,
+  safetyGap = 32,
+) {
+  const [compact, setCompact] = React.useState(true);
+
+  React.useLayoutEffect(() => {
+    const navigation = navigationRef.current;
+    const brand = brandRef.current;
+    const desktopContent = desktopContentRef.current;
+    if (!navigation || !brand || !desktopContent) return;
+
+    let frame = 0;
+    let cancelled = false;
+
+    const measure = () => {
+      frame = 0;
+      const navigationStyle = window.getComputedStyle(navigation);
+      const horizontalPadding =
+        Number.parseFloat(navigationStyle.paddingLeft) +
+        Number.parseFloat(navigationStyle.paddingRight);
+      const availableWidth = navigation.clientWidth - horizontalPadding;
+      const requiredWidth =
+        Math.ceil(brand.getBoundingClientRect().width) +
+        Math.ceil(desktopContent.scrollWidth) +
+        safetyGap;
+      const nextCompact = requiredWidth > availableWidth;
+
+      setCompact((current) =>
+        current === nextCompact ? current : nextCompact,
+      );
+    };
+
+    const scheduleMeasure = () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(measure);
+    };
+
+    const resizeObserver = new ResizeObserver(scheduleMeasure);
+    resizeObserver.observe(navigation);
+    resizeObserver.observe(brand);
+    resizeObserver.observe(desktopContent);
+    scheduleMeasure();
+
+    void document.fonts?.ready.then(() => {
+      if (!cancelled) scheduleMeasure();
+    });
+
+    return () => {
+      cancelled = true;
+      if (frame) window.cancelAnimationFrame(frame);
+      resizeObserver.disconnect();
+    };
+  }, [brandRef, desktopContentRef, navigationRef, safetyGap]);
+
+  return compact;
+}
+
 export function useMobileMenuFocusTrap(
   open: boolean,
   headerRef: React.RefObject<HTMLElement | null>,

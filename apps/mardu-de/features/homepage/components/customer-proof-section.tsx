@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@mardu/ui/lib/utils';
 import { ArrowUpRight } from 'lucide-react';
+import { ScrollReveal } from '@mardu/ui/components/motion/scroll-reveal';
 import { customerProof } from '../homepage-content';
 
 export function CustomerProofSection() {
@@ -26,9 +27,10 @@ export function CustomerProofSection() {
           </ul>
         </div>
 
-        <div
+        <ScrollReveal
           className="grid grid-cols-2 gap-x-7 gap-y-7 sm:grid-cols-3 xl:-mt-1 xl:grid-cols-4"
           aria-hidden="true"
+          distance={28}
         >
           {customerProof.partners.map((partner) => {
             const isRotated = partner.presentation === 'rotated-monochrome';
@@ -61,7 +63,7 @@ export function CustomerProofSection() {
               </div>
             );
           })}
-        </div>
+        </ScrollReveal>
 
         <div className="xl:pl-4">
           <p className="max-w-[29rem] text-base leading-snug text-white">

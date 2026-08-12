@@ -132,6 +132,7 @@ export {
 export {
   default as StickyStorySection,
   type StickyStoryItem,
+  type StickyStoryMotionMode,
   type StickyStorySectionProps,
 } from "./sticky-story-section";
 export {

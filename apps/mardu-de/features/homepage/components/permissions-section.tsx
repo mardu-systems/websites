@@ -9,21 +9,19 @@ export function PermissionsSection() {
       eyebrow="[03] Identität und Berechtigung"
       title={
         <>
-          Eine Identität. <EditorialAccent>Klare Berechtigungen.</EditorialAccent> Viele Zugänge.
+          Zentral geändert. <EditorialAccent>Am Zugang wirksam.</EditorialAccent>
         </>
       }
       intro={
         <p>
-          Verantwortliche ordnen Personen, Rollen, Qualifikationen und Bereiche zentral zu.{' '}
-          <strong className="font-medium text-foreground/82">
-            Am Zugangspunkt wird daraus eine verständliche Entscheidung
-          </strong>{' '}
-          – passend zur jeweiligen Ressource und zum vereinbarten Betriebsmodell.
+          Personen, Rollen und Qualifikationen zentral verwalten. Am Zugang wird daraus Freigabe
+          oder Ablehnung.
         </p>
       }
       items={permissionsStory}
       nextSectionId="nutzen"
       compact
+      motionMode="continuous"
     />
   );
 }

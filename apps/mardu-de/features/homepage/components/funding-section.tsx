@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { ScrollReveal } from '@mardu/ui/components/motion/scroll-reveal';
 import { fundingProof } from '../homepage-content';
 
 export function FundingSection() {
@@ -8,7 +9,10 @@ export function FundingSection() {
       aria-labelledby="funding-title"
       className="scroll-mt-24 border-t border-border bg-background py-16 md:py-20 xl:py-24"
     >
-      <div className="mardu-container grid gap-12 xl:grid-cols-[0.17fr_0.42fr_0.41fr] xl:items-center xl:gap-10">
+      <ScrollReveal
+        className="mardu-container grid gap-12 xl:grid-cols-[0.17fr_0.42fr_0.41fr] xl:items-center xl:gap-10"
+        distance={28}
+      >
         <h2
           id="funding-title"
           className="text-xs font-normal uppercase tracking-[0.18em] text-muted-foreground"
@@ -34,7 +38,7 @@ export function FundingSection() {
         <p className="max-w-[46rem] text-base leading-relaxed text-muted-foreground">
           {fundingProof.description}
         </p>
-      </div>
+      </ScrollReveal>
     </section>
   );
 }
