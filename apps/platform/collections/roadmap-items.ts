@@ -11,10 +11,16 @@ const formatSlug = (value: string): string =>
 
 export const RoadmapItems: CollectionConfig = {
   slug: 'roadmap-items',
+  labels: {
+    singular: 'Roadmap-Eintrag',
+    plural: 'Roadmap-Einträge',
+  },
+  defaultSort: 'sortOrder',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'phaseLabel', 'timeLabel', 'status', 'sortOrder', 'updatedAt'],
     group: 'Roadmap',
+    listSearchableFields: ['title', 'slug', 'summary'],
   },
   versions: {
     drafts: true,

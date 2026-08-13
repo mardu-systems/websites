@@ -13,10 +13,16 @@ const formatSlug = (value: string): string =>
 
 export const Integrations: CollectionConfig = {
   slug: 'integrations',
+  labels: {
+    singular: 'Integration',
+    plural: 'Integrationen',
+  },
+  defaultSort: 'sortOrder',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'availabilityStatus', 'featured', 'sortOrder', 'updatedAt'],
     group: 'Integrationen',
+    listSearchableFields: ['title', 'slug', 'shortDescription', 'vendor'],
   },
   versions: {
     drafts: true,
@@ -255,7 +261,7 @@ export const Integrations: CollectionConfig = {
       admin: { position: 'sidebar' },
       options: [
         {
-          label: 'Available',
+          label: 'Verfügbar',
           value: 'available',
         },
         {
@@ -263,7 +269,7 @@ export const Integrations: CollectionConfig = {
           value: 'beta',
         },
         {
-          label: 'Planned',
+          label: 'Geplant',
           value: 'planned',
         },
       ],

@@ -11,10 +11,16 @@ const formatSlug = (value: string): string =>
 
 export const ProductTechnologies: CollectionConfig = {
   slug: 'product-technologies',
+  labels: {
+    singular: 'Technologie',
+    plural: 'Technologien',
+  },
+  defaultSort: 'sortOrder',
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'sortOrder', 'updatedAt'],
     group: 'Katalog',
+    listSearchableFields: ['name', 'slug'],
   },
   versions: {
     drafts: true,

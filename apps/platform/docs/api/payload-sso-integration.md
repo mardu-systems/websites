@@ -1,12 +1,22 @@
 # Payload OIDC SSO Integration
 
-Diese Datei dokumentiert den OIDC-SSO-Vertrag fuer den Payload Admin Login.
+Diese Datei dokumentiert den OIDC-SSO-Vertrag für den Payload Admin Login.
 
 ## Ziel
 
 - Login in `/admin` über externen Identity Provider (OIDC).
 - Kompatibel mit Keycloak, Auth0, Okta, Azure Entra ID.
-- Bun-basiertes Setup ohne zusaetzlichen Auth-Proxy.
+- Bun-basiertes Setup ohne zusätzlichen Auth-Proxy.
+
+## Admin-Oberfläche
+
+- Die Oberfläche ist deutsch lokalisiert und verwendet die Mardu-Marke in Titel, Favicon,
+  Login und Navigation.
+- Bei aktiver OIDC-Konfiguration ist Mardu SSO der primäre Login-Weg. Die lokale
+  E-Mail-/Passwort-Anmeldung bleibt als Notfallzugang verfügbar.
+- Das Dashboard zeigt ausschließlich aggregierte operative Kennzahlen und verlinkt auf
+  gefilterte Payload-Listen. Es verändert keine Datensätze.
+- Datumswerte werden in der Zeitzone `Europe/Berlin` dargestellt.
 
 ## Endpunkte
 
@@ -37,7 +47,7 @@ Kanonische Typen:
 
 ### `GET /api/sso/login`
 
-- `returnTo` (optional): Relativer Pfad fuer Redirect nach erfolgreichem Login, default `/admin`.
+- `returnTo` (optional): Relativer Pfad für Redirect nach erfolgreichem Login, default `/admin`.
 
 ### `GET /api/sso/callback`
 
@@ -52,7 +62,7 @@ Kanonische Typen:
 ### `GET /api/sso/debug`
 
 - Kein Input.
-- Gibt Debug-Zustand fuer Cookies/Session/User-Lookup zurueck.
+- Gibt Debug-Zustand für Cookies/Session/User-Lookup zurück.
 - Nur aktiv in `development` mit `OIDC_DEBUG=true`, sonst `404`.
 
 ## Laufzeit-Matrix
@@ -65,7 +75,7 @@ Kanonische Typen:
   - Passwort-Login bleibt verfuegbar.
 - Debug in Development:
   - `[OIDC]` Logs aktiv bei `OIDC_DEBUG=true`.
-  - `/api/sso/debug` verfuegbar.
+  - `/api/sso/debug` verfügbar.
 - Debug in Production:
   - keine OIDC-Debug-Logs.
   - `/api/sso/debug` liefert `404`.

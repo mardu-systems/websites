@@ -13,7 +13,7 @@ export function AdminSSOLogoutButton({ tabIndex }: LogoutButtonProps) {
       href="/api/sso/logout?redirect=/admin/login"
       tabIndex={tabIndex}
     >
-      Abmelden (OIDC Session)
+      Abmelden
     </a>
   );
 }

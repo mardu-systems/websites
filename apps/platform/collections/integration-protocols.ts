@@ -10,10 +10,16 @@ const formatSlug = (value: string): string =>
 
 export const IntegrationProtocols: CollectionConfig = {
   slug: 'integration-protocols',
+  labels: {
+    singular: 'Protokoll',
+    plural: 'Protokolle',
+  },
+  defaultSort: 'sortOrder',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'badgeStyle', 'sortOrder', 'updatedAt'],
     group: 'Integrationen',
+    listSearchableFields: ['title', 'slug'],
   },
   access: {
     read: () => true,
@@ -69,11 +75,11 @@ export const IntegrationProtocols: CollectionConfig = {
           value: 'neutral',
         },
         {
-          label: 'Success',
+          label: 'Erfolg',
           value: 'success',
         },
         {
-          label: 'Warn',
+          label: 'Warnung',
           value: 'warn',
         },
         {

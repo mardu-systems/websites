@@ -11,10 +11,16 @@ const formatSlug = (value: string): string =>
 
 export const ProductCarriers: CollectionConfig = {
   slug: 'product-carriers',
+  labels: {
+    singular: 'Produktträger',
+    plural: 'Produktträger',
+  },
+  defaultSort: 'sortOrder',
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'sortOrder', 'updatedAt'],
     group: 'Katalog',
+    listSearchableFields: ['name', 'slug'],
   },
   versions: {
     drafts: true,

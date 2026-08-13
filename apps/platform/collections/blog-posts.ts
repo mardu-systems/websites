@@ -11,10 +11,16 @@ const formatSlug = (value: string): string =>
 
 export const BlogPosts: CollectionConfig = {
   slug: 'blog-posts',
+  labels: {
+    singular: 'Blogbeitrag',
+    plural: 'Blogbeiträge',
+  },
+  defaultSort: '-updatedAt',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'featured', 'publishedAt', 'updatedAt'],
     group: 'Blog',
+    listSearchableFields: ['title', 'slug', 'excerpt'],
   },
   versions: {
     drafts: true,
@@ -108,7 +114,8 @@ export const BlogPosts: CollectionConfig = {
       required: true,
       maxLength: 320,
       admin: {
-        description: 'Kurzer, prägnanter Anreißer für Suchergebnisse und Listen (max. 320 Zeichen).',
+        description:
+          'Kurzer, prägnanter Anreißer für Suchergebnisse und Listen (max. 320 Zeichen).',
       },
     },
     {
@@ -117,7 +124,8 @@ export const BlogPosts: CollectionConfig = {
       relationTo: 'media',
       required: true,
       admin: {
-        description: 'Das Hauptbild des Blog-Beitrag. Empfohlen: 16:9 Querformat, mind. 1200px Breite.',
+        description:
+          'Das Hauptbild des Blog-Beitrag. Empfohlen: 16:9 Querformat, mind. 1200px Breite.',
       },
     },
     {

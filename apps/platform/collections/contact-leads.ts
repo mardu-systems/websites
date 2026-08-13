@@ -2,10 +2,16 @@ import type { CollectionConfig, CollectionSlug } from 'payload';
 
 export const ContactLeads: CollectionConfig = {
   slug: 'contact-leads',
+  labels: {
+    singular: 'Kontaktanfrage',
+    plural: 'Kontaktanfragen',
+  },
+  defaultSort: '-createdAt',
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'email', 'site', 'source', 'twentySyncStatus', 'createdAt'],
     group: 'CRM / Leads',
+    listSearchableFields: ['name', 'email', 'company', 'phone'],
   },
   access: {
     read: ({ req }) => Boolean(req.user),
@@ -82,10 +88,10 @@ export const ContactLeads: CollectionConfig = {
               defaultValue: 'pending',
               admin: { readOnly: true, width: '50%' },
               options: [
-                { label: 'Pending', value: 'pending' },
-                { label: 'Synced', value: 'synced' },
-                { label: 'Failed', value: 'failed' },
-                { label: 'Skipped', value: 'skipped' },
+                { label: 'Ausstehend', value: 'pending' },
+                { label: 'Synchronisiert', value: 'synced' },
+                { label: 'Fehlgeschlagen', value: 'failed' },
+                { label: 'Übersprungen', value: 'skipped' },
               ],
             },
             {
@@ -109,9 +115,7 @@ export const ContactLeads: CollectionConfig = {
       required: true,
       defaultValue: 'mardu-de',
       admin: { position: 'sidebar' },
-      options: [
-        { label: 'mardu.de', value: 'mardu-de' },
-      ],
+      options: [{ label: 'mardu.de', value: 'mardu-de' }],
     },
     {
       name: 'source',
@@ -144,9 +148,9 @@ export const ContactLeads: CollectionConfig = {
       defaultValue: 'pending',
       admin: { position: 'sidebar', readOnly: true },
       options: [
-        { label: 'Pending', value: 'pending' },
-        { label: 'Sent', value: 'sent' },
-        { label: 'Failed', value: 'failed' },
+        { label: 'Ausstehend', value: 'pending' },
+        { label: 'Versendet', value: 'sent' },
+        { label: 'Fehlgeschlagen', value: 'failed' },
       ],
     },
   ],

@@ -1,0 +1,125 @@
+.mardu-admin-dashboard {
+  border-bottom: 1px solid var(--theme-elevation-150);
+  margin-bottom: 2rem;
+  padding: 1.5rem 0 2rem;
+}
+
+.mardu-admin-dashboard__heading {
+  align-items: flex-start;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.mardu-admin-dashboard__heading h1 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  margin: 0 0 0.65rem;
+}
+
+.mardu-admin-dashboard__heading p {
+  color: var(--theme-elevation-650);
+  margin: 0;
+  max-width: 44rem;
+}
+
+.mardu-admin-dashboard__eyebrow {
+  color: var(--mardu-orange, #ff5a1f) !important;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem !important;
+  text-transform: uppercase;
+}
+
+.mardu-admin-dashboard__actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.mardu-admin-dashboard__metrics {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 2rem;
+}
+
+.mardu-admin-dashboard__metric {
+  background: var(--theme-elevation-50);
+  border: 1px solid var(--theme-elevation-150);
+  color: var(--theme-text);
+  display: grid;
+  gap: 0.45rem;
+  min-height: 10.5rem;
+  padding: 1.25rem;
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.mardu-admin-dashboard__metric:hover {
+  background: var(--theme-elevation-100);
+  border-color: var(--theme-elevation-300);
+  transform: translateY(-2px);
+}
+
+.mardu-admin-dashboard__metric:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--mardu-orange, #ff5a1f) 35%, transparent);
+  outline-offset: 3px;
+}
+
+.mardu-admin-dashboard__metric--attention {
+  border-color: color-mix(in srgb, var(--theme-error-500) 45%, var(--theme-elevation-150));
+}
+
+.mardu-admin-dashboard__metric-value {
+  font-size: 2.25rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.mardu-admin-dashboard__metric strong {
+  line-height: 1.3;
+}
+
+.mardu-admin-dashboard__metric span:last-child {
+  color: var(--theme-elevation-650);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 1024px) {
+  .mardu-admin-dashboard__heading {
+    display: grid;
+  }
+
+  .mardu-admin-dashboard__metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .mardu-admin-dashboard {
+    padding-top: 0.75rem;
+  }
+
+  .mardu-admin-dashboard__actions,
+  .mardu-admin-dashboard__actions .btn {
+    width: 100%;
+  }
+
+  .mardu-admin-dashboard__metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .mardu-admin-dashboard__metric {
+    min-height: auto;
+  }
+}

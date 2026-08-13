@@ -3,10 +3,16 @@ import { buildSiteVisibilityField } from '@mardu/content-core';
 
 export const LegalPages: CollectionConfig = {
   slug: 'legal-pages',
+  labels: {
+    singular: 'Rechtliche Seite',
+    plural: 'Rechtliche Seiten',
+  },
+  defaultSort: 'title',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'pageKind', 'updatedAt'],
     group: 'System',
+    listSearchableFields: ['title', 'slug'],
   },
   versions: {
     drafts: true,
@@ -29,7 +35,7 @@ export const LegalPages: CollectionConfig = {
       type: 'tabs',
       tabs: [
         {
-          label: 'Content',
+          label: 'Inhalt',
           fields: [
             {
               name: 'title',
@@ -81,7 +87,8 @@ export const LegalPages: CollectionConfig = {
               type: 'textarea',
               maxLength: 240,
               admin: {
-                description: 'Eine kurze Beschreibung der Seite für Listenansichten und interne Zwecke (max. 240 Zeichen).',
+                description:
+                  'Eine kurze Beschreibung der Seite für Listenansichten und interne Zwecke (max. 240 Zeichen).',
               },
             },
             {

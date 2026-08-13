@@ -3,6 +3,7 @@ import { postgresAdapter } from '@payloadcms/db-postgres';
 import { mcpPlugin } from '@payloadcms/plugin-mcp';
 import { seoPlugin } from '@payloadcms/plugin-seo';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { de } from '@payloadcms/translations/languages/de';
 import migrations from '@/migrations/index.ts';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
@@ -53,6 +54,10 @@ export default buildConfig({
   }),
   email: createPayloadEmailAdapter(),
   editor: lexicalEditor(),
+  i18n: {
+    fallbackLanguage: 'de',
+    supportedLanguages: { de },
+  },
   collections: [
     Users,
     Media,
@@ -78,8 +83,10 @@ export default buildConfig({
     theme: 'light',
     components: {
       graphics: {
+        Icon: '/components/payload/admin-icon.tsx#AdminIcon',
         Logo: '/components/payload/admin-login-logo.tsx#AdminLoginLogo',
       },
+      beforeDashboard: ['/components/payload/admin-dashboard-overview.tsx#AdminDashboardOverview'],
       logout: {
         Button: '/components/payload/admin-sso-logout-button.tsx#AdminSSOLogoutButton',
       },
@@ -88,7 +95,24 @@ export default buildConfig({
     importMap: {
       baseDir: __dirname,
     },
+    dateFormat: 'dd.MM.yyyy',
+    meta: {
+      defaultOGImageType: 'off',
+      description: 'Interne Verwaltungsoberfläche für Inhalte, Katalog und Kontakte.',
+      icons: {
+        icon: '/favicon/favicon.svg',
+      },
+      titleSuffix: ' – Mardu Admin',
+    },
+    timezones: {
+      defaultTimezone: 'Europe/Berlin',
+      supportedTimezones: [{ label: 'Berlin', value: 'Europe/Berlin' }],
+    },
     livePreview: {
+      breakpoints: [
+        { height: 900, label: 'Desktop', name: 'desktop', width: 1440 },
+        { height: 844, label: 'Mobil', name: 'mobile', width: 390 },
+      ],
       url: ({ data, collectionConfig }) => {
         const site = Array.isArray(data?.sites) && data.sites.length > 0 ? data.sites[0] : '';
         let frontendBaseURL = 'http://localhost:3000';

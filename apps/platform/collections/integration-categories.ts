@@ -10,10 +10,16 @@ const formatSlug = (value: string): string =>
 
 export const IntegrationCategories: CollectionConfig = {
   slug: 'integration-categories',
+  labels: {
+    singular: 'Integrationskategorie',
+    plural: 'Integrationskategorien',
+  },
+  defaultSort: 'sortOrder',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'sortOrder', 'updatedAt'],
     group: 'Integrationen',
+    listSearchableFields: ['title', 'slug'],
   },
   access: {
     read: () => true,
