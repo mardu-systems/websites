@@ -21,6 +21,9 @@ const trustSignalIcons = [
   MapPinned,
 ] as const;
 
+const machineHeroImageSizes = '(max-width: 639px) 36rem, (max-width: 1279px) 57rem, 75rem';
+const doorHeroImageSizes = '(max-width: 639px) 27rem, (max-width: 1279px) 43rem, 56rem';
+
 export function HomepageHero() {
   return (
     <section
@@ -100,7 +103,7 @@ export function HomepageHero() {
                 fill
                 priority
                 loading="eager"
-                sizes="(max-width: 1279px) 50vw, 30vw"
+                sizes={machineHeroImageSizes}
                 className="object-cover object-[38%_center]"
               />
             </figure>
@@ -110,7 +113,7 @@ export function HomepageHero() {
                 alt="Mardu-Schließzylinder an einer Gebäudetür bei der Identifikation mit einem Transponder"
                 fill
                 loading="eager"
-                sizes="(max-width: 1279px) 50vw, 30vw"
+                sizes={doorHeroImageSizes}
                 className="object-cover object-[60%_center]"
               />
             </figure>
