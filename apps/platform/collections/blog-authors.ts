@@ -10,10 +10,16 @@ const formatSlug = (value: string): string =>
 
 export const BlogAuthors: CollectionConfig = {
   slug: 'blog-authors',
+  labels: {
+    singular: 'Autor',
+    plural: 'Autoren',
+  },
+  defaultSort: 'name',
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'slug', 'updatedAt'],
     group: 'Blog',
+    listSearchableFields: ['name', 'slug'],
   },
   access: {
     read: () => true,

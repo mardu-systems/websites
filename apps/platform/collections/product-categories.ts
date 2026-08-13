@@ -11,10 +11,16 @@ const formatSlug = (value: string): string =>
 
 export const ProductCategories: CollectionConfig = {
   slug: 'product-categories',
+  labels: {
+    singular: 'Produktkategorie',
+    plural: 'Produktkategorien',
+  },
+  defaultSort: 'sortOrder',
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'featured', 'sortOrder', 'updatedAt'],
     group: 'Katalog',
+    listSearchableFields: ['name', 'slug'],
   },
   versions: {
     drafts: true,
@@ -94,7 +100,11 @@ export const ProductCategories: CollectionConfig = {
         {
           name: 'imageUrl',
           type: 'text',
-          admin: { width: '50%', description: 'Alternative externe Bild-URL.', placeholder: '/category.webp' },
+          admin: {
+            width: '50%',
+            description: 'Alternative externe Bild-URL.',
+            placeholder: '/category.webp',
+          },
         },
       ],
     },
@@ -117,7 +127,10 @@ export const ProductCategories: CollectionConfig = {
     {
       name: 'featured',
       type: 'checkbox',
-      admin: { position: 'sidebar', description: 'Hebt diese Kategorie auf der Übersichtsseite hervor.' },
+      admin: {
+        position: 'sidebar',
+        description: 'Hebt diese Kategorie auf der Übersichtsseite hervor.',
+      },
     },
     {
       name: 'sortOrder',

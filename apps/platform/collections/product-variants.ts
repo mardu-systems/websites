@@ -3,10 +3,16 @@ import { buildSiteVisibilityField } from '@mardu/content-core';
 
 export const ProductVariants: CollectionConfig = {
   slug: 'product-variants',
+  labels: {
+    singular: 'Produktvariante',
+    plural: 'Produktvarianten',
+  },
+  defaultSort: 'sortOrder',
   admin: {
     useAsTitle: 'label',
     defaultColumns: ['label', 'sortOrder', 'updatedAt'],
     group: 'Katalog',
+    listSearchableFields: ['label', 'slug', 'summary'],
   },
   versions: {
     drafts: true,

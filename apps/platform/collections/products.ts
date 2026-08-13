@@ -11,10 +11,16 @@ const formatSlug = (value: string): string =>
 
 export const Products: CollectionConfig = {
   slug: 'products',
+  labels: {
+    singular: 'Produkt',
+    plural: 'Produkte',
+  },
+  defaultSort: 'sortOrder',
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'availability', 'featured', 'sortOrder', 'updatedAt'],
     group: 'Katalog',
+    listSearchableFields: ['name', 'slug', 'tagline', 'summary'],
   },
   versions: {
     drafts: true,
@@ -339,15 +345,15 @@ export const Products: CollectionConfig = {
       admin: { position: 'sidebar' },
       options: [
         {
-          label: 'Available',
+          label: 'Verfügbar',
           value: 'available',
         },
         {
-          label: 'Lead Time',
+          label: 'Auf Anfrage',
           value: 'lead-time',
         },
         {
-          label: 'Project',
+          label: 'Projektgeschäft',
           value: 'project',
         },
       ],

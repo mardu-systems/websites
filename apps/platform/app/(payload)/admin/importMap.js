@@ -28,7 +28,9 @@ import { MetaImageComponent as MetaImageComponent_a8a977ebc872c5d5ea7ee689724c08
 import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { AdminSSOLogoutButton as AdminSSOLogoutButton_45f17344c43c73d2ad5a734675c92615 } from '../../../components/payload/admin-sso-logout-button.tsx'
 import { AdminAuthStatus as AdminAuthStatus_fab6018a6684adbe611cf33a1e03848e } from '../../../components/payload/admin-auth-status.tsx'
+import { AdminIcon as AdminIcon_3575d0a61d56caee610df3763621a4fd } from '../../../components/payload/admin-icon.tsx'
 import { AdminLoginLogo as AdminLoginLogo_548c365f468b65bf1c8ddcdae4e11b2c } from '../../../components/payload/admin-login-logo.tsx'
+import { AdminDashboardOverview as AdminDashboardOverview_c8eeb3609f213f68a892fc36a3bd6ea3 } from '../../../components/payload/admin-dashboard-overview.tsx'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -63,6 +65,8 @@ export const importMap = {
   "@payloadcms/plugin-seo/client#PreviewComponent": PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "/components/payload/admin-sso-logout-button.tsx#AdminSSOLogoutButton": AdminSSOLogoutButton_45f17344c43c73d2ad5a734675c92615,
   "/components/payload/admin-auth-status.tsx#AdminAuthStatus": AdminAuthStatus_fab6018a6684adbe611cf33a1e03848e,
+  "/components/payload/admin-icon.tsx#AdminIcon": AdminIcon_3575d0a61d56caee610df3763621a4fd,
   "/components/payload/admin-login-logo.tsx#AdminLoginLogo": AdminLoginLogo_548c365f468b65bf1c8ddcdae4e11b2c,
+  "/components/payload/admin-dashboard-overview.tsx#AdminDashboardOverview": AdminDashboardOverview_c8eeb3609f213f68a892fc36a3bd6ea3,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

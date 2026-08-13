@@ -10,10 +10,16 @@ const formatSlug = (value: string): string =>
 
 export const BlogCategories: CollectionConfig = {
   slug: 'blog-categories',
+  labels: {
+    singular: 'Blog-Kategorie',
+    plural: 'Blog-Kategorien',
+  },
+  defaultSort: 'title',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'updatedAt'],
     group: 'Blog',
+    listSearchableFields: ['title', 'slug'],
   },
   access: {
     read: () => true,

@@ -11,10 +11,16 @@ const formatSlug = (value: string): string =>
 
 export const Solutions: CollectionConfig = {
   slug: 'solutions',
+  labels: {
+    singular: 'Lösung',
+    plural: 'Lösungen',
+  },
+  defaultSort: '-updatedAt',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'featured', 'publishedAt', 'updatedAt'],
     group: 'Katalog',
+    listSearchableFields: ['title', 'slug', 'summary'],
   },
   versions: {
     drafts: true,
@@ -272,8 +278,8 @@ export const Solutions: CollectionConfig = {
                       type: 'select',
                       admin: { width: '50%', description: 'Ausrichtung des Bildes.' },
                       options: [
-                        { label: 'Left', value: 'left' },
-                        { label: 'Right', value: 'right' },
+                        { label: 'Links', value: 'left' },
+                        { label: 'Rechts', value: 'right' },
                       ],
                     },
                   ],
