@@ -63,10 +63,11 @@ export function ConnectAppSection() {
                 eyebrow="Mardu Connect App"
                 title={
                   <>
-                    Ohne extra Hardware. <EditorialAccent>Zugangs-Tag beschreiben.</EditorialAccent>
+                    Ohne zusätzliches Schreibgerät.{' '}
+                    <EditorialAccent>Zugangs-Tags per Smartphone ausgeben.</EditorialAccent>
                   </>
                 }
-                intro={<p>Person auswählen, QR-Code scannen, Zugangs-Tag beschreiben. Fertig.</p>}
+                intro={<p>Person auswählen, QR-Code scannen, Tag ans Smartphone halten. Fertig.</p>}
                 layout="stacked"
                 titleClassName="mardu-homepage-section-title max-w-[15ch]"
                 introClassName="text-base"
@@ -81,7 +82,7 @@ export function ConnectAppSection() {
                   href={link.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex rounded-sm transition-opacity hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mardu-purple focus-visible:ring-offset-2"
+                  className="inline-flex min-h-11 items-center rounded-sm transition-opacity hover:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mardu-purple focus-visible:ring-offset-2"
                 >
                   <Image
                     src={link.badgeSrc}

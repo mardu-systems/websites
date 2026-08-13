@@ -2,7 +2,6 @@ import { EditorialFaqSection, SectionIntro } from '@mardu/sections';
 import { EditorialAccent } from '@mardu/ui/components/typography';
 import { ScrollReveal } from '@mardu/ui/components/motion/scroll-reveal';
 import { faqItems, rolloutSteps } from '../homepage-content';
-import { FeatureCollectionSection } from './feature-collection-section';
 
 export function RolloutFaqSection() {
   const renderedFaqItems = faqItems.map((item) => ({
@@ -16,7 +15,7 @@ export function RolloutFaqSection() {
         <div className="mardu-container">
           <ScrollReveal distance={32}>
             <SectionIntro
-              eyebrow="[06] Schrittweise einführen"
+              eyebrow="[05] Schrittweise einführen"
               title={
                 <>
                   Klein starten. <EditorialAccent>Im Betrieb lernen.</EditorialAccent> Gezielt
@@ -57,8 +56,6 @@ export function RolloutFaqSection() {
           </ScrollReveal>
         </div>
       </section>
-
-      <FeatureCollectionSection />
 
       <EditorialFaqSection
         className="md:py-20"

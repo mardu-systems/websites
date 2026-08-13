@@ -10,13 +10,11 @@ import { BenefitLiftCard } from './benefit-lift-card';
 const benefitModelUrls = [
   '/models/benefits/qualification-check.glb',
   '/models/benefits/supervision-lock.glb',
-  '/models/benefits/evidence-proof.glb',
 ] as const;
 
 const benefitModelLabels = [
   'Interaktives 3D-Häkchen für eine bestätigte Qualifikation',
   'Interaktives 3D-Schloss für kontrollierte Freigaben',
-  'Interaktives 3D-Diagramm für nachvollziehbare Nachweise',
 ] as const;
 
 export function BenefitsUseCasesSection() {
@@ -26,10 +24,10 @@ export function BenefitsUseCasesSection() {
         <div className="mardu-container">
           <div className="max-w-[46rem]">
             <SectionIntro
-              eyebrow="[04] Nutzen im Betrieb"
+              eyebrow="[03] Nutzen im Betrieb"
               title={
                 <>
-                  Mehr Nutzung. <EditorialAccent>Weniger Freigabe-Routine.</EditorialAccent>
+                  Mehr Nutzung. <EditorialAccent>Weniger Routine.</EditorialAccent>
                 </>
               }
               intro={
@@ -46,7 +44,7 @@ export function BenefitsUseCasesSection() {
             />
           </div>
 
-          <div className="mt-14 grid border-y border-border lg:grid-cols-3">
+          <div className="mt-14 grid border-y border-border lg:grid-cols-2">
             {benefitItems.map((item, index) => {
               return (
                 <BenefitLiftCard
@@ -85,7 +83,7 @@ export function BenefitsUseCasesSection() {
       <section id="einsatzbereiche" className="scroll-mt-24 border-b border-border py-16 md:py-20">
         <div className="mardu-container">
           <SectionIntro
-            eyebrow="[05] Einsatzbereiche"
+            eyebrow="[04] Einsatzbereiche"
             title={
               <>
                 Für Werkstatt, Labor <EditorialAccent>und Campus.</EditorialAccent>
@@ -115,8 +113,15 @@ export function BenefitsUseCasesSection() {
                 sizes="(max-width: 1023px) 100vw, 50vw"
                 className="object-cover object-center"
               />
-              <figcaption className="absolute bottom-3 right-3 bg-black/55 px-2.5 py-1.5 text-xs leading-none text-white/78 backdrop-blur-sm">
-                Foto: Marcus Lenk · Pexels
+              <figcaption className="absolute bottom-3 right-3 bg-black/55 text-xs leading-none text-white/78 backdrop-blur-sm">
+                <a
+                  href="https://www.pexels.com/photo/university-building-in-berlin-18587776/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex min-h-11 items-center px-2.5 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white"
+                >
+                  Foto: Marcus Lenk · Pexels
+                </a>
               </figcaption>
             </figure>
           </div>

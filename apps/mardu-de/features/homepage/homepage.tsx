@@ -6,7 +6,6 @@ import { CustomerProofSection } from './components/customer-proof-section';
 import { FundingSection } from './components/funding-section';
 import { HomepageHero } from './components/homepage-hero';
 import { HomepageIndex } from './components/homepage-index';
-import { PermissionsSection } from './components/permissions-section';
 import { RolloutFaqSection } from './components/rollout-faq-section';
 import { SystemOverviewSection } from './components/system-overview-section';
 import type { SiteFeatureFlags } from '@mardu/site-config';
@@ -18,7 +17,6 @@ export function Homepage({ features }: { features: SiteFeatureFlags }) {
       <CustomerProofSection features={features} />
       <SystemOverviewSection />
       <AccessPointsSection />
-      <PermissionsSection />
       <ConnectAppSection />
       <BenefitsUseCasesSection />
       <ComplianceSection />

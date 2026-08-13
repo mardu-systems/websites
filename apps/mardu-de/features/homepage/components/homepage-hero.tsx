@@ -43,8 +43,12 @@ export function HomepageHero() {
             </span>
           </h1>
 
+          <p className="homepage-hero-entry mt-7 max-w-[34rem] text-base leading-relaxed text-muted-foreground">
+            {homepageHero.description}
+          </p>
+
           <nav
-            className="homepage-hero-entry homepage-hero-entry--actions relative mt-10 max-w-[30rem] border-t border-border"
+            className="homepage-hero-entry homepage-hero-entry--actions relative mt-8 max-w-[30rem] border-t border-border"
             aria-label="Direkteinstiege"
           >
             {[homepageHero.primaryAction, homepageHero.secondaryAction].map((action, index) => (

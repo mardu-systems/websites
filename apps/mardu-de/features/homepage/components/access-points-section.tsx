@@ -51,12 +51,12 @@ export function AccessPointsSection() {
                       [{item.index}]
                     </span>
                     {item.imageCredit ? (
-                      <figcaption className="absolute bottom-2 right-2 bg-black/58 px-2 py-1 text-xs leading-none text-white/76 backdrop-blur-sm">
+                      <figcaption className="absolute bottom-2 right-2 bg-black/58 text-xs leading-none text-white/76 backdrop-blur-sm">
                         <a
                           href={item.imageCredit.href}
                           target="_blank"
                           rel="noreferrer"
-                          className="transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white"
+                          className="inline-flex min-h-11 items-center px-2 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white"
                         >
                           {item.imageCredit.label}
                         </a>

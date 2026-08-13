@@ -83,7 +83,7 @@ export function FooterSocialLink({
   const newTab = opensInNewTab(link.href);
   const className =
     variant === "editorial-index"
-      ? "inline-flex size-9 items-center justify-center border border-white/18 text-white/72 transition-colors hover:border-[var(--footer-accent,#b9a7ff)] hover:text-[var(--footer-accent,#b9a7ff)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--footer-accent,#b9a7ff)]"
+      ? "inline-flex size-11 items-center justify-center border border-white/18 text-white/72 transition-colors hover:border-[var(--footer-accent,#b9a7ff)] hover:text-[var(--footer-accent,#b9a7ff)] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--footer-accent,#b9a7ff)]"
       : theme === "dark"
         ? "inline-flex size-10 items-center justify-center rounded-full border border-white/20 bg-white/6 text-white/90 transition-colors hover:bg-white hover:text-neutral-950"
         : "inline-flex size-10 items-center justify-center rounded-full border border-black/12 bg-black/4 text-foreground/80 transition-colors hover:bg-black hover:text-white";

@@ -120,12 +120,12 @@ export function EditorialSiteFooter({
               <p className="mb-3 text-[0.6875rem] tracking-[0.08em] text-white/60">
                 Wissen & Recht
               </p>
-              <ul className="space-y-2 text-sm">
+              <ul className="text-sm">
                 {metaLinks.map((link) => (
                   <li key={`${link.label}:${link.href}`}>
                     <FooterLink
                       link={link}
-                      className="text-white/68 transition-colors hover:text-white"
+                      className="inline-flex min-h-11 items-center text-white/68 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--footer-accent,#b9a7ff)]"
                     />
                   </li>
                 ))}
@@ -134,7 +134,7 @@ export function EditorialSiteFooter({
                     <button
                       type="button"
                       onClick={() => onAction?.(action.id)}
-                      className="text-white/68 transition-colors hover:text-white"
+                      className="inline-flex min-h-11 items-center text-white/68 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--footer-accent,#b9a7ff)]"
                     >
                       {action.label}
                     </button>

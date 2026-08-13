@@ -43,34 +43,27 @@ export const homepageNavigation: ReadonlyArray<HomepageNavigationItem> = [
   {
     type: 'link',
     index: '03',
-    label: 'Berechtigungen',
-    description: 'Identität & Regeln',
-    href: '#berechtigungen',
-  },
-  {
-    type: 'link',
-    index: '04',
     label: 'Nutzen',
     description: 'Steuern & verstehen',
     href: '#nutzen',
   },
   {
     type: 'link',
-    index: '05',
+    index: '04',
     label: 'Einsatzbereiche',
     description: 'Lehre & Betrieb',
     href: '#einsatzbereiche',
   },
   {
     type: 'link',
-    index: '06',
+    index: '05',
     label: 'Einführung',
     description: 'Schrittweise starten',
     href: '#einfuehrung',
   },
   {
     type: 'link',
-    index: '07',
+    index: '06',
     label: 'Kontakt',
     description: 'Standortgespräch',
     href: '#kontakt',
@@ -78,6 +71,8 @@ export const homepageNavigation: ReadonlyArray<HomepageNavigationItem> = [
 ];
 
 export const homepageHero = {
+  description:
+    'Mardu verbindet Identitäten, Qualifikationen und Zeitregeln mit Maschinen, Türen und Zufahrten vor Ort.',
   primaryAction: { label: 'Standort besprechen', href: '/contact' },
   secondaryAction: { label: 'So funktioniert Mardu', href: '#system' },
   rotatingAccessPoints: ['Maschine', 'Tür', 'Schranke', 'Werkstatt'],
@@ -181,13 +176,13 @@ export const customerProof = {
 export const fundingProof = {
   label: 'Gefördert durch',
   description:
-    'Die Europäische Union fördert zusammen mit dem Bundesministerium für Wirtschaft und Klimaschutz über den Europäischen Sozialfonds Plus (ESF Plus) das Programm Existenzgründungen aus der Wissenschaft (EXIST) in Deutschland.',
+    'Die Europäische Union fördert zusammen mit dem Bundesministerium für Wirtschaft und Energie über den Europäischen Sozialfonds Plus (ESF Plus) das Programm Existenzgründungen aus der Wissenschaft (EXIST) in Deutschland.',
   logos: [
     {
-      src: '/logos/bmwk.svg',
-      alt: 'Bundesministerium für Wirtschaft und Klimaschutz',
-      width: 537,
-      height: 267,
+      src: '/logos/bmwe.png',
+      alt: 'Bundesministerium für Wirtschaft und Energie',
+      width: 600,
+      height: 300,
     },
     {
       src: '/logos/eu_esf.svg',
@@ -284,7 +279,7 @@ export const accessAreas: ReadonlyArray<
   {
     index: '02',
     label: 'Zutritt',
-    title: 'Ein Schließsystem arbeitet mit anderen Systemen zusammen',
+    title: 'Schließsysteme zentral verwalten',
     description:
       'Türen und Bereiche werden gemeinsam verwaltet. Bestehende Identitäts-, Gebäude- und Drittsysteme lassen sich über Schnittstellen anbinden.',
     imageSrc: '/landing/mardu-gebaeudezugang-tuere.webp',
@@ -293,7 +288,7 @@ export const accessAreas: ReadonlyArray<
   {
     index: '03',
     label: 'Zufahrt',
-    title: 'Rollen und Zeiten steuern Zufahrten',
+    title: 'Rollen und Zeitfenster steuern Zufahrten',
     description:
       'Fahrzeug- und Lieferzugänge können nach Person, Rolle, Bereich oder vorgesehenem Zeitfenster organisiert werden.',
     imageSrc: '/configurator/tor.jpg',
@@ -339,7 +334,7 @@ export const permissionSteps: ReadonlyArray<HomepageNumberedItem> = [
 
 export const benefitItems: ReadonlyArray<HomepageStatusItem> = [
   {
-    title: 'Nur passende Personen kommen weiter',
+    title: 'Nur berechtigte Personen erhalten eine Freigabe',
     description:
       'Unterweisungen, Qualifikationen, Rollen und Zeitregeln entscheiden gemeinsam, ob eine Maschine oder Tür freigegeben wird.',
   },
@@ -347,12 +342,6 @@ export const benefitItems: ReadonlyArray<HomepageStatusItem> = [
     title: 'Mehr Nutzung. Weniger Routine.',
     description:
       'Berechtigte Personen nutzen vorgesehene Ressourcen selbstständig. Kritische Freigaben können bei Bedarf ein Vier-Augen-Prinzip verlangen.',
-  },
-  {
-    title: 'Nachweise statt Listen',
-    description:
-      'Freigaben, abgelehnte Zugriffe und vereinbarte Nutzungszeiten werden zentral nachvollziehbar – für interne Compliance, Aufsicht und Versicherung.',
-    status: 'Compliance',
   },
 ];
 
@@ -382,7 +371,7 @@ export const useCases: ReadonlyArray<HomepageLinkedNumberedItem> = [
     index: '04',
     title: 'Makerspaces & offene Werkstätten',
     description:
-      'Längere Öffnungszeiten werden leichter planbar; dokumentierte Einweisungen, Freigaben und Zuständigkeiten schaffen Klarheit in rechtlichen Graubereichen.',
+      'Längere Öffnungszeiten werden leichter planbar; dokumentierte Einweisungen, Freigaben und Zuständigkeiten schaffen nachvollziehbare Abläufe.',
     href: '/solutions#solution-tab-makerspaces-und-offene-werkstaetten',
   },
 ];
@@ -529,7 +518,7 @@ export const faqItems = [
   {
     question: 'Welche Zugänge kann Mardu steuern?',
     answer:
-      'Mardu steuert CNC-Maschinen, Werkstattmaschinen, Türen, Tore, Schranken, Zufahrten, Schließfächer und weitere elektrisch schaltbare Ressourcen. Bestehende Steuerungen, Identmedien und Drittsysteme lassen sich je nach Schnittstelle einbinden.',
+      'Mardu kann die Bedienfreigabe geeigneter CNC- und Werkstattmaschinen sowie elektrisch angebundene Türen, Tore, Schranken, Zufahrten und Schließfächer steuern. Bestehende Steuerungen, Identmedien und Drittsysteme lassen sich je nach Schnittstelle einbinden.',
   },
   {
     question: 'Funktioniert Mardu mit jeder Maschine?',
@@ -550,20 +539,5 @@ export const faqItems = [
     question: 'Was passiert bei Netzwerk-, Server- oder Funkproblemen?',
     answer:
       'Freigaben laufen lokal auf der Mardu-Basisstation oder einem lokalen Server und bleiben damit unabhängig von einer dauerhaften Internetverbindung. Das vermaschte IP500-Funknetz kann Daten über alternative Funkwege weiterleiten. Zusätzliche Mardu-Gateways schaffen Redundanz und können Verfügbarkeit sowie Ausfallsicherheit erhöhen. Zulässige Zustände und Rückfallebenen legen wir je Ressource fest.',
-  },
-  {
-    question: 'Warum nutzt Mardu IP500 statt Werkstatt-WLAN?',
-    answer:
-      'Bei Freigaben zählt nicht eine hohe Datenrate, sondern dass wenige, entscheidende Daten zuverlässig ankommen. Deshalb ist Mardu nicht vom Werkstatt-WLAN abhängig, sondern nutzt ein eigenes IP500-Mesh auf 868 MHz und 2,4 GHz. Die vermaschte, verschlüsselte Kommunikation kann Daten über alternative Funkwege weiterreichen und schafft so eine robuste Grundlage für Maschinen- und Türfreigaben.',
-  },
-  {
-    question: 'Wie unterstützt Mardu bei Betreiberpflichten und Nachweisen?',
-    answer:
-      'Mardu macht nachvollziehbar, wer wann mit welcher Qualifikation eine Freigabe erhalten oder nicht erhalten hat. Protokolle lassen sich filtern, exportieren und als Bericht für interne Prüfungen, Aufsicht, Versicherungen oder DGUV-Nachweise bereitstellen. So bleiben Entscheidungen belegbar, statt in Listen und Einzelabsprachen zu verschwinden. Gefährdungsbeurteilung, Rechtsberatung und Schutzeinrichtungen bleiben Aufgabe der Verantwortlichen.',
-  },
-  {
-    question: 'Welche Daten werden protokolliert?',
-    answer:
-      'Protokolliert werden nur die für den vereinbarten Zweck benötigten Daten. Rollen, Zugriffe, Aufbewahrung und Löschung werden projektbezogen festgelegt. Auswertungen zu Energie oder Auslastung sind kein pauschal aktivierter Standard.',
   },
 ] as const;
