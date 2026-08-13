@@ -25,6 +25,7 @@ import { ProductTechnologies } from '@/collections/product-technologies.ts';
 import { ProductCarriers } from '@/collections/product-carriers.ts';
 import { Products } from '@/collections/products.ts';
 import { ProductVariants } from '@/collections/product-variants.ts';
+import { createPayloadEmailAdapter } from '@/lib/payload-email-adapter.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -50,6 +51,7 @@ export default buildConfig({
     migrationDir: './migrations',
     prodMigrations: migrations,
   }),
+  email: createPayloadEmailAdapter(),
   editor: lexicalEditor(),
   collections: [
     Users,
