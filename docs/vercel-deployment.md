@@ -32,20 +32,20 @@ Secrets werden ausschließlich in Vercel beziehungsweise in lokalen `.env.*.loca
 
 ### `websites-platform`
 
-| Variable                                                  | Production                                         | Preview                                 | Bedeutung                                                  |
-| --------------------------------------------------------- | -------------------------------------------------- | --------------------------------------- | ---------------------------------------------------------- |
-| `DATABASE_URI`                                            | erforderlich                                       | eigene Preview-Datenbank                | PostgreSQL-Verbindung                                      |
-| `PAYLOAD_SECRET`                                          | erforderlich                                       | eigener Wert                            | Signatur-/Payload-Secret                                   |
-| `PAYLOAD_PUBLIC_SERVER_URL`                               | `https://platform.mardu.de`                        | Platform-Preview-Origin                 | Öffentliche Payload-/Admin-URL                             |
-| `MARDU_PLATFORM_ORIGIN`                                   | `https://platform.mardu.de`                        | Platform-Preview-Origin                 | Links in Newsletter- und Lead-Flows                        |
-| `NEWSLETTER_SECRET`                                       | erforderlich                                       | eigener Wert                            | Signatur von Bestätigungs- und Abmelde-Tokens |
-| `RESEND_API_KEY`                                          | erforderlich                                       | Test-Key oder kontrollierter Versand    | E-Mail-Versand                                             |
-| `EMAIL_FROM` / `EMAIL_TO`                                 | erforderlich                                       | Test-Absender und internes Testpostfach | Absender und Lead-Empfänger                                |
-| `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` / `RECAPTCHA_SECRET_KEY` | erforderlich                                       | eigenes Test-Setup                      | Browser- und Serverteil der Abuse Protection               |
-| `BLOB_READ_WRITE_TOKEN`                                   | erforderlich, wenn Uploads über Vercel Blob laufen | eigener Preview-Store                   | Medien-Uploads                                             |
-| `OIDC_*`                                                  | als vollständige Gruppe, falls SSO aktiv ist       | separate Preview-Client-Konfiguration   | Payload-Admin-SSO                                          |
-| `TWENTY_*`                                                | optional                                           | optional/Testsystem                     | Nicht blockierende CRM-Synchronisation                     |
-| `MARDU_PLATFORM_ENABLE_*` / `FLAGS`                       | optional                                           | optional                                | Feature Flags                                              |
+| Variable                                                  | Production                                         | Preview                                 | Bedeutung                                            |
+| --------------------------------------------------------- | -------------------------------------------------- | --------------------------------------- | ---------------------------------------------------- |
+| `DATABASE_URI`                                            | erforderlich                                       | eigene Preview-Datenbank                | PostgreSQL-Verbindung                                |
+| `PAYLOAD_SECRET`                                          | erforderlich                                       | eigener Wert                            | Signatur-/Payload-Secret                             |
+| `PAYLOAD_PUBLIC_SERVER_URL`                               | `https://platform.mardu.de`                        | Platform-Preview-Origin                 | Öffentliche Payload-/Admin-URL                       |
+| `MARDU_PLATFORM_ORIGIN`                                   | `https://platform.mardu.de`                        | Platform-Preview-Origin                 | Links in Newsletter- und Lead-Flows                  |
+| `NEWSLETTER_SECRET`                                       | erforderlich                                       | eigener Wert                            | Signatur von Bestätigungs- und Abmelde-Tokens        |
+| `RESEND_API_KEY`                                          | erforderlich                                       | Test-Key oder kontrollierter Versand    | E-Mail-Versand einschließlich Payload-Passwort-Reset |
+| `EMAIL_FROM` / `EMAIL_TO`                                 | erforderlich                                       | Test-Absender und internes Testpostfach | Absender für Systemmails und Lead-Empfänger          |
+| `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` / `RECAPTCHA_SECRET_KEY` | erforderlich                                       | eigenes Test-Setup                      | Browser- und Serverteil der Abuse Protection         |
+| `BLOB_READ_WRITE_TOKEN`                                   | erforderlich, wenn Uploads über Vercel Blob laufen | eigener Preview-Store                   | Medien-Uploads                                       |
+| `OIDC_*`                                                  | als vollständige Gruppe, falls SSO aktiv ist       | separate Preview-Client-Konfiguration   | Payload-Admin-SSO                                    |
+| `TWENTY_*`                                                | optional                                           | optional/Testsystem                     | Nicht blockierende CRM-Synchronisation               |
+| `MARDU_PLATFORM_ENABLE_*` / `FLAGS`                       | optional                                           | optional                                | Feature Flags                                        |
 
 Vor jedem Release die Variablen getrennt pro Projekt und Environment prüfen:
 

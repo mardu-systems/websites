@@ -1,5 +1,11 @@
 import { randomBytes, createHash, createHmac, timingSafeEqual } from 'node:crypto';
-import { createLocalJWKSet, jwtVerify, SignJWT, type JSONWebKeySet } from 'jose';
+import {
+  createLocalJWKSet,
+  decodeProtectedHeader,
+  jwtVerify,
+  SignJWT,
+  type JSONWebKeySet,
+} from 'jose';
 
 export const OIDC_STATE_COOKIE = 'mardu_oidc_state';
 export const OIDC_SESSION_COOKIE = 'mardu_oidc_session';
@@ -9,6 +15,7 @@ const STATE_TTL_SECONDS = 60 * 10;
 
 type OidcDiscovery = {
   authorization_endpoint: string;
+  id_token_signing_alg_values_supported: string[];
   issuer: string;
   jwks_uri: string;
   token_endpoint: string;
@@ -39,7 +46,9 @@ type VerifiedOidcUser = {
 };
 
 export const isOidcEnabled = (): boolean => {
-  return Boolean(process.env.OIDC_ISSUER && process.env.OIDC_CLIENT_ID && process.env.OIDC_CLIENT_SECRET);
+  return Boolean(
+    process.env.OIDC_ISSUER && process.env.OIDC_CLIENT_ID && process.env.OIDC_CLIENT_SECRET,
+  );
 };
 
 export const isOidcConfiguredForUI = (): boolean => isOidcEnabled();
@@ -175,11 +184,7 @@ export const getExpiredSessionCookieOptions = () => {
 };
 
 const toBase64Url = (input: Buffer): string => {
-  return input
-    .toString('base64')
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=+$/g, '');
+  return input.toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
 };
 
 const createCodeVerifier = (): string => {
@@ -210,7 +215,8 @@ const sanitizeReturnTo = (returnTo?: string): string => {
 
 const getDiscoveryDocument = async (): Promise<OidcDiscovery> => {
   const issuer = getRequiredEnv('OIDC_ISSUER').replace(/\/$/, '');
-  const discoveryURL = getOptionalEnv('OIDC_DISCOVERY_URL') || `${issuer}/.well-known/openid-configuration`;
+  const discoveryURL =
+    getOptionalEnv('OIDC_DISCOVERY_URL') || `${issuer}/.well-known/openid-configuration`;
 
   const response = await fetch(discoveryURL, {
     cache: 'no-store',
@@ -226,8 +232,19 @@ const getDiscoveryDocument = async (): Promise<OidcDiscovery> => {
     throw new Error('OIDC discovery document is missing required endpoints.');
   }
 
+  const supportedSigningAlgorithms = Array.isArray(json.id_token_signing_alg_values_supported)
+    ? json.id_token_signing_alg_values_supported.filter(
+        (algorithm): algorithm is string => typeof algorithm === 'string',
+      )
+    : [];
+
+  if (supportedSigningAlgorithms.length === 0) {
+    throw new Error('OIDC discovery document is missing supported ID token signing algorithms.');
+  }
+
   return {
     authorization_endpoint: json.authorization_endpoint,
+    id_token_signing_alg_values_supported: supportedSigningAlgorithms,
     issuer: json.issuer,
     jwks_uri: getOptionalEnv('OIDC_JWKS_URI') || json.jwks_uri,
     token_endpoint: json.token_endpoint,
@@ -420,19 +437,54 @@ const exchangeCodeForTokens = async (args: {
   };
 };
 
-const verifyIDToken = async (args: {
-  idToken: string;
-  nonce: string;
-}): Promise<VerifiedOidcUser> => {
-  const discovery = await getDiscoveryDocument();
-  const clientID = getRequiredEnv('OIDC_CLIENT_ID');
-  const jwksPayload = await getJWKS(discovery.jwks_uri);
-  const jwks = createLocalJWKSet(jwksPayload);
+type OidcTokenVerificationDiscovery = Pick<
+  OidcDiscovery,
+  'id_token_signing_alg_values_supported' | 'issuer' | 'jwks_uri'
+>;
 
-  const { payload } = await jwtVerify(args.idToken, jwks, {
-    audience: clientID,
-    issuer: discovery.issuer,
-  });
+type VerifyOidcIdTokenArgs = {
+  clientID: string;
+  clientSecret: string;
+  discovery: OidcTokenVerificationDiscovery;
+  idToken: string;
+  loadJWKS?: (jwksURI: string) => Promise<OidcJwksResponse>;
+  nonce: string;
+};
+
+export const verifyOidcIdToken = async (args: VerifyOidcIdTokenArgs): Promise<VerifiedOidcUser> => {
+  const protectedHeader = decodeProtectedHeader(args.idToken);
+  const algorithm = protectedHeader.alg;
+
+  if (!algorithm || algorithm === 'none') {
+    throw new Error('OIDC id_token uses an unsupported signing algorithm.');
+  }
+
+  const supportedAlgorithms = args.discovery.id_token_signing_alg_values_supported;
+
+  if (!supportedAlgorithms.includes(algorithm)) {
+    throw new Error(
+      `OIDC id_token signing algorithm is not advertised by the provider: ${algorithm}`,
+    );
+  }
+
+  const verificationOptions = {
+    algorithms: [algorithm],
+    audience: args.clientID,
+    issuer: args.discovery.issuer,
+  };
+
+  const { payload } =
+    algorithm === 'HS256'
+      ? await jwtVerify(
+          args.idToken,
+          new TextEncoder().encode(args.clientSecret),
+          verificationOptions,
+        )
+      : await jwtVerify(
+          args.idToken,
+          createLocalJWKSet(await (args.loadJWKS ?? getJWKS)(args.discovery.jwks_uri)),
+          verificationOptions,
+        );
 
   if (payload.nonce !== args.nonce) {
     throw new Error('Invalid OIDC nonce.');
@@ -452,6 +504,21 @@ const verifyIDToken = async (args: {
     picture: typeof payload.picture === 'string' ? payload.picture : undefined,
     sub: payload.sub,
   };
+};
+
+const verifyIDToken = async (args: {
+  idToken: string;
+  nonce: string;
+}): Promise<VerifiedOidcUser> => {
+  const discovery = await getDiscoveryDocument();
+
+  return verifyOidcIdToken({
+    clientID: getRequiredEnv('OIDC_CLIENT_ID'),
+    clientSecret: getRequiredEnv('OIDC_CLIENT_SECRET'),
+    discovery,
+    idToken: args.idToken,
+    nonce: args.nonce,
+  });
 };
 
 export const resolveOidcUserFromCallback = async (args: {

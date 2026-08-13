@@ -11,6 +11,7 @@ Diese Datei dokumentiert den OIDC-SSO-Vertrag fuer den Payload Admin Login.
 ## Endpunkte
 
 Implementierung:
+
 - [app/api/sso/login/route.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/api/sso/login/route.ts)
 - [app/api/sso/callback/route.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/api/sso/callback/route.ts)
 - [app/api/sso/logout/route.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/api/sso/logout/route.ts)
@@ -73,6 +74,10 @@ Kanonische Typen:
 
 - Aktiv nur wenn `OIDC_ISSUER`, `OIDC_CLIENT_ID`, `OIDC_CLIENT_SECRET` gesetzt sind.
 - OIDC-Flow nutzt PKCE (`S256`) und signed state-cookie.
+- ID-Token-Signaturen werden abhängig vom vom Provider angekündigten Algorithmus geprüft:
+  - `HS256` mit `OIDC_CLIENT_SECRET` als symmetrischem Verifikationsschlüssel.
+  - Asymmetrische Algorithmen wie `RS256` über den öffentlichen `jwks_uri` des Providers.
+  - Der Algorithmus im Token muss vom Discovery-Dokument angekündigt sein; `none` wird abgelehnt.
 - Session basiert auf signed, `httpOnly` Cookie (`mardu_oidc_session`).
 - Optionales Hardening:
   - `OIDC_ALLOWED_EMAILS`
@@ -85,6 +90,7 @@ Kanonische Typen:
   - wirksam nur in `development`.
 
 Auth-Strategie in Payload:
+
 - [collections/users.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/collections/users.ts)
 - [lib/payload-sso-strategy.ts](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/lib/payload-sso-strategy.ts)
 
@@ -131,3 +137,7 @@ OIDC_DEBUG=false
 ```
 
 `OIDC_DISCOVERY_URL` und `OIDC_JWKS_URI` sind optionale Overrides fuer Provider, deren Discovery- oder JWKS-Endpunkte von der Standardableitung aus `OIDC_ISSUER` abweichen.
+
+Bei einem reinen `HS256`-Provider darf der JWKS-Endpunkt leer sein, weil die Signatur mit dem
+Client-Secret verifiziert wird. Bei einem asymmetrischen Algorithmus muss `OIDC_JWKS_URI`
+hingegen ein JSON Web Key Set mit einem nicht leeren `keys`-Array liefern.
