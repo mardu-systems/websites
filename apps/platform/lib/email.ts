@@ -2,19 +2,15 @@ import { Resend } from 'resend';
 import type { ContactRequestDto, SiteKey } from '@mardu/lead-core';
 import { getSiteConfig } from '@mardu/site-config';
 
-export async function sendEmail({
-  subject,
-  text,
-  html,
-  to,
-  replyTo,
-}: {
+export type SendEmailInput = {
   subject: string;
   text?: string;
   html?: string;
-  to?: string;
+  to?: string | string[];
   replyTo?: string | string[];
-}) {
+};
+
+export async function sendEmail({ subject, text, html, to, replyTo }: SendEmailInput) {
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.EMAIL_FROM;
   const recipient = to ?? process.env.EMAIL_TO;
@@ -46,7 +42,9 @@ export async function sendEmail({
   const { error } = await resend.emails.send(emailData);
 
   if (error) {
-    throw new Error(`Failed to send email: ${error.name ?? 'Error'} ${error.message ?? String(error)}`);
+    throw new Error(
+      `Failed to send email: ${error.name ?? 'Error'} ${error.message ?? String(error)}`,
+    );
   }
 }
 

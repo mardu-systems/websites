@@ -102,6 +102,7 @@ Erweiterte Legal-Page-Dokumentation:
 [docs/api/legal-pages-payload-integration.md](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/docs/api/legal-pages-payload-integration.md)
 
 Hinweis:
+
 - `legal-pages` nutzt einen collection-lokalen SEO-Tab mit `seoTitle`, `seoDescription` und `canonicalUrl`.
 - Die generischen SEO-Plugin-Endpunkte unten gelten weiterhin fuer die über das Plugin integrierten Collections, aber nicht als Admin-UI-Quelle fuer `legal-pages`.
 
@@ -140,6 +141,7 @@ Wenn das SEO-Plugin aktiv ist, stellt Payload zusaetzlich folgende Endpunkte ber
 4. `POST /api/plugin-seo/generate-image`
 
 Hinweis:
+
 - Diese Endpunkte sind primär fuer das Payload Admin UI gedacht.
 
 ## Admin-Routing-Vertrag
@@ -154,9 +156,9 @@ Entry-Routen:
 
 Implementierung:
 
-- [app/(payload)/admin/page.tsx](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/(payload)/admin/page.tsx)
-- [app/(payload)/admin/[...segments]/page.tsx](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/(payload)/admin/[...segments]/page.tsx)
-- [app/(payload)/admin/layout.tsx](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/(payload)/admin/layout.tsx)
+- [app/(payload)/admin/page.tsx](</Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/(payload)/admin/page.tsx>)
+- [app/(payload)/admin/[...segments]/page.tsx](</Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/(payload)/admin/[...segments]/page.tsx>)
+- [app/(payload)/admin/layout.tsx](</Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/(payload)/admin/layout.tsx>)
 
 Login-Modus bei aktivem OIDC:
 
@@ -164,11 +166,18 @@ Login-Modus bei aktivem OIDC:
 
 Import-Map Single Source of Truth:
 
-- [app/(payload)/admin/importMap.js](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/(payload)/admin/importMap.js)
+- [app/(payload)/admin/importMap.js](</Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/(payload)/admin/importMap.js>)
 
 ## Admin-Passwort-Reset
 
 Wenn ein Payload-Admin-Passwort vergessen wurde, darf das Passwort nicht direkt per SQL ersetzt werden. Payload verwaltet Passwort-Hashing und Salt intern.
+
+Der reguläre Admin-Flow verwendet `POST /api/users/forgot-password` und versendet den von Payload
+erzeugten Reset-Link über den gemeinsamen Resend-Maildienst. Dafür müssen `RESEND_API_KEY` und
+`EMAIL_FROM` gesetzt sein. Der Request enthält das Pflichtfeld `email`; Payload antwortet aus
+Sicherheitsgründen auch für unbekannte Adressen ohne Auskunft darüber, ob ein Konto existiert.
+Schlägt die Zustellung zum Mailprovider fehl, wird der Fehler serverseitig protokolliert und der
+Request schlägt fehl, statt den Reset fälschlich als zugestellt zu behandeln.
 
 Kontrollierter Reset:
 
