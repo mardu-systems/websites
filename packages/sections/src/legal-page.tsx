@@ -67,7 +67,7 @@ export function LegalPage({ page, className, eyebrow }: LegalPageProps) {
 
       <section className="py-14 md:py-20">
         <div className="mardu-container min-w-0">
-          <article className="prose prose-base w-full min-w-0 max-w-[52rem] [overflow-wrap:anywhere] prose-headings:scroll-mt-28 prose-headings:font-sans prose-headings:font-normal prose-headings:tracking-[-0.025em] prose-h2:mt-14 prose-h2:border-t prose-h2:border-border prose-h2:pt-8 prose-h2:text-[clamp(1.75rem,3vw,2.5rem)] prose-h2:leading-tight prose-h3:mt-10 prose-h3:text-[1.35rem] prose-h3:leading-tight prose-p:leading-[1.75] prose-p:text-foreground/80 prose-li:leading-relaxed prose-li:text-foreground/80 prose-strong:font-medium prose-strong:text-foreground prose-a:text-mardu-purple prose-a:decoration-mardu-purple/35 prose-a:underline prose-a:underline-offset-4">
+          <article className="prose prose-base w-full min-w-0 max-w-[52rem] [overflow-wrap:anywhere] prose-headings:scroll-mt-28 prose-headings:font-sans prose-headings:font-normal prose-headings:tracking-[-0.025em] prose-h2:mt-14 prose-h2:border-t prose-h2:border-border prose-h2:pt-8 prose-h2:text-[clamp(1.75rem,3vw,2.5rem)] prose-h2:leading-tight prose-h3:mt-10 prose-h3:text-[1.35rem] prose-h3:leading-tight prose-p:leading-[1.75] prose-p:text-foreground/80 prose-li:leading-relaxed prose-li:text-foreground/80 prose-strong:font-medium prose-strong:text-foreground prose-a:text-mardu-purple prose-a:decoration-mardu-purple/35 prose-a:underline prose-a:underline-offset-4 [&>:first-child]:mt-0 [&>:first-child]:border-t-0 [&>:first-child]:pt-0">
             <Markdown>{visibleContentMarkdown}</Markdown>
           </article>
         </div>
