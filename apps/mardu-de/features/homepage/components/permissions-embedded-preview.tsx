@@ -1,215 +1,267 @@
 'use client';
 
-import { useState } from 'react';
 import {
-  EmbeddableDataTable,
-  EmbeddableTableBadge,
-  type EmbeddableTableBadgeTone,
-  type EmbeddableTableColumn,
-} from './embeddable/data-table/embeddable-data-table';
+  type EmbeddableAccessLogRow,
+  EmbeddableAccessLogTable,
+  type EmbeddableDeviceRow,
+  EmbeddableDeviceTable,
+  type EmbeddableUserRow,
+  EmbeddableUserTable,
+} from './embeddable/data-table/table-presets';
+import styles from './permissions-embedded-preview.module.css';
 
 export type PermissionsPreviewVariant = 'identities' | 'events' | 'access-points';
 
-type PreviewStatus = 'Aktiv' | 'Erlaubt' | 'Läuft ab' | 'Abgelehnt' | 'Offline';
-
-interface PreviewRow {
-  id: string;
-  primary: string;
-  secondary: string;
-  tertiary: string;
-  status: PreviewStatus;
-}
-
-interface PreviewConfig {
-  title: string;
-  description: string;
-  columns: readonly [string, string, string];
-  searchPlaceholder: string;
-  rows: readonly PreviewRow[];
-}
-
-const previewConfigs: Record<PermissionsPreviewVariant, PreviewConfig> = {
-  identities: {
-    title: 'Identitäten',
-    description: 'Personen, Rollen und Qualifikationen',
-    columns: ['Person', 'Rolle', 'Qualifikation'],
-    searchPlaceholder: 'Personen durchsuchen …',
-    rows: [
-      {
-        id: 'laura-schmidt',
-        primary: 'Laura Schmidt',
-        secondary: 'Werkstattleitung',
-        tertiary: 'Maschineneinweisung',
-        status: 'Aktiv',
-      },
-      {
-        id: 'aylin-demir',
-        primary: 'Aylin Demir',
-        secondary: 'Metallwerkstatt',
-        tertiary: 'CNC-Fräse',
-        status: 'Aktiv',
-      },
-      {
-        id: 'paul-richter',
-        primary: 'Paul Richter',
-        secondary: 'Externer Techniker',
-        tertiary: 'Elektrofachkraft',
-        status: 'Läuft ab',
-      },
-      {
-        id: 'clara-stein',
-        primary: 'Clara Stein',
-        secondary: 'Labor',
-        tertiary: 'Laserschutz',
-        status: 'Aktiv',
-      },
-    ],
-  },
-  events: {
-    title: 'Freigaben',
-    description: 'Aktuelle Entscheidungen mit Kontext',
-    columns: ['Person', 'Zugangspunkt', 'Regel'],
-    searchPlaceholder: 'Freigaben durchsuchen …',
-    rows: [
-      {
-        id: 'event-1',
-        primary: 'Aylin Demir',
-        secondary: 'CNC-Fräse 02',
-        tertiary: 'Rolle + Einweisung gültig',
-        status: 'Erlaubt',
-      },
-      {
-        id: 'event-2',
-        primary: 'Laura Schmidt',
-        secondary: 'Werkstatt Haupteingang',
-        tertiary: 'Mo–Fr · 06:00–20:00',
-        status: 'Erlaubt',
-      },
-      {
-        id: 'event-3',
-        primary: 'Paul Richter',
-        secondary: 'Schaltschrank Labor',
-        tertiary: 'Vier-Augen-Prinzip fehlt',
-        status: 'Abgelehnt',
-      },
-      {
-        id: 'event-4',
-        primary: 'Clara Stein',
-        secondary: 'Lasercutter',
-        tertiary: 'Qualifikation bis 31.08.',
-        status: 'Läuft ab',
-      },
-    ],
-  },
-  'access-points': {
-    title: 'Zugangspunkte',
-    description: 'Maschinen, Türen und Tore im Überblick',
-    columns: ['Zugangspunkt', 'Bereich', 'Letzte Entscheidung'],
-    searchPlaceholder: 'Zugangspunkte durchsuchen …',
-    rows: [
-      {
-        id: 'access-1',
-        primary: 'CNC-Fräse 02',
-        secondary: 'Metallwerkstatt',
-        tertiary: 'Aylin Demir · 10:42',
-        status: 'Aktiv',
-      },
-      {
-        id: 'access-2',
-        primary: 'Werkstatt Haupteingang',
-        secondary: 'Gebäude 2',
-        tertiary: 'Laura Schmidt · 09:18',
-        status: 'Aktiv',
-      },
-      {
-        id: 'access-3',
-        primary: 'Zufahrt Süd',
-        secondary: 'Außengelände',
-        tertiary: 'Lieferdienst · 08:55',
-        status: 'Aktiv',
-      },
-      {
-        id: 'access-4',
-        primary: 'Schließfach 14',
-        secondary: 'Materiallager',
-        tertiary: 'Keine Verbindung',
-        status: 'Offline',
-      },
-    ],
-  },
+const sharedTableProps = {
+  density: 'compact' as const,
+  pageSize: 7,
+  theme: 'dark' as const,
 };
 
-const statusTone: Record<PreviewStatus, EmbeddableTableBadgeTone> = {
-  Aktiv: 'success',
-  Erlaubt: 'success',
-  'Läuft ab': 'warning',
-  Abgelehnt: 'danger',
-  Offline: 'neutral',
-};
+const identityRows = [
+  {
+    id: 'laura-schmidt',
+    userName: 'laura.schmidt@mardu.de',
+    firstName: 'Laura',
+    lastName: 'Schmidt',
+    email: 'laura.schmidt@mardu.de',
+    emailConfirmed: true,
+    status: 'active',
+    tagCount: 2,
+  },
+  {
+    id: 'aylin-demir',
+    userName: 'aylin.demir@mardu.de',
+    firstName: 'Aylin',
+    lastName: 'Demir',
+    email: 'aylin.demir@mardu.de',
+    emailConfirmed: true,
+    status: 'active',
+    tagCount: 1,
+  },
+  {
+    id: 'paul-richter',
+    userName: 'paul.richter@partner.de',
+    firstName: 'Paul',
+    lastName: 'Richter',
+    email: 'paul.richter@partner.de',
+    emailConfirmed: true,
+    status: 'active',
+    tagCount: 1,
+  },
+  {
+    id: 'clara-stein',
+    userName: 'clara.stein@mardu.de',
+    firstName: 'Clara',
+    lastName: 'Stein',
+    email: 'clara.stein@mardu.de',
+    emailConfirmed: true,
+    status: 'active',
+    tagCount: 0,
+  },
+  {
+    id: 'jonas-vogel',
+    userName: 'jonas.vogel@mardu.de',
+    firstName: 'Jonas',
+    lastName: 'Vogel',
+    email: 'jonas.vogel@mardu.de',
+    emailConfirmed: true,
+    status: 'inactive',
+    tagCount: 1,
+  },
+  {
+    id: 'mara-hoffmann',
+    userName: 'mara.hoffmann@mardu.de',
+    firstName: 'Mara',
+    lastName: 'Hoffmann',
+    email: 'mara.hoffmann@mardu.de',
+    emailConfirmed: true,
+    status: 'active',
+    tagCount: 2,
+  },
+  {
+    id: 'noah-wagner',
+    userName: 'noah.wagner@mardu.de',
+    firstName: 'Noah',
+    lastName: 'Wagner',
+    email: 'noah.wagner@mardu.de',
+    emailConfirmed: true,
+    status: 'active',
+    tagCount: 0,
+  },
+] satisfies readonly EmbeddableUserRow[];
 
-function createColumns(config: PreviewConfig): readonly EmbeddableTableColumn<PreviewRow>[] {
-  return [
-    {
-      id: 'primary',
-      header: config.columns[0],
-      accessor: 'primary',
-      priority: 'primary',
-      sortable: true,
-      width: '30%',
-    },
-    {
-      id: 'secondary',
-      header: config.columns[1],
-      accessor: 'secondary',
-      priority: 'primary',
-      sortable: true,
-      width: '25%',
-    },
-    {
-      id: 'tertiary',
-      header: config.columns[2],
-      accessor: 'tertiary',
-      priority: 'secondary',
-      width: '25%',
-    },
-    {
-      id: 'status',
-      header: 'Status',
-      accessor: 'status',
-      priority: 'primary',
-      width: '20%',
-      render: (row) => (
-        <EmbeddableTableBadge tone={statusTone[row.status]}>{row.status}</EmbeddableTableBadge>
-      ),
-    },
-  ];
+const eventRows = [
+  {
+    id: 'event-1',
+    occurredAt: '12.08.2026 · 10:42',
+    status: 'granted',
+    accessPoint: 'CNC-Fräse 02',
+    device: 'Terminal M-204',
+    requester: 'Aylin Demir',
+    detail: 'Rolle und Einweisung gültig',
+  },
+  {
+    id: 'event-2',
+    occurredAt: '12.08.2026 · 09:18',
+    status: 'granted',
+    accessPoint: 'Werkstatt Haupteingang',
+    device: 'Schließzylinder T-12',
+    requester: 'Laura Schmidt',
+    detail: 'Zeitfenster gültig',
+  },
+  {
+    id: 'event-3',
+    occurredAt: '12.08.2026 · 08:51',
+    status: 'denied',
+    accessPoint: 'Schaltschrank Labor',
+    device: 'Terminal M-117',
+    requester: 'Paul Richter',
+    detail: 'Vier-Augen-Freigabe fehlt',
+  },
+  {
+    id: 'event-4',
+    occurredAt: '11.08.2026 · 17:26',
+    status: 'ended',
+    accessPoint: 'Lasercutter',
+    device: 'Terminal M-088',
+    requester: 'Clara Stein',
+    detail: 'Nutzung regulär beendet',
+  },
+  {
+    id: 'event-5',
+    occurredAt: '11.08.2026 · 15:04',
+    status: 'active',
+    accessPoint: 'Zufahrt Süd',
+    device: 'Torsteuerung G-03',
+    requester: 'Lieferdienst Nord',
+    detail: 'Temporäre Zufahrt aktiv',
+  },
+  {
+    id: 'event-6',
+    occurredAt: '11.08.2026 · 14:39',
+    status: 'granted',
+    accessPoint: 'Materialausgabe',
+    device: 'Schließfach S-14',
+    requester: 'Mara Hoffmann',
+    detail: 'Projektfreigabe gültig',
+  },
+  {
+    id: 'event-7',
+    occurredAt: '11.08.2026 · 13:12',
+    status: 'denied',
+    accessPoint: 'CNC-Fräse 02',
+    device: 'Terminal M-204',
+    requester: 'Jonas Vogel',
+    detail: 'Einweisung abgelaufen',
+  },
+] satisfies readonly EmbeddableAccessLogRow[];
+
+const accessPointRows = [
+  {
+    id: 'access-1',
+    name: 'CNC-Fräse 02',
+    type: 'Maschine',
+    status: 'online',
+    location: 'Metallwerkstatt',
+    lastSeen: 'vor 1 Minute',
+    firmware: '3.8.2',
+  },
+  {
+    id: 'access-2',
+    name: 'Werkstatt Haupteingang',
+    type: 'Schließzylinder',
+    status: 'online',
+    location: 'Gebäude 2',
+    lastSeen: 'vor 2 Minuten',
+    firmware: '2.4.1',
+  },
+  {
+    id: 'access-3',
+    name: 'Zufahrt Süd',
+    type: 'Torsteuerung',
+    status: 'online',
+    location: 'Außengelände',
+    lastSeen: 'vor 4 Minuten',
+    firmware: '3.7.9',
+  },
+  {
+    id: 'access-4',
+    name: 'Lasercutter',
+    type: 'Maschine',
+    status: 'maintenance',
+    location: 'Digitale Fertigung',
+    lastSeen: 'vor 18 Minuten',
+    firmware: '3.8.2',
+  },
+  {
+    id: 'access-5',
+    name: 'Materialausgabe',
+    type: 'Schließfach',
+    status: 'online',
+    location: 'Materiallager',
+    lastSeen: 'vor 7 Minuten',
+    firmware: '2.4.1',
+  },
+  {
+    id: 'access-6',
+    name: 'Schranke Nord',
+    type: 'Schranke',
+    status: 'offline',
+    location: 'Parkplatz',
+    lastSeen: 'vor 3 Stunden',
+    firmware: '3.6.5',
+  },
+  {
+    id: 'access-7',
+    name: 'Elektroniklabor',
+    type: 'Tür',
+    status: 'online',
+    location: 'Gebäude 1',
+    lastSeen: 'vor 1 Minute',
+    firmware: '2.4.1',
+  },
+] satisfies readonly EmbeddableDeviceRow[];
+
+function PreviewTable({ variant }: { variant: PermissionsPreviewVariant }) {
+  if (variant === 'identities') {
+    return (
+      <EmbeddableUserTable
+        {...sharedTableProps}
+        title="Benutzer"
+        description="Identitäten und Zugangs-Tags zentral verwalten."
+        data={identityRows}
+      />
+    );
+  }
+
+  if (variant === 'events') {
+    return (
+      <EmbeddableAccessLogTable
+        {...sharedTableProps}
+        title="Freigaben"
+        description="Entscheidungen mit Zeitpunkt und Kontext nachvollziehen."
+        data={eventRows}
+      />
+    );
+  }
+
+  return (
+    <EmbeddableDeviceTable
+      {...sharedTableProps}
+      title="Zugangspunkte"
+      description="Maschinen, Türen und Tore in einer Übersicht."
+      data={accessPointRows}
+    />
+  );
 }
 
 export function PermissionsEmbeddedPreview({ variant }: { variant: PermissionsPreviewVariant }) {
-  const config = previewConfigs[variant];
-  const [selectedRow, setSelectedRow] = useState<PreviewRow | null>(null);
-
   return (
-    <div className="h-full bg-[#171820] p-3 sm:p-4">
-      <EmbeddableDataTable
-        className="h-full"
-        title={config.title}
-        description={config.description}
-        caption={`${config.title}: ${config.description}`}
-        data={config.rows}
-        columns={createColumns(config)}
-        getRowId={(row) => row.id}
-        theme="dark"
-        density="compact"
-        search={{ placeholder: config.searchPlaceholder }}
-        onRowClick={setSelectedRow}
-        getRowLabel={(row) => `${row.primary} öffnen`}
-        footer={
-          selectedRow ? (
-            <span className="text-xs">Ausgewählt: {selectedRow.primary}</span>
-          ) : undefined
-        }
-      />
+    <div className={styles.stage}>
+      <div className={styles.scaledTable}>
+        <PreviewTable variant={variant} />
+      </div>
     </div>
   );
 }

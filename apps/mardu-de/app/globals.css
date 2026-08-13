@@ -169,6 +169,7 @@
 
   html {
     scroll-padding-top: 7rem;
+    scrollbar-gutter: stable;
   }
 
   body {

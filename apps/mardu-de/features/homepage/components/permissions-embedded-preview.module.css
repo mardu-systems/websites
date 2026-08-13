@@ -1,0 +1,44 @@
+.stage {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0.75rem;
+  background-color: #171820;
+  background-image: url('/verwaltungssoftware/dodecahedron-background.svg');
+  background-position: center;
+  background-size: cover;
+}
+
+.scaledTable {
+  --permissions-table-scale: 0.72;
+  width: calc(100% / var(--permissions-table-scale));
+  flex: 0 0 auto;
+  transform: scale(var(--permissions-table-scale));
+  transform-origin: center;
+}
+
+.stage :global(th[data-column-id='actions']),
+.stage :global(td[data-column-id='actions']) {
+  position: static;
+  box-shadow: none;
+}
+
+@media (max-width: 63.999rem) {
+  .stage {
+    padding: 0.5rem;
+  }
+
+  .scaledTable {
+    --permissions-table-scale: 0.8;
+  }
+}
+
+@media (max-width: 35rem) {
+  .scaledTable {
+    --permissions-table-scale: 0.72;
+  }
+}

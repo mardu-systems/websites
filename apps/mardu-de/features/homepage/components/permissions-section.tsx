@@ -8,11 +8,11 @@ import {
   type PermissionsPreviewVariant,
 } from './permissions-embedded-preview';
 
-const previewVariants: Record<string, PermissionsPreviewVariant> = {
-  identities: 'identities',
-  events: 'events',
-  'access-points': 'access-points',
-};
+const previewVariants = [
+  'identities',
+  'events',
+  'access-points',
+] as const satisfies readonly PermissionsPreviewVariant[];
 
 export function PermissionsSection() {
   return (
@@ -34,8 +34,8 @@ export function PermissionsSection() {
       nextSectionId="nutzen"
       compact
       motionMode="continuous"
-      renderMedia={(item) => (
-        <PermissionsEmbeddedPreview variant={previewVariants[item.id] ?? 'identities'} />
+      renderMedia={(_, index) => (
+        <PermissionsEmbeddedPreview variant={previewVariants[index] ?? 'identities'} />
       )}
     />
   );
