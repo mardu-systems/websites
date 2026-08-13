@@ -111,7 +111,6 @@ export const NewsletterSubscribers: CollectionConfig = {
       admin: { position: 'sidebar' },
       options: [
         { label: 'Newsletter', value: 'newsletter' },
-        { label: 'Whitepaper', value: 'whitepaper' },
       ],
     },
     {

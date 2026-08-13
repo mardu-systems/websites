@@ -40,7 +40,7 @@ TWENTY_CONTACT_NEWSLETTER_OPT_IN_FIELD=
 
 The newsletter signup uses a double opt-in process. `APP_URL` should match the frontend domain, `MARDU_PLATFORM_ORIGIN` should point to `apps/platform`, and `NEWSLETTER_SECRET` signs the shared lead tokens.
 
-If `TWENTY_API_KEY` is set, confirmed newsletter/whitepaper events and contact leads are synchronized to Twenty. This integration is optional and non-blocking.
+If `TWENTY_API_KEY` is set, confirmed newsletter events and contact leads are synchronized to Twenty. This integration is optional and non-blocking.
 
 For contact leads, optional custom field mappings can be configured:
 

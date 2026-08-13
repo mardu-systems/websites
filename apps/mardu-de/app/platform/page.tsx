@@ -72,8 +72,8 @@ export default async function Page() {
         title="Wie Software, Hardware und Integrationen bei Mardu zusammenspielen"
         description={heroDescription}
         overline="Plattform"
-        buttonText="Whitepaper ansehen"
-        buttonHref="/whitepaper"
+        buttonText="Kontakt aufnehmen"
+        buttonHref="/contact"
         secondaryButtonText={productsEnabled ? 'Produkte ansehen' : undefined}
         secondaryButtonHref={productsEnabled ? '/products' : undefined}
         imageSrc="/gateway/mounted.jpg"

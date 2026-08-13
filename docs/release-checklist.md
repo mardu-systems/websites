@@ -30,7 +30,7 @@ Diese Checkliste wird pro Release kopiert und mit Links beziehungsweise IDs stat
 - [ ] Tastatur, Fokus und mobile Navigation geprüft
 - [ ] Browser-Konsole ohne neue Fehler
 - [ ] Hero/LCP und neue Bilder ohne sichtbaren Layout Shift
-- [ ] Kontakt, Konfigurator, Newsletter und Preorder Ende-zu-Ende geprüft
+- [ ] Kontakt, Konfigurator und Newsletter Ende-zu-Ende geprüft
 
 ## Produktion
 

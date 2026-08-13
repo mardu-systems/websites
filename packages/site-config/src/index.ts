@@ -56,8 +56,6 @@ export type SiteConfig = {
   contactPath: string;
   newsletterSuccessPath: string;
   newsletterUnsubscribePath: string;
-  whitepaperSuccessPath?: string;
-  whitepaperDownloadPath?: string;
   emailLogoUrl: string;
   emailBrandName: string;
   features: SiteFeatureFlags;

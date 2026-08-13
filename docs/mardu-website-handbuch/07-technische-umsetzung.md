@@ -105,10 +105,6 @@ Aktuelle Header- und Footerlinks verweisen teilweise auf nicht vorhandene Routen
 
 Navigation, Routen, Breadcrumbs, Sitemap und Redirects werden aus einer gemeinsamen kanonischen Map abgeleitet oder in einem gemeinsamen Review gepflegt.
 
-### Whitepaper
-
-Der kopierte `mardu-de`-Whitepaperflow verweist auf einen Downloadweg, der nicht vollständig verdrahtet ist. Der Flow wird entweder fachlich und technisch repariert oder zugunsten konkreter Wissensinhalte entfernt.
-
 ### Construction und Metadaten
 
 Metadaten und Copy erwähnen weiterhin `mardu.construction`, obwohl die neuere Strategie die Vertikale nicht mehr als aktuelles Angebot führt. Diese Entscheidung wird vor dem Launch einheitlich in Hero, Metadata, JSON-LD, Footer und `llms.txt` umgesetzt.

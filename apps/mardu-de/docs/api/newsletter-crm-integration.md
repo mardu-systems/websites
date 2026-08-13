@@ -1,6 +1,6 @@
 # Newsletter + Contact CRM Integration
 
-`mardu.de` nutzt für Newsletter-, Whitepaper-, Kontakt- und Preorder-Flows die zentrale CRM-Synchronisierung aus `apps/platform`.
+`mardu.de` nutzt für Newsletter- und Kontakt-Flows die zentrale CRM-Synchronisierung aus `apps/platform`.
 
 ## Kanonische Implementierung
 
@@ -10,7 +10,6 @@ Quelle: [`apps/platform/lib/integrations/twenty.ts`](/Users/lucaschoeneberg/Docu
 
 - `mardu.de`-Lead-Routen proxyen an `apps/platform`
 - Newsletter-Anmeldungen senden `role: 'newsletter'` an `POST /api/newsletter`
-- Whitepaper-Anfragen senden `role: 'whitepaper'` an denselben Endpunkt
 - Twenty-Sync wird ausschließlich dort ausgeführt
 - CRM-Fehler bleiben best effort und werden in Payload-Statusfeldern dokumentiert
 
@@ -18,7 +17,7 @@ Quelle: [`apps/platform/lib/integrations/twenty.ts`](/Users/lucaschoeneberg/Docu
 
 - Pflichtfelder:
   - `email`: gültige E-Mail-Adresse
-  - `role`: `newsletter` oder `whitepaper`
+  - `role`: ausschließlich `newsletter`
 - Optionale Felder:
   - `firstName`, `lastName`: jeweils maximal 100 Zeichen
   - `company`: maximal 150 Zeichen

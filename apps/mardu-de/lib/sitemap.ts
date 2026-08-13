@@ -29,7 +29,6 @@ const staticRoutes: MetadataRoute.Sitemap = [
   { url: `${MARDU_SITE_URL}/roadmap`, changeFrequency: 'weekly', priority: 0.65 },
   { url: `${MARDU_SITE_URL}/configurator`, changeFrequency: 'monthly', priority: 0.65 },
   { url: `${MARDU_SITE_URL}/newsletter`, changeFrequency: 'monthly', priority: 0.5 },
-  { url: `${MARDU_SITE_URL}/whitepaper`, changeFrequency: 'monthly', priority: 0.7 },
   { url: `${MARDU_SITE_URL}/privacy`, changeFrequency: 'yearly', priority: 0.3 },
   { url: `${MARDU_SITE_URL}/publisher`, changeFrequency: 'yearly', priority: 0.3 },
 ];

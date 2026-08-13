@@ -21,14 +21,10 @@ export {
 export const siteSchema = z.enum(['mardu-de']);
 export type SiteKey = z.infer<typeof siteSchema>;
 
-export const newsletterRoleSchema = z.enum(['newsletter', 'whitepaper']);
+export const newsletterRoleSchema = z.literal('newsletter');
 export type NewsletterSignupRole = z.infer<typeof newsletterRoleSchema>;
 
-export const newsletterTokenPurposeSchema = z.enum([
-  'confirm',
-  'unsubscribe',
-  'whitepaper-download',
-]);
+export const newsletterTokenPurposeSchema = z.enum(['confirm', 'unsubscribe']);
 export type NewsletterTokenPurpose = z.infer<typeof newsletterTokenPurposeSchema>;
 
 export const newsletterStatusSchema = z.enum(['pending', 'confirmed', 'unsubscribed']);
@@ -79,11 +75,6 @@ export const contactRequestSchema = z.object({
   config: z.unknown().optional(),
 });
 
-export const preorderRequestSchema = z.object({
-  email: z.string().trim().email(),
-  site: siteSchema.default('mardu-de'),
-});
-
 export const newsletterTokenPayloadSchema = z.object({
   email: z.string().trim().email(),
   site: siteSchema,
@@ -118,11 +109,6 @@ export interface ContactRequestDto {
   config?: unknown;
 }
 
-export interface PreorderRequestDto {
-  email: string;
-  site: SiteKey;
-}
-
 export interface NewsletterTokenPayload {
   email: string;
   site: SiteKey;
@@ -135,7 +121,6 @@ export interface NewsletterTokenPayload {
 
 export type NewsletterResponseDto = { ok: true };
 export type ContactResponseDto = { ok: true };
-export type PreorderResponseDto = { ok: true };
 
 /**
  * API error DTO returned by public contact endpoints.

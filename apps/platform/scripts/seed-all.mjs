@@ -11,7 +11,7 @@ if (process.env.VERCEL_ENV === 'production') {
 
 if (process.env.ALLOW_FIXTURE_SEED !== 'true') {
   console.error(
-    'Refusing to run seed:all without ALLOW_FIXTURE_SEED=true. This command creates demo users, leads, subscribers and preorders and is restricted to isolated development or CI databases.',
+    'Refusing to run seed:all without ALLOW_FIXTURE_SEED=true. This command creates demo users, leads and subscribers and is restricted to isolated development or CI databases.',
   );
   process.exit(1);
 }
@@ -187,53 +187,8 @@ async function runScriptsSequentially() {
     }
   }
 
-  // 4. Seed Preorder Requests
-  console.info('\nSeeding Preorder Requests...');
-  const preorders = [
-    {
-      site: 'mardu-de',
-      email: 'a.schmidt@hs-berlin.de',
-      status: 'received',
-      emailDeliveryStatus: 'pending',
-    },
-  ];
-
-  for (const preorder of preorders) {
-    const existing = await payload.find({
-      collection: 'preorder-requests',
-      where: {
-        and: [
-          {
-            site: {
-              equals: preorder.site,
-            },
-          },
-          {
-            email: {
-              equals: preorder.email,
-            },
-          },
-        ],
-      },
-      limit: 1,
-      pagination: false,
-      overrideAccess: true,
-    });
-
-    if (!existing.docs[0]) {
-      await payload.create({
-        collection: 'preorder-requests',
-        data: preorder,
-        overrideAccess: true,
-      });
-      console.info(`✓ Preorder request created for: ${preorder.email}`);
-    } else {
-      console.info(`• Preorder request already exists for: ${preorder.email}`);
-    }
-  }
-
   console.info('\n==================================================');
-  console.info('✓ ✓ ALL 19 collections successfully seeded!');
+  console.info('✓ ✓ ALL 18 collections successfully seeded!');
   console.info('==================================================');
 }
 

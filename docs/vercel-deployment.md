@@ -38,7 +38,7 @@ Secrets werden ausschließlich in Vercel beziehungsweise in lokalen `.env.*.loca
 | `PAYLOAD_SECRET`                                          | erforderlich                                       | eigener Wert                            | Signatur-/Payload-Secret                                   |
 | `PAYLOAD_PUBLIC_SERVER_URL`                               | `https://platform.mardu.de`                        | Platform-Preview-Origin                 | Öffentliche Payload-/Admin-URL                             |
 | `MARDU_PLATFORM_ORIGIN`                                   | `https://platform.mardu.de`                        | Platform-Preview-Origin                 | Links in Newsletter- und Lead-Flows                        |
-| `NEWSLETTER_SECRET`                                       | erforderlich                                       | eigener Wert                            | Signatur von Bestätigungs-, Abmelde- und Whitepaper-Tokens |
+| `NEWSLETTER_SECRET`                                       | erforderlich                                       | eigener Wert                            | Signatur von Bestätigungs- und Abmelde-Tokens |
 | `RESEND_API_KEY`                                          | erforderlich                                       | Test-Key oder kontrollierter Versand    | E-Mail-Versand                                             |
 | `EMAIL_FROM` / `EMAIL_TO`                                 | erforderlich                                       | Test-Absender und internes Testpostfach | Absender und Lead-Empfänger                                |
 | `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` / `RECAPTCHA_SECRET_KEY` | erforderlich                                       | eigenes Test-Setup                      | Browser- und Serverteil der Abuse Protection               |
@@ -139,7 +139,7 @@ bun run --cwd apps/platform seed:solutions
 bun run --cwd apps/platform seed:catalog
 ```
 
-`seed:all` ist verboten: Der Befehl erzeugt Demo-Admin, Test-Leads, Test-Abonnenten und Test-Preorders und verweigert ohne die explizite Fixture-Freigabe die Ausführung.
+`seed:all` ist verboten: Der Befehl erzeugt Demo-Admin, Test-Leads und Test-Abonnenten und verweigert ohne die explizite Fixture-Freigabe die Ausführung.
 
 ## Rollout
 
@@ -165,9 +165,9 @@ RELEASE_BASE_URL=https://www.mardu.de \
 bun run --cwd apps/mardu-de release:verify
 ```
 
-Der Verifier verlangt für alle Sitemap- und internen HTML-Routen HTTP 200, genau eine H1, eine Description, gültiges JSON-LD sowie einen selbstreferenzierenden Canonical. Newsletter-Status- und Whitepaper-Erfolgsseiten müssen `noindex` sein.
+Der Verifier verlangt für alle Sitemap- und internen HTML-Routen HTTP 200, genau eine H1, eine Description, gültiges JSON-LD sowie einen selbstreferenzierenden Canonical. Newsletter-Statusseiten müssen `noindex` sein.
 
-Kontakt, Konfigurator, Newsletter Double-Opt-in/-Abmeldung und Preorder werden zusätzlich manuell mit dem konfigurierten internen `EMAIL_TO`-Postfach geprüft. Testdatensätze werden eindeutig als Release-Test markiert und anschließend kontrolliert entfernt.
+Kontakt, Konfigurator sowie Newsletter Double-Opt-in und Abmeldung werden zusätzlich manuell mit dem konfigurierten internen `EMAIL_TO`-Postfach geprüft. Testdatensätze werden eindeutig als Release-Test markiert und anschließend kontrolliert entfernt.
 
 ## Rollback und Beobachtung
 

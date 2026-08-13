@@ -80,7 +80,6 @@ export interface Config {
     integrations: Integration;
     'newsletter-subscribers': NewsletterSubscriber;
     'contact-leads': ContactLead;
-    'preorder-requests': PreorderRequest;
     solutions: Solution;
     'product-categories': ProductCategory;
     'product-technologies': ProductTechnology;
@@ -107,7 +106,6 @@ export interface Config {
     integrations: IntegrationsSelect<false> | IntegrationsSelect<true>;
     'newsletter-subscribers': NewsletterSubscribersSelect<false> | NewsletterSubscribersSelect<true>;
     'contact-leads': ContactLeadsSelect<false> | ContactLeadsSelect<true>;
-    'preorder-requests': PreorderRequestsSelect<false> | PreorderRequestsSelect<true>;
     solutions: SolutionsSelect<false> | SolutionsSelect<true>;
     'product-categories': ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
     'product-technologies': ProductTechnologiesSelect<false> | ProductTechnologiesSelect<true>;
@@ -519,7 +517,7 @@ export interface NewsletterSubscriber {
   twentyLastSyncedAt?: string | null;
   twentyLastError?: string | null;
   site: 'mardu-de';
-  role: 'newsletter' | 'whitepaper';
+  role: 'newsletter';
   status: 'pending' | 'confirmed' | 'unsubscribed';
   consentModel?: 'double-opt-in' | null;
   /**
@@ -577,19 +575,6 @@ export interface ContactLead {
    * Wunsch für Newsletter-Anmeldung geäußert.
    */
   newsletterOptIn?: boolean | null;
-  emailDeliveryStatus: 'pending' | 'sent' | 'failed';
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "preorder-requests".
- */
-export interface PreorderRequest {
-  id: number;
-  email: string;
-  site: 'mardu-de';
-  status: 'received';
   emailDeliveryStatus: 'pending' | 'sent' | 'failed';
   updatedAt: string;
   createdAt: string;
@@ -1166,20 +1151,6 @@ export interface PayloadMcpApiKey {
      */
     update?: boolean | null;
   };
-  preorderRequests?: {
-    /**
-     * Allow clients to find preorder-requests.
-     */
-    find?: boolean | null;
-    /**
-     * Allow clients to create preorder-requests.
-     */
-    create?: boolean | null;
-    /**
-     * Allow clients to update preorder-requests.
-     */
-    update?: boolean | null;
-  };
   solutions?: {
     /**
      * Allow clients to find solutions.
@@ -1362,10 +1333,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'contact-leads';
         value: number | ContactLead;
-      } | null)
-    | ({
-        relationTo: 'preorder-requests';
-        value: number | PreorderRequest;
       } | null)
     | ({
         relationTo: 'solutions';
@@ -1692,18 +1659,6 @@ export interface ContactLeadsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "preorder-requests_select".
- */
-export interface PreorderRequestsSelect<T extends boolean = true> {
-  email?: T;
-  site?: T;
-  status?: T;
-  emailDeliveryStatus?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "solutions_select".
  */
 export interface SolutionsSelect<T extends boolean = true> {
@@ -2000,13 +1955,6 @@ export interface PayloadMcpApiKeysSelect<T extends boolean = true> {
         update?: T;
       };
   contactLeads?:
-    | T
-    | {
-        find?: T;
-        create?: T;
-        update?: T;
-      };
-  preorderRequests?:
     | T
     | {
         find?: T;

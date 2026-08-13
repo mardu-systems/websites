@@ -5,7 +5,6 @@ import type {
   EmailDeliveryStatus,
   NewsletterRequestDto,
   NewsletterStatus,
-  PreorderRequestDto,
   SiteKey,
   TwentySyncStatus,
 } from '@mardu/lead-core';
@@ -275,61 +274,6 @@ export async function setContactLeadStatuses(input: {
       ...(input.twentySyncStatus ? { twentySyncStatus: input.twentySyncStatus } : {}),
       ...(input.twentySyncStatus === 'synced' ? { twentyLastSyncedAt: now() } : {}),
       ...(input.twentyLastError !== undefined ? { twentyLastError: input.twentyLastError } : {}),
-    },
-    depth: 0,
-  });
-}
-
-export async function createOrUpdatePreorderRequest(input: PreorderRequestDto) {
-  const payload = await getLeadStoreClient();
-  const existing = await findOne<{ id: string | number }>('preorder-requests', {
-    and: [
-      {
-        site: {
-          equals: input.site,
-        },
-      },
-      {
-        email: {
-          equals: input.email.trim().toLowerCase(),
-        },
-      },
-    ],
-  });
-
-  const data = {
-    site: input.site,
-    email: input.email.trim().toLowerCase(),
-    status: 'received' as const,
-    emailDeliveryStatus: 'pending' as const,
-  };
-
-  if (existing) {
-    return payload.update({
-      collection: 'preorder-requests',
-      id: existing.id,
-      data,
-      depth: 0,
-    });
-  }
-
-  return payload.create({
-    collection: 'preorder-requests',
-    data,
-    depth: 0,
-  });
-}
-
-export async function setPreorderEmailDeliveryStatus(
-  id: string | number,
-  status: EmailDeliveryStatus,
-) {
-  const payload = await getLeadStoreClient();
-  await payload.update({
-    collection: 'preorder-requests',
-    id,
-    data: {
-      emailDeliveryStatus: status,
     },
     depth: 0,
   });

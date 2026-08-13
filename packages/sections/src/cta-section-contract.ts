@@ -7,7 +7,7 @@ import type { ReactNode } from "react";
  */
 export interface CTASectionNewsletterDialogProps {
   requestUrl?: string;
-  requestRole?: "newsletter" | "whitepaper";
+  requestRole?: "newsletter";
   dialogTitle?: string;
   dialogDescription?: string;
   submitLabel?: string;

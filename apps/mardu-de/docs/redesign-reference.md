@@ -252,6 +252,6 @@ Es gibt **keine separaten Unterseiten pro Integration** (keine Routen `/integrat
 *   Verantwortlicher und Rechtsgrundlagen.
 *   Vercel-Hosting, Server-Protokolle und Missbrauchsabwehr.
 *   Cookie-Einstellungen sowie Vercel Web Analytics und Speed Insights.
-*   Kontakt, Konfigurator, Newsletter und Whitepaper einschließlich Resend und internem CRM.
+*   Kontakt, Konfigurator und Newsletter einschließlich Resend und internem CRM.
 *   Google reCAPTCHA und einfache Links zu sozialen Netzwerken.
 *   Empfänger, internationale Übermittlungen, Speicherdauer und Betroffenenrechte.

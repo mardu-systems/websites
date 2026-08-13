@@ -7,7 +7,6 @@ Zentrale Lead- und Newsletter-API für `mardu.de`.
 - `apps/platform` ist System of Record fuer:
   - Newsletter-Subscriber
   - Contact-Leads
-  - Preorder-Requests
 - Persistenz erfolgt über Payload + PostgreSQL.
 - Abuse-Protection fuer oeffentliche Lead-POSTs erfolgt zentral in `apps/platform`.
 - `mardu.de` nutzt dafür öffentliche API-Routen oder Proxy-Routen.
@@ -20,7 +19,7 @@ Quelle: [`packages/lead-core/src/index.ts`](/Users/lucaschoeneberg/Documents/Git
 interface NewsletterRequestDto {
   email: string;
   site: 'mardu-de';
-  role: 'newsletter' | 'whitepaper';
+  role: 'newsletter';
   firstName?: string;
   lastName?: string;
   company?: string;
@@ -40,11 +39,6 @@ interface ContactRequestDto {
   token?: string;
   config?: unknown;
 }
-
-interface PreorderRequestDto {
-  email: string;
-  site: 'mardu-de';
-}
 ```
 
 ## Kanonische Endpunkte
@@ -61,7 +55,6 @@ Quelle: [`apps/platform/app/api/newsletter/route.ts`](/Users/lucaschoeneberg/Doc
 - persistiert/aktualisiert einen Subscriber mit Status `pending`
 - versendet die DOI-Mail
 - Response: `{ ok: true }`
-- Whitepaper-Requests laufen über denselben Endpunkt mit `role = whitepaper`.
 - Ungültiges oder syntaktisch fehlerhaftes JSON ergibt HTTP `400`.
 
 ### `GET /api/newsletter/confirm`
@@ -72,7 +65,6 @@ Quelle: [`apps/platform/app/api/newsletter/confirm/route.ts`](/Users/lucaschoene
 - setzt den Subscriber auf `confirmed`
 - erzeugt ein Twenty-Event `newsletter_confirmed`
 - versendet eine Folge-Mail
-- Whitepaper-Flows erzeugen einen site-korrekten Download-Link
 - Redirect erfolgt site-abhaengig zur Success-Seite
 
 ### `GET /api/newsletter/unsubscribe`
@@ -100,15 +92,6 @@ Quelle: [`apps/platform/app/api/contact/route.ts`](/Users/lucaschoeneberg/Docume
 - synchronisiert den Lead best effort nach Twenty
 - Response: `{ ok: true }`
 
-### `POST /api/preorder`
-
-Quelle: [`apps/platform/app/api/preorder/route.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/app/api/preorder/route.ts)
-
-- validiert `PreorderRequestDto`
-- persistiert/updatet den Request in `preorder-requests`
-- versendet die interne Preorder-Mail
-- Response: `{ ok: true }`
-
 ## Fehlerstatus
 
 - `400`: ungültiges JSON, ungültiger DTO-Vertrag oder Captcha
@@ -124,7 +107,6 @@ Collections:
 
 - [`newsletter-subscribers`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/collections/newsletter-subscribers.ts)
 - [`contact-leads`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/collections/contact-leads.ts)
-- [`preorder-requests`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/collections/preorder-requests.ts)
 
 Interne Tabellen:
 
@@ -137,7 +119,6 @@ Wichtige Felder:
 
 - Newsletter: `site`, `email`, `role`, `status`, `confirmedAt`, `unsubscribedAt`, `twentySyncStatus`
 - Contact: `site`, `source`, `message`, `newsletterOptIn`, `emailDeliveryStatus`, `twentySyncStatus`
-- Preorder: `site`, `email`, `status`, `emailDeliveryStatus`
 
 ## Twenty
 
@@ -158,5 +139,4 @@ Quelle: [`packages/site-config/src/index.ts`](/Users/lucaschoeneberg/Documents/G
 
 - Redirects
 - Mail-Branding
-- Whitepaper-Download-Pfade
 - Plattform-Ursprung (`MARDU_PLATFORM_ORIGIN`)

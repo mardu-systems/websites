@@ -10,8 +10,10 @@ import {
 describe('lead request contracts', () => {
   test('rejects retired newsletter roles and contact sources', () => {
     assert.equal(
-      newsletterRequestSchema.safeParse({ email: 'hello@example.com', role: 'whitepaper_requester' })
-        .success,
+      newsletterRequestSchema.safeParse({
+        email: 'hello@example.com',
+        role: 'whitepaper',
+      }).success,
       false,
     );
     assert.equal(

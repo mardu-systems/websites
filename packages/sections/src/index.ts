@@ -1,8 +1,3 @@
-export {
-  default as WhitepaperSection,
-  type WhitepaperSectionProps,
-  type WhitepaperLeadRequestDto,
-} from "./whitepaper-section";
 export { LegalPage, type LegalPageProps } from "./legal-page";
 export {
   default as Gallery,

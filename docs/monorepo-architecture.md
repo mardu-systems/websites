@@ -14,7 +14,7 @@ Diese Dokumentation beschreibt die Zielstruktur des Monorepos unter `../websites
 
 - einziges Payload-Admin
 - zentrale Content-API für Blog, Integrationen, Lösungen, Roadmap, Produktkatalog, Rechtstexte und Media
-- zentrales Lead-Backend für Newsletter, Kontakt, Whitepaper und Preorder
+- zentrales Lead-Backend für Newsletter und Kontakt
 
 ## Gemeinsame Packages
 

@@ -7,6 +7,7 @@ describe('llms.txt feature visibility', () => {
     const text = buildLlmsText({ blog: false, integrations: false, products: false });
 
     assert.doesNotMatch(text, /www\.mardu\.de\/(?:blog|integrations|products)/);
+    assert.doesNotMatch(text, /whitepaper/i);
     assert.match(text, /www\.mardu\.de\/solutions/);
   });
 

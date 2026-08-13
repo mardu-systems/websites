@@ -42,13 +42,13 @@ TWENTY_NEWSLETTER_ROLE_FIELD=
 TWENTY_NEWSLETTER_CONSENT_MODEL_FIELD=
 ```
 
-The newsletter signup uses a double opt-in process. `MARDU_PLATFORM_ORIGIN` should match the public platform domain, and `NEWSLETTER_SECRET` signs confirmation, unsubscribe and whitepaper tokens.
+The newsletter signup uses a double opt-in process. `MARDU_PLATFORM_ORIGIN` should match the public platform domain, and `NEWSLETTER_SECRET` signs confirmation and unsubscribe tokens.
 
-If `TWENTY_API_KEY` is set, confirmed newsletter/whitepaper events and contact leads are synchronized to Twenty. This integration is optional and non-blocking.
+If `TWENTY_API_KEY` is set, confirmed newsletter events and contact leads are synchronized to Twenty. This integration is optional and non-blocking.
 
 ## Content- und Fixture-Seeds
 
-`seed:all` ist ausschließlich für isolierte Entwicklungs- und CI-Datenbanken vorgesehen. Der Befehl erzeugt neben Content auch einen Demo-Admin, Test-Leads, Test-Abonnenten und Test-Preorders und läuft deshalb nur mit einer bewussten Freigabe:
+`seed:all` ist ausschließlich für isolierte Entwicklungs- und CI-Datenbanken vorgesehen. Der Befehl erzeugt neben Content auch einen Demo-Admin, Test-Leads und Test-Abonnenten und läuft deshalb nur mit einer bewussten Freigabe:
 
 ```bash
 ALLOW_FIXTURE_SEED=true bun run seed:all

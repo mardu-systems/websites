@@ -191,7 +191,6 @@ Reihenfolge:
 | `/pricing`          | vorerst kein öffentliches Ziel           | erst nach verbindlicher Preiswahrheit          |
 | `/about`            | `/ueber-mardu`                           | gebrochenen Link ersetzen                      |
 | `/contact`          | `/kontakt`                               | Sprache vereinheitlichen                       |
-| `/whitepaper`       | thematisch passende Wissensseite         | nur bei funktionierendem Downloadflow          |
 
 Vor Umsetzung werden reale Indexierung, Backlinks und bestehender Traffic geprüft. Jede entfernte öffentliche URL erhält einen bewussten 301-Redirect oder einen dokumentierten Grund für 410.
 

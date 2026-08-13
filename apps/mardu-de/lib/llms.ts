@@ -50,11 +50,6 @@ const knowledgeLinks: readonly LlmsLink[] = [
     feature: 'blog',
   },
   {
-    label: 'Whitepaper',
-    url: 'https://www.mardu.de/whitepaper',
-    description: 'Praxisleitfaden zu Zutritt, Maschinenfreigabe und Qualifikationen',
-  },
-  {
     label: 'Über Mardu',
     url: 'https://www.mardu.de/about',
     description: 'Entstehung, Team und fachlicher Hintergrund',

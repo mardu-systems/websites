@@ -4,7 +4,6 @@ Shared content sections for multiple Mardu frontends.
 
 ## Public API
 
-- `WhitepaperSection`
 - `Gallery`
 - `ScenarioGrid`
 - `FeatureList`
@@ -56,28 +55,6 @@ Shared content sections for multiple Mardu frontends.
   - pins one media stage on desktop and switches its image when a text step reaches the activation point
   - renders each image next to its text on smaller screens instead of forcing sticky behavior
   - exposes an optional step button that respects `prefers-reduced-motion` and can continue to `nextSectionId`
-
-## `WhitepaperSection` contract
-
-- Props:
-  - `title?: string`
-  - `description?: string`
-  - `benefits?: string[]`
-  - `coverImageSrc?: string`
-  - `eyebrow?: string`
-  - `requestUrl?: string`
-  - `submitLabel?: string`
-  - `submitPendingLabel?: string`
-  - `consentLabel?: string`
-  - `successTitle?: string`
-  - `successDescription?: string`
-  - `onSubmitRequest?: (payload: WhitepaperLeadRequestDto) => Promise<void>`
-  - `className?: string`
-- Behavior:
-  - defaults to `POST /api/newsletter` with `role: 'whitepaper'`, but the endpoint can be overridden
-  - alternatively accepts an app-owned `onSubmitRequest` handler
-  - shows a success dialog after a successful request
-  - contains no site-specific branding, fetch ownership, or DTO validation logic
 
 ## `HeroSection` contract
 
@@ -289,7 +266,7 @@ Shared content sections for multiple Mardu frontends.
   - `className?: string`
 - `CTASectionNewsletterDialogProps`:
   - `requestUrl?: string`
-  - `requestRole?: 'newsletter' | 'whitepaper'`
+  - `requestRole?: 'newsletter'`
   - `dialogTitle?: string`
   - `dialogDescription?: string`
   - `submitLabel?: string`
@@ -306,7 +283,6 @@ Shared content sections for multiple Mardu frontends.
 
 ## Shared section DTOs
 
-- `WhitepaperLeadRequestDto`
 - `GalleryImage` / `GalleryProps`
 - `ScenarioBlock` / `ScenarioHighlight` / `ScenarioGridProps`
 - `FeatureListItemDef` / `FeatureListProps`

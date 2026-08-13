@@ -22,7 +22,7 @@ Quelle: `app/sitemap.ts`
 - ergänzt veröffentlichte Blog-, Integrations-, Produkt- und Lösungsdetails aus Payload
 - verwendet `updatedAt` ausschließlich, wenn das Content-Dokument einen belastbaren Wert liefert
 - liefert bei einem temporären Payload-Ausfall weiterhin die stabilen statischen und aktivierten Landingpages mit HTTP 200 aus
-- enthält keine Newsletter-, Whitepaper- oder Token-Statusseiten
+- enthält keine Newsletter- oder Token-Statusseiten
 
 ### `GET /llms.txt`
 
@@ -74,7 +74,7 @@ Vor einem Produktionsdeploy prüfen:
 
 1. `/robots.txt`, `/sitemap.xml` und `/llms.txt` liefern HTTP 200.
 2. Jede Sitemap-URL liefert HTTP 200, einen selbstreferenzierenden Canonical und kein `noindex`.
-3. Newsletter- und Whitepaper-Statusseiten liefern `noindex, nofollow`.
+3. Newsletter-Statusseiten liefern `noindex, nofollow`.
 4. JSON-LD ist im gerenderten HTML vorhanden und lässt sich als JSON parsen.
 5. Unterstützte Rich-Result-Typen werden im Google Rich Results Test geprüft.
 6. Alle Schemas werden zusätzlich im Schema.org Validator geprüft.

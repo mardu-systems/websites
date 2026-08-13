@@ -43,15 +43,8 @@ export async function sendNewsletterConfirmationEmail({
   });
 
   const confirmUrl = `${getPlatformOrigin()}/api/newsletter/confirm?token=${encodeURIComponent(confirmToken)}`;
-  const subject =
-    role === 'whitepaper'
-      ? `Bitte bestätige deinen Whitepaper-Download bei ${siteConfig.emailBrandName}`
-      : `Bitte bestätige deine Newsletter-Anmeldung bei ${siteConfig.emailBrandName}`;
-
-  const intro =
-    role === 'whitepaper'
-      ? 'Bitte bestätige deinen Download über den folgenden Link.'
-      : 'Bitte bestätige deine Anmeldung über den folgenden Link.';
+  const subject = `Bitte bestätige deine Newsletter-Anmeldung bei ${siteConfig.emailBrandName}`;
+  const intro = 'Bitte bestätige deine Anmeldung über den folgenden Link.';
 
   await sendEmail({
     to: email,

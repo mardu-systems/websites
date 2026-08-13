@@ -80,8 +80,6 @@ Shared configuration DTO for a site.
 - `contactPath: string`
 - `newsletterSuccessPath: string`
 - `newsletterUnsubscribePath: string`
-- `whitepaperSuccessPath?: string`
-- `whitepaperDownloadPath?: string`
 - `emailLogoUrl: string`
 - `emailBrandName: string`
 - `features: SiteFeatureFlags`

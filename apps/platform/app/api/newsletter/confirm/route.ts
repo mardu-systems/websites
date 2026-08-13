@@ -9,13 +9,9 @@ import { getSiteConfig } from '@mardu/site-config';
 
 const activeSite: SiteKey = 'mardu-de';
 
-function redirectWithStatus(site: SiteKey, status: string, role = 'newsletter') {
+function redirectWithStatus(site: SiteKey, status: string) {
   const siteConfig = getSiteConfig(site);
-  const targetPath =
-    role === 'whitepaper' && siteConfig.whitepaperSuccessPath
-      ? siteConfig.whitepaperSuccessPath
-      : siteConfig.newsletterSuccessPath;
-  const url = new URL(targetPath, siteConfig.origin);
+  const url = new URL(siteConfig.newsletterSuccessPath, siteConfig.origin);
   url.searchParams.set('status', status);
   return NextResponse.redirect(url);
 }
@@ -45,13 +41,12 @@ export async function GET(req: Request) {
       ...(data.company ? { company: data.company } : {}),
     });
 
-    const source = role === 'whitepaper' ? 'whitepaper' : 'newsletter';
     const crmPayload: NewsletterCrmEventDto = {
       type: 'newsletter_confirmed',
       email: data.email,
       site,
       role,
-      source,
+      source: 'newsletter',
       ...(data.firstName ? { firstName: data.firstName } : {}),
       ...(data.lastName ? { lastName: data.lastName } : {}),
       ...(data.company ? { company: data.company } : {}),
@@ -75,7 +70,7 @@ export async function GET(req: Request) {
     }
   } catch (err) {
     console.error('Failed to confirm newsletter subscription', err);
-    return redirectWithStatus(site, 'error', role);
+    return redirectWithStatus(site, 'error');
   }
 
   try {
@@ -89,35 +84,17 @@ export async function GET(req: Request) {
       ...(data.company ? { company: data.company } : {}),
     });
     const unsubscribeUrl = `${process.env.MARDU_PLATFORM_ORIGIN?.trim() || 'https://platform.mardu.de'}/api/newsletter/unsubscribe?token=${encodeURIComponent(unsubscribeToken)}`;
-    const whitepaperDownloadUrl =
-      role === 'whitepaper' && getSiteConfig(site).whitepaperDownloadPath
-        ? `${getSiteConfig(site).origin}${getSiteConfig(site).whitepaperDownloadPath}?token=${encodeURIComponent(
-            createNewsletterToken({
-              email: data.email,
-              site,
-              role,
-              purpose: 'whitepaper-download',
-              ...(data.firstName ? { firstName: data.firstName } : {}),
-              ...(data.lastName ? { lastName: data.lastName } : {}),
-              ...(data.company ? { company: data.company } : {}),
-            }),
-          )}`
-        : undefined;
-    const body = whitepaperDownloadUrl
-      ? `<p>Vielen Dank für deine Bestätigung.</p><p><a href="${whitepaperDownloadUrl}">Whitepaper herunterladen</a></p><p>Wenn du keine weiteren Nachrichten erhalten möchtest, kannst du dich <a href="${unsubscribeUrl}">hier abmelden</a>.</p>`
-      : `<p>Vielen Dank für deine Bestätigung.</p><p>Wenn du den Newsletter nicht mehr erhalten möchtest, kannst du dich <a href="${unsubscribeUrl}">hier abmelden</a>.</p>`;
+    const body = `<p>Vielen Dank für deine Bestätigung.</p><p>Wenn du den Newsletter nicht mehr erhalten möchtest, kannst du dich <a href="${unsubscribeUrl}">hier abmelden</a>.</p>`;
 
     await sendEmail({
       to: data.email,
-      subject: role === 'whitepaper' ? 'Dein Whitepaper ist bereit' : 'Newsletter Anmeldung bestätigt',
-      text: whitepaperDownloadUrl
-        ? `Vielen Dank für deine Bestätigung. Whitepaper: ${whitepaperDownloadUrl} Abmelden: ${unsubscribeUrl}`
-        : `Vielen Dank für deine Bestätigung. Abmelden: ${unsubscribeUrl}`,
-      html: renderEmailLayout(site, role === 'whitepaper' ? 'Whitepaper Download' : 'Newsletter Anmeldung bestätigt', body),
+      subject: 'Newsletter Anmeldung bestätigt',
+      text: `Vielen Dank für deine Bestätigung. Abmelden: ${unsubscribeUrl}`,
+      html: renderEmailLayout(site, 'Newsletter Anmeldung bestätigt', body),
     });
   } catch (err) {
     console.error('Failed to send newsletter confirmation follow-up email', err);
   }
 
-  return redirectWithStatus(site, 'success', role);
+  return redirectWithStatus(site, 'success');
 }

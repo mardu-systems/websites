@@ -36,13 +36,12 @@ export async function GET(req: Request) {
       role: data.role,
     });
     const role = unsubscribed?.role ?? data.role;
-    const source = role === 'whitepaper' ? 'whitepaper' : 'newsletter';
     const crmPayload: NewsletterCrmEventDto = {
       type: 'newsletter_unsubscribed',
       email: data.email,
       site,
       role,
-      source,
+      source: 'newsletter',
       ...(unsubscribed?.firstName ? { firstName: unsubscribed.firstName } : {}),
       ...(unsubscribed?.lastName ? { lastName: unsubscribed.lastName } : {}),
       ...(unsubscribed?.company ? { company: unsubscribed.company } : {}),

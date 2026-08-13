@@ -567,7 +567,7 @@ export async function sendNewsletterEventToTwenty(
         message: title,
         occurredAt: payload.occurredAt,
         site: payload.site,
-        source: payload.source === 'whitepaper' ? 'configurator' : 'contact-form',
+        source: 'contact-form',
         config: { details: lines },
         newsletterOptIn: payload.type !== 'newsletter_unsubscribed',
       });

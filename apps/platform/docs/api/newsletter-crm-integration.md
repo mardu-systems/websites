@@ -19,7 +19,7 @@ interface NewsletterCrmEventDto {
   email: string;
   site: 'mardu-de';
   role: string;
-  source: 'newsletter' | 'whitepaper';
+  source: 'newsletter';
   firstName?: string;
   lastName?: string;
   company?: string;

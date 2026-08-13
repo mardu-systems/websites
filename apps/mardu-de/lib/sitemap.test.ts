@@ -27,6 +27,7 @@ describe('mardu.de sitemap', () => {
     assert.ok(sitemap.some((entry) => entry.url === `${MARDU_SITE_URL}/solutions`));
     assert.ok(sitemap.some((entry) => entry.url === `${MARDU_SITE_URL}/blog`));
     assert.ok(sitemap.some((entry) => entry.url === `${MARDU_SITE_URL}/integrations`));
+    assert.ok(!sitemap.some((entry) => entry.url.includes('/whitepaper')));
     assert.ok(!sitemap.some((entry) => entry.url.includes('/products/gateway-pro')));
   });
 

@@ -13,7 +13,6 @@ export const defaultFooterNavLinks: ReadonlyArray<LayoutLinkDto> = [
 ];
 
 export const defaultFooterMetaLinks: ReadonlyArray<LayoutLinkDto> = [
-  { label: 'Whitepaper', href: '/whitepaper' },
   { label: 'Roadmap', href: '/roadmap' },
   { label: 'Markenressourcen', href: '/brand' },
 ];

@@ -35,6 +35,7 @@ Diese Collections sind fuer typische CMS-Workflows mit vollem CRUD freigegeben:
 - `media`: nur `find`
 
 Begruendung:
+
 - Assets duerfen fuer Referenzen und Auswahl gelesen werden.
 - Uploads, Ersetzungen und Loeschungen bleiben regulierten Admin-/REST-Workflows vorbehalten.
 
@@ -44,9 +45,9 @@ Diese Collections sind fuer Ops-Workflows freigegeben, aber bewusst ohne Loeschr
 
 - `newsletter-subscribers`: `find`, `create`, `update`
 - `contact-leads`: `find`, `create`, `update`
-- `preorder-requests`: `find`, `create`, `update`
 
 Begruendung:
+
 - Operative Datensaetze sollen per MCP gepflegt werden koennen.
 - Versehentliche Datenvernichtung per Agent oder Tool wird ausgeschlossen.
 
@@ -55,6 +56,7 @@ Begruendung:
 - `users`
 
 Begruendung:
+
 - Keine MCP-Freigabe fuer Benutzer- und Authentifizierungsverwaltung in diesem Schritt.
 
 ## Keine Globals
@@ -72,6 +74,7 @@ Folgende experimentelle Toolbereiche bleiben deaktiviert:
 - `jobs`
 
 Begruendung:
+
 - Fokus auf inhaltlicher und operativer Pflege.
 - Keine agentische Schema-, Config- oder Auth-Manipulation in Produktion.
 

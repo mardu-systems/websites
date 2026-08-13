@@ -10,7 +10,6 @@ const expectedHiddenPaths = (process.env.RELEASE_EXPECT_HIDDEN_PATHS || '')
 const requiredNoindexPaths = new Set([
   '/newsletter/anmeldung',
   '/newsletter/abmeldung',
-  '/whitepaper/success',
 ]);
 const ignoredPathPrefixes = ['/api/', '/_next/', '/.well-known/vercel/flags'];
 const ignoredFileExtensions = new Set([

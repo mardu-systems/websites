@@ -2,7 +2,7 @@ import type { SiteKey } from '@mardu/lead-core';
 
 export type NewsletterCrmEventType = 'newsletter_confirmed' | 'newsletter_unsubscribed';
 
-export type NewsletterSignupSource = 'newsletter' | 'whitepaper';
+export type NewsletterSignupSource = 'newsletter';
 
 export interface NewsletterCrmEventDto {
   type: NewsletterCrmEventType;

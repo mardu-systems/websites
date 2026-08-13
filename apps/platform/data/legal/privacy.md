@@ -65,9 +65,9 @@ Soweit Dienstleister Daten in unserem Auftrag verarbeiten, bestehen Verträge zu
 
 Wir speichern Anfragen so lange, wie dies zur Bearbeitung und Dokumentation der Geschäftsbeziehung erforderlich ist. Soweit sich aus einer Anfrage ein Vertrag ergibt, gelten zusätzlich die handels- und steuerrechtlichen Aufbewahrungsfristen. Im Übrigen löschen wir die Daten, wenn der Zweck entfällt und keine gesetzlichen oder berechtigten Gründe für eine weitere Speicherung bestehen.
 
-## 8. Newsletter und Whitepaper
+## 8. Newsletter
 
-Für Newsletter-Anmeldungen und bestimmte Whitepaper-Downloads verarbeiten wir Ihre E-Mail-Adresse sowie freiwillig angegebene Daten wie Vorname, Nachname und Unternehmen. Die Anmeldung erfolgt im Double-Opt-in-Verfahren: Nach der Anmeldung erhalten Sie eine E-Mail mit einem Bestätigungslink. Erst nach der Bestätigung wird die Anmeldung aktiv.
+Für Newsletter-Anmeldungen verarbeiten wir Ihre E-Mail-Adresse sowie freiwillig angegebene Daten wie Vorname, Nachname und Unternehmen. Die Anmeldung erfolgt im Double-Opt-in-Verfahren: Nach der Anmeldung erhalten Sie eine E-Mail mit einem Bestätigungslink. Erst nach der Bestätigung wird die Anmeldung aktiv.
 
 Rechtsgrundlage für den Versand ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Die Protokollierung von Anmeldung, Bestätigung und Abmeldung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt im Nachweis einer ordnungsgemäßen Anmeldung und in der Verhinderung missbräuchlicher Anmeldungen.
 

@@ -66,7 +66,7 @@ export async function POST(req: Request) {
       const subscriber = await upsertPendingNewsletterSubscriber({
         email: payload.email,
         site: payload.site,
-        role: payload.source === 'configurator' ? 'whitepaper' : 'newsletter',
+        role: 'newsletter',
         firstName,
         lastName,
         ...(payload.company ? { company: payload.company } : {}),
@@ -74,7 +74,7 @@ export async function POST(req: Request) {
       await attachContactLeadToSubscriber(leadId, subscriber.id);
       void sendNewsletterConfirmationEmail({
         email: payload.email,
-        role: payload.source === 'configurator' ? 'whitepaper' : 'newsletter',
+        role: 'newsletter',
         site: payload.site,
         firstName,
         lastName,

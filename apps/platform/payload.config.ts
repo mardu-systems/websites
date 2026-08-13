@@ -17,7 +17,6 @@ import { Integrations } from '@/collections/integrations.ts';
 import { LegalPages } from '@/collections/legal-pages.ts';
 import { Media } from '@/collections/media.ts';
 import { NewsletterSubscribers } from '@/collections/newsletter-subscribers.ts';
-import { PreorderRequests } from '@/collections/preorder-requests.ts';
 import { RoadmapItems } from '@/collections/roadmap-items.ts';
 import { Users } from '@/collections/users.ts';
 import { Solutions } from '@/collections/solution.ts';
@@ -65,7 +64,6 @@ export default buildConfig({
     Integrations,
     NewsletterSubscribers,
     ContactLeads,
-    PreorderRequests,
     Solutions,
     ProductCategories,
     ProductTechnologies,
@@ -237,15 +235,6 @@ export default buildConfig({
         'contact-leads': {
           description:
             'Operative Bearbeitung von Kontaktanfragen fuer Lead- und Vertriebs-Workflows ohne Loeschrechte.',
-          enabled: {
-            create: true,
-            find: true,
-            update: true,
-          },
-        },
-        'preorder-requests': {
-          description:
-            'Operative Bearbeitung von Vorbestellungen fuer Pipeline- und Qualification-Workflows ohne Loeschrechte.',
           enabled: {
             create: true,
             find: true,
