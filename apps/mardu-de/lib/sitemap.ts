@@ -13,6 +13,7 @@ export type PlatformContentSitemapEntries = {
 type BuildMarduSitemapOptions = {
   blogEnabled: boolean;
   integrationsEnabled: boolean;
+  productsEnabled: boolean;
   loadContentEntries: () => Promise<PlatformContentSitemapEntries>;
   onContentError?: (error: unknown) => void;
 };
@@ -24,7 +25,6 @@ const staticRoutes: MetadataRoute.Sitemap = [
   { url: `${MARDU_SITE_URL}/brand`, changeFrequency: 'monthly', priority: 0.4 },
   { url: `${MARDU_SITE_URL}/fotos`, changeFrequency: 'monthly', priority: 0.4 },
   { url: `${MARDU_SITE_URL}/platform`, changeFrequency: 'monthly', priority: 0.85 },
-  { url: `${MARDU_SITE_URL}/products`, changeFrequency: 'weekly', priority: 0.85 },
   { url: `${MARDU_SITE_URL}/solutions`, changeFrequency: 'weekly', priority: 0.85 },
   { url: `${MARDU_SITE_URL}/roadmap`, changeFrequency: 'weekly', priority: 0.65 },
   { url: `${MARDU_SITE_URL}/configurator`, changeFrequency: 'monthly', priority: 0.65 },
@@ -37,8 +37,21 @@ const staticRoutes: MetadataRoute.Sitemap = [
 function createLandingRoutes({
   blogEnabled,
   integrationsEnabled,
-}: Pick<BuildMarduSitemapOptions, 'blogEnabled' | 'integrationsEnabled'>): MetadataRoute.Sitemap {
+  productsEnabled,
+}: Pick<
+  BuildMarduSitemapOptions,
+  'blogEnabled' | 'integrationsEnabled' | 'productsEnabled'
+>): MetadataRoute.Sitemap {
   return [
+    ...(productsEnabled
+      ? [
+          {
+            url: `${MARDU_SITE_URL}/products`,
+            changeFrequency: 'weekly' as const,
+            priority: 0.85,
+          },
+        ]
+      : []),
     ...(integrationsEnabled
       ? [
           {
@@ -76,10 +89,11 @@ function createDetailRoutes(
 export async function buildMarduSitemap({
   blogEnabled,
   integrationsEnabled,
+  productsEnabled,
   loadContentEntries,
   onContentError,
 }: BuildMarduSitemapOptions): Promise<MetadataRoute.Sitemap> {
-  const landingRoutes = createLandingRoutes({ blogEnabled, integrationsEnabled });
+  const landingRoutes = createLandingRoutes({ blogEnabled, integrationsEnabled, productsEnabled });
 
   let contentEntries: PlatformContentSitemapEntries;
   try {
@@ -92,7 +106,7 @@ export async function buildMarduSitemap({
   return [
     ...staticRoutes,
     ...landingRoutes,
-    ...createDetailRoutes(contentEntries.products, 'products', 0.75),
+    ...(productsEnabled ? createDetailRoutes(contentEntries.products, 'products', 0.75) : []),
     ...createDetailRoutes(contentEntries.solutions, 'solutions', 0.75),
     ...(integrationsEnabled
       ? createDetailRoutes(contentEntries.integrations, 'integrations', 0.75)

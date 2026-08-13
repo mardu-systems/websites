@@ -3,6 +3,7 @@ import { Homepage } from '@/features/homepage/homepage';
 import { faqItems } from '@/features/homepage/homepage-content';
 import { JsonLd } from '@/components/seo/json-ld';
 import { createFaqJsonLd } from '@/lib/seo';
+import { getSiteFeatureFlags } from '@mardu/site-config/feature-flags.server';
 
 const title = 'Mardu: Maschinenfreigabe, Zutritt und Zufahrt';
 const description =
@@ -37,11 +38,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const features = await getSiteFeatureFlags('mardu-de');
+
   return (
     <>
       <JsonLd data={createFaqJsonLd(faqItems)} />
-      <Homepage />
+      <Homepage features={features} />
     </>
   );
 }

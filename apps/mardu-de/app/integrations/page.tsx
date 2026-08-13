@@ -16,13 +16,21 @@ import { createPageMetadata } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata: Metadata = createPageMetadata({
+const integrationsMetadata: Metadata = createPageMetadata({
   title: 'Integrationen',
   description:
     'Mardu verbindet Zutritt, Maschinen, Identitäten und Prozesse über offene Standards und bestehende Systeme.',
   path: '/integrations',
   socialTitle: 'Integrationen | Mardu',
 });
+
+export async function generateMetadata(): Promise<Metadata> {
+  if (!(await isIntegrationsEnabled('mardu-de'))) {
+    return { title: 'Integrationen nicht gefunden', robots: { index: false, follow: false } };
+  }
+
+  return integrationsMetadata;
+}
 
 const CURATED_INTEGRATIONS = [
   { slug: 'ldap', logoSrc: '/integrations/logos/ldap.png' },

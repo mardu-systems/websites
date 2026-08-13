@@ -26,6 +26,7 @@ Supported site-level feature toggles:
 
 - `blog`
 - `integrations`
+- `products`
 
 #### `SiteFeatureFlags`
 
@@ -33,6 +34,7 @@ DTO describing the resolved site feature state.
 
 - `blog: boolean`
 - `integrations: boolean`
+- `products: boolean`
 
 #### `SiteFeatureFlagOptionDto`
 
@@ -57,6 +59,7 @@ Map of documented flag definitions for one site.
 
 - `blog: SiteFeatureFlagDefinitionDto`
 - `integrations: SiteFeatureFlagDefinitionDto`
+- `products: SiteFeatureFlagDefinitionDto`
 
 #### `SiteConfig`
 
@@ -110,8 +113,10 @@ Recognized env variables:
 
 - `MARDU_DE_ENABLE_BLOG`
 - `MARDU_DE_ENABLE_INTEGRATIONS`
+- `MARDU_DE_ENABLE_PRODUCTS`
 - `MARDU_PLATFORM_ENABLE_BLOG`
 - `MARDU_PLATFORM_ENABLE_INTEGRATIONS`
+- `MARDU_PLATFORM_ENABLE_PRODUCTS`
 
 Supported values:
 
@@ -127,6 +132,10 @@ Async convenience helper for `(await getSiteFeatureFlags(site)).blog`.
 
 Async convenience helper for `(await getSiteFeatureFlags(site)).integrations`.
 
+#### `isProductsEnabled(site)`
+
+Async convenience helper for `(await getSiteFeatureFlags(site)).products`.
+
 #### `getPlatformOrigin()`
 
 Returns the platform origin, optionally overridden through `MARDU_PLATFORM_ORIGIN`.
@@ -139,3 +148,16 @@ Returns the platform origin, optionally overridden through `MARDU_PLATFORM_ORIGI
 - Feature evaluation uses Vercel Flags via `flags/next` and lazily loaded `@flags-sdk/vercel`.
 - Payload content visibility per entry stays in `@mardu/content-core` via the existing `sites` fields.
 - Frontends are responsible for using these helpers to gate navigation, routes, sitemap entries, and preview modules.
+
+## mardu.de rollout flags
+
+The Vercel flag keys are `blog`, `integrations`, and `products`. All three default to `false` for
+`mardu-de`. They can be enabled independently in Vercel Flags for Preview or Production after the
+corresponding content is approved. The static `MARDU_DE_ENABLE_*` variables remain explicit
+emergency and local-development fallbacks; a value set there takes precedence over Vercel Flags.
+
+Disabling one of these flags removes its public navigation and internal entry links, excludes its
+routes from the sitemap and `llms.txt`, and makes direct page requests return HTTP 404.
+Platform/Payload API contracts and CMS content are not disabled or modified by these frontend flags.
+The mardu.de root layout is dynamic so changes to dashboard values also reach shared navigation on
+otherwise static content pages without rebuilding the application.

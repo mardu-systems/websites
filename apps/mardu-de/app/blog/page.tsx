@@ -2,15 +2,24 @@ import { BlogCategoryFilter, BlogGrid, BlogHero, BlogPagination, BlogSearch } fr
 import { isBlogEnabled } from '@mardu/site-config/feature-flags.server';
 import { getBlogCategories, getBlogPosts, getFeaturedPost } from '@/lib/blog';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import { createPageMetadata } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata = createPageMetadata({
+const blogMetadata = createPageMetadata({
   title: 'Blog',
   description: 'Fachbeiträge rund um Zugangssysteme, Engineering und AI-Workflows.',
   path: '/blog',
 });
+
+export async function generateMetadata(): Promise<Metadata> {
+  if (!(await isBlogEnabled('mardu-de'))) {
+    return { title: 'Blog nicht gefunden', robots: { index: false, follow: false } };
+  }
+
+  return blogMetadata;
+}
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 

@@ -5,11 +5,12 @@ export type SiteLink = {
   label: string;
 };
 
-export type SiteFeatureKey = 'blog' | 'integrations';
+export type SiteFeatureKey = 'blog' | 'integrations' | 'products';
 
 export type SiteFeatureFlags = {
   blog: boolean;
   integrations: boolean;
+  products: boolean;
 };
 
 export type SiteFeatureFlagOptionDto = {
@@ -83,8 +84,9 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
     emailLogoUrl: 'https://www.mardu.de/mardu-branding/logo/mardu_logo_side_for_white_bg.svg',
     emailBrandName: 'Mardu GmbH',
     features: {
-      blog: true,
-      integrations: true,
+      blog: false,
+      integrations: false,
+      products: false,
     },
     footerMetaLinks: [
       { href: '/publisher', label: 'Impressum' },
@@ -112,6 +114,7 @@ export const siteConfigs: Record<SiteKey, SiteConfig> = {
     features: {
       blog: false,
       integrations: false,
+      products: false,
     },
     footerMetaLinks: [
       { href: '/publisher', label: 'Impressum' },
@@ -142,6 +145,13 @@ export const siteFeatureFlagDefinitions: Record<SiteKey, SiteFeatureFlagDefiniti
       origin: `${siteConfigs['mardu-de'].origin}/integrations`,
       options: booleanSiteFlagOptions,
     },
+    products: {
+      key: 'products',
+      defaultValue: siteConfigs['mardu-de'].features.products,
+      description: 'Steuert Produkt-Navigation, Produkt-Routen und Sitemap-Einträge auf mardu.de.',
+      origin: `${siteConfigs['mardu-de'].origin}/products`,
+      options: booleanSiteFlagOptions,
+    },
   },
   platform: {
     blog: {
@@ -156,6 +166,13 @@ export const siteFeatureFlagDefinitions: Record<SiteKey, SiteFeatureFlagDefiniti
       defaultValue: siteConfigs.platform.features.integrations,
       description: 'Steuert Integrations-Features auf platform.mardu.de.',
       origin: `${siteConfigs.platform.origin}/integrations`,
+      options: booleanSiteFlagOptions,
+    },
+    products: {
+      key: 'products',
+      defaultValue: siteConfigs.platform.features.products,
+      description: 'Steuert Produkt-Features auf platform.mardu.de.',
+      origin: `${siteConfigs.platform.origin}/products`,
       options: booleanSiteFlagOptions,
     },
   },
@@ -195,9 +212,11 @@ export const featureEnvVarNames: Record<SiteKey, Record<SiteFeatureKey, string>>
   'mardu-de': {
     blog: 'MARDU_DE_ENABLE_BLOG',
     integrations: 'MARDU_DE_ENABLE_INTEGRATIONS',
+    products: 'MARDU_DE_ENABLE_PRODUCTS',
   },
   platform: {
     blog: 'MARDU_PLATFORM_ENABLE_BLOG',
     integrations: 'MARDU_PLATFORM_ENABLE_INTEGRATIONS',
+    products: 'MARDU_PLATFORM_ENABLE_PRODUCTS',
   },
 };

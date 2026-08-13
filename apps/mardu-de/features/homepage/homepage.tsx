@@ -9,12 +9,13 @@ import { HomepageIndex } from './components/homepage-index';
 import { PermissionsSection } from './components/permissions-section';
 import { RolloutFaqSection } from './components/rollout-faq-section';
 import { SystemOverviewSection } from './components/system-overview-section';
+import type { SiteFeatureFlags } from '@mardu/site-config';
 
-export function Homepage() {
+export function Homepage({ features }: { features: SiteFeatureFlags }) {
   return (
     <main className="min-h-screen bg-background">
       <HomepageHero />
-      <CustomerProofSection />
+      <CustomerProofSection features={features} />
       <SystemOverviewSection />
       <AccessPointsSection />
       <PermissionsSection />

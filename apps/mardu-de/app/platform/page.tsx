@@ -2,6 +2,7 @@ import CTASectionWithRecaptcha from '@/components/utilities/cta-section-with-rec
 import { EditorialPanelsSection, HeroSection, SplitContent } from '@mardu/sections';
 import { platformEditorialPanels, platformFeatures, platformNetworks } from '@/data/platform-page';
 import { createPageMetadata } from '@/lib/seo';
+import { isProductsEnabled } from '@mardu/site-config/feature-flags.server';
 
 export const metadata = createPageMetadata({
   title: 'Mardu Plattform',
@@ -62,7 +63,9 @@ const introItems = [
   },
 ];
 
-export default function Page() {
+export default async function Page() {
+  const productsEnabled = await isProductsEnabled('mardu-de');
+
   return (
     <main className="min-h-screen bg-background">
       <HeroSection
@@ -71,8 +74,8 @@ export default function Page() {
         overline="Plattform"
         buttonText="Whitepaper ansehen"
         buttonHref="/whitepaper"
-        secondaryButtonText="Produkte ansehen"
-        secondaryButtonHref="/products"
+        secondaryButtonText={productsEnabled ? 'Produkte ansehen' : undefined}
+        secondaryButtonHref={productsEnabled ? '/products' : undefined}
         imageSrc="/gateway/mounted.jpg"
         imageAlt="mardu Hardware im Werkstattkontext"
       />

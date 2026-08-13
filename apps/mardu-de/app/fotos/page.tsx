@@ -7,6 +7,8 @@ import PhotoSwipeGallery, {
 } from '@/components/utilities/photoswipe-gallery';
 import { sitePhotoAssets } from '@/data/site-photos';
 import { createPageMetadata } from '@/lib/seo';
+import { getSiteFeatureFlags } from '@mardu/site-config/feature-flags.server';
+import { filterFeatureLinks } from '@/lib/feature-links';
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Fotos',
@@ -30,7 +32,14 @@ async function getPhotoGalleryItems(): Promise<PhotoSwipeGalleryItem[]> {
 }
 
 export default async function FotosPage() {
-  const items = await getPhotoGalleryItems();
+  const [galleryItems, features] = await Promise.all([
+    getPhotoGalleryItems(),
+    getSiteFeatureFlags('mardu-de'),
+  ]);
+  const items = galleryItems.map((item) => ({
+    ...item,
+    usedOn: filterFeatureLinks(item.usedOn, features),
+  }));
 
   return (
     <main className="min-h-screen bg-background pb-10 text-foreground">

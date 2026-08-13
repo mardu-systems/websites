@@ -3,9 +3,13 @@ import Link from 'next/link';
 import { cn } from '@mardu/ui/lib/utils';
 import { ArrowUpRight } from 'lucide-react';
 import { ScrollReveal } from '@mardu/ui/components/motion/scroll-reveal';
+import type { SiteFeatureFlags } from '@mardu/site-config';
+import { filterFeatureLinks } from '@/lib/feature-links';
 import { customerProof } from '../homepage-content';
 
-export function CustomerProofSection() {
+export function CustomerProofSection({ features }: { features: SiteFeatureFlags }) {
+  const links = filterFeatureLinks(customerProof.links, features);
+
   return (
     <section
       id="kunden"
@@ -70,7 +74,7 @@ export function CustomerProofSection() {
             {customerProof.description}
           </p>
           <nav className="mt-5 border-t border-white/30" aria-label="Direkteinstiege">
-            {customerProof.links.map((link) => (
+            {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}

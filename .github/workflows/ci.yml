@@ -26,6 +26,9 @@ jobs:
     env:
       ALLOW_LOCAL_CONTENT_IMAGES: 'true'
       DATABASE_URI: postgresql://postgres:postgres@127.0.0.1:5432/mardu_ci
+      MARDU_DE_ENABLE_BLOG: 'false'
+      MARDU_DE_ENABLE_INTEGRATIONS: 'false'
+      MARDU_DE_ENABLE_PRODUCTS: 'false'
       MARDU_PLATFORM_ORIGIN: http://127.0.0.1:4000
       NEWSLETTER_SECRET: ci-newsletter-secret
       PAYLOAD_PUBLIC_SERVER_URL: http://127.0.0.1:4000
@@ -82,3 +85,4 @@ jobs:
         env:
           RELEASE_BASE_URL: http://127.0.0.1:3000
           RELEASE_CANONICAL_ORIGIN: https://www.mardu.de
+          RELEASE_EXPECT_HIDDEN_PATHS: /blog,/integrations,/products

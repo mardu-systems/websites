@@ -51,6 +51,7 @@ Bereitstellung über:
 - `products`, `product-categories`, `product-technologies`, `product-carriers` und `product-variants` nutzen Draft/Publish.
 - Öffentlicher Read-Zugriff liefert nur `_status=published`.
 - Sichtbarkeit für Consumer-Frontends wird zusätzlich über `sites` gesteuert.
+- Das Vercel-Flag `products` in `mardu-de` steuert ausschließlich die öffentliche Frontend-Ausspielung. Bei `false` fehlen Produktlinks und Sitemap-Einträge, und Produktrouten liefern HTTP 404. Die hier dokumentierten Platform-Endpunkte und DTOs bleiben unverändert verfügbar.
 
 ## Mapping-Regeln
 

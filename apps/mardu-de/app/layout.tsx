@@ -18,6 +18,8 @@ import { JsonLd } from '@/components/seo/json-ld';
 const siteConfig = getSiteConfig('mardu-de');
 const SITE_URL = siteConfig.origin;
 
+export const dynamic = 'force-dynamic';
+
 const aktivGrotesk = localFont({
   src: [
     { path: '../public/fonts/AktivGrotesk-Light.ttf', weight: '300', style: 'normal' },

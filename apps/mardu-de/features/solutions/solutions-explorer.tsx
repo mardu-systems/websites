@@ -10,6 +10,7 @@ import type { SolutionExplorerViewModel } from './solutions-page-content';
 
 export interface SolutionsExplorerProps {
   items: readonly SolutionExplorerViewModel[];
+  integrationsEnabled: boolean;
 }
 
 const quickLinks = [
@@ -17,7 +18,7 @@ const quickLinks = [
   { index: '03', label: 'Integrationen', href: '/integrations' },
 ] as const;
 
-export function SolutionsExplorer({ items }: SolutionsExplorerProps) {
+export function SolutionsExplorer({ items, integrationsEnabled }: SolutionsExplorerProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const activeItem = items[activeIndex];
@@ -205,18 +206,20 @@ export function SolutionsExplorer({ items }: SolutionsExplorerProps) {
             </span>
             [01] Lösung im Detail
           </Link>
-          {quickLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="group flex min-h-11 items-center gap-2 border-b border-border py-2 text-sm transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            >
-              <span className="flex size-5 items-center justify-center rounded-full bg-foreground text-background transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                <ArrowUpRight className="size-3" aria-hidden="true" />
-              </span>
-              [{link.index}] {link.label}
-            </Link>
-          ))}
+          {quickLinks
+            .filter((link) => integrationsEnabled || link.href !== '/integrations')
+            .map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="group flex min-h-11 items-center gap-2 border-b border-border py-2 text-sm transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <span className="flex size-5 items-center justify-center rounded-full bg-foreground text-background transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                  <ArrowUpRight className="size-3" aria-hidden="true" />
+                </span>
+                [{link.index}] {link.label}
+              </Link>
+            ))}
         </nav>
       </aside>
     </div>

@@ -15,6 +15,7 @@ describe('mardu.de sitemap', () => {
     const sitemap = await buildMarduSitemap({
       blogEnabled: true,
       integrationsEnabled: true,
+      productsEnabled: true,
       loadContentEntries: async () => {
         throw new Error('Platform offline');
       },
@@ -33,6 +34,7 @@ describe('mardu.de sitemap', () => {
     const sitemap = await buildMarduSitemap({
       blogEnabled: false,
       integrationsEnabled: false,
+      productsEnabled: true,
       loadContentEntries: async () => contentEntries,
     });
     const urls = sitemap.map((entry) => entry.url);
@@ -47,5 +49,20 @@ describe('mardu.de sitemap', () => {
 
     assert.ok(!urls.some((url) => url.startsWith(`${MARDU_SITE_URL}/blog/`)));
     assert.ok(!urls.some((url) => url.startsWith(`${MARDU_SITE_URL}/integrations/`)));
+  });
+
+  test('removes disabled content landings and detail routes', async () => {
+    const sitemap = await buildMarduSitemap({
+      blogEnabled: false,
+      integrationsEnabled: false,
+      productsEnabled: false,
+      loadContentEntries: async () => contentEntries,
+    });
+    const urls = sitemap.map((entry) => entry.url);
+
+    for (const segment of ['blog', 'integrations', 'products']) {
+      assert.ok(!urls.some((url) => url.startsWith(`${MARDU_SITE_URL}/${segment}`)));
+    }
+    assert.ok(urls.includes(`${MARDU_SITE_URL}/solutions`));
   });
 });

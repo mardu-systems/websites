@@ -16,10 +16,9 @@ export type SiteFeatureFlagDeclarations = Record<SiteFeatureKey, Flag<boolean>>;
 const siteFeatureFlagDeclarationsPromise = new Map<SiteKey, Promise<SiteFeatureFlagDeclarations>>();
 
 async function loadVercelAdapter() {
-  const importModule = new Function(
-    'specifier',
-    'return import(specifier);',
-  ) as (specifier: string) => Promise<typeof import('@flags-sdk/vercel')>;
+  const importModule = new Function('specifier', 'return import(specifier);') as (
+    specifier: string,
+  ) => Promise<typeof import('@flags-sdk/vercel')>;
 
   return importModule('@flags-sdk/vercel');
 }
@@ -36,6 +35,10 @@ async function createSiteFlagDeclarations(site: SiteKey): Promise<SiteFeatureFla
   const integrationsDefinition = {
     ...definitions.integrations,
     options: [...definitions.integrations.options],
+  };
+  const productsDefinition = {
+    ...definitions.products,
+    options: [...definitions.products.options],
   };
 
   return {
@@ -57,6 +60,15 @@ async function createSiteFlagDeclarations(site: SiteKey): Promise<SiteFeatureFla
           ...integrationsDefinition,
           decide: async () => definitions.integrations.defaultValue,
         }),
+    products: adapter
+      ? flag<boolean>({
+          ...productsDefinition,
+          adapter,
+        })
+      : flag<boolean>({
+          ...productsDefinition,
+          decide: async () => definitions.products.defaultValue,
+        }),
   };
 }
 
@@ -73,13 +85,25 @@ async function getRuntimeSiteFlagDeclarations(site: SiteKey): Promise<SiteFeatur
 
 function getStaticSiteFeatureFlags(site: SiteKey): SiteFeatureFlags {
   const config = getSiteConfig(site);
+  const overrides = getSiteFeatureFlagOverrides(site);
+
+  return {
+    blog: overrides.blog ?? config.features.blog,
+    integrations: overrides.integrations ?? config.features.integrations,
+    products: overrides.products ?? config.features.products,
+  };
+}
+
+function getSiteFeatureFlagOverrides(site: SiteKey): Partial<SiteFeatureFlags> {
   const envVarNames = featureEnvVarNames[site];
   const blogOverride = parseBooleanEnvOverride(process.env[envVarNames.blog]);
   const integrationsOverride = parseBooleanEnvOverride(process.env[envVarNames.integrations]);
+  const productsOverride = parseBooleanEnvOverride(process.env[envVarNames.products]);
 
   return {
-    blog: blogOverride ?? config.features.blog,
-    integrations: integrationsOverride ?? config.features.integrations,
+    ...(blogOverride === undefined ? {} : { blog: blogOverride }),
+    ...(integrationsOverride === undefined ? {} : { integrations: integrationsOverride }),
+    ...(productsOverride === undefined ? {} : { products: productsOverride }),
   };
 }
 
@@ -93,10 +117,14 @@ export async function getSiteFeatureFlags(site: SiteKey): Promise<SiteFeatureFla
 
   try {
     const flags = await getRuntimeSiteFlagDeclarations(site);
+    const overrides = getSiteFeatureFlagOverrides(site);
 
     return {
-      blog: await flags.blog().catch(() => staticFlags.blog),
-      integrations: await flags.integrations().catch(() => staticFlags.integrations),
+      blog: overrides.blog ?? (await flags.blog().catch(() => staticFlags.blog)),
+      integrations:
+        overrides.integrations ??
+        (await flags.integrations().catch(() => staticFlags.integrations)),
+      products: overrides.products ?? (await flags.products().catch(() => staticFlags.products)),
     };
   } catch (error) {
     console.error('[site-flags] Falling back to static feature flags', {
@@ -106,6 +134,7 @@ export async function getSiteFeatureFlags(site: SiteKey): Promise<SiteFeatureFla
     return {
       blog: staticFlags.blog ?? config.features.blog,
       integrations: staticFlags.integrations ?? config.features.integrations,
+      products: staticFlags.products ?? config.features.products,
     };
   }
 }
@@ -116,4 +145,8 @@ export async function isBlogEnabled(site: SiteKey): Promise<boolean> {
 
 export async function isIntegrationsEnabled(site: SiteKey): Promise<boolean> {
   return (await getSiteFeatureFlags(site)).integrations;
+}
+
+export async function isProductsEnabled(site: SiteKey): Promise<boolean> {
+  return (await getSiteFeatureFlags(site)).products;
 }

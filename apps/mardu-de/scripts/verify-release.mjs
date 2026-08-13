@@ -2,6 +2,10 @@ const baseUrl = new URL(process.env.RELEASE_BASE_URL || 'http://127.0.0.1:3000')
 const canonicalOrigin = new URL(process.env.RELEASE_CANONICAL_ORIGIN || 'https://www.mardu.de');
 const maxPages = Number(process.env.RELEASE_MAX_PAGES || 250);
 const requestTimeoutMs = Number(process.env.RELEASE_REQUEST_TIMEOUT_MS || 15_000);
+const expectedHiddenPaths = (process.env.RELEASE_EXPECT_HIDDEN_PATHS || '')
+  .split(',')
+  .map((path) => normalizePath(path.trim()))
+  .filter((path) => path !== '/');
 
 const requiredNoindexPaths = new Set([
   '/newsletter/anmeldung',
@@ -186,6 +190,29 @@ async function main() {
   const sitemapPaths = new Set(parseSitemapPaths(sitemapResult.text));
   if (sitemapPaths.size === 0) {
     throw new Error('sitemap.xml contains no URLs');
+  }
+
+  for (const hiddenPath of expectedHiddenPaths) {
+    if (
+      [...sitemapPaths].some(
+        (sitemapPath) => sitemapPath === hiddenPath || sitemapPath.startsWith(`${hiddenPath}/`),
+      )
+    ) {
+      errors.push(`${hiddenPath}: disabled feature is still present in sitemap.xml`);
+    }
+
+    try {
+      const hiddenResult = await fetchText(hiddenPath);
+      if (hiddenResult.response.status !== 404) {
+        errors.push(
+          `${hiddenPath}: disabled feature must return HTTP 404, received ${hiddenResult.response.status}`,
+        );
+      }
+    } catch (error) {
+      errors.push(
+        `${hiddenPath}: hidden-route check failed (${error instanceof Error ? error.message : String(error)})`,
+      );
+    }
   }
 
   const queued = new Set(['/', ...sitemapPaths, ...requiredNoindexPaths]);

@@ -37,8 +37,8 @@ Die eigentliche Payload-Implementierung liegt in `apps/platform`, nicht in `mard
 Frontend-Layer in `mardu.de`:
 
 - [`lib/blog.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/lib/blog.ts)
-- [`app/(frontend)/blog/page.tsx`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/(frontend)/blog/page.tsx)
-- [`app/(frontend)/blog/[slug]/page.tsx`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/(frontend)/blog/[slug]/page.tsx)
+- [`app/(frontend)/blog/page.tsx`](</Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/(frontend)/blog/page.tsx>)
+- [`app/(frontend)/blog/[slug]/page.tsx`](</Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/(frontend)/blog/[slug]/page.tsx>)
 
 Diese Consumer duerfen nur DTOs und Read-Vertraege nutzen, keine lokalen Collection-Definitionen.
 
@@ -46,4 +46,5 @@ Diese Consumer duerfen nur DTOs und Read-Vertraege nutzen, keine lokalen Collect
 
 - SEO-Daten kommen aus der zentralen Plattform bzw. dem Payload SEO Plugin
 - `mardu.de` rendert Blog-Routen nur als Consumer
+- Das Vercel-Flag `blog` steuert ausschließlich die öffentliche mardu.de-Ausspielung. Bei `false` fehlen Blog-Links und Sitemap-Einträge, und Blog-Routen liefern HTTP 404. Der API-Vertrag bleibt unverändert verfügbar.
 - neue Blog-Felder oder Filter werden zuerst in `apps/platform` und `packages/content-core` dokumentiert

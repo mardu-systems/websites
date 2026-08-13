@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { CatalogProductDetailDto } from '@mardu/content-core';
 import { notFound } from 'next/navigation';
+import { isProductsEnabled } from '@mardu/site-config/feature-flags.server';
 import {
   CatalogBreadcrumbs,
   CatalogProductDetailHero,
@@ -55,6 +56,13 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
+  if (!(await isProductsEnabled('mardu-de'))) {
+    return {
+      title: 'Produkt nicht gefunden',
+      robots: { index: false, follow: false },
+    };
+  }
+
   const { slug } = await params;
   const product = await getCatalogProductBySlug(slug);
 
@@ -95,6 +103,10 @@ export async function generateMetadata({
 }
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  if (!(await isProductsEnabled('mardu-de'))) {
+    notFound();
+  }
+
   const { slug } = await params;
   const product = await getCatalogProductBySlug(slug);
 

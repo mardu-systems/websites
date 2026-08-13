@@ -4,8 +4,10 @@ import SharedSiteShell from '@mardu/layout/site-shell';
 import type { FooterAiSummaryLinkDto, FooterSocialLinkDto } from '@mardu/layout/types';
 import { EditorialActionButton } from '@mardu/ui/components/editorial-action-button';
 import { getSiteConfig } from '@mardu/site-config';
+import { getSiteFeatureFlags } from '@mardu/site-config/feature-flags.server';
 import { defaultFooterMetaLinks, defaultFooterNavLinks } from '@/data/default-footer-items';
 import { defaultHeaderItems } from '@/data/default-header-items';
+import { filterFeatureLinks } from '@/lib/feature-links';
 import {
   MARDU_FOOTER_MODEL_PATH,
   MARDU_LOGO_DARK_PATH,
@@ -45,8 +47,11 @@ const aiSummaryLinks: ReadonlyArray<FooterAiSummaryLinkDto> = [
   },
 ];
 
-export default function SiteShell({ children }: { children: ReactNode }) {
+export default async function SiteShell({ children }: { children: ReactNode }) {
   const siteConfig = getSiteConfig('mardu-de');
+  const features = await getSiteFeatureFlags('mardu-de');
+  const headerItems = filterFeatureLinks(defaultHeaderItems, features);
+  const footerNavLinks = filterFeatureLinks(defaultFooterNavLinks, features);
   const socialLinks: ReadonlyArray<FooterSocialLinkDto> = [
     ...baseSocialLinks,
     {
@@ -72,7 +77,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
           logoWidth: 156,
           logoHeight: 44,
         },
-        items: defaultHeaderItems,
+        items: headerItems,
         cta: {
           label: 'Jetzt beraten lassen',
           href: '/contact',
@@ -99,7 +104,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
             Jetzt beraten lassen
           </EditorialActionButton>
         ),
-        navLinks: defaultFooterNavLinks,
+        navLinks: footerNavLinks,
         metaLinks: [...defaultFooterMetaLinks, ...siteConfig.footerMetaLinks],
         socialLinks,
         aiSummaryLinks,

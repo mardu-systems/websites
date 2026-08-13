@@ -3,7 +3,13 @@ import { EditorialAccent } from '@mardu/ui/components/typography';
 import { SolutionsExplorer } from './solutions-explorer';
 import { solutionsPageIntro, type SolutionExplorerViewModel } from './solutions-page-content';
 
-export function SolutionsPage({ items }: { items: readonly SolutionExplorerViewModel[] }) {
+export function SolutionsPage({
+  items,
+  integrationsEnabled,
+}: {
+  items: readonly SolutionExplorerViewModel[];
+  integrationsEnabled: boolean;
+}) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <EditorialPageHero
@@ -26,7 +32,7 @@ export function SolutionsPage({ items }: { items: readonly SolutionExplorerViewM
       <section className="py-16 md:py-24" aria-label="Lösungen nach Einsatzbereich">
         <div className="mardu-container">
           {items.length > 0 ? (
-            <SolutionsExplorer items={items} />
+            <SolutionsExplorer items={items} integrationsEnabled={integrationsEnabled} />
           ) : (
             <p className="border-y border-border py-12 text-base text-muted-foreground">
               Derzeit sind keine Lösungen veröffentlicht.

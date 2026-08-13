@@ -40,8 +40,8 @@ Die eigentliche Payload-Implementierung liegt ausschliesslich in `apps/platform`
 Frontend-Layer in `mardu.de`:
 
 - [`lib/integrations.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/lib/integrations.ts)
-- [`app/(frontend)/integrations/page.tsx`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/(frontend)/integrations/page.tsx)
-- [`app/(frontend)/integrations/[slug]/page.tsx`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/(frontend)/integrations/[slug]/page.tsx)
+- [`app/(frontend)/integrations/page.tsx`](</Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/(frontend)/integrations/page.tsx>)
+- [`app/(frontend)/integrations/[slug]/page.tsx`](</Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/(frontend)/integrations/[slug]/page.tsx>)
 
 Diese Consumer duerfen nur DTOs und Read-Vertraege nutzen, keine lokalen Collection-Definitionen oder Seed-Skripte.
 
@@ -49,4 +49,5 @@ Diese Consumer duerfen nur DTOs und Read-Vertraege nutzen, keine lokalen Collect
 
 - SEO-Daten kommen aus der zentralen Plattform bzw. dem Payload SEO Plugin
 - Site-Sichtbarkeit wird zentral über `packages/content-core`/Payload geregelt
+- Das Vercel-Flag `integrations` steuert zusätzlich nur die öffentliche mardu.de-Ausspielung. Bei `false` fehlen Integrationslinks und Sitemap-Einträge, und Integrationsrouten liefern HTTP 404. Der API-Vertrag und die Payload-Sichtbarkeit bleiben unverändert.
 - neue Integrations-Felder oder Filter werden zuerst in `apps/platform` und `packages/content-core` dokumentiert
