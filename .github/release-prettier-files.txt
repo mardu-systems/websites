@@ -35,6 +35,7 @@ apps/mardu-de/lib/sitemap.ts
 apps/mardu-de/next.config.ts
 apps/mardu-de/package.json
 apps/mardu-de/scripts/verify-release.mjs
+apps/mardu-de/types/static-images.d.ts
 apps/platform/README.md
 apps/platform/docs/api/catalog-payload-integration.md
 apps/platform/data/legal/privacy.md
