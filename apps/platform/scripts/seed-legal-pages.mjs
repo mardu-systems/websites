@@ -5,7 +5,7 @@ import config from '../payload.config.ts';
 import { getPayload } from 'payload';
 
 const CURRENT_DIR = dirname(fileURLToPath(import.meta.url));
-const LEGAL_ROOT = join(CURRENT_DIR, '../data/legal');
+const LEGAL_ROOT = join(CURRENT_DIR, '../../../packages/content-core/data/legal');
 
 const legalSeedItems = [
   {

@@ -1,4 +1,5 @@
 import type { LegalPageSlug } from '@mardu/content-core';
+import { getBundledLegalPage } from '@mardu/content-core/legal-content';
 import { getPlatformLegalPage } from '@mardu/content-core/legal-pages';
 import { getPlatformOrigin, getSiteConfig } from '@mardu/site-config';
 import type { Metadata } from 'next';
@@ -8,7 +9,17 @@ const site = 'mardu-de' as const;
 const siteConfig = getSiteConfig(site);
 
 export async function getLegalPage(slug: LegalPageSlug) {
-  return getPlatformLegalPage(getPlatformOrigin(), site, slug);
+  try {
+    return (
+      (await getPlatformLegalPage(getPlatformOrigin(), site, slug)) ?? getBundledLegalPage(slug)
+    );
+  } catch (error) {
+    console.error(
+      `Failed to load legal page "${slug}" from Platform; using bundled fallback`,
+      error,
+    );
+    return getBundledLegalPage(slug);
+  }
 }
 
 export function buildLegalPageMetadata(

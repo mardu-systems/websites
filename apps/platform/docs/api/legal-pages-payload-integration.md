@@ -42,6 +42,6 @@ Die Collection nutzt fuer diese Felder einen eigenen SEO-Tab und nicht die gener
 ## Seed und Bootstrap
 
 - Seed-Skript: [`scripts/seed-legal-pages.mjs`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/scripts/seed-legal-pages.mjs)
-- Seed-Markdown: `apps/platform/data/legal/privacy.md` und `apps/platform/data/legal/publisher.md`
+- Gebündelte Rechtstexte und Seed-Quelle: `packages/content-core/data/legal/privacy.md` und `packages/content-core/data/legal/publisher.md`
 
-Die Markdown-Dateien werden ausschließlich beim expliziten Seeding gelesen. Zur Laufzeit gibt es keinen gebündelten Fallback: Ein fehlendes veröffentlichtes Dokument ergibt `null`/404, ein API- oder Vertragsfehler bleibt sichtbar.
+Payload bleibt zur Laufzeit die bevorzugte Quelle. Wenn ein veröffentlichtes Dokument fehlt oder die Content-API nicht erreichbar ist, verwenden `mardu.de` und die öffentlichen Platform-Seiten denselben gebündelten Rechtstext. Dadurch bleiben Impressum und Datenschutz unabhängig vom Seed-Status erreichbar; API-Fehler werden weiterhin serverseitig protokolliert.

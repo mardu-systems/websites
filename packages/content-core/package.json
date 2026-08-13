@@ -5,6 +5,7 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./legal-pages": "./src/legal-pages.ts"
+    "./legal-pages": "./src/legal-pages.ts",
+    "./legal-content": "./src/legal-content.ts"
   }
 }
