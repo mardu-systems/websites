@@ -74,7 +74,7 @@ function createLandingRoutes({
 
 function createDetailRoutes(
   entries: ContentSitemapEntry[],
-  path: 'blog' | 'integrations',
+  path: 'blog' | 'integrations' | 'products',
   priority: number,
 ): MetadataRoute.Sitemap {
   return entries.map((entry) => ({
@@ -105,6 +105,7 @@ export async function buildMarduSitemap({
   return [
     ...staticRoutes,
     ...landingRoutes,
+    ...(productsEnabled ? createDetailRoutes(contentEntries.products, 'products', 0.78) : []),
     ...(integrationsEnabled
       ? createDetailRoutes(contentEntries.integrations, 'integrations', 0.75)
       : []),

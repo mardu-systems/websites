@@ -109,11 +109,6 @@ const nextConfig: NextConfig = {
         destination: '/solutions?solution=:slug',
         permanent: true,
       },
-      {
-        source: '/products/:slug',
-        destination: '/products?product=:slug',
-        permanent: true,
-      },
     ];
   },
 };

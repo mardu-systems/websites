@@ -1,7 +1,10 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 import type { CatalogCategoryDto, CatalogProductDetailDto } from '@mardu/content-core';
-import { createProductExplorerCategories } from './products-page-content';
+import {
+  createProductCatalogItems,
+  filterProductCatalogItems,
+} from './products-page-content';
 
 const category: CatalogCategoryDto = {
   id: 'gateways',
@@ -77,29 +80,46 @@ const products: CatalogProductDetailDto[] = [
 ];
 
 describe('product explorer content', () => {
-  test('uses the CMS category order and resolves frontend-owned seed images locally', () => {
-    const [result] = createProductExplorerCategories([category], products, 'http://localhost:4000');
+  test('keeps the CMS product order and resolves frontend-owned seed images locally', () => {
+    const result = createProductCatalogItems([category], products, 'http://localhost:4000');
 
     assert.deepEqual(
-      result?.products.map((product) => product.name),
-      ['Gateway Pro', 'Gateway'],
+      result.map((product) => product.name),
+      ['Gateway', 'Gateway Pro'],
     );
-    assert.equal(result?.products[0]?.imageUrl, '/gateway/mounted.jpg');
-    assert.equal(result?.products[1]?.imageUrl, 'https://cdn.example.com/gateway.jpg');
-    assert.equal(result?.products[0]?.overview, products[1]?.overview);
-    assert.deepEqual(result?.products[0]?.featureGroups, products[1]?.featureGroups);
-    assert.deepEqual(result?.products[0]?.specGroups, products[1]?.specGroups);
-    assert.equal(result?.products[0]?.detailMarkdown, products[1]?.detailMarkdown);
-    assert.equal(result?.products[0]?.primaryCtaLabel, products[1]?.primaryCtaLabel);
+    assert.equal(result[0]?.imageUrl, 'https://cdn.example.com/gateway.jpg');
+    assert.equal(result[1]?.imageUrl, '/gateway/mounted.jpg');
+    assert.equal(result[1]?.overview, products[1]?.overview);
+    assert.deepEqual(result[1]?.featureGroups, products[1]?.featureGroups);
+    assert.deepEqual(result[1]?.specGroups, products[1]?.specGroups);
+    assert.equal(result[1]?.detailMarkdown, products[1]?.detailMarkdown);
+    assert.equal(result[1]?.primaryCtaLabel, products[1]?.primaryCtaLabel);
   });
 
-  test('groups published products without a readable CMS category into a fallback section', () => {
-    const [result] = createProductExplorerCategories([], products, 'http://localhost:4000');
+  test('keeps published products without a readable CMS category in the catalog', () => {
+    const result = createProductCatalogItems([], products, 'http://localhost:4000');
 
-    assert.equal(result?.name, 'Produkte');
+    assert.deepEqual(result.map((product) => product.name), ['Gateway', 'Gateway Pro']);
+  });
+
+  test('filters products by search, category and availability', () => {
+    const catalog = createProductCatalogItems([category], products, 'http://localhost:4000');
+
     assert.deepEqual(
-      result?.products.map((product) => product.name),
-      ['Gateway', 'Gateway Pro'],
+      filterProductCatalogItems(catalog, {
+        query: 'redundant',
+        category: 'all',
+        availability: 'all',
+      }).map((product) => product.slug),
+      ['gateway-pro'],
+    );
+    assert.deepEqual(
+      filterProductCatalogItems(catalog, {
+        query: '',
+        category: 'Gateways',
+        availability: 'available',
+      }).map((product) => product.slug),
+      ['gateway'],
     );
   });
 });

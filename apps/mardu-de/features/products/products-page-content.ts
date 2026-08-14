@@ -1,20 +1,16 @@
 import type { CatalogCategoryDto, CatalogProductDetailDto } from '@mardu/content-core';
 import { buildCatalogInquiryHref } from '@/lib/catalog';
 
-export type ProductExplorerProductViewModel = CatalogProductDetailDto & {
+export type ProductCatalogItemViewModel = CatalogProductDetailDto & {
   imageAlt: string;
   inquiryHref: string;
 };
 
-export interface ProductExplorerCategoryViewModel {
-  id: string;
-  slug: string;
-  index: string;
-  name: string;
-  eyebrow: string;
-  description: string;
-  products: readonly ProductExplorerProductViewModel[];
-}
+export type ProductCatalogFilters = {
+  query: string;
+  category: string;
+  availability: string;
+};
 
 function resolveCatalogImageUrl(imageUrl: string | undefined, contentOrigin: string) {
   if (!imageUrl || !imageUrl.startsWith(contentOrigin)) {
@@ -28,73 +24,48 @@ function resolveCatalogImageUrl(imageUrl: string | undefined, contentOrigin: str
   return url.pathname.startsWith('/api/') ? imageUrl : `${url.pathname}${url.search}`;
 }
 
-export function createProductExplorerCategories(
+export function createProductCatalogItems(
   categories: readonly CatalogCategoryDto[],
   products: readonly CatalogProductDetailDto[],
   contentOrigin: string,
-): readonly ProductExplorerCategoryViewModel[] {
-  const productsById = new Map(products.map((product) => [product.id, product]));
-  const categorizedProductIds = new Set<string>();
+): readonly ProductCatalogItemViewModel[] {
+  const categoryByProductId = new Map(
+    categories.flatMap((category) =>
+      category.productIds.map((productId) => [productId, category] as const),
+    ),
+  );
 
-  const createProductViewModel = (
-    product: CatalogProductDetailDto,
-    category: CatalogCategoryDto | undefined,
-  ): ProductExplorerProductViewModel => ({
-    ...product,
-    imageUrl: resolveCatalogImageUrl(product.imageUrl ?? category?.imageUrl, contentOrigin),
-    imageAlt: product.imageAlt ?? category?.imageAlt ?? product.name,
-    inquiryHref: buildCatalogInquiryHref(product),
+  return products.map((product) => {
+    const category = categoryByProductId.get(product.id);
+
+    return {
+      ...product,
+      imageUrl: resolveCatalogImageUrl(product.imageUrl ?? category?.imageUrl, contentOrigin),
+      imageAlt: product.imageAlt ?? category?.imageAlt ?? product.name,
+      inquiryHref: buildCatalogInquiryHref(product),
+    };
   });
+}
 
-  const resolvedCategories = categories.flatMap((category, categoryIndex) => {
-    const categoryProducts = category.productIds.flatMap((productId) => {
-      const product = productsById.get(productId);
+export function filterProductCatalogItems(
+  products: readonly ProductCatalogItemViewModel[],
+  filters: ProductCatalogFilters,
+): readonly ProductCatalogItemViewModel[] {
+  const query = filters.query.trim().toLocaleLowerCase('de');
 
-      if (!product) {
-        return [];
-      }
+  return products.filter((product) => {
+    const matchesQuery =
+      query.length === 0 ||
+      [product.name, product.tagline, product.summary, product.categoryName].some((value) =>
+        value.toLocaleLowerCase('de').includes(query),
+      );
+    const matchesCategory =
+      filters.category === 'all' || product.categoryName === filters.category;
+    const matchesAvailability =
+      filters.availability === 'all' || product.availability === filters.availability;
 
-      categorizedProductIds.add(product.id);
-      return [createProductViewModel(product, category)];
-    });
-
-    if (categoryProducts.length === 0) {
-      return [];
-    }
-
-    return [
-      {
-        id: category.id,
-        slug: category.slug,
-        index: String(categoryIndex + 1).padStart(2, '0'),
-        name: category.name,
-        eyebrow: category.eyebrow ?? 'Systembausteine',
-        description: category.description,
-        products: categoryProducts,
-      },
-    ];
+    return matchesQuery && matchesCategory && matchesAvailability;
   });
-
-  const uncategorizedProducts = products
-    .filter((product) => !categorizedProductIds.has(product.id))
-    .map((product) => createProductViewModel(product, undefined));
-
-  if (uncategorizedProducts.length === 0) {
-    return resolvedCategories;
-  }
-
-  return [
-    ...resolvedCategories,
-    {
-      id: 'products',
-      slug: 'products',
-      index: String(resolvedCategories.length + 1).padStart(2, '0'),
-      name: 'Produkte',
-      eyebrow: 'Systembausteine',
-      description: 'Veröffentlichte Produkte und Systemkomponenten für Mardu-Installationen.',
-      products: uncategorizedProducts,
-    },
-  ];
 }
 
 export const productsPageIntro = {

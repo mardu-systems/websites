@@ -31,7 +31,7 @@ describe('mardu.de sitemap', () => {
     assert.ok(!sitemap.some((entry) => entry.url.includes('/products/gateway-pro')));
   });
 
-  test('publishes no product or solution detail routes', async () => {
+  test('publishes product detail routes but no retired solution detail routes', async () => {
     const sitemap = await buildMarduSitemap({
       blogEnabled: false,
       integrationsEnabled: false,
@@ -40,7 +40,8 @@ describe('mardu.de sitemap', () => {
     });
     const urls = sitemap.map((entry) => entry.url);
 
-    assert.ok(!urls.some((url) => url.startsWith(`${MARDU_SITE_URL}/products/`)));
+    assert.ok(urls.includes(`${MARDU_SITE_URL}/products/gateway-pro`));
+    assert.ok(urls.includes(`${MARDU_SITE_URL}/products/access-point`));
     assert.ok(!urls.some((url) => url.startsWith(`${MARDU_SITE_URL}/solutions/`)));
     assert.ok(!urls.some((url) => url.startsWith(`${MARDU_SITE_URL}/blog/`)));
     assert.ok(!urls.some((url) => url.startsWith(`${MARDU_SITE_URL}/integrations/`)));

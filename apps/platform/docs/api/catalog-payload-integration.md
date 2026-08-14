@@ -101,4 +101,4 @@ Vertrag des Seed-Skripts:
 
 ## Product-Inquiry
 
-Die App transportiert `productId`, `productSlug`, `productName`, `category`, `sourcePage` sowie optionale `variantId`, `priceFrom` und `technologyIds` zur Kontaktseite. `sourcePage` verweist auf die Produktauswahl `/products?product=<slug>`. Nur vollständige Pflichtfelder werden als `CatalogInquiryContextDto` unter `ContactRequestDto.config` weitergesendet.
+Die App transportiert `productId`, `productSlug`, `productName`, `category`, `sourcePage` sowie optionale `variantId`, `priceFrom` und `technologyIds` zur Kontaktseite. `sourcePage` verweist auf die kanonische Produktdetailroute `/products/<slug>`. Nur vollständige Pflichtfelder werden als `CatalogInquiryContextDto` unter `ContactRequestDto.config` weitergesendet.

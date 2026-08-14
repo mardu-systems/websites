@@ -1,14 +1,12 @@
 import { EditorialPageHero } from '@mardu/ui/components/editorial-page-hero';
 import { EditorialAccent } from '@mardu/ui/components/typography';
 import { ProductsExplorer } from './products-explorer';
-import { productsPageIntro, type ProductExplorerCategoryViewModel } from './products-page-content';
+import { productsPageIntro, type ProductCatalogItemViewModel } from './products-page-content';
 
 export function ProductsPage({
-  categories,
-  initialProductSlug,
+  products,
 }: {
-  categories: readonly ProductExplorerCategoryViewModel[];
-  initialProductSlug?: string;
+  products: readonly ProductCatalogItemViewModel[];
 }) {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -29,10 +27,10 @@ export function ProductsPage({
         }
       />
 
-      <section className="py-16 md:py-24" aria-label="Produkte nach Systemrolle">
+      <section className="py-16 md:py-24" aria-label="Produktkatalog">
         <div className="mardu-container">
-          {categories.length > 0 ? (
-            <ProductsExplorer categories={categories} initialProductSlug={initialProductSlug} />
+          {products.length > 0 ? (
+            <ProductsExplorer products={products} />
           ) : (
             <p className="border-y border-border py-12 text-base text-muted-foreground">
               Derzeit sind keine Produkte veröffentlicht.

@@ -2020,6 +2020,31 @@ export interface CollectionsWidget {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MermaidDiagramBlock".
+ */
+export interface MermaidDiagramBlock {
+  /**
+   * Kurzer sichtbarer Titel des Diagramms.
+   */
+  title: string;
+  /**
+   * Beschreibt die Aussage und den Datenfluss für Screenreader und den Fehlerzustand.
+   */
+  description: string;
+  /**
+   * Mermaid-Quelltext, zum Beispiel ein flowchart oder sequenceDiagram.
+   */
+  code: string;
+  /**
+   * Optionale Bildunterschrift unter dem Diagramm.
+   */
+  caption?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mermaidDiagram';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {

@@ -2,6 +2,7 @@ import {
   getPlatformCatalogCarriers,
   getPlatformCatalogCategories,
   getPlatformCatalogProductDetails,
+  getPlatformCatalogProductBySlug,
   getPlatformCatalogTechnologies,
   getPlatformFeaturedCatalogProducts,
   type CatalogProductDetailDto,
@@ -21,6 +22,9 @@ export const getCatalogCarriers = async () => getPlatformCatalogCarriers(getPlat
 
 export const getCatalogProductDetails = async () =>
   getPlatformCatalogProductDetails(getPlatformOrigin(), site);
+
+export const getCatalogProductBySlug = async (slug: string) =>
+  getPlatformCatalogProductBySlug(getPlatformOrigin(), site, slug);
 
 export const getFeaturedCatalogProducts = async (limit = 3) =>
   getPlatformFeaturedCatalogProducts(getPlatformOrigin(), site, limit);

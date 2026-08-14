@@ -1,5 +1,8 @@
 import type { CollectionConfig } from 'payload';
 import { buildSiteVisibilityField } from '@mardu/content-core';
+import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
+
+import { MermaidDiagram } from '../blocks/mermaid-diagram';
 
 const formatSlug = (value: string): string =>
   value
@@ -132,6 +135,12 @@ export const BlogPosts: CollectionConfig = {
       name: 'content',
       type: 'richText',
       required: true,
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [
+          ...defaultFeatures,
+          BlocksFeature({ blocks: [MermaidDiagram] }),
+        ],
+      }),
     },
     {
       name: 'publishedAt',

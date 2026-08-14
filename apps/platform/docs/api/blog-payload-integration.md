@@ -85,6 +85,19 @@ Quelle: [collections/blog-posts.ts](/Users/lucaschoeneberg/Documents/GitHub/webs
 - Public Read: nur `published`
 - Authenticated Read (Admin): alle Stati
 
+## Mermaid-Diagramme im Rich-Text
+
+Blogbeiträge können im Feld `content` den Block `mermaidDiagram` enthalten. Der Block ist Teil des Payload-Rich-Text-Vertrags und besitzt folgende Felder:
+
+- `title` (Pflichtfeld): sichtbare Überschrift des Diagramms.
+- `description` (Pflichtfeld): textuelle Beschreibung für Screenreader und den Fehlerzustand.
+- `code` (Pflichtfeld): Mermaid-Quelltext.
+- `caption` (optional): sichtbare Bildunterschrift.
+
+Das Frontend lädt Mermaid nur für Beiträge mit einem entsprechenden Block. Die Darstellung erfolgt mit `securityLevel: "strict"`; eingebettetes HTML und interaktive Links aus dem Diagrammcode sind damit deaktiviert. Bei ungültigem Mermaid-Code bleibt die Beschreibung als zugänglicher Fehlertext sichtbar.
+
+Der externe `BlogPostDetailDto` bleibt unverändert: `content` wird weiterhin als validierter Payload-Rich-Text ausgeliefert. Der neue Block erweitert ausschließlich die erlaubten Knoten innerhalb dieses Felds.
+
 ## Response-/Fehlerbeispiele
 
 `GET /api/blog-posts?where[_status][equals]=published&limit=1`

@@ -1750,7 +1750,7 @@ function mapCatalogProductDetail(
       productName: listItem.name,
       category: listItem.categoryName,
       ...(doc.priceFromLabel ? { priceFrom: doc.priceFromLabel } : {}),
-      sourcePage: `/products?product=${encodeURIComponent(listItem.slug)}`,
+      sourcePage: `/products/${encodeURIComponent(listItem.slug)}`,
       technologyIds: listItem.technologies.map((item) => item.id),
     },
   };
