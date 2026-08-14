@@ -178,6 +178,7 @@ describe('public Payload mappers', () => {
     assert.equal(product.seoTitle, 'Legacy Reader | Mardu');
     assert.equal(product.canonicalUrl, 'https://www.mardu.de/products/legacy-reader');
     assert.equal(product.ogImageUrl, 'https://platform.mardu.de/device/reader.jpg');
+    assert.equal(product.inquiryContext.sourcePage, '/products/legacy-reader');
     assert.equal(product.updatedAt, '2026-08-12T10:00:00.000Z');
   });
 

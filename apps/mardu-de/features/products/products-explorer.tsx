@@ -68,7 +68,13 @@ function ProductTags({ product }: { product: ProductCatalogItemViewModel }) {
   );
 }
 
-function ProductCatalogRow({ product }: { product: ProductCatalogItemViewModel }) {
+function ProductCatalogRow({
+  product,
+  priority,
+}: {
+  product: ProductCatalogItemViewModel;
+  priority: boolean;
+}) {
   const [variantsOpen, setVariantsOpen] = useState(false);
   const hasVariants = product.variants.length > 0;
 
@@ -85,6 +91,7 @@ function ProductCatalogRow({ product }: { product: ProductCatalogItemViewModel }
               src={product.imageUrl}
               alt={product.imageAlt}
               fill
+              priority={priority}
               sizes="(max-width: 767px) 100vw, 18rem"
               className="object-cover transition-transform duration-500 hover:scale-[1.025]"
             />
@@ -239,8 +246,8 @@ export function ProductsExplorer({ products }: ProductsExplorerProps) {
           {filteredProducts.length} {filteredProducts.length === 1 ? 'Produkt' : 'Produkte'}
         </p>
         {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
-            <ProductCatalogRow key={product.id} product={product} />
+          filteredProducts.map((product, index) => (
+            <ProductCatalogRow key={product.id} product={product} priority={index === 0} />
           ))
         ) : (
           <div className="rounded-2xl border border-border px-6 py-12 text-center">
