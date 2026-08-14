@@ -1612,20 +1612,22 @@ function mapCatalogProductListItem(
   const technologies = toRelationshipDocs<PayloadCatalogTechnologyDoc>(doc.technologies)
     .map((item) => mapCatalogTechnology(item, origin))
     .filter((item): item is CatalogTechnologyDto => Boolean(item));
+  const categoryRelationshipIds = toRelationshipIds(doc.categories);
 
-  if (categories.length === 0) {
+  if (categories.length === 0 && categoryRelationshipIds.length === 0) {
     return null;
   }
 
   const image = resolveMediaFields(doc.image, origin, doc.imageUrl, doc.imageAlt ?? doc.name);
   const primaryCategory = categories[0];
+  const fallbackCategoryId = `category-${categoryRelationshipIds[0]}`;
 
   return {
     id: doc.slug,
     slug: doc.slug,
     name: doc.name,
-    categoryId: primaryCategory.slug,
-    categoryName: primaryCategory.name,
+    categoryId: primaryCategory?.slug ?? fallbackCategoryId,
+    categoryName: primaryCategory?.name ?? doc.eyebrow ?? doc.badge ?? 'Produkte',
     tagline: doc.tagline,
     summary: doc.summary,
     ...(image.url ? { imageUrl: image.url } : {}),
@@ -1914,14 +1916,18 @@ async function fetchPublishedResolvedCatalogProductDocs(
     fetchPublishedCatalogVariantDocs(origin, site),
   ]);
 
-  return productDocs.map((product) => ({
-    ...product,
-    categories: resolveRelationshipDocs(product.categories, categoryDocs),
-    technologies: resolveRelationshipDocs(product.technologies, technologyDocs),
-    carriers: resolveRelationshipDocs(product.carriers, carrierDocs),
-    variants: resolveRelationshipDocs(product.variants, variantDocs),
-    relatedProducts: resolveRelationshipDocs(product.relatedProducts, productDocs),
-  }));
+  return productDocs.map((product) => {
+    const categories = resolveRelationshipDocs(product.categories, categoryDocs);
+
+    return {
+      ...product,
+      categories: categories.length > 0 ? categories : product.categories,
+      technologies: resolveRelationshipDocs(product.technologies, technologyDocs),
+      carriers: resolveRelationshipDocs(product.carriers, carrierDocs),
+      variants: resolveRelationshipDocs(product.variants, variantDocs),
+      relatedProducts: resolveRelationshipDocs(product.relatedProducts, productDocs),
+    };
+  });
 }
 
 async function fetchPublishedSolutionDocs(

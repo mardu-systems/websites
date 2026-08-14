@@ -92,4 +92,14 @@ describe('product explorer content', () => {
     assert.equal(result?.products[0]?.detailMarkdown, products[1]?.detailMarkdown);
     assert.equal(result?.products[0]?.primaryCtaLabel, products[1]?.primaryCtaLabel);
   });
+
+  test('groups published products without a readable CMS category into a fallback section', () => {
+    const [result] = createProductExplorerCategories([], products, 'http://localhost:4000');
+
+    assert.equal(result?.name, 'Produkte');
+    assert.deepEqual(
+      result?.products.map((product) => product.name),
+      ['Gateway', 'Gateway Pro'],
+    );
+  });
 });

@@ -70,6 +70,10 @@ Bereitstellung über:
 - Beziehungen zu Kategorien, Technologien, Carriern, Varianten und verwandten Produkten dürfen
   als expandierte Dokumente oder IDs vorliegen. IDs werden vor dem DTO-Mapping gegen die jeweils
   publizierten und für die angefragte Site sichtbaren Collection-Dokumente aufgelöst.
+- Ein publiziertes Produkt bleibt sichtbar, wenn eine referenzierte Taxonomie oder Variante nicht
+  öffentlich auflösbar ist. Nicht auflösbare optionale Beziehungen entfallen; ohne auflösbare
+  Kategorie nutzt das Produkt sein `eyebrow` beziehungsweise `badge` als Label und wird im
+  Frontend in einer allgemeinen Produktgruppe ausgegeben.
 - `heroDescription` bleibt im öffentlichen Detail-DTO verpflichtend. Für ältere Payload-Dokumente mit leerem Feld nutzt der Mapper zuerst `description` und anschließend `summary` als sichtbaren Fallback.
 - `overview` bleibt ebenfalls verpflichtend und fällt bei älteren Dokumenten auf `description` beziehungsweise `summary` zurück.
 - Ein in Payload gespeichertes `null` für `priceFrom` wird wie ein nicht gepflegter Preis behandelt und nicht in das öffentliche DTO übernommen.

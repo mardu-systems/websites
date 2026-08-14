@@ -34,8 +34,19 @@ export function createProductExplorerCategories(
   contentOrigin: string,
 ): readonly ProductExplorerCategoryViewModel[] {
   const productsById = new Map(products.map((product) => [product.id, product]));
+  const categorizedProductIds = new Set<string>();
 
-  return categories.flatMap((category, categoryIndex) => {
+  const createProductViewModel = (
+    product: CatalogProductDetailDto,
+    category: CatalogCategoryDto | undefined,
+  ): ProductExplorerProductViewModel => ({
+    ...product,
+    imageUrl: resolveCatalogImageUrl(product.imageUrl ?? category?.imageUrl, contentOrigin),
+    imageAlt: product.imageAlt ?? category?.imageAlt ?? product.name,
+    inquiryHref: buildCatalogInquiryHref(product),
+  });
+
+  const resolvedCategories = categories.flatMap((category, categoryIndex) => {
     const categoryProducts = category.productIds.flatMap((productId) => {
       const product = productsById.get(productId);
 
@@ -43,14 +54,8 @@ export function createProductExplorerCategories(
         return [];
       }
 
-      return [
-        {
-          ...product,
-          imageUrl: resolveCatalogImageUrl(product.imageUrl ?? category.imageUrl, contentOrigin),
-          imageAlt: product.imageAlt ?? category.imageAlt ?? product.name,
-          inquiryHref: buildCatalogInquiryHref(product),
-        },
-      ];
+      categorizedProductIds.add(product.id);
+      return [createProductViewModel(product, category)];
     });
 
     if (categoryProducts.length === 0) {
@@ -69,6 +74,27 @@ export function createProductExplorerCategories(
       },
     ];
   });
+
+  const uncategorizedProducts = products
+    .filter((product) => !categorizedProductIds.has(product.id))
+    .map((product) => createProductViewModel(product, undefined));
+
+  if (uncategorizedProducts.length === 0) {
+    return resolvedCategories;
+  }
+
+  return [
+    ...resolvedCategories,
+    {
+      id: 'products',
+      slug: 'products',
+      index: String(resolvedCategories.length + 1).padStart(2, '0'),
+      name: 'Produkte',
+      eyebrow: 'Systembausteine',
+      description: 'Veröffentlichte Produkte und Systemkomponenten für Mardu-Installationen.',
+      products: uncategorizedProducts,
+    },
+  ];
 }
 
 export const productsPageIntro = {

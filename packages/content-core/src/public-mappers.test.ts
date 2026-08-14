@@ -92,6 +92,43 @@ describe('public Payload mappers', () => {
     assert.equal(products[0]?.variants[0]?.label, 'Standard');
   });
 
+  test('keeps a published product visible when its category relation is not publicly readable', async () => {
+    globalThis.fetch = async (input) => {
+      const url = new URL(input instanceof Request ? input.url : input.toString());
+      return Response.json({
+        docs:
+          url.pathname === '/api/products'
+            ? [
+                {
+                  id: 1,
+                  slug: 'gateway-pro',
+                  name: 'Mardu Basisstation Professionell',
+                  eyebrow: 'Plattform',
+                  tagline: 'Lokaler Plattformknoten.',
+                  summary: 'Verbindet Gerätekommunikation und Plattformdienste.',
+                  description: 'Für professionelle Installationen.',
+                  availability: 'lead-time',
+                  availabilityLabel: 'Projektware',
+                  categories: [2],
+                  technologies: [3, 4],
+                  sites: ['mardu-de'],
+                },
+              ]
+            : [],
+      });
+    };
+
+    const products = await getPlatformCatalogProductDetails(
+      'https://platform.mardu.de',
+      'mardu-de',
+    );
+
+    assert.equal(products.length, 1);
+    assert.equal(products[0]?.categoryId, 'category-2');
+    assert.equal(products[0]?.categoryName, 'Plattform');
+    assert.deepEqual(products[0]?.technologies, []);
+  });
+
   test('keeps legacy products linkable without inventing a price or technology', async () => {
     mockCollection([
       {
