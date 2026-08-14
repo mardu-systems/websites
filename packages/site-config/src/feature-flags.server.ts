@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { vercelAdapter } from '@flags-sdk/vercel';
 import { flag, type Flag } from 'flags/next';
 import {
   featureEnvVarNames,
@@ -15,19 +16,9 @@ export type SiteFeatureFlagDeclarations = Record<SiteFeatureKey, Flag<boolean>>;
 
 const siteFeatureFlagDeclarationsPromise = new Map<SiteKey, Promise<SiteFeatureFlagDeclarations>>();
 
-async function loadVercelAdapter() {
-  const importModule = new Function('specifier', 'return import(specifier);') as (
-    specifier: string,
-  ) => Promise<typeof import('@flags-sdk/vercel')>;
-
-  return importModule('@flags-sdk/vercel');
-}
-
 async function createSiteFlagDeclarations(site: SiteKey): Promise<SiteFeatureFlagDeclarations> {
   const definitions = getSiteFlagDefinitions(site);
-  const adapter = process.env.FLAGS?.trim()
-    ? (await loadVercelAdapter()).vercelAdapter<boolean, any>()
-    : null;
+  const adapter = process.env.FLAGS?.trim() ? vercelAdapter<boolean, unknown>() : null;
   const blogDefinition = {
     ...definitions.blog,
     options: [...definitions.blog.options],
