@@ -5,21 +5,33 @@ import { useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 import { cn } from '@mardu/ui/lib/utils';
 import type { SolutionExplorerViewModel } from './solutions-page-content';
 
 export interface SolutionsExplorerProps {
   items: readonly SolutionExplorerViewModel[];
   integrationsEnabled: boolean;
+  initialSlug?: string;
 }
 
-const quickLinks = [
-  { index: '02', label: 'Projekt anfragen', href: '/contact' },
-  { index: '03', label: 'Integrationen', href: '/integrations' },
-] as const;
+const solutionDateFormatter = new Intl.DateTimeFormat('de-DE', {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+  timeZone: 'Europe/Berlin',
+});
 
-export function SolutionsExplorer({ items, integrationsEnabled }: SolutionsExplorerProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
+export function SolutionsExplorer({
+  items,
+  integrationsEnabled,
+  initialSlug,
+}: SolutionsExplorerProps) {
+  const initialActiveIndex = Math.max(
+    0,
+    initialSlug ? items.findIndex((item) => item.slug === initialSlug) : 0,
+  );
+  const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const activeItem = items[activeIndex];
 
@@ -28,7 +40,15 @@ export function SolutionsExplorer({ items, integrationsEnabled }: SolutionsExplo
   }
 
   function selectItem(index: number) {
+    const selectedItem = items[index];
+
     setActiveIndex(index);
+
+    if (selectedItem) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('solution', selectedItem.slug);
+      window.history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+    }
   }
 
   function handleTabKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
@@ -86,7 +106,7 @@ export function SolutionsExplorer({ items, integrationsEnabled }: SolutionsExplo
               )}
             >
               <span className="flex items-center justify-between gap-3 text-base leading-tight">
-                <span>{item.navigationLabel}</span>
+                <span>{item.title}</span>
                 <span
                   className={cn(
                     'flex size-6 shrink-0 items-center justify-center rounded-full',
@@ -126,69 +146,127 @@ export function SolutionsExplorer({ items, integrationsEnabled }: SolutionsExplo
           <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-foreground text-background">
             <ArrowRight className="size-3.5" aria-hidden="true" />
           </span>
-          <p className="text-base font-medium text-foreground">{activeItem.navigationLabel}</p>
+          <div>
+            <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
+              {activeItem.tagline}
+            </p>
+            <h2 className="mt-1 text-xl font-medium leading-tight text-foreground">
+              {activeItem.title}
+            </h2>
+          </div>
         </div>
 
-        <p className="max-w-[46rem] border-b border-border py-3.5 text-base leading-relaxed text-muted-foreground">
-          {activeItem.summary}
-        </p>
+        <div className="max-w-[46rem] space-y-3 border-b border-border py-5">
+          {activeItem.heroTitle !== activeItem.title ? (
+            <h3 className="text-[1.375rem] font-light leading-tight text-foreground">
+              {activeItem.heroTitle}
+            </h3>
+          ) : null}
+          <p className="text-base leading-relaxed text-muted-foreground">{activeItem.summary}</p>
+          <p className="text-base leading-relaxed text-muted-foreground">{activeItem.heroIntro}</p>
+          {activeItem.updatedAt ? (
+            <p className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted-foreground">
+              Aktualisiert am{' '}
+              <time dateTime={activeItem.updatedAt}>
+                {solutionDateFormatter.format(new Date(activeItem.updatedAt))}
+              </time>
+            </p>
+          ) : null}
+        </div>
 
-        <div className="grid border-b border-border md:grid-cols-[0.42fr_0.58fr]">
-          <h2 className="py-3.5 pr-5 text-base font-normal">
+        <section className="border-b border-border py-5">
+          <h3 className="text-base font-normal">
             <span className="mr-1 text-xs text-muted-foreground">[01]</span>
             Typische Anwendungsfälle
-          </h2>
-          <ul className="border-t border-border md:border-l md:border-t-0">
+          </h3>
+          <ul className="mt-4 border-t border-border">
             {activeItem.applications.map((application) => (
               <li
-                key={application}
-                className="border-b border-border px-0 py-3.5 text-base last:border-b-0 md:px-5"
+                key={application.id}
+                className="grid gap-5 border-b border-border py-5 last:border-b-0 md:grid-cols-2 md:items-center"
               >
-                {application}
+                <div className={cn(application.imageSide === 'left' && 'md:order-2')}>
+                  {application.eyebrow ? (
+                    <p className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
+                      {application.eyebrow}
+                    </p>
+                  ) : null}
+                  <h4 className="mt-1 text-lg font-medium leading-tight">{application.title}</h4>
+                  <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+                    {application.body}
+                  </p>
+                </div>
+                <div
+                  className={cn(
+                    'relative aspect-[4/3] overflow-hidden bg-muted',
+                    application.imageSide === 'left' && 'md:order-1',
+                  )}
+                >
+                  <Image
+                    src={application.imageUrl}
+                    alt={application.imageAlt}
+                    fill
+                    sizes="(max-width: 767px) 100vw, 22rem"
+                    className="object-cover"
+                  />
+                </div>
               </li>
             ))}
           </ul>
-        </div>
+        </section>
 
-        <div className="grid border-b border-border md:grid-cols-[0.42fr_0.58fr]">
-          <h2 className="py-3.5 pr-5 text-base font-normal">
+        <section className="border-b border-border py-5">
+          <h3 className="text-base font-normal">
             <span className="mr-1 text-xs text-muted-foreground">[02]</span>
             Vorteile
-          </h2>
-          <ul className="border-t border-border md:border-l md:border-t-0">
+          </h3>
+          <ul className="mt-4 border-t border-border">
             {activeItem.benefits.map((benefit) => (
               <li
-                key={benefit}
-                className="border-b border-border px-0 py-3.5 text-base last:border-b-0 md:px-5"
+                key={benefit.title}
+                className="border-b border-border py-4 text-base last:border-b-0"
               >
-                {benefit}
+                <h4 className="font-medium text-foreground">{benefit.title}</h4>
+                <p className="mt-1 leading-relaxed text-muted-foreground">{benefit.description}</p>
               </li>
             ))}
           </ul>
-        </div>
+        </section>
 
-        <div className="grid pt-3.5 md:grid-cols-[0.42fr_0.58fr]">
-          <h2 className="pr-5 text-base font-normal">
+        <section className="grid border-b border-border py-5 md:grid-cols-[0.42fr_0.58fr]">
+          <h3 className="pr-5 text-base font-normal">
             <span className="mr-1 text-xs text-muted-foreground">[03]</span>
             Im Betrieb
-          </h2>
+          </h3>
           <div className="mt-4 md:mt-0 md:border-l md:border-border md:pl-5">
-            <h3 className="max-w-[28rem] text-[1.375rem] font-light leading-tight">
+            <h4 className="max-w-[28rem] text-[1.375rem] font-light leading-tight">
               {activeItem.perspectiveTitle}
-            </h3>
+            </h4>
             <p className="mt-4 max-w-[42rem] text-base leading-relaxed text-muted-foreground">
               {activeItem.perspectiveBody}
             </p>
           </div>
-        </div>
+        </section>
+
+        {activeItem.detailMarkdown ? (
+          <section className="py-5">
+            <h3 className="text-base font-normal">
+              <span className="mr-1 text-xs text-muted-foreground">[04]</span>
+              Weitere Details
+            </h3>
+            <div className="prose mt-4 max-w-none prose-headings:font-sans prose-headings:tracking-[-0.02em] prose-p:text-foreground/85 prose-li:text-foreground/85 prose-strong:text-foreground prose-a:text-foreground prose-a:underline prose-a:underline-offset-3">
+              <ReactMarkdown>{activeItem.detailMarkdown}</ReactMarkdown>
+            </div>
+          </section>
+        ) : null}
       </article>
 
       <aside className="min-w-0">
         <div className="relative aspect-square overflow-hidden bg-muted">
           <Image
-            key={activeItem.imageUrl}
-            src={activeItem.imageUrl}
-            alt={activeItem.imageAlt}
+            key={activeItem.heroImageUrl}
+            src={activeItem.heroImageUrl}
+            alt={activeItem.heroImageAlt}
             fill
             loading="eager"
             sizes="(max-width: 1279px) 100vw, 25rem"
@@ -196,30 +274,25 @@ export function SolutionsExplorer({ items, integrationsEnabled }: SolutionsExplo
           />
         </div>
 
-        <nav aria-label={`Weiterführende Links für ${activeItem.navigationLabel}`} className="mt-5">
-          <Link
-            href={`/solutions/${activeItem.slug}`}
-            className="group flex min-h-11 items-center gap-2 border-b border-border py-2 text-sm transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <span className="flex size-5 items-center justify-center rounded-full bg-foreground text-background transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-              <ArrowUpRight className="size-3" aria-hidden="true" />
-            </span>
-            [01] Lösung im Detail
-          </Link>
-          {quickLinks
-            .filter((link) => integrationsEnabled || link.href !== '/integrations')
-            .map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="group flex min-h-11 items-center gap-2 border-b border-border py-2 text-sm transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <span className="flex size-5 items-center justify-center rounded-full bg-foreground text-background transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                  <ArrowUpRight className="size-3" aria-hidden="true" />
-                </span>
-                [{link.index}] {link.label}
-              </Link>
-            ))}
+        <nav aria-label={`Weiterführende Links für ${activeItem.title}`} className="mt-5">
+          {[
+            {
+              label: activeItem.ctaLabel ?? 'Projekt anfragen',
+              href: activeItem.ctaHref ?? '/contact',
+            },
+            ...(integrationsEnabled ? [{ label: 'Integrationen', href: '/integrations' }] : []),
+          ].map((link, index) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="group flex min-h-11 items-center gap-2 border-b border-border py-2 text-sm transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <span className="flex size-5 items-center justify-center rounded-full bg-foreground text-background transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                <ArrowUpRight className="size-3" aria-hidden="true" />
+              </span>
+              [{String(index + 1).padStart(2, '0')}] {link.label}
+            </Link>
+          ))}
         </nav>
       </aside>
     </div>

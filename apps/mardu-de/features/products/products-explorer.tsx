@@ -2,23 +2,37 @@
 
 import type { KeyboardEvent } from 'react';
 import { useRef, useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { cn } from '@mardu/ui/lib/utils';
+import { ProductDetails, ProductSidebar } from './product-details';
 import type { ProductExplorerCategoryViewModel } from './products-page-content';
 
 export interface ProductsExplorerProps {
   categories: readonly ProductExplorerCategoryViewModel[];
+  initialProductSlug?: string;
 }
 
-function updateHash(value: string) {
-  window.history.replaceState(null, '', `#${value}`);
+function updateProductUrl(productSlug: string) {
+  const url = new URL(window.location.href);
+  url.searchParams.set('product', productSlug);
+  window.history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
 }
 
-export function ProductsExplorer({ categories }: ProductsExplorerProps) {
-  const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
-  const [activeProductId, setActiveProductId] = useState(categories[0]?.products[0]?.id ?? '');
+export function ProductsExplorer({ categories, initialProductSlug }: ProductsExplorerProps) {
+  const initialCategoryIndex = Math.max(
+    0,
+    initialProductSlug
+      ? categories.findIndex((category) =>
+          category.products.some((product) => product.slug === initialProductSlug),
+        )
+      : 0,
+  );
+  const initialCategory = categories[initialCategoryIndex];
+  const initialProduct =
+    initialCategory?.products.find((product) => product.slug === initialProductSlug) ??
+    initialCategory?.products[0];
+  const [activeCategoryIndex, setActiveCategoryIndex] = useState(initialCategoryIndex);
+  const [activeProductId, setActiveProductId] = useState(initialProduct?.id ?? '');
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const activeCategory = categories[activeCategoryIndex];
   const activeProduct =
@@ -36,14 +50,35 @@ export function ProductsExplorer({ categories }: ProductsExplorerProps) {
       return;
     }
 
+    const firstProduct = category.products[0];
     setActiveCategoryIndex(index);
-    setActiveProductId(category.products[0]?.id ?? '');
-    updateHash(`category-${category.slug}`);
+    setActiveProductId(firstProduct?.id ?? '');
+    if (firstProduct) {
+      updateProductUrl(firstProduct.slug);
+    }
   }
 
   function selectProduct(productId: string, productSlug: string) {
     setActiveProductId(productId);
-    updateHash(`product-${productSlug}`);
+    updateProductUrl(productSlug);
+  }
+
+  function selectRelatedProduct(productSlug: string) {
+    const categoryIndex = categories.findIndex((category) =>
+      category.products.some((product) => product.slug === productSlug),
+    );
+    const product = categories[categoryIndex]?.products.find(
+      (current) => current.slug === productSlug,
+    );
+
+    if (!product || categoryIndex < 0) {
+      return;
+    }
+
+    setActiveCategoryIndex(categoryIndex);
+    setActiveProductId(product.id);
+    updateProductUrl(product.slug);
+    tabRefs.current[categoryIndex]?.focus();
   }
 
   function handleTabKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
@@ -188,7 +223,7 @@ export function ProductsExplorer({ categories }: ProductsExplorerProps) {
                       isActive ? 'text-background/72' : 'text-muted-foreground',
                     )}
                   >
-                    {product.priceFromLabel}
+                    {product.priceFromLabel ?? 'Auf Anfrage'}
                   </span>
                 </button>
               );
@@ -196,82 +231,10 @@ export function ProductsExplorer({ categories }: ProductsExplorerProps) {
           </div>
         </div>
 
-        <div className="grid py-4 md:grid-cols-[0.34fr_0.66fr]">
-          <p className="pr-5 text-xs uppercase tracking-[0.12em] text-muted-foreground">
-            [02] Einordnung
-          </p>
-          <div className="mt-4 md:mt-0 md:border-l md:border-border md:pl-5">
-            <h3 className="text-[1.375rem] font-light leading-tight">{activeProduct.tagline}</h3>
-            <p className="mt-4 max-w-[42rem] text-base leading-relaxed text-muted-foreground">
-              {activeProduct.summary}
-            </p>
-            <dl className="mt-6 grid gap-3 border-t border-border pt-4 sm:grid-cols-2">
-              <div>
-                <dt className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
-                  Verfügbarkeit
-                </dt>
-                <dd className="mt-1 text-sm">{activeProduct.availabilityLabel}</dd>
-              </div>
-              <div>
-                <dt className="text-xs uppercase tracking-[0.12em] text-muted-foreground">
-                  Technologie
-                </dt>
-                <dd className="mt-1 text-sm">
-                  {activeProduct.technologies.length > 0
-                    ? activeProduct.technologies.join(' · ')
-                    : 'Projektabhängig'}
-                </dd>
-              </div>
-            </dl>
-          </div>
-        </div>
+        <ProductDetails product={activeProduct} onSelectRelatedProduct={selectRelatedProduct} />
       </article>
 
-      <aside className="min-w-0">
-        {activeProduct.imageUrl ? (
-          <div className="relative aspect-square overflow-hidden bg-muted">
-            <Image
-              key={activeProduct.imageUrl}
-              src={activeProduct.imageUrl}
-              alt={activeProduct.imageAlt}
-              fill
-              loading="eager"
-              sizes="(max-width: 1279px) 100vw, 25rem"
-              className="object-cover"
-            />
-          </div>
-        ) : null}
-
-        <nav aria-label={`Weiterführende Links für ${activeProduct.name}`} className="mt-5">
-          <Link
-            href={`/products/${activeProduct.slug}`}
-            className="group flex min-h-11 items-center gap-2 border-b border-border py-2 text-sm transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <span className="flex size-5 items-center justify-center rounded-full bg-foreground text-background transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-              <ArrowUpRight className="size-3" aria-hidden="true" />
-            </span>
-            [01] Produkt im Detail
-          </Link>
-          <Link
-            href="/configurator"
-            className="group flex min-h-11 items-center gap-2 border-b border-border py-2 text-sm transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <span className="flex size-5 items-center justify-center rounded-full bg-foreground text-background transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-              <ArrowUpRight className="size-3" aria-hidden="true" />
-            </span>
-            [02] Projekt konfigurieren
-          </Link>
-          <Link
-            href="/contact"
-            className="group flex min-h-11 items-center gap-2 border-b border-border py-2 text-sm transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <span className="flex size-5 items-center justify-center rounded-full bg-foreground text-background transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-              <ArrowUpRight className="size-3" aria-hidden="true" />
-            </span>
-            [03] Projekt anfragen
-          </Link>
-        </nav>
-      </aside>
+      <ProductSidebar product={activeProduct} />
     </div>
   );
 }

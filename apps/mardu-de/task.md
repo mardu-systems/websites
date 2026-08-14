@@ -7,8 +7,9 @@
 - [ ] **Design Theme & Style Adoption**
   - [ ] Extend `@theme inline` in [globals.css](file:///Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/globals.css) with new custom colors and animation keyframes
 - [ ] **Restructure Single-Page Routes & Dynamic Tab toggles**
-  - [ ] Redesign `/solutions` to use interactive CMS tab-switching, delete `/solutions/[slug]` route
-  - [ ] Redesign `/products` and `/pricing` with sub-tabs, delete `/products/[slug]` route
+  - [x] Redesign `/solutions` to use interactive CMS tab-switching, delete `/solutions/[slug]` route
+  - [x] Redesign `/products` with CMS sub-tabs and delete `/products/[slug]` route
+  - [ ] Redesign `/pricing` with product sub-tabs
   - [ ] Redesign `/integrations` list, delete `/integrations/[slug]` route
 - [ ] **Circular Orbit Configurator**
   - [ ] Build orbital interactive layout for `/configurator` steps

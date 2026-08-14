@@ -1717,7 +1717,7 @@ function mapCatalogProductDetail(
       productName: listItem.name,
       category: listItem.categoryName,
       ...(doc.priceFromLabel ? { priceFrom: doc.priceFromLabel } : {}),
-      sourcePage: `/products/${listItem.slug}`,
+      sourcePage: `/products?product=${encodeURIComponent(listItem.slug)}`,
       technologyIds: listItem.technologies.map((item) => item.id),
     },
   };
@@ -1733,13 +1733,57 @@ function sortCatalogCategories(items: CatalogCategoryDto[]) {
   });
 }
 
-function sortCatalogProducts(items: CatalogProductListItemDto[]) {
+function sortCatalogProducts<T extends CatalogProductListItemDto>(items: T[]): T[] {
   return [...items].sort((a, b) => {
     if (Number(a.featured) !== Number(b.featured)) {
       return Number(b.featured) - Number(a.featured);
     }
 
     return a.name.localeCompare(b.name, 'de');
+  });
+}
+
+function mapCatalogProductDetails(
+  docs: PayloadCatalogProductDoc[],
+  origin: string,
+): CatalogProductDetailDto[] {
+  const details = mapPayloadDocumentsStrict(
+    docs,
+    (doc) => mapCatalogProductDetail(doc, origin),
+    '/api/products',
+  );
+  const allProducts = mapPayloadDocumentsStrict(
+    docs,
+    (doc) => mapCatalogProductListItem(doc, origin),
+    '/api/products',
+  );
+  const docsBySlug = new Map(docs.map((doc) => [doc.slug, doc]));
+
+  return details.map((detail) => {
+    const doc = docsBySlug.get(detail.slug);
+    const explicitRelated = mapPayloadDocumentsStrict(
+      toRelationshipDocs<PayloadCatalogProductDoc>(doc?.relatedProducts),
+      (item) => mapCatalogProductListItem(item, origin),
+      '/api/products.relatedProducts',
+    );
+    const relatedProducts =
+      explicitRelated.length > 0
+        ? explicitRelated
+        : allProducts
+            .filter((item) => item.id !== detail.id)
+            .filter(
+              (item) =>
+                item.categoryId === detail.categoryId ||
+                item.technologies.some((technology) =>
+                  detail.technologies.some((current) => current.id === technology.id),
+                ),
+            )
+            .slice(0, 3);
+
+    return {
+      ...detail,
+      relatedProducts,
+    };
   });
 }
 
@@ -1897,6 +1941,19 @@ export async function getPlatformCatalogProducts(
   );
 }
 
+/**
+ * Loads every published, site-visible product with the complete editorial detail contract.
+ * Uses one Payload collection request and is intended for single-page product catalogs.
+ */
+export async function getPlatformCatalogProductDetails(
+  origin: string,
+  site: VisibleSite,
+): Promise<CatalogProductDetailDto[]> {
+  return sortCatalogProducts(
+    mapCatalogProductDetails(await fetchPublishedCatalogProductDocs(origin, site), origin),
+  );
+}
+
 export async function getPlatformFeaturedCatalogProducts(
   origin: string,
   site: VisibleSite,
@@ -1912,48 +1969,10 @@ export async function getPlatformCatalogProductBySlug(
   site: VisibleSite,
   slug: string,
 ): Promise<CatalogProductDetailDto | null> {
-  const docs = await fetchPublishedCatalogProductDocs(origin, site);
-  const doc = docs.find((item) => item.slug === slug);
-
-  if (!doc) {
-    return null;
-  }
-
-  const [detail] = mapPayloadDocumentsStrict(
-    [doc],
-    (item) => mapCatalogProductDetail(item, origin),
-    '/api/products',
+  return (
+    (await getPlatformCatalogProductDetails(origin, site)).find((item) => item.slug === slug) ??
+    null
   );
-
-  const allProducts = mapPayloadDocumentsStrict(
-    docs,
-    (item) => mapCatalogProductListItem(item, origin),
-    '/api/products',
-  );
-  const explicitRelated = mapPayloadDocumentsStrict(
-    toRelationshipDocs<PayloadCatalogProductDoc>(doc.relatedProducts),
-    (item) => mapCatalogProductListItem(item, origin),
-    '/api/products.relatedProducts',
-  );
-
-  const relatedProducts =
-    explicitRelated.length > 0
-      ? explicitRelated
-      : allProducts
-          .filter((item) => item.id !== detail.id)
-          .filter(
-            (item) =>
-              item.categoryId === detail.categoryId ||
-              item.technologies.some((technology) =>
-                detail.technologies.some((current) => current.id === technology.id),
-              ),
-          )
-          .slice(0, 3);
-
-  return {
-    ...detail,
-    relatedProducts,
-  };
 }
 
 function mapSolutionListItem(doc: PayloadSolutionDoc, origin: string): SolutionListItemDto | null {

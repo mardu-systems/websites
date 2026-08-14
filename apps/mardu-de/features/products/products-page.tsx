@@ -5,8 +5,10 @@ import { productsPageIntro, type ProductExplorerCategoryViewModel } from './prod
 
 export function ProductsPage({
   categories,
+  initialProductSlug,
 }: {
   categories: readonly ProductExplorerCategoryViewModel[];
+  initialProductSlug?: string;
 }) {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -30,7 +32,7 @@ export function ProductsPage({
       <section className="py-16 md:py-24" aria-label="Produkte nach Systemrolle">
         <div className="mardu-container">
           {categories.length > 0 ? (
-            <ProductsExplorer categories={categories} />
+            <ProductsExplorer categories={categories} initialProductSlug={initialProductSlug} />
           ) : (
             <p className="border-y border-border py-12 text-base text-muted-foreground">
               Derzeit sind keine Produkte veröffentlicht.

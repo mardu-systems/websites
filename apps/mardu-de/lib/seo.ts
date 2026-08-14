@@ -2,7 +2,6 @@ import type {
   BlogPostDetailDto,
   CatalogProductDetailDto,
   IntegrationDetailDto,
-  SolutionDetailDto,
 } from '@mardu/content-core';
 import { getSiteConfig } from '@mardu/site-config';
 import type { Metadata } from 'next';
@@ -183,16 +182,6 @@ function createWebPageJsonLd({
     ...(image ? { primaryImageOfPage: absoluteSiteUrl(image) } : {}),
     ...(dateModified ? { dateModified } : {}),
   };
-}
-
-export function createSolutionJsonLd(solution: SolutionDetailDto): JsonLdData {
-  return createWebPageJsonLd({
-    url: solution.canonicalUrl || `/solutions/${solution.slug}`,
-    name: solution.seoTitle || solution.title,
-    description: solution.seoDescription || solution.summary,
-    image: solution.ogImageUrl || solution.heroImageUrl,
-    dateModified: solution.updatedAt,
-  });
 }
 
 export function createIntegrationJsonLd(integration: IntegrationDetailDto): JsonLdData {

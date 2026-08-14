@@ -32,7 +32,14 @@ Zusätzliche SEO-, Preis- und Aktualitätsfelder im Produktdetail-DTO:
 - `priceFrom` (optional, numerischer Netto-Einstiegspreis in Euro)
 - `updatedAt` (optional, ISO-8601)
 
-Das Frontend nutzt diese Felder für Metadata, Social Cards und valides `Product`-JSON-LD. Ein `Offer` wird nur ausgegeben, wenn `priceFrom` numerisch gepflegt ist.
+Das Frontend nutzt diese Felder für die vollständige Inline-Darstellung auf `/products`.
+Ein numerisch gepflegtes `priceFrom` kann zusätzlich für valides `Product`-JSON-LD verwendet
+werden; ohne numerischen Preis wird kein `Offer` ausgegeben.
+
+Für Single-Page-Kataloge stellt `getPlatformCatalogProductDetails(origin, site)` alle
+publizierten, für die Site sichtbaren Produkte als vollständige `CatalogProductDetailDto[]`
+mit einer einzigen Collection-Abfrage bereit. `getPlatformCatalogProductBySlug` verwendet
+denselben Mapping-Vertrag für einzelne Produktansichten.
 
 ## Endpunktmatrix
 
@@ -85,4 +92,4 @@ Vertrag des Seed-Skripts:
 
 ## Product-Inquiry
 
-Die App transportiert `productId`, `productSlug`, `productName`, `category`, `sourcePage` sowie optionale `variantId`, `priceFrom` und `technologyIds` zur Kontaktseite. Nur vollständige Pflichtfelder werden als `CatalogInquiryContextDto` unter `ContactRequestDto.config` weitergesendet.
+Die App transportiert `productId`, `productSlug`, `productName`, `category`, `sourcePage` sowie optionale `variantId`, `priceFrom` und `technologyIds` zur Kontaktseite. `sourcePage` verweist auf die Produktauswahl `/products?product=<slug>`. Nur vollständige Pflichtfelder werden als `CatalogInquiryContextDto` unter `ContactRequestDto.config` weitergesendet.

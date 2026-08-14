@@ -31,7 +31,7 @@ describe('mardu.de sitemap', () => {
     assert.ok(!sitemap.some((entry) => entry.url.includes('/products/gateway-pro')));
   });
 
-  test('publishes every returned product and solution detail slug exactly once', async () => {
+  test('publishes no product or solution detail routes', async () => {
     const sitemap = await buildMarduSitemap({
       blogEnabled: false,
       integrationsEnabled: false,
@@ -40,14 +40,8 @@ describe('mardu.de sitemap', () => {
     });
     const urls = sitemap.map((entry) => entry.url);
 
-    for (const entry of [...contentEntries.products, ...contentEntries.solutions]) {
-      const segment = contentEntries.products.includes(entry) ? 'products' : 'solutions';
-      assert.equal(
-        urls.filter((url) => url === `${MARDU_SITE_URL}/${segment}/${entry.slug}`).length,
-        1,
-      );
-    }
-
+    assert.ok(!urls.some((url) => url.startsWith(`${MARDU_SITE_URL}/products/`)));
+    assert.ok(!urls.some((url) => url.startsWith(`${MARDU_SITE_URL}/solutions/`)));
     assert.ok(!urls.some((url) => url.startsWith(`${MARDU_SITE_URL}/blog/`)));
     assert.ok(!urls.some((url) => url.startsWith(`${MARDU_SITE_URL}/integrations/`)));
   });

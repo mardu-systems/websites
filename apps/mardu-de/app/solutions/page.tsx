@@ -14,7 +14,13 @@ export const metadata: Metadata = createPageMetadata({
   path: '/solutions',
 });
 
-export default async function SolutionsPage() {
+export default async function SolutionsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ solution?: string | string[] }>;
+}) {
+  const requestedSolution = (await searchParams).solution;
+  const initialSlug = typeof requestedSolution === 'string' ? requestedSolution : undefined;
   const [solutions, integrationsEnabled] = await Promise.all([
     getSolutionDetails(),
     isIntegrationsEnabled('mardu-de'),
@@ -23,7 +29,11 @@ export default async function SolutionsPage() {
 
   return (
     <main className="min-h-screen bg-background">
-      <SolutionsPageContent items={items} integrationsEnabled={integrationsEnabled} />
+      <SolutionsPageContent
+        items={items}
+        integrationsEnabled={integrationsEnabled}
+        initialSlug={initialSlug}
+      />
     </main>
   );
 }

@@ -146,10 +146,10 @@ export default buildConfig({
           return `${frontendBaseURL}/integrations/${slug}`;
         }
         if (collectionSlug === 'solutions') {
-          return `${frontendBaseURL}/solutions/${slug}`;
+          return `${frontendBaseURL}/solutions?solution=${slug}`;
         }
         if (collectionSlug === 'products') {
-          return `${frontendBaseURL}/products/${slug}`;
+          return `${frontendBaseURL}/products?product=${slug}`;
         }
         if (collectionSlug === 'blog-posts') {
           return `${frontendBaseURL}/blog/${slug}`;
@@ -399,7 +399,7 @@ export default buildConfig({
           typeof doc?.slug === 'string' &&
           doc.slug.length > 0
         ) {
-          return `${baseURL}/solutions/${doc.slug}`;
+          return `${baseURL}/solutions?solution=${doc.slug}`;
         }
 
         if (
@@ -407,7 +407,7 @@ export default buildConfig({
           typeof doc?.slug === 'string' &&
           doc.slug.length > 0
         ) {
-          return `${baseURL}/products/${doc.slug}`;
+          return `${baseURL}/products?product=${doc.slug}`;
         }
 
         if (typeof doc?.slug === 'string' && doc.slug.length > 0) {

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
-import type { CatalogCategoryDto, CatalogProductListItemDto } from '@mardu/content-core';
+import type { CatalogCategoryDto, CatalogProductDetailDto } from '@mardu/content-core';
 import { createProductExplorerCategories } from './products-page-content';
 
 const category: CatalogCategoryDto = {
@@ -11,7 +11,7 @@ const category: CatalogCategoryDto = {
   productIds: ['gateway-pro', 'gateway'],
 };
 
-const products: CatalogProductListItemDto[] = [
+const products: CatalogProductDetailDto[] = [
   {
     id: 'gateway',
     slug: 'gateway',
@@ -23,7 +23,21 @@ const products: CatalogProductListItemDto[] = [
     imageUrl: 'https://cdn.example.com/gateway.jpg',
     availability: 'available',
     availabilityLabel: 'Verfügbar',
+    heroDescription: 'Für Standardinstallationen.',
+    overview: 'Koordiniert lokale Geräte.',
+    variants: [],
     technologies: [],
+    carriers: [],
+    featureGroups: [],
+    specGroups: [],
+    relatedProducts: [],
+    inquiryContext: {
+      productId: 'gateway',
+      productSlug: 'gateway',
+      productName: 'Gateway',
+      category: 'Gateways',
+      sourcePage: '/products/gateway',
+    },
   },
   {
     id: 'gateway-pro',
@@ -36,7 +50,29 @@ const products: CatalogProductListItemDto[] = [
     imageUrl: 'http://localhost:4000/gateway/mounted.jpg',
     availability: 'lead-time',
     availabilityLabel: 'Projektware',
+    heroDescription: 'Für verteilte Gebäudeinstallationen.',
+    overview: 'Koordiniert Geräte und Plattformdienste am Standort.',
+    variants: [],
     technologies: [],
+    carriers: [],
+    featureGroups: [{ title: 'Betrieb am Standort', items: ['Lokaler Plattformknoten'] }],
+    specGroups: [
+      {
+        title: 'Projektstatus',
+        specs: [{ label: 'Verfügbarkeit', value: 'Projektware' }],
+      },
+    ],
+    relatedProducts: [],
+    detailMarkdown: '## Weitere Details\n\nAus dem CMS.',
+    primaryCtaLabel: 'Projekt besprechen',
+    secondaryCtaLabel: 'Installation konfigurieren',
+    inquiryContext: {
+      productId: 'gateway-pro',
+      productSlug: 'gateway-pro',
+      productName: 'Gateway Pro',
+      category: 'Gateways',
+      sourcePage: '/products/gateway-pro',
+    },
   },
 ];
 
@@ -50,5 +86,10 @@ describe('product explorer content', () => {
     );
     assert.equal(result?.products[0]?.imageUrl, '/gateway/mounted.jpg');
     assert.equal(result?.products[1]?.imageUrl, 'https://cdn.example.com/gateway.jpg');
+    assert.equal(result?.products[0]?.overview, products[1]?.overview);
+    assert.deepEqual(result?.products[0]?.featureGroups, products[1]?.featureGroups);
+    assert.deepEqual(result?.products[0]?.specGroups, products[1]?.specGroups);
+    assert.equal(result?.products[0]?.detailMarkdown, products[1]?.detailMarkdown);
+    assert.equal(result?.products[0]?.primaryCtaLabel, products[1]?.primaryCtaLabel);
   });
 });

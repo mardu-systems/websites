@@ -9,7 +9,7 @@ import { createProductExplorerCategories } from '@/features/products/products-pa
 import {
   getCatalogCarriers,
   getCatalogCategories,
-  getCatalogProducts,
+  getCatalogProductDetails,
   getCatalogTechnologies,
 } from '@/lib/catalog';
 import { createPageMetadata } from '@/lib/seo';
@@ -31,16 +31,22 @@ export async function generateMetadata(): Promise<Metadata> {
   return productsMetadata;
 }
 
-export default async function ProductsPage() {
+export default async function ProductsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ product?: string | string[] }>;
+}) {
   if (!(await isProductsEnabled('mardu-de'))) {
     notFound();
   }
 
+  const requestedProduct = (await searchParams).product;
+  const initialProductSlug = typeof requestedProduct === 'string' ? requestedProduct : undefined;
   const [categories, technologies, carriers, products, integrationsEnabled] = await Promise.all([
     getCatalogCategories(),
     getCatalogTechnologies(),
     getCatalogCarriers(),
-    getCatalogProducts(),
+    getCatalogProductDetails(),
     isIntegrationsEnabled('mardu-de'),
   ]);
   const explorerCategories = createProductExplorerCategories(
@@ -51,7 +57,10 @@ export default async function ProductsPage() {
 
   return (
     <main className="min-h-screen bg-background">
-      <ProductsPageContent categories={explorerCategories} />
+      <ProductsPageContent
+        categories={explorerCategories}
+        initialProductSlug={initialProductSlug}
+      />
 
       <CatalogTechnologyGrid
         eyebrow="Technologien"

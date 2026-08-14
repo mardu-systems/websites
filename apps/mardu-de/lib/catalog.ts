@@ -1,8 +1,7 @@
 import {
   getPlatformCatalogCarriers,
   getPlatformCatalogCategories,
-  getPlatformCatalogProductBySlug,
-  getPlatformCatalogProducts,
+  getPlatformCatalogProductDetails,
   getPlatformCatalogTechnologies,
   getPlatformFeaturedCatalogProducts,
   type CatalogProductDetailDto,
@@ -18,17 +17,13 @@ export const getCatalogCategories = async () =>
 export const getCatalogTechnologies = async () =>
   getPlatformCatalogTechnologies(getPlatformOrigin(), site);
 
-export const getCatalogCarriers = async () =>
-  getPlatformCatalogCarriers(getPlatformOrigin(), site);
+export const getCatalogCarriers = async () => getPlatformCatalogCarriers(getPlatformOrigin(), site);
 
-export const getCatalogProducts = async () =>
-  getPlatformCatalogProducts(getPlatformOrigin(), site);
+export const getCatalogProductDetails = async () =>
+  getPlatformCatalogProductDetails(getPlatformOrigin(), site);
 
 export const getFeaturedCatalogProducts = async (limit = 3) =>
   getPlatformFeaturedCatalogProducts(getPlatformOrigin(), site, limit);
-
-export const getCatalogProductBySlug = async (slug: string) =>
-  getPlatformCatalogProductBySlug(getPlatformOrigin(), site, slug);
 
 export function buildCatalogInquiryHref(product: CatalogProductDetailDto, variantId?: string) {
   const context: CatalogInquiryContextDto = {

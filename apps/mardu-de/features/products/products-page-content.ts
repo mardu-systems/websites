@@ -1,17 +1,10 @@
-import type { CatalogCategoryDto, CatalogProductListItemDto } from '@mardu/content-core';
+import type { CatalogCategoryDto, CatalogProductDetailDto } from '@mardu/content-core';
+import { buildCatalogInquiryHref } from '@/lib/catalog';
 
-export interface ProductExplorerProductViewModel {
-  id: string;
-  slug: string;
-  name: string;
-  tagline: string;
-  summary: string;
-  imageUrl?: string;
+export type ProductExplorerProductViewModel = CatalogProductDetailDto & {
   imageAlt: string;
-  priceFromLabel: string;
-  availabilityLabel: string;
-  technologies: readonly string[];
-}
+  inquiryHref: string;
+};
 
 export interface ProductExplorerCategoryViewModel {
   id: string;
@@ -37,7 +30,7 @@ function resolveCatalogImageUrl(imageUrl: string | undefined, contentOrigin: str
 
 export function createProductExplorerCategories(
   categories: readonly CatalogCategoryDto[],
-  products: readonly CatalogProductListItemDto[],
+  products: readonly CatalogProductDetailDto[],
   contentOrigin: string,
 ): readonly ProductExplorerCategoryViewModel[] {
   const productsById = new Map(products.map((product) => [product.id, product]));
@@ -52,16 +45,10 @@ export function createProductExplorerCategories(
 
       return [
         {
-          id: product.id,
-          slug: product.slug,
-          name: product.name,
-          tagline: product.tagline,
-          summary: product.summary,
+          ...product,
           imageUrl: resolveCatalogImageUrl(product.imageUrl ?? category.imageUrl, contentOrigin),
           imageAlt: product.imageAlt ?? category.imageAlt ?? product.name,
-          priceFromLabel: product.priceFromLabel ?? 'Auf Anfrage',
-          availabilityLabel: product.availabilityLabel,
-          technologies: product.technologies.map((technology) => technology.name),
+          inquiryHref: buildCatalogInquiryHref(product),
         },
       ];
     });

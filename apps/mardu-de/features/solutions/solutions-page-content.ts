@@ -1,18 +1,28 @@
-import type { SolutionDetailDto } from '@mardu/content-core';
+import type {
+  SolutionContentBlockDto,
+  SolutionDetailDto,
+  SolutionFeatureDto,
+} from '@mardu/content-core';
 
 export interface SolutionExplorerViewModel {
   id: string;
   index: string;
   slug: string;
-  navigationLabel: string;
   title: string;
+  tagline: string;
   summary: string;
-  imageUrl: string;
-  imageAlt: string;
-  applications: readonly string[];
-  benefits: readonly string[];
+  updatedAt?: string;
+  heroTitle: string;
+  heroIntro: string;
+  heroImageUrl: string;
+  heroImageAlt: string;
+  applications: readonly SolutionContentBlockDto[];
+  benefits: readonly SolutionFeatureDto[];
   perspectiveTitle: string;
   perspectiveBody: string;
+  detailMarkdown?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
 }
 
 export function createSolutionExplorerItems(
@@ -22,15 +32,21 @@ export function createSolutionExplorerItems(
     id: solution.id,
     index: String(itemIndex + 1).padStart(2, '0'),
     slug: solution.slug,
-    navigationLabel: solution.badge ?? solution.title,
     title: solution.title,
+    tagline: solution.tagline,
     summary: solution.summary,
-    imageUrl: solution.imageUrl,
-    imageAlt: solution.imageAlt,
-    applications: solution.contentBlocks.map((block) => block.title),
-    benefits: solution.features?.map((feature) => feature.title) ?? [],
+    ...(solution.updatedAt ? { updatedAt: solution.updatedAt } : {}),
+    heroTitle: solution.heroTitle,
+    heroIntro: solution.heroIntro,
+    heroImageUrl: solution.heroImageUrl,
+    heroImageAlt: solution.heroImageAlt,
+    applications: solution.contentBlocks,
+    benefits: solution.features ?? [],
     perspectiveTitle: solution.problemTitle,
     perspectiveBody: solution.problemBody,
+    ...(solution.detailMarkdown ? { detailMarkdown: solution.detailMarkdown } : {}),
+    ...(solution.ctaLabel ? { ctaLabel: solution.ctaLabel } : {}),
+    ...(solution.ctaHref ? { ctaHref: solution.ctaHref } : {}),
   }));
 }
 

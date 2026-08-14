@@ -32,14 +32,44 @@ export async function generateMetadata(): Promise<Metadata> {
   return integrationsMetadata;
 }
 
-const CURATED_INTEGRATIONS = [
-  { slug: 'ldap', logoSrc: '/integrations/logos/ldap.png' },
-  { slug: 'oidc', logoSrc: '/integrations/logos/openid.svg' },
-  { slug: 'microsoft-entra-id', logoSrc: '/integrations/logos/microsoft.svg' },
-  { slug: 'mqtt', logoSrc: '/integrations/logos/mqtt.svg' },
-  { slug: 'easyverein', logoSrc: '/integrations/logos/easyverein.ico' },
-  { slug: 'stripe', logoSrc: '/integrations/logos/stripe.svg' },
+const CURATED_INTEGRATION_SLUGS = [
+  'ldap',
+  'openid-connect',
+  'microsoft-entra-id',
+  'mqtt',
+  'easyverein',
+  'stripe',
 ] as const;
+
+const INTEGRATION_LOGO_SOURCES: Readonly<Record<string, string>> = {
+  ldap: '/integrations/logos/ldap.png',
+  'openid-connect': '/integrations/logos/openid-connect.svg',
+  'microsoft-entra-id': '/integrations/logos/microsoft.svg',
+  'open-badges': '/integrations/logos/open-badges.svg',
+  mqtt: '/integrations/logos/mqtt.svg',
+  'rest-api-openapi': '/integrations/logos/openapi.svg',
+  'webhooks-events': '/integrations/logos/webhooks-events.svg',
+  'github-app-ota': '/integrations/logos/github.svg',
+  'lokale-ota-verteilung': '/integrations/logos/local-ota.svg',
+  smtp: '/integrations/logos/smtp.svg',
+  'vonage-sms': '/integrations/logos/vonage.png',
+  'web-push-echtzeit': '/integrations/logos/web-push.svg',
+  'rabbitmq-masstransit': '/integrations/logos/message-queue.svg',
+  'model-context-protocol': '/integrations/logos/mcp.svg',
+  ip500: '/integrations/logos/ip500.svg',
+  'nfc-mifare-desfire': '/integrations/logos/nfc-mifare.svg',
+  'qr-geraete-onboarding': '/integrations/logos/qr-onboarding.svg',
+  'osdp-phg-crypt': '/integrations/logos/osdp-phg.svg',
+  modbus: '/integrations/logos/modbus.svg',
+  'node-red': '/integrations/logos/node-red.png',
+  n8n: '/integrations/logos/n8n.png',
+  stripe: '/integrations/logos/stripe.png',
+  easyverein: '/integrations/logos/easyverein.png',
+  'twenty-crm': '/integrations/logos/twenty.png',
+  'moodle-ilias': '/integrations/logos/learning.svg',
+  uninow: '/integrations/logos/university.svg',
+  'lexware-sevdesk': '/integrations/logos/accounting.svg',
+};
 
 const SYSTEM_GROUPS = [
   { index: '02', title: 'Identität & Zugriff', count: 3 },
@@ -54,19 +84,17 @@ const toDirectoryItem = (item: IntegrationListItemDto): IntegrationsDirectoryIte
   shortDescription: item.shortDescription,
   status: item.status,
   categories: item.categories.map(({ slug, title }) => ({ slug, title })),
-  logoSrc: item.logoUrl,
+  logoSrc: item.logoUrl ?? INTEGRATION_LOGO_SOURCES[item.slug],
   href: `/integrations/${item.slug}`,
 });
 
 const buildDirectoryItems = (items: IntegrationListItemDto[]): IntegrationsDirectoryItem[] => {
   const itemsBySlug = new Map(items.map((item) => [item.slug, item]));
-  const curatedSlugs = new Set<string>(CURATED_INTEGRATIONS.map((item) => item.slug));
+  const curatedSlugs = new Set<string>(CURATED_INTEGRATION_SLUGS);
 
-  const curated = CURATED_INTEGRATIONS.flatMap((presentation) => {
-    const item = itemsBySlug.get(presentation.slug);
-    return item
-      ? [{ ...toDirectoryItem(item), logoSrc: presentation.logoSrc ?? item.logoUrl }]
-      : [];
+  const curated = CURATED_INTEGRATION_SLUGS.flatMap((slug) => {
+    const item = itemsBySlug.get(slug);
+    return item ? [toDirectoryItem(item)] : [];
   });
 
   const remaining: IntegrationsDirectoryItem[] = [];

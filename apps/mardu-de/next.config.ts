@@ -102,6 +102,20 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  redirects() {
+    return [
+      {
+        source: '/solutions/:slug',
+        destination: '/solutions?solution=:slug',
+        permanent: true,
+      },
+      {
+        source: '/products/:slug',
+        destination: '/products?product=:slug',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
