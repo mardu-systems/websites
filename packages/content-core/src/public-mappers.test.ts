@@ -1,6 +1,10 @@
 import assert from 'node:assert/strict';
 import { afterEach, describe, test } from 'node:test';
-import { getPlatformCatalogProductBySlug, getPlatformSolutionBySlug } from './index';
+import {
+  getPlatformCatalogProductBySlug,
+  getPlatformCatalogProductDetails,
+  getPlatformSolutionBySlug,
+} from './index';
 
 const originalFetch = globalThis.fetch;
 
@@ -13,6 +17,81 @@ function mockCollection(docs: unknown[]) {
 }
 
 describe('public Payload mappers', () => {
+  test('resolves numeric product relationships from the published catalog collections', async () => {
+    const collectionDocsByPath: Record<string, unknown[]> = {
+      '/api/products': [
+        {
+          id: 7,
+          slug: 'gateway-pro',
+          name: 'Gateway Pro',
+          tagline: 'Zentrale Steuerung',
+          summary: 'Verbindet Geräte und Berechtigungen.',
+          description: 'Das Gateway für professionelle Installationen.',
+          availability: 'available',
+          availabilityLabel: 'Verfügbar',
+          categories: [2],
+          technologies: [3],
+          carriers: [4],
+          variants: [5],
+          relatedProducts: [],
+          sites: ['mardu-de'],
+        },
+      ],
+      '/api/product-categories': [
+        {
+          id: 2,
+          slug: 'gateways',
+          name: 'Gateways',
+          description: 'Zentrale Komponenten.',
+          sites: ['mardu-de'],
+        },
+      ],
+      '/api/product-technologies': [
+        {
+          id: 3,
+          slug: 'nfc',
+          name: 'NFC',
+          description: 'Kontaktlose Identifikation.',
+          sites: ['mardu-de'],
+        },
+      ],
+      '/api/product-carriers': [
+        {
+          id: 4,
+          slug: 'karte',
+          name: 'Karte',
+          description: 'Robuster Identträger.',
+          sites: ['mardu-de'],
+        },
+      ],
+      '/api/product-variants': [
+        {
+          id: 5,
+          slug: 'standard',
+          label: 'Standard',
+          summary: 'Für typische Installationen.',
+          sites: ['mardu-de'],
+        },
+      ],
+    };
+
+    globalThis.fetch = async (input) => {
+      const url = new URL(input instanceof Request ? input.url : input.toString());
+      return Response.json({ docs: collectionDocsByPath[url.pathname] ?? [] });
+    };
+
+    const products = await getPlatformCatalogProductDetails(
+      'https://platform.mardu.de',
+      'mardu-de',
+    );
+
+    assert.equal(products.length, 1);
+    assert.equal(products[0]?.categoryName, 'Gateways');
+    assert.equal(products[0]?.technologies[0]?.name, 'NFC');
+    assert.equal(products[0]?.carriers[0]?.name, 'Karte');
+    assert.equal(products[0]?.variants[0]?.label, 'Standard');
+  });
+
   test('keeps legacy products linkable without inventing a price or technology', async () => {
     mockCollection([
       {

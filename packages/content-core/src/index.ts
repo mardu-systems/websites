@@ -790,6 +790,37 @@ function toRelationshipIds(value: unknown): string[] {
     .filter(Boolean);
 }
 
+function resolveRelationshipDocs<T extends { id?: string | number }>(
+  value: unknown,
+  availableDocs: T[],
+): T[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  const docsById = new Map(
+    availableDocs.flatMap((doc) => {
+      const id = toId(doc.id);
+      return id ? [[id, doc] as const] : [];
+    }),
+  );
+
+  return value.flatMap((relation) => {
+    if (relation && typeof relation === 'object') {
+      const expandedDoc = relation as T;
+      const id = toId(expandedDoc.id);
+      return [id ? (docsById.get(id) ?? expandedDoc) : expandedDoc];
+    }
+
+    if (typeof relation === 'string' || typeof relation === 'number') {
+      const resolvedDoc = docsById.get(toId(relation));
+      return resolvedDoc ? [resolvedDoc] : [];
+    }
+
+    return [];
+  });
+}
+
 function resolveMediaFields(
   mediaValue: unknown,
   origin: string,
@@ -1839,6 +1870,22 @@ async function fetchPublishedCatalogCarrierDocs(
   return result.docs.filter((doc) => isVisibleOnSite(doc, site));
 }
 
+async function fetchPublishedCatalogVariantDocs(
+  origin: string,
+  site: VisibleSite,
+): Promise<PayloadCatalogVariantDoc[]> {
+  const url = buildRestUrl(origin, '/api/product-variants', {
+    depth: '1',
+    limit: String(MAX_TAXONOMY_FETCH),
+    pagination: 'false',
+    sort: 'sortOrder',
+    'where[_status][equals]': 'published',
+  });
+  const result = await fetchJson<PayloadRestCollectionResult<PayloadCatalogVariantDoc>>(url);
+
+  return result.docs.filter((doc) => isVisibleOnSite(doc, site));
+}
+
 async function fetchPublishedCatalogProductDocs(
   origin: string,
   site: VisibleSite,
@@ -1853,6 +1900,28 @@ async function fetchPublishedCatalogProductDocs(
   const result = await fetchJson<PayloadRestCollectionResult<PayloadCatalogProductDoc>>(url);
 
   return result.docs.filter((doc) => isVisibleOnSite(doc, site));
+}
+
+async function fetchPublishedResolvedCatalogProductDocs(
+  origin: string,
+  site: VisibleSite,
+): Promise<PayloadCatalogProductDoc[]> {
+  const [productDocs, categoryDocs, technologyDocs, carrierDocs, variantDocs] = await Promise.all([
+    fetchPublishedCatalogProductDocs(origin, site),
+    fetchPublishedCatalogCategoryDocs(origin, site),
+    fetchPublishedCatalogTechnologyDocs(origin, site),
+    fetchPublishedCatalogCarrierDocs(origin, site),
+    fetchPublishedCatalogVariantDocs(origin, site),
+  ]);
+
+  return productDocs.map((product) => ({
+    ...product,
+    categories: resolveRelationshipDocs(product.categories, categoryDocs),
+    technologies: resolveRelationshipDocs(product.technologies, technologyDocs),
+    carriers: resolveRelationshipDocs(product.carriers, carrierDocs),
+    variants: resolveRelationshipDocs(product.variants, variantDocs),
+    relatedProducts: resolveRelationshipDocs(product.relatedProducts, productDocs),
+  }));
 }
 
 async function fetchPublishedSolutionDocs(
@@ -1934,7 +2003,7 @@ export async function getPlatformCatalogProducts(
 ): Promise<CatalogProductListItemDto[]> {
   return sortCatalogProducts(
     mapPayloadDocumentsStrict(
-      await fetchPublishedCatalogProductDocs(origin, site),
+      await fetchPublishedResolvedCatalogProductDocs(origin, site),
       (doc) => mapCatalogProductListItem(doc, origin),
       '/api/products',
     ),
@@ -1943,14 +2012,15 @@ export async function getPlatformCatalogProducts(
 
 /**
  * Loads every published, site-visible product with the complete editorial detail contract.
- * Uses one Payload collection request and is intended for single-page product catalogs.
+ * Resolves Payload relationships from the published catalog collections and is intended for
+ * single-page product catalogs.
  */
 export async function getPlatformCatalogProductDetails(
   origin: string,
   site: VisibleSite,
 ): Promise<CatalogProductDetailDto[]> {
   return sortCatalogProducts(
-    mapCatalogProductDetails(await fetchPublishedCatalogProductDocs(origin, site), origin),
+    mapCatalogProductDetails(await fetchPublishedResolvedCatalogProductDocs(origin, site), origin),
   );
 }
 

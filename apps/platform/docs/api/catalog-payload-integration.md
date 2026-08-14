@@ -38,8 +38,10 @@ werden; ohne numerischen Preis wird kein `Offer` ausgegeben.
 
 Für Single-Page-Kataloge stellt `getPlatformCatalogProductDetails(origin, site)` alle
 publizierten, für die Site sichtbaren Produkte als vollständige `CatalogProductDetailDto[]`
-mit einer einzigen Collection-Abfrage bereit. `getPlatformCatalogProductBySlug` verwendet
-denselben Mapping-Vertrag für einzelne Produktansichten.
+bereit. Beziehungen werden dabei auch dann über die veröffentlichten Katalog-Collections
+aufgelöst, wenn Payload statt expandierter Dokumente nur numerische IDs liefert.
+`getPlatformCatalogProductBySlug` verwendet denselben Mapping-Vertrag für einzelne
+Produktansichten.
 
 ## Endpunktmatrix
 
@@ -65,6 +67,9 @@ Bereitstellung über:
 - Upload-Felder können über Payload `media` gepflegt werden.
 - Alternativ können relative oder absolute Asset-URLs über `imageUrl` / `heroImageUrl` gepflegt werden.
 - `@mardu/content-core` bevorzugt Media-Uploads und fällt sonst auf URL-Felder zurück.
+- Beziehungen zu Kategorien, Technologien, Carriern, Varianten und verwandten Produkten dürfen
+  als expandierte Dokumente oder IDs vorliegen. IDs werden vor dem DTO-Mapping gegen die jeweils
+  publizierten und für die angefragte Site sichtbaren Collection-Dokumente aufgelöst.
 - `heroDescription` bleibt im öffentlichen Detail-DTO verpflichtend. Für ältere Payload-Dokumente mit leerem Feld nutzt der Mapper zuerst `description` und anschließend `summary` als sichtbaren Fallback.
 - `overview` bleibt ebenfalls verpflichtend und fällt bei älteren Dokumenten auf `description` beziehungsweise `summary` zurück.
 - Ein in Payload gespeichertes `null` für `priceFrom` wird wie ein nicht gepflegter Preis behandelt und nicht in das öffentliche DTO übernommen.
