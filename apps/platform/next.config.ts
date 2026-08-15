@@ -42,6 +42,10 @@ const nextConfig: NextConfig = {
         hostname: '*.r2.dev',
       },
       {
+        protocol: 'https',
+        hostname: '*.public.blob.vercel-storage.com',
+      },
+      {
         protocol: 'http',
         hostname: 'localhost',
         port: '4000',

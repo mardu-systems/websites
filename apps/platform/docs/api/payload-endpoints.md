@@ -7,7 +7,26 @@ Diese Datei dokumentiert alle bereitgestellten Payload-Routen, deren Zugriff und
 - `apps/platform` ist die einzige Payload-Instanz im Monorepo.
 - `apps/mardu-de` konsumiert Blog-, Integrations- und Lead-Daten über diese Plattform.
 - `apps/mardu-de` leitet `/admin` und lokale SSO-Routen nur noch auf die Plattform weiter und betreibt keine eigene aktive Payload-Runtime mehr.
-- Uploads fuer `media` laufen über die Standard-Payload-Upload-Konfiguration der Plattform.
+- Uploads für `media` werden auf Vercel in Vercel Blob gespeichert; das lokale Deployment-Dateisystem wird dort nicht verwendet.
+
+## Medien-Uploads und Storage
+
+- Die Payload-Collection bleibt `media`; bestehende REST- und Admin-Upload-Flows ändern sich fachlich nicht.
+- Wenn `BLOB_READ_WRITE_TOKEN` gesetzt ist, verwendet Payload den offiziellen Adapter `@payloadcms/storage-vercel-blob`. Die Dateien liegen unter dem Blob-Präfix `media/`, und Payload liefert eine öffentliche `url` auf `*.public.blob.vercel-storage.com` zurück.
+- Direkte Client-Uploads sind aktiviert. Dadurch laufen die Dateidaten nicht durch den begrenzten Request-Body der Vercel Function; Payload prüft den Upload-Token-Endpunkt standardmäßig gegen einen angemeldeten Benutzer.
+- Auf Vercel ist `BLOB_READ_WRITE_TOKEN` Pflicht. Fehlt die Variable, bricht die Konfiguration mit einer verständlichen Fehlermeldung ab, statt später auf das schreibgeschützte Dateisystem zurückzufallen.
+- Außerhalb von Vercel bleibt lokales Speichern ohne Token für die Entwicklung möglich. Mit einem lokal gesetzten Token verwendet auch die lokale App denselben zentralen Blob Store.
+
+Vercel-Einrichtung für das Monorepo und anschließend aus `apps/platform`:
+
+```bash
+vercel link --repo
+cd apps/platform
+vercel blob create-store mardu-platform-media --access public --region fra1 --yes
+vercel env pull .env.local --environment=development --yes
+```
+
+Der von Vercel bereitgestellte Wert `BLOB_READ_WRITE_TOKEN` ist ein Secret und darf nicht ins Repository eingecheckt werden. Bereits vorhandene Dateien aus `apps/platform/media` müssen einmalig mit denselben Pfaden nach `media/` in den Blob Store übertragen werden; das Hinzufügen des Adapters kopiert Bestandsdateien nicht automatisch.
 
 ## Bereitstellung
 

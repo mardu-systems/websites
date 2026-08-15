@@ -3,6 +3,7 @@ import { postgresAdapter } from '@payloadcms/db-postgres';
 import { mcpPlugin } from '@payloadcms/plugin-mcp';
 import { seoPlugin } from '@payloadcms/plugin-seo';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
 import { de } from '@payloadcms/translations/languages/de';
 import migrations from '@/migrations/index.ts';
 import { fileURLToPath } from 'node:url';
@@ -32,6 +33,13 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const databaseURL =
   process.env.DATABASE_URI || 'postgres://postgres:postgres@127.0.0.1:5432/mardu_payload';
+const vercelBlobToken = process.env.BLOB_READ_WRITE_TOKEN;
+
+if (process.env.VERCEL === '1' && !vercelBlobToken) {
+  throw new Error(
+    'BLOB_READ_WRITE_TOKEN is required on Vercel so Payload media is not written to the read-only local filesystem.',
+  );
+}
 
 function getRelationshipId(value: unknown): string | number | undefined {
   if (typeof value !== 'object' || value === null || !('id' in value)) {
@@ -160,6 +168,15 @@ export default buildConfig({
     },
   },
   plugins: [
+    vercelBlobStorage({
+      clientUploads: true,
+      collections: {
+        media: {
+          prefix: 'media',
+        },
+      },
+      token: vercelBlobToken,
+    }),
     mcpPlugin({
       collections: {
         'blog-posts': {
