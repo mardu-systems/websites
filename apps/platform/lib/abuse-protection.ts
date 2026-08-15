@@ -20,7 +20,7 @@ type PayloadDb = {
 };
 
 type PayloadDbContainer = {
-  db?: PayloadDb & {
+  db?: {
     drizzle?: PayloadDb;
   };
 };
@@ -31,10 +31,8 @@ function getDbExecutor(payload: unknown): PayloadDb {
   const container = payload as PayloadDbContainer;
   const directDb = container.db;
 
-  if (directDb && typeof directDb.execute === 'function') {
-    return directDb;
-  }
-
+  // Payload's adapter-level execute() expects an options object. Raw SQL queries
+  // must run through the underlying Drizzle client instead.
   if (directDb?.drizzle && typeof directDb.drizzle.execute === 'function') {
     return directDb.drizzle;
   }
@@ -73,7 +71,7 @@ async function incrementRateLimit(input: {
     RETURNING "request_count";
   `);
 
-  const rows = Array.isArray(result) ? result : result.rows ?? [];
+  const rows = Array.isArray(result) ? result : (result.rows ?? []);
   const count = rows[0]?.request_count;
 
   if (typeof count === 'number') {

@@ -2,14 +2,17 @@
 
 import { useId, useState } from 'react';
 import Link from 'next/link';
+import { Loader2 } from 'lucide-react';
 import { useRecaptcha } from '@mardu/lead-core/recaptcha';
 import { Alert, AlertDescription } from '@mardu/ui/components/alert';
 import { Button } from '@mardu/ui/components/button';
 import { Checkbox } from '@mardu/ui/components/checkbox';
-import { EditorialActionButton } from '@mardu/ui/components/editorial-action-button';
 import { Input } from '@mardu/ui/components/input';
 import { Label } from '@mardu/ui/components/label';
 import { cn } from '@mardu/ui/lib/utils';
+
+const EDITORIAL_INPUT_CLASSES =
+  'h-auto w-full rounded-none border-0 border-b border-neutral-800/70 bg-transparent px-0 py-2 text-base text-foreground shadow-none placeholder:text-muted-foreground focus-visible:border-mardu-purple focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mardu-purple focus-visible:ring-0 md:text-base';
 
 /**
  * Public props for the reusable newsletter signup form.
@@ -84,8 +87,8 @@ export default function NewsletterSignupForm({
         }),
       });
 
-      const body = (await response.json().catch(() => null)) as { error?: string } | null;
       if (!response.ok) {
+        const body = (await response.json().catch(() => null)) as { error?: string } | null;
         throw new Error(body?.error ?? 'Newsletter-Anmeldung fehlgeschlagen');
       }
 
@@ -106,7 +109,7 @@ export default function NewsletterSignupForm({
     <div
       className={cn(
         'space-y-2',
-        editorial && 'border-b border-border py-5',
+        editorial && 'newsletter-form-field--email',
         compact && 'border-b border-border pb-3',
       )}
     >
@@ -128,7 +131,7 @@ export default function NewsletterSignupForm({
         spellCheck={false}
         placeholder="name@unternehmen.de"
         className={cn(
-          editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none',
+          editorial && EDITORIAL_INPUT_CLASSES,
           compact && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none',
         )}
       />
@@ -141,11 +144,17 @@ export default function NewsletterSignupForm({
       onSubmit={handleSubmit}
       noValidate
     >
-      <div className={cn('grid gap-4 md:grid-cols-2', editorial && 'gap-0', compact && 'gap-5')}>
+      <div
+        className={cn(
+          'grid gap-4 md:grid-cols-2',
+          editorial && 'newsletter-form-group--identity gap-6 sm:gap-8',
+          compact && 'gap-5',
+        )}
+      >
         <div
           className={cn(
             'space-y-2',
-            editorial && 'border-b border-border py-5 md:pr-5',
+            editorial && 'newsletter-form-field--first-name',
             compact && 'border-b border-border pb-3',
           )}
         >
@@ -153,7 +162,7 @@ export default function NewsletterSignupForm({
             htmlFor={`${idPrefix}-firstName`}
             className={cn(compact && "after:ml-0.5 after:text-destructive after:content-['*']")}
           >
-            Vorname
+            Vorname{editorial ? ' (optional)' : ''}
           </Label>
           <Input
             type="text"
@@ -163,7 +172,7 @@ export default function NewsletterSignupForm({
             autoComplete="given-name"
             placeholder="Dein Vorname"
             className={cn(
-              editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none',
+              editorial && EDITORIAL_INPUT_CLASSES,
               compact && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none',
             )}
           />
@@ -172,22 +181,15 @@ export default function NewsletterSignupForm({
         {compact ? (
           emailField
         ) : (
-          <div
-            className={cn(
-              'space-y-2',
-              editorial && 'border-b border-border py-5 md:border-l md:pl-5',
-            )}
-          >
-            <Label htmlFor={`${idPrefix}-lastName`}>Nachname</Label>
+          <div className={cn('space-y-2', editorial && 'newsletter-form-field--last-name')}>
+            <Label htmlFor={`${idPrefix}-lastName`}>Nachname{editorial ? ' (optional)' : ''}</Label>
             <Input
               type="text"
               id={`${idPrefix}-lastName`}
               name="lastName"
               autoComplete="family-name"
               placeholder="Dein Nachname"
-              className={cn(
-                editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none',
-              )}
+              className={cn(editorial && EDITORIAL_INPUT_CLASSES)}
             />
           </div>
         )}
@@ -195,17 +197,15 @@ export default function NewsletterSignupForm({
 
       {!compact ? (
         <>
-          <div className={cn('space-y-2', editorial && 'border-b border-border py-5')}>
-            <Label htmlFor={`${idPrefix}-company`}>Firma</Label>
+          <div className={cn('space-y-2', editorial && 'newsletter-form-field--company')}>
+            <Label htmlFor={`${idPrefix}-company`}>Firma{editorial ? ' (optional)' : ''}</Label>
             <Input
               type="text"
               id={`${idPrefix}-company`}
               name="company"
               autoComplete="organization"
               placeholder="Deine Firma"
-              className={cn(
-                editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none',
-              )}
+              className={cn(editorial && EDITORIAL_INPUT_CLASSES)}
             />
           </div>
 
@@ -214,7 +214,7 @@ export default function NewsletterSignupForm({
       ) : null}
 
       <div
-        className={cn('flex items-start gap-3 pt-1', editorial && 'border-b border-border py-6')}
+        className={cn('flex items-start gap-3 pt-1', editorial && 'newsletter-form-field--consent')}
       >
         <Checkbox
           id={`${idPrefix}-consent`}
@@ -228,7 +228,10 @@ export default function NewsletterSignupForm({
         <div className="flex-1">
           <Label
             htmlFor={`${idPrefix}-consent`}
-            className="cursor-pointer text-xs leading-relaxed text-muted-foreground"
+            className={cn(
+              'cursor-pointer leading-relaxed',
+              editorial ? 'text-sm leading-5 text-foreground' : 'text-xs text-muted-foreground',
+            )}
           >
             Ich möchte den Mardu Newsletter erhalten und stimme der Verarbeitung meiner Daten dafür
             zu.
@@ -254,14 +257,12 @@ export default function NewsletterSignupForm({
           {pending ? 'Wird gesendet...' : 'Updates per E-Mail erhalten'}
         </Button>
       ) : editorial ? (
-        <EditorialActionButton
-          type="submit"
-          disabled={pending}
-          aria-busy={pending}
-          className="w-full justify-start"
-        >
-          {pending ? 'Wird gesendet...' : 'Newsletter abonnieren'}
-        </EditorialActionButton>
+        <div className="newsletter-form-submit">
+          <Button type="submit" disabled={pending} aria-busy={pending} className="min-w-40">
+            {pending ? <Loader2 className="size-4 animate-spin" aria-hidden="true" /> : null}
+            {pending ? 'Wird gesendet...' : 'Newsletter abonnieren'}
+          </Button>
+        </div>
       ) : (
         <Button type="submit" size="xl" disabled={pending} aria-busy={pending}>
           {pending ? 'Wird gesendet...' : 'Newsletter abonnieren'}
@@ -269,7 +270,11 @@ export default function NewsletterSignupForm({
       )}
 
       {success ? (
-        <Alert role="status" aria-live="polite">
+        <Alert
+          className={cn(editorial && 'border-green-600/30 bg-green-50 text-green-900')}
+          role="status"
+          aria-live="polite"
+        >
           <AlertDescription>{success}</AlertDescription>
         </Alert>
       ) : null}

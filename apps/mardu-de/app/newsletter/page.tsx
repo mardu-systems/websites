@@ -52,7 +52,9 @@ export default function NewsletterPage() {
               </h2>
             </div>
 
-            <NewsletterSignupForm variant="editorial-index" />
+            <div className="contact-editorial-form">
+              <NewsletterSignupForm variant="editorial-index" />
+            </div>
           </div>
         </div>
       </section>

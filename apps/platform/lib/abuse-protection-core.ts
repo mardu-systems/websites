@@ -2,9 +2,7 @@ import { createHash } from 'node:crypto';
 
 export type PublicLeadEndpoint = 'contact' | 'newsletter';
 
-export type GuardResult =
-  | { ok: true }
-  | { ok: false; status: 400 | 429 | 503; error: string };
+export type GuardResult = { ok: true } | { ok: false; status: 400 | 429 | 503; error: string };
 
 export type RateLimitConfig = {
   endpoint: string;
@@ -97,7 +95,9 @@ export function normalizeErrorMessage(error: unknown): string {
 
 export function isRateLimitStoreUnavailableError(error: unknown): boolean {
   const code =
-    typeof error === 'object' && error && 'code' in error ? (error as ErrorWithMetadata).code : undefined;
+    typeof error === 'object' && error && 'code' in error
+      ? (error as ErrorWithMetadata).code
+      : undefined;
   if (code === '42P01') {
     return true;
   }
@@ -110,6 +110,7 @@ export function isRateLimitStoreUnavailableError(error: unknown): boolean {
     message.includes('payload database adapter does not expose an execute() method') ||
     message.includes("cannot read properties of undefined (reading 'execute')") ||
     message.includes("undefined is not an object (evaluating 's.execute')") ||
+    message.includes("undefined is not an object (evaluating 'm.execute')") ||
     message.includes("undefined is not an object (evaluating 'executefrom.execute')")
   );
 }

@@ -317,13 +317,17 @@
 
   .contact-editorial-form .contact-form-group--identity,
   .contact-editorial-form .contact-form-field--company,
-  .contact-editorial-form .contact-form-field--message {
+  .contact-editorial-form .contact-form-field--message,
+  .contact-editorial-form .newsletter-form-group--identity,
+  .contact-editorial-form .newsletter-form-field--company {
     margin-bottom: 1.5rem;
   }
 
   .contact-editorial-form .contact-form-field--phone,
   .contact-editorial-form .contact-form-field--message,
-  .contact-editorial-form .contact-form-field--consent {
+  .contact-editorial-form .contact-form-field--consent,
+  .contact-editorial-form .newsletter-form-field--email,
+  .contact-editorial-form .newsletter-form-field--consent {
     border-bottom: 1px solid rgb(0 0 0 / 15%);
     padding-bottom: 2.25rem;
   }
@@ -331,7 +335,9 @@
   .contact-editorial-form .contact-form-field--message,
   .contact-editorial-form .contact-form-field--newsletter,
   .contact-editorial-form .contact-form-field--consent,
-  .contact-editorial-form .contact-form-submit {
+  .contact-editorial-form .contact-form-submit,
+  .contact-editorial-form .newsletter-form-field--consent,
+  .contact-editorial-form .newsletter-form-submit {
     padding-top: 2.25rem;
   }
 }
