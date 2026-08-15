@@ -54,13 +54,21 @@ export function filterProductCatalogItems(
   const query = filters.query.trim().toLocaleLowerCase('de');
 
   return products.filter((product) => {
+    const searchableProductContent = [
+      product.name,
+      product.tagline,
+      product.summary,
+      product.categoryName,
+      ...product.featureGroups.flatMap((group) => [group.title, ...group.items]),
+      ...product.specGroups.flatMap((group) => [
+        group.title,
+        ...group.specs.flatMap((spec) => [spec.label, spec.value]),
+      ]),
+    ];
     const matchesQuery =
       query.length === 0 ||
-      [product.name, product.tagline, product.summary, product.categoryName].some((value) =>
-        value.toLocaleLowerCase('de').includes(query),
-      );
-    const matchesCategory =
-      filters.category === 'all' || product.categoryName === filters.category;
+      searchableProductContent.some((value) => value.toLocaleLowerCase('de').includes(query));
+    const matchesCategory = filters.category === 'all' || product.categoryName === filters.category;
     const matchesAvailability =
       filters.availability === 'all' || product.availability === filters.availability;
 

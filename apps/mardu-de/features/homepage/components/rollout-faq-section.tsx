@@ -16,17 +16,18 @@ export function RolloutFaqSection() {
         <div className="mardu-container">
           <ScrollReveal distance={32}>
             <SectionIntro
-              eyebrow="[06] Schrittweise einführen"
+              eyebrow="[06] Pilotprojekt"
               title={
                 <>
-                  Klein starten. <EditorialAccent>Im Betrieb lernen.</EditorialAccent> Gezielt
-                  skalieren.
+                  Vom ersten Pilotprojekt zum{' '}
+                  <EditorialAccent>standortweiten System.</EditorialAccent>
                 </>
               }
               intro={
                 <p>
-                  Wir starten mit einem Pilotprojekt: ein Zugangspunkt, die richtigen Rollen und ein
-                  überprüfbares Ziel.
+                  Wir beginnen an einem repräsentativen Zugangspunkt – mit klaren Rollen,
+                  Verantwortlichkeiten und Erfolgskriterien. So zeigt der Pilot im realen Betrieb,
+                  was für den weiteren Rollout funktioniert.
                 </p>
               }
               layout="stacked"
