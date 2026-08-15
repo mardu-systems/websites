@@ -1,6 +1,7 @@
 'use client';
 
 import { useId, useState } from 'react';
+import Link from 'next/link';
 import { useRecaptcha } from '@mardu/lead-core/recaptcha';
 import { Alert, AlertDescription } from '@mardu/ui/components/alert';
 import { Button } from '@mardu/ui/components/button';
@@ -17,7 +18,7 @@ import { cn } from '@mardu/ui/lib/utils';
  */
 export interface NewsletterSignupFormProps {
   onSuccess?: () => void;
-  variant?: 'default' | 'editorial-index';
+  variant?: 'compact' | 'default' | 'editorial-index';
 }
 
 export default function NewsletterSignupForm({
@@ -31,6 +32,7 @@ export default function NewsletterSignupForm({
   const idPrefix = useId();
   const executeRecaptcha = useRecaptcha();
   const editorial = variant === 'editorial-index';
+  const compact = variant === 'compact';
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -46,6 +48,12 @@ export default function NewsletterSignupForm({
       email: String(formData.get('email') ?? '').trim(),
       role: 'newsletter',
     };
+
+    if (compact && !payload.firstName) {
+      setError('Bitte gib deinen Vornamen ein.');
+      setSuccess(null);
+      return;
+    }
 
     if (!payload.email) {
       setError('Bitte gib eine E-Mail-Adresse ein.');
@@ -94,93 +102,158 @@ export default function NewsletterSignupForm({
     }
   }
 
+  const emailField = (
+    <div
+      className={cn(
+        'space-y-2',
+        editorial && 'border-b border-border py-5',
+        compact && 'border-b border-border pb-3',
+      )}
+    >
+      <Label
+        htmlFor={`${idPrefix}-email`}
+        className="after:ml-0.5 after:text-destructive after:content-['*']"
+      >
+        E-Mail
+      </Label>
+      <Input
+        type="email"
+        id={`${idPrefix}-email`}
+        name="email"
+        required
+        autoComplete="email"
+        inputMode="email"
+        autoCapitalize="none"
+        autoCorrect="off"
+        spellCheck={false}
+        placeholder="name@unternehmen.de"
+        className={cn(
+          editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none',
+          compact && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none',
+        )}
+      />
+    </div>
+  );
+
   return (
-    <form className={cn('space-y-6', editorial && 'space-y-0')} onSubmit={handleSubmit} noValidate>
-      <div className={cn('grid gap-4 md:grid-cols-2', editorial && 'gap-0')}>
-        <div className={cn('space-y-2', editorial && 'border-b border-border py-5 md:pr-5')}>
-          <Label htmlFor={`${idPrefix}-firstName`}>Vorname</Label>
+    <form
+      className={cn('space-y-6', editorial && 'space-y-0', compact && 'space-y-5')}
+      onSubmit={handleSubmit}
+      noValidate
+    >
+      <div className={cn('grid gap-4 md:grid-cols-2', editorial && 'gap-0', compact && 'gap-5')}>
+        <div
+          className={cn(
+            'space-y-2',
+            editorial && 'border-b border-border py-5 md:pr-5',
+            compact && 'border-b border-border pb-3',
+          )}
+        >
+          <Label
+            htmlFor={`${idPrefix}-firstName`}
+            className={cn(compact && "after:ml-0.5 after:text-destructive after:content-['*']")}
+          >
+            Vorname
+          </Label>
           <Input
             type="text"
             id={`${idPrefix}-firstName`}
             name="firstName"
+            required={compact}
             autoComplete="given-name"
             placeholder="Dein Vorname"
             className={cn(
               editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none',
+              compact && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none',
             )}
           />
         </div>
 
-        <div
-          className={cn(
-            'space-y-2',
-            editorial && 'border-b border-border py-5 md:border-l md:pl-5',
-          )}
-        >
-          <Label htmlFor={`${idPrefix}-lastName`}>Nachname</Label>
-          <Input
-            type="text"
-            id={`${idPrefix}-lastName`}
-            name="lastName"
-            autoComplete="family-name"
-            placeholder="Dein Nachname"
+        {compact ? (
+          emailField
+        ) : (
+          <div
             className={cn(
-              editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none',
+              'space-y-2',
+              editorial && 'border-b border-border py-5 md:border-l md:pl-5',
             )}
-          />
+          >
+            <Label htmlFor={`${idPrefix}-lastName`}>Nachname</Label>
+            <Input
+              type="text"
+              id={`${idPrefix}-lastName`}
+              name="lastName"
+              autoComplete="family-name"
+              placeholder="Dein Nachname"
+              className={cn(
+                editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none',
+              )}
+            />
+          </div>
+        )}
+      </div>
+
+      {!compact ? (
+        <>
+          <div className={cn('space-y-2', editorial && 'border-b border-border py-5')}>
+            <Label htmlFor={`${idPrefix}-company`}>Firma</Label>
+            <Input
+              type="text"
+              id={`${idPrefix}-company`}
+              name="company"
+              autoComplete="organization"
+              placeholder="Deine Firma"
+              className={cn(
+                editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none',
+              )}
+            />
+          </div>
+
+          {emailField}
+        </>
+      ) : null}
+
+      <div
+        className={cn('flex items-start gap-3 pt-1', editorial && 'border-b border-border py-6')}
+      >
+        <Checkbox
+          id={`${idPrefix}-consent`}
+          checked={consentChecked}
+          required
+          onCheckedChange={(checked: boolean | 'indeterminate') => {
+            setConsentChecked(checked === true);
+          }}
+          className="mt-1"
+        />
+        <div className="flex-1">
+          <Label
+            htmlFor={`${idPrefix}-consent`}
+            className="cursor-pointer text-xs leading-relaxed text-muted-foreground"
+          >
+            Ich möchte den Mardu Newsletter erhalten und stimme der Verarbeitung meiner Daten dafür
+            zu.
+          </Label>
+          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+            Die{' '}
+            <Link href="/privacy" className="underline underline-offset-2 hover:text-foreground">
+              Datenschutzerklärung
+            </Link>{' '}
+            habe ich gelesen. Die Anmeldung erfolgt per Double-Opt-in.
+          </p>
         </div>
       </div>
 
-      <div className={cn('space-y-2', editorial && 'border-b border-border py-5')}>
-        <Label htmlFor={`${idPrefix}-company`}>Firma</Label>
-        <Input
-          type="text"
-          id={`${idPrefix}-company`}
-          name="company"
-          autoComplete="organization"
-          placeholder="Deine Firma"
-          className={cn(editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none')}
-        />
-      </div>
-
-      <div className={cn('space-y-2', editorial && 'border-b border-border py-5')}>
-        <Label
-          htmlFor={`${idPrefix}-email`}
-          className="after:ml-0.5 after:text-destructive after:content-['*']"
+      {compact ? (
+        <Button
+          type="submit"
+          size="xl"
+          disabled={pending}
+          aria-busy={pending}
+          className="w-full rounded-none sm:w-auto"
         >
-          E-Mail
-        </Label>
-        <Input
-          type="email"
-          id={`${idPrefix}-email`}
-          name="email"
-          required
-          autoComplete="email"
-          inputMode="email"
-          autoCapitalize="none"
-          autoCorrect="off"
-          spellCheck={false}
-          placeholder="name@unternehmen.de"
-          className={cn(editorial && 'h-11 rounded-none border-0 bg-transparent px-0 shadow-none')}
-        />
-      </div>
-
-      <div className={cn('space-y-2 pt-1', editorial && 'border-b border-border py-6')}>
-        <Label className="flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-muted-foreground">
-          <Checkbox
-            id={`${idPrefix}-consent`}
-            checked={consentChecked}
-            onCheckedChange={(checked: boolean | 'indeterminate') => {
-              setConsentChecked(checked === true);
-            }}
-            className="mt-1"
-          />
-          Deine hier eingegebenen Daten werden ausschließlich für den Newsletter verwendet. Mit dem
-          Absenden bestätigst du die Datenverarbeitung und unsere Datenschutzerklärung.
-        </Label>
-      </div>
-
-      {editorial ? (
+          {pending ? 'Wird gesendet...' : 'Updates per E-Mail erhalten'}
+        </Button>
+      ) : editorial ? (
         <EditorialActionButton
           type="submit"
           disabled={pending}

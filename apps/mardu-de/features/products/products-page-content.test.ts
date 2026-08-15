@@ -1,10 +1,7 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 import type { CatalogCategoryDto, CatalogProductDetailDto } from '@mardu/content-core';
-import {
-  createProductCatalogItems,
-  filterProductCatalogItems,
-} from './products-page-content';
+import { createProductCatalogItems, filterProductCatalogItems } from './products-page-content';
 
 const category: CatalogCategoryDto = {
   id: 'gateways',
@@ -99,7 +96,10 @@ describe('product explorer content', () => {
   test('keeps published products without a readable CMS category in the catalog', () => {
     const result = createProductCatalogItems([], products, 'http://localhost:4000');
 
-    assert.deepEqual(result.map((product) => product.name), ['Gateway', 'Gateway Pro']);
+    assert.deepEqual(
+      result.map((product) => product.name),
+      ['Gateway', 'Gateway Pro'],
+    );
   });
 
   test('filters products by search, category and availability', () => {
@@ -108,6 +108,14 @@ describe('product explorer content', () => {
     assert.deepEqual(
       filterProductCatalogItems(catalog, {
         query: 'redundant',
+        category: 'all',
+        availability: 'all',
+      }).map((product) => product.slug),
+      ['gateway-pro'],
+    );
+    assert.deepEqual(
+      filterProductCatalogItems(catalog, {
+        query: 'lokaler plattformknoten',
         category: 'all',
         availability: 'all',
       }).map((product) => product.slug),

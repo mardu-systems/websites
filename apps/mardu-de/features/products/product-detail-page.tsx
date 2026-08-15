@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
-import { Button } from '@mardu/ui/components/button';
+import { CTASection } from '@mardu/sections';
+import { EditorialActionButton } from '@mardu/ui/components/editorial-action-button';
+import { EditorialAccent, Overline } from '@mardu/ui/components/typography';
 import { cn } from '@mardu/ui/lib/utils';
 import type { ProductCatalogItemViewModel } from './products-page-content';
 
@@ -15,6 +17,9 @@ export function ProductDetailPage({
   const benefits = product.featureGroups.flatMap((group) =>
     group.items.map((item) => ({ group: group.title, item })),
   );
+  const productNameParts = product.name.trim().split(/\s+/);
+  const productNameEmphasis = productNameParts.pop() ?? product.name;
+  const productNamePrefix = productNameParts.join(' ');
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -28,57 +33,61 @@ export function ProductDetailPage({
             Zurück zu allen Produkten
           </Link>
 
-          <div className="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.72fr)] lg:items-start lg:gap-16">
-            <div>
-              <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.12em] text-muted-foreground">
-                <span>{product.categoryName}</span>
-                <span aria-hidden="true">·</span>
-                <span>{product.availabilityLabel}</span>
-              </div>
-              <h1 className="mt-5 max-w-4xl text-[clamp(2.5rem,6vw,5.5rem)] font-light leading-[0.96] tracking-[-0.045em]">
-                {product.name}
+          <div className="mt-8 grid gap-3 xl:grid-cols-[0.82fr_1.18fr] xl:items-stretch">
+            <div className="relative border-y border-border px-5 py-8 sm:px-7 xl:flex xl:flex-col xl:justify-center xl:py-12">
+              <Overline variant="editorial">
+                [{product.categoryName} · {product.availabilityLabel}]
+              </Overline>
+              <h1 className="mt-6 max-w-[13ch] text-[clamp(2.85rem,7.4vw,5rem)] font-light leading-[0.98] tracking-[-0.04em]">
+                {productNamePrefix ? <>{productNamePrefix} </> : null}
+                <EditorialAccent>{productNameEmphasis}</EditorialAccent>
               </h1>
-              <p className="mt-7 max-w-[46rem] text-xl leading-relaxed text-foreground/78 md:text-2xl">
+              <p className="mt-7 max-w-[36rem] text-lg leading-relaxed text-foreground/78 md:text-xl">
                 {product.tagline}
               </p>
-              <p className="mt-5 max-w-[48rem] text-base leading-relaxed text-muted-foreground md:text-lg">
+              <p className="mt-5 max-w-[38rem] text-base leading-relaxed text-muted-foreground">
                 {product.summary}
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button render={<Link href={product.inquiryHref} />} size="lg">
+              <div className="mt-9 flex max-w-[38rem] flex-col gap-3 sm:flex-row">
+                <EditorialActionButton
+                  render={<Link href={product.inquiryHref} />}
+                  className="w-full justify-start sm:w-auto"
+                >
                   {product.primaryCtaLabel ?? 'Projekt anfragen'}
-                </Button>
-                <Button render={<Link href="/configurator" />} variant="outline" size="lg">
+                </EditorialActionButton>
+                <EditorialActionButton
+                  render={<Link href="/configurator" />}
+                  priority="secondary"
+                  className="w-full justify-start sm:w-auto"
+                >
                   {product.secondaryCtaLabel ?? 'Projekt konfigurieren'}
-                </Button>
+                </EditorialActionButton>
               </div>
             </div>
 
             {product.imageUrl ? (
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-muted lg:aspect-square">
+              <figure className="relative min-h-80 overflow-hidden bg-muted sm:min-h-[34rem] xl:min-h-[42rem]">
                 <Image
                   src={product.imageUrl}
                   alt={product.imageAlt}
                   fill
                   priority
-                  sizes="(max-width: 1023px) 100vw, 38vw"
+                  sizes="(max-width: 1279px) 100vw, 59vw"
                   className="object-cover"
                 />
-              </div>
+              </figure>
             ) : null}
           </div>
         </div>
       </section>
 
       {benefits.length > 0 ? (
-        <section className="border-b border-border py-14 md:py-20">
+        <section className="border-b border-border bg-card py-14 md:py-20">
           <div className="mardu-container grid gap-8 lg:grid-cols-[0.32fr_0.68fr] lg:gap-16">
             <div>
-              <p className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
-                Vorteile
-              </p>
-              <h2 className="mt-3 text-3xl font-light tracking-[-0.03em] md:text-4xl">
-                Das bringt das Produkt im Betrieb
+              <p className="text-xs uppercase tracking-[0.18em] text-mardu-purple">[Vorteile]</p>
+              <h2 className="mardu-homepage-section-title mt-5 max-w-[12ch]">
+                Das bringt das Produkt <EditorialAccent>im Betrieb.</EditorialAccent>
               </h2>
             </div>
             <ul className="grid gap-x-8 gap-y-5 sm:grid-cols-2">
@@ -87,7 +96,9 @@ export function ProductDetailPage({
                   key={`${benefit.group}-${benefit.item}`}
                   className="flex gap-3 border-t border-border pt-4"
                 >
-                  <Check className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden="true" />
+                  <span className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full border border-emerald-500 text-emerald-600">
+                    <Check className="size-4" strokeWidth={1.8} aria-hidden="true" />
+                  </span>
                   <span>
                     <span className="block text-xs uppercase tracking-[0.1em] text-muted-foreground">
                       {benefit.group}
@@ -106,19 +117,25 @@ export function ProductDetailPage({
       {product.specGroups.length > 0 ? (
         <section className="border-b border-border py-14 md:py-20">
           <div className="mardu-container">
-            <p className="text-xs uppercase tracking-[0.14em] text-muted-foreground">Highlights</p>
-            <h2 className="mt-3 text-3xl font-light tracking-[-0.03em] md:text-4xl">
-              Die wichtigsten Eckdaten
-            </h2>
-            <div className="mt-8 grid gap-5 md:grid-cols-3">
+            <Overline variant="editorial">[Auf einen Blick]</Overline>
+            <h2 className="mardu-homepage-section-title mt-5 max-w-[12ch]">Highlights</h2>
+            <div className="mt-10 grid gap-px border border-border bg-border md:grid-cols-3">
               {product.specGroups.flatMap((group) =>
                 group.specs.map((spec) => (
-                  <div key={`${group.title}-${spec.label}`} className="border-t border-border pt-4">
-                    <p className="text-xs uppercase tracking-[0.1em] text-muted-foreground">
+                  <article
+                    key={`${group.title}-${spec.label}`}
+                    className="min-h-56 bg-background p-6 md:p-7"
+                  >
+                    <span className="flex size-11 items-center justify-center rounded-full border border-emerald-500 text-emerald-600">
+                      <Check className="size-5" strokeWidth={1.8} aria-hidden="true" />
+                    </span>
+                    <p className="mt-7 text-xs uppercase tracking-[0.12em] text-muted-foreground">
                       {spec.label}
                     </p>
-                    <p className="mt-2 text-lg leading-relaxed text-foreground/86">{spec.value}</p>
-                  </div>
+                    <h3 className="mt-3 max-w-[22rem] text-xl font-semibold leading-snug tracking-[-0.02em] text-foreground/86">
+                      {spec.value}
+                    </h3>
+                  </article>
                 )),
               )}
             </div>
@@ -205,21 +222,13 @@ export function ProductDetailPage({
         </section>
       ) : null}
 
-      <section className="py-14 md:py-20">
-        <div className="mardu-container flex flex-col gap-6 border-y border-border py-10 md:flex-row md:items-center md:justify-between">
-          <div>
-            <p className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
-              Nächster Schritt
-            </p>
-            <h2 className="mt-2 text-2xl font-light tracking-[-0.02em] md:text-3xl">
-              Passt das Produkt zu deinem Projekt?
-            </h2>
-          </div>
-          <Button render={<Link href={product.inquiryHref} />} size="lg">
-            {product.primaryCtaLabel ?? 'Projekt anfragen'}
-          </Button>
-        </div>
-      </section>
+      <CTASection
+        eyebrow="Nächster Schritt"
+        title={`${product.name} im Projekt einsetzen?`}
+        description="Gemeinsam prüfen wir Zugangspunkt, vorhandene Infrastruktur und Sicherheitskonzept – und klären den passenden Pilotaufbau für deinen Standort."
+        primaryButtonText={product.primaryCtaLabel ?? 'Projekt anfragen'}
+        primaryButtonHref={product.inquiryHref}
+      />
     </div>
   );
 }

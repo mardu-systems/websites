@@ -390,24 +390,27 @@ export const useCases: ReadonlyArray<HomepageLinkedNumberedItem> = [
 export const rolloutSteps: ReadonlyArray<HomepageNumberedItem> = [
   {
     index: '01',
-    title: 'Pilot wählen',
+    title: 'Pilotbereich auswählen',
     description:
-      'Einen repräsentativen Zugangspunkt, die beteiligten Rollen und ein Ziel festlegen.',
+      'Wir wählen eine repräsentative Maschine, Tür oder Zufahrt und legen Nutzergruppen, Betriebszeiten und Erfolgskriterien fest.',
   },
   {
     index: '02',
-    title: 'Passung prüfen',
-    description: 'Technik, Abläufe und Verantwortlichkeiten vorab klären.',
+    title: 'Technik und Regeln vorbereiten',
+    description:
+      'Wir prüfen Schnittstellen, Identmedien und das Sicherheitskonzept und bilden Rollen, Qualifikationen und Zuständigkeiten ab.',
   },
   {
     index: '03',
-    title: 'Im Alltag testen',
-    description: 'Freigaben und Ausfallverhalten im realen Betrieb prüfen.',
+    title: 'Im Betrieb erproben',
+    description:
+      'Der Zugangspunkt läuft im Alltag. Wir prüfen Freigaben, Ausnahmen und Ausfallverhalten anhand der vereinbarten Kriterien.',
   },
   {
     index: '04',
-    title: 'Gezielt skalieren',
-    description: 'Erst nach der Auswertung weitere Ressourcen anbinden.',
+    title: 'Rollout entscheiden',
+    description:
+      'Wir werten den Pilot aus, schärfen Regeln nach und planen gezielt weitere Ressourcen, Bereiche oder Standorte.',
   },
 ];
 

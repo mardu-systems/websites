@@ -131,7 +131,9 @@ function ProductCatalogRow({
                     onClick={() => setVariantsOpen((current) => !current)}
                     className="inline-flex min-h-11 cursor-pointer items-center gap-2 text-sm font-medium transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                   >
-                    {variantsOpen ? 'Varianten schließen' : `Varianten (${product.variants.length})`}
+                    {variantsOpen
+                      ? 'Varianten schließen'
+                      : `Varianten (${product.variants.length})`}
                     {variantsOpen ? (
                       <Minus className="size-4" aria-hidden="true" />
                     ) : (
@@ -207,12 +209,12 @@ export function ProductsExplorer({ products }: ProductsExplorerProps) {
         </p>
         <div className="mt-4 grid gap-3 lg:grid-cols-[minmax(18rem,1.4fr)_1fr_1fr]">
           <label className="relative block">
-            <span className="sr-only">Produkte durchsuchen</span>
+            <span className="sr-only">Produkte nach Name oder Einsatzbereich durchsuchen</span>
             <input
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Produktname oder Einsatz"
+              placeholder="Produktname oder Einsatzbereich"
               className="min-h-12 w-full rounded-xl border border-border bg-card px-4 pr-12 text-sm text-foreground outline-none placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20"
             />
             <Search
