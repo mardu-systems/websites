@@ -103,13 +103,30 @@
   justify-content: flex-end;
 }
 
-.searchInput {
+.searchField {
+  position: relative;
   width: 18rem;
   min-width: 12rem;
+  flex: 0 1 18rem;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  left: 0.625rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--edt-muted-foreground);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.searchInput {
+  width: 100%;
   height: 2rem;
   border: 1px solid var(--edt-input);
   border-radius: 0.5rem;
-  padding: 0.25rem 0.625rem;
+  padding: 0.25rem 0.625rem 0.25rem 2rem;
   background: transparent;
   color: var(--edt-foreground);
   font: inherit;
@@ -478,6 +495,28 @@ button.control:focus-visible {
   width: 1rem;
   height: 1rem;
   stroke-width: 2.5;
+}
+
+.avatar {
+  position: relative;
+  display: inline-grid;
+  width: 2rem;
+  height: 2rem;
+  flex: 0 0 auto;
+  overflow: hidden;
+  place-items: center;
+  border: 1px solid var(--edt-border);
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--edt-primary) 18%, var(--edt-muted));
+  color: var(--edt-foreground);
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+.avatar[data-has-image='true'] {
+  background-position: center;
+  background-size: cover;
 }
 
 .skeleton,

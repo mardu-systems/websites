@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import {
   EmbeddableDataTable,
   type EmbeddableDataTableProps,
+  EmbeddableTableAvatar,
   EmbeddableTableBadge,
   EmbeddableTableButton,
   type EmbeddableTableColumn,
@@ -28,11 +29,19 @@ export interface EmbeddableUserRow {
   userName: string;
   firstName?: string;
   lastName?: string;
+  displayName?: string;
   email?: string;
   emailConfirmed?: boolean;
+  imageUrl?: string | null;
+  identitySource?: string;
+  identityProvider?: string;
   status: 'active' | 'inactive';
+  twoFactorEnabled?: boolean;
   tagCount?: number;
 }
+
+const USER_FILTER_LABELS = ['Kontostatus', 'Quelle', 'E-Mail-Status', 'Zwei-Faktor-Schutz'];
+const STATUS_FILTER_LABELS = ['Status'];
 
 export interface EmbeddableDeviceRow {
   id: string;
@@ -54,15 +63,15 @@ export interface EmbeddableAccessLogRow {
   detail?: string;
 }
 
-function PresetToolbar({
-  filterLabel,
+function createPresetToolbar({
+  filterLabels,
   addLabel,
   onReload,
   onAdd,
   onViewOptions,
   onFilter,
 }: {
-  filterLabel: string;
+  filterLabels: readonly string[];
   addLabel: string;
   onReload?: () => void;
   onAdd?: () => void;
@@ -71,9 +80,13 @@ function PresetToolbar({
 }) {
   return {
     filters: (
-      <EmbeddableTableButton icon={<PlusCircle />} onClick={onFilter}>
-        {filterLabel}
-      </EmbeddableTableButton>
+      <>
+        {filterLabels.map((label) => (
+          <EmbeddableTableButton key={label} icon={<PlusCircle />} onClick={onFilter}>
+            {label}
+          </EmbeddableTableButton>
+        ))}
+      </>
     ),
     actions: (
       <>
@@ -91,34 +104,63 @@ function PresetToolbar({
   };
 }
 
+function getUserDisplayName(row: EmbeddableUserRow) {
+  return (
+    row.displayName ||
+    [row.firstName, row.lastName].filter(Boolean).join(' ').trim() ||
+    row.userName
+  );
+}
+
+function getIdentitySourceLabel(row: EmbeddableUserRow) {
+  const source = row.identitySource?.toLocaleLowerCase() || 'local';
+  const sourceLabel =
+    source === 'local' ? 'Lokal' : source === 'ldap' ? 'LDAP' : source === 'oidc' ? 'OIDC' : source;
+
+  return row.identityProvider && row.identityProvider.toLocaleLowerCase() !== source
+    ? `${sourceLabel} · ${row.identityProvider}`
+    : sourceLabel;
+}
+
 function getUserColumns(
   onRowAction?: (row: EmbeddableUserRow) => void,
 ): readonly EmbeddableTableColumn<EmbeddableUserRow>[] {
   return [
+    {
+      id: 'avatar',
+      header: 'Profil',
+      priority: 'primary',
+      width: '3.25rem',
+      render: (row) => (
+        <EmbeddableTableAvatar name={getUserDisplayName(row)} imageUrl={row.imageUrl} />
+      ),
+    },
     {
       id: 'userName',
       header: 'Benutzername',
       accessor: 'userName',
       priority: 'primary',
       sortable: true,
-      width: '21%',
-      render: (row) => <span style={{ fontWeight: 500 }}>{row.userName}</span>,
+      width: '25%',
+      searchText: (row) => `${row.userName} ${getIdentitySourceLabel(row)}`,
+      render: (row) => (
+        <span style={{ display: 'inline-flex', minWidth: 0, alignItems: 'center', gap: '0.5rem' }}>
+          <span style={{ overflow: 'hidden', fontWeight: 500, textOverflow: 'ellipsis' }}>
+            {row.userName}
+          </span>
+          <EmbeddableTableBadge tone="neutral" showIcon={false}>
+            {getIdentitySourceLabel(row)}
+          </EmbeddableTableBadge>
+        </span>
+      ),
     },
     {
-      id: 'firstName',
-      header: 'Vorname',
-      accessor: 'firstName',
+      id: 'displayName',
+      header: 'Name',
+      accessor: getUserDisplayName,
       priority: 'secondary',
       sortable: true,
-      width: '8%',
-    },
-    {
-      id: 'lastName',
-      header: 'Nachname',
-      accessor: 'lastName',
-      priority: 'secondary',
-      sortable: true,
-      width: '9%',
+      width: '17%',
     },
     {
       id: 'email',
@@ -126,7 +168,7 @@ function getUserColumns(
       accessor: 'email',
       priority: 'tertiary',
       sortable: true,
-      width: '25%',
+      width: '22%',
       render: (row) => (
         <span style={{ display: 'inline-flex', minWidth: 0, alignItems: 'center', gap: '0.5rem' }}>
           <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{row.email || '—'}</span>
@@ -144,6 +186,18 @@ function getUserColumns(
       render: (row) => (
         <EmbeddableTableBadge tone={row.status === 'active' ? 'success' : 'neutral'}>
           {row.status === 'active' ? 'Aktiv' : 'Inaktiv'}
+        </EmbeddableTableBadge>
+      ),
+    },
+    {
+      id: 'twoFactorEnabled',
+      header: '2FA',
+      accessor: (row) => (row.twoFactorEnabled ? 'Aktiv' : 'Inaktiv'),
+      priority: 'secondary',
+      width: '9%',
+      render: (row) => (
+        <EmbeddableTableBadge tone={row.twoFactorEnabled ? 'success' : 'neutral'} showIcon={false}>
+          {row.twoFactorEnabled ? 'Aktiv' : 'Inaktiv'}
         </EmbeddableTableBadge>
       ),
     },
@@ -357,8 +411,8 @@ export function EmbeddableUserTable({
   onRowAction,
   ...props
 }: PresetSharedProps<EmbeddableUserRow>) {
-  const toolbar = PresetToolbar({
-    filterLabel: 'Aktiv',
+  const toolbar = createPresetToolbar({
+    filterLabels: USER_FILTER_LABELS,
     addLabel: 'Benutzer hinzufügen',
     onReload,
     onAdd,
@@ -397,8 +451,8 @@ export function EmbeddableDeviceTable({
   onRowAction,
   ...props
 }: PresetSharedProps<EmbeddableDeviceRow>) {
-  const toolbar = PresetToolbar({
-    filterLabel: 'Status',
+  const toolbar = createPresetToolbar({
+    filterLabels: STATUS_FILTER_LABELS,
     addLabel: 'Gerät hinzufügen',
     onReload,
     onAdd,
@@ -436,8 +490,8 @@ export function EmbeddableAccessLogTable({
   onRowAction,
   ...props
 }: PresetSharedProps<EmbeddableAccessLogRow>) {
-  const toolbar = PresetToolbar({
-    filterLabel: 'Status',
+  const toolbar = createPresetToolbar({
+    filterLabels: STATUS_FILTER_LABELS,
     addLabel: 'Exportieren',
     onReload,
     onViewOptions,

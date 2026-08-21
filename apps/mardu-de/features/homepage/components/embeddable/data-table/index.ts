@@ -2,6 +2,8 @@ export { embeddableDemoUsers } from './demo-data';
 export {
   EmbeddableDataTable,
   type EmbeddableDataTableProps,
+  EmbeddableTableAvatar,
+  type EmbeddableTableAvatarProps,
   EmbeddableTableBadge,
   type EmbeddableTableBadgeProps,
   type EmbeddableTableBadgeTone,

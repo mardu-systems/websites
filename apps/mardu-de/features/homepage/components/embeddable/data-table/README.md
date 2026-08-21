@@ -31,12 +31,15 @@ import { EmbeddableUserTable, type EmbeddableUserRow } from './data-table';
 const users: readonly EmbeddableUserRow[] = [
   {
     id: '1',
-    userName: 'clara.stein@demo.mardu.local',
-    firstName: 'Clara',
-    lastName: 'Stein',
-    email: 'clara.stein@demo.mardu.local',
+    userName: 'coordination@mardu.example',
+    displayName: 'Werkstattkoordination',
+    email: 'coordination@mardu.example',
     emailConfirmed: true,
+    imageUrl: null,
+    identitySource: 'oidc',
+    identityProvider: 'Microsoft Entra ID',
     status: 'active',
+    twoFactorEnabled: true,
     tagCount: 0,
   },
 ];
@@ -45,6 +48,10 @@ export function UserPreview() {
   return <EmbeddableUserTable data={users} theme="dark" />;
 }
 ```
+
+`imageUrl` ist optional. Bei `null` oder fehlendem Wert zeigt die Tabelle Initialen und lädt
+kein Bild. `identitySource` wird kompakt neben dem Benutzernamen dargestellt; bekannte Werte sind
+`local`, `ldap` und `oidc`, weitere Provider-Typen bleiben möglich.
 
 Ohne Callbacks bleiben „Neu laden“, „Benutzer hinzufügen“, „Ansicht“, Tags und Zeilenaktionen reine Mockup-Elemente. Suche, Sortierung, Auswahl und Pagination funktionieren lokal.
 

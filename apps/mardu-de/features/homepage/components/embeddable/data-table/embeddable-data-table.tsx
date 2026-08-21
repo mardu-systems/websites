@@ -9,6 +9,7 @@ import {
   ChevronsRight,
   ChevronsUpDown,
   Minus,
+  Search,
 } from 'lucide-react';
 import type { CSSProperties, KeyboardEvent, ReactNode } from 'react';
 import { useDeferredValue, useEffect, useId, useRef, useState } from 'react';
@@ -107,6 +108,11 @@ export interface EmbeddableTableButtonProps {
   className?: string;
   ariaLabel?: string;
   onClick?: () => void;
+}
+
+export interface EmbeddableTableAvatarProps {
+  name: string;
+  imageUrl?: string | null;
 }
 
 const DEFAULT_LABELS: EmbeddableTableLabels = {
@@ -288,6 +294,27 @@ export function EmbeddableTableVerifiedMark({ label = 'Bestätigt' }: { label?: 
   );
 }
 
+export function EmbeddableTableAvatar({ name, imageUrl }: EmbeddableTableAvatarProps) {
+  const initials = name
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2)
+    .toLocaleUpperCase();
+
+  return (
+    <span
+      className={styles.avatar}
+      aria-label={`Profilbild von ${name}`}
+      data-has-image={imageUrl ? 'true' : undefined}
+      style={imageUrl ? { backgroundImage: `url(${JSON.stringify(imageUrl)})` } : undefined}
+    >
+      {imageUrl ? null : <span aria-hidden="true">{initials || '?'}</span>}
+    </span>
+  );
+}
+
 export function EmbeddableDataTable<TData>({
   title,
   description,
@@ -442,15 +469,18 @@ export function EmbeddableDataTable<TData>({
           <div className={styles.toolbar}>
             <div className={styles.toolbarLeading}>
               {configuredSearch ? (
-                <input
-                  type="search"
-                  value={searchValue}
-                  onChange={(event) => handleSearchChange(event.target.value)}
-                  placeholder={configuredSearch.placeholder ?? 'Tabelle durchsuchen …'}
-                  aria-label={configuredSearch.label ?? 'Suchen'}
-                  className={styles.searchInput}
-                  readOnly={isSearchControlled && !configuredSearch.onChange}
-                />
+                <div className={styles.searchField}>
+                  <Search className={styles.searchIcon} aria-hidden="true" />
+                  <input
+                    type="search"
+                    value={searchValue}
+                    onChange={(event) => handleSearchChange(event.target.value)}
+                    placeholder={configuredSearch.placeholder ?? 'Tabelle durchsuchen …'}
+                    aria-label={configuredSearch.label ?? 'Suchen'}
+                    className={styles.searchInput}
+                    readOnly={isSearchControlled && !configuredSearch.onChange}
+                  />
+                </div>
               ) : null}
               {toolbarFilters}
             </div>
