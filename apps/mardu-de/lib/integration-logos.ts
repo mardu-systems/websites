@@ -1,0 +1,56 @@
+import type { IntegrationListItemDto } from '@mardu/content-core';
+
+export const INTEGRATION_LOGO_SOURCES: Readonly<Record<string, string>> = {
+  ldap: '/integrations/logos/ldap.png',
+  'openid-connect': '/integrations/logos/openid-connect.svg',
+  'microsoft-entra-id': '/integrations/logos/microsoft.svg',
+  'open-badges': '/integrations/logos/open-badges.svg',
+  mqtt: '/integrations/logos/mqtt.svg',
+  'rest-api-openapi': '/integrations/logos/openapi.svg',
+  'webhooks-events': '/integrations/logos/webhooks-events.svg',
+  'github-app-ota': '/integrations/logos/github.svg',
+  'lokale-ota-verteilung': '/integrations/logos/local-ota.svg',
+  smtp: '/integrations/logos/smtp.svg',
+  'vonage-sms': '/integrations/logos/vonage.png',
+  'web-push-echtzeit': '/integrations/logos/web-push.svg',
+  'rabbitmq-masstransit': '/integrations/logos/message-queue.svg',
+  'model-context-protocol': '/integrations/logos/mcp.svg',
+  ip500: '/integrations/logos/ip500.svg',
+  'nfc-mifare-desfire': '/integrations/logos/nfc-mifare.svg',
+  'qr-geraete-onboarding': '/integrations/logos/qr-onboarding.svg',
+  'osdp-phg-crypt': '/integrations/logos/osdp-phg.svg',
+  modbus: '/integrations/logos/modbus.svg',
+  'node-red': '/integrations/logos/node-red.png',
+  n8n: '/integrations/logos/n8n.png',
+  stripe: '/integrations/logos/stripe.png',
+  easyverein: '/integrations/logos/easyverein.png',
+  'twenty-crm': '/integrations/logos/twenty.png',
+  'moodle-ilias': '/integrations/logos/learning.svg',
+  uninow: '/integrations/logos/university.svg',
+  'lexware-sevdesk': '/integrations/logos/accounting.svg',
+  'amazon-cognito': '/integrations/logos/amazon-cognito.svg',
+  auth0: '/integrations/logos/auth0.svg',
+  authentik: '/integrations/logos/authentik.svg',
+  'bacnet-ip': '/integrations/logos/bacnet-ip.png',
+  google: '/integrations/logos/google.png',
+  'home-assistant': '/integrations/logos/home-assistant.svg',
+  keycloak: '/integrations/logos/keycloak.svg',
+  'knx-ip': '/integrations/logos/knx-ip.svg',
+  'lorawan-chirpstack': '/integrations/logos/lorawan-chirpstack.png',
+  okta: '/integrations/logos/okta.svg',
+  'siemens-s7': '/integrations/logos/siemens-s7.svg',
+  zigbee2mqtt: '/integrations/logos/zigbee2mqtt.png',
+  zitadel: '/integrations/logos/zitadel.svg',
+  'opc-ua': '/integrations/logos/opc-ua.svg',
+  'ethernet-ip': '/integrations/logos/ethernet-ip.svg',
+  snmp: '/integrations/logos/snmp.svg',
+  serial: '/integrations/logos/serial.svg',
+  socketcan: '/integrations/logos/socketcan.svg',
+  'matter-thread': '/integrations/logos/matter-thread.svg',
+};
+
+/** Adds the local website logo when no editorial CMS logo is configured. */
+export function withIntegrationLogo<T extends IntegrationListItemDto>(item: T): T {
+  const logoUrl = item.logoUrl ?? INTEGRATION_LOGO_SOURCES[item.slug];
+  return logoUrl ? { ...item, logoUrl, logoAlt: item.logoAlt || item.title } : item;
+}

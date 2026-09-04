@@ -11,12 +11,13 @@ import {
   NativeSelectOption,
 } from "@mardu/ui/components/native-select";
 import Link from "next/link";
+import { INTEGRATION_STATUS_LABELS } from "./integration-status-badge";
 
 const STATUS_ITEMS: Array<{ label: string; value: "" | IntegrationStatus }> = [
   { label: "Alle", value: "" },
-  { label: "Available", value: "available" },
-  { label: "Beta", value: "beta" },
-  { label: "Planned", value: "planned" },
+  { label: INTEGRATION_STATUS_LABELS.available, value: "available" },
+  { label: INTEGRATION_STATUS_LABELS.beta, value: "beta" },
+  { label: INTEGRATION_STATUS_LABELS.planned, value: "planned" },
 ];
 
 export interface IntegrationsFiltersProps {

@@ -10,6 +10,8 @@ import {
 } from '@mardu/content-core';
 import { getPlatformOrigin } from '@mardu/site-config';
 
+import { withIntegrationLogo } from './integration-logos';
+
 const site = 'mardu-de' as const;
 
 export const getIntegrationCategories = async () =>
@@ -19,13 +21,21 @@ export const getIntegrationProtocols = async () =>
   getPlatformIntegrationProtocols(getPlatformOrigin());
 
 export const getFeaturedIntegrations = async (limit = 8) =>
-  getPlatformFeaturedIntegrations(getPlatformOrigin(), site, limit);
+  (await getPlatformFeaturedIntegrations(getPlatformOrigin(), site, limit)).map(
+    withIntegrationLogo,
+  );
 
-export const getIntegrations = async (query: IntegrationListQueryDto) =>
-  getPlatformIntegrations(getPlatformOrigin(), site, query);
+export const getIntegrations = async (query: IntegrationListQueryDto) => {
+  const result = await getPlatformIntegrations(getPlatformOrigin(), site, query);
+  return { ...result, items: result.items.map(withIntegrationLogo) };
+};
 
-export const getIntegrationBySlug = async (slug: string) =>
-  getPlatformIntegrationBySlug(getPlatformOrigin(), site, slug);
+export const getIntegrationBySlug = async (slug: string) => {
+  const integration = await getPlatformIntegrationBySlug(getPlatformOrigin(), site, slug);
+  return integration ? withIntegrationLogo(integration) : integration;
+};
 
 export const getRelatedIntegrations = async (integration: IntegrationDetailDto, limit = 3) =>
-  getPlatformRelatedIntegrations(getPlatformOrigin(), site, integration, limit);
+  (await getPlatformRelatedIntegrations(getPlatformOrigin(), site, integration, limit)).map(
+    withIntegrationLogo,
+  );

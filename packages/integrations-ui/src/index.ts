@@ -4,6 +4,7 @@ export {
 } from "./integration-protocol-badges";
 export {
   IntegrationStatusBadge,
+  INTEGRATION_STATUS_LABELS,
   type IntegrationStatusBadgeProps,
 } from "./integration-status-badge";
 export { IntegrationCard, type IntegrationCardProps } from "./integration-card";

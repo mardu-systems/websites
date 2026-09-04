@@ -1,3 +1,4 @@
+import { INTEGRATION_STATUS_LABELS } from '@mardu/integrations-ui';
 import type { IntegrationListItemDto } from '@mardu/content-core';
 import { isIntegrationsEnabled } from '@mardu/site-config/feature-flags.server';
 import { LockKeyhole } from 'lucide-react';
@@ -41,41 +42,10 @@ const CURATED_INTEGRATION_SLUGS = [
   'stripe',
 ] as const;
 
-const INTEGRATION_LOGO_SOURCES: Readonly<Record<string, string>> = {
-  ldap: '/integrations/logos/ldap.png',
-  'openid-connect': '/integrations/logos/openid-connect.svg',
-  'microsoft-entra-id': '/integrations/logos/microsoft.svg',
-  'open-badges': '/integrations/logos/open-badges.svg',
-  mqtt: '/integrations/logos/mqtt.svg',
-  'rest-api-openapi': '/integrations/logos/openapi.svg',
-  'webhooks-events': '/integrations/logos/webhooks-events.svg',
-  'github-app-ota': '/integrations/logos/github.svg',
-  'lokale-ota-verteilung': '/integrations/logos/local-ota.svg',
-  smtp: '/integrations/logos/smtp.svg',
-  'vonage-sms': '/integrations/logos/vonage.png',
-  'web-push-echtzeit': '/integrations/logos/web-push.svg',
-  'rabbitmq-masstransit': '/integrations/logos/message-queue.svg',
-  'model-context-protocol': '/integrations/logos/mcp.svg',
-  ip500: '/integrations/logos/ip500.svg',
-  'nfc-mifare-desfire': '/integrations/logos/nfc-mifare.svg',
-  'qr-geraete-onboarding': '/integrations/logos/qr-onboarding.svg',
-  'osdp-phg-crypt': '/integrations/logos/osdp-phg.svg',
-  modbus: '/integrations/logos/modbus.svg',
-  'node-red': '/integrations/logos/node-red.png',
-  n8n: '/integrations/logos/n8n.png',
-  stripe: '/integrations/logos/stripe.png',
-  easyverein: '/integrations/logos/easyverein.png',
-  'twenty-crm': '/integrations/logos/twenty.png',
-  'moodle-ilias': '/integrations/logos/learning.svg',
-  uninow: '/integrations/logos/university.svg',
-  'lexware-sevdesk': '/integrations/logos/accounting.svg',
-};
-
 const SYSTEM_GROUPS = [
-  { index: '02', title: 'Identität & Zugriff', count: 3 },
-  { index: '03', title: 'Automation & IoT', count: 4 },
-  { index: '04', title: 'Verwaltung & Organisation', count: 3 },
-  { index: '05', title: 'Finanzen & Abrechnung', count: 1 },
+  { index: '01', status: 'available' },
+  { index: '02', status: 'beta' },
+  { index: '03', status: 'planned' },
 ] as const;
 
 const toDirectoryItem = (item: IntegrationListItemDto): IntegrationsDirectoryItem => ({
@@ -84,7 +54,7 @@ const toDirectoryItem = (item: IntegrationListItemDto): IntegrationsDirectoryIte
   shortDescription: item.shortDescription,
   status: item.status,
   categories: item.categories.map(({ slug, title }) => ({ slug, title })),
-  logoSrc: item.logoUrl ?? INTEGRATION_LOGO_SOURCES[item.slug],
+  logoSrc: item.logoUrl,
   href: `/integrations/${item.slug}`,
 });
 
@@ -125,7 +95,7 @@ export default async function IntegrationsPage() {
             Systeme, die <EditorialAccent>miteinander arbeiten.</EditorialAccent>
           </>
         }
-        description="Verbinde Zutritt, Maschinen, Identitäten und Prozesse mit Standards wie LDAP, OIDC, MQTT, ModBus und MCP sowie Plattformen wie n8n, Stripe und easyVerein."
+        description="Verbinde Mardu über OIDC, LDAP, MQTT, REST und MCP mit deinen Systemen. Entdecke verfügbare Integrationen, Beta-Anbindungen und geplante Erweiterungen."
         media={
           <div className="relative h-20 overflow-hidden md:h-24 xl:h-20">
             <Image
@@ -142,14 +112,14 @@ export default async function IntegrationsPage() {
 
       <section aria-labelledby="systemlandschaft-heading" className="py-12 md:py-16">
         <h2 id="systemlandschaft-heading" className="sr-only">
-          Mardu Systemlandschaft
+          Integrationen nach Verfügbarkeit
         </h2>
         <div className="mardu-container">
           <div className="relative mx-auto lg:w-[78%]">
             <div className="relative flex min-h-10 items-center justify-between bg-[#101010] px-5 text-[10px] uppercase tracking-[0.045em] text-white md:px-24 md:text-[11px]">
               <span className="pr-16 sm:pr-0">Mardu – Identitäts- und Zugriffsplattform</span>
               <span className="hidden items-center gap-2 text-white/86 sm:flex">
-                Einheitlicher Zugriff, Richtlinien &amp; Audit
+                Berechtigungen, Freigaben &amp; Protokolle
                 <LockKeyhole aria-hidden="true" className="size-3.5 stroke-[1.5]" />
               </span>
               <span className="absolute right-3 top-1/2 z-10 flex size-12 -translate-y-1/2 items-center justify-center bg-mardu-purple sm:left-1/2 sm:right-auto sm:-translate-x-1/2 md:size-13">
@@ -163,7 +133,7 @@ export default async function IntegrationsPage() {
               </span>
             </div>
 
-            <div className="relative grid border-b border-border sm:grid-cols-2 lg:grid-cols-4">
+            <div className="relative grid border-b border-border sm:grid-cols-3">
               {SYSTEM_GROUPS.map((group) => (
                 <div
                   key={group.index}
@@ -172,9 +142,12 @@ export default async function IntegrationsPage() {
                   <span className="absolute left-1/2 top-0 hidden h-4 w-px -translate-x-1/2 bg-foreground/35 lg:block" />
                   <span className="absolute left-1/2 top-3 hidden size-2 -translate-x-1/2 bg-mardu-purple lg:block" />
                   <p className="font-mono text-[10px] text-mardu-purple">[{group.index}]</p>
-                  <h3 className="mt-1 text-sm font-normal leading-tight">{group.title}</h3>
+                  <h3 className="mt-1 text-sm font-normal leading-tight">
+                    {INTEGRATION_STATUS_LABELS[group.status]}
+                  </h3>
                   <p className="mt-1 text-sm text-foreground/58">
-                    {group.count} {group.count === 1 ? 'Integration' : 'Integrationen'}
+                    {result.statusCounts[group.status]}{' '}
+                    {result.statusCounts[group.status] === 1 ? 'Integration' : 'Integrationen'}
                   </p>
                 </div>
               ))}
