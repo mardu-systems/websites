@@ -1,4 +1,5 @@
-import { buildConfig } from 'payload';
+import { APIError, buildConfig } from 'payload';
+import { reportServerError } from '@mardu/observability/server';
 import { postgresAdapter } from '@payloadcms/db-postgres';
 import { mcpPlugin } from '@payloadcms/plugin-mcp';
 import { seoPlugin } from '@payloadcms/plugin-seo';
@@ -51,6 +52,14 @@ function getRelationshipId(value: unknown): string | number | undefined {
 }
 
 export default buildConfig({
+  hooks: {
+    afterError: [
+      async ({ error }) => {
+        if (error instanceof APIError && error.status < 500) return;
+        await reportServerError(error, 'payload-api');
+      },
+    ],
+  },
   secret: process.env.PAYLOAD_SECRET || 'payload-dev-secret-please-change',
   db: postgresAdapter({
     pool: {

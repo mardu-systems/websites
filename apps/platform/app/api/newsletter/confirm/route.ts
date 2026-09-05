@@ -1,3 +1,4 @@
+import { reportServerError } from '@mardu/observability/server';
 import { NextResponse } from 'next/server';
 import type { SiteKey } from '@mardu/lead-core';
 import { createNewsletterToken, verifyNewsletterToken } from '@mardu/lead-core';
@@ -69,7 +70,7 @@ export async function GET(req: Request) {
         });
     }
   } catch (err) {
-    console.error('Failed to confirm newsletter subscription', err);
+    await reportServerError(err, 'newsletter-confirm');
     return redirectWithStatus(site, 'error');
   }
 
@@ -93,7 +94,7 @@ export async function GET(req: Request) {
       html: renderEmailLayout(site, 'Newsletter Anmeldung bestätigt', body),
     });
   } catch (err) {
-    console.error('Failed to send newsletter confirmation follow-up email', err);
+    await reportServerError(err, 'newsletter-confirm-email');
   }
 
   return redirectWithStatus(site, 'success');

@@ -1,3 +1,4 @@
+import { withGlitchTip } from '@mardu/observability/next-config';
 import type { NextConfig } from 'next';
 import { withPayload } from '@payloadcms/next/withPayload';
 import { fileURLToPath } from 'node:url';
@@ -9,6 +10,7 @@ const nextConfig: NextConfig = {
     '@mardu/layout',
     '@mardu/content-core',
     '@mardu/lead-core',
+    '@mardu/observability',
     '@mardu/sections',
     '@mardu/site-config',
     '@mardu/styles',
@@ -76,4 +78,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withPayload(nextConfig);
+export default withGlitchTip(withPayload(nextConfig));

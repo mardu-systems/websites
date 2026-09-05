@@ -1,7 +1,12 @@
+import { reportServerError } from '@mardu/observability/server';
 import { NextResponse } from 'next/server';
 import { newsletterRequestSchema, readRequestJson } from '@mardu/lead-core';
 import { forwardPlatformJson } from '@/lib/platform-api';
-import type { NewsletterErrorResponseDto, NewsletterRequestDto, NewsletterResponseDto } from '@mardu/lead-core';
+import type {
+  NewsletterErrorResponseDto,
+  NewsletterRequestDto,
+  NewsletterResponseDto,
+} from '@mardu/lead-core';
 
 export async function POST(req: Request) {
   const jsonResult = await readRequestJson(req);
@@ -19,12 +24,13 @@ export async function POST(req: Request) {
       site: 'mardu-de',
     };
     const response = await forwardPlatformJson('/api/newsletter', payload);
-    const responseBody = (await response.json().catch(() => ({ error: 'Upstream request failed' }))) as
-      | NewsletterResponseDto
-      | NewsletterErrorResponseDto;
+    const responseBody = (await response
+      .json()
+      .catch(() => ({ error: 'Upstream request failed' }))) as
+      NewsletterResponseDto | NewsletterErrorResponseDto;
     return NextResponse.json(responseBody, { status: response.status });
   } catch (err) {
-    console.error('Failed to send confirmation email', err);
+    await reportServerError(err, 'newsletter-proxy');
     return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
   }
 }

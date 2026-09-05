@@ -1,5 +1,10 @@
+import { reportServerError } from '@mardu/observability/server';
 import { NextResponse } from 'next/server';
-import { newsletterRequestSchema, readRequestJson, type NewsletterRequestDto } from '@mardu/lead-core';
+import {
+  newsletterRequestSchema,
+  readRequestJson,
+  type NewsletterRequestDto,
+} from '@mardu/lead-core';
 import { upsertPendingNewsletterSubscriber } from '@/lib/lead-store';
 import { sendNewsletterConfirmationEmail } from '@/lib/newsletter-confirmation';
 import { enforcePublicLeadProtection } from '@/lib/abuse-protection';
@@ -40,7 +45,7 @@ export async function POST(req: Request) {
       company: payload.company,
     });
   } catch (err) {
-    console.error('Failed to send confirmation email', err);
+    await reportServerError(err, 'newsletter');
     return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
   }
 

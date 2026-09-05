@@ -1,3 +1,4 @@
+import { reportServerError } from '@mardu/observability/server';
 import { NextResponse } from 'next/server';
 import { contactRequestSchema, readRequestJson } from '@mardu/lead-core';
 import {
@@ -115,7 +116,7 @@ export async function POST(req: Request) {
     const response: ContactResponseDto = { ok: true };
     return NextResponse.json(response);
   } catch (err) {
-    console.error('Failed to send contact email', err);
+    await reportServerError(err, 'contact');
     if (lead) {
       await setContactLeadStatuses({
         id: lead.id,

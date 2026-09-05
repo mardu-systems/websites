@@ -1,5 +1,6 @@
 'use client';
 
+import { reportError } from '@mardu/observability';
 import { useId, useState } from 'react';
 import Link from 'next/link';
 import { Loader2 } from 'lucide-react';
@@ -97,6 +98,7 @@ export default function NewsletterSignupForm({
       setConsentChecked(false);
       onSuccess?.();
     } catch (submitError) {
+      reportError(submitError, 'newsletter-signup');
       setError(
         submitError instanceof Error ? submitError.message : 'Newsletter-Anmeldung fehlgeschlagen',
       );

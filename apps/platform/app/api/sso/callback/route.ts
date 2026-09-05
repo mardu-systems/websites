@@ -1,3 +1,4 @@
+import { reportServerError } from '@mardu/observability/server';
 import config from '@/payload.config';
 import {
   buildErrorRedirectURL,
@@ -172,13 +173,10 @@ export async function GET(request: Request) {
 
     return response;
   } catch (error) {
+    await reportServerError(error, 'sso-callback');
     logOidcDebug('callback:error', {
       error: error instanceof Error ? error.message : String(error),
     });
-
-    if (process.env.NODE_ENV !== 'production') {
-      console.error(error);
-    }
 
     return redirectWithError('oidc_callback_failed', request);
   }

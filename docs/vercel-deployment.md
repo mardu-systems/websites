@@ -60,6 +60,13 @@ vercel env ls preview
 vercel env pull .env.production.local --yes --environment=production
 ```
 
+## Fehlererfassung
+
+Die optionale Fehlererfassung für beide Projekte, DSNs, Release-IDs und geheime
+Source-Map-Uploadtokens sind unter [GlitchTip-Fehlererfassung](error-tracking.md)
+dokumentiert. `NEXT_PUBLIC_GLITCHTIP_*` muss bereits beim Build korrekt gesetzt sein;
+beim Promoten eines Preview-Artefakts werden diese Werte nicht ersetzt.
+
 ## Content-Flags auf mardu.de
 
 Die öffentlichen Bereiche Blog, Integrationen und Produkte verwenden die Vercel-Flag-Keys

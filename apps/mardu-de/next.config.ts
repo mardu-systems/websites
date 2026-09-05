@@ -1,3 +1,5 @@
+import { getGlitchTipOrigin } from '@mardu/observability/config';
+import { withGlitchTip } from '@mardu/observability/next-config';
 import type { NextConfig } from 'next';
 import { fileURLToPath } from 'node:url';
 
@@ -6,13 +8,15 @@ const platformOrigin = new URL(
   process.env.MARDU_PLATFORM_ORIGIN?.trim() || 'https://platform.mardu.de',
 );
 
+const glitchTipOrigin = getGlitchTipOrigin(process.env.NEXT_PUBLIC_GLITCHTIP_DSN);
+
 const contentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://*.vercel.app https://vitals.vercel-insights.com https://liv-showcase.s3.eu-central-1.amazonaws.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   img-src 'self' data: blob: https://www.mardu.de https://mardu.de ${platformOrigin.origin};
   font-src 'self' https://fonts.gstatic.com;
-  connect-src 'self' https://vercel.live https://vitals.vercel-insights.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;
+  connect-src 'self' ${glitchTipOrigin} https://vercel.live https://vitals.vercel-insights.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;
   frame-src 'self' https://cal.meetergo.com https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/;
   media-src 'self';
   object-src 'none';
@@ -60,6 +64,7 @@ const nextConfig: NextConfig = {
     '@mardu/layout',
     '@mardu/content-core',
     '@mardu/lead-core',
+    '@mardu/observability',
     '@mardu/sections',
     '@mardu/site-config',
     '@mardu/solutions-ui',
@@ -117,4 +122,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withGlitchTip(nextConfig);

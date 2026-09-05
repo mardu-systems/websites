@@ -1,3 +1,4 @@
+import { reportServerError } from '@mardu/observability/server';
 import {
   buildOidcAuthorization,
   buildRedirectURL,
@@ -42,16 +43,13 @@ export async function GET(request: Request) {
 
     return response;
   } catch (error) {
+    await reportServerError(error, 'sso-login');
     logOidcDebug('login:error', {
       error: error instanceof Error ? error.message : String(error),
     });
 
     const fallbackLoginURL = buildRedirectURL(request, '/admin/login');
     fallbackLoginURL.searchParams.set('error', 'oidc_login_init_failed');
-
-    if (process.env.NODE_ENV !== 'production') {
-      console.error(error);
-    }
 
     return NextResponse.redirect(fallbackLoginURL);
   }

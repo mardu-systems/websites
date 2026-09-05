@@ -1,3 +1,4 @@
+import { reportError } from '@mardu/observability';
 import Link from 'next/link';
 import type { CollectionSlug, ServerProps, Where } from 'payload';
 import React from 'react';
@@ -20,6 +21,7 @@ const countDocuments = async (
     const result = await payload.count({ collection, where });
     return result.totalDocs;
   } catch (error) {
+    reportError(error, 'admin-dashboard-count');
     payload.logger.error(
       { collection, error },
       'Admin-Dashboard-Kennzahl konnte nicht geladen werden.',
