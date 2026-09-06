@@ -14,6 +14,8 @@ import { normalizePhoneNumber } from '@mardu/lead-core/phone';
 import { enforcePublicLeadProtection } from '@/lib/abuse-protection';
 import type { ContactRequestDto, ContactResponseDto } from '@mardu/lead-core';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: Request) {
   const jsonResult = await readRequestJson(req);
   if (!jsonResult.success) {

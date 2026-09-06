@@ -8,6 +8,8 @@ import { renderEmailLayout, sendEmail } from '@/lib/email';
 import type { NewsletterCrmEventDto } from '@/types/api/newsletter-crm';
 import { getSiteConfig } from '@mardu/site-config';
 
+export const dynamic = 'force-dynamic';
+
 const activeSite: SiteKey = 'mardu-de';
 
 function redirectWithStatus(site: SiteKey, status: string) {

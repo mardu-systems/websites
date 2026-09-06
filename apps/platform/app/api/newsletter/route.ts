@@ -9,6 +9,8 @@ import { upsertPendingNewsletterSubscriber } from '@/lib/lead-store';
 import { sendNewsletterConfirmationEmail } from '@/lib/newsletter-confirmation';
 import { enforcePublicLeadProtection } from '@/lib/abuse-protection';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: Request) {
   const jsonResult = await readRequestJson(req);
   if (!jsonResult.success) {

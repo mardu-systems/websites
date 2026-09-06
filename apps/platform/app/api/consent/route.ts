@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { getConsent, setConsent } from '@mardu/lead-core/consent-server';
 import { consentPreferencesSchema, readRequestJson } from '@mardu/lead-core';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   return NextResponse.json(await getConsent());
 }
