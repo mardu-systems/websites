@@ -1,3 +1,4 @@
+import { reportServerError } from '@mardu/observability/server';
 import { NextResponse } from 'next/server';
 import { contactRequestSchema, readRequestJson } from '@mardu/lead-core';
 import {
@@ -12,6 +13,8 @@ import { sendNewsletterConfirmationEmail, splitFullName } from '@/lib/newsletter
 import { normalizePhoneNumber } from '@mardu/lead-core/phone';
 import { enforcePublicLeadProtection } from '@/lib/abuse-protection';
 import type { ContactRequestDto, ContactResponseDto } from '@mardu/lead-core';
+
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
   const jsonResult = await readRequestJson(req);
@@ -115,7 +118,7 @@ export async function POST(req: Request) {
     const response: ContactResponseDto = { ok: true };
     return NextResponse.json(response);
   } catch (err) {
-    console.error('Failed to send contact email', err);
+    await reportServerError(err, 'contact');
     if (lead) {
       await setContactLeadStatuses({
         id: lead.id,

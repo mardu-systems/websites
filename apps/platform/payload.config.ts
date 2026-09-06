@@ -1,4 +1,5 @@
-import { buildConfig } from 'payload';
+import { APIError, buildConfig } from 'payload';
+import { reportServerError } from '@mardu/observability/server';
 import { postgresAdapter } from '@payloadcms/db-postgres';
 import { mcpPlugin } from '@payloadcms/plugin-mcp';
 import { seoPlugin } from '@payloadcms/plugin-seo';
@@ -34,10 +35,17 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const databaseURL =
   process.env.DATABASE_URI || 'postgres://postgres:postgres@127.0.0.1:5432/mardu_payload';
 const vercelBlobToken = process.env.BLOB_READ_WRITE_TOKEN;
+const isProductionBuild = process.env.NEXT_PHASE === 'phase-production-build';
 
-if (process.env.VERCEL === '1' && !vercelBlobToken) {
+if (process.env.VERCEL === '1' && !vercelBlobToken && !isProductionBuild) {
   throw new Error(
     'BLOB_READ_WRITE_TOKEN is required on Vercel so Payload media is not written to the read-only local filesystem.',
+  );
+}
+
+if (isProductionBuild && process.env.VERCEL === '1' && !vercelBlobToken) {
+  console.warn(
+    '[payload] BLOB_READ_WRITE_TOKEN is missing during production build; Vercel Blob storage stays disabled for the build. Set it for runtime.',
   );
 }
 
@@ -51,6 +59,14 @@ function getRelationshipId(value: unknown): string | number | undefined {
 }
 
 export default buildConfig({
+  hooks: {
+    afterError: [
+      async ({ error }) => {
+        if (error instanceof APIError && error.status < 500) return;
+        await reportServerError(error, 'payload-api');
+      },
+    ],
+  },
   secret: process.env.PAYLOAD_SECRET || 'payload-dev-secret-please-change',
   db: postgresAdapter({
     pool: {

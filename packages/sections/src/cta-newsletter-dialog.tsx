@@ -1,5 +1,6 @@
 "use client";
 
+import { reportError } from "@mardu/observability";
 import { useRef, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { Alert, AlertDescription } from "@mardu/ui/components/alert";
@@ -137,6 +138,7 @@ export function CtaNewsletterDialog({
       setConsentChecked(false);
       window.setTimeout(() => setOpen(false), 1500);
     } catch (error: unknown) {
+      reportError(error, "newsletter-dialog");
       setStatus("error");
       setErrorMessage(
         error instanceof Error ? error.message : dialogConfig.errorMessage,

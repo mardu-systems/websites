@@ -1,3 +1,4 @@
+import { reportServerError } from '@mardu/observability/server';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { contactRequestSchema, readRequestJson } from '@mardu/lead-core';
@@ -40,7 +41,7 @@ export async function POST(req: Request) {
       ContactResponseDto | { error: string; details?: Record<string, string[] | undefined> };
     return NextResponse.json(responseBody, { status: response.status });
   } catch (err) {
-    console.error('Failed to send contact email', err);
+    await reportServerError(err, 'contact-proxy');
     return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
   }
 }

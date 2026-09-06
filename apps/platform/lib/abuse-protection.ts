@@ -1,3 +1,4 @@
+import { reportError } from '@mardu/observability';
 import { getPayload } from 'payload';
 import { sql } from '@payloadcms/db-postgres';
 import config from '@/payload.config';
@@ -97,6 +98,7 @@ async function incrementRateLimitOrBypass(input: {
     });
     return { count, bypassed: false };
   } catch (error) {
+    reportError(error, 'rate-limit-store');
     if (!isRateLimitStoreUnavailableError(error)) {
       throw error;
     }

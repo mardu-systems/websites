@@ -1,11 +1,17 @@
+import { reportServerError } from '@mardu/observability/server';
 import { NextResponse } from 'next/server';
 import type { SiteKey } from '@mardu/lead-core';
 import { verifyNewsletterToken } from '@mardu/lead-core';
-import { setNewsletterSubscriberTwentyStatus, unsubscribeNewsletterSubscriber } from '@/lib/lead-store';
+import {
+  setNewsletterSubscriberTwentyStatus,
+  unsubscribeNewsletterSubscriber,
+} from '@/lib/lead-store';
 import { sendNewsletterEventToTwenty } from '@/lib/integrations/twenty';
 import { renderEmailLayout, sendEmail } from '@/lib/email';
 import type { NewsletterCrmEventDto } from '@/types/api/newsletter-crm';
 import { getSiteConfig } from '@mardu/site-config';
+
+export const dynamic = 'force-dynamic';
 
 const activeSite: SiteKey = 'mardu-de';
 
@@ -60,11 +66,15 @@ export async function GET(req: Request) {
         )
         .catch((err) => {
           console.error('Failed to sync unsubscribe to Twenty', err);
-          return setNewsletterSubscriberTwentyStatus(unsubscribedSubscriber.id, 'failed', String(err));
+          return setNewsletterSubscriberTwentyStatus(
+            unsubscribedSubscriber.id,
+            'failed',
+            String(err),
+          );
         });
     }
   } catch (err) {
-    console.error('Failed to unsubscribe newsletter', err);
+    await reportServerError(err, 'newsletter-unsubscribe');
     return redirectWithStatus(site, 'error');
   }
 
@@ -73,10 +83,14 @@ export async function GET(req: Request) {
       to: data.email,
       subject: 'Newsletter Abmeldung',
       text: 'Du hast dich erfolgreich vom Newsletter abgemeldet.',
-      html: renderEmailLayout(site, 'Newsletter Abmeldung', '<p>Du hast dich erfolgreich vom Newsletter abgemeldet.</p>'),
+      html: renderEmailLayout(
+        site,
+        'Newsletter Abmeldung',
+        '<p>Du hast dich erfolgreich vom Newsletter abgemeldet.</p>',
+      ),
     });
   } catch (err) {
-    console.error('Failed to send newsletter unsubscribe follow-up email', err);
+    await reportServerError(err, 'newsletter-unsubscribe-email');
   }
 
   return redirectWithStatus(site, 'success');

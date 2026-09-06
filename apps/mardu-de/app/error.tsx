@@ -1,14 +1,21 @@
 'use client';
 
+import { useEffect } from 'react';
+import { reportError } from '@mardu/observability';
 import Link from 'next/link';
 import { Button } from '@mardu/ui/components/button';
 
 export default function ErrorPage({
+  error,
   reset,
 }: {
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  useEffect(() => {
+    reportError(error, 'page-error');
+  }, [error]);
+
   return (
     <main className="mardu-container grid min-h-[60svh] place-items-center py-16 text-center">
       <div className="max-w-xl" role="alert">

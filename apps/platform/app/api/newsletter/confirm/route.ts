@@ -1,3 +1,4 @@
+import { reportServerError } from '@mardu/observability/server';
 import { NextResponse } from 'next/server';
 import type { SiteKey } from '@mardu/lead-core';
 import { createNewsletterToken, verifyNewsletterToken } from '@mardu/lead-core';
@@ -6,6 +7,8 @@ import { sendNewsletterEventToTwenty } from '@/lib/integrations/twenty';
 import { renderEmailLayout, sendEmail } from '@/lib/email';
 import type { NewsletterCrmEventDto } from '@/types/api/newsletter-crm';
 import { getSiteConfig } from '@mardu/site-config';
+
+export const dynamic = 'force-dynamic';
 
 const activeSite: SiteKey = 'mardu-de';
 
@@ -69,7 +72,7 @@ export async function GET(req: Request) {
         });
     }
   } catch (err) {
-    console.error('Failed to confirm newsletter subscription', err);
+    await reportServerError(err, 'newsletter-confirm');
     return redirectWithStatus(site, 'error');
   }
 
@@ -93,7 +96,7 @@ export async function GET(req: Request) {
       html: renderEmailLayout(site, 'Newsletter Anmeldung bestätigt', body),
     });
   } catch (err) {
-    console.error('Failed to send newsletter confirmation follow-up email', err);
+    await reportServerError(err, 'newsletter-confirm-email');
   }
 
   return redirectWithStatus(site, 'success');

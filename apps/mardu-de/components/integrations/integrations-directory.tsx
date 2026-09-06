@@ -1,5 +1,6 @@
 'use client';
 
+import { INTEGRATION_STATUS_LABELS as STATUS_LABELS } from '@mardu/integrations-ui';
 import type { IntegrationStatus } from '@mardu/content-core';
 import { ArrowRight, ChevronDown, Search } from 'lucide-react';
 import Image from 'next/image';
@@ -18,12 +19,6 @@ export type IntegrationsDirectoryItem = {
 
 type IntegrationsDirectoryProps = {
   items: IntegrationsDirectoryItem[];
-};
-
-const STATUS_LABELS: Record<IntegrationStatus, string> = {
-  available: 'Verfügbar',
-  beta: 'In Beta',
-  planned: 'In Planung',
 };
 
 const STATUS_ORDER = [

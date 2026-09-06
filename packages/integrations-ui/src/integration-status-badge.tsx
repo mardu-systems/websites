@@ -1,9 +1,9 @@
 import type { IntegrationStatus } from "@mardu/content-core";
 
-const STATUS_LABELS: Record<IntegrationStatus, string> = {
-  available: "Available",
-  beta: "Beta",
-  planned: "Planned",
+export const INTEGRATION_STATUS_LABELS: Record<IntegrationStatus, string> = {
+  available: "Verfügbar",
+  beta: "In Beta",
+  planned: "In Planung",
 };
 
 const STATUS_CLASSNAMES: Record<IntegrationStatus, string> = {
@@ -23,7 +23,7 @@ export function IntegrationStatusBadge({
     <span
       className={`inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.12em] ${STATUS_CLASSNAMES[status]}`}
     >
-      {STATUS_LABELS[status]}
+      {INTEGRATION_STATUS_LABELS[status]}
     </span>
   );
 }

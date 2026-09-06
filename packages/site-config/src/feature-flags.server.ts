@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { reportError } from '@mardu/observability';
 import { vercelAdapter } from '@flags-sdk/vercel';
 import { flag, type Flag } from 'flags/next';
 import {
@@ -111,11 +112,24 @@ export async function getSiteFeatureFlags(site: SiteKey): Promise<SiteFeatureFla
     const overrides = getSiteFeatureFlagOverrides(site);
 
     return {
-      blog: overrides.blog ?? (await flags.blog().catch(() => staticFlags.blog)),
+      blog:
+        overrides.blog ??
+        (await flags.blog().catch((error: unknown) => {
+          reportError(error, 'feature-flag-blog');
+          return staticFlags.blog;
+        })),
       integrations:
         overrides.integrations ??
-        (await flags.integrations().catch(() => staticFlags.integrations)),
-      products: overrides.products ?? (await flags.products().catch(() => staticFlags.products)),
+        (await flags.integrations().catch((error: unknown) => {
+          reportError(error, 'feature-flag-integrations');
+          return staticFlags.integrations;
+        })),
+      products:
+        overrides.products ??
+        (await flags.products().catch((error: unknown) => {
+          reportError(error, 'feature-flag-products');
+          return staticFlags.products;
+        })),
     };
   } catch (error) {
     console.error('[site-flags] Falling back to static feature flags', {

@@ -1,0 +1,21 @@
+{
+  "name": "@mardu/observability",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts",
+    "./server": "./src/server.ts",
+    "./config": "./src/config.ts",
+    "./init": "./src/init.ts",
+    "./next-config": "./src/next-config.ts"
+  },
+  "dependencies": {
+    "@sentry/nextjs": "10.73.0"
+  },
+  "peerDependencies": {
+    "next": "16.3.0",
+    "react": "^19.2.8"
+  }
+}

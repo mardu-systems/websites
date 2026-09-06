@@ -64,7 +64,8 @@
     "tailwind-clip-path": "^1.0.0",
     "tailwind-merge": "^3.6.0",
     "vaul": "^1.1.2",
-    "zod": "^4.4.3"
+    "zod": "^4.4.3",
+    "@mardu/observability": "workspace:*"
   },
   "devDependencies": {
     "@mardu/eslint-config": "workspace:*",
