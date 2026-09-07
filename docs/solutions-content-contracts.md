@@ -11,7 +11,7 @@ Diese Notiz dokumentiert den öffentlichen Daten- und UI-Vertrag für Branchen- 
   - Routen
   - Metadaten
   - Linkzielen und CTA-Zielen
-- Seed-Daten liegen ausschließlich in `apps/platform/data/solution-seed-items.ts`
+- Seed-Daten liegen ausschließlich in `apps/mardu-de/data/solution-seed-items.ts`
 
 ## Öffentliche DTOs
 
@@ -95,7 +95,7 @@ Wichtige Regel:
 
 ## V1-Umfang
 
-- Runtime-Ausspielung erfolgt ausschließlich über Payload in `apps/platform` und den strikten Read-Layer in `@mardu/content-core`.
+- Runtime-Ausspielung erfolgt ausschließlich über Payload in `apps/mardu-de` und den strikten Read-Layer in `@mardu/content-core`.
 - Ein leeres veröffentlichtes Ergebnis wird als expliziter Leerzustand gerendert; API- und DTO-Fehler werden nicht durch Seeds ersetzt.
 - Keine Filter und keine zusätzliche Taxonomie-UI.
 - Fokus liegt weiterhin auf branchenspezifischer Einordnung mit Text und Bild.

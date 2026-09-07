@@ -4,9 +4,9 @@ Die öffentliche Roadmap für `mardu.de` wird über die Payload-Collection `road
 
 ## Rollenverteilung
 
-- `apps/platform`
-  - stellt die Collection `roadmap-items` bereit
-  - verwaltet Drafts, Veröffentlichungen und `sites`-Sichtbarkeit
+- `apps/mardu-de`
+  - stellt die Collection `roadmap-items` bereit (`collections/roadmap-items.ts`)
+  - verwaltet Drafts, Veröffentlichungen und `sites`-Sichtbarkeit im Payload-Admin (`/admin`)
 - `packages/content-core`
   - definiert die öffentlichen DTOs `RoadmapItemDto` und `RoadmapPhaseDto`
   - liefert die Fetcher `getPlatformRoadmapItems(origin, site)` und `getPlatformRoadmapPhases(origin, site)`
