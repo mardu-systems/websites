@@ -12,7 +12,7 @@ import { getCreateOneNoteTargetUrl } from '@/lib/integrations/twenty/generated/e
 import { normalizePhoneNumber } from '@mardu/lead-core/phone';
 import type { NewsletterCrmEventDto } from '@/types/api/newsletter-crm';
 import type { TwentyContactLeadDto } from '@/types/api/twenty-sync';
-import type { ContactSource } from '@mardu/lead-core';
+import { getSiteConfig } from '@mardu/site-config';
 
 type TwentySyncResult = { ok: true; skipped: false } | { ok: false; skipped: true; reason: string };
 
@@ -255,9 +255,14 @@ type EnsurePersonInput = {
   fullName?: string;
   phone?: string;
   companyId?: string;
-  source?: ContactSource;
+  source?: TwentyContactLeadDto['source'];
+  site?: TwentyContactLeadDto['site'];
   message?: string;
   newsletterOptIn?: boolean;
+  consent?: boolean;
+  newsletterStatus?: string;
+  newsletterRole?: string;
+  newsletterConsentModel?: string;
 };
 
 function readCustomFieldKey(envVar: string): string | undefined {
@@ -302,9 +307,34 @@ async function ensurePerson(input: EnsurePersonInput): Promise<string | undefine
     payload[sourceField] = input.source;
   }
 
+  const siteField = readCustomFieldKey('TWENTY_CONTACT_SITE_FIELD');
+  if (siteField && input.site) {
+    payload[siteField] = input.site;
+  }
+
   const newsletterOptInField = readCustomFieldKey('TWENTY_CONTACT_NEWSLETTER_OPT_IN_FIELD');
   if (newsletterOptInField && typeof input.newsletterOptIn === 'boolean') {
     payload[newsletterOptInField] = input.newsletterOptIn;
+  }
+
+  const consentField = readCustomFieldKey('TWENTY_CONTACT_CONSENT_FIELD');
+  if (consentField && typeof input.consent === 'boolean') {
+    payload[consentField] = input.consent;
+  }
+
+  const newsletterStatusField = readCustomFieldKey('TWENTY_NEWSLETTER_STATUS_FIELD');
+  if (newsletterStatusField && input.newsletterStatus) {
+    payload[newsletterStatusField] = input.newsletterStatus;
+  }
+
+  const newsletterRoleField = readCustomFieldKey('TWENTY_NEWSLETTER_ROLE_FIELD');
+  if (newsletterRoleField && input.newsletterRole) {
+    payload[newsletterRoleField] = input.newsletterRole;
+  }
+
+  const newsletterConsentField = readCustomFieldKey('TWENTY_NEWSLETTER_CONSENT_MODEL_FIELD');
+  if (newsletterConsentField && input.newsletterConsentModel) {
+    payload[newsletterConsentField] = input.newsletterConsentModel;
   }
 
   const personId = await findPersonIdByEmail(input.email);
@@ -332,23 +362,25 @@ function getContactSourceLabel(source: TwentyContactLeadDto['source']): string {
     return 'Kontaktformular';
   }
   if (source === 'admin-software') {
-    return 'Verwaltungssoftware';
+    return 'Admin-Software';
   }
   return 'Unbekannt';
 }
 
-function getContactSourceUrl(source: TwentyContactLeadDto['source']): string | undefined {
-  if (source !== 'contact-form') {
-    return undefined;
-  }
-
-  const appUrl = process.env.APP_URL?.trim();
-  if (!appUrl) {
-    return undefined;
-  }
+function getContactSourceUrl(
+  site: TwentyContactLeadDto['site'],
+  source: TwentyContactLeadDto['source'],
+): string | undefined {
+  const siteConfig = getSiteConfig(site);
+  const path =
+    source === 'configurator'
+      ? siteConfig.contactPath
+      : source === 'admin-software'
+        ? '/verwaltungssoftware'
+        : siteConfig.contactPath;
 
   try {
-    return new URL('/contact', appUrl).toString();
+    return new URL(path, siteConfig.origin).toString();
   } catch {
     return undefined;
   }
@@ -358,8 +390,11 @@ type CreateContactNoteInput = {
   personId: string;
   message: string;
   occurredAt: string;
+  site: TwentyContactLeadDto['site'];
   source?: TwentyContactLeadDto['source'];
+  consent?: boolean;
   newsletterOptIn?: boolean;
+  config?: unknown;
 };
 
 function buildBlockNotePayload(text: string): string {
@@ -391,16 +426,19 @@ async function createContactNote(input: CreateContactNoteInput): Promise<string 
   }
 
   const sourceLabel = getContactSourceLabel(input.source);
-  const sourceUrl = getContactSourceUrl(input.source);
+  const sourceUrl = getContactSourceUrl(input.site, input.source);
   const titleDate = input.occurredAt.slice(0, 10);
   const title = `Kontaktanfrage (${sourceLabel}, ${titleDate})`;
   const details = [
+    `Site: ${input.site}`,
     `Datum: ${input.occurredAt}`,
     `Quelle: ${sourceLabel}`,
     ...(sourceUrl ? [`Quelle-URL: ${sourceUrl}`] : []),
+    ...(typeof input.consent === 'boolean' ? [`Consent: ${input.consent ? 'ja' : 'nein'}`] : []),
     ...(typeof input.newsletterOptIn === 'boolean'
       ? [`Newsletter-Opt-in: ${input.newsletterOptIn ? 'ja' : 'nein'}`]
       : []),
+    ...(input.config !== undefined ? [`Config: ${JSON.stringify(input.config, null, 2)}`] : []),
   ];
   const markdownBody = `${details.map((line) => `- ${line}`).join('\n')}\n\n${trimmedMessage}`;
   const blocknoteBody = buildBlockNotePayload(markdownBody);
@@ -452,9 +490,11 @@ export async function syncContactLeadToTwenty(
     email: payload.email,
     fullName: payload.name,
     phone: payload.phone,
+    site: payload.site,
     source: payload.source,
     message: payload.message,
     newsletterOptIn: payload.newsletterOptIn,
+    consent: payload.consent,
     companyId,
   });
 
@@ -464,8 +504,11 @@ export async function syncContactLeadToTwenty(
         personId,
         message: payload.message,
         occurredAt: new Date().toISOString(),
+        site: payload.site,
         source: payload.source,
+        consent: payload.consent,
         newsletterOptIn: payload.newsletterOptIn,
+        config: payload.config,
       });
     } catch (error) {
       console.error('Failed to create contact note in Twenty', error);
@@ -492,12 +535,46 @@ export async function sendNewsletterEventToTwenty(
     ? await ensureCompany(normalizedCompany, payload.email)
     : undefined;
 
-  await ensurePerson({
+  const personId = await ensurePerson({
     email: payload.email,
+    site: payload.site,
     ...(payload.firstName ? { firstName: payload.firstName } : {}),
     ...(payload.lastName ? { lastName: payload.lastName } : {}),
     ...(companyId ? { companyId } : {}),
+    newsletterStatus: payload.type === 'newsletter_unsubscribed' ? 'unsubscribed' : 'confirmed',
+    newsletterRole: payload.role,
+    newsletterConsentModel: payload.consentModel,
   });
+
+  if (personId) {
+    const title =
+      payload.type === 'newsletter_unsubscribed'
+        ? 'Newsletter-Abmeldung'
+        : 'Newsletter-Bestätigung';
+    const lines = [
+      `Site: ${payload.site}`,
+      `Datum: ${payload.occurredAt}`,
+      `Event: ${payload.type}`,
+      `Quelle: ${payload.source}`,
+      `Rolle: ${payload.role}`,
+      `Consent-Model: ${payload.consentModel}`,
+      ...(payload.company ? [`Firma: ${payload.company}`] : []),
+    ];
+
+    try {
+      await createContactNote({
+        personId,
+        message: title,
+        occurredAt: payload.occurredAt,
+        site: payload.site,
+        source: 'contact-form',
+        config: { details: lines },
+        newsletterOptIn: payload.type !== 'newsletter_unsubscribed',
+      });
+    } catch (error) {
+      console.error('Failed to create newsletter event note in Twenty', error);
+    }
+  }
 
   return { ok: true, skipped: false };
 }

@@ -1,12 +1,16 @@
 import { reportServerError } from '@mardu/observability/server';
 import { NextResponse } from 'next/server';
-import { newsletterRequestSchema, readRequestJson } from '@mardu/lead-core';
-import { forwardPlatformJson } from '@/lib/platform-api';
-import type {
-  NewsletterErrorResponseDto,
-  NewsletterRequestDto,
-  NewsletterResponseDto,
+import {
+  newsletterRequestSchema,
+  readRequestJson,
+  type NewsletterRequestDto,
 } from '@mardu/lead-core';
+import { upsertPendingNewsletterSubscriber } from '@/lib/lead-store';
+import { sendNewsletterConfirmationEmail } from '@/lib/newsletter-confirmation';
+import { enforcePublicLeadProtection } from '@/lib/abuse-protection';
+import type { NewsletterResponseDto } from '@mardu/lead-core';
+
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
   const jsonResult = await readRequestJson(req);
@@ -18,19 +22,36 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
   }
 
+  const { token, ...rawPayload } = parsed.data;
+  const payload: NewsletterRequestDto = {
+    ...rawPayload,
+    site: 'mardu-de',
+  };
+  const protection = await enforcePublicLeadProtection({
+    req,
+    endpoint: 'newsletter',
+    site: payload.site,
+    token,
+  });
+
+  if (!protection.ok) {
+    return NextResponse.json({ error: protection.error }, { status: protection.status });
+  }
+
   try {
-    const payload: NewsletterRequestDto = {
-      ...parsed.data,
-      site: 'mardu-de',
-    };
-    const response = await forwardPlatformJson('/api/newsletter', payload);
-    const responseBody = (await response
-      .json()
-      .catch(() => ({ error: 'Upstream request failed' }))) as
-      NewsletterResponseDto | NewsletterErrorResponseDto;
-    return NextResponse.json(responseBody, { status: response.status });
+    await upsertPendingNewsletterSubscriber(payload);
+    await sendNewsletterConfirmationEmail({
+      email: payload.email,
+      role: payload.role,
+      site: payload.site,
+      firstName: payload.firstName,
+      lastName: payload.lastName,
+      company: payload.company,
+    });
   } catch (err) {
-    await reportServerError(err, 'newsletter-proxy');
+    await reportServerError(err, 'newsletter');
     return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
   }
+
+  return NextResponse.json({ ok: true } satisfies NewsletterResponseDto);
 }

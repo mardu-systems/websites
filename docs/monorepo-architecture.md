@@ -1,20 +1,16 @@
 # Monorepo Architecture
 
-Diese Dokumentation beschreibt die Zielstruktur des Monorepos unter `../websites` und den technischen Zuschnitt der beiden Apps.
+Diese Dokumentation beschreibt die Zielstruktur des Monorepos unter `../websites`. Es gibt genau eine deploybare App.
 
-## Deploybare Apps
+## Deploybare App
 
 ### `apps/mardu-de`
 
-- öffentliche Produkt- und Marketingseite für `mardu.de`
+- öffentliche Produkt- und Marketingseite für `mardu.de` unter `app/(site)`
+- einziges Payload-Admin unter `app/(payload)/admin`
+- Content-API für Blog, Integrationen, Lösungen, Roadmap, Produktkatalog, Rechtstexte und Media unter `app/api`
+- Lead-Backend für Newsletter und Kontakt unter `app/api`
 - konsumiert gemeinsame UI-, Style- und Site-Config-Pakete
-- konsumiert Content und Lead-APIs ausschließlich aus `apps/platform`
-
-### `apps/platform`
-
-- einziges Payload-Admin
-- zentrale Content-API für Blog, Integrationen, Lösungen, Roadmap, Produktkatalog, Rechtstexte und Media
-- zentrales Lead-Backend für Newsletter und Kontakt
 
 ## Gemeinsame Packages
 
@@ -22,7 +18,7 @@ Diese Dokumentation beschreibt die Zielstruktur des Monorepos unter `../websites
 
 - globale Tailwind-/Animation-Basis
 - gemeinsame Browser- und Accessibility-Grundregeln
-- Site-Themes für `mardu-de` und `platform`
+- Site-Theme für `mardu-de`
 
 ### `packages/site-config`
 
@@ -32,7 +28,7 @@ Diese Dokumentation beschreibt die Zielstruktur des Monorepos unter `../websites
 ### `packages/lead-core`
 
 - zentrale DTOs und Zod-Schemas für Lead-nahe API-Verträge
-- bildet die Basis für dokumentierte Plattform-Endpunkte
+- bildet die Basis für dokumentierte Lead-Endpunkte
 
 ### `packages/content-core`
 
@@ -50,15 +46,13 @@ Diese Dokumentation beschreibt die Zielstruktur des Monorepos unter `../websites
 ## Vercel-Zuschnitt
 
 - ein Git-Repository
-- zwei getrennte Vercel-Projekte
-- Root Directories:
-  - `apps/mardu-de`
-  - `apps/platform`
+- ein Vercel-Projekt
+- Root Directory: `apps/mardu-de`
 - geteilte Packages werden über den Workspace aufgelöst
 
 ## Verbindliche Grenzen
 
-- `apps/platform` ist System of Record für CMS- und Lead-Daten.
-- `apps/mardu-de` enthält keine Runtime-Fallback-Datensätze für Payload-Inhalte.
-- Seed-Daten liegen ausschließlich unter `apps/platform/data` und werden nur durch explizite Seed-Skripte verwendet.
-- Historische Datenmigrationen in `apps/platform/migrations` bleiben unverändert; alte JSON-Importer und Aliasverträge sind entfernt.
+- Die Payload-Runtime in `apps/mardu-de` ist System of Record für CMS- und Lead-Daten.
+- `apps/mardu-de` enthält keine Runtime-Fallback-Datensätze für Payload-Inhalte (ausgenommen gebündelte Legal-Fallbacks).
+- Seed-Skripte liegen unter `apps/mardu-de/scripts` und werden nur durch explizite Seed-Skripte verwendet.
+- Historische Datenmigrationen in `apps/mardu-de/migrations` bleiben unverändert; alte JSON-Importer und Aliasverträge sind entfernt.

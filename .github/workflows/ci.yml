@@ -25,13 +25,13 @@ jobs:
           --health-retries 5
     env:
       ALLOW_LOCAL_CONTENT_IMAGES: 'true'
+      APP_URL: http://127.0.0.1:3000
       DATABASE_URI: postgresql://postgres:postgres@127.0.0.1:5432/mardu_ci
       MARDU_DE_ENABLE_BLOG: 'false'
       MARDU_DE_ENABLE_INTEGRATIONS: 'false'
       MARDU_DE_ENABLE_PRODUCTS: 'false'
-      MARDU_PLATFORM_ORIGIN: http://127.0.0.1:4000
       NEWSLETTER_SECRET: ci-newsletter-secret
-      PAYLOAD_PUBLIC_SERVER_URL: http://127.0.0.1:4000
+      PAYLOAD_PUBLIC_SERVER_URL: http://127.0.0.1:3000
       PAYLOAD_SECRET: ci-payload-secret-that-is-long-enough
     steps:
       - uses: actions/checkout@v4
@@ -49,24 +49,11 @@ jobs:
       - run: bun run lint
       - run: bun run type-check
       - run: bun test
-      - run: bun run --cwd apps/platform payload:migrate
-      - run: bun run --cwd apps/platform seed:all
+      - run: bun run --cwd apps/mardu-de payload:migrate
+      - run: bun run --cwd apps/mardu-de seed:all
         env:
           ALLOW_FIXTURE_SEED: 'true'
-      - run: bun run --cwd apps/platform release:content:audit
-      - run: bun run --cwd apps/platform clean
-      - run: bun run --cwd apps/platform build
-      - name: Start Payload platform
-        run: |
-          PORT=4000 bun run --cwd apps/platform start > /tmp/mardu-platform.log 2>&1 &
-          for attempt in {1..30}; do
-            if curl --fail --silent http://127.0.0.1:4000/api/products?limit=1 > /dev/null; then
-              exit 0
-            fi
-            sleep 1
-          done
-          cat /tmp/mardu-platform.log
-          exit 1
+      - run: bun run --cwd apps/mardu-de release:content:audit
       - run: bun run --cwd apps/mardu-de clean
       - run: bun run --cwd apps/mardu-de build
       - name: Start mardu.de

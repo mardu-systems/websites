@@ -1,24 +1,32 @@
-# Plattform-Proxy-Vertrag (`mardu.de`)
+# Payload-Vertrag (`mardu.de`)
 
-`mardu.de` betreibt keine eigene Payload-Runtime, kein Admin und keine SSO-Einstiegspfade. Die App ist das öffentliche Frontend und nutzt die zentrale Plattform nur für fachliche API- und Content-Zugriffe.
+`mardu.de` betreibt die Payload-Runtime lokal: Admin, Content-API, Lead-Backend und SSO laufen in derselben Next.js-Instanz. Es gibt kein separates Platform-Projekt mehr.
 
-## API-Proxy
+## Payload-API
 
-Quelle:
-[`app/api/[...slug]/route.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/app/api/[...slug]/route.ts)
+Quelle: `app/api/[...slug]/route.ts`
 
 - `GET|POST|PATCH|PUT|DELETE|OPTIONS /api/[...slug]`
-- leitet Requests an `MARDU_PLATFORM_ORIGIN/api/[...slug]` weiter
-- übernimmt Methode, Query-Parameter, Header und Request-Body
-- bleibt `force-dynamic`, damit keine Plattform-Antwort gecacht wird
+- echte Payload-REST-Handler (`@payloadcms/next/routes`, `force-dynamic`)
+- keine Proxy-Weiterleitung, keine Upstream-Abhängigkeit
 
-## Nicht Teil von `mardu.de`
+## Admin und SSO
 
-- kein lokales Payload-Admin
-- keine `/admin`-Weiterleitung
-- keine `/api/sso/*`-Kompatibilitätspfade
+- Admin unter `/admin` (`app/(payload)/admin`, `force-dynamic`, `robots.txt` disallowt `/admin`)
+- SSO-Einstiegspfade unter `/api/sso/*` (Login, Callback, Logout, Debug)
+
+## Lead-Routen
+
+- `POST /api/contact` und `POST /api/newsletter` schreiben direkt über `getPayload()` in die Collections `contact-leads` / `newsletter-subscribers`
+- `GET /api/newsletter/confirm` und `GET /api/newsletter/unsubscribe` lösen Double-Opt-in-Token lokal auf und redirecten auf die `mardu-de`-Statusseiten
+- Request-Verträge bleiben unverändert: `site` wird serverseitig auf `mardu-de` gesetzt
+
+## Content-Zugriffe
+
+- Blog, Integrationen und Legal-Pages lesen direkt via `getPayload()` (`lib/blog.ts`, `lib/integrations.ts`, `lib/legal-pages.ts`)
+- Katalog, Solutions, Roadmap und Sitemap nutzen die Content-DTOs aus `@mardu/content-core` gegen die eigene Content-API (`getContentOrigin()`, Basis `APP_URL`)
 
 ## Source of Truth
 
-- Admin, Payload, CMS und SSO: [`apps/platform`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform)
-- Lead- und Content-DTOs: [`packages/content-core/src/index.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/content-core/src/index.ts), [`packages/lead-core/src/index.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/packages/lead-core/src/index.ts)
+- Payload-Config, Collections und Migrationen: `payload.config.ts`, `collections/`, `migrations/`
+- Lead- und Content-DTOs: `packages/content-core/src/index.ts`, `packages/lead-core/src/index.ts`

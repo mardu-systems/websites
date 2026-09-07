@@ -8,26 +8,26 @@ import {
   type CatalogProductDetailDto,
   type CatalogInquiryContextDto,
 } from '@mardu/content-core';
-import { getPlatformOrigin } from '@mardu/site-config';
+import { getContentOrigin } from '@/lib/content-origin';
 
 const site = 'mardu-de' as const;
 
 export const getCatalogCategories = async () =>
-  getPlatformCatalogCategories(getPlatformOrigin(), site);
+  getPlatformCatalogCategories(getContentOrigin(), site);
 
 export const getCatalogTechnologies = async () =>
-  getPlatformCatalogTechnologies(getPlatformOrigin(), site);
+  getPlatformCatalogTechnologies(getContentOrigin(), site);
 
-export const getCatalogCarriers = async () => getPlatformCatalogCarriers(getPlatformOrigin(), site);
+export const getCatalogCarriers = async () => getPlatformCatalogCarriers(getContentOrigin(), site);
 
 export const getCatalogProductDetails = async () =>
-  getPlatformCatalogProductDetails(getPlatformOrigin(), site);
+  getPlatformCatalogProductDetails(getContentOrigin(), site);
 
 export const getCatalogProductBySlug = async (slug: string) =>
-  getPlatformCatalogProductBySlug(getPlatformOrigin(), site, slug);
+  getPlatformCatalogProductBySlug(getContentOrigin(), site, slug);
 
 export const getFeaturedCatalogProducts = async (limit = 3) =>
-  getPlatformFeaturedCatalogProducts(getPlatformOrigin(), site, limit);
+  getPlatformFeaturedCatalogProducts(getContentOrigin(), site, limit);
 
 export function buildCatalogInquiryHref(product: CatalogProductDetailDto, variantId?: string) {
   const context: CatalogInquiryContextDto = {

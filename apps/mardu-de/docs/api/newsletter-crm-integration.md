@@ -1,16 +1,16 @@
 # Newsletter + Contact CRM Integration
 
-`mardu.de` nutzt für Newsletter- und Kontakt-Flows die zentrale CRM-Synchronisierung aus `apps/platform`.
+`mardu.de` führt Newsletter- und Kontakt-Flows lokal aus: Lead-Routen, Payload-Collections und Twenty-Synchronisierung laufen in derselben App.
 
 ## Kanonische Implementierung
 
-Quelle: [`apps/platform/lib/integrations/twenty.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/lib/integrations/twenty.ts)
+Quelle: [`lib/integrations/twenty.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/lib/integrations/twenty.ts)
 
 ## Verhalten
 
-- `mardu.de`-Lead-Routen proxyen an `apps/platform`
+- `POST /api/contact` und `POST /api/newsletter` schreiben direkt via `getPayload()` in `contact-leads` / `newsletter-subscribers`
 - Newsletter-Anmeldungen senden `role: 'newsletter'` an `POST /api/newsletter`
-- Twenty-Sync wird ausschließlich dort ausgeführt
+- Twenty-Sync wird ausschließlich in diesen Routen ausgeführt
 - CRM-Fehler bleiben best effort und werden in Payload-Statusfeldern dokumentiert
 
 ## Request-Vertrag `POST /api/newsletter`
@@ -22,14 +22,14 @@ Quelle: [`apps/platform/lib/integrations/twenty.ts`](/Users/lucaschoeneberg/Docu
   - `firstName`, `lastName`: jeweils maximal 100 Zeichen
   - `company`: maximal 150 Zeichen
   - `token`: reCAPTCHA-Token, wenn der Schutz in der Zielumgebung aktiv ist
-- Die öffentliche `mardu.de`-Route ergänzt serverseitig `site: 'mardu-de'`.
+- Die öffentliche Route ergänzt serverseitig `site: 'mardu-de'`.
 - Statuscodes:
   - `200`: Anfrage angenommen
   - `400`: ungültiges JSON oder ungültiger Payload
   - `429`: Schutz- oder Rate-Limit-Prüfung abgelehnt
-  - `500`: Weiterleitung oder E-Mail-Versand fehlgeschlagen
+  - `500`: Persistierung oder E-Mail-Versand fehlgeschlagen
 
 ## DTOs
 
-- [`apps/platform/types/api/newsletter-crm.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/types/api/newsletter-crm.ts)
-- [`apps/platform/types/api/twenty-sync.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/types/api/twenty-sync.ts)
+- [`types/api/newsletter-crm.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/types/api/newsletter-crm.ts)
+- [`types/api/twenty-sync.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/types/api/twenty-sync.ts)
