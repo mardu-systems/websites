@@ -34,8 +34,9 @@ Secrets werden ausschließlich in Vercel beziehungsweise in lokalen `.env.*.loca
 | `TWENTY_*`                                                                           | optional                                           | optional/Testsystem                     | Nicht blockierende CRM-Synchronisation                                                      |
 | `PAYLOAD_FETCH_TIMEOUT_MS`                                                           | optional, Standard `10000`                         | optional                                | Content-Timeout zwischen 1.000 und 30.000 ms                                                |
 | `NEXT_PUBLIC_GOOGLE_MEASUREMENT_ID`                                                  | optional                                           | normalerweise leer                      | GA4                                                                                         |
-| `MARDU_DE_ENABLE_BLOG` / `MARDU_DE_ENABLE_INTEGRATIONS` / `MARDU_DE_ENABLE_PRODUCTS` | optional                                           | optional                                | Statischer Feature-Flag-Fallback                                                            |
-| `FLAGS` / `FLAGS_SECRET`                                                             | erforderlich für Dashboard-Steuerung               | eigene Werte je Environment             | Vercel-Flags-Auswertung und geschützte Discovery                                            |
+| `MARDU_DE_ENABLE_BLOG` / `MARDU_DE_ENABLE_INTEGRATIONS` / `MARDU_DE_ENABLE_PRODUCTS` | optional                                           | optional                                | Statischer Feature-Flag-Fallback (überschreibt PostHog)                                     |
+| `POSTHOG_API_KEY`                                                                    | erforderlich für Dashboard-Steuerung               | eigener Wert je Environment             | PostHog-Projekt-Key für Feature-Flags                                                       |
+| `POSTHOG_HOST`                                                                       | optional, Standard EU-Cloud                        | optional                                | PostHog-Host, Standard `https://app-eu.posthog.com`                                         |
 
 Vor jedem Release die Variablen getrennt pro Environment prüfen:
 
@@ -59,18 +60,17 @@ beim Promoten eines Preview-Artefakts werden diese Werte nicht ersetzt.
 
 ## Content-Flags auf mardu.de
 
-Die öffentlichen Bereiche Blog, Integrationen und Produkte verwenden die Vercel-Flag-Keys
-`blog`, `integrations` und `products`. Alle drei sind im Code standardmäßig deaktiviert. Im
+Die öffentlichen Bereiche Blog, Integrationen und Produkte verwenden die PostHog-Flag-Keys
+`blog`, `integrations` und `products` (PostHog-EU-Projekt, serverseitige Auswertung ohne Personenbezug). Alle drei sind im Code standardmäßig deaktiviert. Im
 deaktivierten Zustand fehlen die Bereiche in Header, Footer, internen Einstiegen und Sitemap;
 auch `llms.txt` verlinkt sie nicht. Direkte Seitenaufrufe liefern HTTP 404 und versteckte Metadaten
 bleiben `noindex`.
 
 Aktivierung ohne neuen Code-Release:
 
-1. Im Vercel-Projekt `mardu-de` unter **Flags** das gewünschte Flag öffnen.
-2. Zuerst Preview konfigurieren, Zielgruppe `Everyone` auf `true` setzen und speichern.
-3. Content, Navigation, Sitemap, Responsive-Verhalten und SEO in Preview abnehmen.
-4. Dieselbe Konfiguration separat für Production setzen und unmittelbar den Release-Verifier ausführen.
+1. Im PostHog-Projekt das gewünschte Flag öffnen und für die Umgebung aktivieren (zuerst Preview/Development, dann Production).
+2. Content, Navigation, Sitemap, Responsive-Verhalten und SEO in Preview abnehmen.
+3. Dieselbe Konfiguration separat für Production setzen und unmittelbar den Release-Verifier ausführen.
 
 ```bash
 RELEASE_BASE_URL=https://www.mardu.de \
@@ -85,7 +85,7 @@ deaktivierte Bereiche weder in der Sitemap stehen noch einen anderen Status als 
 Die Flags sperren bewusst nur das öffentliche Frontend. Payload-Inhalte und öffentliche
 Content-API-Verträge bleiben bestehen, damit Content vor der Freischaltung gepflegt und geprüft
 werden kann. Die `MARDU_DE_ENABLE_*`-Variablen sind lokale beziehungsweise statische Fallbacks und
-überschreiben die Dashboard-Auswertung; sie dürfen daher in Vercel nicht widersprüchlich gesetzt sein.
+überschreiben die PostHog-Auswertung; sie dürfen daher in Vercel nicht widersprüchlich gesetzt sein.
 Das Root-Layout wird dynamisch ausgewertet, damit Header, Footer und interne Einstiege eine
 Dashboard-Änderung ohne neuen Build übernehmen.
 

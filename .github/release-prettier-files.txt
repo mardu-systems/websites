@@ -1,6 +1,5 @@
 .github/release-prettier-files.txt
 .github/workflows/ci.yml
-apps/mardu-de/app/.well-known/vercel/flags/route.ts
 apps/mardu-de/app/(site)/blog/layout.tsx
 apps/mardu-de/app/(site)/blog/page.tsx
 apps/mardu-de/app/(site)/fotos/page.tsx
@@ -26,7 +25,6 @@ apps/mardu-de/features/homepage/components/system-product-family-visual.tsx
 apps/mardu-de/features/homepage/homepage.tsx
 apps/mardu-de/features/solutions/solutions-explorer.tsx
 apps/mardu-de/features/solutions/solutions-page.tsx
-apps/mardu-de/flags.ts
 apps/mardu-de/lib/feature-links.test.ts
 apps/mardu-de/lib/feature-links.ts
 apps/mardu-de/lib/llms.test.ts
@@ -45,6 +43,8 @@ docs/vercel-deployment.md
 packages/content-core/src/index.ts
 packages/content-core/src/public-mappers.test.ts
 packages/site-config/README.md
+packages/site-config/src/feature-flags.server.test.ts
 packages/site-config/src/feature-flags.server.ts
+packages/site-config/src/feature-flags.ts
 packages/site-config/src/index.test.ts
 packages/site-config/src/index.ts
