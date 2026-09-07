@@ -23,8 +23,10 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
-# Next-16-/Payload-Build ist speicherhungrig; bei OOM im Dashboard-Log erhöhen.
-ENV NODE_OPTIONS=--max-old-space-size=3072
+# Next-16-/Payload-Build ist speicherhungrig (Peak hängt von der CPU-Zahl ab,
+# da Next pro Kern Worker startet). Für kleine Server bewusst niedrig;
+# zusätzlich Swap auf dem Host einplanen. Bei OOM im Dashboard-Log erhöhen.
+ENV NODE_OPTIONS=--max-old-space-size=2048
 # Hinweis: bun 1.3.14 stürzt auf linux/arm64 beim Prozess-Teardown NACH
 # erfolgreicher Kompilierung ab (SIGTRAP, bisher nur dort beobachtet).
 # Der Guard akzeptiert einen Non-Zero-Exit nur, wenn die Build-Zusammenfassung

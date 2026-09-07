@@ -19,7 +19,9 @@ Next.js-Instanz aus dem `Dockerfile` im Repo-Root. Das Vercel-Setup ist abgelös
 
 ## Erst-Setup (Dashboard, einmalig)
 
-1. PR in `main` mergen. Die App deployed Branch `main` aus `mardu-systems/websites`.
+1. **Branch wählen:** Für den Vorab-Test Branch `chore/merge-platform-into-mardu-de`
+   in der App einstellen (Configuration → Git), nach dem Go-live zurück auf `main`
+   (bzw. PR mergen und auf `main` lassen).
 2. **Postgres erstellen:** im Coolify-Projekt `+ New` → `Database` → `PostgreSQL`
    (Version 17, Name z. B. `mardu-postgres`). Nach dem Start die **interne**
    Connection-String aus der Datenbank-Ansicht kopieren.
@@ -65,7 +67,9 @@ Next.js-Instanz aus dem `Dockerfile` im Repo-Root. Das Vercel-Setup ist abgelös
 - `BLOB_READ_WRITE_TOKEN` wird auf Coolify **nicht** gesetzt (Vercel-Blob entfällt
   zugunsten des Volumes). `payload.config.ts` verlangt den Token nur bei `VERCEL=1`.
 - `ALLOW_LOCAL_CONTENT_IMAGES` wird nicht gesetzt (nur für CI-Upstream).
-- Build braucht Speicher (Next 16 + Payload): `NODE_OPTIONS` steht im `Dockerfile`
-  auf `--max-old-space-size=3072`; bei OOM-Abbrüchen im Dashboard-Log erhöhen.
+- Build braucht Speicher (Next 16 + Payload, Peak wächst mit der Kernzahl):
+  `NODE_OPTIONS` steht im `Dockerfile` bewusst auf `--max-old-space-size=2048`.
+  Auf kleinen Servern zusätzlich Swap einrichten (z. B. 4 GB), sonst drohen
+  OOM-Abbrüche während `next build`. Bei Abbrüchen im Dashboard-Log erhöhen.
 - Die beiden `metamcp-*`-Services im Projekt gehören nicht zu `mardu.de` und bleiben
   unberührt.
