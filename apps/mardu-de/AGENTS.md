@@ -1,20 +1,24 @@
 # mardu.de Contributor Guide
 
-This repository powers **mardu.de**, a content-rich Next.js 16 (App Router) experience with Tailwind CSS 4 and a collection of reusable UI primitives. The goal of these guidelines is to keep the project approachable, performant, and easy to extend.
+This repository powers **mardu.de**, a content-rich Next.js 16 (App Router) experience with Tailwind CSS 4, an integrated Payload 3 CMS, and a collection of reusable UI primitives. The goal of these guidelines is to keep the project approachable, performant, and easy to extend.
 
 ## Project Snapshot
-- **App Router**: Pages, layouts, and API routes live under `app/` (`app/api/*` for endpoints).
+
+- **App Router**: Public pages live under `app/(site)/`, the Payload Admin under `app/(payload)/admin`, and API routes under `app/api/*`. The `(site)` and `(payload)` groups each own a root layout with their own `<html>`/`<body>` — never add a shared root layout at `app/layout.tsx`.
+- **Payload CMS**: Config in `payload.config.ts`, collections in `collections/`, migrations in `migrations/`, seed scripts and data in `scripts/` and `data/`. Content reads use `getPayload()` directly (`lib/blog.ts`, `lib/integrations.ts`, `lib/legal-pages.ts`); catalog/solutions/roadmap/sitemap use `@mardu/content-core` against the local API via `lib/content-origin.ts` (basis `APP_URL`).
 - **Reusable UI**: Shareable building blocks reside in `components/` and `features/`.
 - **Client & Server Utilities**: General helpers and integrations are in `lib/` and `hooks/`.
 - **Static Assets & Data**: Use `public/` for images and favicons, `data/` for JSON/TS constants, and `types/` for shared TypeScript contracts.
 - **Tooling**: Local Tailwind plugins in `plugin/`, maintenance scripts in `scripts/` (e.g., image compression).
 
 ## Tooling & Environment
+
 - **Engines**: Use the repository's Bun version from the root `packageManager` field.
-- **Environment variables**: Copy `.env.example` → `.env.development` before running local builds. Keep secrets out of source control. Critical keys include GA4 (`NEXT_PUBLIC_GOOGLE_MEASUREMENT_ID`) and email/newsletter settings (`RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_TO`, `APP_URL`, `NEWSLETTER_SECRET`).
+- **Environment variables**: Copy `.env.example` → `.env.development` before running local builds. Keep secrets out of source control. Critical keys include GA4 (`NEXT_PUBLIC_GOOGLE_MEASUREMENT_ID`), email/newsletter settings (`RESEND_API_KEY`, `EMAIL_FROM`, `EMAIL_TO`, `APP_URL`, `NEWSLETTER_SECRET`) and the local Payload runtime (`DATABASE_URI`, `PAYLOAD_SECRET`, `PAYLOAD_PUBLIC_SERVER_URL`, `BLOB_READ_WRITE_TOKEN` on Vercel).
 - **Package Manager**: Bun with the root `bun.lock` is the only documented workspace path.
 
 ## Building, Running & Quality Gates
+
 Before opening a pull request, validate your changes by running the full set of local checks:
 
 ```bash
@@ -22,13 +26,17 @@ bun run lint && bun run type-check && bun test && bun run build
 ```
 
 This sequence mirrors CI expectations: ESLint (Next + TypeScript rules), strict type checking (`tsc --noEmit`), and a production Next.js build. For day-to-day work:
-- `bun run dev:mardu-de` launches the Turbopack-powered dev server on port 3000.
+
+- `bun run dev:mardu-de` launches the Turbopack-powered dev server on port 3000 (Payload Admin at `http://localhost:3000/admin` once `DATABASE_URI` points to a migrated database).
+- Regenerate Payload types or the admin import map after collection changes with `bun run --cwd apps/mardu-de generate:types` / `generate:importmap`.
 - `bun run clean` removes stale `.next` artifacts.
 - `bun run build:analyze` surfaces bundle insights when diagnosing performance issues.
 - `bun run --cwd apps/mardu-de images:compress:overwrite` optimizes assets inside `public/` before committing large media updates.
 
 ## Testing & QA Strategy
+
 The project currently relies on linting and type checking as mandatory automated gates. When adding critical logic—especially within `lib/` or hooks—prefer lightweight unit tests (Vitest or similar) colocated with the module (`*.test.ts[x]`). If you introduce new tests:
+
 - Stick to `describe/it/expect/vi` conventions.
 - Reset mocks with `vi.resetAllMocks()` in `beforeEach` and restore with `vi.restoreAllMocks()` in `afterEach`.
 - Mock Node built-ins (`fs`, `os`, `path`, etc.) at the top of the file when they influence module-level state.
@@ -36,18 +44,21 @@ The project currently relies on linting and type checking as mandatory automated
 For UI work, manually verify the relevant route with `bun run dev:mardu-de`. Capture screenshots or recordings whenever you adjust visual components.
 
 ## Styling & Code Conventions
+
 - **Language**: TypeScript in strict mode with the `@/*` path alias.
 - **File naming**: Favor kebab-case for filenames (`cookie-banner.tsx`) and PascalCase exports for React components. Variables and functions remain in camelCase.
 - **Tailwind CSS**: Use utility-first classes and composition instead of bespoke CSS whenever possible. Co-locate component-level styles with the component.
 - **Formatting**: Prettier is available via `bun run format` and `bun run format:check`.
 
 ### TypeScript Practices
+
 - Prefer plain objects with explicit `type`/`interface` definitions over classes for better React interoperability.
 - Avoid the `any` type. Reach for `unknown` plus type narrowing if a value’s shape is uncertain.
 - Be sparing with type assertions—consider factoring logic into smaller modules when internals need direct testing.
 - Keep switch statements exhaustive; add default guards that throw or narrow explicitly when dealing with discriminated unions.
 
 ## React & Component Guidelines
+
 - Write functional components with hooks; no class components or legacy lifecycle APIs.
 - Keep render logic pure. Perform side effects (analytics, subscriptions, network calls) inside `useEffect` or event handlers.
 - Respect one-way data flow. Lift shared state upward or introduce context providers rather than mutating globals.
@@ -58,6 +69,7 @@ For UI work, manually verify the relevant route with `bun run dev:mardu-de`. Cap
 - Lean on React Compiler optimizations—avoid premature memoization (`useMemo`, `useCallback`) unless profiling demonstrates a need.
 
 ## Git & Pull Requests
+
 - Default branch: `main`.
 - Commit messages should be concise and imperative (Conventional Commits encouraged: `feat:`, `fix:`, `refactor:`, etc.).
 - Keep PRs focused. Include:
@@ -68,6 +80,7 @@ For UI work, manually verify the relevant route with `bun run dev:mardu-de`. Cap
 - Ensure CI-parity checks (`lint`, `type-check`, `build`) pass before requesting review.
 
 ## Security & Assets
+
 - Never commit secrets. Sanitize configuration before pushing.
 - Optimize large images with the provided script before committing.
 - Review analytics or email-related changes carefully to prevent regressions.

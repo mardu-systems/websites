@@ -1,6 +1,6 @@
 import { getPlatformSolutionDetails } from '@mardu/content-core';
-import { getPlatformOrigin } from '@mardu/site-config';
+import { getContentOrigin } from '@/lib/content-origin';
 
 const site = 'mardu-de' as const;
 
-export const getSolutionDetails = async () => getPlatformSolutionDetails(getPlatformOrigin(), site);
+export const getSolutionDetails = async () => getPlatformSolutionDetails(getContentOrigin(), site);

@@ -1,4 +1,4 @@
-import type { ContactSource } from '@mardu/lead-core';
+import type { ContactSource, SiteKey } from '@mardu/lead-core';
 
 export interface TwentyContactLeadDto {
   name: string;
@@ -7,6 +7,8 @@ export interface TwentyContactLeadDto {
   phone?: string;
   message?: string;
   source?: ContactSource;
+  site: SiteKey;
   consent?: boolean;
   newsletterOptIn?: boolean;
+  config?: unknown;
 }

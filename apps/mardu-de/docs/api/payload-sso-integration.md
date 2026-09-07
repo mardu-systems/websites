@@ -1,20 +1,25 @@
 # OIDC SSO Contract (`mardu.de`)
 
-`mardu.de` stellt keine Payload- oder SSO-Endpunkte mehr bereit.
+`mardu.de` betreibt Payload- und SSO-Endpunkte lokal in derselben App.
+
+## Endpunkte
+
+- `GET /api/sso/login`
+- `GET /api/sso/callback`
+- `GET /api/sso/logout`
+- `GET /api/sso/debug` (nur mit `OIDC_DEBUG=true`)
 
 ## Source of Truth
 
-- Die eigentliche OIDC-/Payload-SSO-Implementierung liegt in [`apps/platform`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform)
-- Der kanonische API- und DTO-Vertrag liegt in [`apps/platform/docs/api/payload-sso-integration.md`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/docs/api/payload-sso-integration.md) und [`apps/platform/types/api/payload-sso.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform/types/api/payload-sso.ts)
+- OIDC-/Payload-SSO-Implementierung: `lib/payload-sso.ts`, `lib/payload-sso-strategy.ts`
+- DTOs: [`types/api/payload-sso.ts`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/mardu-de/types/api/payload-sso.ts)
+- Admin-Anbindung: `payload.config.ts`, `app/(payload)/admin/*`
 
-## Wirkung für `mardu.de`
+## ENV-Vertrag
 
-- keine `/api/sso/login`
-- keine `/api/sso/callback`
-- keine `/api/sso/logout`
-- keine `/api/sso/debug`
+- `OIDC_ISSUER`, `OIDC_CLIENT_ID`, `OIDC_CLIENT_SECRET`
+- `OIDC_REDIRECT_URI` (zeigt auf `/api/sso/callback` der jeweiligen Origin)
+- `OIDC_ALLOWED_EMAILS` / `OIDC_ALLOWED_EMAIL_DOMAINS`
+- `OIDC_AUTO_CREATE_USERS`, `OIDC_SESSION_SECRET`, `OIDC_DEBUG`
 
-## Zuständigkeit
-
-- Die eigentliche OIDC-/Payload-SSO-Implementierung liegt in [`apps/platform`](/Users/lucaschoeneberg/Documents/GitHub/websites/apps/platform)
-- Fehlercodes, ENV-Vertrag, Redirect-Details und DTOs werden ausschliesslich in der Plattform-Dokumentation gepflegt
+Siehe `.env.example` für die vollständige Liste.

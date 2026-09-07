@@ -8,8 +8,7 @@
     "./feature-flags.server": "./src/feature-flags.server.ts"
   },
   "dependencies": {
-    "@flags-sdk/vercel": "^1.4.6",
-    "flags": "^4.3.0",
-    "@mardu/observability": "workspace:*"
+    "@mardu/observability": "workspace:*",
+    "posthog-node": "^5.51.6"
   }
 }

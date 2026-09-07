@@ -33,7 +33,7 @@ Dieses Dokument beschreibt den öffentlichen Vertrag für den wiederverwendbaren
   - Anfragefluss
   - Seitenkomposition
 - konsumiert renderfähige Payload-Daten über `@mardu/content-core`
-- enthält keine Katalog-Seeds; Seed-Daten gehören ausschließlich zu `apps/platform/data/catalog`
+- enthält keine Katalog-Seeds; Seed-Daten gehören ausschließlich zu `apps/mardu-de/data/catalog`
 
 ## Öffentliche DTOs
 

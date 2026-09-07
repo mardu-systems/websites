@@ -1,5 +1,5 @@
 import { getPlatformContentSitemapEntries } from '@mardu/content-core';
-import { getPlatformOrigin } from '@mardu/site-config';
+import { getContentOrigin } from '@/lib/content-origin';
 import {
   isBlogEnabled,
   isIntegrationsEnabled,
@@ -20,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     blogEnabled,
     integrationsEnabled,
     productsEnabled,
-    loadContentEntries: () => getPlatformContentSitemapEntries(getPlatformOrigin(), 'mardu-de'),
+    loadContentEntries: () => getPlatformContentSitemapEntries(getContentOrigin(), 'mardu-de'),
     onContentError: (error) => {
       console.error('[sitemap] Content API unavailable; serving stable routes only', {
         error: error instanceof Error ? error.message : String(error),

@@ -38,14 +38,14 @@ DTO describing the resolved site feature state.
 
 #### `SiteFeatureFlagOptionDto`
 
-DTO for one documented override option in Vercel Flags Explorer.
+DTO for one documented override option.
 
 - `label: string`
 - `value: boolean`
 
 #### `SiteFeatureFlagDefinitionDto`
 
-Documented flag definition DTO exposed to app-local `flags.ts` modules.
+Documented flag definition DTO.
 
 - `key: SiteFeatureKey`
 - `defaultValue: boolean`
@@ -93,19 +93,19 @@ Returns the static config DTO for the given site.
 
 #### `getSiteFlagDefinitions(site)`
 
-Returns the documented flag definition DTOs for the given site. These definitions are used by
-app-local `flags.ts` modules and the `/.well-known/vercel/flags` discovery endpoint.
+Returns the documented flag definition DTOs for the given site.
 
 #### `getSiteFeatureFlags(site)`
 
 Returns the resolved site feature flags asynchronously. Resolution order:
 
 1. optional env override per site and feature
-2. Vercel Flags evaluation
+2. PostHog evaluation (`blog`, `integrations`, `products` in the PostHog EU project)
 3. default values from `siteConfigs`
 
-If no `FLAGS` SDK key is present, evaluation falls back to env overrides and site defaults without
-loading the Vercel adapter. This keeps local builds and non-Vercel environments stable.
+If no `POSTHOG_API_KEY` is present, evaluation falls back to env overrides and site defaults without
+any network request. This keeps local builds and CI stable. PostHog errors degrade to the same
+fallbacks.
 
 Recognized env variables:
 
@@ -143,16 +143,16 @@ Returns the platform origin, optionally overridden through `MARDU_PLATFORM_ORIGI
 - This package resolves site-level availability only.
 - Discovery metadata stays synchronous and framework-safe in `@mardu/site-config`.
 - Runtime evaluation lives in `@mardu/site-config/feature-flags.server`.
-- Feature evaluation uses Vercel Flags via `flags/next` and lazily loaded `@flags-sdk/vercel`.
+- Feature evaluation uses PostHog (`posthog-node`, EU host by default) with static fallbacks.
 - Payload content visibility per entry stays in `@mardu/content-core` via the existing `sites` fields.
 - Frontends are responsible for using these helpers to gate navigation, routes, sitemap entries, and preview modules.
 
 ## mardu.de rollout flags
 
-The Vercel flag keys are `blog`, `integrations`, and `products`. All three default to `false` for
-`mardu-de`. They can be enabled independently in Vercel Flags for Preview or Production after the
+The PostHog flag keys are `blog`, `integrations`, and `products`. All three default to `false` for
+`mardu-de`. They can be enabled independently in PostHog for Preview or Production after the
 corresponding content is approved. The static `MARDU_DE_ENABLE_*` variables remain explicit
-emergency and local-development fallbacks; a value set there takes precedence over Vercel Flags.
+emergency and local-development fallbacks; a value set there takes precedence over PostHog.
 
 Disabling one of these flags removes its public navigation and internal entry links, excludes its
 routes from the sitemap and `llms.txt`, and makes direct page requests return HTTP 404.

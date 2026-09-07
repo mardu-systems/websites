@@ -7,10 +7,7 @@ const expectedHiddenPaths = (process.env.RELEASE_EXPECT_HIDDEN_PATHS || '')
   .map((path) => normalizePath(path.trim()))
   .filter((path) => path !== '/');
 
-const requiredNoindexPaths = new Set([
-  '/newsletter/anmeldung',
-  '/newsletter/abmeldung',
-]);
+const requiredNoindexPaths = new Set(['/newsletter/anmeldung', '/newsletter/abmeldung']);
 const ignoredPathPrefixes = ['/api/', '/_next/', '/.well-known/vercel/flags'];
 const ignoredFileExtensions = new Set([
   '.avif',

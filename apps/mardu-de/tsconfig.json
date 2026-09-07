@@ -1,11 +1,14 @@
 {
-  "extends": "../../packages/tsconfig/nextjs.json",
+  "extends": "../../packages/tsconfig/nextjs-payload.json",
   "compilerOptions": {
     "allowImportingTsExtensions": true,
     "ignoreDeprecations": "5.0",
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "@payload-config": [
+        "./payload.config.ts"
       ]
     }
   },

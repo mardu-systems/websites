@@ -1,12 +1,12 @@
 import { getGlitchTipOrigin } from '@mardu/observability/config';
 import { withGlitchTip } from '@mardu/observability/next-config';
+import { withPayload } from '@payloadcms/next/withPayload';
 import type { NextConfig } from 'next';
 import { fileURLToPath } from 'node:url';
 
 const workspaceRoot = fileURLToPath(new URL('../../', import.meta.url));
-const platformOrigin = new URL(
-  process.env.MARDU_PLATFORM_ORIGIN?.trim() || 'https://platform.mardu.de',
-);
+const siteOrigin = new URL(process.env.APP_URL?.trim() || 'https://www.mardu.de');
+const siteProtocol = siteOrigin.protocol === 'http:' ? 'http' : 'https';
 
 const glitchTipOrigin = getGlitchTipOrigin(process.env.NEXT_PUBLIC_GLITCHTIP_DSN);
 
@@ -14,7 +14,7 @@ const contentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://*.vercel.app https://vitals.vercel-insights.com https://liv-showcase.s3.eu-central-1.amazonaws.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  img-src 'self' data: blob: https://www.mardu.de https://mardu.de ${platformOrigin.origin};
+  img-src 'self' data: blob: https://www.mardu.de https://mardu.de https://*.public.blob.vercel-storage.com https://*.r2.dev;
   font-src 'self' https://fonts.gstatic.com;
   connect-src 'self' ${glitchTipOrigin} https://vercel.live https://vitals.vercel-insights.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/;
   frame-src 'self' https://cal.meetergo.com https://www.google.com/recaptcha/ https://recaptcha.google.com/recaptcha/;
@@ -88,11 +88,36 @@ const nextConfig: NextConfig = {
 
     return config;
   },
+  outputFileTracingIncludes: {
+    '/**/*': ['./migrations/**/*'],
+  },
   images: {
     dangerouslyAllowLocalIP: process.env.ALLOW_LOCAL_CONTENT_IMAGES === 'true',
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
-      new URL('/**', platformOrigin),
+      new URL('/api/media/**', siteOrigin),
+      {
+        protocol: siteProtocol,
+        hostname: siteOrigin.hostname,
+        pathname: '/api/media/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'mardu.de',
+        pathname: '/api/media/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/api/media/**',
+      },
+      {
+        protocol: 'http',
+        hostname: '127.0.0.1',
+        port: '3000',
+        pathname: '/api/media/**',
+      },
       {
         protocol: 'https',
         hostname: '*.r2.dev',
@@ -122,4 +147,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withGlitchTip(nextConfig);
+export default withGlitchTip(withPayload(nextConfig));

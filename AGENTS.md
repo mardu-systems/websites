@@ -1,15 +1,21 @@
 # Mardu Websites – Arbeitsanweisungen
 
 Diese Datei enthält nur repositoryweite Regeln. Für Arbeiten in `apps/mardu-de`
-oder `apps/platform` gilt zusätzlich die dortige `AGENTS.md`; die jeweils nähere
+gilt zusätzlich die dortige `AGENTS.md`; die jeweils nähere
 Datei ist bei Abweichungen maßgeblich. Halte jede `AGENTS.md` unter 500 Zeilen.
 
 ## Projektkontext
 
 - Das Monorepo nutzt Bun Workspaces und Turborepo. Verwende ausschließlich die
   im Root-`package.json` festgelegte Bun-Version und den vorhandenen `bun.lock`.
-- `apps/mardu-de` ist die öffentliche Website. `apps/platform` enthält Payload
-  Admin, Content-API und Lead-Backend. Beide Apps basieren auf Next.js 16.
+- `apps/mardu-de` ist die einzige deploybare App (Next.js 16): öffentliches
+  Frontend unter `app/(site)`, Payload Admin unter `app/(payload)/admin` sowie
+  Content-API und Lead-Backend unter `app/api`. Es gibt kein separates
+  Platform-Projekt mehr.
+- Lege kein Root-Layout unter `apps/mardu-de/app/layout.tsx` an: Die Routen-
+  gruppen `(site)` und `(payload)` besitzen jeweils eigene Root-Layouts mit
+  eigenem `<html>`/`<body>`. Ein gemeinsames Root-Layout würde das Payload-
+  Admin-Markup ungültig verschachteln.
 - Wiederverwendbarer Code gehört nach `packages/*`: UI-Primitives nach
   `packages/ui`, Marketing-Sektionen nach `packages/sections`, Content-Verträge
   und Mapper nach `packages/content-core`, Lead-Logik nach `packages/lead-core`

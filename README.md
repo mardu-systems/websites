@@ -1,11 +1,10 @@
 # Mardu Websites Monorepo
 
-Dieses Repository bündelt das öffentliche Frontend `mardu.de` sowie die zentrale Payload-/Lead-Plattform in einem gemeinsamen Workspace.
+Dieses Repository bündelt Website, Payload-CMS und Lead-Backend von `mardu.de` in einem gemeinsamen Workspace mit einer einzigen deploybaren App.
 
 ## Apps
 
-- `apps/mardu-de`: öffentliche Marketing- und Produktseite von `mardu.de`
-- `apps/platform`: zentrales Payload-Admin, Content-API und Lead-Backend
+- `apps/mardu-de`: öffentliche Marketing- und Produktseite, Payload-Admin (`/admin`), Content-API und Lead-Backend in einer Next.js-16-Instanz (Frontend unter `app/(site)`)
 
 ## Packages
 
@@ -28,20 +27,13 @@ bun test
 bun run build
 ```
 
-Die öffentliche Website benötigt die Payload-Plattform für Katalog, Lösungen,
-Integrationen, Blog und Rechtstexte. Der reguläre Startbefehl startet deshalb
-beide Apps gemeinsam:
+Katalog, Lösungen, Integrationen, Blog und Rechtstexte kommen aus der lokalen Payload-Runtime derselben App (Postgres via `DATABASE_URI`). Der reguläre Startbefehl lautet:
 
 ```bash
 bun run dev:mardu-de
 ```
 
-Für die getrennte Entwicklung stehen weiterhin die einzelnen Prozesse bereit:
-
-```bash
-bun run dev:mardu-de:frontend
-bun run dev:platform
-```
+Lokale Entwicklung gegen Postgres (Admin unter `http://localhost:3000/admin`): siehe `apps/mardu-de/.env.example` (`DATABASE_URI`, `PAYLOAD_SECRET`, `PAYLOAD_PUBLIC_SERVER_URL`).
 
 ## Vercel Deployment
 
