@@ -1,0 +1,17 @@
+node_modules
+.next
+.turbo
+.turbo-cache
+coverage
+.git
+.github
+.vercel
+.idea
+.vscode
+*.log
+.DS_Store
+.env*.local
+apps/mardu-de/.next
+apps/mardu-de/out
+playwright-report
+test-results

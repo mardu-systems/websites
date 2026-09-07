@@ -16,6 +16,9 @@ export const Media: CollectionConfig = {
   },
   upload: {
     mimeTypes: ['image/*'],
+    // Auf Coolify per Volume persistiert (PAYLOAD_MEDIA_DIR=/data/media),
+    // lokal/Vercel-Build fällt auf ./media zurück.
+    staticDir: process.env.PAYLOAD_MEDIA_DIR || 'media',
   },
   fields: [
     {
